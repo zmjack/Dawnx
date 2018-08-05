@@ -1,0 +1,30 @@
+﻿@page
+@model Dawnx.AspNetCore.IdentityUtility.Pages.Roles.DetailsModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IdentityRole</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Input.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Input.Id)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Input.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Input.Name)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Input.NormalizedName)</dt>
+        <dd>@Html.DisplayFor(model => model.Input.NormalizedName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Input.ConcurrencyStamp)</dt>
+        <dd>@Html.DisplayFor(model => model.Input.ConcurrencyStamp)</dd>
+    </dl>
+</div>
+<div>
+    <a href="Edit?Id=@Model.Input.Id">Edit</a> |
+    <a href="Index">Back to List</a>
+</div>

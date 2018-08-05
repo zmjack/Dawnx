@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

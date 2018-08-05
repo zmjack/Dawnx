@@ -41,9 +41,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\^Dawnx.Library\^AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
-    <ProjectReference Include="..\^Dawnx.Library\^Net\Dawnx.Net\Dawnx.Net.csproj" />
-    <ProjectReference Include="..\^Dawnx.Library\^Security\Dawnx.Security\Dawnx.Security.csproj" />
   </ItemGroup>
 
 </Project>

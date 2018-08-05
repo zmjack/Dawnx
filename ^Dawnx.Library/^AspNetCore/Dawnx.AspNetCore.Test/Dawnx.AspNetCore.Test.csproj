@@ -30,8 +30,4 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
-  </ItemGroup>
-
 </Project>

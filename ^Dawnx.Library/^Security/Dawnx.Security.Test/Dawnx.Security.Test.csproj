@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\Dawnx.Security\Dawnx.Security.csproj" />
   </ItemGroup>
 
 </Project>

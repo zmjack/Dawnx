@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\Dawnx.Xml\Dawnx.Xml.csproj" />
   </ItemGroup>
 
 </Project>

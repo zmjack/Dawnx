@@ -1,0 +1,93 @@
+﻿@page
+@model Dawnx.AspNetCore.IdentityUtility.Pages.Users.CreateModel
+
+@{
+    ViewBag.Title = "Create";
+
+    var Roles = ViewBag.Roles as string[];
+}
+
+<h2>Create</h2>
+
+<h4>IdentityUser</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.UserName" class="control-label"></label>
+                <input asp-for="Input.UserName" class="form-control" />
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email" class="control-label"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.EmailConfirmed"></label>
+                <input asp-for="Input.EmailConfirmed" />
+                <span asp-validation-for="Input.EmailConfirmed" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber" class="control-label"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumberConfirmed"></label>
+                <input asp-for="Input.PhoneNumberConfirmed" />
+                <span asp-validation-for="Input.PhoneNumberConfirmed" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.LockoutEnabled"></label>
+                <input asp-for="Input.LockoutEnabled" />
+                <span asp-validation-for="Input.LockoutEnabled" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LockoutEnd" class="control-label"></label>
+                <input asp-for="Input.LockoutEnd" type="datetime-local"
+                       value="@Model.Input.LockoutEnd?.ToLocalTime().ToString("yyyy-MM-ddTHH:mm")"
+                       class="form-control" />
+                <span asp-validation-for="Input.LockoutEnd" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="control-label">Password</label>
+                <input id="password" name="password" class="form-control" />
+                @Html.ValidationMessage("password", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label>Roles</label>
+                <ul>
+                    @foreach (var role in Roles)
+                    {
+                        var id = Guid.NewGuid();
+                        <li>
+                            <input type="checkbox" id="@id" name="roles" value="@role" />
+                            <label for="@id">@role</label>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

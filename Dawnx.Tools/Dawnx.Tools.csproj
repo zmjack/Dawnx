@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>dotnet-dawnx</AssemblyName>
+    <RootNamespace>Dawnx.Tools</RootNamespace>
+    <Company>dawnx.net</Company>
+    <Authors>dawnx.net</Authors>
+    <Description>Dawnx cli tools.</Description>
+    <PackageId>Dawnx.Tools</PackageId>
+    <Product>Dawnx.Tools</Product>
+    <PackageType>DotnetCliTool</PackageType>
+    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
+    <Version>1.1.19.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\^Dawnx.Library\^AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
+    <ProjectReference Include="..\^Dawnx.Library\^Net\Dawnx.Net\Dawnx.Net.csproj" />
+    <ProjectReference Include="..\^Dawnx.Library\^Security\Dawnx.Security\Dawnx.Security.csproj" />
+  </ItemGroup>
+
+</Project>

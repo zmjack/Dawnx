@@ -1,0 +1,90 @@
+﻿using System;
+using System.Reflection;
+
+namespace Dawnx.Reflection
+{
+    public class DefaultBasicTypeConverter : IBasicTypeConverter
+    {
+        private bool _strict;
+
+        public DefaultBasicTypeConverter() : this(true) { }
+        /// <summary>
+        /// If set 'strict', null string will be replaced by default of the source.
+        /// </summary>
+        /// <param name="strict"></param>
+        public DefaultBasicTypeConverter(bool strict) { _strict = strict; }
+
+        public object Convert(PropertyInfo prop, object source) => Convert(prop.PropertyType, source, prop);
+        public object Convert(FieldInfo field, object source) => Convert(field.FieldType, source, field);
+        public object Convert(Type type, object source, ICustomAttributeProvider provider = null)
+        {
+            switch (type.Name)
+            {
+                case BasicType.@bool: return ConvertToBoolean(source, provider);
+                case BasicType.@byte: return ConvertToByte(source, provider);
+                case BasicType.@sbyte: return ConvertToSByte(source, provider);
+                case BasicType.@char: return ConvertToChar(source, provider);
+                case BasicType.@short: return ConvertToInt16(source, provider);
+                case BasicType.@ushort: return ConvertToUInt16(source, provider);
+                case BasicType.@int: return ConvertToInt32(source, provider);
+                case BasicType.@uint: return ConvertToUInt32(source, provider);
+                case BasicType.@long: return ConvertToInt64(source, provider);
+                case BasicType.@ulong: return ConvertToUInt64(source, provider);
+                case BasicType.@float: return ConvertToSingle(source, provider);
+                case BasicType.@double: return ConvertToDouble(source, provider);
+                case BasicType.@decimal: return ConvertToDecimal(source, provider);
+                case BasicType.@string: return ConvertToString(source, provider);
+                case BasicType.DateTime: return ConvertToDateTime(source, provider);
+                default: return source;
+            }
+        }
+
+        public object ConvertTo<T>(object source, ICustomAttributeProvider provider, Func<object, T> func)
+        {
+            if (_strict)
+            {
+                if (IsNullOrWhiteSpaceString(source)) return default(T);
+                else return func(source);
+            }
+            else
+            {
+                try { return func(source); }
+                catch { return default(T); }
+            }
+        }
+
+        public virtual object ConvertToBoolean(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToBoolean);
+        public virtual object ConvertToByte(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToByte);
+        public virtual object ConvertToSByte(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToSByte);
+        public virtual object ConvertToChar(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToChar);
+        public virtual object ConvertToInt16(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToInt16);
+        public virtual object ConvertToUInt16(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToUInt16);
+        public virtual object ConvertToInt32(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToInt32);
+        public virtual object ConvertToUInt32(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToUInt32);
+        public virtual object ConvertToInt64(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToInt64);
+        public virtual object ConvertToUInt64(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToUInt64);
+        public virtual object ConvertToSingle(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToSingle);
+        public virtual object ConvertToDouble(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToDouble);
+        public virtual object ConvertToDecimal(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToDecimal);
+        public virtual object ConvertToString(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToString);
+        public virtual object ConvertToDateTime(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, System.Convert.ToDateTime);
+
+        public bool IsNullOrWhiteSpaceString(object source) => source is string && (source as string).IsNullOrWhiteSpace();
+
+    }
+}

@@ -1,0 +1,50 @@
+﻿@page
+@model Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles.IndexModel
+
+@{
+    ViewBag.Title = "Roles";
+
+    var __LiveRole__ = new Dawnx.AspNetCore.LiveAccount.LiveRole();
+    var LiveRoles = ViewBag.LiveRoles as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRole>;
+    var LiveOperation = ViewBag.LiveOperation as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveOperation>;
+    var LiveRoleOperations = ViewBag.LiveRoleOperations as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRoleOperation>;
+}
+
+<h2>LiveRole</h2>
+
+<p>
+    <a href="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => __LiveRole__.Name)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var liveRole in LiveRoles)
+        {
+            var id_ConcurrencyStamp = Guid.NewGuid();
+
+            <tr>
+                <td>@Html.DisplayFor(modelItem => liveRole.Name)</td>
+                <td>
+                    @foreach (var liveOperation in LiveOperation)
+                    {
+                        if (LiveRoleOperations.Any(x => x.Role == liveRole.Id && x.Role == liveOperation.Id))
+                        {
+                            <text>✔</text>
+                        }
+                        else { }
+                    }
+                </td>
+                <td>
+                    <a href="Edit?Id=@liveRole.Id">Edit</a> |
+                    <a href="Details?Id=@liveRole.Id">Details</a> |
+                    <a href="Delete?Id=@liveRole.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

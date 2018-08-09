@@ -29,7 +29,7 @@ namespace Dawnx.Tools
                     int fileCount = model["count"].Value<int>();
                     int fileDownload = 0;
                     int fileSkip = 0;
-                    Func<int> fileDone = () => fileDownload + fileSkip;
+                    int fileDone() => fileDownload + fileSkip;
                     int fileVerifySuccess = 0;
                     int fileVerifyFailed = 0;
 

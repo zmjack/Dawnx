@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Dawnx;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 {
+    [AllowAnonymous]
     public class EditModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager

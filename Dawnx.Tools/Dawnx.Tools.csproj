@@ -40,9 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\'Library\'AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
-    <ProjectReference Include="..\'Library\'Net\Dawnx.Net\Dawnx.Net.csproj" />
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\~Library\~AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
+    <ProjectReference Include="..\~Library\~Net\Dawnx.Net\Dawnx.Net.csproj" />
   </ItemGroup>
 
 </Project>

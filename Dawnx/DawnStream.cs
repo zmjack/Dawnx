@@ -16,6 +16,9 @@ namespace Dawnx
                 processing(@this, buffer, readLength);
         }
 
+        public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize)
+            => WriteProcess(@this, writeTarget, bufferSize, (_writeTarget, _buffer, _wrote) => { });
+
         public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize, WriteProcessingHandler processing)
         {
             if (@this.Length >= int.MaxValue)

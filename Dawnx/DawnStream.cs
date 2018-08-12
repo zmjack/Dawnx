@@ -1,32 +1,35 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Dawnx
 {
     public static class DawnStream
     {
-        public delegate void ReadProcessingHandler(byte[] buffer, int length);
-        public delegate void WriteProcessingHandler(int wrote);
+        public delegate void ReadProcessingHandler(Stream readTarget, byte[] buffer, int readLength);
+        public delegate void WriteProcessingHandler(Stream writeTarget, byte[] buffer, int wrote);
 
-        public static void ReadProcessing(this Stream @this, int bufferSize, ReadProcessingHandler processing)
+        public static void ReadProcess(this Stream @this, int bufferSize, ReadProcessingHandler processing)
         {
             var buffer = new byte[bufferSize];
             int readLength;
             while ((readLength = @this.Read(buffer, 0, bufferSize)) > 0)
-                processing(buffer, readLength);
+                processing(@this, buffer, readLength);
         }
 
-        public static void WriteProcessing(this Stream @this, byte[] buffer, int pieceSize, WriteProcessingHandler processing)
+        public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize, WriteProcessingHandler processing)
         {
-            int total = buffer.Length;
+            if (@this.Length >= int.MaxValue)
+                throw new NotSupportedException();
+
+            int total = (int)@this.Length;
             int wrote = 0;
 
-            while (wrote < total)
+            ReadProcess(@this, 1 * 1024 * 1024, (readTarget, buffer, readLength) =>
             {
-                var write = (total - wrote).For(_ => _ < pieceSize ? _ : pieceSize);
-                @this.Write(buffer, wrote, write);
-                wrote += write;
-                processing(wrote);
-            }
+                writeTarget.Write(buffer, 0, readLength);
+                wrote += readLength;
+                processing(writeTarget, buffer, wrote);
+            });
         }
 
     }

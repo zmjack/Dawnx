@@ -19,7 +19,7 @@ namespace Dawnx.AspNetCore
             Source[key] = value;
             return this;
         }
-
+        
         public override string ToString()
         {
             return Source.Select(pair

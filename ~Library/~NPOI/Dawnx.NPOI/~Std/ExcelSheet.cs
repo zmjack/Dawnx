@@ -67,7 +67,7 @@ namespace Dawnx.NPOI
         public SheetRange this[string start, string end]
             => new SheetRange(this, GetCellPos(start), GetCellPos(end));
 
-        public SheetRange Print(object[,] values, bool reserveCursor = false)
+        public SheetRange Print<T>(T[,] values, bool reserveCursor = false)
         {
             var startRow = Cursor.row;
             var rowLength = values.GetLength(0);
@@ -97,7 +97,7 @@ namespace Dawnx.NPOI
                 (startRow + rowLength - 1, Cursor.col + colLength - 1));
         }
 
-        public SheetRange Print(object[][] values, bool reserveCursor = false)
+        public SheetRange Print<T>(T[][] values, bool reserveCursor = false)
         {
             var startRow = Cursor.row;
             var rowLength = values.Length;
@@ -122,8 +122,8 @@ namespace Dawnx.NPOI
                 (startRow + rowLength - 1, Cursor.col + colLength - 1));
         }
 
-        public SheetRange Print(params object[] values) => Print(values, false);
-        public SheetRange Print(object[] values, bool reserveCursor)
+        public SheetRange Print<T>(params T[] values) => Print(values, false);
+        public SheetRange Print<T>(T[] values, bool reserveCursor)
         {
             var startRow = Cursor.row;
 

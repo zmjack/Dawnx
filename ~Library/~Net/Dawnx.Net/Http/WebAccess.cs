@@ -70,7 +70,7 @@ namespace Dawnx.Net.Http
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.ReadProcessing(bufferSize, (buffer, readLength) =>
+                    stream.ReadProcess(bufferSize, (readTarget, buffer, readLength) =>
                     {
                         receiver.Write(buffer, 0, readLength);
                         received += readLength;

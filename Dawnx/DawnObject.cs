@@ -50,5 +50,17 @@ namespace Dawnx
         public static bool In<TSource>(this TSource @this, IEnumerable<TSource> sequence)
             => sequence.Contains(@this);
 
+        /// <summary>
+        /// If the element is null, the method will be called. Otherwise, nothing will happen.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="method"></param>
+        public static TSelf IfNull<TSelf>(this TSelf @this, Action<TSelf> method)
+        {
+            if (@this == null)
+                method(@this);
+            return @this;
+        }
+
     }
 }

@@ -9,16 +9,15 @@ namespace Dawnx.Tools
 {
     public static partial class Commands
     {
-        public static void Gcs(string jsonFile)
+        public static void Add(string name)
         {
             if (!ConsoleUtility.ConfirmUseOnlineService()) return;
             Console.WriteLine("Connect to dawnx service...");
 
-            var respJson = Web.Post($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
+            var respJson = Web.Post($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
             {
                 ["Namespace"] = ProjectUtility.RootNamespace,
-                ["ClassName"] = Path.GetFileNameWithoutExtension(jsonFile),
-                ["Json"] = File.ReadAllText(jsonFile),
+                ["Name"] = name,
             });
 
             var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);

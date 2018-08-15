@@ -19,6 +19,15 @@ namespace Dawnx.Tools
             return ynSetup == "y";
         }
 
+        public static bool ConfirmUseOnlineService()
+        {
+            Console.WriteLine("This is a online sevice, you will upload your file to dawnx.net.");
+            Console.WriteLine("  BUT, we will not collect the documents which you provided.");
+            Console.WriteLine();
+
+            return AskYN("Are you sure to use this service, and upload your file?");
+        }
+
         public static void PrintErrorMessage(SimpleResponse resp)
         {
             Console.WriteLine($"  state: {resp.state}");

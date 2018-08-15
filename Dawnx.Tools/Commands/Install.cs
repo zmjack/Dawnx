@@ -19,7 +19,7 @@ namespace Dawnx.Tools
             });
 
             var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-            if (resp.state == "success")
+            if (resp.Success)
             {
                 var model = resp.model as JObject;
                 var cli_version = model["cli_version"].Value<string>();

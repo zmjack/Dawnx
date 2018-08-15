@@ -21,5 +21,10 @@
         /// If necessary, carry a data model 
         /// </summary>
         public object model;
+
+        public const string SuccessState = "success";
+        public static SimpleResponse SuccessResponse => new SimpleResponse { state = SuccessState };
+        public bool Success => state == SuccessState;
+
     }
 }

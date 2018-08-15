@@ -59,6 +59,33 @@ namespace Dawnx
         {
             if (@this == null)
                 method(@this);
+
+            return @this;
+        }
+
+        /// <summary>
+        /// If the element is not null, the method will be called. Otherwise, nothing will happen.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="method"></param>
+        public static TSelf IfNotNull<TSelf>(this TSelf @this, Action<TSelf> method)
+        {
+            if (@this != null)
+                method(@this);
+
+            return @this;
+        }
+
+        /// <summary>
+        /// If the specified condition is true, the method will be called. Otherwise, nothing will happen.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="method"></param>
+        public static TSelf If<TSelf>(this TSelf @this, Predicate<TSelf> condition, Action<TSelf> method)
+        {
+            if (condition(@this))
+                method(@this);
+
             return @this;
         }
 

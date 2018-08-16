@@ -10,9 +10,9 @@ namespace Dawnx.Generators
     {
         public string Format { get; private set; }
         public double AllowedProbability { get; private set; }
+        public double MaxCount { get; private set; }
 
         private readonly string[] CodeSegments;
-        private readonly double MaxCount;
 
         public StringGenerator(string format, double allowedProbability = 0.9)
         {
@@ -25,16 +25,41 @@ namespace Dawnx.Generators
             CodeSegments = CalcCodeSegments(format);
             MaxCount = CalcMaxCount(CodeSegments);
         }
+        
+        public double AfterProbability(int count) => (MaxCount - count) / MaxCount;
+        public double AfterProbability(int count, string[] excepts)
+        {
+            //TODO: In this version, hit rate is not accurate
+            return (MaxCount - count - excepts.Length) / MaxCount;
+        }
 
         public string[] Take(int count)
+        {
+            if (AfterProbability(count) < AllowedProbability)
+                throw new TimeoutException("The probability of generation is too low after take.");
+
+            return Generate(count);
+        }
+
+        public string[] Take(int count, string[] excepts)
+        {
+            if (AfterProbability(count, excepts) < AllowedProbability)
+                throw new TimeoutException("The probability of generation is too low after take.");
+
+            var list = new List<string>();
+            for (var n = count; list.Count < count; n = count - list.Count)
+                list.AddRange(Take(n).Except(excepts.Concat(list)));
+
+            return list.ToArray();
+        }
+
+        private string[] Generate(int count)
         {
             var random = new Random();
             var code = new byte[CodeSegments.Length];
             var sets = new HashSet<string>();
 
             if (count > MaxCount) throw new OverflowException();
-            if (((MaxCount - count) / MaxCount) < AllowedProbability)
-                throw new TimeoutException("The probability of generation is too low.");
 
             for (int recordAmount = 0; recordAmount < count;)
             {
@@ -42,18 +67,12 @@ namespace Dawnx.Generators
                 for (int i = 0; i < code.Length; i++)
                     code[i] = (byte)(code[i] % (byte)CodeSegments[i].Length);
                 var generatedCode = new string(CodeSegments.Select((segment, i) => segment[code[i]]).ToArray());
+
+                if (sets.Add(generatedCode))
+                    recordAmount++;
             }
 
             return sets.ToArray();
-        }
-
-        public string[] Take(int count, string[] excepts)
-        {
-            var list = new List<string>();
-            for (var n = count; list.Count < count; n = count - list.Count)
-                list.AddRange(Take(n).Except(excepts.Concat(list)));
-
-            return list.ToArray();
         }
 
         private unsafe static bool CheckFormat(string format)
@@ -67,7 +86,7 @@ namespace Dawnx.Generators
                 {
                     if (*p == '$')
                     {
-                        if ((*(p + 1)).In(new[] { 'c', 'w', 'l', 'u', 'd', '[', ']', '$' }))
+                        if (new[] { 'c', 'w', 'l', 'u', 'd', '[', ']', '$' }.Contains(*(p + 1)))
                             p += 2;
                         else return false;
                     }

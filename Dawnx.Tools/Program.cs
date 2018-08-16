@@ -12,7 +12,7 @@ namespace Dawnx.Tools
         public static readonly string DOWNLOAD_DIRECTORY = $"{Path.GetTempPath()}DawnxCliCaches";
 
         //public static readonly string SUPPORT_URL = "http://localhost:57028/CliService";
-        public static readonly string SUPPORT_URL = "http://dawnx.net/CliService";
+        public const string SUPPORT_URL = "http://dawnx.net/CliService";
 
         static void Main(string[] args)
         {

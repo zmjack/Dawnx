@@ -89,5 +89,21 @@ namespace Dawnx
             return @this;
         }
 
+        /// <summary>
+        /// This function is equal to '@this as T'.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static T As<T>(this object @this) where T : class => @this as T;
+
+        /// <summary>
+        /// This function is equal to '(T)@this'.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static T CastTo<T>(this object @this) => (T)@this;
+
     }
 }

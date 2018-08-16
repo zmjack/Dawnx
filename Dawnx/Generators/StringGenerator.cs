@@ -25,13 +25,16 @@ namespace Dawnx.Generators
             CodeSegments = CalcCodeSegments(format);
             MaxCount = CalcMaxCount(CodeSegments);
         }
-        
+
         public double AfterProbability(int count) => (MaxCount - count) / MaxCount;
         public double AfterProbability(int count, string[] excepts)
         {
             //TODO: In this version, hit rate is not accurate
             return (MaxCount - count - excepts.Length) / MaxCount;
         }
+
+        public string TakeOne() => Take(1)[0];
+        public string TakeOne(string[] excepts) => Take(1, excepts)[0];
 
         public string[] Take(int count)
         {

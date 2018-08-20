@@ -11,8 +11,8 @@ namespace Dawnx.Utilities
         /// </summary>
         /// <param name="ip"></param>
         /// <returns></returns>
-        public static long GetLongString(IPAddress ip)
-            => BitConverter.ToUInt32(ip.GetAddressBytes().Reverse().ToArray(), 0);
+        public static string GetLongString(IPAddress ip)
+            => BitConverter.ToUInt32(ip.GetAddressBytes().Reverse().ToArray(), 0).ToString();
         
     }
 }

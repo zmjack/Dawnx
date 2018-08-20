@@ -103,7 +103,7 @@ namespace Dawnx
         /// <typeparam name="T"></typeparam>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static T CastTo<T>(this object @this) => (T)@this;
+        public static T CastTo<T>(this object @this) => (T)(dynamic)@this;
 
     }
 }

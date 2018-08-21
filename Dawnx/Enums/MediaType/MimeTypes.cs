@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+namespace Dawnx.Enums
+{
+    /// <summary>
+    /// MIME Type definitions
+    /// (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
+    /// </summary>
+    public static partial class MediaType
+    {
+        public static string GetMediaType(string filePath)
+        {
+            switch (Path.GetExtension(filePath))
+            {
+                case ".html":
+                case ".htm": return TEXT_HTML;
+                default: return APPLICATION_OCTET_STREAM;
+            }
+        }
+    }
+}

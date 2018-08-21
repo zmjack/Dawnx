@@ -41,7 +41,7 @@ namespace Dawnx.Algorithms.Math.Test
         }
 
         [Fact]
-        public void Times()
+        public void TimesTest()
         {
             var matrix1 = new Matrix(new double[,]
             {
@@ -54,7 +54,7 @@ namespace Dawnx.Algorithms.Math.Test
                 { 2 },
                 { 3 },
             });
-            
+
             Assert.Equal(new Matrix(new double[,]
             {
                 { 3 * 2 + 5 * 3 },
@@ -63,7 +63,7 @@ namespace Dawnx.Algorithms.Math.Test
         }
 
         [Fact]
-        public void Plus()
+        public void PlusTest()
         {
             var matrix1 = new Matrix(new double[,]
             {
@@ -76,12 +76,28 @@ namespace Dawnx.Algorithms.Math.Test
                 { 2, 3 },
                 { 3, 4 },
             });
-            
+
             Assert.Equal(new Matrix(new double[,]
             {
                 { 3 + 2, 5 + 3 },
                 { 4 + 3, 6 + 4 },
             }), matrix1 + matrix2);
+        }
+
+        [Fact]
+        public void PowTest()
+        {
+            var matrix = new Matrix(new double[,]
+            {
+                { 1, 1 },
+                { 1, 0 },
+            });
+
+            Assert.Equal(new Matrix(new double[,]
+            {
+                { 5, 3 },
+                { 3, 2 },
+            }), matrix.Pow(4));
         }
 
     }

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Dawnx.Algorithms.Math
 {
-    public class Matrix
+    public class Matrix : ICloneable
     {
         public int RowLength { get; private set; }
         public int ColumnLength { get; private set; }
@@ -14,7 +14,7 @@ namespace Dawnx.Algorithms.Math
 
         public Matrix(double[,] values)
         {
-            Values = values;
+            Values = values.Clone() as double[,];
             RowLength = values.GetLength(0);
             ColumnLength = values.GetLength(1);
 
@@ -56,6 +56,21 @@ namespace Dawnx.Algorithms.Math
                 for (int i = 0; i < RowLength; i++)
                     ret[i, j] = Values[i, cols[j]];
             return new Determinant(ret);
+        }
+
+        public Matrix Pow(int n)
+        {
+            if (n < 1) throw new ArgumentOutOfRangeException("The parameter n must greater than 0.");
+
+            if (IsSquareMatrix)
+            {
+                var ret = this.Clone();
+                for (int i = 1; i < n; i++)
+                    ret = ret * this;
+
+                return ret;
+            }
+            else throw new InvalidOperationException("Only square matrix can find a new matrix to the NTH power");
         }
 
         public static Matrix operator *(Matrix matrix1, Matrix matrix2)
@@ -112,6 +127,10 @@ namespace Dawnx.Algorithms.Math
         public static bool operator !=(Matrix matrix1, Matrix matrix2) => !(matrix1 == matrix2);
 
         public override bool Equals(object obj) => this == obj as Matrix;
+        public override int GetHashCode() => 0;
+
+        object ICloneable.Clone() => new Matrix(Values);
+        public Matrix Clone() => (this as ICloneable).Clone() as Matrix;
 
     }
 }

@@ -9,8 +9,7 @@ namespace Dawnx.Algorithms.Math
         public int ColumnLength { get; private set; }
         public bool IsAugmentedMatrix { get; private set; }
         public bool IsSquareMatrix { get; private set; }
-
-        public double[,] Values;
+        public double[,] Values { get; private set; }
 
         public Matrix(double[,] values)
         {

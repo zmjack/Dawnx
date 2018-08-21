@@ -5,7 +5,7 @@ namespace Dawnx.Algorithms.Math.Test
     public class MatrixTest
     {
         [Fact]
-        public void Test1()
+        public void FindEquationSolution1()
         {
             new Matrix(new double[,]
             {
@@ -16,7 +16,7 @@ namespace Dawnx.Algorithms.Math.Test
         }
 
         [Fact]
-        public void Test2()
+        public void FindEquationSolution2()
         {
             new Matrix(new double[,]
             {
@@ -28,7 +28,7 @@ namespace Dawnx.Algorithms.Math.Test
         }
 
         [Fact]
-        public void Test3()
+        public void FindEquationSolution3()
         {
             new Matrix(new double[,]
             {
@@ -38,6 +38,26 @@ namespace Dawnx.Algorithms.Math.Test
                 { 3, 2, 1, 0, -1 },
             })
             .Self(_ => Assert.Equal(new double[] { 1.75, -10.25, 14.25, 2.25 }, _.FindEquationSolution()));
+        }
+
+        [Fact]
+        public void Times()
+        {
+            var matrix1 = new Matrix(new double[,]
+            {
+                { 3, 5 },
+                { 4, 6 },
+            });
+
+            var matrix2 = new Matrix(new double[,]
+            {
+                { 2 },
+                { 3 },
+            });
+
+            var ret = matrix1 * matrix2;
+            Assert.Equal(3 * 2 + 5 * 3, ret[0, 0]);
+            Assert.Equal(4 * 2 + 6 * 3, ret[1, 0]);
         }
 
     }

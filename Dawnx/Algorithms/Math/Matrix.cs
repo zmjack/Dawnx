@@ -5,54 +5,76 @@ namespace Dawnx.Algorithms.Math
 {
     public class Matrix
     {
-        public double[,] Values { get; private set; }
-        public int DimensionLength0 { get; private set; }
-        public int DimensionLength1 { get; private set; }
+        public int RowLength { get; private set; }
+        public int ColumnLength { get; private set; }
         public bool IsAugmentedMatrix { get; private set; }
+        public bool IsSquareMatrix { get; private set; }
+
+        public double[,] Values;
 
         public Matrix(double[,] values)
         {
-            if (values.GetLength(0) == values.GetLength(1))
-            {
-                Values = values;
-                DimensionLength0 = values.GetLength(0);
-                DimensionLength1 = values.GetLength(1);
-            }
-            else if (values.GetLength(1) == values.GetLength(1))
-            {
-                Values = values;
-                DimensionLength0 = values.GetLength(0);
-                DimensionLength1 = values.GetLength(1);
+            Values = values;
+            RowLength = values.GetLength(0);
+            ColumnLength = values.GetLength(1);
+
+            if (RowLength == ColumnLength)
+                IsSquareMatrix = true;
+            else if (ColumnLength == RowLength + 1)
                 IsAugmentedMatrix = true;
-            }
-            else throw new FormatException("Can not convert the specified values to be a matrix.");
+        }
+
+        public double this[int i, int j]
+        {
+            get => Values[i, j];
+            set => Values[i, j] = value;
         }
 
         public double[] FindEquationSolution()
         {
-            var ret = new double[DimensionLength0];
+            var ret = new double[RowLength];
             if (IsAugmentedMatrix)
             {
-                var divisor = SelectDeterminant(Range.Create(DimensionLength0));
+                var divisor = SelectDeterminant(Range.Create(RowLength));
 
-                Range.Create(DimensionLength0).Each(i =>
+                Range.Create(RowLength).Each(i =>
                 {
-                    var dividend = SelectDeterminant(Range.Create(DimensionLength0).Self(_ => _[i] = DimensionLength1 - 1).ToArray());
+                    var dividend = SelectDeterminant(Range.Create(RowLength)
+                        .Self(_ => _[i] = ColumnLength - 1).ToArray());
                     ret[i] = dividend.Value / divisor.Value;
                 });
 
                 return ret;
             }
-            else throw new InvalidOperationException("Only augmented matrix can find a equation solution.");
+            else throw new InvalidOperationException("Only augmented matrix can find a solution of equation.");
         }
 
         public Determinant SelectDeterminant(int[] cols)
         {
-            var ret = new double[DimensionLength0, cols.Length];
+            var ret = new double[RowLength, cols.Length];
             for (var j = 0; j < cols.Length; j++)
-                for (int i = 0; i < DimensionLength0; i++)
+                for (int i = 0; i < RowLength; i++)
                     ret[i, j] = Values[i, cols[j]];
             return new Determinant(ret);
+        }
+
+        public static Matrix operator *(Matrix matrix1, Matrix matrix2)
+        {
+            if (matrix1.ColumnLength == matrix2.RowLength)
+            {
+                var length = matrix1.ColumnLength;
+                var retRowLength = matrix1.RowLength;
+                var retColumnLenth = matrix2.ColumnLength;
+
+                var retValues = new double[retRowLength, retColumnLenth];
+                for (int i = 0; i < retRowLength; i++)
+                    for (int j = 0; j < retColumnLenth; j++)
+                        retValues[i, j] = Range.Create(length).Sum(x => matrix1[i, x] * matrix2[x, j]);
+
+                return new Matrix(retValues);
+            }
+            else throw new InvalidOperationException($"The column length of matrix1 must be equal to the row length of matrix2.");
+
         }
 
     }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dawnx
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class CheckAttribute : ValidationAttribute
     {
         public Type Type { get; private set; }

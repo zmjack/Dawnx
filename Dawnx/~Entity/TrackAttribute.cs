@@ -2,6 +2,7 @@
 
 namespace Dawnx
 {
+    [AttributeUsage(AttributeTargets.Property)]
     public class TrackAttribute : Attribute
     {
         public Type Type { get; set; }

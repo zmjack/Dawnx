@@ -27,8 +27,16 @@ namespace Dawnx
             var type = typeof(TEntity);
             var props = type.GetProperties()
                 .Where(x => x.CanRead && x.CanWrite)
-                .Where(x => !x.GetCustomAttributes(false)
-                    .Any(attr => attr.GetType().Name.For(name => name == "KeyAttribute" || name.StartsWith("Track"))))
+                .Where(x => !x.GetCustomAttributes(false).For(attrs =>
+                {
+                    return attrs.Any(attr => attr is NotAcceptable)
+                        || attrs.Any(attr => attr.GetType().Name.In(new[]
+                        {
+                            "KeyAttribute",
+                            nameof(TrackCreationTimeAttribute),
+                            nameof(TrackLastWriteTimeAttribute)
+                        }));
+                }))
                 .Where(x => x.PropertyType.FullName.In(BasicType.AllFullNames) || x.PropertyType.IsValueType);
 
             //Copy values
@@ -108,8 +116,16 @@ namespace Dawnx
             var type = typeof(TEntity);
             var props = type.GetProperties()
                 .Where(x => x.CanRead && x.CanWrite)
-                .Where(x => !x.GetCustomAttributes(false)
-                    .Any(attr => attr.GetType().Name.In("KeyAttribute", "TrackCreationTimeAttribute", "TrackLastWriteTimeAttribute")))
+                .Where(x => !x.GetCustomAttributes(false).For(attrs =>
+                {
+                    return attrs.Any(attr => attr is NotAcceptable)
+                        || attrs.Any(attr => attr.GetType().Name.In(new[]
+                        {
+                            "KeyAttribute",
+                            nameof(TrackCreationTimeAttribute),
+                            nameof(TrackLastWriteTimeAttribute)
+                        }));
+                }))
                 .Where(x => x.PropertyType.FullName.In(BasicType.AllFullNames) || x.PropertyType.IsValueType);
 
             props = props.Where(x => !propNames.Contains(x.Name));

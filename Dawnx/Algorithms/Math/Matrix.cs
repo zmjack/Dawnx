@@ -74,8 +74,44 @@ namespace Dawnx.Algorithms.Math
                 return new Matrix(retValues);
             }
             else throw new InvalidOperationException($"The column length of matrix1 must be equal to the row length of matrix2.");
-
         }
+
+        public static Matrix operator +(Matrix matrix1, Matrix matrix2)
+        {
+            if (matrix1.RowLength == matrix2.RowLength && matrix1.ColumnLength == matrix2.ColumnLength)
+            {
+                var retRowLength = matrix1.RowLength;
+                var retColumnLenth = matrix1.ColumnLength;
+
+                var retValues = new double[retRowLength, retColumnLenth];
+                for (int i = 0; i < retRowLength; i++)
+                    for (int j = 0; j < retColumnLenth; j++)
+                        retValues[i, j] = matrix1[i, j] + matrix2[i, j];
+
+                return new Matrix(retValues);
+            }
+            else throw new InvalidOperationException($"Both must have the same row length and column length");
+        }
+
+        public static bool operator ==(Matrix matrix1, Matrix matrix2)
+        {
+            //TODO: Use hashcode to optimize
+            if (matrix1.RowLength == matrix2.RowLength && matrix1.ColumnLength == matrix2.ColumnLength)
+            {
+                var rowLength = matrix1.RowLength;
+                var columnLenth = matrix1.ColumnLength;
+
+                for (int i = 0; i < rowLength; i++)
+                    for (int j = 0; j < columnLenth; j++)
+                        if (matrix1[i, j] != matrix2[i, j]) return false;
+
+                return true;
+            }
+            else return false;
+        }
+        public static bool operator !=(Matrix matrix1, Matrix matrix2) => !(matrix1 == matrix2);
+
+        public override bool Equals(object obj) => this == obj as Matrix;
 
     }
 }

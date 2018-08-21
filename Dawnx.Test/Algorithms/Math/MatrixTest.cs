@@ -54,10 +54,34 @@ namespace Dawnx.Algorithms.Math.Test
                 { 2 },
                 { 3 },
             });
+            
+            Assert.Equal(new Matrix(new double[,]
+            {
+                { 3 * 2 + 5 * 3 },
+                { 4 * 2 + 6 * 3 },
+            }), matrix1 * matrix2);
+        }
 
-            var ret = matrix1 * matrix2;
-            Assert.Equal(3 * 2 + 5 * 3, ret[0, 0]);
-            Assert.Equal(4 * 2 + 6 * 3, ret[1, 0]);
+        [Fact]
+        public void Plus()
+        {
+            var matrix1 = new Matrix(new double[,]
+            {
+                { 3, 5 },
+                { 4, 6 },
+            });
+
+            var matrix2 = new Matrix(new double[,]
+            {
+                { 2, 3 },
+                { 3, 4 },
+            });
+            
+            Assert.Equal(new Matrix(new double[,]
+            {
+                { 3 + 2, 5 + 3 },
+                { 4 + 3, 6 + 4 },
+            }), matrix1 + matrix2);
         }
 
     }

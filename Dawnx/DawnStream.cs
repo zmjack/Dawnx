@@ -21,17 +21,12 @@ namespace Dawnx
 
         public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize, WriteProcessingHandler processing)
         {
-            if (@this.Length >= int.MaxValue)
-                throw new NotSupportedException();
-
-            int total = (int)@this.Length;
-            int wrote = 0;
-
+            int totalWritten = 0;
             ReadProcess(@this, bufferSize, (readTarget, buffer, readLength) =>
             {
                 writeTarget.Write(buffer, 0, readLength);
-                wrote += readLength;
-                processing(writeTarget, buffer, wrote);
+                totalWritten += readLength;
+                processing(writeTarget, buffer, totalWritten);
             });
         }
 

@@ -46,23 +46,25 @@ Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
 
         public void AddData(string name, byte[] data)
         {
-            var memory = new MemoryStream().Self(_ =>
-            {
-                _.Write(data, 0, data.Length);
-                _.Write(ControlBytes.CrLf, 0, 2);
-                _.Seek(0, SeekOrigin.Begin);
-            });
-            Values.Add(new UploadData { Key = name, Stream = memory });
+            Values.Add(new UploadData { Key = name, Stream = new MemoryStream(data) });
         }
 
         public Stream GetStream()
         {
             return SequenceInputStream.Create(EnumerableUtility.Combine(new[]
             {
-                Values.Select(x => SequenceInputStream.Create(
-                    new MemoryStream(GetPartHeader(x.Key)), x.Stream) as Stream),
-                Files.Select(x => SequenceInputStream.Create(
-                    new MemoryStream(GetPartHeader(x.Name, x.FileName)), x.Stream) as Stream),
+                Values.Select(x => SequenceInputStream.Create(new[]
+                {
+                    new MemoryStream(GetPartHeader(x.Key)),
+                    x.Stream,
+                    new MemoryStream(ControlBytes.CrLf),
+                }) as Stream),
+                Files.Select(x => SequenceInputStream.Create(new[]
+                {
+                    new MemoryStream(GetPartHeader(x.Name, x.FileName)),
+                    x.Stream,
+                    new MemoryStream(ControlBytes.CrLf),
+                }) as Stream),
                 new []
                 {
                     new SequenceInputStream<Stream>(

@@ -132,27 +132,25 @@ namespace Dawnx.Net.Http
             var encoding = Encoding.GetEncoding(StateContainer.Encoding);
 
             var contentType = enctype;
-            byte[] body;
+            Stream bodyStream = null;
 
             switch (enctype)
             {
                 default:
                 case WebRequestStateContainer.URL_ENCODED:
-                    var bodyList = new List<string>();
+                    var query = new List<string>();
                     foreach (var data in updata)
                     {
                         var values = NormalizeStringValues(data.Value);
                         foreach (var value in values)
-                            bodyList.Add($"{data.Key}={HttpUtility.UrlEncode(value)}");
+                            query.Add($"{data.Key}={HttpUtility.UrlEncode(value)}");
                     }
-
-                    body = encoding.GetBytes(string.Join("&", bodyList));
 
                     if (method == WebRequestStateContainer.GET)
                     {
                         if (!url.Contains("?"))
-                            url = $"{url}?{encoding.GetString(body)}";
-                        else url = $"{url}&{encoding.GetString(body)}";
+                            url = $"{url}?{query.Join("&")}";
+                        else url = $"{url}&{query.Join("&")}";
                     }
                     break;
 
@@ -168,10 +166,10 @@ namespace Dawnx.Net.Http
                     {
                         var values = NormalizeStringValues(file.Value);
                         foreach (var value in values)
-                            formData.AddFile(file.Key, Path.GetFileName(value), File.ReadAllBytes(value));
+                            formData.AddFile(file.Key, Path.GetFileName(value), new FileStream(value, FileMode.Open, FileAccess.Read));
                     }
 
-                    body = formData;
+                    bodyStream = formData.GetStream();
                     contentType = formData.ContentType;
                     break;
             }
@@ -205,17 +203,13 @@ namespace Dawnx.Net.Http
 
             if (method == WebRequestStateContainer.POST)
             {
-                request.ContentLength = body.Length;
-                int send = 0;
+                request.ContentLength = bodyStream.Length;
                 using (var stream = request.GetRequestStream())
                 {
-                    int sendLength = body.Length - send;
-                    if (sendLength > RECOMMENDED_BUFFER_SIZE)
-                        sendLength = RECOMMENDED_BUFFER_SIZE;
-
-                    stream.Write(body, send, sendLength);
-                    send += sendLength;
-                    UploadProgress?.Invoke(this, url, send, body.Length);
+                    bodyStream.WriteProcess(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
+                    {
+                        UploadProgress?.Invoke(this, url, totalWrittenLength, bodyStream.Length);
+                    });
                 }
             }
 

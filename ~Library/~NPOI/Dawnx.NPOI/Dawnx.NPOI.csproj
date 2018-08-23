@@ -11,7 +11,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Dawnx Contributors</Authors>
     <Company>dawnx.net</Company>
-    <Version>1.2.6</Version>
+    <Version>1.2.8</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
@@ -23,6 +23,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <LangVersion>7.3</LangVersion>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -6,7 +6,7 @@ namespace Dawnx
     public static class DawnStream
     {
         public delegate void ReadProcessingHandler(Stream readTarget, byte[] buffer, int readLength);
-        public delegate void WriteProcessingHandler(Stream writeTarget, byte[] buffer, int wrote);
+        public delegate void WriteProcessingHandler(Stream writeTarget, byte[] buffer, int totalWrittenLength);
 
         public static void ReadProcess(this Stream @this, int bufferSize, ReadProcessingHandler processing)
         {
@@ -17,7 +17,7 @@ namespace Dawnx
         }
 
         public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize)
-            => WriteProcess(@this, writeTarget, bufferSize, (_writeTarget, _buffer, _wrote) => { });
+            => WriteProcess(@this, writeTarget, bufferSize, (_writeTarget, _buffer, _totalWrittenLength) => { });
 
         public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize, WriteProcessingHandler processing)
         {
@@ -27,7 +27,7 @@ namespace Dawnx
             int total = (int)@this.Length;
             int wrote = 0;
 
-            ReadProcess(@this, 1 * 1024 * 1024, (readTarget, buffer, readLength) =>
+            ReadProcess(@this, bufferSize, (readTarget, buffer, readLength) =>
             {
                 writeTarget.Write(buffer, 0, readLength);
                 wrote += readLength;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,8 +9,6 @@ namespace Dawnx.Net.Http
 {
     internal class HttpFormData
     {
-        public readonly byte[] CRLF = new byte[] { 13, 10 };
-
         public List<UploadFileData> Files = new List<UploadFileData>();
         public List<UploadData> Values = new List<UploadData>();
         public Encoding Encoding { get; private set; }
@@ -35,49 +34,42 @@ Content-Type: application/octet-stream" + "\r\n\r\n");
 Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
         }
 
-        public void AddFile(string name, string fileName, string path)
+        public void AddFile(string name, string fileName, Stream stream)
         {
             Files.Add(new UploadFileData
             {
                 Name = name,
                 FileName = fileName,
-                Data = File.ReadAllBytes(path).Concat(CRLF).ToArray(),
-            });
-        }
-
-        public void AddFile(string name, string fileName, byte[] data)
-        {
-            Files.Add(new UploadFileData
-            {
-                Name = name,
-                FileName = fileName,
-                Data = data.Concat(CRLF).ToArray(),
+                Stream = stream,
             });
         }
 
         public void AddData(string name, byte[] data)
         {
-            Values.Add(new UploadData { Key = name, Value = data.Concat(CRLF).ToArray() });
+            var memory = new MemoryStream().Self(_ =>
+            {
+                _.Write(data, 0, data.Length);
+                _.Write(ControlBytes.CrLf, 0, 2);
+                _.Seek(0, SeekOrigin.Begin);
+            });
+            Values.Add(new UploadData { Key = name, Stream = memory });
         }
 
-        public static implicit operator byte[] (HttpFormData @this)
+        public Stream GetStream()
         {
-            var content = new byte[0];
-            foreach (var value in @this.Values)
+            return SequenceInputStream.Create(EnumerableUtility.Combine(new[]
             {
-                content = content
-                    .Concat(@this.GetPartHeader(value.Key))
-                    .Concat(value.Value).ToArray();
-            }
-            foreach (var data in @this.Files)
-            {
-                content = content
-                    .Concat(@this.GetPartHeader(data.Name, data.FileName))
-                    .Concat(data.Data).ToArray();
-            }
-            content = content.Concat(Encoding.UTF8.GetBytes($"--{@this._boundary}--")).ToArray();
-
-            return content;
+                Values.Select(x => SequenceInputStream.Create(
+                    new MemoryStream(GetPartHeader(x.Key)), x.Stream) as Stream),
+                Files.Select(x => SequenceInputStream.Create(
+                    new MemoryStream(GetPartHeader(x.Name, x.FileName)), x.Stream) as Stream),
+                new []
+                {
+                    new SequenceInputStream<Stream>(
+                        new MemoryStream(Encoding.UTF8.GetBytes($"--{_boundary}--"))) as Stream,
+                },
+            }).ToArray());
         }
+
     }
 }

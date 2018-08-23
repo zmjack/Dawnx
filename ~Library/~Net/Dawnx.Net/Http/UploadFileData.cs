@@ -1,9 +1,11 @@
-﻿namespace Dawnx.Net.Http
+﻿using System.IO;
+
+namespace Dawnx.Net.Http
 {
     internal class UploadFileData
     {
         public string Name;
         public string FileName;
-        public byte[] Data;
+        public Stream Stream;
     }
 }

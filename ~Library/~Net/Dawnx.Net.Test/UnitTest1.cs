@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using Xunit;
 
@@ -5,6 +6,13 @@ namespace Dawnx.Net.Test
 {
     public class UnitTest1
     {
+        //    var host = new WebHostBuilder()
+        //        .UseKestrel()
+        //        .UseStartup<Startup>()
+        //        .Build();
+
+        //    host.Run();
+
         private Dictionary<string, object> updata = new Dictionary<string, object>
         {
             ["str"] = "str",

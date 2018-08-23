@@ -75,20 +75,7 @@ namespace Dawnx
 
             return @this;
         }
-
-        /// <summary>
-        /// If the specified condition is true, the method will be called. Otherwise, nothing will happen.
-        /// </summary>
-        /// <param name="this"></param>
-        /// <param name="method"></param>
-        public static TSelf If<TSelf>(this TSelf @this, Predicate<TSelf> condition, Action<TSelf> method)
-        {
-            if (condition(@this))
-                method(@this);
-
-            return @this;
-        }
-
+        
         /// <summary>
         /// This function is equal to '@this as T'.
         /// </summary>

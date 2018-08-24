@@ -7,7 +7,7 @@ namespace Dawnx.Net.Http
     {
         HttpWebResponse Process(
             WebAccess web, HttpWebResponse response,
-            string method, string url, string enctype,
+            string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles);
     }

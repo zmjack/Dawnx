@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,38 +35,37 @@ namespace Dawnx.Net.Http
             else StateContainer = new WebRequestStateContainer();
         }
 
-        public void AttachProcessor(IResponseProcessor processor)
-            => ResponseProcessors.Add(processor);
+        public void AttachProcessor(IResponseProcessor processor) => ResponseProcessors.Add(processor);
         public void ClearProcessor() => ResponseProcessors.Clear();
 
         public int AllowRedirectTimes { get; set; } = 10;
         public int RedirectTimes { get; set; } = 0;
 
         public string Get(string url, Dictionary<string, object> updata = null)
-            => ReadString(WebRequestStateContainer.GET, url, WebRequestStateContainer.URL_ENCODED, updata, null);
+            => ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
         public string Post(string url, Dictionary<string, object> updata = null)
-            => ReadString(WebRequestStateContainer.POST, url, WebRequestStateContainer.URL_ENCODED, updata, null);
+            => ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
         public string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
-            => ReadString(WebRequestStateContainer.POST, url, WebRequestStateContainer.FORM_DATA, updata, upfiles);
+            => ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles);
 
         public void GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, WebRequestStateContainer.GET, url, WebRequestStateContainer.URL_ENCODED, updata, null, bufferSize);
+            => Download(receiver, HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
         public void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, WebRequestStateContainer.POST, url, WebRequestStateContainer.URL_ENCODED, updata, null, bufferSize);
+            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
         public void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, WebRequestStateContainer.POST, url, WebRequestStateContainer.FORM_DATA, updata, upfiles, bufferSize);
+            => Download(receiver, HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
 
         public void Download(
             Stream receiver,
-            string method, string url, string enctype,
+            string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles,
             int bufferSize)
         {
-            using (var response = GetResponse(method, url, enctype, updata, upfiles))
+            using (var response = GetResponse(method, enctype, url, updata, upfiles))
             {
                 long received = 0;
                 using (var stream = response.GetResponseStream())
@@ -81,11 +81,11 @@ namespace Dawnx.Net.Http
         }
 
         public string ReadString(
-            string method, string url, string enctype,
+            string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
-            using (var response = GetResponse(method, url, enctype, updata, upfiles))
+            using (var response = GetResponse(method, enctype, url, updata, upfiles))
             using (var stream = response.GetResponseStream())
             using (var reader = new StreamReader(stream))
             {
@@ -94,18 +94,18 @@ namespace Dawnx.Net.Http
         }
 
         public HttpWebResponse GetResponse(
-            string method, string url, string enctype,
+            string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
-            var response = GetPureResponse(method, url, enctype, updata, upfiles);
+            var response = GetPureResponse(method, enctype, url, updata, upfiles);
 
             foreach (Cookie respCookie in response.Cookies)
                 StateContainer.Cookies.Add(respCookie);
 
             foreach (var processor in ResponseProcessors)
             {
-                var processedResponse = processor.Process(this, response, method, url, enctype, updata, upfiles);
+                var processedResponse = processor.Process(this, response, method, enctype, url, updata, upfiles);
 
                 if (processedResponse != null)
                     return processedResponse;
@@ -116,7 +116,7 @@ namespace Dawnx.Net.Http
         }
 
         public HttpWebResponse GetPureResponse(
-            string method, string url, string enctype,
+            string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
@@ -137,7 +137,7 @@ namespace Dawnx.Net.Http
             switch (enctype)
             {
                 default:
-                case WebRequestStateContainer.URL_ENCODED:
+                case MediaType.APPLICATION_X_WWW_FORM_URLENCODED:
                     var query = new List<string>();
                     foreach (var data in updata)
                     {
@@ -147,19 +147,19 @@ namespace Dawnx.Net.Http
                     }
                     var queryString = query.Join("&");
 
-                    if (method == WebRequestStateContainer.GET)
+                    if (method == HttpVerb.GET)
                     {
                         if (!url.Contains("?"))
                             url = $"{url}?{queryString}";
                         else url = $"{url}&{queryString}";
                     }
-                    else if (method == WebRequestStateContainer.POST)
+                    else if (method == HttpVerb.POST)
                     {
                         bodyStream = new MemoryStream(queryString.GetBytes(encoding));
                     }
                     break;
 
-                case WebRequestStateContainer.FORM_DATA:
+                case MediaType.MULTIPART_FORM_DATA:
                     var formData = new HttpFormData(encoding);
                     foreach (var data in updata)
                     {
@@ -206,7 +206,7 @@ namespace Dawnx.Net.Http
                 _.CookieContainer = StateContainer.Cookies;
             });
 
-            if (method == WebRequestStateContainer.POST)
+            if (method == HttpVerb.POST)
             {
                 request.ContentLength = bodyStream.Length;
                 using (var stream = request.GetRequestStream())

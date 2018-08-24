@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Dawnx.Enums;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
@@ -42,33 +43,33 @@ namespace Dawnx.Net.Http
 
         public static void Download(Stream receiver,
             string method, string url,
-            string enctype = WebRequestStateContainer.URL_ENCODED,
+            string enctype = MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
             Dictionary<string, object> upfiles = null,
             int bufferSize = 4096,
             WebRequestStateContainer config = null)
         {
-            new WebAccess(config).Download(receiver, method, url, enctype, updata, upfiles, bufferSize);
+            new WebAccess(config).Download(receiver, method, enctype, url, updata, upfiles, bufferSize);
         }
 
         public static string ReadString(
             string method, string url,
-            string enctype = WebRequestStateContainer.URL_ENCODED,
+            string enctype = MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
             Dictionary<string, object> upfiles = null,
             WebRequestStateContainer config = null)
         {
-            return new WebAccess(config).ReadString(method, url, enctype, updata, upfiles);
+            return new WebAccess(config).ReadString(method, enctype, url, updata, upfiles);
         }
 
         public static HttpWebResponse GetResponse(
             string method, string url,
-            string enctype = WebRequestStateContainer.URL_ENCODED,
+            string enctype = MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
             Dictionary<string, object> upfiles = null,
             WebRequestStateContainer config = null)
         {
-            return new WebAccess(config).GetResponse(method, url, enctype, updata, upfiles);
+            return new WebAccess(config).GetResponse(method, enctype, url, updata, upfiles);
         }
 
     }

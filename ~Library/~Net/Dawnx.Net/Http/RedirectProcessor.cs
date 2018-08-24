@@ -8,7 +8,7 @@ namespace Dawnx.Net.Http
     {
         public HttpWebResponse Process(
             WebAccess web, HttpWebResponse response,
-            string method, string url, string enctype,
+            string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
@@ -26,7 +26,7 @@ namespace Dawnx.Net.Http
                     return new WebAccess(web.StateContainer)
                     {
                         RedirectTimes = web.RedirectTimes + 1
-                    }.GetResponse(method, location, enctype, null, null);
+                    }.GetResponse(method, enctype, location, null, null);
                 }
                 else throw new WebException("Too many automatic redirections were attempted.");
             }

@@ -19,12 +19,5 @@ namespace Dawnx.Net.Http
         public static string DefaultEncoding { get; set; } = "utf-8";
         public static bool SystemLoginByDefault { get; set; } = false;
 
-        public const string URL_ENCODED = "application/x-www-form-urlencoded";
-        public const string FORM_DATA = "multipart/form-data";
-        public const string GET = "get";
-        public const string POST = "post";
-        public const string Put = "put";
-        public const string DELETE = "delete";
-
     }
 }

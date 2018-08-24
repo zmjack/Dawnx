@@ -15,6 +15,7 @@
     <RootNamespace>Dawnx.Tools</RootNamespace>
     <Company>dawnx.net</Company>
     <Authors>dawnx.net</Authors>
+    <Owners>zmjack</Owners>
     <Description>Dawnx cli tools.</Description>
     <PackageId>Dawnx.Tools</PackageId>
     <Product>Dawnx.Tools</Product>

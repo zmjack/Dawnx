@@ -145,12 +145,17 @@ namespace Dawnx.Net.Http
                         foreach (var value in values)
                             query.Add($"{data.Key}={HttpUtility.UrlEncode(value)}");
                     }
+                    var queryString = query.Join("&");
 
                     if (method == WebRequestStateContainer.GET)
                     {
                         if (!url.Contains("?"))
-                            url = $"{url}?{query.Join("&")}";
-                        else url = $"{url}&{query.Join("&")}";
+                            url = $"{url}?{queryString}";
+                        else url = $"{url}&{queryString}";
+                    }
+                    else if (method == WebRequestStateContainer.POST)
+                    {
+                        bodyStream = new MemoryStream(queryString.GetBytes(encoding));
                     }
                     break;
 

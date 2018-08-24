@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -13,6 +13,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Provides some functions for xpath analysis.</Description>
     <Authors>Dawnx Contributors</Authors>
+    <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>

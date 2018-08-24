@@ -68,7 +68,7 @@ Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
                 new []
                 {
                     new SequenceInputStream<Stream>(
-                        new MemoryStream(Encoding.UTF8.GetBytes($"--{_boundary}--"))) as Stream,
+                        new MemoryStream(Encoding.GetBytes($"--{_boundary}--"))) as Stream,
                 },
             }).ToArray());
         }

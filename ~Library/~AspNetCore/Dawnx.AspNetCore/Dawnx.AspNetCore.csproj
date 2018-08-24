@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -13,6 +13,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>dawnx.net</Company>
     <Authors>Dawnx Contributors</Authors>
+    <Owners>zmjack</Owners>
     <Description>Provides some common functions, such as navigation tree, make it easier to build Web applications.</Description>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>

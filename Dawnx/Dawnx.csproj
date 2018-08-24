@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -12,6 +12,7 @@
     <Version>1.2.8</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx Contributors</Authors>
+    <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
     <Description>Provides some extension functions to help you create highly readable programs.</Description>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>

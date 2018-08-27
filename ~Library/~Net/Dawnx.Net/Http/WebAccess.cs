@@ -1,4 +1,5 @@
 ﻿using Dawnx.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,6 +48,13 @@ namespace Dawnx.Net.Http
             => ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
         public string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
             => ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles);
+
+        public TRet Get<TRet>(string url, Dictionary<string, object> updata = null)
+            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null));
+        public TRet Post<TRet>(string url, Dictionary<string, object> updata = null)
+            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null));
+        public TRet Up<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
+            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles));
 
         public void GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)

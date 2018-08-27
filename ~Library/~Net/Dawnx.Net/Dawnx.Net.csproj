@@ -15,7 +15,7 @@
     <Owners>zmjack</Owners>
     <Authors>Dawnx Contributors</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.9</Version>
+    <Version>1.2.9.1</Version>
     <Copyright>Copyright © dawnx.net 2018</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
@@ -32,6 +32,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
   </ItemGroup>
 

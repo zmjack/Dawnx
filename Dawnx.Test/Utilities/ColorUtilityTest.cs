@@ -20,7 +20,7 @@ namespace Dawnx.Test.Utilities
                     {
                         var color = Color.FromArgb(0, r, g, b);
                         var ashvColor = ColorUtility.CreateFromAhsv
-                            (0, color.GetHue(), color.GetSaturation(), (float)(new[] { r, g, b }.Max(x => x) / 255d));
+                            (0, color.GetHueOfHsv(), color.GetSaturationOfHsv(), color.GetValueOfHsv());
 
                         Assert.Equal(color, ashvColor);
                     }

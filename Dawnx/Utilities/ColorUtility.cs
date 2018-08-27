@@ -19,18 +19,16 @@ namespace Dawnx.Utilities
 
             var ahColor = GetAbsoluteHueColor(alpha, hue);
             var ahsColor = Color.FromArgb(alpha,
-                (int)Math.Round((double)ahColor.R + (255 - ahColor.R) * (1 - saturation)),
-                (int)Math.Round((double)ahColor.G + (255 - ahColor.G) * (1 - saturation)),
-                (int)Math.Round((double)ahColor.B + (255 - ahColor.B) * (1 - saturation)));
+                (int)((double)ahColor.R + (255 - ahColor.R) * (1 - saturation)),
+                (int)((double)ahColor.G + (255 - ahColor.G) * (1 - saturation)),
+                (int)((double)ahColor.B + (255 - ahColor.B) * (1 - saturation)));
             var ahsvColor = Color.FromArgb(alpha,
-                (int)Math.Round((double)ahsColor.R * value),
-                (int)Math.Round((double)ahsColor.G * value),
-                (int)Math.Round((double)ahsColor.B * value));
+                (int)((double)ahsColor.R * value),
+                (int)((double)ahsColor.G * value),
+                (int)((double)ahsColor.B * value));
 
             return ahsvColor;
         }
-
-        public static float GetSaturationOfHsv() => 0;
 
         private static Color GetAbsoluteHueColor(int alpha, float hue)
         {

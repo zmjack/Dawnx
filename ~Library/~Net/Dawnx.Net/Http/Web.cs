@@ -31,6 +31,16 @@ namespace Dawnx.Net.Http
             WebRequestStateContainer config = null)
             => new WebAccess(config).Up(url, updata, upfiles);
 
+        public static TRet Get<TRet>(string url, Dictionary<string, object> updata = null,
+            WebRequestStateContainer config = null)
+            => new WebAccess(config).Get<TRet>(url, updata);
+        public static TRet Post<TRet>(string url, Dictionary<string, object> updata = null,
+            WebRequestStateContainer config = null)
+            => new WebAccess(config).Post<TRet>(url, updata);
+        public static TRet Up<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
+            WebRequestStateContainer config = null)
+            => new WebAccess(config).Up<TRet>(url, updata, upfiles);
+
         public static void GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = WebAccess.RECOMMENDED_BUFFER_SIZE, WebRequestStateContainer config = null)
             => new WebAccess(config).GetDownload(receiver, url, updata, bufferSize);

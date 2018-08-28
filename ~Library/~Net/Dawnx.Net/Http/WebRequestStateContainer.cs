@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 
 namespace Dawnx.Net.Http
 {
@@ -12,6 +13,7 @@ namespace Dawnx.Net.Http
         public string ProxyPassword = DefaultProxy.Password;
         public bool SystemLogin = SystemLoginByDefault;
         public CookieContainer Cookies = new CookieContainer();
+        public Dictionary<HttpRequestHeader, string> Headers;
 
         public static bool ProxyEnabledByDefault { get; set; } = false;
         public static ProxyInfo DefaultProxy { get; set; } = new ProxyInfo();

@@ -212,6 +212,11 @@ namespace Dawnx.Net.Http
                 else _.Proxy = null;
 
                 _.CookieContainer = StateContainer.Cookies;
+                StateContainer.Headers.IfNotNull(headers =>
+                {
+                    foreach (var header in StateContainer.Headers)
+                        _.Headers.Add(header.Key, header.Value);
+                });
             });
 
             if (method == HttpVerb.POST)

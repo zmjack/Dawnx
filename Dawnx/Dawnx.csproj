@@ -39,4 +39,8 @@
     <PackageReference Include="System.Drawing.Common" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="~Scopes\" />
+  </ItemGroup>
+
 </Project>

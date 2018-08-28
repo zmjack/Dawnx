@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx
+namespace Dawnx.Utilities
 {
     public static class DateTimeUtility
     {

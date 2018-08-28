@@ -14,13 +14,13 @@ namespace Dawnx.Test.Utilities
         [Fact]
         public void AhsvTest()
         {
-            for (var r = 0; r < 360; r++)
-                for (var g = 0; g <= 100; g++)
-                    for (var b = 0; b <= 100; b++)
+            for (var r = 0; r < 256; r++)
+                for (var g = 0; g < 256; g++)
+                    for (var b = 0; b < 256; b++)
                     {
-                        var color = Color.FromArgb(0, r, g, b);
+                        var color = Color.FromArgb(r, g, b);
                         var ashvColor = ColorUtility.CreateFromAhsv
-                            (0, color.GetHueOfHsv(), color.GetSaturationOfHsv(), color.GetValueOfHsv());
+                            (color.GetHueOfHsv(), color.GetSaturationOfHsv(), color.GetValueOfHsv());
 
                         Assert.Equal(color, ashvColor);
                     }

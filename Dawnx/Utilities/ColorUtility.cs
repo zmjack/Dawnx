@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Dawnx.Utilities
 {
-#if DEBUG
     public static class ColorUtility
     {
         public static Color CreateFromAhsv(float hue, float saturation, float value)
@@ -17,69 +16,42 @@ namespace Dawnx.Utilities
             if (saturation < 0 || saturation > 1) throw new ArgumentException("The saturation must be between 0 and 1.");
             if (value < 0 || value > 1) throw new ArgumentException("The value must be between 0 and 1.");
 
-            var ahColor = GetAbsoluteHueColor(alpha, hue);
-            var ahsColor = Color.FromArgb(alpha,
-                (int)((double)ahColor.R + (255 - ahColor.R) * (1 - saturation)),
-                (int)((double)ahColor.G + (255 - ahColor.G) * (1 - saturation)),
-                (int)((double)ahColor.B + (255 - ahColor.B) * (1 - saturation)));
-            var ahsvColor = Color.FromArgb(alpha,
-                (int)((double)ahsColor.R * value),
-                (int)((double)ahsColor.G * value),
-                (int)((double)ahsColor.B * value));
+            int max = (int)Math.Round(255 * value);
+            int min = (int)Math.Round(max - saturation * max);
+            int d = max - min;
 
-            return ahsvColor;
-        }
-
-        private static Color GetAbsoluteHueColor(int alpha, float hue)
-        {
-            hue = hue % 360;
-            var unit = 255d / 60;
+            int slide(int baseLine) => (int)Math.Round((hue - baseLine) * d / 60);
 
             switch (hue)
             {
+                case float h when h == 0:
+                    return Color.FromArgb(alpha, max, min, min);
+                case float h when h < 60:
+                    return Color.FromArgb(alpha, max, min + slide(0), min);
+                case float h when h == 60:
+                    return Color.FromArgb(alpha, max, max, min);
+                case float h when h < 120:
+                    return Color.FromArgb(alpha, min - slide(120), max, min);
+                case float h when h == 120:
+                    return Color.FromArgb(alpha, min, max, min);
+                case float h when h < 180:
+                    return Color.FromArgb(alpha, min, max, min + slide(120));
+                case float h when h == 180:
+                    return Color.FromArgb(alpha, min, max, max);
+                case float h when h < 240:
+                    return Color.FromArgb(alpha, min, min - slide(240), max);
+                case float h when h == 240:
+                    return Color.FromArgb(alpha, min, min, max);
+                case float h when h < 300:
+                    return Color.FromArgb(alpha, min + slide(240), min, max);
+                case float h when h == 300:
+                    return Color.FromArgb(alpha, max, min, max);
+                case float h when h < 360:
+                    return Color.FromArgb(alpha, max, min, min - slide(360));
                 default:
-                case float h when h < 0 || h > 360: throw new NotSupportedException();
-
-                case float h when h == 0
-                               || h == 360: // R
-                    return Color.FromArgb(alpha, 255, 0, 0);
-
-                case float h when h < 60:   // R +G
-                    return Color.FromArgb(alpha, 255, (int)(unit * (h % 60)), 0);
-
-                case float h when h == 60:  // RG
-                    return Color.FromArgb(alpha, 255, 255, 0);
-
-                case float h when h < 120:  // RG -R
-                    return Color.FromArgb(alpha, 255 - (int)(unit * (h % 60)), 255, 0);
-
-                case float h when h == 120: // G
-                    return Color.FromArgb(alpha, 0, 255, 0);
-
-                case float h when h < 180:  // G +B
-                    return Color.FromArgb(alpha, 0, 255, (int)(unit * (h % 60)));
-
-                case float h when h == 180: // GB
-                    return Color.FromArgb(alpha, 0, 255, 255);
-
-                case float h when h < 240:  // GB -G
-                    return Color.FromArgb(alpha, 0, 255 - (int)(unit * (h % 60)), 255);
-
-                case float h when h == 240: // B
-                    return Color.FromArgb(alpha, 0, 0, 255);
-
-                case float h when h < 300:  // B +R
-                    return Color.FromArgb(alpha, (int)(unit * (h % 60)), 0, 255);
-
-                case float h when h == 300: // BR
-                    return Color.FromArgb(alpha, 255, 0, 255);
-
-                case float h when h < 360:  // BR -B
-                    return Color.FromArgb(alpha, 255, 0, 255 - (int)(unit * (h % 60)));
+                    throw new NotSupportedException();
             }
         }
 
     }
-#endif
-
 }

@@ -1,4 +1,4 @@
-﻿namespace Dawnx
+﻿namespace Dawnx.Utilities
 {
     public static class ConsoleUtility
     {

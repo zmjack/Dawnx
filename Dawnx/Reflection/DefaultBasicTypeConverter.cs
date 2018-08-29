@@ -18,7 +18,7 @@ namespace Dawnx.Reflection
         public object Convert(FieldInfo field, object source) => Convert(field.FieldType, source, field);
         public object Convert(Type type, object source, ICustomAttributeProvider provider = null)
         {
-            switch (type.Name)
+            switch (type.FullName)
             {
                 case BasicType.@bool: return ConvertToBoolean(source, provider);
                 case BasicType.@byte: return ConvertToByte(source, provider);

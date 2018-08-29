@@ -5,23 +5,23 @@ namespace Dawnx.Reflection
 {
     public static class BasicType
     {
-        public const string @bool = nameof(Boolean);
-        public const string @byte = nameof(Byte);
-        public const string @sbyte = nameof(SByte);
-        public const string @char = nameof(Char);
-        public const string @short = nameof(Int16);
-        public const string @ushort = nameof(UInt16);
-        public const string @int = nameof(Int32);
-        public const string @uint = nameof(UInt32);
-        public const string @long = nameof(Int64);
-        public const string @ulong = nameof(UInt64);
-        public const string @float = nameof(Single);
-        public const string @double = nameof(Double);
-        public const string @string = nameof(String);
-        public const string @decimal = nameof(Decimal);
-        public const string @DateTime = nameof(System.DateTime);
+        public const string @bool = "System.Boolean";
+        public const string @byte = "System.Byte";
+        public const string @sbyte = "System.SByte";
+        public const string @char = "System.Char";
+        public const string @short = "System.Int16";
+        public const string @ushort = "System.UInt16";
+        public const string @int = "System.Int32";
+        public const string @uint = "System.UInt32";
+        public const string @long = "System.Int64";
+        public const string @ulong = "System.UInt64";
+        public const string @float = "System.Single";
+        public const string @double = "System.Double";
+        public const string @string = "System.String";
+        public const string @decimal = "System.Decimal";
+        public const string DateTime = "System.DateTime";
 
-        public static readonly string[] AllNames = new string[]
+        public static readonly string[] AllFullNames = new string[]
         {
             @bool, @byte, @sbyte, @char,
             @short, @ushort,
@@ -29,16 +29,6 @@ namespace Dawnx.Reflection
             @long, @ulong,
             @float, @double,
             @string, @decimal, DateTime
-        };
-
-        public static readonly string[] AllFullNames = new string[]
-        {
-            "System.Boolean", "System.Byte", "System.SByte", "System.Char",
-            "System.Int16", "System.UInt16",
-            "System.Int32", "System.UInt32",
-            "System.Int64", "System.UInt64",
-            "System.Single", "System.Double",
-            "System.String", "System.Decimal", "System.DateTime",
         };
 
         public static MethodInfo GetToStringMethod(Type type)

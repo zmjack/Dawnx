@@ -11,7 +11,6 @@ namespace Dawnx.Test
 {
     public class WhereStrategyTests
     {
-
         [Fact]
         public void Test1()
         {
@@ -99,6 +98,17 @@ namespace Dawnx.Test
             Assert.Equal(count, dbSet.WhereStrategy(strategy).Count());
         }
 
+        public class ApplicationDbContext : DbContext
+        {
+            public ApplicationDbContext()
+                : base(new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase("default").Options)
+            {
+            }
+
+            public DbSet<CompLevel> CompLevels { get; set; }
+            public DbSet<Person> People { get; set; }
+        }
+
         public class CompLevel
         {
             [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -126,16 +136,6 @@ namespace Dawnx.Test
             public virtual CompLevel CompLevelLink { get; set; }
         }
 
-        public class ApplicationDbContext : DbContext
-        {
-            public ApplicationDbContext()
-                : base(new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase("default").Options)
-            {
-            }
-
-            public DbSet<CompLevel> CompLevels { get; set; }
-            public DbSet<Person> People { get; set; }
-        }
     }
 
 }

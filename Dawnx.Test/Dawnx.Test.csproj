@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="MySql.Data" Version="6.10.8" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
@@ -32,6 +33,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="~Scopes\" />
   </ItemGroup>
 
 </Project>

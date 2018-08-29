@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label asp-for="Input.LockoutEnd" class="control-label"></label>
                 <input asp-for="Input.LockoutEnd" type="datetime-local"
-                       value="@Model.Input.LockoutEnd?.ToLocalTime().ToString("yyyy-MM-ddTHH:mm")"
+                       value="@Model.Input.LockoutEnd?.ToLocalTime().ToString("s")"
                        class="form-control" />
                 <span asp-validation-for="Input.LockoutEnd" class="text-danger"></span>
             </div>

@@ -67,7 +67,7 @@ namespace Dawnx.Security.Test
             {
                 var now = DateTime.Now.ToString();
                 var encrypted = _.Encrypt(now.ToString().GetBytes(Encoding.UTF8)).GetBase64String();
-                Assert.Equal(now, _.Decrypt(encrypted.GetBytesFromBase64()).GetString(Encoding.UTF8));
+                Assert.Equal(now, _.Decrypt(encrypted.GetBytesFromBase64String()).GetString(Encoding.UTF8));
             });
         }
 

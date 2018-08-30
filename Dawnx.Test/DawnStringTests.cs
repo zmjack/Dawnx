@@ -46,7 +46,7 @@ namespace Dawnx.Test
             Assert.Equal(hexString, hexString_Bytes.GetHexString());
 
             Assert.Equal(hexString,
-                hexString_Base64.GetBytesFromBase64().GetString(Encoding.Default));
+                hexString_Base64.GetBytesFromBase64String().GetString(Encoding.Default));
         }
 
         [Fact]

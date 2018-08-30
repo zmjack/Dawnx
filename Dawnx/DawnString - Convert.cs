@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text;
 
 namespace Dawnx
@@ -9,7 +10,6 @@ namespace Dawnx
         /// Encodes all the characters in the specified string into a sequence of bytes (Unicode, UTF-16), then returns it.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="encoding"></param>
         /// <returns></returns>
         public static byte[] GetBytes(this string @this)
             => GetBytes(@this, Encoding.Unicode);
@@ -38,7 +38,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static byte[] GetBytesFromBase64(this string @this)
+        public static byte[] GetBytesFromBase64String(this string @this)
             => Convert.FromBase64String(@this);
 
         /// <summary>
@@ -67,13 +67,6 @@ namespace Dawnx
 
             return ret;
         }
-
-        /// <summary>
-        /// Converts a text string into a URL-encoded string.
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        public static string GetUrlEncodedString(this string )
 
     }
 }

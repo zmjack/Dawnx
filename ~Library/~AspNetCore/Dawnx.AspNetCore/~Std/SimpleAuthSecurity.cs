@@ -13,12 +13,12 @@ namespace Dawnx.AspNetCore
         public string Encrypt(string source)
             => _Rsa.Encrypt(source.GetBytes(Encoding.UTF8)).GetBase64String();
         public string Decrypt(string encrypted)
-            => _Rsa.Decrypt(encrypted.GetBytesFromBase64()).GetString(Encoding.UTF8);
+            => _Rsa.Decrypt(encrypted.GetBytesFromBase64String()).GetString(Encoding.UTF8);
 
         public string SignData(string data) =>
             _Rsa.SignData(data.GetBytes(Encoding.UTF8)).GetBase64String();
         public bool VerifyData(string data, string signature) =>
-            _Rsa.VerifyData(data.GetBytes(Encoding.UTF8), signature.GetBytesFromBase64());
+            _Rsa.VerifyData(data.GetBytes(Encoding.UTF8), signature.GetBytesFromBase64String());
 
     }
 }

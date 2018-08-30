@@ -31,7 +31,6 @@ namespace Dawnx
         /// Decodes all the bytes in the specified byte (Unicode, UTF-16) array into a string.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="encoding"></param>
         /// <returns></returns>
         public static string GetString(this byte[] @this)
             => GetString(@this, Encoding.Unicode);

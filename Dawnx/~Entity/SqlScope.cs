@@ -47,8 +47,9 @@ namespace Dawnx
 
                 yield return dict;
             }
+            reader.Close();
         }
-
+        
         public TDbCommand SqlCommand(FormattableString formattableSql)
         {
             var values = formattableSql.GetArguments();

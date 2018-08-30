@@ -35,8 +35,4 @@
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="~Scopes\" />
-  </ItemGroup>
-
 </Project>

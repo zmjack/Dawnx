@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FABC5697-527C-4D46-A0C0-185CC67849D3}</ProjectGuid>
+    <ProjectGuid>{36E74D56-2A70-43F7-B624-5D7D5E19EC6D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dawnx.Win32</RootNamespace>

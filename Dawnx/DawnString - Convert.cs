@@ -68,5 +68,12 @@ namespace Dawnx
             return ret;
         }
 
+        /// <summary>
+        /// Converts a text string into a URL-encoded string.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public static string GetUrlEncodedString(this string )
+
     }
 }

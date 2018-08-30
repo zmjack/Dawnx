@@ -24,6 +24,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -14,7 +14,7 @@ namespace Dawnx.Net.Http
     {
         static WebAccess()
         {
-            //TODO: If WebClient can run in netcore 2.1+ normally, delete it.
+            //TODO: If WebClient can not run in netcore 2.1+ normally, delete it.
             AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
         }
 

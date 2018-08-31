@@ -28,6 +28,52 @@
             <param name="acceptAllChangesOnSuccess"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPath(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.PathBase}{@this.Path}".
+                eg. /controller/action
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.FullPath(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.PathBase}{@this.Path}{@this.QueryString}".
+                eg. /controller/action?id=1
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.SchemeHost(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}".
+                eg. http://dawnx.net
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.Url(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
+                eg. http://dawnx.net/controller/action?id=1
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.IsMobile(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Determines whether the access device is a mobile.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.IsTablet(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Determines whether the access device is a tablet.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
             <summary>
             Gets user's menu from the tree.

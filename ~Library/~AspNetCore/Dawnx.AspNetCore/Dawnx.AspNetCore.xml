@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dawnx.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.Menu``1(System.Security.Claims.ClaimsPrincipal,Dawnx.AspNetCore.ClaimsMenu{``0})">
+            <summary>
+            Returns user's menu from the specified menu.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="this"></param>
+            <param name="menu"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetRoles(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Returns roles of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnDbContext.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
+            <summary>
+            This method should be called before 'base.SaveChanges'.
+            </summary>
+            <param name="this"></param>
+            <param name="acceptAllChangesOnSuccess"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets user's menu from the tree.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.state">
+            <summary>
+            A simple code describing the state of the service invocation
+            </summary>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.status">
+            <summary>
+            The detailed information
+            </summary>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.message">
+            <summary>
+            A friendly message that tells client that the status
+            </summary>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.model">
+            <summary>
+            If necessary, carry a data model 
+            </summary>
+        </member>
+        <member name="M:Dawnx.DawnObject.GetJson(System.Object)">
+            <summary>
+            Serializes the specified object to a JSON string.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetFromJson``1(System.String)">
+            <summary>
+            Deserializes the JSON to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

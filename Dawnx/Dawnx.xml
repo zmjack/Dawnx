@@ -1,0 +1,908 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dawnx</name>
+    </assembly>
+    <members>
+        <member name="T:Dawnx.Analysises.ConsoleArgs">
+            <summary>
+            This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:Dawnx.DawnArray.GetBase64String(System.Byte[])">
+            <summary>
+            Converts an array of 8-bit unsigned integers to its equivalent string representation
+                that is encoded with base-64 digits.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.GetHexString(System.Byte[],System.String)">
+            <summary>
+            Converts an array of 8-bit unsigned integers to its equivalent string representation
+                that is encoded with hex digits.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.GetString(System.Byte[])">
+            <summary>
+            Decodes all the bytes in the specified byte (Unicode, UTF-16) array into a string.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.GetString(System.Byte[],System.String)">
+            <summary>
+            Decodes all the bytes in the specified byte array into a string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.GetString(System.Byte[],System.Text.Encoding)">
+            <summary>
+            Decodes all the bytes in the specified byte array into a string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.Self``1(``0[],System.Action{``0[],System.Int32})">
+            <summary>
+            Do a task for itself.
+            </summary>
+            <typeparam name="TSelf"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.IndexOf``1(``0[],``0)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.Slice``1(``0[],System.Int32)">
+            <summary>
+            Retrieves an array from this instance. The new array starts at a specified
+                element position and continues to the end of the array.
+                (If the parameter is negative, the search will start on the right.)
+            </summary>
+            <param name="this"></param>
+            <param name="start"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.Slice``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Retrieves an array from this instance. The new array starts at a specified
+                element position and ends with a specified element position.
+                (If the parameters is negative, the search will start on the right.)
+            </summary>
+            <param name="this"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.Shuffle``1(``0[])">
+            <summary>
+            Shuffles a array and returns itself.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.SelectPage``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Projects page elements of a sequence into a new form.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="pageNumber">'pageNumber' starts at 1</param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.FirstDayOfMonth(System.DateTime)">
+            <summary>
+            Gets the first day of the month.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.LastDayOfMonth(System.DateTime)">
+            <summary>
+            Gets the last day of the month.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.PastDay(System.DateTime,System.DayOfWeek,System.Boolean)">
+            <summary>
+            Gets a past day for the specified day of week.
+            </summary>
+            <param name="this"></param>
+            <param name="dayOfWeek"></param>
+            <param name="includeCurrentDay"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.FutureDay(System.DateTime,System.DayOfWeek,System.Boolean)">
+            <summary>
+            Gets a future day for the specified day of week.
+            </summary>
+            <param name="this"></param>
+            <param name="dayOfWeek"></param>
+            <param name="includeCurrentDay"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.WeekInMonth(System.DateTime,System.DayOfWeek)">
+            <summary>
+            Gets the number of weeks in a month for the specified date.
+            (eg. If define Sunday as the fisrt day of the week, its first appearance means week 1, before is week 0.)
+            </summary>
+            <param name="this"></param>
+            <param name="weekStart"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.Week(System.DateTime,System.DayOfWeek)">
+            <summary>
+            Gets the number of weeks in a year for the specified date. 
+            </summary>
+            <param name="this"></param>
+            <param name="weekStart"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.UnixTimeMilliseconds(System.DateTime)">
+            <summary>
+            Gets the Unix Timestamp(milliseconds) of the specified DateTime.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.UnixTimeSeconds(System.DateTime)">
+            <summary>
+            Gets the Unix Timestamp(seconds) of the specified DateTime.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnICollection.SelectPage``1(System.Collections.Generic.ICollection{``0},System.Int32,System.Int32)">
+            <summary>
+            Projects page elements of a sequence into a new form.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="pageNumber">'pageNumber' starts at 1</param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.AsVI``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns a collection of tuples containing values and indexes.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.AsVI``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns a collection of tuples containing values and indexes.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.SelectPage``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>
+            Projects page elements of a sequence into a new form.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="pageNumber">'pageNumber' starts at 1</param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Projects each element of the specified array into a new distributed array collection by 'Classify' method.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TConditionRet"></typeparam>
+            <param name="this"></param>
+            <param name="Classify"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
+            <summary>
+            Projects each element of the specified array into a new distributed array collection by 'Classify' method.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TConditionRet"></typeparam>
+            <param name="this"></param>
+            <param name="Classify"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Projects each element of the specified array into a new distributed array collection by its index.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distinct``1(System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Returns distinct elements from a sequence by using a specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compareMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Except``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set difference of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compareMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Union``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set union of two sequences by using a specified properties.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compareMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Intersect``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set intersection of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compareMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnInt32.IsOdd(System.Int32)">
+            <summary>
+            Returns whether the specified number is odd.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnInt32.IsEven(System.Int32)">
+            <summary>
+            Returns whether the specified number is even.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnInt64.IsOdd(System.Int64)">
+            <summary>
+            Returns whether the specified number is odd.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnInt64.IsEven(System.Int64)">
+            <summary>
+            Returns whether the specified number is even.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIPAddress.ToLong(System.Net.IPAddress)">
+            <summary>
+            Converts a IP Address into a uint value.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.WhereStrategy``1(System.Linq.IQueryable{``0},Dawnx.IWhereStrategy{``0})">
+            <summary>
+            Use a WhereStragtegy to generate a where expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <param name="strategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnJaggedArray.Each``1(``0[][],System.Action{``0,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnJaggedArray.Each``1(``0[][][],System.Action{``0,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnJaggedArray.Each``1(``0[][][][],System.Action{``0,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnJaggedArray.ToMultiArray``1(``0[][])">
+            <summary>
+            Converts jagged array to multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnJaggedArray.ToMultiArray``1(``0[][][])">
+            <summary>
+            Converts jagged array to multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnJaggedArray.ToMultiArray``1(``0[][][][])">
+            <summary>
+            Converts jagged array to multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:],System.Action{``0,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:,0:],System.Action{``0,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:,0:,0:],System.Action{``0,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:,0:,0:,0:],System.Action{``0,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:,0:,0:,0:,0:],System.Action{``0,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:,0:,0:,0:,0:,0:],System.Action{``0,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Each``1(``0[0:,0:,0:,0:,0:,0:,0:,0:],System.Action{``0,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.ToJaggedArray``1(``0[0:,0:])">
+            <summary>
+            Converts jagged array to multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.ToJaggedArray``1(``0[0:,0:,0:])">
+            <summary>
+            Converts jagged array to multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.ToJaggedArray``1(``0[0:,0:,0:,0:])">
+            <summary>
+            Converts jagged array to multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:,0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:,0:,0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:,0:,0:,0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:,0:,0:,0:,0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnMultiArray.Select``2(``0[0:,0:,0:,0:,0:,0:,0:,0:],System.Func{``0,``1})">
+            <summary>
+            Do action for each item of multidimensional array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.Self``1(``0,System.Action{``0})">
+            <summary>
+            Do a task for itself.
+            </summary>
+            <typeparam name="TSelf"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.For``2(``0,System.Func{``0,``1})">
+            <summary>
+            Casts the element to the specified type through the convert method.
+            </summary>
+            <typeparam name="TSelf"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="convert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.In``1(``0,``0[])">
+            <summary>
+            Determines whether the specified element in a sequence by using the default equality comparer.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="enumerable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.In``1(``0,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Determines whether the specified element in a sequence by using the default equality comparer.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="enumerable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.IfNull``1(``0,System.Action{``0})">
+            <summary>
+            If the element is null, the method will be called. Otherwise, nothing will happen.
+            </summary>
+            <param name="this"></param>
+            <param name="method"></param>
+        </member>
+        <member name="M:Dawnx.DawnObject.IfNotNull``1(``0,System.Action{``0})">
+            <summary>
+            If the element is not null, the method will be called. Otherwise, nothing will happen.
+            </summary>
+            <param name="this"></param>
+            <param name="method"></param>
+        </member>
+        <member name="M:Dawnx.DawnObject.As``1(System.Object)">
+            <summary>
+            This function is equal to '@this as T'.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.CastTo``1(System.Object)">
+            <summary>
+            This function is equal to '(T)@this'.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetBytes(System.String)">
+            <summary>
+            Encodes all the characters in the specified string into a sequence of bytes (Unicode, UTF-16), then returns it.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetBytes(System.String,System.Text.Encoding)">
+            <summary>
+            Encodes all the characters in the specified string into a sequence of bytes, then returns it.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetBytes(System.String,System.String)">
+            <summary>
+            Encodes all the characters in the specified string into a sequence of bytes, then returns it.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetBytesFromBase64String(System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as base-64 digits, to
+                an equivalent 8-bit unsigned integer array.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetBytesFromHexString(System.String,System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as hex digits, to
+                an equivalent 8-bit unsigned integer array.
+            </summary>
+            <param name="this"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IsNullOrEmpty(System.String)">
+            <summary>
+            Indicates whether the specified string is null or an System.String.Empty string.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Indicates whether a specified string is null, empty, or consists only of white-space characters.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IsEmpty(System.String)">
+            <summary>
+            Indicates whether the specified string is an System.String.Empty string.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IsWhiteSpace(System.String)">
+            <summary>
+            Indicates whether a specified string is empty, or consists only of white-space characters.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Center(System.String,System.Int32,System.Char)">
+            <summary>
+            Returns centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IsMatch(System.String,System.String)">
+            <summary>
+            Indicates whether the string matches the specified regular expression.
+            </summary>
+            <param name="this"></param>
+            <param name="regex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IsMatch(System.String,System.Text.RegularExpressions.Regex)">
+            <summary>
+            Indicates whether the string matches the specified regular expression.
+            </summary>
+            <param name="this"></param>
+            <param name="regex"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Slice(System.String,System.Int32)">
+            <summary>
+            Retrieves a substring from this instance. The substring starts at a specified
+                character position and continues to the end of the string.
+                (If the parameter is negative, the search will start on the right.)
+            </summary>
+            <param name="this"></param>
+            <param name="start"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Slice(System.String,System.Int32,System.Int32)">
+            <summary>
+            Retrieves a substring from this instance. The substring starts at a specified
+                character position and ends with a specified character position.
+                (If the parameters is negative, the search will start on the right.)
+            </summary>
+            <param name="this"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.CharAt(System.String,System.Int32)">
+            <summary>
+            Returns the char at a specified index in the string.
+                (If the parameter is negative, the search will start on the right.)
+            </summary>
+            <param name="this"></param>
+            <param name="pos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Times(System.String,System.Int32)">
+            <summary>
+            Returns a string which is equivalent to adding it to itself n times.
+            </summary>
+            <param name="this"></param>
+            <param name="times"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Count(System.String,System.String,System.Boolean)">
+            <summary>
+            Returns the number of occurrences of substring sub in the string.
+            </summary>
+            <param name="this"></param>
+            <param name="searchString"></param>
+            <param name="overlapping"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.NormalizeNewLine(System.String)">
+            <summary>
+            Returns a new string which is normalized by the newline string of current environment.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetLines(System.String)">
+            <summary>
+            Divides a string into multi-lines. If the string is null, return string[0].
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Unique(System.String)">
+            <summary>
+            Removes all leading and trailing white-space characters from the current string,
+                and replaces multiple spaces with a single.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnUInt32.IsOdd(System.UInt32)">
+            <summary>
+            Returns whether the specified number is odd.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnUInt32.IsEven(System.UInt32)">
+            <summary>
+            Returns whether the specified number is even.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnUInt64.IsOdd(System.UInt64)">
+            <summary>
+            Returns whether the specified number is odd.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnUInt64.IsEven(System.UInt64)">
+            <summary>
+            Returns whether the specified number is even.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dawnx.Enums.MediaType">
+            <summary>
+            MIME Type definitions
+            (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
+            </summary>
+        </member>
+        <member name="T:Dawnx.Patterns.DoubleCheck">
+            <summary>
+            Double-checked locking pattern: if -> lock -> if -> dosth.
+            </summary>
+        </member>
+        <member name="M:Dawnx.Reflection.DefaultBasicTypeConverter.#ctor(System.Boolean)">
+            <summary>
+            If set 'strict', null string will be replaced by default of the source.
+            </summary>
+            <param name="strict"></param>
+        </member>
+        <member name="M:Dawnx.Utilities.IPUtility.GetLongString(System.Net.IPAddress)">
+            <summary>
+            Converts a <see cref="T:System.Net.IPAddress"/>  into a long IP string.
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.RegexUtility.IPRange(System.String)">
+            <summary>
+            Compile IPv4RangeRegexExp to Regex.
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.StringUtility.CommonStarts(System.String[])">
+            <summary>
+            Get the common starts of the specified strings.
+            </summary>
+            <param name="strings"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Dawnx.IEntity">
+            <summary>
+            Use <see cref="T:Dawnx.IEntity"/> to define entity classes to get some useful extension methods.
+            </summary>
+        </member>
+        <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0)">
+            <summary>
+            Accept all property values which are can be read and write from another model.
+                (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')
+            </summary>
+            <typeparam name="TEntity">Instance of IEntity</typeparam>
+            <param name="this">Source model</param>
+            <param name="model">The model which provide values</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Accept the specified property values from another model.
+            </summary>
+            <typeparam name="TEntity">Instance of IEntity</typeparam>
+            <param name="this">Source model</param>
+            <param name="model">The model which provide values</param>
+            <param name="includes">Specifies properties that are applied to the source model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEntity.AcceptBut``1(``0,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Accept all property values which are can be read and write from another model,
+                but exclude the specified properties.
+                (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')
+            </summary>
+            <typeparam name="TEntity">Instance of IEntity</typeparam>
+            <param name="this">Source model</param>
+            <param name="model">The model which provide values</param>
+            <param name="excludes">Specifies properties that aren't applied to the source model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Range.Create(System.Int32)">
+            <summary>
+            The range type represents an immutable sequence of numbers
+                and is commonly used for looping a specific number of times in for loops.
+            </summary>
+            <param name="stop"></param>
+        </member>
+        <member name="M:Dawnx.Range.Create(System.Int32,System.Int32)">
+            <summary>
+            The range type represents an immutable sequence of numbers
+                and is commonly used for looping a specific number of times in for loops.
+            </summary>
+            <param name="start"></param>
+            <param name="stop"></param>
+        </member>
+        <member name="M:Dawnx.Range.Create(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The range type represents an immutable sequence of numbers
+                and is commonly used for looping a specific number of times in for loops.
+            </summary>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="scan"></param>
+        </member>
+        <member name="T:Dawnx.Scope`2">
+            <summary>
+            Cooperate with 'using' keyword using thread safe <see cref="T:Dawnx.Scope`2"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TSelf"></typeparam>
+        </member>
+    </members>
+</doc>

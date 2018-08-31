@@ -20,6 +20,6 @@ nuget push "~Library/~Security/Dawnx.Security/bin/Release/Dawnx.Security.1.3.2.n
 nuget push "~Library/~Xml/Dawnx.Xml/bin/Release/Dawnx.Xml.1.3.2.nupkg" -source nuget.org
 
 ::==== ~Native ====
-::nuget push "~Library/~Native/Dawnx.Win32/Dawnx.PInvoke.1.0.1.nupkg" -source nuget.org
+::nuget push "~NativeLibrary/Dawnx.Win32/Dawnx.Win32.1.0.1.nupkg" -source nuget.org
 
 pause

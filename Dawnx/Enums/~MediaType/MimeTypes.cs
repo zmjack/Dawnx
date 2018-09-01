@@ -11,7 +11,7 @@ namespace Dawnx.Enums
     /// </summary>
     public static partial class MediaType
     {
-        public static string GetMediaType(string filePath)
+        public static string GetFrom(string filePath)
         {
             switch (Path.GetExtension(filePath))
             {

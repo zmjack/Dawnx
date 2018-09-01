@@ -42,11 +42,11 @@ namespace Dawnx.Test
             {
                 0x0C, 0x66, 0x18, 0x2E, 0xC7, 0x10, 0x84, 0x00, 0x65, 0xEB, 0xAA, 0x47, 0xC5, 0xE6, 0xCE, 0x90
             };
-            Assert.Equal(hexString_Bytes, hexString.GetBytesFromHexString());
-            Assert.Equal(hexString, hexString_Bytes.GetHexString());
+            Assert.Equal(hexString_Bytes, hexString.HexDecode());
+            Assert.Equal(hexString, hexString_Bytes.HexEncode());
 
             Assert.Equal(hexString,
-                hexString_Base64.GetBytesFromBase64String().GetString(Encoding.Default));
+                hexString_Base64.Base64Decode().GetString(Encoding.Default));
         }
 
         [Fact]

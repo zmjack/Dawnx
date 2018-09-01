@@ -27,6 +27,9 @@ namespace Dawnx.Net.Http
         public static string Post(string url, Dictionary<string, object> updata = null,
             WebRequestStateContainer config = null)
             => new WebAccess(config).Post(url, updata);
+        public static string PostJson(string url, Dictionary<string, object> updata = null,
+            WebRequestStateContainer config = null)
+            => new WebAccess(config).PostJson(url, updata);
         public static string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             WebRequestStateContainer config = null)
             => new WebAccess(config).Up(url, updata, upfiles);
@@ -37,6 +40,9 @@ namespace Dawnx.Net.Http
         public static TRet Post<TRet>(string url, Dictionary<string, object> updata = null,
             WebRequestStateContainer config = null)
             => new WebAccess(config).Post<TRet>(url, updata);
+        public static TRet PostJson<TRet>(string url, Dictionary<string, object> updata = null,
+            WebRequestStateContainer config = null)
+            => new WebAccess(config).PostJson<TRet>(url, updata);
         public static TRet Up<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             WebRequestStateContainer config = null)
             => new WebAccess(config).Up<TRet>(url, updata, upfiles);
@@ -47,6 +53,9 @@ namespace Dawnx.Net.Http
         public static void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = WebAccess.RECOMMENDED_BUFFER_SIZE, WebRequestStateContainer config = null)
             => new WebAccess(config).PostDownload(receiver, url, updata, bufferSize);
+        public static void PostJsonDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
+            int bufferSize = WebAccess.RECOMMENDED_BUFFER_SIZE, WebRequestStateContainer config = null)
+            => new WebAccess(config).PostJsonDownload(receiver, url, updata, bufferSize);
         public static void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             int bufferSize = WebAccess.RECOMMENDED_BUFFER_SIZE, WebRequestStateContainer config = null)
             => new WebAccess(config).UpDownload(receiver, url, updata, upfiles, bufferSize);

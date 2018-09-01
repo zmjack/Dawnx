@@ -22,13 +22,21 @@ namespace Dawnx.Net.Test
         };
 
         [Fact]
-        public void GoGetTest()
+        public void PostJsonTest()
+        {
+            Assert.Equal(
+                "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
+                Web.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
+        }
+
+        [Fact]
+        public void RequestTest()
         {
             Assert.Equal(
                 "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
                 Web.Get("http://dev.dawnx.net/Http", updata));
             Assert.Equal(
-                "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
+                "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
                 Web.Post("http://dev.dawnx.net/Http", updata));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",

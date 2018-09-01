@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Dawnx.AspNetCore
 {
@@ -61,6 +63,41 @@ namespace Dawnx.AspNetCore
             var mobileKeywords = new[] { "Android", "iPhone", "iPod", "iPad", "Windows Phone", "Mobile" };
             return mobileKeywords.Any(x => userAgent.Contains(x));
         }
+
+        /// <summary>
+        /// Gets the request body string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string BodyString(this HttpRequest @this, Encoding encoding)
+        {
+            var memory = new MemoryStream();
+            @this.Body.WriteProcess(memory, 256 * 1024);
+
+            var bodyStream = new MemoryStream();
+            @this.Body.WriteProcess(memory, 256 * 1024);
+            return memory.ToArray().GetString(encoding);
+        }
+
+        /// <summary>
+        /// Deserializes the body, which is json, to a .NET object.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static object BodyJsonDecode(this HttpRequest @this, Encoding encoding)
+            => BodyString(@this, encoding).JsonDecode();
+
+        /// <summary>
+        /// Deserializes the body, which is json, to a .NET object.
+        /// </summary>
+        /// <typeparam name="TRet"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static TRet BodyJsonDecode<TRet>(this HttpRequest @this, Encoding encoding)
+            => BodyString(@this, encoding).JsonDecode<TRet>();
 
     }
 }

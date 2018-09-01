@@ -11,7 +11,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Dawnx Contributors</Authors>
     <Owners>zmjack</Owners>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <Company>dawnx.net</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>

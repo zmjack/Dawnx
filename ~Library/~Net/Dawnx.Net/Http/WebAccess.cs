@@ -178,7 +178,7 @@ namespace Dawnx.Net.Http
                     {
                         var values = NormalizeStringValues(data.Value);
                         foreach (var value in values)
-                            formData.AddData(data.Key, encoding.GetBytes(value.ToString()));
+                            formData.AddData(data.Key, value.GetBytes(encoding));
                     }
                     foreach (var file in upfiles)
                     {
@@ -192,7 +192,7 @@ namespace Dawnx.Net.Http
                     break;
 
                 case MediaType.APPLICATION_JSON:
-                    bodyStream = new MemoryStream(JsonConvert.SerializeObject(updata).GetBytes());
+                    bodyStream = new MemoryStream(JsonConvert.SerializeObject(updata).GetBytes(encoding));
                     break;
             }
 

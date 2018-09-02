@@ -74,9 +74,6 @@ namespace Dawnx.AspNetCore
         {
             var memory = new MemoryStream();
             @this.Body.WriteProcess(memory, 256 * 1024);
-
-            var bodyStream = new MemoryStream();
-            @this.Body.WriteProcess(memory, 256 * 1024);
             return memory.ToArray().GetString(encoding);
         }
 

@@ -26,7 +26,7 @@ namespace Dawnx.Net.Test
         {
             Assert.Equal(
                 "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
-                Web.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
+                Web.PostJson("http://localhost:52420/Http/RestJson", updata));
         }
 
         [Fact]

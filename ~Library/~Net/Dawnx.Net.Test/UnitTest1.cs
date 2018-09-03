@@ -26,7 +26,7 @@ namespace Dawnx.Net.Test
         {
             Assert.Equal(
                 "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
-                Web.PostJson("http://localhost:52420/Http/RestJson", updata));
+                Web.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
         }
 
         [Fact]

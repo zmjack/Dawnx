@@ -198,9 +198,12 @@ namespace Dawnx.Net.Http
 
             var request = ((HttpWebRequest)WebRequest.Create(new Uri(url))).Self(_ =>
             {
-                if (!StateContainer.Headers.Any(x => x.Key == HttpRequestHeader.ContentType))
-                    _.ContentType = contentType;
-
+                StateContainer.Headers.IfNotNull(headers =>
+                {
+                    foreach (var header in StateContainer.Headers)
+                        _.Headers.Add(header.Key, header.Value);
+                });
+                
                 _.UserAgent = StateContainer.UserAgent;
                 _.Method = method;
                 _.Timeout = -1;
@@ -223,15 +226,13 @@ namespace Dawnx.Net.Http
                 else _.Proxy = null;
 
                 _.CookieContainer = StateContainer.Cookies;
-                StateContainer.Headers.IfNotNull(headers =>
-                {
-                    foreach (var header in StateContainer.Headers)
-                        _.Headers.Add(header.Key, header.Value);
-                });
             });
 
             if (method == HttpVerb.POST)
             {
+                if (!request.Headers.AllKeys.Any(x => x == "Content-Type"))
+                    request.ContentType = enctype;
+
                 request.ContentLength = bodyStream.Length;
                 using (var stream = request.GetRequestStream())
                 {

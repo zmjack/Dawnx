@@ -7,7 +7,8 @@ namespace Dawnx
     public static partial class DawnString
     {
         /// <summary>
-        /// Encodes all the characters in the specified string into a sequence of bytes (Unicode, UTF-16), then returns it.
+        /// Encodes all the characters in the specified string into a sequence of bytes (Unicode, UTF-16),
+        ///     then returns it.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>

@@ -42,14 +42,6 @@ namespace Dawnx
             => Convert.FromBase64String(@this);
 
         /// <summary>
-        /// Converts the specified string, which encodes binary data as base-64 digits, to a new string.
-        /// </summary>
-        /// <param name="this"></param>
-        /// <returns></returns>
-        public static string Base64Decode(this string @this, Encoding encoding)
-            => Base64Decode(@this).GetString(encoding);
-
-        /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to
         ///     an equivalent 8-bit unsigned integer array.
         /// </summary>
@@ -76,13 +68,39 @@ namespace Dawnx
         }
 
         /// <summary>
+        /// Converts the specified string into a Base64-encoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string Base64Encode(this string @this, Encoding encoding)
+            => @this.GetBytes(encoding).Base64Encode();
+
+        /// <summary>
+        /// Converts the specified string into a Hex-encoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string HexEncode(this string @this, Encoding encoding)
+            => @this.GetBytes(encoding).HexEncode();
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as base-64 digits, to a new string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string Base64Decode(this string @this, Encoding encoding)
+            => @this.Base64Decode().GetString(encoding);
+
+        /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to a new string.
         /// </summary>
         /// <param name="this"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
         public static string HexDecode(this string @this, Encoding encoding, string separator = "")
-            => HexDecode(@this).GetString(encoding);
+            => @this.HexDecode().GetString(encoding);
 
         /// <summary>
         /// Converts the specified string into a URL-encoded string.

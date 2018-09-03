@@ -640,13 +640,6 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.Base64Decode(System.String,System.Text.Encoding)">
-            <summary>
-            Converts the specified string, which encodes binary data as base-64 digits, to a new string.
-            </summary>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.DawnString.HexDecode(System.String,System.String)">
             <summary>
             Converts the specified string, which encodes binary data as hex digits, to
@@ -654,6 +647,29 @@
             </summary>
             <param name="this"></param>
             <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Base64Encode(System.String,System.Text.Encoding)">
+            <summary>
+            Converts the specified string into a Base64-encoded string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.HexEncode(System.String,System.Text.Encoding)">
+            <summary>
+            Converts the specified string into a Hex-encoded string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Base64Decode(System.String,System.Text.Encoding)">
+            <summary>
+            Converts the specified string, which encodes binary data as base-64 digits, to a new string.
+            </summary>
+            <param name="this"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.HexDecode(System.String,System.Text.Encoding,System.String)">

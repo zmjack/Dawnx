@@ -38,8 +38,16 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static byte[] GetBytesFromBase64String(this string @this)
+        public static byte[] Base64Decode(this string @this)
             => Convert.FromBase64String(@this);
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as base-64 digits, to a new string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string Base64Decode(this string @this, Encoding encoding)
+            => Base64Decode(@this).GetString(encoding);
 
         /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to
@@ -48,10 +56,9 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
-        public static byte[] GetBytesFromHexString(this string @this, string separator = "")
+        public static byte[] HexDecode(this string @this, string separator = "")
         {
-            if (@this.IsNullOrEmpty())
-                return new byte[0];
+            if (@this.IsNullOrEmpty()) return new byte[0];
 
             var hexString = @this;
             if (!separator.IsEmpty())
@@ -67,6 +74,43 @@ namespace Dawnx
 
             return ret;
         }
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as hex digits, to a new string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string HexDecode(this string @this, Encoding encoding, string separator = "")
+            => HexDecode(@this).GetString(encoding);
+
+        /// <summary>
+        /// Converts the specified string into a URL-encoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string UrlEncode(this string @this) => WebUtility.UrlEncode(@this);
+
+        /// <summary>
+        /// Converts the specified string that has been encoded for transmission in a URL into a decoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string UrlDecode(this string @this) => WebUtility.UrlDecode(@this);
+
+        /// <summary>
+        /// Converts the specified string to an HTML-encoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string HtmlEncode(this string @this) => WebUtility.HtmlEncode(@this);
+
+        /// <summary>
+        /// Converts the specified string that has been HTML-encoded for HTTP transmission into a decoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string HtmlDecode(this string @this) => WebUtility.HtmlDecode(@this);
 
     }
 }

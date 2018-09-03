@@ -12,7 +12,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string GetBase64String(this byte[] @this) => Convert.ToBase64String(@this);
+        public static string Base64Encode(this byte[] @this) => Convert.ToBase64String(@this);
 
         /// <summary>
         /// Converts an array of 8-bit unsigned integers to its equivalent string representation
@@ -20,7 +20,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string GetHexString(this byte[] @this, string separator = "")
+        public static string HexEncode(this byte[] @this, string separator = "")
         {
             var ret = new List<string>();
             @this.Each(@byte => ret.Add(@byte.ToString("x2")));

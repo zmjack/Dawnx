@@ -46,6 +46,8 @@ namespace Dawnx.Net.Http
             => ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
         public string Post(string url, Dictionary<string, object> updata = null)
             => ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
+        public string PostJson(string url, Dictionary<string, object> updata = null)
+            => ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, updata, null);
         public string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
             => ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles);
 
@@ -53,6 +55,8 @@ namespace Dawnx.Net.Http
             => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null));
         public TRet Post<TRet>(string url, Dictionary<string, object> updata = null)
             => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null));
+        public TRet PostJson<TRet>(string url, Dictionary<string, object> updata = null)
+            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, updata, null));
         public TRet Up<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
             => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles));
 
@@ -62,6 +66,9 @@ namespace Dawnx.Net.Http
         public void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
+        public void PostJsonDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
+            int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_JSON, url, updata, null, bufferSize);
         public void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => Download(receiver, HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
@@ -138,8 +145,6 @@ namespace Dawnx.Net.Http
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var encoding = Encoding.GetEncoding(StateContainer.Encoding);
-
-            var contentType = enctype;
             Stream bodyStream = null;
 
             switch (enctype)
@@ -173,7 +178,7 @@ namespace Dawnx.Net.Http
                     {
                         var values = NormalizeStringValues(data.Value);
                         foreach (var value in values)
-                            formData.AddData(data.Key, encoding.GetBytes(value.ToString()));
+                            formData.AddData(data.Key, value.GetBytes(encoding));
                     }
                     foreach (var file in upfiles)
                     {
@@ -183,7 +188,11 @@ namespace Dawnx.Net.Http
                     }
 
                     bodyStream = formData.GetStream();
-                    contentType = formData.ContentType;
+                    enctype = formData.ContentType;
+                    break;
+
+                case MediaType.APPLICATION_JSON:
+                    bodyStream = new MemoryStream(JsonConvert.SerializeObject(updata).GetBytes(encoding));
                     break;
             }
 

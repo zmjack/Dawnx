@@ -74,6 +74,31 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyString(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            Gets the request body string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            Deserializes the body, which is json, to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            Deserializes the body, which is json, to a .NET object.
+            </summary>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
             <summary>
             Gets user's menu from the tree.
@@ -101,14 +126,21 @@
             If necessary, carry a data model 
             </summary>
         </member>
-        <member name="M:Dawnx.DawnObject.GetJson(System.Object)">
+        <member name="M:Dawnx.DawnObject.JsonEncode(System.Object)">
             <summary>
             Serializes the specified object to a JSON string.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.GetFromJson``1(System.String)">
+        <member name="M:Dawnx.DawnString.JsonDecode``1(System.String)">
+            <summary>
+            Deserializes the JSON to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.JsonDecode(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>

@@ -189,7 +189,9 @@ namespace Dawnx.Net.Http
 
             var request = ((HttpWebRequest)WebRequest.Create(new Uri(url))).Self(_ =>
             {
-                _.ContentType = contentType;
+                if (!StateContainer.Headers.Any(x => x.Key == HttpRequestHeader.ContentType))
+                    _.ContentType = contentType;
+
                 _.UserAgent = StateContainer.UserAgent;
                 _.Method = method;
                 _.Timeout = -1;

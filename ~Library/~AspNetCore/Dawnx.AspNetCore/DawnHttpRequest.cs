@@ -74,7 +74,7 @@ namespace Dawnx.AspNetCore
         {
             var memory = new MemoryStream();
             @this.Body.WriteProcess(memory, 256 * 1024);
-            return memory.ToArray().GetString(encoding);
+            return memory.ToArray().String(encoding);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Dawnx.AspNetCore
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static object BodyJsonDecode(this HttpRequest @this, Encoding encoding)
-            => BodyString(@this, encoding).JsonDecode();
+            => BodyString(@this, encoding).GetFromJson();
 
         /// <summary>
         /// Deserializes the body, which is json, to a .NET object.
@@ -94,7 +94,7 @@ namespace Dawnx.AspNetCore
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static TRet BodyJsonDecode<TRet>(this HttpRequest @this, Encoding encoding)
-            => BodyString(@this, encoding).JsonDecode<TRet>();
+            => BodyString(@this, encoding).GetFromJson<TRet>();
 
     }
 }

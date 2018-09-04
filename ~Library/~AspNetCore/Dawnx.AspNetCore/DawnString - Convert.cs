@@ -12,14 +12,14 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static TRet JsonDecode<TRet>(this string @this) => JsonConvert.DeserializeObject<TRet>(@this);
+        public static TRet GetFromJson<TRet>(this string @this) => JsonConvert.DeserializeObject<TRet>(@this);
 
         /// <summary>
         /// Deserializes the JSON to a .NET object.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static object JsonDecode(this string @this) => JsonConvert.DeserializeObject(@this);
+        public static object GetFromJson(this string @this) => JsonConvert.DeserializeObject(@this);
 
     }
 }

@@ -12,7 +12,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Base64Encode(this byte[] @this) => Convert.ToBase64String(@this);
+        public static string Base64String(this byte[] @this) => Convert.ToBase64String(@this);
 
         /// <summary>
         /// Converts an array of 8-bit unsigned integers to its equivalent string representation
@@ -20,7 +20,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string HexEncode(this byte[] @this, string separator = "")
+        public static string HexString(this byte[] @this, string separator = "")
         {
             var ret = new List<string>();
             @this.Each(@byte => ret.Add(@byte.ToString("x2")));
@@ -28,12 +28,11 @@ namespace Dawnx
         }
 
         /// <summary>
-        /// Decodes all the bytes in the specified byte (Unicode, UTF-16) array into a string.
+        /// Decodes all the bytes in the specified byte(UTF-8) array into a string.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string GetString(this byte[] @this)
-            => GetString(@this, Encoding.Unicode);
+        public static string String(this byte[] @this) => String(@this, Encoding.UTF8);
 
         /// <summary>
         /// Decodes all the bytes in the specified byte array into a string.
@@ -41,8 +40,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string GetString(this byte[] @this, string encoding)
-            => Encoding.GetEncoding(encoding).GetString(@this);
+        public static string String(this byte[] @this, string encoding) => Encoding.GetEncoding(encoding).GetString(@this);
 
         /// <summary>
         /// Decodes all the bytes in the specified byte array into a string.
@@ -50,8 +48,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string GetString(this byte[] @this, Encoding encoding)
-            => encoding.GetString(@this);
+        public static string String(this byte[] @this, Encoding encoding) => encoding.GetString(@this);
 
     }
 }

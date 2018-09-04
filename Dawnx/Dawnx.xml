@@ -9,7 +9,7 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
-        <member name="M:Dawnx.DawnArray.Base64Encode(System.Byte[])">
+        <member name="M:Dawnx.DawnArray.Base64String(System.Byte[])">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
                 that is encoded with base-64 digits.
@@ -17,7 +17,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnArray.HexEncode(System.Byte[],System.String)">
+        <member name="M:Dawnx.DawnArray.HexString(System.Byte[],System.String)">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
                 that is encoded with hex digits.
@@ -25,14 +25,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnArray.GetString(System.Byte[])">
+        <member name="M:Dawnx.DawnArray.String(System.Byte[])">
             <summary>
-            Decodes all the bytes in the specified byte (Unicode, UTF-16) array into a string.
+            Decodes all the bytes in the specified byte(UTF-8) array into a string.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnArray.GetString(System.Byte[],System.String)">
+        <member name="M:Dawnx.DawnArray.String(System.Byte[],System.String)">
             <summary>
             Decodes all the bytes in the specified byte array into a string.
             </summary>
@@ -40,7 +40,7 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnArray.GetString(System.Byte[],System.Text.Encoding)">
+        <member name="M:Dawnx.DawnArray.String(System.Byte[],System.Text.Encoding)">
             <summary>
             Decodes all the bytes in the specified byte array into a string.
             </summary>
@@ -609,22 +609,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.GetBytes(System.String)">
+        <member name="M:Dawnx.DawnString.Bytes(System.String)">
             <summary>
-            Encodes all the characters in the specified string into a sequence of bytes (Unicode, UTF-16), then returns it.
+            Encodes all the characters in the specified string into a sequence of bytes(UTF-8), then returns it.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.GetBytes(System.String,System.Text.Encoding)">
-            <summary>
-            Encodes all the characters in the specified string into a sequence of bytes, then returns it.
-            </summary>
-            <param name="this"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnString.GetBytes(System.String,System.String)">
+        <member name="M:Dawnx.DawnString.Bytes(System.String,System.Text.Encoding)">
             <summary>
             Encodes all the characters in the specified string into a sequence of bytes, then returns it.
             </summary>
@@ -632,7 +624,15 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.Base64Decode(System.String)">
+        <member name="M:Dawnx.DawnString.Bytes(System.String,System.String)">
+            <summary>
+            Encodes all the characters in the specified string into a sequence of bytes, then returns it.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.BytesFromBase64(System.String)">
             <summary>
             Converts the specified string, which encodes binary data as base-64 digits, to
                 an equivalent 8-bit unsigned integer array.
@@ -640,7 +640,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.HexDecode(System.String,System.String)">
+        <member name="M:Dawnx.DawnString.BytesFromHex(System.String,System.String)">
             <summary>
             Converts the specified string, which encodes binary data as hex digits, to
                 an equivalent 8-bit unsigned integer array.
@@ -649,9 +649,24 @@
             <param name="separator"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.Base64Encode(System.String)">
+            <summary>
+            Converts the specified string into a Base64-encoded string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnString.Base64Encode(System.String,System.Text.Encoding)">
             <summary>
             Converts the specified string into a Base64-encoded string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.HexEncode(System.String)">
+            <summary>
+            Converts the specified string into a Hex-encoded string(UTF-8).
             </summary>
             <param name="this"></param>
             <param name="encoding"></param>
@@ -665,11 +680,26 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.Base64Decode(System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as base-64 digits, to a new string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnString.Base64Decode(System.String,System.Text.Encoding)">
             <summary>
             Converts the specified string, which encodes binary data as base-64 digits, to a new string.
             </summary>
             <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.HexDecode(System.String,System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as hex digits, to a new string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <param name="separator"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.HexDecode(System.String,System.Text.Encoding,System.String)">

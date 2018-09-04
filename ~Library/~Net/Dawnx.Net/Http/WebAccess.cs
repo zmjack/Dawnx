@@ -168,7 +168,7 @@ namespace Dawnx.Net.Http
                     }
                     else if (method == HttpVerb.POST)
                     {
-                        bodyStream = new MemoryStream(queryString.GetBytes(encoding));
+                        bodyStream = new MemoryStream(queryString.Bytes(encoding));
                     }
                     break;
 
@@ -178,7 +178,7 @@ namespace Dawnx.Net.Http
                     {
                         var values = NormalizeStringValues(data.Value);
                         foreach (var value in values)
-                            formData.AddData(data.Key, value.GetBytes(encoding));
+                            formData.AddData(data.Key, value.Bytes(encoding));
                     }
                     foreach (var file in upfiles)
                     {
@@ -192,7 +192,7 @@ namespace Dawnx.Net.Http
                     break;
 
                 case MediaType.APPLICATION_JSON:
-                    bodyStream = new MemoryStream(JsonConvert.SerializeObject(updata).GetBytes(encoding));
+                    bodyStream = new MemoryStream(JsonConvert.SerializeObject(updata).Bytes(encoding));
                     break;
             }
 

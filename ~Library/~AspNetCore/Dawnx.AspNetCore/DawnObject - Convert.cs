@@ -12,7 +12,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string JsonEncode(this object @this) => JsonConvert.SerializeObject(@this);
+        public static string Json(this object @this) => JsonConvert.SerializeObject(@this);
 
     }
 }

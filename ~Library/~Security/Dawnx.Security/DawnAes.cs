@@ -8,12 +8,12 @@ namespace Dawnx.Security
         public static readonly byte[] EMPTY_IV = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public static void FromBase64String(this Aes @this, string base64Key)
-            => @this.Key = base64Key.Base64Decode();
-        public static string ToBase64String(this Aes @this) => @this.Key.Base64Encode();
+            => @this.Key = base64Key.BytesFromBase64();
+        public static string ToBase64String(this Aes @this) => @this.Key.Base64String();
 
         public static void FromHexString(this Aes @this, string hexKey)
-            => @this.Key = hexKey.HexDecode();
-        public static string ToHexString(this Aes @this) => @this.Key.HexEncode();
+            => @this.Key = hexKey.BytesFromHex();
+        public static string ToHexString(this Aes @this) => @this.Key.HexString();
 
         public static void SetEmptyIV(this Aes @this) => @this.IV = EMPTY_IV;
 

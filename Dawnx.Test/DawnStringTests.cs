@@ -31,10 +31,10 @@ namespace Dawnx.Test
         public void GetBytes()
         {
             var str = "ÀèÃ÷";
-            Assert.Equal(Encoding.UTF8.GetBytes(str), str.GetBytes(Encoding.UTF8));
-            Assert.Equal(Encoding.UTF8.GetBytes(str), str.GetBytes("utf-8"));
-            Assert.NotEqual(Encoding.ASCII.GetBytes(str), str.GetBytes(Encoding.UTF8));
-            Assert.NotEqual(Encoding.ASCII.GetBytes(str), str.GetBytes("utf-8"));
+            Assert.Equal(Encoding.UTF8.GetBytes(str), str.Bytes(Encoding.UTF8));
+            Assert.Equal(Encoding.UTF8.GetBytes(str), str.Bytes("utf-8"));
+            Assert.NotEqual(Encoding.ASCII.GetBytes(str), str.Bytes(Encoding.UTF8));
+            Assert.NotEqual(Encoding.ASCII.GetBytes(str), str.Bytes("utf-8"));
 
             var hexString = "0c66182ec710840065ebaa47c5e6ce90";
             var hexString_Base64 = "MGM2NjE4MmVjNzEwODQwMDY1ZWJhYTQ3YzVlNmNlOTA=";
@@ -42,11 +42,11 @@ namespace Dawnx.Test
             {
                 0x0C, 0x66, 0x18, 0x2E, 0xC7, 0x10, 0x84, 0x00, 0x65, 0xEB, 0xAA, 0x47, 0xC5, 0xE6, 0xCE, 0x90
             };
-            Assert.Equal(hexString_Bytes, hexString.HexDecode());
-            Assert.Equal(hexString, hexString_Bytes.HexEncode());
+            Assert.Equal(hexString_Bytes, hexString.BytesFromHex());
+            Assert.Equal(hexString, hexString_Bytes.HexString());
 
             Assert.Equal(hexString,
-                hexString_Base64.Base64Decode().GetString(Encoding.Default));
+                hexString_Base64.BytesFromBase64().String(Encoding.Default));
         }
 
         [Fact]

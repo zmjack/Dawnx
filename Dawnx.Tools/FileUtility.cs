@@ -12,7 +12,7 @@ namespace Dawnx.Tools
             {
                 Console.SetCursorPosition(72, Console.CursorTop);
 
-                var savedMD5 = MD5.Create().ComputeHash(file).HexEncode();
+                var savedMD5 = MD5.Create().ComputeHash(file).HexString();
                 return (savedMD5 == md5);
             }
         }

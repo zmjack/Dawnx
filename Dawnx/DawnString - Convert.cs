@@ -7,13 +7,11 @@ namespace Dawnx
     public static partial class DawnString
     {
         /// <summary>
-        /// Encodes all the characters in the specified string into a sequence of bytes (Unicode, UTF-16),
-        ///     then returns it.
+        /// Encodes all the characters in the specified string into a sequence of bytes(UTF-8), then returns it.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static byte[] GetBytes(this string @this)
-            => GetBytes(@this, Encoding.Unicode);
+        public static byte[] Bytes(this string @this) => Bytes(@this, Encoding.UTF8);
 
         /// <summary>
         /// Encodes all the characters in the specified string into a sequence of bytes, then returns it.
@@ -21,8 +19,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static byte[] GetBytes(this string @this, Encoding encoding)
-            => encoding.GetBytes(@this);
+        public static byte[] Bytes(this string @this, Encoding encoding) => encoding.GetBytes(@this);
 
         /// <summary>
         /// Encodes all the characters in the specified string into a sequence of bytes, then returns it.
@@ -30,8 +27,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static byte[] GetBytes(this string @this, string encoding)
-            => Encoding.GetEncoding(encoding).GetBytes(@this);
+        public static byte[] Bytes(this string @this, string encoding) => Encoding.GetEncoding(encoding).GetBytes(@this);
 
         /// <summary>
         /// Converts the specified string, which encodes binary data as base-64 digits, to
@@ -39,8 +35,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static byte[] Base64Decode(this string @this)
-            => Convert.FromBase64String(@this);
+        public static byte[] BytesFromBase64(this string @this) => Convert.FromBase64String(@this);
 
         /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to
@@ -49,7 +44,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
-        public static byte[] HexDecode(this string @this, string separator = "")
+        public static byte[] BytesFromHex(this string @this, string separator = "")
         {
             if (@this.IsNullOrEmpty()) return new byte[0];
 
@@ -69,13 +64,30 @@ namespace Dawnx
         }
 
         /// <summary>
+        /// Converts the specified string into a Base64-encoded string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string Base64Encode(this string @this)
+            => @this.Bytes(Encoding.UTF8).Base64String();
+
+        /// <summary>
         /// Converts the specified string into a Base64-encoded string.
         /// </summary>
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Base64Encode(this string @this, Encoding encoding)
-            => @this.GetBytes(encoding).Base64Encode();
+            => @this.Bytes(encoding).Base64String();
+
+        /// <summary>
+        /// Converts the specified string into a Hex-encoded string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string HexEncode(this string @this) 
+            => @this.Bytes(Encoding.UTF8).HexString();
 
         /// <summary>
         /// Converts the specified string into a Hex-encoded string.
@@ -83,16 +95,33 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string HexEncode(this string @this, Encoding encoding)
-            => @this.GetBytes(encoding).HexEncode();
+        public static string HexEncode(this string @this, Encoding encoding) 
+            => @this.Bytes(encoding).HexString();
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as base-64 digits, to a new string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string Base64Decode(this string @this)
+            => @this.BytesFromBase64().String(Encoding.UTF8);
 
         /// <summary>
         /// Converts the specified string, which encodes binary data as base-64 digits, to a new string.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Base64Decode(this string @this, Encoding encoding)
-            => @this.Base64Decode().GetString(encoding);
+        public static string Base64Decode(this string @this, Encoding encoding) 
+            => @this.BytesFromBase64().String(encoding);
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as hex digits, to a new string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string HexDecode(this string @this, string separator = "")
+            => @this.BytesFromHex(separator).String(Encoding.UTF8);
 
         /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to a new string.
@@ -101,7 +130,7 @@ namespace Dawnx
         /// <param name="separator"></param>
         /// <returns></returns>
         public static string HexDecode(this string @this, Encoding encoding, string separator = "")
-            => @this.HexDecode().GetString(encoding);
+            => @this.BytesFromHex(separator).String(encoding);
 
         /// <summary>
         /// Converts the specified string into a URL-encoded string.

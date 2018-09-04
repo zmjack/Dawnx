@@ -126,21 +126,21 @@
             If necessary, carry a data model 
             </summary>
         </member>
-        <member name="M:Dawnx.DawnObject.JsonEncode(System.Object)">
+        <member name="M:Dawnx.DawnObject.Json(System.Object)">
             <summary>
             Serializes the specified object to a JSON string.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.JsonDecode``1(System.String)">
+        <member name="M:Dawnx.DawnString.GetFromJson``1(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.JsonDecode(System.String)">
+        <member name="M:Dawnx.DawnString.GetFromJson(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>

@@ -29,10 +29,39 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="task"></param>
         /// <returns></returns>
+        public static IEnumerable Each<TSource>(IEnumerable @this, Action<TSource> task)
+        {
+            foreach (TSource item in @this)
+                task(item);
+            return @this;
+        }
+
+        /// <summary>
+        /// Do action for each item.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="task"></param>
+        /// <returns></returns>
         public static IEnumerable<TSource> Each<TSource>(this IEnumerable<TSource> @this, Action<TSource, int> task)
         {
             int i = 0;
             foreach (var item in @this)
+                task(item, i++);
+            return @this;
+        }
+
+        /// <summary>
+        /// Do action for each item.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public static IEnumerable Each<TSource>(this IEnumerable @this, Action<TSource, int> task)
+        {
+            int i = 0;
+            foreach (TSource item in @this)
                 task(item, i++);
             return @this;
         }

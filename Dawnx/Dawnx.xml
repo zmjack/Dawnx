@@ -186,7 +186,25 @@
             <param name="task"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.IEnumerable,System.Action{``0})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.IEnumerable,System.Action{``0,System.Int32})">
             <summary>
             Do action for each item.
             </summary>

@@ -1,6 +1,8 @@
 ﻿using Dawnx.Enums;
+using Dawnx.Utilities;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,6 +44,7 @@ namespace Dawnx.Net.Http
         public int AllowRedirectTimes { get; set; } = 10;
         public int RedirectTimes { get; set; } = 0;
 
+        // If update is Dictionary
         public string Get(string url, Dictionary<string, object> updata = null)
             => ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
         public string Post(string url, Dictionary<string, object> updata = null)
@@ -72,6 +75,44 @@ namespace Dawnx.Net.Http
         public void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => Download(receiver, HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
+        // End
+
+        // If update is object
+        public string Get(string url, object updata)
+            => ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null);
+        public string Post(string url, object updata)
+            => ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null);
+        public string PostJson(string url, object updata)
+            => ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, ObjectUtility.CovertToDictionary(updata), null);
+        public string Up(string url, object updata, Dictionary<string, object> upfiles = null)
+            => ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, ObjectUtility.CovertToDictionary(updata), upfiles);
+
+        public TRet Get<TRet>(string url, object updata)
+            => JsonConvert.DeserializeObject<TRet>(
+                ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null));
+        public TRet Post<TRet>(string url, object updata)
+            => JsonConvert.DeserializeObject<TRet>(
+                ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null));
+        public TRet PostJson<TRet>(string url, object updata)
+            => JsonConvert.DeserializeObject<TRet>(
+                ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, ObjectUtility.CovertToDictionary(updata), null));
+        public TRet Up<TRet>(string url, object updata, Dictionary<string, object> upfiles = null)
+            => JsonConvert.DeserializeObject<TRet>(
+                ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, ObjectUtility.CovertToDictionary(updata), upfiles));
+
+        public void GetDownload(Stream receiver, string url, object updata,
+            int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null, bufferSize);
+        public void PostDownload(Stream receiver, string url, object updata,
+            int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null, bufferSize);
+        public void PostJsonDownload(Stream receiver, string url, object updata,
+            int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_JSON, url, ObjectUtility.CovertToDictionary(updata), null, bufferSize);
+        public void UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null,
+            int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, ObjectUtility.CovertToDictionary(updata), upfiles, bufferSize);
+        // End
 
         public void Download(
             Stream receiver,
@@ -156,7 +197,7 @@ namespace Dawnx.Net.Http
                     {
                         var values = NormalizeStringValues(data.Value);
                         foreach (var value in values)
-                            query.Add($"{data.Key}={HttpUtility.UrlEncode(value)}");
+                            query.Add($"{data.Key}={WebUtility.UrlEncode(value)}");
                     }
                     var queryString = query.Join("&");
 
@@ -203,7 +244,7 @@ namespace Dawnx.Net.Http
                     foreach (var header in StateContainer.Headers)
                         _.Headers.Add(header.Key, header.Value);
                 });
-                
+
                 _.UserAgent = StateContainer.UserAgent;
                 _.Method = method;
                 _.Timeout = -1;
@@ -258,6 +299,8 @@ namespace Dawnx.Net.Http
 
         private static IEnumerable<string> NormalizeStringValues(object dvalue)
         {
+            //TODO: This method limit the urlencode ability of urlencode, because it support only 1 level search.
+            //Need to be optimized.
             if (dvalue is Array)
             {
                 return (dvalue as Array).OfType<object>()

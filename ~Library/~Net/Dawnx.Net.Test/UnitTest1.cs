@@ -2,6 +2,7 @@ using Dawnx.Net.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dawnx.Net.Test
@@ -21,12 +22,23 @@ namespace Dawnx.Net.Test
             ["files"] = new[] { "file1.txt", "file2.txt" },
         };
 
+        private object updataObj = new
+        {
+            str = "str",
+            strs = new[] { "str1", "str2" },
+            num = 1,
+            nums = new[] { 2.1, 2.2 },
+        };
+
         [Fact]
         public void PostJsonTest()
         {
             Assert.Equal(
                 "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
                 Web.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
+            Assert.Equal(
+                "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
+                Web.PostJson("http://dev.dawnx.net/Http/RestJson", updataObj));
         }
 
         [Fact]
@@ -38,6 +50,16 @@ namespace Dawnx.Net.Test
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
                 Web.Post("http://dev.dawnx.net/Http", updata));
+            Assert.Equal(
+                "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",
+                Web.Up("http://dev.dawnx.net/Http", updata, upfiles));
+
+            Assert.Equal(
+                "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
+                Web.Get("http://dev.dawnx.net/Http", updataObj));
+            Assert.Equal(
+                "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
+                Web.Post("http://dev.dawnx.net/Http", updataObj));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",
                 Web.Up("http://dev.dawnx.net/Http", updata, upfiles));
@@ -56,6 +78,27 @@ namespace Dawnx.Net.Test
 
             Assert.Equal("1991-01-01", web.StateContainer.Cookies.GetCookies(new Uri("http://dev.dawnx.net"))["SetTime1"].Value);
             Assert.Equal("2012-04-16", web.StateContainer.Cookies.GetCookies(new Uri("http://dev.dawnx.net"))["SetTime2"].Value);
+        }
+
+        [Fact]
+        public void WebAccessAuthLoginTest()
+        {
+            var web = new WebAccess();
+            var loginPage = web.Get("http://dev.dawnx.net/Identity/Account/Login");
+            string requestToken = null;
+
+            var match_RequestToken = new Regex(@"<input name=""__RequestVerificationToken"" type=""hidden"" value=""(.+?)"" />").Match(loginPage);
+            if (match_RequestToken.Success)
+                requestToken = match_RequestToken.Groups[1].Value;
+
+            web.Post("http://dev.dawnx.net/Identity/Account/Login", new Dictionary<string, object>
+            {
+                ["Input.Email"] = "jack@zmland.com",
+                ["Input.Password"] = "123123",
+                ["__RequestVerificationToken"] = requestToken,
+            });
+
+            Assert.Equal("jack@zmland.com", web.Get("http://dev.dawnx.net/AuthInfo"));
         }
 
     }

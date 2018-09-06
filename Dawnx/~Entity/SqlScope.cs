@@ -1,4 +1,5 @@
 ﻿using Dawnx.Reflection;
+using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -75,21 +76,21 @@ namespace Dawnx
                     {
                         switch (value.GetType().FullName)
                         {
-                            case BasicType.@bool: return DbType.Boolean;
-                            case BasicType.@byte: return DbType.Byte;
-                            case BasicType.@sbyte: return DbType.SByte;
-                            case BasicType.@char: return DbType.Byte;
-                            case BasicType.@short: return DbType.Int16;
-                            case BasicType.@ushort: return DbType.UInt16;
-                            case BasicType.@int: return DbType.Int32;
-                            case BasicType.@uint: return DbType.UInt32;
-                            case BasicType.@long: return DbType.Int64;
-                            case BasicType.@ulong: return DbType.UInt64;
-                            case BasicType.@float: return DbType.Single;
-                            case BasicType.@double: return DbType.Double;
-                            case BasicType.@string: return DbType.String;
-                            case BasicType.@decimal: return DbType.Decimal;
-                            case BasicType.DateTime: return DbType.DateTime;
+                            case BasicTypeUtility.@bool: return DbType.Boolean;
+                            case BasicTypeUtility.@byte: return DbType.Byte;
+                            case BasicTypeUtility.@sbyte: return DbType.SByte;
+                            case BasicTypeUtility.@char: return DbType.Byte;
+                            case BasicTypeUtility.@short: return DbType.Int16;
+                            case BasicTypeUtility.@ushort: return DbType.UInt16;
+                            case BasicTypeUtility.@int: return DbType.Int32;
+                            case BasicTypeUtility.@uint: return DbType.UInt32;
+                            case BasicTypeUtility.@long: return DbType.Int64;
+                            case BasicTypeUtility.@ulong: return DbType.UInt64;
+                            case BasicTypeUtility.@float: return DbType.Single;
+                            case BasicTypeUtility.@double: return DbType.Double;
+                            case BasicTypeUtility.@string: return DbType.String;
+                            case BasicTypeUtility.@decimal: return DbType.Decimal;
+                            case BasicTypeUtility.DateTime: return DbType.DateTime;
                             default: return DbType.Object;
                         }
                     });

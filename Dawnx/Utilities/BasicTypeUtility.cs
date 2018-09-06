@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
-namespace Dawnx.Reflection
+namespace Dawnx.Utilities
 {
-    public static class BasicType
+    public static class BasicTypeUtility
     {
         public const string @bool = "System.Boolean";
         public const string @byte = "System.Byte";
@@ -30,8 +31,12 @@ namespace Dawnx.Reflection
             @float, @double,
             @string, @decimal, DateTime
         };
+        public static readonly string[] AllArrayFullNames = AllFullNames.Select(x => $"{x}[]").ToArray();
 
-        public static MethodInfo GetToStringMethod(Type type)
+        public static bool IsBasicType(object obj) => obj.GetType().FullName.In(AllFullNames);
+        public static bool IsBasicType(Type type) => type.FullName.In(AllFullNames);
+
+        public static MethodInfo GetMethodForToString(Type type)
         {
             switch (type.FullName)
             {
@@ -48,7 +53,7 @@ namespace Dawnx.Reflection
                 case "System.Single": return typeof(float).GetMethod("ToString");
                 case "System.Double": return typeof(double).GetMethod("ToString");
                 case "System.String": return typeof(string).GetMethod("ToString");
-                case "System.Decimal": return typeof(Decimal).GetMethod("ToString");
+                case "System.Decimal": return typeof(decimal).GetMethod("ToString");
                 case "System.DateTime": return typeof(DateTime).GetMethod("ToString");
                 default: throw new NotSupportedException();
             }

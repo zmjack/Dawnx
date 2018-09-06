@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Reflection;
 
 namespace Dawnx.Reflection
@@ -20,21 +21,21 @@ namespace Dawnx.Reflection
         {
             switch (type.FullName)
             {
-                case BasicType.@bool: return ConvertToBoolean(source, provider);
-                case BasicType.@byte: return ConvertToByte(source, provider);
-                case BasicType.@sbyte: return ConvertToSByte(source, provider);
-                case BasicType.@char: return ConvertToChar(source, provider);
-                case BasicType.@short: return ConvertToInt16(source, provider);
-                case BasicType.@ushort: return ConvertToUInt16(source, provider);
-                case BasicType.@int: return ConvertToInt32(source, provider);
-                case BasicType.@uint: return ConvertToUInt32(source, provider);
-                case BasicType.@long: return ConvertToInt64(source, provider);
-                case BasicType.@ulong: return ConvertToUInt64(source, provider);
-                case BasicType.@float: return ConvertToSingle(source, provider);
-                case BasicType.@double: return ConvertToDouble(source, provider);
-                case BasicType.@decimal: return ConvertToDecimal(source, provider);
-                case BasicType.@string: return ConvertToString(source, provider);
-                case BasicType.DateTime: return ConvertToDateTime(source, provider);
+                case BasicTypeUtility.@bool: return ConvertToBoolean(source, provider);
+                case BasicTypeUtility.@byte: return ConvertToByte(source, provider);
+                case BasicTypeUtility.@sbyte: return ConvertToSByte(source, provider);
+                case BasicTypeUtility.@char: return ConvertToChar(source, provider);
+                case BasicTypeUtility.@short: return ConvertToInt16(source, provider);
+                case BasicTypeUtility.@ushort: return ConvertToUInt16(source, provider);
+                case BasicTypeUtility.@int: return ConvertToInt32(source, provider);
+                case BasicTypeUtility.@uint: return ConvertToUInt32(source, provider);
+                case BasicTypeUtility.@long: return ConvertToInt64(source, provider);
+                case BasicTypeUtility.@ulong: return ConvertToUInt64(source, provider);
+                case BasicTypeUtility.@float: return ConvertToSingle(source, provider);
+                case BasicTypeUtility.@double: return ConvertToDouble(source, provider);
+                case BasicTypeUtility.@decimal: return ConvertToDecimal(source, provider);
+                case BasicTypeUtility.@string: return ConvertToString(source, provider);
+                case BasicTypeUtility.DateTime: return ConvertToDateTime(source, provider);
                 default: return source;
             }
         }

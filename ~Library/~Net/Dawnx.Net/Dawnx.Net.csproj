@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Provides some functions to access to the network easily.</Description>
+    <Description>Provides a more convenient way to access the network.</Description>
     <Company>dawnx.net</Company>
     <Authors>Dawnx Contributors</Authors>
     <Owners>zmjack</Owners>

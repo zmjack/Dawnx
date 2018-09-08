@@ -1,18 +1,17 @@
-dotnet restore
+dotnet restore Dawnx.sln
 dotnet build Dawnx.sln
 
 ::==== ~Root ====
 dotnet test Dawnx.Test/Dawnx.Test.csproj
 dotnet test Dawnx.Tools.Test/Dawnx.Tools.Test.csproj
 ::==== ~AspNetCore ====
-dotnet test "~Library/~AspNetCore/Dawnx.AspNetCore/Dawnx.AspNetCore.csproj"
-dotnet test "~Library/~AspNetCore/Dawnx.AspNetCore.IdentityUtility/Dawnx.AspNetCore.IdentityUtility.csproj"
-dotnet test "~Library/~AspNetCore/Dawnx.AspNetCore.LiveAccountUtility/Dawnx.AspNetCore.LiveAccountUtility.csproj"
+dotnet test "~Library/~AspNetCore/Dawnx.AspNetCore.Test/Dawnx.AspNetCore.Test.csproj"
 ::==== ~Net ====
-dotnet test "~Library/~AspNetCore/Dawnx.Net/Dawnx.Net.csproj"
+dotnet test "~Library/~Net/Dawnx.Net.Test/Dawnx.Net.Test.csproj"
 ::==== ~NPOI ====
-dotnet test "~Library/~AspNetCore/Dawnx.NPOI/Dawnx.NPOI.csproj"
+dotnet test "~Library/~NPOI/Dawnx.NPOI.Test/Dawnx.NPOI.Test.csproj"
 ::==== ~Security ====
-dotnet test "~Library/~AspNetCore/Dawnx.Security/Dawnx.Security.csproj"
+dotnet test "~Library/~Security/Dawnx.Security.Test/Dawnx.Security.Test.csproj"
 ::==== ~Xml ====
-dotnet test "~Library/~AspNetCore/Dawnx.Xml/Dawnx.Xml.csproj"
+dotnet test "~Library/~Xml/Dawnx.Xml.Test/Dawnx.Xml.Test.csproj"
+pause

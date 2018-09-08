@@ -13,5 +13,4 @@ nuget push "~Library/~NPOI/Dawnx.NPOI/bin/Release/Dawnx.NPOI.1.4.2.nupkg" -sourc
 nuget push "~Library/~Security/Dawnx.Security/bin/Release/Dawnx.Security.1.4.2.nupkg" -source nuget.org
 ::==== ~Xml ====
 nuget push "~Library/~Xml/Dawnx.Xml/bin/Release/Dawnx.Xml.1.4.2.nupkg" -source nuget.org
-
 pause

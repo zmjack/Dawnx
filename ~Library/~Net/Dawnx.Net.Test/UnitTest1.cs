@@ -1,7 +1,10 @@
+using Dawnx.Enums;
 using Dawnx.Net.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using Xunit;
 
@@ -83,22 +86,38 @@ namespace Dawnx.Net.Test
         [Fact]
         public void WebAccessAuthLoginTest()
         {
-            var web = new WebAccess();
-            var loginPage = web.Get("http://dev.dawnx.net/Identity/Account/Login");
-            string requestToken = null;
-
-            var match_RequestToken = new Regex(@"<input name=""__RequestVerificationToken"" type=""hidden"" value=""(.+?)"" />").Match(loginPage);
-            if (match_RequestToken.Success)
-                requestToken = match_RequestToken.Groups[1].Value;
-
-            web.Post("http://dev.dawnx.net/Identity/Account/Login", new Dictionary<string, object>
-            {
-                ["Input.Email"] = "jack@zmland.com",
-                ["Input.Password"] = "123123",
-                ["__RequestVerificationToken"] = requestToken,
-            });
-
+            var web = new WebAccess().Self(_ => _.AddProcessor(new DevLoginProcessor()));
             Assert.Equal("jack@zmland.com", web.Get("http://dev.dawnx.net/AuthInfo"));
+        }
+
+        public class DevLoginProcessor : LoginProcessor
+        {
+            public override HttpWebResponse LoginProcess(WebAccess web, HttpWebResponse response)
+            {
+                var uri = response.ResponseUri;
+                if (uri.LocalPath == "/Identity/Account/Login")
+                {
+                    string html;
+                    using (var stream = response.GetResponseStream())
+                    using (var reader = new StreamReader(stream))
+                        html = reader.ReadToEnd();
+
+                    var match_RequestToken = new Regex(@"<input name=""__RequestVerificationToken"" type=""hidden"" value=""(.+?)"" />").Match(html);
+                    if (match_RequestToken.Success)
+                    {
+                        return web.GetResponse(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
+                            uri.AbsoluteUri,
+                            new Dictionary<string, object>
+                            {
+                                ["Input.Email"] = "jack@zmland.com",
+                                ["Input.Password"] = "123123",
+                                ["__RequestVerificationToken"] = match_RequestToken.Groups[1].Value,
+                            }, null);
+                    }
+                    else throw new FormatException();
+                }
+                else return null;
+            }
         }
 
     }

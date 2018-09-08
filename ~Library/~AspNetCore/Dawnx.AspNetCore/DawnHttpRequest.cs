@@ -21,7 +21,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string FullPath(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}{@this.QueryString}";
+        public static string PathQuery(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}{@this.QueryString}";
 
         /// <summary>
         /// Returns $"{@this.Scheme}://{@this.Host}".

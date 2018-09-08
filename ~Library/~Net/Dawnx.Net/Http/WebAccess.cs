@@ -27,8 +27,8 @@ namespace Dawnx.Net.Http
         public event ProgressHandler UploadProgress;
 
         public WebRequestStateContainer StateContainer { get; private set; }
-        public HashSet<IResponseProcessor> ResponseProcessors { get; private set; }
-            = new HashSet<IResponseProcessor>().Self(_ => _.Add(new RedirectProcessor()));
+        public LinkedList<IResponseProcessor> ResponseProcessors { get; private set; }
+            = new LinkedList<IResponseProcessor>().Self(_ => _.AddLast(new RedirectProcessor()));
 
         public WebAccess() : this(new WebRequestStateContainer()) { }
         public WebAccess(WebRequestStateContainer config)
@@ -38,7 +38,33 @@ namespace Dawnx.Net.Http
             else StateContainer = new WebRequestStateContainer();
         }
 
-        public void AttachProcessor(IResponseProcessor processor) => ResponseProcessors.Add(processor);
+        private LinkedListNode<IResponseProcessor> FindProcessorNode(string processorFullName)
+        {
+            for (var node = ResponseProcessors.First; node != null; node = node.Next)
+                if (node.Value.GetType().FullName == processorFullName) return node;
+            return null;
+        }
+
+        public void AddProcessor(IResponseProcessor processor)
+        {
+            var findNode = FindProcessorNode(processor.GetType().FullName);
+            if (findNode == null)
+                ResponseProcessors.AddLast(processor);
+            else throw new ArgumentException("Only one processor can be added for each type.");
+        }
+        public void AddProcessorBefore<TFindProcessor>(IResponseProcessor processor)
+            where TFindProcessor : IResponseProcessor
+        {
+            var findNode = FindProcessorNode(processor.GetType().FullName);
+            if (findNode == null)
+            {
+                var targetNode = FindProcessorNode(typeof(TFindProcessor).FullName);
+                if (targetNode != null)
+                    ResponseProcessors.AddBefore(targetNode, new LinkedListNode<IResponseProcessor>(processor));
+                else ResponseProcessors.AddLast(processor);
+            }
+            else throw new ArgumentException("Only one processor can be added for each type.");
+        }
         public void ClearProcessor() => ResponseProcessors.Clear();
 
         public int AllowRedirectTimes { get; set; } = 10;
@@ -144,9 +170,7 @@ namespace Dawnx.Net.Http
             using (var response = GetResponse(method, enctype, url, updata, upfiles))
             using (var stream = response.GetResponseStream())
             using (var reader = new StreamReader(stream))
-            {
                 return reader.ReadToEnd();
-            }
         }
 
         public HttpWebResponse GetResponse(
@@ -171,7 +195,7 @@ namespace Dawnx.Net.Http
             return response;
         }
 
-        public HttpWebResponse GetPureResponse(
+        private HttpWebResponse GetPureResponse(
             string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)

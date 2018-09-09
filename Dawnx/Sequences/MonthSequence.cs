@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Dawnx
+namespace Dawnx.Sequences
 {
     public static class MonthSequence
     {

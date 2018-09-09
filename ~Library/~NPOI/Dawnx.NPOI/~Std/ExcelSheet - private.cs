@@ -1,4 +1,6 @@
-﻿namespace Dawnx.NPOI
+﻿using Dawnx.Sequences;
+
+namespace Dawnx.NPOI
 {
     public partial class ExcelSheet
     {

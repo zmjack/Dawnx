@@ -3,6 +3,7 @@ using System;
 
 namespace Dawnx.NPOI
 {
+    [Obsolete]
     public class ComparedCellStyle : ICellStyle
     {
         public bool ShrinkToFit { get; set; }

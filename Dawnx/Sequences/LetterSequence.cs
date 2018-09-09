@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace Dawnx
+namespace Dawnx.Sequences
 {
     public static class LetterSequence
     {

@@ -42,4 +42,8 @@
     <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>

@@ -33,6 +33,9 @@ namespace Dawnx.NPOI
             else return @this.ToString();
         }
 
+        public void SetBookCellStyle(Action<BookCellStyleApplier> initApplier)
+            => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
+
         public void SetCellStyle(ICellStyle style) => MapedCell.CellStyle = style;
         public void SetCellStyle(ComparedCellStyle style)
             => Sheet.Book.GetCellStyle(style);

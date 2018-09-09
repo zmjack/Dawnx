@@ -1,6 +1,10 @@
+using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Xunit;
 
 namespace Dawnx.NPOI.Test
@@ -105,6 +109,31 @@ namespace Dawnx.NPOI.Test
             book[0]["B10"].SetValue("123");
 
             book.SaveAs("result2.xlsx");
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            var book = new ExcelBook("test.xlsx");
+            ICellStyle style;
+
+            var sheet = book.CreateSheet("Display");
+            sheet["A1"].SetBookCellStyle(x =>
+            {
+                x.BorderBottom = BorderStyle.Medium;
+                x.BottomBorderColor = ExcelColor.Orange;
+            });
+
+            //for (int row = 0; row < 7; row++)
+            //    for (int col = 0; col < 10; col++)
+            //    {
+            //        var cell = book["Legend"][(row, col)];
+
+            //        style = cell.CellStyle;
+            //        sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
+            //    }
+
+            book.SaveAs("1.xlsx");
         }
 
         public class Model

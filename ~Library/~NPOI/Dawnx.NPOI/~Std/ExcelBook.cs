@@ -88,6 +88,25 @@ namespace Dawnx.NPOI
             else return findStyle;
         }
 
+        public BookCellStyle[] BookCellStyles => CellStyles.Select(x => new BookCellStyle(this, x)).ToArray();
+
+        public BookCellStyle CreateBookCellStyle(Action<BookCellStyle> init)
+            => new BookCellStyle(this).Self(_ => init(_));
+        public BookCellStyle GetBookCellStyle(Action<BookCellStyleApplier> initApplier)
+        {
+            var compared = new BookCellStyleApplier().Self(_ => initApplier(_));
+            return BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
+        }
+        public BookCellStyle BookCellStyle(Action<BookCellStyleApplier> initApplier)
+        {
+            var compared = new BookCellStyleApplier().Self(_ => initApplier(_));
+
+            var find = BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
+            if (find == null)
+                return new BookCellStyle(this).Self(_ => compared.Apply(_));
+            else return find;
+        }
+
         public IFont[] Fonts
             => Range.Create(NumberOfFonts).Select(i => GetFontAt((short)i)).ToArray();
         public IFont GetFont(ComparedFont compared)

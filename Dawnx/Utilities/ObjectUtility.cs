@@ -12,7 +12,7 @@ namespace Dawnx.Utilities
     {
         public static Dictionary<string, object> CovertToDictionary(object obj)
         {
-            if (obj == null) return new Dictionary<string, object>();
+            if (obj is null) return new Dictionary<string, object>();
 
             var stateContainer = new List<object>();
             return Convert(stateContainer, obj);

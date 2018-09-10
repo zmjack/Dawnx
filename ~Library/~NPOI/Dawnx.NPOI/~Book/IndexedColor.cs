@@ -1,7 +1,7 @@
 ﻿
 namespace Dawnx.NPOI
 {
-    public enum ExcelColor : short
+    public enum IndexedColor : short
     {
         Black = 8,                  // #000000
         White = 9,                  // #ffffff

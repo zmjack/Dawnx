@@ -26,6 +26,10 @@
     <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0" />

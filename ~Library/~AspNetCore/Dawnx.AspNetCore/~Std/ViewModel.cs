@@ -12,7 +12,7 @@ namespace Dawnx.AspNetCore
         public static string DisplayName<TRet>(Expression<Func<TModel, TRet>> expression)
         {
             var exp = expression.Body as MemberExpression;
-            if (exp == null)
+            if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
             //TODO: It will be optimized in the future, if this class is included in the standard library.
@@ -27,7 +27,7 @@ namespace Dawnx.AspNetCore
         public static string DisplayShortName<TRet>(Expression<Func<TModel, TRet>> expression)
         {
             var exp = expression.Body as MemberExpression;
-            if (exp == null)
+            if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
             //TODO: It will be optimized in the future, if this class is included in the standard library.

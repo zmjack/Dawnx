@@ -8,8 +8,24 @@ namespace Dawnx.Utilities
 {
     public static class ColorUtility
     {
+        /// <summary>
+        /// Creates a color using Alpha(255) + HSV model.
+        /// </summary>
+        /// <param name="hue">[0,360)</param>
+        /// <param name="saturation">[0,1]</param>
+        /// <param name="value">[0,1]</param>
+        /// <returns></returns>
         public static Color CreateFromAhsv(float hue, float saturation, float value)
             => CreateFromAhsv(255, hue, saturation, value);
+
+        /// <summary>
+        /// Creates a color using Alpha + HSV model.
+        /// </summary>
+        /// <param name="alpha"></param>
+        /// <param name="hue">[0,360)</param>
+        /// <param name="saturation">[0,1]</param>
+        /// <param name="value">[0,1]</param>
+        /// <returns></returns>
         public static Color CreateFromAhsv(int alpha, float hue, float saturation, float value)
         {
             if (hue < 0) throw new ArgumentException("The hue must be greater than 0.");

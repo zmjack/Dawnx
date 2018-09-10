@@ -79,7 +79,7 @@ namespace Dawnx
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            if (buffer == null)
+            if (buffer is null)
                 throw new ArgumentNullException(nameof(buffer), "The parameter 'buffer' can not be null.");
             if (offset < 0)
                 throw new ArgumentOutOfRangeException(nameof(offset), "The parameter 'offset' can not be less than 0.");

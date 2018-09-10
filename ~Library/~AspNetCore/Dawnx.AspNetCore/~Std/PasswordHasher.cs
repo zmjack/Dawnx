@@ -10,7 +10,7 @@ namespace Dawnx.AspNetCore.Identity
         {
             byte[] salt;
             byte[] buffer2;
-            if (password == null)
+            if (password is null)
                 throw new ArgumentNullException("The specified password is null.");
 
             using (var bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
@@ -28,7 +28,7 @@ namespace Dawnx.AspNetCore.Identity
         public static bool Verify(string passwordHash, string password)
         {
             byte[] buffer4;
-            if (password == null)
+            if (password is null)
                 throw new ArgumentNullException("The specified password is null.");
 
             byte[] src = Convert.FromBase64String(passwordHash);

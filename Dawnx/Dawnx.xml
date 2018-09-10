@@ -922,6 +922,25 @@
             </summary>
             <param name="strict"></param>
         </member>
+        <member name="M:Dawnx.Utilities.ColorUtility.CreateFromAhsv(System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a color using Alpha(255) + HSV model.
+            </summary>
+            <param name="hue">[0,360)</param>
+            <param name="saturation">[0,1]</param>
+            <param name="value">[0,1]</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.ColorUtility.CreateFromAhsv(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a color using Alpha + HSV model.
+            </summary>
+            <param name="alpha"></param>
+            <param name="hue">[0,360)</param>
+            <param name="saturation">[0,1]</param>
+            <param name="value">[0,1]</param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.Utilities.IPUtility.GetLongString(System.Net.IPAddress)">
             <summary>
             Converts a <see cref="T:System.Net.IPAddress"/>  into a long IP string.

@@ -19,7 +19,7 @@ namespace Dawnx
         {
             DoubleCheck.Do(
                 lockTarget: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
-                checkCondition: () => Scopes == null,
+                checkCondition: () => Scopes is null,
                 task: () => Scopes = new Stack<Scope<T, TSelf>>());
 
             Model = model;

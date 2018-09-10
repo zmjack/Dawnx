@@ -28,7 +28,7 @@ namespace Dawnx
 
         private ParameterExpression[] GetParameterExpressions(Expression expression)
         {
-            if (expression == null) return new ParameterExpression[0];
+            if (expression is null) return new ParameterExpression[0];
 
             if (expression is ParameterExpression)
                 return new[] { expression as ParameterExpression };
@@ -100,7 +100,7 @@ namespace Dawnx
 
                     foreach (var argExp in exp.Arguments)
                     {
-                        if (leftExp == null)
+                        if (leftExp is null)
                             leftExp = _binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp);
                         else leftExp = Expression.OrElse(leftExp,
                             _binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp));

@@ -43,11 +43,11 @@ namespace Dawnx.NPOI
             get
             {
                 var irow = GetRow(pos.row);
-                if (irow == null)
+                if (irow is null)
                     irow = CreateRow(pos.row);
 
                 var icol = irow.GetCell(pos.col);
-                if (icol == null)
+                if (icol is null)
                     icol = irow.CreateCell(pos.col);
 
                 return new SheetCell(this, icol);
@@ -78,7 +78,7 @@ namespace Dawnx.NPOI
                 for (var col = 0; col < colLength; col++)
                 {
                     var valueObj = values[row, col];
-                    if (valueObj == null) continue;
+                    if (valueObj is null) continue;
 
                     if (valueObj is string && (valueObj as string).StartsWith("="))
                     {
@@ -108,7 +108,7 @@ namespace Dawnx.NPOI
                 for (int col = 0; col < values[row].Length; col++)
                 {
                     var valueObj = values[row][col];
-                    if (valueObj == null) continue;
+                    if (valueObj is null) continue;
 
                     this[(Cursor.row + row, Cursor.col + col)].SetValue(valueObj);
                 }
@@ -130,7 +130,7 @@ namespace Dawnx.NPOI
             for (int col = 0; col < values.Length; col++)
             {
                 var valueObj = values[col];
-                if (valueObj == null) continue;
+                if (valueObj is null) continue;
 
                 this[(Cursor.row, Cursor.col + col)].SetValue(valueObj);
             }

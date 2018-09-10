@@ -1,3 +1,4 @@
+using Dawnx.Utilities;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -115,23 +116,21 @@ namespace Dawnx.NPOI.Test
         public void Test3()
         {
             var book = new ExcelBook("test.xlsx");
+            var sheet = book.CreateSheet("Display");
             ICellStyle style;
 
-            var sheet = book.CreateSheet("Display");
-            sheet["A1"].SetBookCellStyle(x =>
+            var s = book.MapedWorkbook.CreateCellStyle();
+
+            for (int row = 6; row < 7; row++)
             {
-                x.BorderBottom = BorderStyle.Medium;
-                x.BottomBorderColor = ExcelColor.Orange;
-            });
+                for (int col = 0; col < 10; col++)
+                {
+                    var cell = book["Legend"][(row, col)];
 
-            //for (int row = 0; row < 7; row++)
-            //    for (int col = 0; col < 10; col++)
-            //    {
-            //        var cell = book["Legend"][(row, col)];
-
-            //        style = cell.CellStyle;
-            //        sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
-            //    }
+                    style = cell.CellStyle;
+                    sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
+                }
+            }
 
             book.SaveAs("1.xlsx");
         }

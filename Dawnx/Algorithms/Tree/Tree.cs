@@ -53,7 +53,7 @@ namespace Dawnx.Algorithms.Tree
 
         public bool IsTree => Children.Any();
         public bool IsLeaf => !Children.Any();
-        public bool IsRoot => Parent == null;
+        public bool IsRoot => Parent is null;
 
         public HashSet<TDerivedClass> Children { get; private set; } = new HashSet<TDerivedClass>();
         public IEnumerable<TDerivedClass> Trees => Children.Where(x => x.IsTree);
@@ -175,7 +175,7 @@ namespace Dawnx.Algorithms.Tree
             var pendingNodeQueue = new Queue<TDerivedClass>();
 
             entities
-                .Where(entity => entity.Parent == null)
+                .Where(entity => entity.Parent is null)
                 .OrderBy(entity => entity.Index)
                 .Each(entity =>
                 {

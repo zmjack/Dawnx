@@ -48,7 +48,7 @@ namespace Dawnx.Net.Http
         public void AddProcessor(IResponseProcessor processor)
         {
             var findNode = FindProcessorNode(processor.GetType().FullName);
-            if (findNode == null)
+            if (findNode is null)
                 ResponseProcessors.AddLast(processor);
             else throw new ArgumentException("Only one processor can be added for each type.");
         }
@@ -56,7 +56,7 @@ namespace Dawnx.Net.Http
             where TFindProcessor : IResponseProcessor
         {
             var findNode = FindProcessorNode(processor.GetType().FullName);
-            if (findNode == null)
+            if (findNode is null)
             {
                 var targetNode = FindProcessorNode(typeof(TFindProcessor).FullName);
                 if (targetNode != null)
@@ -203,9 +203,9 @@ namespace Dawnx.Net.Http
             method = method.ToLower();
             enctype = enctype.ToLower();
 
-            if (updata == null)
+            if (updata is null)
                 updata = new Dictionary<string, object>();
-            if (upfiles == null)
+            if (upfiles is null)
                 upfiles = new Dictionary<string, object>();
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -316,7 +316,7 @@ namespace Dawnx.Net.Http
             catch (WebException ex)
             {
                 response = ex.Response as HttpWebResponse;
-                if (response == null) throw;
+                if (response is null) throw;
             }
             return response;
         }

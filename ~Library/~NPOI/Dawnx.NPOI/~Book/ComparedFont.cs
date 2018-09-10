@@ -3,6 +3,7 @@ using System;
 
 namespace Dawnx.NPOI
 {
+    [Obsolete]
     public class ComparedFont : IFont
     {
         private short _FontHeightInPoints;

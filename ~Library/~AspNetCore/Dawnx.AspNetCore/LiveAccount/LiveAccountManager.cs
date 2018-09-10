@@ -27,7 +27,7 @@ namespace Dawnx.AspNetCore.LiveAccount
             var username = actionExecutingContext.HttpContext.User.Identity.Name;
 
             var user = Users.SingleOrDefault(x => x.UserName == username);
-            if (user == null) return false;
+            if (user is null) return false;
 
             var allowedActions = LiveUserRoles
                 .Include(x => x.RoleLink.RoleOperations)
@@ -39,9 +39,9 @@ namespace Dawnx.AspNetCore.LiveAccount
                 .ToArray();
 
             return allowedActions.Any(x =>
-                (x.Area == null && x.Controller == null && x.Action == null)
-                || (x.Area == areaName && x.Controller == null && x.Action == null)
-                || (x.Area == areaName && x.Controller == controllerName && x.Action == null)
+                (x.Area is null && x.Controller is null && x.Action is null)
+                || (x.Area == areaName && x.Controller is null && x.Action is null)
+                || (x.Area == areaName && x.Controller == controllerName && x.Action is null)
                 || (x.Area == areaName && x.Controller == controllerName && x.Action == actionName));
         }
 

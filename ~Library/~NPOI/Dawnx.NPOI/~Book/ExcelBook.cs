@@ -54,7 +54,7 @@ namespace Dawnx.NPOI
                 else return false;
             });
 
-            if (findStyle == null)
+            if (findStyle is null)
             {
                 var newStyle = MapedWorkbook.CreateCellStyle().Self(_ =>
                 {
@@ -89,7 +89,6 @@ namespace Dawnx.NPOI
         }
 
         public BookCellStyle[] BookCellStyles => CellStyles.Select(x => new BookCellStyle(this, x)).ToArray();
-
         public BookCellStyle CreateBookCellStyle(Action<BookCellStyle> init)
             => new BookCellStyle(this).Self(_ => init(_));
         public BookCellStyle GetBookCellStyle(Action<BookCellStyleApplier> initApplier)
@@ -102,7 +101,7 @@ namespace Dawnx.NPOI
             var compared = new BookCellStyleApplier().Self(_ => initApplier(_));
 
             var find = BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
-            if (find == null)
+            if (find is null)
                 return new BookCellStyle(this).Self(_ => compared.Apply(_));
             else return find;
         }
@@ -121,7 +120,7 @@ namespace Dawnx.NPOI
                 else return false;
             });
 
-            if (findFont == null)
+            if (findFont is null)
             {
                 var newFont = MapedWorkbook.CreateFont().Self(_ =>
                 {
@@ -139,6 +138,24 @@ namespace Dawnx.NPOI
                 return newFont;
             }
             else return findFont;
+        }
+
+        public BookFont[] BookFonts => Fonts.Select(x => new BookFont(this, x)).ToArray();
+        public BookFont CreateBookFont(Action<BookFont> init)
+            => new BookFont(this).Self(_ => init(_));
+        public BookFont GetBookFont(Action<BookFontApplier> initApplier)
+        {
+            var compared = new BookFontApplier().Self(_ => initApplier(_));
+            return BookFonts.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
+        }
+        public BookFont BookFont(Action<BookFontApplier> initApplier)
+        {
+            var compared = new BookFontApplier().Self(_ => initApplier(_));
+
+            var find = BookFonts.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
+            if (find is null)
+                return new BookFont(this).Self(_ => compared.Apply(_));
+            else return find;
         }
 
         public ExcelSheet this[int index] => GetSheetAt(index);
@@ -180,7 +197,7 @@ namespace Dawnx.NPOI
 
         public void Save()
         {
-            if (FilePath == null)
+            if (FilePath is null)
                 throw new FileNotFoundException("Has no specified file path.");
 
             using (var file = new FileStream(FilePath, FileMode.Create, FileAccess.Write))

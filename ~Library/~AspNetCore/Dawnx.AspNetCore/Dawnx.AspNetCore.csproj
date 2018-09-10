@@ -30,6 +30,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>default</LangVersion>
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.xml</DocumentationFile>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>

@@ -15,27 +15,32 @@ namespace Dawnx.NPOI
 
         #region Border
         BorderStyle BorderLeft { get; set; }
-        ExcelColor LeftBorderColor { get; set; }
+        IndexedColor LeftBorderColor { get; set; }
 
         BorderStyle BorderRight { get; set; }
-        ExcelColor RightBorderColor { get; set; }
+        IndexedColor RightBorderColor { get; set; }
 
         BorderStyle BorderTop { get; set; }
-        ExcelColor TopBorderColor { get; set; }
+        IndexedColor TopBorderColor { get; set; }
 
         BorderStyle BorderBottom { get; set; }
-        ExcelColor BottomBorderColor { get; set; }
+        IndexedColor BottomBorderColor { get; set; }
 
         BorderStyle BorderDiagonalLineStyle { get; set; }
-        ExcelColor BorderDiagonalColor { get; set; }
+        IndexedColor BorderDiagonalColor { get; set; }
         BorderDiagonal BorderDiagonal { get; set; }
         #endregion
 
-        //public short FillForegroundColor { get; set; }
-        //public short FillBackgroundColor { get; set; }
-        //public FillPattern FillPattern { get; set; }
-        //public IColor FillBackgroundColorColor { get; }
-        //public IColor FillForegroundColorColor { get; }
+        #region Fill
+        FillPattern FillPattern { get; set; }
+
+        IndexedColor FillBackgroundColor { get; set; }
+        RGBColor FillBackgroundColorColor { get; set; }
+
+        IndexedColor FillForegroundColor { get; set; }
+        RGBColor FillForegroundColorColor { get; set; }
+        #endregion
+
         //public short Rotation { get; set; }
         //public bool WrapText { get; set; }
         //public bool IsLocked { get; set; }
@@ -50,19 +55,6 @@ namespace Dawnx.NPOI
         //string GetDataFormatString();
         //IFont GetFont(IWorkbook parentWorkbook);
         //void SetFont(IFont font);
-
-        //public static implicit operator ICellStyle(SheetCellStyle instance)
-        //{
-        //    var cellStyles = Book.CellStyles;
-
-        //    var findStyle = CellStyles.FirstOrDefault(style =>
-        //    {
-        //        if (props.All(prop => prop.GetValue(style).Equals(prop.GetValue(compared)))
-        //            && style.FontIndex == compared.FontIndex)
-        //            return true;
-        //        else return false;
-        //    });
-        //}
 
     }
 }

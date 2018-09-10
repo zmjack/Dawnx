@@ -24,7 +24,7 @@ namespace Dawnx.AspNetCore
             var roles = Model.GetRoles();
 
             if (!Children.Any())
-                return (roles == null && users == null)
+                return (roles is null && users is null)
                     || (roles?.Any(role => user.IsInRole(role)) ?? false)
                     || (users?.Contains(user.Identity.Name) ?? false);
             else return Children.Any(subTree => subTree.IsUserNode(user));

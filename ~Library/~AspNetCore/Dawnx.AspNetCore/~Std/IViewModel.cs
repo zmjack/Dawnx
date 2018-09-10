@@ -30,7 +30,7 @@ namespace Dawnx.AspNetCore
             where TModel : class, IViewModel<TModel>, new()
         {
             var exp = expression.Body as MemberExpression;
-            if (exp == null)
+            if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
             TRet value;

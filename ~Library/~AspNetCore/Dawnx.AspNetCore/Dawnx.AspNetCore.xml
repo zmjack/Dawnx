@@ -36,7 +36,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.FullPath(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.PathQuery(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.PathBase}{@this.Path}{@this.QueryString}".
                 eg. /controller/action?id=1

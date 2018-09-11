@@ -49,16 +49,16 @@ namespace Dawnx
             if (@this.IsNullOrEmpty()) return new byte[0];
 
             var hexString = @this;
-            if (!separator.IsEmpty())
+            if (!separator.IsNullOrEmpty())
                 hexString = hexString.Replace(separator, "");
 
-            var length = @this.Length;
+            var length = hexString.Length;
             if (length.IsOdd())
                 throw new FormatException("The specified string's length must be even.");
 
             var ret = new byte[length / 2];
             for (int i = 0; i < ret.Length; i++)
-                ret[i] = Convert.ToByte(@this.Substring(i * 2, 2), 16);
+                ret[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
 
             return ret;
         }
@@ -86,7 +86,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string HexEncode(this string @this) 
+        public static string HexEncode(this string @this)
             => @this.Bytes(Encoding.UTF8).HexString();
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string HexEncode(this string @this, Encoding encoding) 
+        public static string HexEncode(this string @this, Encoding encoding)
             => @this.Bytes(encoding).HexString();
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Base64Decode(this string @this, Encoding encoding) 
+        public static string Base64Decode(this string @this, Encoding encoding)
             => @this.BytesFromBase64().String(encoding);
 
         /// <summary>

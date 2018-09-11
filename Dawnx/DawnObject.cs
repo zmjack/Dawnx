@@ -51,32 +51,6 @@ namespace Dawnx
             => sequence.Contains(@this);
 
         /// <summary>
-        /// If the element is null, the method will be called. Otherwise, nothing will happen.
-        /// </summary>
-        /// <param name="this"></param>
-        /// <param name="method"></param>
-        public static TSelf IfNull<TSelf>(this TSelf @this, Action<TSelf> method)
-        {
-            if (@this == null)
-                method(@this);
-
-            return @this;
-        }
-
-        /// <summary>
-        /// If the element is not null, the method will be called. Otherwise, nothing will happen.
-        /// </summary>
-        /// <param name="this"></param>
-        /// <param name="method"></param>
-        public static TSelf IfNotNull<TSelf>(this TSelf @this, Action<TSelf> method)
-        {
-            if (@this != null)
-                method(@this);
-
-            return @this;
-        }
-        
-        /// <summary>
         /// This function is equal to '@this as T'.
         /// </summary>
         /// <typeparam name="T"></typeparam>

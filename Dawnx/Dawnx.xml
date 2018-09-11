@@ -597,20 +597,6 @@
             <param name="enumerable"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnObject.IfNull``1(``0,System.Action{``0})">
-            <summary>
-            If the element is null, the method will be called. Otherwise, nothing will happen.
-            </summary>
-            <param name="this"></param>
-            <param name="method"></param>
-        </member>
-        <member name="M:Dawnx.DawnObject.IfNotNull``1(``0,System.Action{``0})">
-            <summary>
-            If the element is not null, the method will be called. Otherwise, nothing will happen.
-            </summary>
-            <param name="this"></param>
-            <param name="method"></param>
-        </member>
         <member name="M:Dawnx.DawnObject.As``1(System.Object)">
             <summary>
             This function is equal to '@this as T'.

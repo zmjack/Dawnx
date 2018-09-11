@@ -263,10 +263,13 @@ namespace Dawnx.Net.Http
 
             var request = ((HttpWebRequest)WebRequest.Create(new Uri(url))).Self(_ =>
             {
-                StateContainer.Headers.IfNotNull(headers =>
+                StateContainer.Headers.Self(headers =>
                 {
-                    foreach (var header in StateContainer.Headers)
-                        _.Headers.Add(header.Key, header.Value);
+                    if (!(headers is null))
+                    {
+                        foreach (var header in StateContainer.Headers)
+                            _.Headers.Add(header.Key, header.Value);
+                    }
                 });
 
                 _.UserAgent = StateContainer.UserAgent;

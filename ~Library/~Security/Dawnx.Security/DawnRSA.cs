@@ -62,9 +62,7 @@ namespace Dawnx.Security
         {
             using (var file = new FileStream(path, FileMode.Open))
             using (var reader = new StreamReader(file))
-            {
                 FromPemStringStd(@this, reader.ReadToEnd());
-            }
         }
 
         public static string ToXmlStringStd(this RSA @this, bool includePrivateParameters)
@@ -97,7 +95,7 @@ namespace Dawnx.Security
         {
             var keyName = includePrivateParameters ? "PRIVATE" : "PUBLIC";
             var @params = @this.ExportParameters(includePrivateParameters);
-            var base64 = string.Join("\r\n", Convert.ToBase64String(
+            var base64 = string.Join(Environment.NewLine, Convert.ToBase64String(
                 RSAConverter.ParamsToPem(@params, includePrivateParameters))
                 .ToCharArray().Distribute(64).Select(a => new string(a.ToArray())));
 

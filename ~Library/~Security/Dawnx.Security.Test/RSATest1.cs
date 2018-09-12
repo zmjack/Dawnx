@@ -81,7 +81,7 @@ namespace Dawnx.Security.Test
 
         private void AssertCheck_Private(RSA rsa)
         {
-            // "D" is different between a creator and a non-creator when output parameters
+            // "D" is different between a creator and a non-creator while outputting parameters
             Assert.True(rsa.ToXmlStringStd(true).For(_ => _ == privateKey || _ == privateKey_NonCreator));
             Assert.True(rsa.ToPemStringStd(true).For(_ => _ == privatePem || _ == privatePem_NonCreator));
         }

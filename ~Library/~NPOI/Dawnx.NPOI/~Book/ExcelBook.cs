@@ -41,120 +41,26 @@ namespace Dawnx.NPOI
 
         public ICellStyle[] CellStyles
             => Range.Create(NumCellStyles).Select(i => GetCellStyleAt((short)i)).ToArray();
-        public ICellStyle GetCellStyle(ComparedCellStyle compared)
+        public BookCellStyle[] BookCellStyles
+            => CellStyles.Select(x => new BookCellStyle(this, x)).ToArray();
+        public BookCellStyle BookCellStyle(Action<BookCellStyleApplier> init)
         {
-            //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
-            var props = typeof(ICellStyle).GetProperties().Where(prop => prop.CanWrite);
-
-            var findStyle = CellStyles.FirstOrDefault(style =>
-            {
-                if (props.All(prop => prop.GetValue(style).Equals(prop.GetValue(compared)))
-                    && style.FontIndex == compared.FontIndex)
-                    return true;
-                else return false;
-            });
-
-            if (findStyle is null)
-            {
-                var newStyle = MapedWorkbook.CreateCellStyle().Self(_ =>
-                {
-                    _.SetFont(GetFontAt(compared.FontIndex));
-                    _.BorderLeft = compared.BorderLeft;
-                    _.BorderDiagonal = compared.BorderDiagonal;
-                    _.BorderDiagonalLineStyle = compared.BorderDiagonalLineStyle;
-                    _.BorderDiagonalColor = compared.BorderDiagonalColor;
-                    _.FillPattern = compared.FillPattern;
-                    _.FillForegroundColor = compared.FillForegroundColor;
-                    _.FillBackgroundColor = compared.FillBackgroundColor;
-                    _.BottomBorderColor = compared.BottomBorderColor;
-                    _.TopBorderColor = compared.TopBorderColor;
-                    _.RightBorderColor = compared.RightBorderColor;
-                    _.LeftBorderColor = compared.LeftBorderColor;
-                    _.BorderBottom = compared.BorderBottom;
-                    _.BorderTop = compared.BorderTop;
-                    _.BorderRight = compared.BorderRight;
-                    _.Rotation = compared.Rotation;
-                    _.VerticalAlignment = compared.VerticalAlignment;
-                    _.WrapText = compared.WrapText;
-                    _.Alignment = compared.Alignment;
-                    _.IsLocked = compared.IsLocked;
-                    _.IsHidden = compared.IsHidden;
-                    _.DataFormat = compared.DataFormat;
-                    _.ShrinkToFit = compared.ShrinkToFit;
-                    _.Indention = compared.Indention;
-                });
-                return newStyle;
-            }
-            else return findStyle;
-        }
-
-        public BookCellStyle[] BookCellStyles => CellStyles.Select(x => new BookCellStyle(this, x)).ToArray();
-        public BookCellStyle CreateBookCellStyle(Action<BookCellStyle> init)
-            => new BookCellStyle(this).Self(_ => init(_));
-        public BookCellStyle GetBookCellStyle(Action<BookCellStyleApplier> initApplier)
-        {
-            var compared = new BookCellStyleApplier().Self(_ => initApplier(_));
-            return BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
-        }
-        public BookCellStyle BookCellStyle(Action<BookCellStyleApplier> initApplier)
-        {
-            var compared = new BookCellStyleApplier().Self(_ => initApplier(_));
-
-            var find = BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
+            var applier = BookCellStyleApplier.Create(init);
+            var find = BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
             if (find is null)
-                return new BookCellStyle(this).Self(_ => compared.Apply(_));
+                return new BookCellStyle(this).Self(_ => applier.Apply(_));
             else return find;
         }
 
         public IFont[] Fonts
             => Range.Create(NumberOfFonts).Select(i => GetFontAt((short)i)).ToArray();
-        public IFont GetFont(ComparedFont compared)
-        {
-            //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
-            var props = typeof(IFont).GetProperties().Where(prop => prop.CanWrite);
-
-            var findFont = Fonts.FirstOrDefault(style =>
-            {
-                if (props.All(prop => prop.GetValue(style).Equals(prop.GetValue(compared))))
-                    return true;
-                else return false;
-            });
-
-            if (findFont is null)
-            {
-                var newFont = MapedWorkbook.CreateFont().Self(_ =>
-                {
-                    _.FontName = compared.FontName;
-                    _.FontHeightInPoints = compared.FontHeightInPoints;
-                    _.IsItalic = compared.IsItalic;
-                    _.IsStrikeout = compared.IsStrikeout;
-                    _.Color = compared.Color;
-                    _.TypeOffset = compared.TypeOffset;
-                    _.Underline = compared.Underline;
-                    _.Charset = compared.Charset;
-                    _.Boldweight = compared.Boldweight;
-                    _.IsBold = compared.IsBold;
-                });
-                return newFont;
-            }
-            else return findFont;
-        }
-
         public BookFont[] BookFonts => Fonts.Select(x => new BookFont(this, x)).ToArray();
-        public BookFont CreateBookFont(Action<BookFont> init)
-            => new BookFont(this).Self(_ => init(_));
-        public BookFont GetBookFont(Action<BookFontApplier> initApplier)
+        public BookFont BookFont(Action<BookFontApplier> init)
         {
-            var compared = new BookFontApplier().Self(_ => initApplier(_));
-            return BookFonts.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
-        }
-        public BookFont BookFont(Action<BookFontApplier> initApplier)
-        {
-            var compared = new BookFontApplier().Self(_ => initApplier(_));
-
-            var find = BookFonts.FirstOrDefault(x => x.InterfaceValuesEqual(compared));
+            var applier = BookFontApplier.Create(init);
+            var find = BookFonts.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
             if (find is null)
-                return new BookFont(this).Self(_ => compared.Apply(_));
+                return new BookFont(this).Self(_ => applier.Apply(_));
             else return find;
         }
 

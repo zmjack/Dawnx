@@ -33,12 +33,11 @@ namespace Dawnx.NPOI
             else return @this.ToString();
         }
 
+        public void SetCellStyle(ICellStyle style) => MapedCell.CellStyle = style;
+        public void SetCellStyle(BookCellStyle style) => SetCellStyle(style.CellStyle);
         public void SetBookCellStyle(Action<BookCellStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
 
-        public void SetCellStyle(ICellStyle style) => MapedCell.CellStyle = style;
-        public void SetCellStyle(ComparedCellStyle style)
-            => Sheet.Book.GetCellStyle(style);
 
         public void SetValue(object value)
         {
@@ -107,9 +106,10 @@ namespace Dawnx.NPOI
             {
                 var book = Sheet.Book;
                 MapedCell.SetCellValue(value);
-                SetCellStyle(book.GetCellStyle(new ComparedCellStyle
+                SetCellStyle(book.BookCellStyle(s =>
                 {
-                    DataFormat = book.GetDataFormat("yyyy-M-d"),
+                    //TODO: DataFormat
+                    //s.DataFormat = book.GetDataFormat("yyyy-M-d");
                 }));
             }
         }

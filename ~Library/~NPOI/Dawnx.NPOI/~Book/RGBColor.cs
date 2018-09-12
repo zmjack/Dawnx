@@ -1,27 +1,26 @@
 ﻿
 namespace Dawnx.NPOI
 {
-    public class RGBColor
+    public partial class RGBColor
     {
-        public byte Red { get; private set; }
-        public byte Green { get; private set; }
-        public byte Blue { get; private set; }
         public int Value { get; private set; }
+        public byte[] Bytes { get; private set; }
+        public short Index { get; set; }
 
-        public byte[] Bytes => new[] { Red, Green, Blue };
-
-        public RGBColor(int rgb)
+        public RGBColor(int rgbValue)
         {
-            Red = (byte)(rgb & 0xFF0000 >> (8 * 2));
-            Green = (byte)(rgb & 0xFF00 >> (8 * 1));
-            Blue = (byte)(rgb & 0xFF);
+            Bytes = new[]
+            {
+                (byte)(rgbValue & 0xFF0000 >> (8 * 2)),
+                (byte)(rgbValue & 0xFF00 >> (8 * 1)),
+                (byte)(rgbValue & 0xFF),
+            };
+            Value = rgbValue;
         }
 
         public RGBColor(byte red, byte green, byte blue)
         {
-            Red = red;
-            Green = green;
-            Blue = blue;
+            Bytes = new[] { red, green, blue };
             Value = (red << (8 * 2)) + (green << (8 * 1)) + blue;
         }
 

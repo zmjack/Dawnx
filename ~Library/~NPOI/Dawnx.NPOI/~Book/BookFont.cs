@@ -13,13 +13,11 @@ namespace Dawnx.NPOI
         public ExcelBook Book { get; private set; }
         public IFont Font { get; private set; }
 
-        public BookFont() { }
-
-        public BookFont(ExcelBook book)
+        internal BookFont(ExcelBook book)
             : this(book, book.MapedWorkbook.CreateFont())
         { }
 
-        public BookFont(ExcelBook book, IFont cellStyle)
+        internal BookFont(ExcelBook book, IFont cellStyle)
         {
             Book = book;
             Font = cellStyle;
@@ -57,13 +55,41 @@ namespace Dawnx.NPOI
             set => Font.Underline = value;
         }
 
-        public bool InterfaceValuesEqual(IBookFont obj)
+        public RGBColor FontColor
+        {
+            get
+            {
+                switch (Book.Version)
+                {
+                    case ExcelVersion.Excel2003:
+                        return (Font as HSSFFont).GetHSSFColor(Book.MapedWorkbook as HSSFWorkbook)?.For(_ => new RGBColor(_.RGB));
+                    case ExcelVersion.Excel2007:
+                        return (Font as XSSFFont).GetXSSFColor()?.For(_ => new RGBColor(_.RGB));
+                    default: throw new NotSupportedException();
+                }
+            }
+            set
+            {
+                switch (Book.Version)
+                {
+                    case ExcelVersion.Excel2003:
+                        Font.Color = value.Index;
+                        return;
+                    case ExcelVersion.Excel2007:
+                        (Font as XSSFFont).SetColor(value?.For(_ => new XSSFColor(_.Bytes)));
+                        return;
+                    default: throw new NotSupportedException();
+                }
+            }
+        }
+
+        internal bool InterfaceValuesEqual(BookFontApplier obj)
         {
             var instance = obj as IBookFont;
             if (instance is null) return false;
 
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
-            var props = typeof(IBookCellStyle).GetProperties().Where(prop => prop.CanWrite);
+            var props = typeof(IBookFont).GetProperties().Where(prop => prop.CanWrite);
             return props.All(prop => prop.GetValue(this).Equals(prop.GetValue(instance)));
         }
 
@@ -81,4 +107,5 @@ namespace Dawnx.NPOI
         //short Boldweight { get; set; }
         //bool IsBold { get; set; }
     }
+
 }

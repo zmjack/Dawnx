@@ -8,40 +8,54 @@ namespace Dawnx.NPOI
 {
     public class BookCellStyleApplier : IBookCellStyle
     {
+        private BookCellStyleApplier() { }
+
+        internal static BookCellStyleApplier Create(Action<BookCellStyleApplier> init)
+            => new BookCellStyleApplier().Self(_ => init(_));
+
         #region Alignment
-        public HorizontalAlignment Alignment { get; set; }
-        public VerticalAlignment VerticalAlignment { get; set; }
+        public HorizontalAlignment Alignment { get; set; } = HorizontalAlignment.General;
+        public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Bottom;
         #endregion
 
         #region Border
         public BorderStyle BorderLeft { get; set; } = BorderStyle.None;
-        public IndexedColor LeftBorderColor { get; set; } = IndexedColor.Black;
+        public RGBColor LeftBorderColor { get; set; } = RGBColor.Black;
 
         public BorderStyle BorderRight { get; set; } = BorderStyle.None;
-        public IndexedColor RightBorderColor { get; set; } = IndexedColor.Black;
+        public RGBColor RightBorderColor { get; set; } = RGBColor.Black;
 
         public BorderStyle BorderTop { get; set; } = BorderStyle.None;
-        public IndexedColor TopBorderColor { get; set; } = IndexedColor.Black;
+        public RGBColor TopBorderColor { get; set; } = RGBColor.Black;
 
         public BorderStyle BorderBottom { get; set; } = BorderStyle.None;
-        public IndexedColor BottomBorderColor { get; set; } = IndexedColor.Black;
+        public RGBColor BottomBorderColor { get; set; } = RGBColor.Black;
 
         public BorderStyle BorderDiagonalLineStyle { get; set; } = BorderStyle.None;
-        public IndexedColor BorderDiagonalColor { get; set; } = IndexedColor.Black;
+        public RGBColor BorderDiagonalColor { get; set; } = RGBColor.Black;
         public BorderDiagonal BorderDiagonal { get; set; } = BorderDiagonal.None;
         #endregion
 
         #region Fill
         public FillPattern FillPattern { get; set; } = FillPattern.NoFill;
-
-        public IndexedColor FillBackgroundColor { get; set; } = IndexedColor.Automatic;
-        public RGBColor FillBackgroundColorColor { get; set; }
-
-        public IndexedColor FillForegroundColor { get; set; } = IndexedColor.Automatic;
-        public RGBColor FillForegroundColorColor { get; set; }
+        public RGBColor FillBackgroundColor { get; set; } = RGBColor.Automatic;
+        public RGBColor FillForegroundColor { get; set; } = RGBColor.Automatic;
         #endregion
 
-        public void Apply(BookCellStyle style)
+        #region Font
+        public short FontIndex { get; set; }
+        public IBookFont Font { get; set; }
+        #endregion
+
+        public void FullBorder()
+        {
+            BorderLeft = BorderStyle.Thin;
+            BorderRight = BorderStyle.Thin;
+            BorderTop = BorderStyle.Thin;
+            BorderBottom = BorderStyle.Thin;
+        }
+
+        public void Apply(IBookCellStyle style)
         {
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
             var props = typeof(IBookCellStyle).GetProperties().Where(prop => prop.CanWrite);

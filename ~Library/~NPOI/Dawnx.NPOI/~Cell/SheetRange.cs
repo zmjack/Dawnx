@@ -1,5 +1,6 @@
 ﻿using NPOI.SS.UserModel;
 using NPOI.SS.Util;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,9 @@ namespace Dawnx.NPOI
                 for (int col = Start.col; col <= End.col; col++)
                     Sheet[(row, col)].SetCellStyle(style);
         }
-
-        public void SetCellStyle(ComparedCellStyle style)
-            => SetCellStyle(Sheet.Book.GetCellStyle(style));
+        public void SetCellStyle(BookCellStyle style) => SetCellStyle(style.CellStyle);
+        public void SetBookCellStyle(Action<BookCellStyleApplier> initApplier)
+            => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
 
         public SheetRange SelectColunm(int selectCol)
         {

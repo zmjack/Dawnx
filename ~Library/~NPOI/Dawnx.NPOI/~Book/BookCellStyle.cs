@@ -12,13 +12,11 @@ namespace Dawnx.NPOI
         public ExcelBook Book { get; private set; }
         public ICellStyle CellStyle { get; private set; }
 
-        public BookCellStyle() { }
-
-        public BookCellStyle(ExcelBook book)
+        internal BookCellStyle(ExcelBook book)
             : this(book, book.MapedWorkbook.CreateCellStyle())
         { }
 
-        public BookCellStyle(ExcelBook book, ICellStyle cellStyle)
+        internal BookCellStyle(ExcelBook book, ICellStyle cellStyle)
         {
             Book = book;
             CellStyle = cellStyle;
@@ -43,10 +41,10 @@ namespace Dawnx.NPOI
             get => CellStyle.BorderLeft;
             set => CellStyle.BorderLeft = value;
         }
-        public IndexedColor LeftBorderColor
+        public RGBColor LeftBorderColor
         {
-            get => (IndexedColor)CellStyle.LeftBorderColor;
-            set => CellStyle.LeftBorderColor = (short)value;
+            get => ColorPairUtility.Get(CellStyle, i => i.LeftBorderColor, c => (c as XSSFCellStyle).LeftBorderXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.LeftBorderColor, c => (c as XSSFCellStyle).LeftBorderXSSFColor, value);
         }
 
         public BorderStyle BorderRight
@@ -54,10 +52,10 @@ namespace Dawnx.NPOI
             get => CellStyle.BorderRight;
             set => CellStyle.BorderRight = value;
         }
-        public IndexedColor RightBorderColor
+        public RGBColor RightBorderColor
         {
-            get => (IndexedColor)CellStyle.RightBorderColor;
-            set => CellStyle.RightBorderColor = (short)value;
+            get => ColorPairUtility.Get(CellStyle, i => i.RightBorderColor, c => (c as XSSFCellStyle).RightBorderXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.RightBorderColor, c => (c as XSSFCellStyle).RightBorderXSSFColor, value);
         }
 
         public BorderStyle BorderTop
@@ -65,10 +63,10 @@ namespace Dawnx.NPOI
             get => CellStyle.BorderTop;
             set => CellStyle.BorderTop = value;
         }
-        public IndexedColor TopBorderColor
+        public RGBColor TopBorderColor
         {
-            get => (IndexedColor)CellStyle.TopBorderColor;
-            set => CellStyle.TopBorderColor = (short)value;
+            get => ColorPairUtility.Get(CellStyle, i => i.TopBorderColor, c => (c as XSSFCellStyle).TopBorderXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.TopBorderColor, c => (c as XSSFCellStyle).TopBorderXSSFColor, value);
         }
 
         public BorderStyle BorderBottom
@@ -76,10 +74,10 @@ namespace Dawnx.NPOI
             get => CellStyle.BorderBottom;
             set => CellStyle.BorderBottom = value;
         }
-        public IndexedColor BottomBorderColor
+        public RGBColor BottomBorderColor
         {
-            get => (IndexedColor)CellStyle.BottomBorderColor;
-            set => CellStyle.BottomBorderColor = (short)value;
+            get => ColorPairUtility.Get(CellStyle, i => i.BottomBorderColor, c => (c as XSSFCellStyle).BottomBorderXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.BottomBorderColor, c => (c as XSSFCellStyle).BottomBorderXSSFColor, value);
         }
 
         public BorderStyle BorderDiagonalLineStyle
@@ -87,10 +85,10 @@ namespace Dawnx.NPOI
             get => CellStyle.BorderDiagonalLineStyle;
             set => CellStyle.BorderDiagonalLineStyle = value;
         }
-        public IndexedColor BorderDiagonalColor
+        public RGBColor BorderDiagonalColor
         {
-            get => (IndexedColor)CellStyle.BorderDiagonalColor;
-            set => CellStyle.BorderDiagonalColor = (short)value;
+            get => ColorPairUtility.Get(CellStyle, i => i.BorderDiagonalColor, c => (c as XSSFCellStyle).DiagonalBorderXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.BorderDiagonalColor, c => (c as XSSFCellStyle).DiagonalBorderXSSFColor, value);
         }
         public BorderDiagonal BorderDiagonal
         {
@@ -106,59 +104,41 @@ namespace Dawnx.NPOI
             set => CellStyle.FillPattern = value;
         }
 
-        public IndexedColor FillBackgroundColor
+        public RGBColor FillBackgroundColor
         {
-            get => (IndexedColor)CellStyle.FillBackgroundColor;
-            set => CellStyle.FillBackgroundColor = (short)value;
-        }
-        public RGBColor FillBackgroundColorColor
-        {
-            get => new RGBColor(CellStyle.FillBackgroundColorColor?.RGB);
-            set
-            {
-                switch (Book.Version)
-                {
-                    case ExcelVersion.Excel2007:
-                        var style = (CellStyle as XSSFCellStyle);
-                        style.FillBackgroundColorColor = value?.For(_ => new XSSFColor(_.Bytes));
-                        break;
-
-                    default: throw new NotSupportedException();
-                }
-            }
+            get => ColorPairUtility.Get(CellStyle, i => i.FillBackgroundColor, c => (c as XSSFCellStyle).FillBackgroundXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.FillBackgroundColor, c => (c as XSSFCellStyle).FillBackgroundXSSFColor, value);
         }
 
-        public IndexedColor FillForegroundColor
+        public RGBColor FillForegroundColor
         {
-            get => (IndexedColor)CellStyle.FillForegroundColor;
-            set => CellStyle.FillForegroundColor = (short)value;
-        }
-        public RGBColor FillForegroundColorColor
-        {
-            get => new RGBColor(CellStyle.FillForegroundColorColor?.RGB);
-            set
-            {
-                switch (Book.Version)
-                {
-                    case ExcelVersion.Excel2007:
-                        var style = (CellStyle as XSSFCellStyle);
-                        style.FillForegroundColorColor = value?.For(_ => new XSSFColor(_.Bytes));
-                        break;
-
-                    default: throw new NotSupportedException();
-                }
-            }
+            get => ColorPairUtility.Get(CellStyle, i => i.FillForegroundColor, c => (c as XSSFCellStyle).FillForegroundXSSFColor);
+            set => ColorPairUtility.Set(CellStyle, i => i.FillForegroundColor, c => (c as XSSFCellStyle).FillForegroundXSSFColor, value);
         }
         #endregion
 
-        public bool InterfaceValuesEqual(IBookCellStyle obj)
+        #region Font
+        public short FontIndex { get; set; }
+        public IBookFont Font { get; set; }
+        #endregion
+
+        internal bool InterfaceValuesEqual(BookCellStyleApplier obj)
         {
             var instance = obj as IBookCellStyle;
             if (instance is null) return false;
 
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
             var props = typeof(IBookCellStyle).GetProperties().Where(prop => prop.CanWrite);
-            return props.All(prop => prop.GetValue(this).Equals(prop.GetValue(instance)));
+            return props.All(prop =>
+            {
+                var left = prop.GetValue(this);
+                var right = prop.GetValue(instance);
+
+                if (left is null && right is null) return true;
+                else if (left is null && !(right is null)) return false;
+                else if (!(left is null) && right is null) return false;
+                else return left.Equals(right);
+            });
         }
 
     }

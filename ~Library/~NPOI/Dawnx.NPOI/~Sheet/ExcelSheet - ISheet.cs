@@ -295,6 +295,12 @@ namespace Dawnx.NPOI
             MapedSheet.SetColumnHidden(columnIndex, hidden);
         }
 
+        public void SetAutoSizeColumns(params int[] colIndexs)
+            => colIndexs.Each(index => MapedSheet.AutoSizeColumn(index));
+
+        public void SetAutoSizeColumns(params string[] colNames)
+            => colNames.Each(name => MapedSheet.AutoSizeColumn(GetCol(name)));
+
         /// <summary>
         /// Tip: This is a new function, not a native method in NPOI. (Let the width be the same as the Excel width.)
         /// </summary>

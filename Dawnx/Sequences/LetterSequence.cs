@@ -29,5 +29,6 @@ namespace Dawnx.Sequences
 
             return new string(title.ToString().Reverse().ToArray());
         }
+
     }
 }

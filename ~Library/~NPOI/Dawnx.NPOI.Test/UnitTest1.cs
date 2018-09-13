@@ -111,7 +111,7 @@ namespace Dawnx.NPOI.Test
         [Fact]
         public void Test3()
         {
-            var book = new ExcelBook(ExcelVersion.Excel2003);
+            var book = new ExcelBook("test.xlsx");
             var sheet = book.CreateSheet("Display");
             ICellStyle style;
 

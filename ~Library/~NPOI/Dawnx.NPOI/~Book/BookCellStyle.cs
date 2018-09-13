@@ -1,4 +1,5 @@
-﻿using NPOI.SS.UserModel;
+﻿using Dawnx.Utilities;
+using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace Dawnx.NPOI
 {
     public class BookCellStyle : IBookCellStyle
     {
-        public ExcelBook Book { get; private set; }
-        public ICellStyle CellStyle { get; private set; }
+        public ExcelBook Book { get; }
+        public ICellStyle CellStyle { get; }
 
         internal BookCellStyle(ExcelBook book)
             : this(book, book.MapedWorkbook.CreateCellStyle())
@@ -21,6 +22,8 @@ namespace Dawnx.NPOI
             Book = book;
             CellStyle = cellStyle;
         }
+
+        public short Index => CellStyle.Index;
 
         #region Alignment
         public HorizontalAlignment Alignment
@@ -43,8 +46,14 @@ namespace Dawnx.NPOI
         }
         public RGBColor LeftBorderColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.LeftBorderColor, c => (c as XSSFCellStyle).LeftBorderXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.LeftBorderColor, c => (c as XSSFCellStyle).LeftBorderXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.LeftBorderXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.LeftBorderColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.SetLeftBorderColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
+                if (!xssf) CellStyle.LeftBorderColor = value.Index;
+            }
         }
 
         public BorderStyle BorderRight
@@ -54,8 +63,14 @@ namespace Dawnx.NPOI
         }
         public RGBColor RightBorderColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.RightBorderColor, c => (c as XSSFCellStyle).RightBorderXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.RightBorderColor, c => (c as XSSFCellStyle).RightBorderXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.RightBorderXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.RightBorderColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.SetRightBorderColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
+                if (!xssf) CellStyle.RightBorderColor = value.Index;
+            }
         }
 
         public BorderStyle BorderTop
@@ -65,8 +80,14 @@ namespace Dawnx.NPOI
         }
         public RGBColor TopBorderColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.TopBorderColor, c => (c as XSSFCellStyle).TopBorderXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.TopBorderColor, c => (c as XSSFCellStyle).TopBorderXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.TopBorderXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.TopBorderColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.SetTopBorderColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
+                if (!xssf) CellStyle.TopBorderColor = value.Index;
+            }
         }
 
         public BorderStyle BorderBottom
@@ -76,8 +97,14 @@ namespace Dawnx.NPOI
         }
         public RGBColor BottomBorderColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.BottomBorderColor, c => (c as XSSFCellStyle).BottomBorderXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.BottomBorderColor, c => (c as XSSFCellStyle).BottomBorderXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.BottomBorderXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.BottomBorderColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.SetBottomBorderColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
+                if (!xssf) CellStyle.BottomBorderColor = value.Index;
+            }
         }
 
         public BorderStyle BorderDiagonalLineStyle
@@ -87,8 +114,14 @@ namespace Dawnx.NPOI
         }
         public RGBColor BorderDiagonalColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.BorderDiagonalColor, c => (c as XSSFCellStyle).DiagonalBorderXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.BorderDiagonalColor, c => (c as XSSFCellStyle).DiagonalBorderXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.DiagonalBorderXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.BorderDiagonalColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.SetDiagonalBorderColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
+                if (!xssf) CellStyle.BorderDiagonalColor = value.Index;
+            }
         }
         public BorderDiagonal BorderDiagonal
         {
@@ -106,20 +139,76 @@ namespace Dawnx.NPOI
 
         public RGBColor FillBackgroundColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.FillBackgroundColor, c => (c as XSSFCellStyle).FillBackgroundXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.FillBackgroundColor, c => (c as XSSFCellStyle).FillBackgroundXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.FillBackgroundXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.FillBackgroundColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.FillBackgroundXSSFColor = new XSSFColor(value.Bytes)).For(_ => true) ?? false;
+                if (!xssf) CellStyle.FillBackgroundColor = value.Index;
+            }
         }
 
         public RGBColor FillForegroundColor
         {
-            get => ColorPairUtility.Get(CellStyle, i => i.FillForegroundColor, c => (c as XSSFCellStyle).FillForegroundXSSFColor);
-            set => ColorPairUtility.Set(CellStyle, i => i.FillForegroundColor, c => (c as XSSFCellStyle).FillForegroundXSSFColor, value);
+            get => (CellStyle as XSSFCellStyle)?.FillForegroundXSSFColor?.RGB.For(_ => new RGBColor(_))
+                ?? RGBColor.ParseIndexed(CellStyle.FillForegroundColor);
+            set
+            {
+                var xssf = (CellStyle as XSSFCellStyle)?
+                    .Self(_ => _.FillForegroundXSSFColor = new XSSFColor(value.Bytes)).For(_ => true) ?? false;
+                if (!xssf) CellStyle.FillForegroundColor = value.Index;
+            }
         }
         #endregion
 
         #region Font
-        public short FontIndex { get; set; }
-        public IBookFont Font { get; set; }
+        public BookFont Font
+        {
+            get => Book.BookFontAt(CellStyle.FontIndex);
+            set => CellStyle.SetFont(value.Font);
+        }
+        #endregion
+
+        #region DataFormat
+        public string DataFormat
+        {
+            get => CellStyle.GetDataFormatString();
+            set => CellStyle.DataFormat = Book.GetDataFormat(value);
+        }
+        #endregion
+
+        #region Others
+        public short Rotation
+        {
+            get => CellStyle.Rotation;
+            set => CellStyle.Rotation = value;
+        }
+        public short Indention
+        {
+            get => CellStyle.Indention;
+            set => CellStyle.Indention = value;
+        }
+        public bool WrapText
+        {
+            get => CellStyle.WrapText;
+            set => CellStyle.WrapText = value;
+        }
+        public bool IsLocked
+        {
+            get => CellStyle.IsLocked;
+            set => CellStyle.IsLocked = value;
+        }
+        public bool IsHidden
+        {
+            get => CellStyle.IsHidden;
+            set => CellStyle.IsHidden = value;
+        }
+        public bool ShrinkToFit
+        {
+            get => CellStyle.ShrinkToFit;
+            set => CellStyle.ShrinkToFit = value;
+        }
         #endregion
 
         internal bool InterfaceValuesEqual(BookCellStyleApplier obj)
@@ -129,16 +218,8 @@ namespace Dawnx.NPOI
 
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
             var props = typeof(IBookCellStyle).GetProperties().Where(prop => prop.CanWrite);
-            return props.All(prop =>
-            {
-                var left = prop.GetValue(this);
-                var right = prop.GetValue(instance);
-
-                if (left is null && right is null) return true;
-                else if (left is null && !(right is null)) return false;
-                else if (!(left is null) && right is null) return false;
-                else return left.Equals(right);
-            });
+            return props.All(prop => CompareUtility.UsingEquals(prop.GetValue(this), prop.GetValue(instance)))
+                && Font.InterfaceValuesEqual(obj.Font);
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using NPOI.HSSF.UserModel;
+﻿using Dawnx.Utilities;
+using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -10,8 +11,8 @@ namespace Dawnx.NPOI
 {
     public class BookFont : IBookFont
     {
-        public ExcelBook Book { get; private set; }
-        public IFont Font { get; private set; }
+        public ExcelBook Book { get; }
+        public IFont Font { get; }
 
         internal BookFont(ExcelBook book)
             : this(book, book.MapedWorkbook.CreateFont())
@@ -22,6 +23,8 @@ namespace Dawnx.NPOI
             Book = book;
             Font = cellStyle;
         }
+
+        public short Index => Font.Index;
 
         public string FontName
         {
@@ -49,37 +52,26 @@ namespace Dawnx.NPOI
             get => Font.IsStrikeout;
             set => Font.IsStrikeout = value;
         }
+
         public FontUnderlineType Underline
         {
             get => Font.Underline;
             set => Font.Underline = value;
         }
+        public FontSuperScript TypeOffset
+        {
+            get => Font.TypeOffset;
+            set => Font.TypeOffset = value;
+        }
 
         public RGBColor FontColor
         {
-            get
-            {
-                switch (Book.Version)
-                {
-                    case ExcelVersion.Excel2003:
-                        return (Font as HSSFFont).GetHSSFColor(Book.MapedWorkbook as HSSFWorkbook)?.For(_ => new RGBColor(_.RGB));
-                    case ExcelVersion.Excel2007:
-                        return (Font as XSSFFont).GetXSSFColor()?.For(_ => new RGBColor(_.RGB));
-                    default: throw new NotSupportedException();
-                }
-            }
+            get => (Font as XSSFFont)?.GetXSSFColor()?.For(_ => new RGBColor(_.RGB))
+                ?? (Font as HSSFFont).GetHSSFColor(Book.MapedWorkbook as HSSFWorkbook).For(_ => new RGBColor(_.RGB));
             set
             {
-                switch (Book.Version)
-                {
-                    case ExcelVersion.Excel2003:
-                        Font.Color = value.Index;
-                        return;
-                    case ExcelVersion.Excel2007:
-                        (Font as XSSFFont).SetColor(value?.For(_ => new XSSFColor(_.Bytes)));
-                        return;
-                    default: throw new NotSupportedException();
-                }
+                var xssf = (Font as XSSFFont)?.Self(_ => _.SetColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
+                if (!xssf) Font.Color = value.Index;
             }
         }
 
@@ -90,22 +82,9 @@ namespace Dawnx.NPOI
 
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
             var props = typeof(IBookFont).GetProperties().Where(prop => prop.CanWrite);
-            return props.All(prop => prop.GetValue(this).Equals(prop.GetValue(instance)));
+            return props.All(prop => CompareUtility.UsingEquals(prop.GetValue(this), prop.GetValue(instance)));
         }
 
-        //double FontHeight { get; set; }
-        //short FontHeightInPoints { get; set; }
-        //bool IsItalic { get; set; }
-        //bool IsStrikeout { get; set; }
-        //short Color { get; set; }
-        //FontSuperScript TypeOffset { get; set; }
-        //FontUnderlineType Underline { get; set; }
-        //short Charset { get; set; }
-
-        //short Index { get; }
-
-        //short Boldweight { get; set; }
-        //bool IsBold { get; set; }
     }
 
 }

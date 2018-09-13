@@ -11,7 +11,7 @@ namespace Dawnx.NPOI
         private BookCellStyleApplier() { }
 
         internal static BookCellStyleApplier Create(Action<BookCellStyleApplier> init)
-            => new BookCellStyleApplier().Self(_ => init(_));
+            => new BookCellStyleApplier().Self(_ => init?.Invoke(_));
 
         #region Alignment
         public HorizontalAlignment Alignment { get; set; } = HorizontalAlignment.General;
@@ -43,8 +43,20 @@ namespace Dawnx.NPOI
         #endregion
 
         #region Font
-        public short FontIndex { get; set; }
-        public IBookFont Font { get; set; }
+        public BookFontApplier Font { get; } = BookFontApplier.Create(null);
+        #endregion
+
+        #region DataFormat
+        public string DataFormat { get; set; } = "General";
+        #endregion
+
+        #region Others
+        public short Rotation { get; set; } = 0;
+        public short Indention { get; set; } = 0;
+        public bool WrapText { get; set; } = false;
+        public bool IsLocked { get; set; } = true;
+        public bool IsHidden { get; set; } = false;
+        public bool ShrinkToFit { get; set; } = false;
         #endregion
 
         public void FullBorder()
@@ -55,12 +67,16 @@ namespace Dawnx.NPOI
             BorderBottom = BorderStyle.Thin;
         }
 
-        public void Apply(IBookCellStyle style)
+        public void Apply(BookCellStyle style)
         {
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
             var props = typeof(IBookCellStyle).GetProperties().Where(prop => prop.CanWrite);
             foreach (var prop in props)
                 prop.SetValue(style, prop.GetValue(this));
+
+            // Font
+            style.Font = style.Book.BookFont(Font);
         }
+
     }
 }

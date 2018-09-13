@@ -106,11 +106,7 @@ namespace Dawnx.NPOI
             {
                 var book = Sheet.Book;
                 MapedCell.SetCellValue(value);
-                SetCellStyle(book.BookCellStyle(s =>
-                {
-                    //TODO: DataFormat
-                    //s.DataFormat = book.GetDataFormat("yyyy-M-d");
-                }));
+                SetCellStyle(book.BookCellStyle(s => s.DataFormat = "yyyy-M-d"));
             }
         }
         public double Number

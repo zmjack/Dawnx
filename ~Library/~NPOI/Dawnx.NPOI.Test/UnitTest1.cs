@@ -17,56 +17,25 @@ namespace Dawnx.NPOI.Test
         {
             var book = new ExcelBook(ExcelVersion.Excel2007);
 
-
-            var 黑体style1 = book.BookCellStyle((Action<BookCellStyleApplier>)(s =>
+            var 黑体style1 = book.BookCellStyle(s =>
             {
                 s.FullBorder();
-                s.FillForegroundColor = RGBColor.Blue;
+                s.FillForegroundColor = new RGBColor(0x8CB0FF);
                 s.FillPattern = FillPattern.SolidForeground;
-                s.Font = book.BookFont(f =>
-                {
-                    f.FontName = "黑体";
-                    f.FontSize = 20;
-                });
-                //s.DataFormat = book.GetDataFormat("0.00");
-            }));
-            var 宋体style1 = book.BookCellStyle((Action<BookCellStyleApplier>)(s =>
+                s.DataFormat = "0.00";
+                s.Font.FontName = "黑体";
+                s.Font.FontSize = 20;
+            });
+            var 宋体style1 = book.BookCellStyle(s =>
             {
                 s.FullBorder();
                 s.FillForegroundColor = RGBColor.Red;
                 s.FillPattern = FillPattern.SolidForeground;
-                s.Font = book.BookFont(f =>
-                {
-                    f.FontName = "宋体";
-                    f.FontSize = 27;
-                    //f.FontColor = IndexedColor.BlueGrey;
-                });
-                //s.DataFormat = book.GetDataFormat("0.00");
-            }));
-
-            //var 黑体style1 = ComparedCellStyle.FullBorder.Self(_ =>
-            //{
-            //    _.DataFormat = book.GetDataFormat("0.00");
-            //    _.FontIndex = book.GetFont(new ComparedFont
-            //    {
-            //        FontName = "黑体",
-            //        FontHeightInPoints = 20,
-            //    }).Index;
-            //    _.FillForegroundColor = IndexedColors.Blue.Index;
-            //    _.FillPattern = FillPattern.SolidForeground;
-            //});
-            //var 宋体style1 = ComparedCellStyle.FullBorder.Self(_ =>
-            //{
-            //    _.DataFormat = book.GetDataFormat("0.00%");
-            //    _.FontIndex = book.GetFont(new ComparedFont
-            //    {
-            //        FontName = "宋体",
-            //        FontHeightInPoints = 27,
-            //        Color = IndexedColors.BlueGrey.Index,
-            //    }).Index;
-            //    _.FillForegroundColor = IndexedColors.Red.Index;
-            //    _.FillPattern = FillPattern.SolidForeground;
-            //});
+                s.DataFormat = "0.00";
+                s.Font.FontName = "宋体";
+                s.Font.FontSize = 27;
+                s.Font.FontColor = RGBColor.BlueGrey;
+            });
 
             var sampleSheet = book.CreateSheet("Sample");
             sampleSheet.SetColumnWidth("A", 8.5);
@@ -112,7 +81,7 @@ namespace Dawnx.NPOI.Test
 
 
             //sheet["A2", "C8"].SmartMerge(new[] { 0, 2, 1 });
-            book.SaveAs(@"result1.xlsx");
+            book.SaveAs(@"result1.xls");
 
             //var book = new XSSFWorkbook(@"C:\Users\19558\Desktop\e1.xlsx");
             //var book2 = new HSSFWorkbook();
@@ -142,11 +111,19 @@ namespace Dawnx.NPOI.Test
         [Fact]
         public void Test3()
         {
-            var book = new ExcelBook("test.xlsx");
+            var book = new ExcelBook(ExcelVersion.Excel2003);
             var sheet = book.CreateSheet("Display");
             ICellStyle style;
 
-            var s = book.MapedWorkbook.CreateCellStyle();
+            var 黑体style1 = book.BookCellStyle(s =>
+            {
+                s.FullBorder();
+                s.FillForegroundColor = RGBColor.Blue;
+                s.FillPattern = FillPattern.SolidForeground;
+                s.DataFormat = "0.00";
+                s.Font.FontName = "黑体";
+                s.Font.FontSize = 20;
+            });
 
             for (int row = 6; row < 7; row++)
             {

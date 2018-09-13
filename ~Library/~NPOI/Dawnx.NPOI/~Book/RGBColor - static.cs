@@ -3,7 +3,6 @@ namespace Dawnx.NPOI
 {
     public partial class RGBColor
     {
-        public static RGBColor Custom = new RGBColor(0x000000) { Index = 0 };
         public static RGBColor Black = new RGBColor(0x000000) { Index = 8 };
         public static RGBColor White = new RGBColor(0xffffff) { Index = 9 };
         public static RGBColor Red = new RGBColor(0xff0000) { Index = 10 };
@@ -105,7 +104,7 @@ namespace Dawnx.NPOI
                 case 62: return Indigo;
                 case 63: return Grey80Percent;
                 case 64: return Automatic;
-                default: return Custom;
+                default: goto case 64;
             }
         }
     }

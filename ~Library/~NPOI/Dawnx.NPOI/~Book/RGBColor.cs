@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace Dawnx.NPOI
 {
     public partial class RGBColor
@@ -11,8 +13,8 @@ namespace Dawnx.NPOI
         {
             Bytes = new[]
             {
-                (byte)(rgbValue & 0xFF0000 >> (8 * 2)),
-                (byte)(rgbValue & 0xFF00 >> (8 * 1)),
+                (byte)((rgbValue & 0xFF0000) >> 16),
+                (byte)((rgbValue & 0xFF00) >> 8),
                 (byte)(rgbValue & 0xFF),
             };
             Value = rgbValue;
@@ -21,7 +23,7 @@ namespace Dawnx.NPOI
         public RGBColor(byte red, byte green, byte blue)
         {
             Bytes = new[] { red, green, blue };
-            Value = (red << (8 * 2)) + (green << (8 * 1)) + blue;
+            Value = (red << 16) + (green << 8) + blue;
         }
 
         public RGBColor(byte[] rgb) : this(rgb[0], rgb[1], rgb[2]) { }
@@ -36,6 +38,9 @@ namespace Dawnx.NPOI
 
         public static bool operator ==(RGBColor instance1, RGBColor instance2) => instance1.Equals(instance2);
         public static bool operator !=(RGBColor instance1, RGBColor instance2) => !instance1.Equals(instance2);
+
+        public override string ToString() => $"#{Bytes.Select(x => x.ToString("x2")).Join("")}";
+
     }
 
 }

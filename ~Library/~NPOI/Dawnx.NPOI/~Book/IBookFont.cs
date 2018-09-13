@@ -17,10 +17,10 @@ namespace Dawnx.NPOI
         bool IsBold { get; set; }
 
         FontUnderlineType Underline { get; set; }
-        
+        FontSuperScript TypeOffset { get; set; }
+
         RGBColor FontColor { get; set; }
 
-        //FontSuperScript TypeOffset { get; set; }
         //short Charset { get; set; }
         //short Index { get; }
         //short Boldweight { get; set; }

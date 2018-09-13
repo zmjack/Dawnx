@@ -38,26 +38,20 @@ namespace Dawnx.NPOI
         #endregion
 
         #region Font
-        //short FontIndex { get; set; }
-        //IBookFont Font { get; set; }
         #endregion
 
-        //TODO: Border Color
+        #region DataFormat
+        string DataFormat { get; set; }
+        #endregion
 
-        //public short Rotation { get; set; }
-        //public bool WrapText { get; set; }
-        //public bool IsLocked { get; set; }
-        //public bool IsHidden { get; set; }
-        //public short FontIndex { get; }
-        //public short DataFormat { get; set; }
-        //public short Index { get; }
-        //public bool ShrinkToFit { get; set; }
-        //public short Indention { get; set; }
-
-        //void CloneStyleFrom(ICellStyle source);
-        //string GetDataFormatString();
-        //IFont GetFont(IWorkbook parentWorkbook);
-        //void SetFont(IFont font);
+        #region Others
+        short Rotation { get; set; }
+        short Indention { get; set; }
+        bool WrapText { get; set; }
+        bool IsLocked { get; set; }
+        bool IsHidden { get; set; }
+        bool ShrinkToFit { get; set; }
+        #endregion
 
     }
 }

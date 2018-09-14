@@ -66,8 +66,8 @@ namespace Dawnx.NPOI
 
         public RGBColor FontColor
         {
-            get => (Font as XSSFFont)?.GetXSSFColor()?.For(_ => new RGBColor(_.RGB))
-                ?? (Font as HSSFFont).GetHSSFColor(Book.MapedWorkbook as HSSFWorkbook).For(_ => new RGBColor(_.RGB));
+            get => Font.Index > 0 ? RGBColor.ParseIndexed(Font.Index)
+                : (Font as XSSFFont)?.GetXSSFColor()?.For(_ => new RGBColor(_.RGB)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)

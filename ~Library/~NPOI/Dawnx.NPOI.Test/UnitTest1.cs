@@ -17,25 +17,9 @@ namespace Dawnx.NPOI.Test
         {
             var book = new ExcelBook(ExcelVersion.Excel2007);
 
-            var 黑体style1 = book.BookCellStyle(s =>
-            {
-                s.FullBorder();
-                s.FillForegroundColor = new RGBColor(0x8CB0FF);
-                s.FillPattern = FillPattern.SolidForeground;
-                s.DataFormat = "0.00";
-                s.Font.FontName = "黑体";
-                s.Font.FontSize = 20;
-            });
-            var 宋体style1 = book.BookCellStyle(s =>
-            {
-                s.FullBorder();
-                s.FillForegroundColor = RGBColor.Red;
-                s.FillPattern = FillPattern.SolidForeground;
-                s.DataFormat = "0.00";
-                s.Font.FontName = "宋体";
-                s.Font.FontSize = 27;
-                s.Font.FontColor = RGBColor.BlueGrey;
-            });
+            var 黑体style2 = book.BookCellStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Blue).SetFont("黑体", 20).FullBorder());
+            var 黑体style1 = book.BookCellStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Blue).SetFont("黑体", 20).FullBorder());
+            var 宋体style1 = book.BookCellStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Red).SetFont("宋体", 27, RGBColor.BlueGrey).FullBorder());
 
             var sampleSheet = book.CreateSheet("Sample");
             sampleSheet.SetColumnWidth("A", 8.5);
@@ -61,7 +45,7 @@ namespace Dawnx.NPOI.Test
                 {
                     if (row[(0, 1)].GetValue().ToString() == "Cu")
                     {
-                        row.SelectColunms(1).SetCellStyle(宋体style1);
+                        row.SelectColunm(1).SetCellStyle(宋体style1);
                     }
                 });
                 _.SmartMerge(new[] { 0, 1, 2, 3 });
@@ -81,7 +65,7 @@ namespace Dawnx.NPOI.Test
 
 
             //sheet["A2", "C8"].SmartMerge(new[] { 0, 2, 1 });
-            book.SaveAs(@"result1.xls");
+            book.SaveAs(@"result1.xlsx");
 
             //var book = new XSSFWorkbook(@"C:\Users\19558\Desktop\e1.xlsx");
             //var book2 = new HSSFWorkbook();

@@ -107,12 +107,15 @@ namespace Dawnx.NPOI
         public BookCellStyleApplier Underline(FontUnderlineType value = FontUnderlineType.Single) { Font.Underline = value; return this; }
         public BookCellStyleApplier TypeOffset(FontSuperScript value) { Font.TypeOffset = value; return this; }
 
-        public BookCellStyleApplier FontName(string name) { Font.FontName = name; return this; }
-        public BookCellStyleApplier FontSize(short size) { Font.FontSize = size; return this; }
-
-        public BookCellStyleApplier FontColor(int rgbValue) => FontColor(new RGBColor(rgbValue));
-        public BookCellStyleApplier FontColor(RGBColor color) { Font.FontColor = color; return this; }
-
+        public BookCellStyleApplier SetFont(string fontName, short size) => SetFont(fontName, size, RGBColor.Automatic);
+        public BookCellStyleApplier SetFont(string fontName, short size, int rgbValue) => SetFont(fontName, size, new RGBColor(rgbValue));
+        public BookCellStyleApplier SetFont(string fontName, short size, RGBColor color)
+        {
+            Font.FontName = fontName;
+            Font.FontSize = size;
+            Font.FontColor = color;
+            return this;
+        }
         public BookCellStyleApplier CellFormat(string dataFormat) { DataFormat = dataFormat; return this; }
 
         public BookCellStyleApplier WordWrap(bool value = true) { WrapText = value; return this; }

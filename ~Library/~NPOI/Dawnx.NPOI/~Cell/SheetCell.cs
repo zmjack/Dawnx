@@ -35,7 +35,7 @@ namespace Dawnx.NPOI
 
         public void SetCellStyle(ICellStyle style) => MapedCell.CellStyle = style;
         public void SetCellStyle(BookCellStyle style) => SetCellStyle(style.CellStyle);
-        public void SetBookCellStyle(Action<BookCellStyleApplier> initApplier)
+        public void SetCellStyle(Action<BookCellStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
 
 

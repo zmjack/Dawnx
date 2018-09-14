@@ -70,8 +70,13 @@ namespace Dawnx.NPOI
                 ?? (Font as HSSFFont).GetHSSFColor(Book.MapedWorkbook as HSSFWorkbook).For(_ => new RGBColor(_.RGB));
             set
             {
-                var xssf = (Font as XSSFFont)?.Self(_ => _.SetColor(new XSSFColor(value.Bytes))).For(_ => true) ?? false;
-                if (!xssf) Font.Color = value.Index;
+                if (value.Index == 0)
+                {
+                    if (Font is XSSFFont)
+                        (Font as XSSFFont).SetColor(new XSSFColor(value.Bytes));
+                    else Font.Color = RGBColor.Automatic.Index;
+                }
+                else Font.Color = value.Index;
             }
         }
 

@@ -32,7 +32,7 @@ namespace Dawnx.NPOI
                     Sheet[(row, col)].SetCellStyle(style);
         }
         public void SetCellStyle(BookCellStyle style) => SetCellStyle(style.CellStyle);
-        public void SetBookCellStyle(Action<BookCellStyleApplier> initApplier)
+        public void SetCellStyle(Action<BookCellStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
 
         public SheetRange SelectColunm(int selectCol)

@@ -115,6 +115,13 @@ namespace Dawnx.NPOI.Test
             var sheet = book.CreateSheet("Display");
             ICellStyle style;
 
+            sheet[(1, 1)].SetCellStyle(x =>
+            {
+                x.FillPattern = FillPattern.SolidForeground;
+                x.FillBackgroundColor = RGBColor.Automatic;
+                x.FillForegroundColor = RGBColor.Yellow;
+            });
+
             var ºÚÌåstyle1 = book.BookCellStyle(s =>
             {
                 s.FullBorder();

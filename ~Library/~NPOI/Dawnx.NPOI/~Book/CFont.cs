@@ -9,16 +9,16 @@ using System.Text;
 
 namespace Dawnx.NPOI
 {
-    public class BookFont : IBookFont
+    public class CFont : ICFont
     {
         public ExcelBook Book { get; }
         public IFont Font { get; }
 
-        internal BookFont(ExcelBook book)
+        internal CFont(ExcelBook book)
             : this(book, book.MapedWorkbook.CreateFont())
         { }
 
-        internal BookFont(ExcelBook book, IFont cellStyle)
+        internal CFont(ExcelBook book, IFont cellStyle)
         {
             Book = book;
             Font = cellStyle;
@@ -80,13 +80,13 @@ namespace Dawnx.NPOI
             }
         }
 
-        internal bool InterfaceValuesEqual(BookFontApplier obj)
+        internal bool InterfaceValuesEqual(CFontApplier obj)
         {
-            var instance = obj as IBookFont;
+            var instance = obj as ICFont;
             if (instance is null) return false;
 
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
-            var props = typeof(IBookFont).GetProperties().Where(prop => prop.CanWrite);
+            var props = typeof(ICFont).GetProperties().Where(prop => prop.CanWrite);
             return props.All(prop => CompareUtility.UsingEquals(prop.GetValue(this), prop.GetValue(instance)));
         }
 

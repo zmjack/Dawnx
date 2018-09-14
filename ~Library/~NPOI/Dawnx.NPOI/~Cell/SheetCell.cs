@@ -34,10 +34,9 @@ namespace Dawnx.NPOI
         }
 
         public void SetCellStyle(ICellStyle style) => MapedCell.CellStyle = style;
-        public void SetCellStyle(BookCellStyle style) => SetCellStyle(style.CellStyle);
-        public void SetCellStyle(Action<BookCellStyleApplier> initApplier)
-            => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
-
+        public void SetCStyle(CStyle style) => SetCellStyle(style.CellStyle);
+        public void SetCStyle(Action<CStyleApplier> initApplier) => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
+        public CStyle GetCStyle() => new CStyle(Sheet.Book, CellStyle);
 
         public void SetValue(object value)
         {
@@ -70,7 +69,7 @@ namespace Dawnx.NPOI
 
                 case CValue v:
                     SetValue(v.Value);
-                    MapedCell.CellStyle = v.Style;
+                    SetCStyle(v.Style);
                     return;
 
                 case object v: String = v.ToString(); return;
@@ -106,7 +105,7 @@ namespace Dawnx.NPOI
             {
                 var book = Sheet.Book;
                 MapedCell.SetCellValue(value);
-                SetCellStyle(book.BookCellStyle(s => s.DataFormat = "yyyy-M-d"));
+                SetCStyle(book.CStyle(s => s.DataFormat = "yyyy-M-d"));
             }
         }
         public double Number

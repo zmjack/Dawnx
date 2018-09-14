@@ -31,9 +31,9 @@ namespace Dawnx.NPOI
                 for (int col = Start.col; col <= End.col; col++)
                     Sheet[(row, col)].SetCellStyle(style);
         }
-        public void SetCellStyle(BookCellStyle style) => SetCellStyle(style.CellStyle);
-        public void SetCellStyle(Action<BookCellStyleApplier> initApplier)
-            => SetCellStyle(Sheet.Book.BookCellStyle(initApplier).CellStyle);
+        public void SetCStyle(CStyle style) => SetCellStyle(style.CellStyle);
+        public void SetCStyle(Action<CStyleApplier> initApplier)
+            => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
 
         public SheetRange SelectColunm(int selectCol)
         {

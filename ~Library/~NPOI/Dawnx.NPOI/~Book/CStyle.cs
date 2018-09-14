@@ -8,16 +8,16 @@ using System.Text;
 
 namespace Dawnx.NPOI
 {
-    public class BookCellStyle : IBookCellStyle
+    public class CStyle : ICStyle
     {
         public ExcelBook Book { get; }
         public ICellStyle CellStyle { get; }
 
-        internal BookCellStyle(ExcelBook book)
+        internal CStyle(ExcelBook book)
             : this(book, book.MapedWorkbook.CreateCellStyle())
         { }
 
-        internal BookCellStyle(ExcelBook book, ICellStyle cellStyle)
+        internal CStyle(ExcelBook book, ICellStyle cellStyle)
         {
             Book = book;
             CellStyle = cellStyle;
@@ -191,9 +191,9 @@ namespace Dawnx.NPOI
         #endregion
 
         #region Font
-        public BookFont Font
+        public CFont Font
         {
-            get => Book.BookFontAt(CellStyle.FontIndex);
+            get => Book.CFontAt(CellStyle.FontIndex);
             set => CellStyle.SetFont(value.Font);
         }
         #endregion
@@ -239,13 +239,13 @@ namespace Dawnx.NPOI
         }
         #endregion
 
-        internal bool InterfaceValuesEqual(BookCellStyleApplier obj)
+        internal bool InterfaceValuesEqual(CStyleApplier obj)
         {
-            var instance = obj as IBookCellStyle;
+            var instance = obj as ICStyle;
             if (instance is null) return false;
 
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
-            var props = typeof(IBookCellStyle).GetProperties().Where(prop => prop.CanWrite);
+            var props = typeof(ICStyle).GetProperties().Where(prop => prop.CanWrite);
             return props.All(prop => CompareUtility.UsingEquals(prop.GetValue(this), prop.GetValue(instance)))
                 && Font.InterfaceValuesEqual(obj.Font);
         }

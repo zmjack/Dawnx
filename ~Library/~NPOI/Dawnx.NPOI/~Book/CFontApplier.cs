@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Dawnx.NPOI
 {
-    public class BookFontApplier : IBookFont
+    public class CFontApplier : ICFont
     {
-        private BookFontApplier() { }
+        private CFontApplier() { }
 
-        internal static BookFontApplier Create(Action<BookFontApplier> init)
-            => new BookFontApplier().Self(_ => init?.Invoke(_));
+        internal static CFontApplier Create(Action<CFontApplier> init)
+            => new CFontApplier().Self(_ => init?.Invoke(_));
 
         public string FontName { get; set; } = "Calibri";
         public short FontSize { get; set; } = 11;
@@ -27,10 +27,10 @@ namespace Dawnx.NPOI
 
         public RGBColor FontColor { get; set; } = RGBColor.Black;
 
-        public void Apply(BookFont style)
+        public void Apply(CFont style)
         {
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
-            var props = typeof(IBookFont).GetProperties().Where(prop => prop.CanWrite);
+            var props = typeof(ICFont).GetProperties().Where(prop => prop.CanWrite);
             foreach (var prop in props)
                 prop.SetValue(style, prop.GetValue(this));
         }

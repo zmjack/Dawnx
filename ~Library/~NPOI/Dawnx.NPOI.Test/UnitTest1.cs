@@ -17,9 +17,9 @@ namespace Dawnx.NPOI.Test
         {
             var book = new ExcelBook(ExcelVersion.Excel2007);
 
-            var 黑体style2 = book.BookCellStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Blue).SetFont("黑体", 20).FullBorder());
-            var 黑体style1 = book.BookCellStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Blue).SetFont("黑体", 20).FullBorder());
-            var 宋体style1 = book.BookCellStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Red).SetFont("宋体", 27, RGBColor.BlueGrey).FullBorder());
+            var 黑体style2 = book.CStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Blue).SetFont("黑体", 20).FullBorder());
+            var 黑体style1 = book.CStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Blue).SetFont("黑体", 20).FullBorder());
+            var 宋体style1 = book.CStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Red).SetFont("宋体", 27, RGBColor.BlueGrey).FullBorder());
 
             var sampleSheet = book.CreateSheet("Sample");
             sampleSheet.SetColumnWidth("A", 8.5);
@@ -40,12 +40,12 @@ namespace Dawnx.NPOI.Test
                 { "Company 102", "Cu", 4, DateTime.Parse("2017-1-4"), "[??]" },
             }).Self(_ =>
             {
-                _.SetCellStyle(黑体style1);
+                _.SetCStyle(黑体style1);
                 _.Each(row =>
                 {
                     if (row[(0, 1)].GetValue().ToString() == "Cu")
                     {
-                        row.SelectColunm(1).SetCellStyle(宋体style1);
+                        row.SelectColunm(1).SetCStyle(宋体style1);
                     }
                 });
                 _.SmartMerge(new[] { 0, 1, 2, 3 });
@@ -97,16 +97,16 @@ namespace Dawnx.NPOI.Test
         {
             var book = new ExcelBook("test.xlsx");
             var sheet = book.CreateSheet("Display");
-            ICellStyle style;
+            CStyle style;
 
-            sheet[(1, 1)].SetCellStyle(x =>
+            sheet[(1, 1)].SetCStyle(x =>
             {
                 x.FillPattern = FillPattern.SolidForeground;
                 x.FillBackgroundColor = RGBColor.Automatic;
                 x.FillForegroundColor = RGBColor.Yellow;
             });
 
-            var 黑体style1 = book.BookCellStyle(s =>
+            var 黑体style1 = book.CStyle(s =>
             {
                 s.FullBorder();
                 s.FillForegroundColor = RGBColor.Blue;
@@ -122,7 +122,7 @@ namespace Dawnx.NPOI.Test
                 {
                     var cell = book["Legend"][(row, col)];
 
-                    style = cell.CellStyle;
+                    style = cell.GetCStyle();
                     sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
                 }
             }

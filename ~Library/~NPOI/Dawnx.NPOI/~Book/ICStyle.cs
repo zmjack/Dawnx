@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Dawnx.NPOI
 {
-    public interface IBookCellStyle
+    public interface ICStyle
     {
         #region Alignment
         HorizontalAlignment Alignment { get; set; }

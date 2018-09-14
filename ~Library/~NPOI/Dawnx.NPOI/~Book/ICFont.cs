@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Dawnx.NPOI
 {
-    public interface IBookFont
+    public interface ICFont
     {
         string FontName { get; set; }
         short FontSize { get; set; }

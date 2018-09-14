@@ -41,26 +41,26 @@ namespace Dawnx.NPOI
         public short GetDataFormat(string format) => MapedWorkbook.CreateDataFormat().GetFormat(format);
 
         public IEnumerable<ICellStyle> CellStyles => Range.Create(NumCellStyles).Select(i => GetCellStyleAt((short)i));
-        public IEnumerable<BookCellStyle> BookCellStyles => CellStyles.Select(x => new BookCellStyle(this, x));
-        public BookCellStyle BookCellStyleAt(short index) => new BookCellStyle(this, GetCellStyleAt(index));
-        public BookCellStyle BookCellStyle(Action<BookCellStyleApplier> init) => BookCellStyle(BookCellStyleApplier.Create(init));
-        public BookCellStyle BookCellStyle(BookCellStyleApplier applier)
+        public IEnumerable<CStyle> CStyles => CellStyles.Select(x => new CStyle(this, x));
+        public CStyle CStyleAt(short index) => new CStyle(this, GetCellStyleAt(index));
+        public CStyle CStyle(Action<CStyleApplier> init) => CStyle(CStyleApplier.Create(init));
+        public CStyle CStyle(CStyleApplier applier)
         {
-            var find = BookCellStyles.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
+            var find = CStyles.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
             if (find is null)
-                return new BookCellStyle(this).Self(_ => applier.Apply(_));
+                return new CStyle(this).Self(_ => applier.Apply(_));
             else return find;
         }
 
         public IEnumerable<IFont> Fonts => Range.Create(NumberOfFonts).Select(i => GetFontAt((short)i));
-        public IEnumerable<BookFont> BookFonts => Fonts.Select(x => new BookFont(this, x));
-        public BookFont BookFontAt(short index) => new BookFont(this, GetFontAt(index));
-        public BookFont BookFont(Action<BookFontApplier> init) => BookFont(BookFontApplier.Create(init));
-        internal BookFont BookFont(BookFontApplier applier)
+        public IEnumerable<CFont> CFonts => Fonts.Select(x => new CFont(this, x));
+        public CFont CFontAt(short index) => new CFont(this, GetFontAt(index));
+        public CFont CFont(Action<CFontApplier> init) => CFont(CFontApplier.Create(init));
+        internal CFont CFont(CFontApplier applier)
         {
-            var find = BookFonts.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
+            var find = CFonts.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
             if (find is null)
-                return new BookFont(this).Self(_ => applier.Apply(_));
+                return new CFont(this).Self(_ => applier.Apply(_));
             else return find;
         }
 

@@ -47,7 +47,7 @@ namespace Dawnx.NPOI
         public RGBColor LeftBorderColor
         {
             get => CellStyle.LeftBorderColor > 0 ? RGBColor.ParseIndexed(CellStyle.LeftBorderColor)
-                : (CellStyle as XSSFCellStyle)?.LeftBorderXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.LeftBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)
@@ -68,7 +68,7 @@ namespace Dawnx.NPOI
         public RGBColor RightBorderColor
         {
             get => CellStyle.RightBorderColor > 0 ? RGBColor.ParseIndexed(CellStyle.RightBorderColor)
-                : (CellStyle as XSSFCellStyle)?.RightBorderXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.RightBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)
@@ -89,7 +89,7 @@ namespace Dawnx.NPOI
         public RGBColor TopBorderColor
         {
             get => CellStyle.TopBorderColor > 0 ? RGBColor.ParseIndexed(CellStyle.TopBorderColor)
-                : (CellStyle as XSSFCellStyle)?.TopBorderXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.TopBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)
@@ -110,7 +110,7 @@ namespace Dawnx.NPOI
         public RGBColor BottomBorderColor
         {
             get => CellStyle.BottomBorderColor > 0 ? RGBColor.ParseIndexed(CellStyle.BottomBorderColor)
-                : (CellStyle as XSSFCellStyle)?.BottomBorderXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.BottomBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)
@@ -131,7 +131,7 @@ namespace Dawnx.NPOI
         public RGBColor BorderDiagonalColor
         {
             get => CellStyle.BorderDiagonalColor > 0 ? RGBColor.ParseIndexed(CellStyle.BorderDiagonalColor)
-                : (CellStyle as XSSFCellStyle)?.DiagonalBorderXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.DiagonalBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)
@@ -160,7 +160,7 @@ namespace Dawnx.NPOI
         public RGBColor FillBackgroundColor
         {
             get => CellStyle.FillBackgroundColor > 0 ? RGBColor.ParseIndexed(CellStyle.FillBackgroundColor)
-                : (CellStyle as XSSFCellStyle)?.FillBackgroundXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.FillBackgroundXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)
@@ -176,7 +176,7 @@ namespace Dawnx.NPOI
         public RGBColor FillForegroundColor
         {
             get => CellStyle.FillForegroundColor > 0 ? RGBColor.ParseIndexed(CellStyle.FillForegroundColor)
-                : (CellStyle as XSSFCellStyle)?.FillForegroundXSSFColor?.RGB.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
+                : (CellStyle as XSSFCellStyle)?.FillForegroundXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
                 if (value.Index == 0)

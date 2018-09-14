@@ -2,6 +2,8 @@
 using NPOI.SS.Util;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 namespace Dawnx.NPOI
 {
@@ -296,32 +298,19 @@ namespace Dawnx.NPOI
         }
 
         public void SetAutoSizeColumns(params int[] colIndexs)
-            => colIndexs.Each(index => MapedSheet.AutoSizeColumn(index));
+        {
+            colIndexs.Each(index => MapedSheet.AutoSizeColumn(index));
+        }
 
         public void SetAutoSizeColumns(params string[] colNames)
             => colNames.Each(name => MapedSheet.AutoSizeColumn(GetCol(name)));
 
-        /// <summary>
-        /// Tip: This is a new function, not a native method in NPOI. (Let the width be the same as the Excel width.)
-        /// </summary>
-        /// <param name="colName"></param>
-        /// <param name="width"></param>
-        public void SetColumnWidth(string colName, double width)
-            => MapedSheet.SetColumnWidth(GetCol(colName), (int)(width * 256 + 158.72));
-        /// <summary>
-        /// Tip: This is a new function, not a native method in NPOI. (Let the width be the same as the Excel width.)
-        /// </summary>
-        /// <param name="colName"></param>
-        /// <param name="width"></param>
-        public void SetColumnWidth(int columnIndex, double width)
-            => MapedSheet.SetColumnWidth(columnIndex, (int)(width * 256 + 158.72));
-        void ISheet.SetColumnWidth(int columnIndex, int width)
-            => MapedSheet.SetColumnWidth(columnIndex, width);
+        public void SetColumnExcelWidth(string colName, double width) => SetColumnExcelWidth(GetCol(colName), width);
+        public void SetColumnExcelWidth(int columnIndex, double width) => MapedSheet.SetColumnWidth(columnIndex, (int)(width * 256 + 158.72));
+        public void SetColumnWidth(int columnIndex, int width) => MapedSheet.SetColumnWidth(columnIndex, width);
 
-        public void SetRowHeight(string rowName, float height)
-            => this[(GetRow(rowName), 1)].SetHeight(height);
-        public void SetRowHeight(int rowIndex, float height)
-            => this[(rowIndex, 1)].SetHeight(height);
+        public void SetRowHeight(string rowName, float height) => this[(GetRow(rowName), 1)].SetHeight(height);
+        public void SetRowHeight(int rowIndex, float height) => this[(rowIndex, 1)].SetHeight(height);
 
         public void SetDefaultColumnStyle(int column, ICellStyle style)
         {

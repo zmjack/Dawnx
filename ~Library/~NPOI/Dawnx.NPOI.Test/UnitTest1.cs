@@ -22,9 +22,9 @@ namespace Dawnx.NPOI.Test
             var ËÎÌåstyle1 = book.CStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Red).SetFont("ËÎÌå", 27, RGBColor.BlueGrey).FullBorder());
 
             var sampleSheet = book.CreateSheet("Sample");
-            sampleSheet.SetColumnWidth("A", 8.5);
-            sampleSheet.SetColumnWidth("B", 3);
-            sampleSheet.SetColumnWidth("C", 30);
+            sampleSheet.SetColumnExcelWidth("A", 8.5);
+            sampleSheet.SetColumnExcelWidth("B", 3);
+            sampleSheet.SetColumnExcelWidth("C", 30);
 
             sampleSheet.SetCursor("C2");
 

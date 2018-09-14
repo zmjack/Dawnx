@@ -16,6 +16,8 @@ namespace Dawnx.NPOI
         public ExcelBook Book { get; private set; }
         public (int row, int col) Cursor;
 
+        public bool AutoSizeColumns { get; set; }
+
         public ExcelSheet(ExcelBook excel, ISheet sheet)
         {
             Book = excel;

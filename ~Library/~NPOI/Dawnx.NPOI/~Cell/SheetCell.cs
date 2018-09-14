@@ -1,6 +1,7 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Data;
+using System.Drawing;
 
 namespace Dawnx.NPOI
 {
@@ -42,37 +43,48 @@ namespace Dawnx.NPOI
         {
             switch (value)
             {
-                case null: String = ""; return;
-                case bool v: Boolean = v; return;
-                case short v: Number = v; return;
-                case ushort v: Number = v; return;
-                case int v: Number = v; return;
-                case uint v: Number = v; return;
-                case long v: Number = v; return;
-                case ulong v: Number = v; return;
-                case float v: Number = v; return;
-                case double v: Number = v; return;
-                case DateTime v: DateTime = v; return;
-                case IRichTextString v: RichTextString = v; return;
+                case null: String = ""; break;
+                case bool v: Boolean = v; break;
+                case short v: Number = v; break;
+                case ushort v: Number = v; break;
+                case int v: Number = v; break;
+                case uint v: Number = v; break;
+                case long v: Number = v; break;
+                case ulong v: Number = v; break;
+                case float v: Number = v; break;
+                case double v: Number = v; break;
+                case DateTime v: DateTime = v; break;
+                case IRichTextString v: RichTextString = v; break;
                 case string v:
                     if (v.StartsWith("=")) Formula = v.Slice(1);
                     else String = v;
-                    return;
+                    break;
 
-                case SheetCell v when v.MapedCell.CellType == CellType.Blank: return;
-                case SheetCell v when v.MapedCell.CellType == CellType.Error: return;
-                case SheetCell v when v.MapedCell.CellType == CellType.Unknown: return;
-                case SheetCell v when v.MapedCell.CellType == CellType.Boolean: Boolean = v.Boolean; return;
-                case SheetCell v when v.MapedCell.CellType == CellType.Numeric: Number = v.Number; return;
-                case SheetCell v when v.MapedCell.CellType == CellType.String: String = v.String; return;
-                case SheetCell v when v.MapedCell.CellType == CellType.Formula: Formula = v.Formula; return;
+                case SheetCell v when v.MapedCell.CellType == CellType.Blank: break;
+                case SheetCell v when v.MapedCell.CellType == CellType.Error: break;
+                case SheetCell v when v.MapedCell.CellType == CellType.Unknown: break;
+                case SheetCell v when v.MapedCell.CellType == CellType.Boolean: Boolean = v.Boolean; break;
+                case SheetCell v when v.MapedCell.CellType == CellType.Numeric: Number = v.Number; break;
+                case SheetCell v when v.MapedCell.CellType == CellType.String: String = v.String; break;
+                case SheetCell v when v.MapedCell.CellType == CellType.Formula: Formula = v.Formula; break;
 
                 case CValue v:
                     SetValue(v.Value);
                     SetCStyle(v.Style);
-                    return;
+                    break;
 
-                case object v: String = v.ToString(); return;
+                case object v: String = v.ToString(); break;
+            }
+
+            if (Sheet.AutoSizeColumns)
+            {
+                //自动列宽
+                var graphics = Graphics.FromImage(new Bitmap(100, 100));
+                var sizeF = graphics.MeasureString("地地", new Font(GetCStyle().Font.FontName, GetCStyle().Font.FontSize));
+                Sheet.GetColumnWidth(ColumnIndex);
+                Sheet.SetColumnWidth();
+                var w = sizeF.Width;
+                GetValue().ToString()
             }
         }
         public object GetValue()
@@ -135,7 +147,7 @@ namespace Dawnx.NPOI
         public SheetRange Print(object[] values) => Sheet.Print(values, true);
         public SheetRange Print(DataTable table) => Sheet.Print(table, true);
 
-        public void SetWidth(double width) => Sheet.SetColumnWidth(ColumnIndex, width);
+        public void SetWidth(double width) => Sheet.SetColumnExcelWidth(ColumnIndex, width);
         public void SetHeight(float height) => Sheet.GetRow(RowIndex).HeightInPoints = height;
 
     }

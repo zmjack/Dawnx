@@ -1,8 +1,10 @@
 ﻿using Dawnx.Reflection;
+using Dawnx.Sequences;
 using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -12,11 +14,13 @@ namespace Dawnx.NPOI
 {
     public partial class ExcelSheet
     {
+        public const int EXCEL_WIDTH_PER_PX = 8;
+        public const int AUTO_SIZE_PADDING_PX = 21;
+        public const int COLUMN_BORDER_PX = 3;
+
         public ISheet MapedSheet { get; private set; }
         public ExcelBook Book { get; private set; }
         public (int row, int col) Cursor;
-
-        public bool AutoSizeColumns { get; set; }
 
         public ExcelSheet(ExcelBook excel, ISheet sheet)
         {
@@ -262,6 +266,40 @@ namespace Dawnx.NPOI
 
             return ret;
         }
+
+        public void SetWidth(string colName, double width) => SetWidth(GetCol(colName), width);
+        public void SetWidth(int columnIndex, double width) => MapedSheet.SetColumnWidth(columnIndex, (int)Math.Ceiling(255.86 * width + 184.27));
+
+        public void SetHeight(string rowName, float height) => this[(GetRow(rowName), 1)].SetHeight(height);
+        public void SetHeight(int rowIndex, float height) => this[(rowIndex, 1)].SetHeight(height);
+
+        public int GetWidth(int columnIndex) => (int)Math.Ceiling((MapedSheet.GetColumnWidth(columnIndex) - 184.27) / 255.86);
+
+        public void AutoSize(params string[] columns) => AutoSize(columns.Select(x => Sequences.LetterSequence.GetNumber(x)).ToArray());
+        public void AutoSize(params int[] columns)
+        {
+            int maxWidth = 0;
+            foreach (var col in columns)
+            {
+                for (int row = 0; row <= LastRowNum; row++)
+                {
+                    var cell = this[(row, col)];
+                    var cstyle = cell.GetCStyle();
+                    var value = cell.GetValue();
+
+                    var graphics = Graphics.FromImage(new Bitmap(1, 1));
+                    var fontSize = graphics.MeasureString(value.ToString(), new Font(cstyle.Font.FontName, cstyle.Font.FontSize));
+                    var width = fontSize.Width > 0 ? (int)((COLUMN_BORDER_PX + AUTO_SIZE_PADDING_PX + fontSize.Width) / EXCEL_WIDTH_PER_PX) : 0;
+
+                    if (width > maxWidth) maxWidth = width;
+                }
+                SetWidth(col, maxWidth);
+            }
+        }
+
+        public void AutoSizeRange(int fromColumn, int toColumn) => AutoSize(Range.Create(fromColumn, toColumn + 1));
+        public void AutoSizeRange(string fromColumn, string toColumn)
+            => AutoSize(Range.Create(LetterSequence.GetNumber(fromColumn), LetterSequence.GetNumber(toColumn) + 1));
 
     }
 }

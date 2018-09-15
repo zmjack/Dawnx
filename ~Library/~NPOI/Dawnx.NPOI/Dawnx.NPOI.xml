@@ -11,19 +11,5 @@
             </summary>
             <param name="offsetCols"></param>
         </member>
-        <member name="M:Dawnx.NPOI.ExcelSheet.SetColumnWidth(System.String,System.Double)">
-            <summary>
-            Tip: This is a new function, not a native method in NPOI. (Let the width be the same as the Excel width.)
-            </summary>
-            <param name="colName"></param>
-            <param name="width"></param>
-        </member>
-        <member name="M:Dawnx.NPOI.ExcelSheet.SetColumnWidth(System.Int32,System.Double)">
-            <summary>
-            Tip: This is a new function, not a native method in NPOI. (Let the width be the same as the Excel width.)
-            </summary>
-            <param name="colName"></param>
-            <param name="width"></param>
-        </member>
     </members>
 </doc>

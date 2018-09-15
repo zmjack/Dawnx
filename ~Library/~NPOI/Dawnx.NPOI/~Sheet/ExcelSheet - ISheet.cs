@@ -72,299 +72,124 @@ namespace Dawnx.NPOI
         public CellRangeAddress RepeatingRows { get => MapedSheet.RepeatingRows; set => MapedSheet.RepeatingRows = value; }
         public CellRangeAddress RepeatingColumns { get => MapedSheet.RepeatingColumns; set => MapedSheet.RepeatingColumns = value; }
 
-        public int AddMergedRegion(CellRangeAddress region)
-        {
-            return MapedSheet.AddMergedRegion(region);
-        }
+        public int AddMergedRegion(CellRangeAddress region) => MapedSheet.AddMergedRegion(region);
 
-        public void AddValidationData(IDataValidation dataValidation)
-        {
-            MapedSheet.AddValidationData(dataValidation);
-        }
+        public void AddValidationData(IDataValidation dataValidation) => MapedSheet.AddValidationData(dataValidation);
 
-        public void AutoSizeColumn(int column)
-        {
-            MapedSheet.AutoSizeColumn(column);
-        }
+        public void AutoSizeColumn(int column) => MapedSheet.AutoSizeColumn(column);
 
-        public void AutoSizeColumn(int column, bool useMergedCells)
-        {
-            MapedSheet.AutoSizeColumn(column, useMergedCells);
-        }
+        public void AutoSizeColumn(int column, bool useMergedCells) => MapedSheet.AutoSizeColumn(column, useMergedCells);
 
-        public IRow CopyRow(int sourceIndex, int targetIndex)
-        {
-            return MapedSheet.CopyRow(sourceIndex, targetIndex);
-        }
+        public IRow CopyRow(int sourceIndex, int targetIndex) => MapedSheet.CopyRow(sourceIndex, targetIndex);
 
-        public ISheet CopySheet(string Name)
-        {
-            return MapedSheet.CopySheet(Name);
-        }
+        public ISheet CopySheet(string Name) => MapedSheet.CopySheet(Name);
 
-        public ISheet CopySheet(string Name, bool copyStyle)
-        {
-            return MapedSheet.CopySheet(Name, copyStyle);
-        }
+        public ISheet CopySheet(string Name, bool copyStyle) => MapedSheet.CopySheet(Name, copyStyle);
 
-        public IDrawing CreateDrawingPatriarch()
-        {
-            return MapedSheet.CreateDrawingPatriarch();
-        }
+        public IDrawing CreateDrawingPatriarch() => MapedSheet.CreateDrawingPatriarch();
 
         public void CreateFreezePane(int colSplit, int rowSplit, int leftmostColumn, int topRow)
-        {
-            MapedSheet.CreateFreezePane(colSplit, rowSplit, leftmostColumn, topRow);
-        }
+            => MapedSheet.CreateFreezePane(colSplit, rowSplit, leftmostColumn, topRow);
 
-        public void CreateFreezePane(int colSplit, int rowSplit)
-        {
-            MapedSheet.CreateFreezePane(colSplit, rowSplit);
-        }
+        public void CreateFreezePane(int colSplit, int rowSplit) => MapedSheet.CreateFreezePane(colSplit, rowSplit);
 
-        public IRow CreateRow(int rownum)
-        {
-            return MapedSheet.CreateRow(rownum);
-        }
+        public IRow CreateRow(int rownum) => MapedSheet.CreateRow(rownum);
 
         public void CreateSplitPane(int xSplitPos, int ySplitPos, int leftmostColumn, int topRow, PanePosition activePane)
-        {
-            MapedSheet.CreateSplitPane(xSplitPos, ySplitPos, leftmostColumn, topRow, activePane);
-        }
+            => MapedSheet.CreateSplitPane(xSplitPos, ySplitPos, leftmostColumn, topRow, activePane);
 
-        public IComment GetCellComment(int row, int column)
-        {
-            return MapedSheet.GetCellComment(row, column);
-        }
+        public IComment GetCellComment(int row, int column) => MapedSheet.GetCellComment(row, column);
 
-        public int GetColumnOutlineLevel(int columnIndex)
-        {
-            return MapedSheet.GetColumnOutlineLevel(columnIndex);
-        }
+        public int GetColumnOutlineLevel(int columnIndex) => MapedSheet.GetColumnOutlineLevel(columnIndex);
 
-        public ICellStyle GetColumnStyle(int column)
-        {
-            return MapedSheet.GetColumnStyle(column);
-        }
+        public ICellStyle GetColumnStyle(int column) => MapedSheet.GetColumnStyle(column);
 
-        public int GetColumnWidth(int columnIndex)
-        {
-            return MapedSheet.GetColumnWidth(columnIndex);
-        }
+        public float GetColumnWidthInPixels(int columnIndex) => MapedSheet.GetColumnWidthInPixels(columnIndex);
 
-        public float GetColumnWidthInPixels(int columnIndex)
-        {
-            return MapedSheet.GetColumnWidthInPixels(columnIndex);
-        }
+        public IDataValidationHelper GetDataValidationHelper() => MapedSheet.GetDataValidationHelper();
 
-        public IDataValidationHelper GetDataValidationHelper()
-        {
-            return MapedSheet.GetDataValidationHelper();
-        }
+        public List<IDataValidation> GetDataValidations() => MapedSheet.GetDataValidations();
 
-        public List<IDataValidation> GetDataValidations()
-        {
-            return MapedSheet.GetDataValidations();
-        }
+        public IEnumerator GetEnumerator() => MapedSheet.GetEnumerator();
 
-        public IEnumerator GetEnumerator()
-        {
-            return MapedSheet.GetEnumerator();
-        }
+        public double GetMargin(MarginType margin) => MapedSheet.GetMargin(margin);
 
-        public double GetMargin(MarginType margin)
-        {
-            return MapedSheet.GetMargin(margin);
-        }
+        public CellRangeAddress GetMergedRegion(int index) => MapedSheet.GetMergedRegion(index);
 
-        public CellRangeAddress GetMergedRegion(int index)
-        {
-            return MapedSheet.GetMergedRegion(index);
-        }
+        public IRow GetRow(int rownum) => MapedSheet.GetRow(rownum);
 
-        public IRow GetRow(int rownum)
-        {
-            return MapedSheet.GetRow(rownum);
-        }
+        public IEnumerator GetRowEnumerator() => MapedSheet.GetRowEnumerator();
 
-        public IEnumerator GetRowEnumerator()
-        {
-            return MapedSheet.GetRowEnumerator();
-        }
+        public void GroupColumn(int fromColumn, int toColumn) => MapedSheet.GroupColumn(fromColumn, toColumn);
 
-        public void GroupColumn(int fromColumn, int toColumn)
-        {
-            MapedSheet.GroupColumn(fromColumn, toColumn);
-        }
+        public void GroupRow(int fromRow, int toRow) => MapedSheet.GroupRow(fromRow, toRow);
 
-        public void GroupRow(int fromRow, int toRow)
-        {
-            MapedSheet.GroupRow(fromRow, toRow);
-        }
+        public bool IsColumnBroken(int column) => MapedSheet.IsColumnBroken(column);
 
-        public bool IsColumnBroken(int column)
-        {
-            return MapedSheet.IsColumnBroken(column);
-        }
+        public bool IsColumnHidden(int columnIndex) => MapedSheet.IsColumnHidden(columnIndex);
 
-        public bool IsColumnHidden(int columnIndex)
-        {
-            return MapedSheet.IsColumnHidden(columnIndex);
-        }
+        public bool IsMergedRegion(CellRangeAddress mergedRegion) => MapedSheet.IsMergedRegion(mergedRegion);
 
-        public bool IsMergedRegion(CellRangeAddress mergedRegion)
-        {
-            return MapedSheet.IsMergedRegion(mergedRegion);
-        }
+        public bool IsRowBroken(int row) => MapedSheet.IsRowBroken(row);
 
-        public bool IsRowBroken(int row)
-        {
-            return MapedSheet.IsRowBroken(row);
-        }
+        public void ProtectSheet(string password) => MapedSheet.ProtectSheet(password);
 
-        public void ProtectSheet(string password)
-        {
-            MapedSheet.ProtectSheet(password);
-        }
+        public ICellRange<ICell> RemoveArrayFormula(ICell cell) => MapedSheet.RemoveArrayFormula(cell);
 
-        public ICellRange<ICell> RemoveArrayFormula(ICell cell)
-        {
-            return MapedSheet.RemoveArrayFormula(cell);
-        }
+        public void RemoveColumnBreak(int column) => MapedSheet.RemoveColumnBreak(column);
 
-        public void RemoveColumnBreak(int column)
-        {
-            MapedSheet.RemoveColumnBreak(column);
-        }
+        public void RemoveMergedRegion(int index) => MapedSheet.RemoveMergedRegion(index);
 
-        public void RemoveMergedRegion(int index)
-        {
-            MapedSheet.RemoveMergedRegion(index);
-        }
+        public void RemoveRow(IRow row) => MapedSheet.RemoveRow(row);
 
-        public void RemoveRow(IRow row)
-        {
-            MapedSheet.RemoveRow(row);
-        }
+        public void RemoveRowBreak(int row) => MapedSheet.RemoveRowBreak(row);
 
-        public void RemoveRowBreak(int row)
-        {
-            MapedSheet.RemoveRowBreak(row);
-        }
+        public void SetActive(bool value) => MapedSheet.SetActive(value);
 
-        public void SetActive(bool value)
-        {
-            MapedSheet.SetActive(value);
-        }
-
-        public void SetActiveCell(int row, int column)
-        {
-            MapedSheet.SetActiveCell(row, column);
-        }
+        public void SetActiveCell(int row, int column) => MapedSheet.SetActiveCell(row, column);
 
         public void SetActiveCellRange(int firstRow, int lastRow, int firstColumn, int lastColumn)
-        {
-            MapedSheet.SetActiveCellRange(firstRow, lastRow, firstColumn, lastColumn);
-        }
+            => MapedSheet.SetActiveCellRange(firstRow, lastRow, firstColumn, lastColumn);
 
         public void SetActiveCellRange(List<CellRangeAddress8Bit> cellranges, int activeRange, int activeRow, int activeColumn)
-        {
-            MapedSheet.SetActiveCellRange(cellranges, activeRange, activeRow, activeColumn);
-        }
+            => MapedSheet.SetActiveCellRange(cellranges, activeRange, activeRow, activeColumn);
 
-        public ICellRange<ICell> SetArrayFormula(string formula, CellRangeAddress range)
-        {
-            return MapedSheet.SetArrayFormula(formula, range);
-        }
+        public ICellRange<ICell> SetArrayFormula(string formula, CellRangeAddress range) => MapedSheet.SetArrayFormula(formula, range);
 
-        public IAutoFilter SetAutoFilter(CellRangeAddress range)
-        {
-            return MapedSheet.SetAutoFilter(range);
-        }
+        public IAutoFilter SetAutoFilter(CellRangeAddress range) => MapedSheet.SetAutoFilter(range);
 
-        public void SetColumnBreak(int column)
-        {
-            MapedSheet.SetColumnBreak(column);
-        }
+        public void SetColumnBreak(int column) => MapedSheet.SetColumnBreak(column);
 
-        public void SetColumnGroupCollapsed(int columnNumber, bool collapsed)
-        {
-            MapedSheet.SetColumnGroupCollapsed(columnNumber, collapsed);
-        }
+        public void SetColumnGroupCollapsed(int columnNumber, bool collapsed) => MapedSheet.SetColumnGroupCollapsed(columnNumber, collapsed);
 
-        public void SetColumnHidden(int columnIndex, bool hidden)
-        {
-            MapedSheet.SetColumnHidden(columnIndex, hidden);
-        }
+        public void SetColumnHidden(int columnIndex, bool hidden) => MapedSheet.SetColumnHidden(columnIndex, hidden);
 
-        public void SetAutoSizeColumns(params int[] colIndexs)
-        {
-            colIndexs.Each(index => MapedSheet.AutoSizeColumn(index));
-        }
+        void ISheet.SetColumnWidth(int columnIndex, int width) => MapedSheet.SetColumnWidth(columnIndex, width);
 
-        public void SetAutoSizeColumns(params string[] colNames)
-            => colNames.Each(name => MapedSheet.AutoSizeColumn(GetCol(name)));
+        int ISheet.GetColumnWidth(int columnIndex) => MapedSheet.GetColumnWidth(columnIndex);
 
-        public void SetColumnExcelWidth(string colName, double width) => SetColumnExcelWidth(GetCol(colName), width);
-        public void SetColumnExcelWidth(int columnIndex, double width) => MapedSheet.SetColumnWidth(columnIndex, (int)(width * 256 + 158.72));
-        public void SetColumnWidth(int columnIndex, int width) => MapedSheet.SetColumnWidth(columnIndex, width);
+        public void SetDefaultColumnStyle(int column, ICellStyle style) => MapedSheet.SetDefaultColumnStyle(column, style);
 
-        public void SetRowHeight(string rowName, float height) => this[(GetRow(rowName), 1)].SetHeight(height);
-        public void SetRowHeight(int rowIndex, float height) => this[(rowIndex, 1)].SetHeight(height);
+        public void SetMargin(MarginType margin, double size) => MapedSheet.SetMargin(margin, size);
 
-        public void SetDefaultColumnStyle(int column, ICellStyle style)
-        {
-            MapedSheet.SetDefaultColumnStyle(column, style);
-        }
+        public void SetRowBreak(int row) => MapedSheet.SetRowBreak(row);
 
-        public void SetMargin(MarginType margin, double size)
-        {
-            MapedSheet.SetMargin(margin, size);
-        }
+        public void SetRowGroupCollapsed(int row, bool collapse) => MapedSheet.SetRowGroupCollapsed(row, collapse);
 
-        public void SetRowBreak(int row)
-        {
-            MapedSheet.SetRowBreak(row);
-        }
+        public void SetZoom(int numerator, int denominator) => MapedSheet.SetZoom(numerator, denominator);
 
-        public void SetRowGroupCollapsed(int row, bool collapse)
-        {
-            MapedSheet.SetRowGroupCollapsed(row, collapse);
-        }
-
-        public void SetZoom(int numerator, int denominator)
-        {
-            MapedSheet.SetZoom(numerator, denominator);
-        }
-
-        public void ShiftRows(int startRow, int endRow, int n)
-        {
-            MapedSheet.ShiftRows(startRow, endRow, n);
-        }
+        public void ShiftRows(int startRow, int endRow, int n) => MapedSheet.ShiftRows(startRow, endRow, n);
 
         public void ShiftRows(int startRow, int endRow, int n, bool copyRowHeight, bool resetOriginalRowHeight)
-        {
-            MapedSheet.ShiftRows(startRow, endRow, n, copyRowHeight, resetOriginalRowHeight);
-        }
+            => MapedSheet.ShiftRows(startRow, endRow, n, copyRowHeight, resetOriginalRowHeight);
 
-        public void ShowInPane(int toprow, int leftcol)
-        {
-            MapedSheet.ShowInPane(toprow, leftcol);
-        }
+        public void ShowInPane(int toprow, int leftcol) => MapedSheet.ShowInPane(toprow, leftcol);
 
-        public void ShowInPane(short toprow, short leftcol)
-        {
-            MapedSheet.ShowInPane(toprow, leftcol);
-        }
+        public void ShowInPane(short toprow, short leftcol) => MapedSheet.ShowInPane(toprow, leftcol);
 
-        public void UngroupColumn(int fromColumn, int toColumn)
-        {
-            MapedSheet.UngroupColumn(fromColumn, toColumn);
-        }
+        public void UngroupColumn(int fromColumn, int toColumn) => MapedSheet.UngroupColumn(fromColumn, toColumn);
 
-        public void UngroupRow(int fromRow, int toRow)
-        {
-            MapedSheet.UngroupRow(fromRow, toRow);
-        }
+        public void UngroupRow(int fromRow, int toRow) => MapedSheet.UngroupRow(fromRow, toRow);
+
     }
 }

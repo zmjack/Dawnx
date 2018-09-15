@@ -75,17 +75,6 @@ namespace Dawnx.NPOI
 
                 case object v: String = v.ToString(); break;
             }
-
-            if (Sheet.AutoSizeColumns)
-            {
-                //自动列宽
-                var graphics = Graphics.FromImage(new Bitmap(100, 100));
-                var sizeF = graphics.MeasureString("地地", new Font(GetCStyle().Font.FontName, GetCStyle().Font.FontSize));
-                Sheet.GetColumnWidth(ColumnIndex);
-                Sheet.SetColumnWidth();
-                var w = sizeF.Width;
-                GetValue().ToString()
-            }
         }
         public object GetValue()
         {
@@ -147,7 +136,7 @@ namespace Dawnx.NPOI
         public SheetRange Print(object[] values) => Sheet.Print(values, true);
         public SheetRange Print(DataTable table) => Sheet.Print(table, true);
 
-        public void SetWidth(double width) => Sheet.SetColumnExcelWidth(ColumnIndex, width);
+        public void SetWidth(double width) => Sheet.SetWidth(ColumnIndex, width);
         public void SetHeight(float height) => Sheet.GetRow(RowIndex).HeightInPoints = height;
 
     }

@@ -22,9 +22,9 @@ namespace Dawnx.NPOI.Test
             var 宋体style1 = book.CStyle(x => x.CellFormat("0.00").CellColor(RGBColor.Red).SetFont("宋体", 27, RGBColor.BlueGrey).FullBorder());
 
             var sampleSheet = book.CreateSheet("Sample");
-            sampleSheet.SetColumnExcelWidth("A", 8.5);
-            sampleSheet.SetColumnExcelWidth("B", 3);
-            sampleSheet.SetColumnExcelWidth("C", 30);
+            sampleSheet.SetWidth("A", 8.5);
+            sampleSheet.SetWidth("B", 3);
+            sampleSheet.SetWidth("C", 30);
 
             sampleSheet.SetCursor("C2");
 
@@ -97,35 +97,30 @@ namespace Dawnx.NPOI.Test
         {
             var book = new ExcelBook("test.xlsx");
             var sheet = book.CreateSheet("Display");
-            CStyle style;
 
-            sheet[(1, 1)].SetCStyle(x =>
-            {
-                x.FillPattern = FillPattern.SolidForeground;
-                x.FillBackgroundColor = RGBColor.Automatic;
-                x.FillForegroundColor = RGBColor.Yellow;
-            });
+            sheet.AutoSizeColumns = true;
+            sheet[(0, 0)].SetValue("Hyproca 1897 Mama 海普诺凯1897妈妈");
 
-            var 黑体style1 = book.CStyle(s =>
-            {
-                s.FullBorder();
-                s.FillForegroundColor = RGBColor.Blue;
-                s.FillPattern = FillPattern.SolidForeground;
-                s.DataFormat = "0.00";
-                s.Font.FontName = "黑体";
-                s.Font.FontSize = 20;
-            });
+            //var 黑体style1 = book.CStyle(s =>
+            //{
+            //    s.FullBorder();
+            //    s.FillForegroundColor = RGBColor.Blue;
+            //    s.FillPattern = FillPattern.SolidForeground;
+            //    s.DataFormat = "0.00";
+            //    s.Font.FontName = "黑体";
+            //    s.Font.FontSize = 20;
+            //});
 
-            for (int row = 6; row < 7; row++)
-            {
-                for (int col = 0; col < 10; col++)
-                {
-                    var cell = book["Legend"][(row, col)];
+            //for (int row = 6; row < 7; row++)
+            //{
+            //    for (int col = 0; col < 10; col++)
+            //    {
+            //        var cell = book["Legend"][(row, col)];
 
-                    style = cell.GetCStyle();
-                    sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
-                }
-            }
+            //        style = cell.GetCStyle();
+            //        sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
+            //    }
+            //}
 
             book.SaveAs("1.xlsx");
         }

@@ -76,9 +76,9 @@ namespace Dawnx.NPOI
 
         public void AddValidationData(IDataValidation dataValidation) => MapedSheet.AddValidationData(dataValidation);
 
-        public void AutoSizeColumn(int column) => MapedSheet.AutoSizeColumn(column);
+        void ISheet.AutoSizeColumn(int column) => MapedSheet.AutoSizeColumn(column);
 
-        public void AutoSizeColumn(int column, bool useMergedCells) => MapedSheet.AutoSizeColumn(column, useMergedCells);
+        void ISheet.AutoSizeColumn(int column, bool useMergedCells) => MapedSheet.AutoSizeColumn(column, useMergedCells);
 
         public IRow CopyRow(int sourceIndex, int targetIndex) => MapedSheet.CopyRow(sourceIndex, targetIndex);
 

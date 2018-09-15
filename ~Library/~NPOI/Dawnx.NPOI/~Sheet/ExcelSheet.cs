@@ -278,9 +278,9 @@ namespace Dawnx.NPOI
         public void AutoSize(params string[] columns) => AutoSize(columns.Select(x => Sequences.LetterSequence.GetNumber(x)).ToArray());
         public void AutoSize(params int[] columns)
         {
-            int maxWidth = 0;
             foreach (var col in columns)
             {
+                int maxWidth = GetWidth(col);
                 for (int row = 0; row <= LastRowNum; row++)
                 {
                     var cell = this[(row, col)];

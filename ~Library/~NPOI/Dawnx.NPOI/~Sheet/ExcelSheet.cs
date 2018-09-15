@@ -275,6 +275,8 @@ namespace Dawnx.NPOI
 
         public int GetWidth(int columnIndex) => (int)Math.Ceiling((MapedSheet.GetColumnWidth(columnIndex) - 184.27) / 255.86);
 
+        public void AutoSizeAllColumns() => AutoSize(Range.Create(LastRowNum + 1));
+
         public void AutoSize(params string[] columns) => AutoSize(columns.Select(x => Sequences.LetterSequence.GetNumber(x)).ToArray());
         public void AutoSize(params int[] columns)
         {

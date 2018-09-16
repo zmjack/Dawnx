@@ -7,11 +7,11 @@ namespace Dawnx.Sequences
     {
         public const int RADIX = 26;
 
-        public static int GetNumber(string latter)
+        public static int GetNumber(string letter)
         {
             int ret = 0;
-            for (int i = 0; i < latter.Length; i++)
-                ret = ret * RADIX + latter.ElementAt(i) - 'A' + 1;
+            for (int i = 0; i < letter.Length; i++)
+                ret = ret * RADIX + letter.ElementAt(i) - 'A' + 1;
             return ret - 1;
         }
 

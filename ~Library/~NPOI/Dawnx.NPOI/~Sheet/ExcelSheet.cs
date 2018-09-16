@@ -1,4 +1,5 @@
-﻿using Dawnx.Reflection;
+﻿using Dawnx.Ranges;
+using Dawnx.Reflection;
 using Dawnx.Sequences;
 using NPOI.SS.UserModel;
 using System;
@@ -275,7 +276,9 @@ namespace Dawnx.NPOI
 
         public int GetWidth(int columnIndex) => (int)Math.Ceiling((MapedSheet.GetColumnWidth(columnIndex) - 184.27) / 255.86);
 
-        public void AutoSize(params string[] columns) => AutoSize(columns.Select(x => Sequences.LetterSequence.GetNumber(x)).ToArray());
+        public void AutoSize(IntegerRange range) => AutoSize(range.ToArray());
+        public void AutoSize(LetterRange range) => AutoSize(range.ToArray());
+        public void AutoSize(params string[] columns) => AutoSize(columns.Select(x => LetterSequence.GetNumber(x)).ToArray());
         public void AutoSize(params int[] columns)
         {
             foreach (var col in columns)
@@ -298,10 +301,6 @@ namespace Dawnx.NPOI
                 SetWidth(col, maxWidth);
             }
         }
-
-        public void AutoSizeRange(int fromColumn, int toColumn) => AutoSize(Range.Create(fromColumn, toColumn + 1));
-        public void AutoSizeRange(string fromColumn, string toColumn)
-            => AutoSize(Range.Create(LetterSequence.GetNumber(fromColumn), LetterSequence.GetNumber(toColumn) + 1));
 
         public IEnumerable<SheetRange> MergedRanges
         {

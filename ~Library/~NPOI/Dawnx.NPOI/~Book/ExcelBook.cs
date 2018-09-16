@@ -116,5 +116,14 @@ namespace Dawnx.NPOI
                 Write(file);
         }
 
+        public ExcelSheet CreateSheet() => new ExcelSheet(this, MapedWorkbook.CreateSheet());
+        public ExcelSheet CloneSheet(string name) => CloneSheet(GetSheetIndex(name));
+        public ExcelSheet CloneSheet(int sheetNum) => new ExcelSheet(this, MapedWorkbook.CloneSheet(sheetNum));
+
+        public ExcelSheet CreateSheet(string sheetname) => new ExcelSheet(this, MapedWorkbook.CreateSheet(sheetname));
+
+        public ExcelSheet GetSheet(string name) => new ExcelSheet(this, MapedWorkbook.GetSheet(name));
+        public ExcelSheet GetSheetAt(int index) => new ExcelSheet(this, MapedWorkbook.GetSheetAt(index));
+        public int GetSheetIndex(ExcelSheet sheet) => GetSheetIndex(sheet.SheetName);
     }
 }

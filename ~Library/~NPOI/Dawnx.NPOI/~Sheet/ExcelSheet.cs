@@ -275,8 +275,6 @@ namespace Dawnx.NPOI
 
         public int GetWidth(int columnIndex) => (int)Math.Ceiling((MapedSheet.GetColumnWidth(columnIndex) - 184.27) / 255.86);
 
-        public void AutoSizeAllColumns() => AutoSize(Range.Create(LastRowNum + 1));
-
         public void AutoSize(params string[] columns) => AutoSize(columns.Select(x => Sequences.LetterSequence.GetNumber(x)).ToArray());
         public void AutoSize(params int[] columns)
         {
@@ -286,6 +284,8 @@ namespace Dawnx.NPOI
                 for (int row = 0; row <= LastRowNum; row++)
                 {
                     var cell = this[(row, col)];
+                    if (cell.MergedRange?.For(_ => _.IsFullRowRange && !_.IsDefinitionCell(cell)) ?? false) continue;
+
                     var cstyle = cell.GetCStyle();
                     var value = cell.GetValue();
 
@@ -302,6 +302,15 @@ namespace Dawnx.NPOI
         public void AutoSizeRange(int fromColumn, int toColumn) => AutoSize(Range.Create(fromColumn, toColumn + 1));
         public void AutoSizeRange(string fromColumn, string toColumn)
             => AutoSize(Range.Create(LetterSequence.GetNumber(fromColumn), LetterSequence.GetNumber(toColumn) + 1));
+
+        public IEnumerable<SheetRange> MergedRanges
+        {
+            get
+            {
+                return Range.Create(NumMergedRegions).Select(
+                    i => GetMergedRegion(i).For(_ => new SheetRange(this, (_.FirstRow, _.FirstColumn), (_.LastRow, _.LastColumn))));
+            }
+        }
 
     }
 }

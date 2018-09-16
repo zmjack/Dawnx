@@ -98,29 +98,10 @@ namespace Dawnx.NPOI.Test
             var book = new ExcelBook("test.xlsx");
             var sheet = book.CreateSheet("Display");
 
-            sheet.AutoSizeColumns = true;
-            sheet[(0, 0)].SetValue("Hyproca 1897 Mama º£ÆÕÅµ¿­1897ÂèÂè");
+            sheet[(0, 0)].SetValue("Hyproca 1897 Mama\r\nº£ÆÕÅµ¿­1897ÂèÂè");
 
-            //var ºÚÌåstyle1 = book.CStyle(s =>
-            //{
-            //    s.FullBorder();
-            //    s.FillForegroundColor = RGBColor.Blue;
-            //    s.FillPattern = FillPattern.SolidForeground;
-            //    s.DataFormat = "0.00";
-            //    s.Font.FontName = "ºÚÌå";
-            //    s.Font.FontSize = 20;
-            //});
-
-            //for (int row = 6; row < 7; row++)
-            //{
-            //    for (int col = 0; col < 10; col++)
-            //    {
-            //        var cell = book["Legend"][(row, col)];
-
-            //        style = cell.GetCStyle();
-            //        sheet[(row, col)].SetValue(new CValue { Value = cell.GetValue(), Style = style });
-            //    }
-            //}
+            sheet["A1", "B2"].Merge();
+            var aa = sheet["A1", "B2"][(0, 0)].MapedCell;
 
             book.SaveAs("1.xlsx");
         }

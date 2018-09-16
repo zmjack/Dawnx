@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 
 namespace Dawnx.NPOI
 {
@@ -139,5 +140,14 @@ namespace Dawnx.NPOI
         public void SetWidth(double width) => Sheet.SetWidth(ColumnIndex, width);
         public void SetHeight(float height) => Sheet.GetRow(RowIndex).HeightInPoints = height;
 
+        public SheetRange MergedRange
+        {
+            get
+            {
+                if (IsMergedCell)
+                    return Sheet.MergedRanges.FirstOrDefault(x => x.IsInRange(this));
+                else return null;
+            }
+        }
     }
 }

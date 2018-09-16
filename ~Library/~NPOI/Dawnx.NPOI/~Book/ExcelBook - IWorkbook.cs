@@ -22,236 +22,96 @@ namespace Dawnx.NPOI
         public MissingCellPolicy MissingCellPolicy { get => MapedWorkbook.MissingCellPolicy; set => MapedWorkbook.MissingCellPolicy = value; }
         public bool IsHidden { get => MapedWorkbook.IsHidden; set => MapedWorkbook.IsHidden = value; }
 
-        public int AddPicture(byte[] pictureData, PictureType format)
-        {
-            return MapedWorkbook.AddPicture(pictureData, format);
-        }
+        public int AddPicture(byte[] pictureData, PictureType format) => MapedWorkbook.AddPicture(pictureData, format);
 
-        public void AddToolPack(UDFFinder toopack)
-        {
-            MapedWorkbook.AddToolPack(toopack);
-        }
+        public void AddToolPack(UDFFinder toopack) => MapedWorkbook.AddToolPack(toopack);
 
-        ISheet IWorkbook.CloneSheet(int sheetNum)
-        {
-            return MapedWorkbook.CloneSheet(sheetNum);
-        }
-        public ExcelSheet CloneSheet(string name)
-        {
-            return CloneSheet(GetSheetIndex(name));
-        }
-        public ExcelSheet CloneSheet(int sheetNum)
-            => new ExcelSheet(this, MapedWorkbook.CloneSheet(sheetNum));
+        ISheet IWorkbook.CloneSheet(int sheetNum) => MapedWorkbook.CloneSheet(sheetNum);
 
-        public void Close()
-        {
-            MapedWorkbook.Close();
-        }
+        public void Close() => MapedWorkbook.Close();
 
-        ICellStyle IWorkbook.CreateCellStyle()
-        {
-            return MapedWorkbook.CreateCellStyle();
-        }
+        ICellStyle IWorkbook.CreateCellStyle() => MapedWorkbook.CreateCellStyle();
 
-        IDataFormat IWorkbook.CreateDataFormat()
-        {
-            return MapedWorkbook.CreateDataFormat();
-        }
+        IDataFormat IWorkbook.CreateDataFormat() => MapedWorkbook.CreateDataFormat();
 
-        public IFont CreateFont()
-        {
-            return MapedWorkbook.CreateFont();
-        }
+        public IFont CreateFont() => MapedWorkbook.CreateFont();
 
-        public IName CreateName()
-        {
-            return MapedWorkbook.CreateName();
-        }
+        public IName CreateName() => MapedWorkbook.CreateName();
 
-        ISheet IWorkbook.CreateSheet()
-        {
-            return MapedWorkbook.CreateSheet();
-        }
-        public ExcelSheet CreateSheet()
-            => new ExcelSheet(this, MapedWorkbook.CreateSheet());
+        ISheet IWorkbook.CreateSheet() => MapedWorkbook.CreateSheet();
 
-        ISheet IWorkbook.CreateSheet(string sheetname)
-        {
-            return MapedWorkbook.CreateSheet(sheetname);
-        }
-        public ExcelSheet CreateSheet(string sheetname)
-            => new ExcelSheet(this, MapedWorkbook.CreateSheet(sheetname));
+        ISheet IWorkbook.CreateSheet(string sheetname) => MapedWorkbook.CreateSheet(sheetname);
 
         public IFont FindFont(short boldWeight, short color, short fontHeight, string name, bool italic, bool strikeout, FontSuperScript typeOffset, FontUnderlineType underline)
-        {
-            return MapedWorkbook.FindFont(boldWeight, color, fontHeight, name, italic, strikeout, typeOffset, underline);
-        }
+            => MapedWorkbook.FindFont(boldWeight, color, fontHeight, name, italic, strikeout, typeOffset, underline);
 
-        public IList GetAllPictures()
-        {
-            return MapedWorkbook.GetAllPictures();
-        }
+        public IList GetAllPictures() => MapedWorkbook.GetAllPictures();
 
-        public ICellStyle GetCellStyleAt(short idx)
-        {
-            return MapedWorkbook.GetCellStyleAt(idx);
-        }
+        public ICellStyle GetCellStyleAt(short idx) => MapedWorkbook.GetCellStyleAt(idx);
 
-        public ICreationHelper GetCreationHelper()
-        {
-            return MapedWorkbook.GetCreationHelper();
-        }
+        public ICreationHelper GetCreationHelper() => MapedWorkbook.GetCreationHelper();
 
-        public IEnumerator GetEnumerator()
-        {
-            return MapedWorkbook.GetEnumerator();
-        }
+        public IEnumerator GetEnumerator() => MapedWorkbook.GetEnumerator();
 
-        public IFont GetFontAt(short idx)
-        {
-            return MapedWorkbook.GetFontAt(idx);
-        }
+        public IFont GetFontAt(short idx) => MapedWorkbook.GetFontAt(idx);
 
-        public IName GetName(string name)
-        {
-            return MapedWorkbook.GetName(name);
-        }
+        public IName GetName(string name) => MapedWorkbook.GetName(name);
 
-        public IName GetNameAt(int nameIndex)
-        {
-            return MapedWorkbook.GetNameAt(nameIndex);
-        }
+        public IName GetNameAt(int nameIndex) => MapedWorkbook.GetNameAt(nameIndex);
 
-        public int GetNameIndex(string name)
-        {
-            return MapedWorkbook.GetNameIndex(name);
-        }
+        public int GetNameIndex(string name) => MapedWorkbook.GetNameIndex(name);
 
-        public string GetPrintArea(int sheetIndex)
-        {
-            return MapedWorkbook.GetPrintArea(sheetIndex);
-        }
+        public string GetPrintArea(int sheetIndex) => MapedWorkbook.GetPrintArea(sheetIndex);
 
-        public ExcelSheet GetSheet(string name)
-            => new ExcelSheet(this, MapedWorkbook.GetSheet(name));
-        ISheet IWorkbook.GetSheet(string name)
-        {
-            return MapedWorkbook.GetSheet(name);
-        }
+        ISheet IWorkbook.GetSheet(string name) => MapedWorkbook.GetSheet(name);
 
-        ISheet IWorkbook.GetSheetAt(int index)
-        {
-            return MapedWorkbook.GetSheetAt(index);
-        }
-        public ExcelSheet GetSheetAt(int index)
-            => new ExcelSheet(this, MapedWorkbook.GetSheetAt(index));
+        ISheet IWorkbook.GetSheetAt(int index) => MapedWorkbook.GetSheetAt(index);
 
-        public int GetSheetIndex(string name)
-        {
-            return MapedWorkbook.GetSheetIndex(name);
-        }
+        public int GetSheetIndex(string name) => MapedWorkbook.GetSheetIndex(name);
 
-        public int GetSheetIndex(ISheet sheet)
-        {
-            return MapedWorkbook.GetSheetIndex(sheet);
-        }
-        public int GetSheetIndex(ExcelSheet sheet) => GetSheetIndex(sheet.SheetName);
+        public int GetSheetIndex(ISheet sheet) => MapedWorkbook.GetSheetIndex(sheet);
 
-        public string GetSheetName(int sheet)
-        {
-            return MapedWorkbook.GetSheetName(sheet);
-        }
+        public string GetSheetName(int sheet) => MapedWorkbook.GetSheetName(sheet);
 
-        public bool IsSheetHidden(int sheetIx)
-        {
-            return MapedWorkbook.IsSheetHidden(sheetIx);
-        }
+        public bool IsSheetHidden(int sheetIx) => MapedWorkbook.IsSheetHidden(sheetIx);
 
-        public bool IsSheetVeryHidden(int sheetIx)
-        {
-            return MapedWorkbook.IsSheetVeryHidden(sheetIx);
-        }
+        public bool IsSheetVeryHidden(int sheetIx) => MapedWorkbook.IsSheetVeryHidden(sheetIx);
 
-        public int LinkExternalWorkbook(string name, IWorkbook workbook)
-        {
-            return MapedWorkbook.LinkExternalWorkbook(name, workbook);
-        }
+        public int LinkExternalWorkbook(string name, IWorkbook workbook) => MapedWorkbook.LinkExternalWorkbook(name, workbook);
 
-        public void RemoveName(int index)
-        {
-            MapedWorkbook.RemoveName(index);
-        }
+        public void RemoveName(int index) => MapedWorkbook.RemoveName(index);
 
-        public void RemoveName(string name)
-        {
-            MapedWorkbook.RemoveName(name);
-        }
+        public void RemoveName(string name) => MapedWorkbook.RemoveName(name);
 
-        public void RemovePrintArea(int sheetIndex)
-        {
-            MapedWorkbook.RemovePrintArea(sheetIndex);
-        }
+        public void RemovePrintArea(int sheetIndex) => MapedWorkbook.RemovePrintArea(sheetIndex);
 
-        public void RemoveSheetAt(int index)
-        {
-            MapedWorkbook.RemoveSheetAt(index);
-        }
+        public void RemoveSheetAt(int index) => MapedWorkbook.RemoveSheetAt(index);
 
-        public void SetActiveSheet(int sheetIndex)
-        {
-            MapedWorkbook.SetActiveSheet(sheetIndex);
-        }
+        public void SetActiveSheet(int sheetIndex) => MapedWorkbook.SetActiveSheet(sheetIndex);
 
-        public void SetPrintArea(int sheetIndex, string reference)
-        {
-            MapedWorkbook.SetPrintArea(sheetIndex, reference);
-        }
+        public void SetPrintArea(int sheetIndex, string reference) => MapedWorkbook.SetPrintArea(sheetIndex, reference);
 
         public void SetPrintArea(int sheetIndex, int startColumn, int endColumn, int startRow, int endRow)
-        {
-            MapedWorkbook.SetPrintArea(sheetIndex, startColumn, endColumn, startRow, endRow);
-        }
+            => MapedWorkbook.SetPrintArea(sheetIndex, startColumn, endColumn, startRow, endRow);
 
         public void SetRepeatingRowsAndColumns(int sheetIndex, int startColumn, int endColumn, int startRow, int endRow)
-        {
 #pragma warning disable CS0618
-            MapedWorkbook.SetRepeatingRowsAndColumns(sheetIndex, startColumn, endColumn, startRow, endRow);
+             => MapedWorkbook.SetRepeatingRowsAndColumns(sheetIndex, startColumn, endColumn, startRow, endRow);
 #pragma warning restore CS0618
-        }
 
-        public void SetSelectedTab(int index)
-        {
-            MapedWorkbook.SetSelectedTab(index);
-        }
 
-        public void SetSheetHidden(int sheetIx, SheetState hidden)
-        {
-            MapedWorkbook.SetSheetHidden(sheetIx, hidden);
-        }
+        public void SetSelectedTab(int index) => MapedWorkbook.SetSelectedTab(index);
 
-        public void SetSheetHidden(int sheetIx, int hidden)
-        {
-            MapedWorkbook.SetSheetHidden(sheetIx, hidden);
-        }
+        public void SetSheetHidden(int sheetIx, SheetState hidden) => MapedWorkbook.SetSheetHidden(sheetIx, hidden);
 
-        public void RenameSheet(string oldName, string newName)
-        {
-            SetSheetName(GetSheetIndex(oldName), newName);
-        }
+        public void SetSheetHidden(int sheetIx, int hidden) => MapedWorkbook.SetSheetHidden(sheetIx, hidden);
 
-        public void SetSheetName(int sheet, string name)
-        {
-            MapedWorkbook.SetSheetName(sheet, name);
-        }
+        public void RenameSheet(string oldName, string newName) => SetSheetName(GetSheetIndex(oldName), newName);
 
-        public void SetSheetOrder(string sheetname, int pos)
-        {
-            MapedWorkbook.SetSheetOrder(sheetname, pos);
-        }
+        public void SetSheetName(int sheet, string name) => MapedWorkbook.SetSheetName(sheet, name);
 
-        public void Write(Stream stream)
-        {
-            MapedWorkbook.Write(stream);
-        }
+        public void SetSheetOrder(string sheetname, int pos) => MapedWorkbook.SetSheetOrder(sheetname, pos);
+
+        public void Write(Stream stream) => MapedWorkbook.Write(stream);
     }
 }

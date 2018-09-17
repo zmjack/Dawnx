@@ -18,13 +18,15 @@ namespace Dawnx.NPOI
         public int ColumnLengh => End.col - Start.col + 1;
         public SheetCell Cell => Sheet[Start];
 
-        public bool IsFullRowRange => ColumnLengh == 1;
-        public bool IsFullColumnRange => RowLength == 1;
+        public bool IsSingleRow => RowLength == 1;
+        public bool IsSingleColumn => ColumnLengh == 1;
 
         public bool IsInRange(SheetCell cell)
-            => Start.row <= cell.RowIndex && cell.RowIndex <= End.row && Start.col <= cell.ColumnIndex && End.col <= cell.ColumnIndex;
-        public bool IsDefinitionCell(SheetCell cell)
-            => cell.RowIndex == Start.row && cell.ColumnIndex == Start.col;
+        {
+            return Start.row <= cell.RowIndex && cell.RowIndex <= End.row
+                && Start.col <= cell.ColumnIndex && cell.ColumnIndex <= End.col;
+        }
+        public bool IsDefinitionCell(SheetCell cell) => cell.RowIndex == Start.row && cell.ColumnIndex == Start.col;
 
         public SheetRange(ExcelSheet sheet, (int row, int col) start, (int row, int col) end)
         {

@@ -66,17 +66,14 @@ namespace Dawnx.NPOI
 
         public RGBColor FontColor
         {
-            get => Font.Index > 0 ? RGBColor.ParseIndexed(Font.Index)
+            get => Font.Color > 0 ? RGBColor.ParseIndexed(Font.Color)
                 : (Font as XSSFFont)?.GetXSSFColor()?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (Font is XSSFFont)
-                        (Font as XSSFFont).SetColor(new XSSFColor(value.Bytes));
-                    else Font.Color = RGBColor.Automatic.Index;
-                }
-                else Font.Color = value.Index;
+                Font.Color = value.Index;
+                if (Font is XSSFFont)
+                    (Font as XSSFFont).SetColor(
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes));
             }
         }
 

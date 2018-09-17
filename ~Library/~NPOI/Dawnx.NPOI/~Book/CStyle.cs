@@ -50,13 +50,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.LeftBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).SetLeftBorderColor(new XSSFColor(value.Bytes));
-                    else CellStyle.LeftBorderColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.LeftBorderColor = value.Index;
+                CellStyle.LeftBorderColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).SetLeftBorderColor(
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes));
             }
         }
 
@@ -71,13 +68,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.RightBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).SetRightBorderColor(new XSSFColor(value.Bytes));
-                    else CellStyle.RightBorderColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.RightBorderColor = value.Index;
+                CellStyle.RightBorderColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).SetRightBorderColor(
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes));
             }
         }
 
@@ -92,13 +86,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.TopBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).SetTopBorderColor(new XSSFColor(value.Bytes));
-                    else CellStyle.TopBorderColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.TopBorderColor = value.Index;
+                CellStyle.TopBorderColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).SetTopBorderColor(
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes));
             }
         }
 
@@ -113,13 +104,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.BottomBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).SetBottomBorderColor(new XSSFColor(value.Bytes));
-                    else CellStyle.BottomBorderColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.BottomBorderColor = value.Index;
+                CellStyle.BottomBorderColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).SetBottomBorderColor(
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes));
             }
         }
 
@@ -134,13 +122,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.DiagonalBorderXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).SetDiagonalBorderColor(new XSSFColor(value.Bytes));
-                    else CellStyle.BorderDiagonalColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.BorderDiagonalColor = value.Index;
+                CellStyle.BorderDiagonalColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).SetDiagonalBorderColor(
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes));
             }
         }
         public BorderDiagonal BorderDiagonal
@@ -163,13 +148,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.FillBackgroundXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).FillBackgroundXSSFColor = new XSSFColor(value.Bytes);
-                    else CellStyle.FillBackgroundColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.FillBackgroundColor = value.Index;
+                CellStyle.FillBackgroundColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).FillBackgroundXSSFColor =
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes);
             }
         }
 
@@ -179,13 +161,10 @@ namespace Dawnx.NPOI
                 : (CellStyle as XSSFCellStyle)?.FillForegroundXSSFColor?.RGB?.For(_ => new RGBColor(_)) ?? RGBColor.Automatic;
             set
             {
-                if (value.Index == 0)
-                {
-                    if (CellStyle is XSSFCellStyle)
-                        (CellStyle as XSSFCellStyle).FillForegroundXSSFColor = new XSSFColor(value.Bytes);
-                    else CellStyle.FillForegroundColor = RGBColor.Automatic.Index;
-                }
-                else CellStyle.FillForegroundColor = value.Index;
+                CellStyle.FillForegroundColor = value.Index;
+                if (CellStyle is XSSFCellStyle)
+                    (CellStyle as XSSFCellStyle).FillForegroundXSSFColor =
+                        value.Index == RGBColor.AutomaticIndex ? null : new XSSFColor(value.Bytes);
             }
         }
         #endregion

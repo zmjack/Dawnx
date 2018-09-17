@@ -287,7 +287,7 @@ namespace Dawnx.NPOI
                 for (int row = 0; row <= LastRowNum; row++)
                 {
                     var cell = this[(row, col)];
-                    if (cell.MergedRange?.For(_ => _.IsFullRowRange && !_.IsDefinitionCell(cell)) ?? false) continue;
+                    if (cell.MergedRange?.For(_ => !_.IsSingleColumn || !_.IsDefinitionCell(cell)) ?? false) continue;
 
                     var cstyle = cell.GetCStyle();
                     var value = cell.GetValue();

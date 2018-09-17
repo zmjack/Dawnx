@@ -80,14 +80,17 @@ namespace Dawnx.NPOI
         public CStyleApplier TopBorder(BorderStyle borderStyle = BorderStyle.Thin) { BorderTop = borderStyle; return this; }
         public CStyleApplier BottomBorder(BorderStyle borderStyle = BorderStyle.Thin) { BorderBottom = borderStyle; return this; }
 
-        public CStyleApplier CellColor(int foregroundColor) => CellColor(new RGBColor(foregroundColor));
-        public CStyleApplier CellColor(int foregroundColor, int backgroundColor, FillPattern pattern) => CellColor(new RGBColor(foregroundColor), new RGBColor(backgroundColor), pattern);
-        public CStyleApplier CellColor(RGBColor foregroundColor) { FillForegroundColor = foregroundColor; FillPattern = FillPattern.SolidForeground; return this; }
+        public CStyleApplier CellColor(RGBColor foregroundColor)
+            => CellColor(foregroundColor, RGBColor.Automatic, FillPattern.SolidForeground);
         public CStyleApplier CellColor(RGBColor foregroundColor, RGBColor backgroundColor, FillPattern pattern)
         {
             FillForegroundColor = foregroundColor;
             FillBackgroundColor = backgroundColor;
-            FillPattern = pattern;
+
+            if (foregroundColor.Index == RGBColor.AutomaticIndex && backgroundColor.Index == RGBColor.AutomaticIndex)
+                FillPattern = FillPattern.NoFill;
+            else FillPattern = pattern;
+
             return this;
         }
 

@@ -100,9 +100,9 @@ namespace Dawnx.NPOI.Test
 
             sheet[(0, 0)].SetValue("Hyproca 1897 Mama\r\nº£ÆÕÅµ¿­1897ÂèÂè");
 
-            sheet["A1", "B2"].Merge();
-            var aa = sheet["A1", "B2"][(0, 0)].MapedCell;
+            var style_content = book.CStyle(x => x.Center().CellColor(new RGBColor(220, 230, 241)).SetFont("ºÚÌå", 10, RGBColor.Black).FullBorder());
 
+            sheet["A1"].SetCStyle(style_content);
             book.SaveAs("1.xlsx");
         }
 

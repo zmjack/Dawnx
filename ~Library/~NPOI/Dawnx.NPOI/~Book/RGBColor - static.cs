@@ -3,6 +3,8 @@ namespace Dawnx.NPOI
 {
     public partial class RGBColor
     {
+        public static short AutomaticIndex = 64;
+
         public static RGBColor Black = new RGBColor(0x000000) { Index = 8 };
         public static RGBColor White = new RGBColor(0xffffff) { Index = 9 };
         public static RGBColor Red = new RGBColor(0xff0000) { Index = 10 };

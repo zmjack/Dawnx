@@ -54,14 +54,14 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="stop"></param>
         /// <returns></returns>
-        public static T[] Slice<T>(this T[] @this, int start, int end)
+        public static T[] Slice<T>(this T[] @this, int start, int stop)
         {
             start = GetElementPosition(ref @this, start);
-            end = GetElementPosition(ref @this, end);
+            stop = GetElementPosition(ref @this, stop);
 
-            var length = end - start;
+            var length = stop - start;
             if (length > 0)
             {
                 var ret = new T[length];
@@ -69,7 +69,7 @@ namespace Dawnx
                 return ret;
             }
             else if (length == 0) return new T[0];
-            else throw new IndexOutOfRangeException($"'start:{start}' can not greater than 'end:{end}'.");
+            else throw new IndexOutOfRangeException($"'{nameof(start)}:{start}' can not greater than '{nameof(stop)}:{stop}'.");
         }
         private static int GetElementPosition<T>(ref T[] str, int pos) => pos < 0 ? str.Length + pos : pos;
 

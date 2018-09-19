@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Dawnx
+namespace Dawnx.IO
 {
     public static class SequenceInputStream
     {

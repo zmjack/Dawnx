@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using Dawnx.Security.Aes;
+using System.IO;
 using System.Security.Cryptography;
+using SystemAes = System.Security.Cryptography.Aes;
 
 namespace Dawnx.Security
 {
@@ -7,15 +9,15 @@ namespace Dawnx.Security
     {
         public static readonly byte[] EMPTY_IV = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-        public static void FromBase64String(this Aes @this, string base64Key)
+        public static void FromBase64String(this SystemAes @this, string base64Key)
             => @this.Key = base64Key.BytesFromBase64();
-        public static string ToBase64String(this Aes @this) => @this.Key.Base64String();
+        public static string ToBase64String(this SystemAes @this) => @this.Key.Base64String();
 
-        public static void FromHexString(this Aes @this, string hexKey)
+        public static void FromHexString(this SystemAes @this, string hexKey)
             => @this.Key = hexKey.BytesFromHex();
-        public static string ToHexString(this Aes @this) => @this.Key.HexString();
+        public static string ToHexString(this SystemAes @this) => @this.Key.HexString();
 
-        public static void SetEmptyIV(this Aes @this) => @this.IV = EMPTY_IV;
+        public static void SetEmptyIV(this SystemAes @this) => @this.IV = EMPTY_IV;
 
         /// <summary>
         /// </summary>
@@ -23,7 +25,7 @@ namespace Dawnx.Security
         /// <param name="data"></param>
         /// <param name="key">'key' must be 128 bits(16 bytes) or 192 bits (24 bytes) or 256 bits(32 bytes).</param>
         /// <returns></returns>
-        public static byte[] Encrypt<TAesCombiner>(this Aes @this, byte[] data)
+        public static byte[] Encrypt<TAesCombiner>(this SystemAes @this, byte[] data)
             where TAesCombiner : IAesCombiner, new()
         {
             var combiner = new TAesCombiner().Self(_ => _.Init(@this));
@@ -39,14 +41,14 @@ namespace Dawnx.Security
             var ciphertext = encryptor_memory.ToArray();
             return combiner.Combine(ciphertext, iv);
         }
-        public static byte[] Encrypt(this Aes @this, byte[] data)
+        public static byte[] Encrypt(this SystemAes @this, byte[] data)
         {
             if (@this.Mode == CipherMode.ECB)
                 return Encrypt<AesEmptyIVCombiner>(@this, data);
             else return Encrypt<AesDefaultCombiner>(@this, data);
         }
 
-        public static byte[] Decrypt<TAesCombiner>(this Aes @this, byte[] data)
+        public static byte[] Decrypt<TAesCombiner>(this SystemAes @this, byte[] data)
             where TAesCombiner : IAesCombiner, new()
         {
             var combiner = new TAesCombiner().Self(_ => _.Init(@this));
@@ -69,7 +71,7 @@ namespace Dawnx.Security
                 return data_memory.ToArray();
             }
         }
-        public static byte[] Decrypt(this Aes @this, byte[] data)
+        public static byte[] Decrypt(this SystemAes @this, byte[] data)
         {
             if (@this.Mode == CipherMode.ECB)
                 return Decrypt<AesEmptyIVCombiner>(@this, data);

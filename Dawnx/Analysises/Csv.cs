@@ -1,9 +1,7 @@
 ﻿using Dawnx.Reflection;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Reflection;
 
 namespace Dawnx.Analysises
 {

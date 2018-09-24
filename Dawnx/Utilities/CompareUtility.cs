@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Utilities
+﻿namespace Dawnx.Utilities
 {
     public static class CompareUtility
     {

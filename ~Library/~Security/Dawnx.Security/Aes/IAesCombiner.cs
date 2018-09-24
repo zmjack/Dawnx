@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using SystemAes = System.Security.Cryptography.Aes;
+﻿using SystemAes = System.Security.Cryptography.Aes;
 
 namespace Dawnx.Security.AesSecurity
 {

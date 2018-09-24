@@ -1,6 +1,4 @@
-﻿using NPOI.SS.UserModel;
-
-namespace Dawnx.NPOI
+﻿namespace Dawnx.NPOI
 {
     public class CValue
     {

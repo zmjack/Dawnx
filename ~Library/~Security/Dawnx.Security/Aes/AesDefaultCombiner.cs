@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Security.Cryptography;
 using SystemAes = System.Security.Cryptography.Aes;
 
 namespace Dawnx.Security.AesSecurity

@@ -83,7 +83,7 @@
             </summary>
             <param name="this"></param>
             <param name="start"></param>
-            <param name="end"></param>
+            <param name="stop"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnArray.Shuffle``1(``0[])">

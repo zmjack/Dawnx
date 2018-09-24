@@ -11,14 +11,7 @@ namespace Dawnx
         public static string DisplayName(this Enum @this)
         {
             var field = @this.GetType().GetFields().First(x => x.Name == @this.ToString());
-
-            var displayNameAttr = field.GetCustomAttribute<DisplayNameAttribute>();
-            if (displayNameAttr != null) return displayNameAttr.DisplayName;
-
-            var displayAttr = field.GetCustomAttribute<DisplayAttribute>();
-            if (displayAttr != null) return displayAttr.Name;
-
-            return @this.ToString();
+            return NetCompatibility.GetDisplayNameFromAttribute(field);
         }
 
     }

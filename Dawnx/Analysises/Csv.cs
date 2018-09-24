@@ -52,13 +52,8 @@ namespace Dawnx.Analysises
 
             for (int j = 0; j < Titles.Length; j++)
             {
-                var prop = props.FirstOrDefault(p =>
-                {
-                    var attr = p.GetCustomAttribute<DisplayNameAttribute>(false);
-                    if (attr != null)
-                        return (attr as DisplayNameAttribute).DisplayName == Titles[j];
-                    else return p.Name == Titles[j];
-                });
+                var prop = props.FirstOrDefault(
+                    p => NetCompatibility.GetDisplayNameFromAttribute(p) == Titles[j]);
 
                 if (prop != null)
                 {

@@ -11,7 +11,7 @@ namespace Dawnx.Tools
     {
         public static void Gcs(string jsonFile)
         {
-            if (!ConsoleUtility.ConfirmUseOnlineService()) return;
+            if (!AlertUtility.ConfirmUseOnlineService()) return;
             Console.WriteLine("Connect to dawnx service...");
 
             var respJson = Web.Post($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
@@ -33,7 +33,7 @@ namespace Dawnx.Tools
                 Console.WriteLine($"{resp.message}");
                 Console.WriteLine($"  File Saved: {Path.GetFullPath(outFile)}");
             }
-            else ConsoleUtility.PrintErrorMessage(resp);
+            else AlertUtility.PrintErrorMessage(resp);
         }
 
     }

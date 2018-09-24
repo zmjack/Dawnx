@@ -85,7 +85,7 @@ namespace Dawnx.Tools
                                     else
                                     {
                                         Console.WriteLine($"  File can not be downloaded from {url}");
-                                        if (ConsoleUtility.AskYN("Retry?"))
+                                        if (AlertUtility.AskYN("Retry?"))
                                         {
                                             retry = 0;
                                             goto retry;
@@ -134,7 +134,7 @@ namespace Dawnx.Tools
                     Console.WriteLine($"---- All files has been downloaded using engine Dawnx.Net.Http.Web ----{Environment.NewLine}");
 
                     // Setup
-                    if (ConsoleUtility.AskYN("Setup now?"))
+                    if (AlertUtility.AskYN("Setup now?"))
                     {
                         Console.WriteLine();
                         foreach (var file in extractFileList)
@@ -147,7 +147,7 @@ namespace Dawnx.Tools
                 }
                 else Console.WriteLine($"Install service requires the lowest cli tool version: {cli_version}.");
             }
-            else ConsoleUtility.PrintErrorMessage(resp);
+            else AlertUtility.PrintErrorMessage(resp);
         }
 
     }

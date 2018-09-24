@@ -17,16 +17,7 @@ namespace Dawnx.AspNetCore
             return new SelectList(fields.Select(field => new
             {
                 Value = field.Name,
-                Text = field.For(_ =>
-                {
-                    var displayNameAttr = _.GetCustomAttribute<DisplayNameAttribute>();
-                    if (displayNameAttr != null) return displayNameAttr.DisplayName;
-
-                    var displayAttr = _.GetCustomAttribute<DisplayAttribute>();
-                    if (displayAttr != null) return displayAttr.Name;
-
-                    return field.Name;
-                }),
+                Text = NetCompatibility.GetDisplayNameFromAttribute(field),
             }), "Value", "Text");
         }
 
@@ -36,16 +27,7 @@ namespace Dawnx.AspNetCore
             return new SelectList(fields.Select(field => new
             {
                 Value = field.Name,
-                Text = field.For(_ =>
-                {
-                    var displayNameAttr = _.GetCustomAttribute<DisplayNameAttribute>();
-                    if (displayNameAttr != null) return displayNameAttr.DisplayName;
-
-                    var displayAttr = _.GetCustomAttribute<DisplayAttribute>();
-                    if (displayAttr != null) return displayAttr.Name;
-
-                    return field.Name;
-                }),
+                Text = NetCompatibility.GetDisplayNameFromAttribute(field),
             }), "Value", "Text", @enum.ToString());
         }
 

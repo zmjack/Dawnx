@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using SystemAes = System.Security.Cryptography.Aes;
 
-namespace Dawnx.Security.Aes
+namespace Dawnx.Security.AesSecurity
 {
     public class AesEmptyIVCombiner : IAesCombiner
     {

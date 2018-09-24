@@ -18,11 +18,26 @@ namespace Dawnx
         public static int GetConsoleLength(string text)
         {
             int ret = 0;
+            bool @continue = false;
             foreach (var ch in text)
             {
                 if (ch < 128) ret += 1;
-                else ret += 2;
+                else { ret += 2; }
             }
+            return ret;
+        }
+
+        /// <summary>
+        /// Gets the count of double bytes char.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static int GetCountOfDoubleBytesChar(string text)
+        {
+            int ret = 0;
+            bool @continue = false;
+            foreach (var ch in text)
+                if (ch >= 128) ret++;
             return ret;
         }
 
@@ -53,10 +68,15 @@ namespace Dawnx
                         if (!((value as ConsoleValue).ForegroundColor is null))
                             Console.ForegroundColor = (value as ConsoleValue).ForegroundColor.Value;
 
-                        Console.Write((value as ConsoleValue).Value.PadRight(lengths[i]));
+                        var svalue = (value as ConsoleValue).Value;
+                        Console.Write(svalue.PadRight(lengths[i] - GetCountOfDoubleBytesChar(svalue)));
                         Console.ResetColor();
                     }
-                    else Console.Write(value.ToString().PadRight(lengths[i]));
+                    else
+                    {
+                        var svalue = value.ToString();
+                        Console.Write(svalue.PadRight(lengths[i] - GetCountOfDoubleBytesChar(svalue)));
+                    }
 
                     Console.Write(TABLE_CELL_PADDING);
                 }
@@ -71,6 +91,11 @@ namespace Dawnx
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Prints console table for models.
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="models"></param>
         public static void PrintTable<TModel>(IEnumerable<TModel> models)
         {
             var props = typeof(TModel).GetProperties();

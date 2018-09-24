@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Dawnx.Tools
+namespace Dawnx
 {
-    public static class ConsoleUtility
+    public class ConsoleUtility
     {
+        private const string TABLE_CELL_PADDING = " ";
+        private const int TABLE_CELL_PADDING_LENGTH = 1;
+
         /// <summary>
         /// Gets the console length.
         /// </summary>
@@ -24,74 +27,50 @@ namespace Dawnx.Tools
         }
 
         /// <summary>
-        /// Prints table line, like ┌┬┐(specified by the format value).
-        /// </summary>
-        /// <param name="lengths"></param>
-        /// <param name="format"></param>
-        public static void PrintTableLine(int[] lengths, string format)
-            => Console.WriteLine(GetTableLine(lengths, format));
-
-        /// <summary>
-        /// Prints table line, like ┌┬┐(specified by the format value).
-        /// </summary>
-        /// <param name="lengths"></param>
-        /// <param name="format"></param>
-        public static void PrintTableLine(int[] lengths, string format, string[] data)
-            => Console.WriteLine(GetTableLine(lengths, format, data));
-
-        /// <summary>
         /// Gets table line, like ┌┬┐(specified by the format value).
         /// </summary>
         /// <param name="lengths"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public static string GetTableLine(int[] lengths, string format)
+        private static void PrintTableLine(int[] lengths, string format, object[] data = null)
         {
             var ubound = lengths.GetUpperBound(0);
-            var line = new StringBuilder();
 
             for (int i = 0; i < lengths.Length; i++)
             {
-                if (i == 0) line.Append(format[0]);
-                else line.Append(format[1]);
+                if (i == 0) Console.Write(format[0]);
+                else Console.Write(format[1]);
 
-                line.Append(" " + "─".Times(lengths[i]));
+                if (!(data is null))
+                {
+                    Console.Write(TABLE_CELL_PADDING);
 
-                if (i == ubound) line.Append(format[2]);
+                    var value = data[i];
+                    if (value is ConsoleValue)
+                    {
+                        if (!((value as ConsoleValue).BackgroundColor is null))
+                            Console.BackgroundColor = (value as ConsoleValue).BackgroundColor.Value;
+                        if (!((value as ConsoleValue).ForegroundColor is null))
+                            Console.ForegroundColor = (value as ConsoleValue).ForegroundColor.Value;
+
+                        Console.Write((value as ConsoleValue).Value.PadRight(lengths[i]));
+                        Console.ResetColor();
+                    }
+                    else Console.Write(value.ToString().PadRight(lengths[i]));
+
+                    Console.Write(TABLE_CELL_PADDING);
+                }
+                else
+                {
+                    Console.Write("─".Times(lengths[i] + TABLE_CELL_PADDING_LENGTH * 2));
+                }
+
+                if (i == ubound) Console.Write(format[2]);
             }
 
-            return line.ToString();
+            Console.WriteLine();
         }
 
-        /// <summary>
-        /// Gets table line, like ┌┬┐(specified by the format value).
-        /// </summary>
-        /// <param name="lengths"></param>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public static string GetTableLine(int[] lengths, string format, string[] data)
-        {
-            var ubound = lengths.GetUpperBound(0);
-            var line = new StringBuilder();
-
-            for (int i = 0; i < lengths.Length; i++)
-            {
-                if (i == 0) line.Append(format[0]);
-                else line.Append(format[1]);
-
-                line.Append(" " + data[i].PadRight(lengths[i]));
-
-                if (i == ubound) line.Append(format[2]);
-            }
-
-            return line.ToString();
-        }
-
-        /// <summary>
-        /// Prints console table.
-        /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <param name="models"></param>
         public static void PrintTable<TModel>(IEnumerable<TModel> models)
         {
             var props = typeof(TModel).GetProperties();
@@ -100,7 +79,7 @@ namespace Dawnx.Tools
 
             //calculate lengths of each column
             foreach (var prop in props.AsVI())
-                lengths[prop.Index] = GetConsoleLength(NetCompatibility.GetDisplayNameFromAttribute(prop.Value));
+                lengths[prop.Index] = GetConsoleLength(prop.Value.Name);
 
             foreach (var prop in props.AsVI())
             {
@@ -114,15 +93,20 @@ namespace Dawnx.Tools
 
             //print lines
             PrintTableLine(lengths, "┌┬┐");
-            PrintTableLine(lengths, "│││", props.Select(x => x.Name).ToArray());
+            PrintTableLine(lengths, "│││", props.Select(x => new ConsoleValue
+            {
+                ForegroundColor = ConsoleColor.Cyan,
+                Value = x.Name,
+            }).ToArray());
 
             if (models.Any())
                 PrintTableLine(lengths, "├┼┤");
 
             foreach (var model in models)
-                PrintTableLine(lengths, "│││", props.Select(x => x.GetValue(model).ToString()).ToArray());
+                PrintTableLine(lengths, "│││", props.Select(x => x.GetValue(model)).ToArray());
 
             PrintTableLine(lengths, "└┴┘");
         }
+
     }
 }

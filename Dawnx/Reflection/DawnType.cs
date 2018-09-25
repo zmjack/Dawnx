@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Dawnx
+namespace Dawnx.Reflection
 {
-    public static class DawnType
+    public static class Reflection_DawnType
     {
         public static MethodInfo GetMethodViaFormatName(this Type @this, string formatName)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Dawnx
 {
-    public static class DawnObject
+    public static partial class DawnObject
     {
         /// <summary>
         /// Do a task for itself.
@@ -49,22 +49,6 @@ namespace Dawnx
         /// <returns></returns>
         public static bool In<TSource>(this TSource @this, IEnumerable<TSource> sequence)
             => sequence.Contains(@this);
-
-        /// <summary>
-        /// This function is equal to '@this as T'.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="this"></param>
-        /// <returns></returns>
-        public static T As<T>(this object @this) where T : class => @this as T;
-
-        /// <summary>
-        /// This function is equal to '(T)@this'.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="this"></param>
-        /// <returns></returns>
-        public static T CastTo<T>(this object @this) => (T)(dynamic)@this;
-
+        
     }
 }

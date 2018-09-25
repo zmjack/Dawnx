@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace Dawnx.AspNetCore
 {
@@ -15,13 +16,7 @@ namespace Dawnx.AspNetCore
             if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
-            //TODO: It will be optimized in the future, if this class is included in the standard library.
-            var displayNameAttrType = exp.Member.GetCustomAttributes(false)
-                .FirstOrDefault(x => x.GetType().FullName == "System.ComponentModel.DataAnnotations.DisplayAttribute");
-
-            if (displayNameAttrType != null)
-                return ((dynamic)displayNameAttrType).Name as string;
-            else return exp.Member.Name;
+            return NetCompatibility.GetDisplayNameFromAttribute(exp.Member);
         }
 
         public static string DisplayShortName<TRet>(Expression<Func<TModel, TRet>> expression)
@@ -30,15 +25,8 @@ namespace Dawnx.AspNetCore
             if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
-            //TODO: It will be optimized in the future, if this class is included in the standard library.
-            var displayNameAttrType = exp.Member.GetCustomAttributes(false)
-                .FirstOrDefault(x => x.GetType().FullName == "System.ComponentModel.DataAnnotations.DisplayAttribute");
-
-            if (displayNameAttrType != null)
-                return ((dynamic)displayNameAttrType).Name as string;
-            else return exp.Member.Name;
+            return exp.Member.GetCustomAttribute<DisplayAttribute>()?.ShortName ?? exp.Member.Name;
         }
-
 
     }
 }

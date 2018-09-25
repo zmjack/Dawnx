@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using Xunit;
 using System.Text;
 using Dawnx.Generators;
+using Dawnx.Security.AesSecurity;
 
 namespace Dawnx.Security.Test
 {

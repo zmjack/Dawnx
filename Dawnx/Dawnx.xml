@@ -606,22 +606,6 @@
             <param name="enumerable"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnObject.As``1(System.Object)">
-            <summary>
-            This function is equal to '@this as T'.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnObject.CastTo``1(System.Object)">
-            <summary>
-            This function is equal to '(T)@this'.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.DawnString.Bytes(System.String)">
             <summary>
             Encodes all the characters in the specified string into a sequence of bytes(UTF-8), then returns it.

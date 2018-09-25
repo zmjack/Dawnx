@@ -1,4 +1,3 @@
-using System.Xml;
 using Xunit;
 
 namespace Dawnx.Tools.Test

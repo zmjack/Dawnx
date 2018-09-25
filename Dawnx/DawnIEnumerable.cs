@@ -103,6 +103,13 @@ namespace Dawnx
         public static PagedEnumerable<TSource> SelectPage<TSource>(this IEnumerable<TSource> @this, int pageNumber, int pageSize)
             => new PagedEnumerable<TSource>(@this, pageNumber, pageSize, (int)Math.Ceiling((double)@this.Count() / pageSize));
 
+        /// <summary>
+        /// Concatenates the members of a collection, using the specified separator between each member.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public static string Join<TSource>(this IEnumerable<TSource> @this, string separator) => string.Join(separator, @this);
 
         /// <summary>

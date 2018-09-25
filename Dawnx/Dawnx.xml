@@ -83,7 +83,7 @@
             </summary>
             <param name="this"></param>
             <param name="start"></param>
-            <param name="end"></param>
+            <param name="stop"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnArray.Shuffle``1(``0[])">
@@ -237,6 +237,15 @@
             <param name="this"></param>
             <param name="pageNumber">'pageNumber' starts at 1</param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Join``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Concatenates the members of a collection, using the specified separator between each member.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="separator"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">

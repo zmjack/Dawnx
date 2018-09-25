@@ -1,11 +1,5 @@
-using Dawnx.Utilities;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using Xunit;
 
 namespace Dawnx.NPOI.Test

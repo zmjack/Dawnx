@@ -1,10 +1,6 @@
 ﻿using Dawnx.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dawnx.Test.Utilities

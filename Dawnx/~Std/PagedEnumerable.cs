@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,11 +14,11 @@ namespace Dawnx
         public bool IsFristPage => PageNumber == 1;
         public bool IsLastPage => PageNumber == PageCount;
 
-        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize, int pageCount)
+        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize)
         {
             PageNumber = page;
             PageSize = pageSize;
-            PageCount = pageCount;
+            PageCount = source.PageCount(pageSize);
             Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
         }
 

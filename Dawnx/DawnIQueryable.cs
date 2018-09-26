@@ -31,7 +31,17 @@ namespace Dawnx
         /// <param name="pageSize"></param>
         /// <returns></returns>
         public static PagedQueryable<TSource> SelectPage<TSource>(this IQueryable<TSource> @this, int pageNumber, int pageSize)
-            => new PagedQueryable<TSource>(@this, pageNumber, pageSize, (int)Math.Ceiling((double)@this.Count() / pageSize));
+            => new PagedQueryable<TSource>(@this, pageNumber, pageSize);
+
+        /// <summary>
+        /// Calculates the max page number through the specified page size.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static int PageCount<TSource>(this IQueryable<TSource> @this, int pageSize)
+            => (int)Math.Ceiling((double)@this.Count() / pageSize);
     }
 
 }

@@ -19,11 +19,11 @@ namespace Dawnx
         public Expression Expression => Items.Expression;
         public IQueryProvider Provider => Items.Provider;
 
-        public PagedQueryable(IQueryable<T> source, int page, int pageSize, int pageCount)
+        public PagedQueryable(IQueryable<T> source, int page, int pageSize)
         {
             PageNumber = page;
             PageSize = pageSize;
-            PageCount = pageCount;
+            PageCount = source.PageCount(pageSize);
             Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
         }
 

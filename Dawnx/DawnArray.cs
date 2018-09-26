@@ -103,7 +103,7 @@ namespace Dawnx
         /// <param name="pageSize"></param>
         /// <returns></returns>
         public static PagedEnumerable<TSource> SelectPage<TSource>(this TSource[] @this, int pageNumber, int pageSize)
-            => new PagedEnumerable<TSource>(@this, pageNumber, pageSize, (int)Math.Ceiling((double)@this.Length / pageSize));
+            => new PagedEnumerable<TSource>(@this, pageNumber, pageSize);
 
     }
 }

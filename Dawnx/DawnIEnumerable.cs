@@ -101,7 +101,26 @@ namespace Dawnx
         /// <param name="pageSize"></param>
         /// <returns></returns>
         public static PagedEnumerable<TSource> SelectPage<TSource>(this IEnumerable<TSource> @this, int pageNumber, int pageSize)
-            => new PagedEnumerable<TSource>(@this, pageNumber, pageSize, (int)Math.Ceiling((double)@this.Count() / pageSize));
+            => new PagedEnumerable<TSource>(@this, pageNumber, pageSize);
+
+        /// <summary>
+        /// Calculates the max page number through the specified page size.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static int PageCount<TSource>(this IEnumerable<TSource> @this, int pageSize)
+        {
+            int count = 0;
+            switch (@this)
+            {
+                case TSource[] array: count = array.Length; break;
+                case ICollection<TSource> collection: count = collection.Count; break;
+                default: count = @this.Count(); break;
+            }
+            return (int)Math.Ceiling((double)count / pageSize);
+        }
 
         /// <summary>
         /// Concatenates the members of a collection, using the specified separator between each member.

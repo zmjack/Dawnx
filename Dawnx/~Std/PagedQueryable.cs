@@ -1,19 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Dawnx
 {
-    public class PagedEnumerable<T> : IPageable<T>, IEnumerable<T>
+    public class PagedQueryable<T> : IPageable<T>, IQueryable<T>
     {
-        public IEnumerable<T> Items;
+        public IQueryable<T> Items;
         public int PageNumber { get; private set; }
         public int PageSize { get; private set; }
         public int PageCount { get; private set; }
         public bool IsFristPage => PageNumber == 1;
         public bool IsLastPage => PageNumber == PageCount;
 
-        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize, int pageCount)
+        public Type ElementType => Items.ElementType;
+        public Expression Expression => Items.Expression;
+        public IQueryProvider Provider => Items.Provider;
+
+        public PagedQueryable(IQueryable<T> source, int page, int pageSize, int pageCount)
         {
             PageNumber = page;
             PageSize = pageSize;

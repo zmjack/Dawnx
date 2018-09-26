@@ -22,6 +22,16 @@ namespace Dawnx
         public static IQueryable<TEntity> WhereSearch<TEntity>(this IQueryable<TEntity> @this, string searchString, Expression<Func<TEntity, object>> searchMembers)
             => @this.WhereStrategy(new SearchStrategy<TEntity>(searchString, searchMembers));
 
+        /// <summary>
+        /// Projects page elements of a sequence into a new form.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="pageNumber">'pageNumber' starts at 1</param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static PagedQueryable<TSource> SelectPage<TSource>(this IQueryable<TSource> @this, int pageNumber, int pageSize)
+            => new PagedQueryable<TSource>(@this, pageNumber, pageSize, (int)Math.Ceiling((double)@this.Count() / pageSize));
     }
 
 }

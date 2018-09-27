@@ -1035,6 +1035,14 @@
             <param name="excludes">Specifies properties that aren't applied to the source model.</param>
             <returns></returns>
         </member>
+        <member name="T:Dawnx.SqlScope`3">
+            <summary>
+            Easy to use and secure SQL Executor
+            </summary>
+            <typeparam name="TDbConnection"></typeparam>
+            <typeparam name="TDbCommand"></typeparam>
+            <typeparam name="TDbParameter"></typeparam>
+        </member>
         <member name="M:Dawnx.Range.Create(System.Int32)">
             <summary>
             The range type represents an immutable sequence of numbers

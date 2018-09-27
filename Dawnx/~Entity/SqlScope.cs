@@ -6,6 +6,12 @@ using System.Data.Common;
 
 namespace Dawnx
 {
+    /// <summary>
+    /// Easy to use and secure SQL Executor
+    /// </summary>
+    /// <typeparam name="TDbConnection"></typeparam>
+    /// <typeparam name="TDbCommand"></typeparam>
+    /// <typeparam name="TDbParameter"></typeparam>
     public abstract class SqlScope<TDbConnection, TDbCommand, TDbParameter>
         : Scope<TDbConnection, SqlScope<TDbConnection, TDbCommand, TDbParameter>>
         where TDbConnection : DbConnection

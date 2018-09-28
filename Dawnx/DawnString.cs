@@ -154,6 +154,7 @@ namespace Dawnx
         /// <returns></returns>
         public static string NormalizeNewLine(this string @this)
         {
+            //TODO: Is \r allowed ?
             switch (Environment.NewLine)
             {
                 case "\r\n":
@@ -195,6 +196,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Unique(this string @this) => new Regex(@"[\s]{2,}").Replace(@this.Trim(), " ");
+        public static string Unique(this string @this) 
+            => new Regex(@"[\s]{2,}").Replace(@this.NormalizeNewLine().Replace(Environment.NewLine, " ").Trim(), " ");
     }
 }

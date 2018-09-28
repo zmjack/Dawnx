@@ -71,6 +71,8 @@ namespace Dawnx.Test
         {
             Assert.Equal("123 456 7890", "  123  456    7890 ".Unique());
             Assert.Equal("123 456 7890", "  123  456 7890".Unique());
+            Assert.Equal("123 456 7890", "  123\r\n456 7890".Unique());
+            Assert.Equal("123 456 7890", "  123\r\n 456 7890".Unique());
         }
 
     }

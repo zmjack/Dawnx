@@ -11,10 +11,18 @@ namespace Dawnx.AspNetCore.Test
     {
         public class VModel : IViewModel<VModel>
         {
+            public enum ESex
+            {
+                [Display(Name = "Man")] Male,
+                [Display(Name = "Woman")] Female,
+            }
+
             [Display(Name = "Street Name")]
             public string Street { get; set; }
 
             public string Name { get; set; }
+
+            public ESex Sex { get; set; }
 
             [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
             public DateTime RentStartDate { get; set; }
@@ -41,11 +49,10 @@ namespace Dawnx.AspNetCore.Test
 
             Assert.Equal("Street Name", model.DisplayName(_ => _.Street));
             Assert.Equal("Name", model.DisplayName(_ => _.Name));
+            Assert.Equal("Man", model.Display(_ => _.Sex));
 
             Assert.Equal("2018-01-02", model.Display(_ => _.RentStartDate));
             Assert.Equal("20180102112233", model.Display(_ => _.RentEndDate));
-
-            Assert.Equal("", model.Display(_ => _.Link.Street));
 
             Assert.Equal("Street Name", models.DisplayName(_ => _.Street));
 

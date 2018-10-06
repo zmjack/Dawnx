@@ -22,15 +22,15 @@ namespace Dawnx.Utilities
             return memberInfo.Name;
         }
 
-        public static string GetDisplayString(object obj, string propOrFieldName, string defaultReturn = "")
+        public static string GetDisplayString(object model, string propOrFieldName, string defaultReturn = "")
         {
-            var parameter = Expression.Parameter(obj.GetType());
+            var parameter = Expression.Parameter(model.GetType());
             var property = Expression.PropertyOrField(parameter, propOrFieldName);
             var lambda = Expression.Lambda(property, parameter);
-            return GetDisplayString(obj, lambda, defaultReturn);
+            return GetDisplayString(model, lambda, defaultReturn);
         }
 
-        public static string GetDisplayString(object obj, LambdaExpression expression, string defaultReturn = "")
+        public static string GetDisplayString(object model, LambdaExpression expression, string defaultReturn = "")
         {
             var exp = expression.Body as MemberExpression;
             if (exp is null)
@@ -39,7 +39,7 @@ namespace Dawnx.Utilities
             object value;
             try
             {
-                value = expression.Compile().DynamicInvoke(new object[] { obj });
+                value = expression.Compile().DynamicInvoke(new object[] { model });
             }
             catch { value = null; }
 

@@ -8,7 +8,7 @@ namespace Dawnx
         public static string DisplayName(this Enum @this)
         {
             var field = @this.GetType().GetFields().First(x => x.Name == @this.ToString());
-            return NetCompatibility.GetDisplayNameFromAttribute(field);
+            return DataAnnotationUtility.GetDisplayNameFromAttribute(field);
         }
 
     }

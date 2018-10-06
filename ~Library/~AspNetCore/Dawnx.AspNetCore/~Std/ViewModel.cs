@@ -16,7 +16,7 @@ namespace Dawnx.AspNetCore
             if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
-            return NetCompatibility.GetDisplayNameFromAttribute(exp.Member);
+            return DataAnnotationUtility.GetDisplayNameFromAttribute(exp.Member);
         }
 
         public static string DisplayShortName<TRet>(Expression<Func<TModel, TRet>> expression)

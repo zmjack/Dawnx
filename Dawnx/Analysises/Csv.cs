@@ -51,7 +51,7 @@ namespace Dawnx.Analysises
             for (int j = 0; j < Titles.Length; j++)
             {
                 var prop = props.FirstOrDefault(
-                    p => NetCompatibility.GetDisplayNameFromAttribute(p) == Titles[j]);
+                    p => DataAnnotationUtility.GetDisplayNameFromAttribute(p) == Titles[j]);
 
                 if (prop != null)
                 {

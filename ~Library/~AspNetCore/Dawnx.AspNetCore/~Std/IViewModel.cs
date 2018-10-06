@@ -66,7 +66,7 @@ namespace Dawnx.AspNetCore
                 else
                 {
                     if (value.GetType().BaseType.FullName == "System.Enum")
-                        return NetCompatibility.GetDisplayNameFromAttribute(
+                        return DataAnnotationUtility.GetDisplayNameFromAttribute(
                             value.GetType().GetFields().First(x => x.Name == value.ToString()));
                     else return value.ToString();
                 }

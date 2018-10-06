@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using Dawnx.Utilities;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Dawnx.AspNetCore
             return new SelectList(fields.Select(field => new
             {
                 Value = field.Name,
-                Text = NetCompatibility.GetDisplayNameFromAttribute(field),
+                Text = DataAnnotationUtility.GetDisplayName(field),
             }), "Value", "Text");
         }
 
@@ -24,7 +25,7 @@ namespace Dawnx.AspNetCore
             return new SelectList(fields.Select(field => new
             {
                 Value = field.Name,
-                Text = NetCompatibility.GetDisplayNameFromAttribute(field),
+                Text = DataAnnotationUtility.GetDisplayName(field),
             }), "Value", "Text", @enum.ToString());
         }
 

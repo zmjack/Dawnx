@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Dawnx
+namespace Dawnx.Utilities
 {
-    public static class NetCompatibility
+    public static class DataAnnotationUtility
     {
-        public static string GetDisplayNameFromAttribute(MemberInfo memberInfo, bool inherit = true)
+        public static string GetDisplayName(MemberInfo memberInfo, bool inherit = true)
         {
             var attr_DispalyName = memberInfo.GetCustomAttribute<DisplayNameAttribute>(inherit);
             if (attr_DispalyName != null)

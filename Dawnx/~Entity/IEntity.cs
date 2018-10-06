@@ -12,7 +12,7 @@ namespace Dawnx
     /// </summary>
     public interface IEntity { }
 
-    public static class DawnIEntity
+    public static partial class DawnIEntity
     {
         /// <summary>
         /// Accept all property values which are can be read and write from another model.
@@ -139,18 +139,25 @@ namespace Dawnx
             return @this;
         }
 
-        public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this)
-            where TEntity : class, IEntity<TEntity>, new()
+        public static void SetValue(this IEntity @this, string propName, object value)
+            => @this.GetType().GetProperty(propName).SetValue(@this, value);
+        public static object GetValue(this IEntity @this, string propName)
+            => @this.GetType().GetProperty(propName).GetValue(@this);
+
+        public static string Display(this IEntity @this, LambdaExpression expression, string defaultReturn = "")
+            => DataAnnotationUtility.GetDisplayString(@this, expression, defaultReturn);
+
+        public static Dictionary<string, string> ToDisplayDictionary(this IEntity @this)
         {
             // Filter
-            var type = typeof(TEntity);
+            var type = @this.GetType();
             var props = type.GetProperties();
 
             // Copy Values
             var ret = new Dictionary<string, string>();
             foreach (var prop in props)
             {
-                var parameter = Expression.Parameter(typeof(TEntity));
+                var parameter = Expression.Parameter(type);
                 var property = Expression.Property(parameter, prop.Name);
                 var lambda = Expression.Lambda(property, parameter);
 
@@ -160,39 +167,17 @@ namespace Dawnx
             return ret;
         }
 
-        public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this, Expression<Func<TEntity, object>> includes)
-            where TEntity : class, IEntity<TEntity>, new()
+        public static Dictionary<string, string> ToDisplayDictionary(this IEntity @this, params string[] propNames)
         {
-            string[] propNames;
-            switch (includes.Body)
-            {
-                case MemberExpression exp:
-                    propNames = new[] { exp.Member.Name };
-                    break;
-
-                case NewExpression exp:
-                    propNames = exp.Members.Select(x => x.Name).ToArray();
-                    break;
-
-                default:
-                    throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
-            }
-
             // Filter
-            var type = typeof(TEntity);
+            var type = @this.GetType();
             var props = type.GetProperties()
                 .Where(a => propNames.Contains(a.Name));
 
             // Copy Values
             var ret = new Dictionary<string, string>();
             foreach (var prop in props)
-            {
-                var parameter = Expression.Parameter(typeof(TEntity));
-                var property = Expression.Property(parameter, prop.Name);
-                var lambda = Expression.Lambda(property, parameter);
-
-                ret.Add(prop.Name, @this.Display(lambda));
-            }
+                ret.Add(prop.Name, DataAnnotationUtility.GetDisplayString(@this, prop.Name));
 
             return ret;
         }

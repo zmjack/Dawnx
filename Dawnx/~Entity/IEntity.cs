@@ -1,5 +1,6 @@
 ﻿using Dawnx.Utilities;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -32,7 +33,7 @@ namespace Dawnx
                     return attrs.Any(attr => attr is NotAcceptable)
                         || attrs.Any(attr => attr.GetType().Name.In(new[]
                         {
-                            "KeyAttribute",
+                            nameof(KeyAttribute),
                             nameof(TrackCreationTimeAttribute),
                             nameof(TrackLastWriteTimeAttribute)
                         }));
@@ -121,7 +122,7 @@ namespace Dawnx
                     return attrs.Any(attr => attr is NotAcceptable)
                         || attrs.Any(attr => attr.GetType().Name.In(new[]
                         {
-                            "KeyAttribute",
+                            nameof(KeyAttribute),
                             nameof(TrackCreationTimeAttribute),
                             nameof(TrackLastWriteTimeAttribute)
                         }));

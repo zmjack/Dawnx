@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Linq;
 
 namespace Dawnx
@@ -8,7 +9,7 @@ namespace Dawnx
         public static string DisplayName(this Enum @this)
         {
             var field = @this.GetType().GetFields().First(x => x.Name == @this.ToString());
-            return DataAnnotationUtility.GetDisplayNameFromAttribute(field);
+            return DataAnnotationUtility.GetDisplayName(field);
         }
 
     }

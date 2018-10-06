@@ -9,7 +9,7 @@ namespace Dawnx.AspNetCore.Test
 {
     public class IViewModelTest
     {
-        public class VModel : IViewModel<VModel>
+        public class VModel : IEntity<VModel>
         {
             public enum ESex
             {

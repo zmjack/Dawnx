@@ -2,8 +2,9 @@
 using System.Linq.Expressions;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using Dawnx.Utilities;
 
-namespace Dawnx.AspNetCore
+namespace Dawnx
 {
     public static class ViewModel<TModel>
         where TModel : new()
@@ -16,7 +17,7 @@ namespace Dawnx.AspNetCore
             if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
-            return DataAnnotationUtility.GetDisplayNameFromAttribute(exp.Member);
+            return DataAnnotationUtility.GetDisplayName(exp.Member);
         }
 
         public static string DisplayShortName<TRet>(Expression<Func<TModel, TRet>> expression)

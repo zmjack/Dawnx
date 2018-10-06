@@ -1,4 +1,5 @@
 ﻿using Dawnx.Reflection;
+using Dawnx.Utilities;
 using System;
 using System.Data;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace Dawnx.Analysises
             for (int j = 0; j < Titles.Length; j++)
             {
                 var prop = props.FirstOrDefault(
-                    p => DataAnnotationUtility.GetDisplayNameFromAttribute(p) == Titles[j]);
+                    p => DataAnnotationUtility.GetDisplayName(p) == Titles[j]);
 
                 if (prop != null)
                 {

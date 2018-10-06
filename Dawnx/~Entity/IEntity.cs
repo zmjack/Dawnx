@@ -1,5 +1,6 @@
 ﻿using Dawnx.Utilities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -24,7 +25,7 @@ namespace Dawnx
         public static TEntity Accept<TEntity>(this TEntity @this, TEntity model)
             where TEntity : class, IEntity
         {
-            //Filter
+            // Filter
             var type = typeof(TEntity);
             var props = type.GetProperties()
                 .Where(x => x.CanRead && x.CanWrite)
@@ -40,9 +41,9 @@ namespace Dawnx
                 }))
                 .Where(x => x.PropertyType.FullName.In(BasicTypeUtility.AllFullNames) || x.PropertyType.IsValueType);
 
-            //Copy values
+            // Copy values
             foreach (var prop in props)
-                prop.SetValue(@this, prop.GetValue(model, null), null);
+                prop.SetValue(@this, prop.GetValue(model), null);
 
             return @this;
         }
@@ -73,14 +74,14 @@ namespace Dawnx
                     throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
             }
 
-            //Filter
+            // Filter
             var type = typeof(TEntity);
             var props = type.GetProperties()
                 .Where(a => propNames.Contains(a.Name));
 
-            //Copy values
+            // Copy values
             foreach (var prop in props)
-                prop.SetValue(@this, prop.GetValue(model, null), null);
+                prop.SetValue(@this, prop.GetValue(model), null);
 
             return @this;
         }
@@ -113,7 +114,7 @@ namespace Dawnx
                     throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
             }
 
-            //Filter
+            // Filter
             var type = typeof(TEntity);
             var props = type.GetProperties()
                 .Where(x => x.CanRead && x.CanWrite)
@@ -131,11 +132,69 @@ namespace Dawnx
 
             props = props.Where(x => !propNames.Contains(x.Name));
 
-            //Copy values
+            // Copy values
             foreach (var prop in props)
-                prop.SetValue(@this, prop.GetValue(model, null), null);
+                prop.SetValue(@this, prop.GetValue(model), null);
 
             return @this;
+        }
+
+        public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this)
+            where TEntity : class, IEntity<TEntity>, new()
+        {
+            // Filter
+            var type = typeof(TEntity);
+            var props = type.GetProperties();
+
+            // Copy Values
+            var ret = new Dictionary<string, string>();
+            foreach (var prop in props)
+            {
+                var parameter = Expression.Parameter(typeof(TEntity));
+                var property = Expression.Property(parameter, prop.Name);
+                var lambda = Expression.Lambda(property, parameter);
+
+                ret.Add(prop.Name, @this.Display(lambda));
+            }
+
+            return ret;
+        }
+
+        public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this, Expression<Func<TEntity, object>> includes)
+            where TEntity : class, IEntity<TEntity>, new()
+        {
+            string[] propNames;
+            switch (includes.Body)
+            {
+                case MemberExpression exp:
+                    propNames = new[] { exp.Member.Name };
+                    break;
+
+                case NewExpression exp:
+                    propNames = exp.Members.Select(x => x.Name).ToArray();
+                    break;
+
+                default:
+                    throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
+            }
+
+            // Filter
+            var type = typeof(TEntity);
+            var props = type.GetProperties()
+                .Where(a => propNames.Contains(a.Name));
+
+            // Copy Values
+            var ret = new Dictionary<string, string>();
+            foreach (var prop in props)
+            {
+                var parameter = Expression.Parameter(typeof(TEntity));
+                var property = Expression.Property(parameter, prop.Name);
+                var lambda = Expression.Lambda(property, parameter);
+
+                ret.Add(prop.Name, @this.Display(lambda));
+            }
+
+            return ret;
         }
 
     }

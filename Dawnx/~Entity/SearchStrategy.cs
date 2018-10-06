@@ -26,7 +26,6 @@ namespace Dawnx
                     return Expression.Call(anyMethod, leftExp, lambda);
                 }
                 else throw new NotSupportedException();
-
             }), searchString ?? "", searchMembers)
         {
         }

@@ -15,30 +15,36 @@ namespace Dawnx
 
     public static class DawnIEntity_T
     {
-        public static string DisplayName<TModel, TRet>(this IEnumerable<IEntity<TModel>> @this, Expression<Func<TModel, TRet>> expression)
-            where TModel : class, IEntity<TModel>, new()
-            => ViewModel<TModel>.DisplayName(expression);
-        public static string DisplayName<TModel, TRet>(this IEntity<TModel> @this, Expression<Func<TModel, TRet>> expression)
-            where TModel : class, IEntity<TModel>, new()
-            => ViewModel<TModel>.DisplayName(expression);
+        public static string DisplayName<TEntity, TRet>(this IEnumerable<IEntity<TEntity>> @this, Expression<Func<TEntity, TRet>> expression)
+            where TEntity : class, IEntity<TEntity>, new()
+            => ViewModel<TEntity>.DisplayName(expression);
+        public static string DisplayName<TEntity, TRet>(this IEntity<TEntity> @this, Expression<Func<TEntity, TRet>> expression)
+            where TEntity : class, IEntity<TEntity>, new()
+            => ViewModel<TEntity>.DisplayName(expression);
 
-        public static string DisplayShortName<TModel, TRet>(this IEnumerable<IEntity<TModel>> @this, Expression<Func<TModel, TRet>> expression)
-            where TModel : class, IEntity<TModel>, new()
-            => ViewModel<TModel>.DisplayShortName(expression);
-        public static string DisplayShortName<TModel, TRet>(this IEntity<TModel> @this, Expression<Func<TModel, TRet>> expression)
-            where TModel : class, IEntity<TModel>, new()
-            => ViewModel<TModel>.DisplayShortName(expression);
+        public static string DisplayShortName<TEntity, TRet>(this IEnumerable<IEntity<TEntity>> @this, Expression<Func<TEntity, TRet>> expression)
+            where TEntity : class, IEntity<TEntity>, new()
+            => ViewModel<TEntity>.DisplayShortName(expression);
+        public static string DisplayShortName<TEntity, TRet>(this IEntity<TEntity> @this, Expression<Func<TEntity, TRet>> expression)
+            where TEntity : class, IEntity<TEntity>, new()
+            => ViewModel<TEntity>.DisplayShortName(expression);
 
-        public static string Display<TModel, TRet>(this IEntity<TModel> @this, Expression<Func<TModel, TRet>> expression, string defaultReturn = "")
-            where TModel : class, IEntity<TModel>, new()
+        public static string Display<TEntity, TRet>(this IEntity<TEntity> @this, Expression<Func<TEntity, TRet>> expression, string defaultReturn = "")
+            where TEntity : class, IEntity<TEntity>, new()
+            => Display<TEntity>(@this, expression as LambdaExpression, defaultReturn);
+        public static string Display<TEntity>(this IEntity<TEntity> @this, LambdaExpression expression, string defaultReturn = "")
+            where TEntity : class, IEntity<TEntity>, new()
         {
             var exp = expression.Body as MemberExpression;
             if (exp is null)
                 throw new NotSupportedException("This argument 'expression' must be MemberExpression.");
 
-            TRet value;
-            try { value = expression.Compile()(@this as TModel); }
-            catch { value = default(TRet); }
+            object value;
+            try
+            {
+                value = expression.Compile().DynamicInvoke(new object[] { @this as TEntity });
+            }
+            catch { value = null; }
 
             if (value != null)
             {
@@ -75,13 +81,13 @@ namespace Dawnx
             else return defaultReturn;
         }
 
-        public static void SetValue<TModel>(this IEntity<TModel> @this, string propName, object value)
-            where TModel : class, IEntity<TModel>, new()
-            => ViewModel<TModel>.InstanceType.GetProperty(propName).SetValue(@this, value);
+        public static void SetValue<TEntity>(this IEntity<TEntity> @this, string propName, object value)
+            where TEntity : class, IEntity<TEntity>, new()
+            => ViewModel<TEntity>.InstanceType.GetProperty(propName).SetValue(@this, value);
 
-        public static object GetValue<TModel>(this IEntity<TModel> @this, string propName)
-            where TModel : class, IEntity<TModel>, new()
-            => ViewModel<TModel>.InstanceType.GetProperty(propName).GetValue(@this);
+        public static object GetValue<TEntity>(this IEntity<TEntity> @this, string propName)
+            where TEntity : class, IEntity<TEntity>, new()
+            => ViewModel<TEntity>.InstanceType.GetProperty(propName).GetValue(@this);
 
     }
 }

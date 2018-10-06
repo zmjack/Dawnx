@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Dawnx.AspNetCore.Test
 {
-    public class IViewModelTest
+    public class IEntityTest
     {
         public class VModel : IEntity<VModel>
         {
@@ -34,29 +34,6 @@ namespace Dawnx.AspNetCore.Test
             public DateTime? Reservation { get; set; }
 
             public VModel Link { get; set; }
-        }
-
-        [Fact]
-        public void Test1()
-        {
-            var model = new VModel()
-            {
-                RentStartDate = DateTime.Parse("2018-1-2 11:22:33"),
-                RentEndDate = DateTime.Parse("2018-1-2 11:22:33"),
-            };
-
-            var models = new VModel[0] as IEnumerable<VModel>;
-
-            Assert.Equal("Street Name", model.DisplayName(_ => _.Street));
-            Assert.Equal("Name", model.DisplayName(_ => _.Name));
-            Assert.Equal("Man", model.Display(_ => _.Sex));
-
-            Assert.Equal("2018-01-02", model.Display(_ => _.RentStartDate));
-            Assert.Equal("20180102112233", model.Display(_ => _.RentEndDate));
-
-            Assert.Equal("Street Name", models.DisplayName(_ => _.Street));
-
-            Assert.Equal("", model.Display(_ => _.Reservation));
         }
 
         [Fact]

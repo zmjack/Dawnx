@@ -8,9 +8,9 @@ namespace Dawnx.Utilities
 {
     public static class RegexUtility
     {
-        public static readonly string ChineseChars = "[\u4e00-\u9fa5]";
-        public static readonly string KoreanChars = "[\uac00-\ud7ff]";
-        public static readonly string JapanChars = "[\u0800-\u4e00]";
+        public static readonly string ChineseChars = @"[\u4e00-\u9fa5]";
+        public static readonly string KoreanChars = @"[\uac00-\ud7ff]";
+        public static readonly string JapanChars = @"[\u0800-\u4e00]";
 
         /// <summary>
         /// Compile IPv4RangeRegexExp to Regex.

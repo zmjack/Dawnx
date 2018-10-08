@@ -52,8 +52,8 @@ namespace Dawnx
             }
             reader.Close();
         }
-        
-        public TDbCommand SqlCommand(FormattableString formattableSql)
+
+        protected TDbCommand SqlCommand(FormattableString formattableSql)
         {
             var values = formattableSql.GetArguments();
             var sql = formattableSql.Format;

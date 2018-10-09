@@ -1,4 +1,4 @@
-﻿namespace Dawnx
+﻿namespace Dawnx.Enums
 {
     public static class ControlChars
     {

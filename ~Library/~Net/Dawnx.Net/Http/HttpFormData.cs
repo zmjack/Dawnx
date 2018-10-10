@@ -1,4 +1,5 @@
-﻿using Dawnx.IO;
+﻿using Dawnx.Enums;
+using Dawnx.IO;
 using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;

@@ -25,6 +25,9 @@ namespace Dawnx.NPOI
 
         public ExcelSheet(ExcelBook excel, ISheet sheet)
         {
+            if (sheet is null)
+                throw new ArgumentException("Cannot find sheet.");
+
             Book = excel;
             MapedSheet = sheet;
             Cursor = (0, 0);

@@ -12,8 +12,7 @@ namespace Dawnx.Test._Std
         {
             public override int StateTransfer(int n)
             {
-                if (n == 1) return 1;
-                if (n == 2) return 2;
+                if (n == 0 || n == 1) return 1;
                 return this[n - 1] + this[n - 2];
             }
         }

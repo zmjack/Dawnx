@@ -7,12 +7,14 @@ namespace Dawnx
 {
     public class PagedEnumerable<T> : IPageable<T>, IEnumerable<T>
     {
-        public IEnumerable<T> Items;
-        public int PageNumber { get; private set; }
-        public int PageSize { get; private set; }
-        public int PageCount { get; private set; }
+        public IEnumerable<T> Items { get; protected set; }
+        public int PageNumber { get; protected set; }
+        public int PageSize { get; protected set; }
+        public int PageCount { get; protected set; }
         public bool IsFristPage => PageNumber == 1;
         public bool IsLastPage => PageNumber == PageCount;
+
+        protected PagedEnumerable() { }
 
         public PagedEnumerable(IEnumerable<T> source, int page, int pageSize)
         {

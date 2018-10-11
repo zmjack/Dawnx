@@ -6,18 +6,11 @@ using System.Linq.Expressions;
 
 namespace Dawnx
 {
-    public class PagedQueryable<T> : IPageable<T>, IQueryable<T>
+    public class PagedQueryable<T> : PagedEnumerable<T>, IQueryable<T>
     {
-        public IQueryable<T> Items;
-        public int PageNumber { get; private set; }
-        public int PageSize { get; private set; }
-        public int PageCount { get; private set; }
-        public bool IsFristPage => PageNumber == 1;
-        public bool IsLastPage => PageNumber == PageCount;
-
-        public Type ElementType => Items.ElementType;
-        public Expression Expression => Items.Expression;
-        public IQueryProvider Provider => Items.Provider;
+        public Type ElementType => (Items as IQueryable<T>).ElementType;
+        public Expression Expression => (Items as IQueryable<T>).Expression;
+        public IQueryProvider Provider => (Items as IQueryable<T>).Provider;
 
         public PagedQueryable(IQueryable<T> source, int page, int pageSize)
         {
@@ -27,8 +20,6 @@ namespace Dawnx
             Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
         }
 
-        public IEnumerator<T> GetEnumerator() => Items.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
     }
 
 }

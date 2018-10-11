@@ -15,6 +15,7 @@ namespace Dawnx
 
     public interface IPageable<T> : IPageable, IEnumerable<T>
     {
+        IEnumerable<T> Items { get; }
     }
 
 }

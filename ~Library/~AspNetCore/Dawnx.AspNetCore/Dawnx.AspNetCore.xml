@@ -99,6 +99,27 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnObject.Json(System.Object)">
+            <summary>
+            Serializes the specified object to a JSON string.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnString.GetFromJson``1(System.String)">
+            <summary>
+            Deserializes the JSON to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnString.GetFromJson(System.String)">
+            <summary>
+            Deserializes the JSON to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
             <summary>
             Gets user's menu from the tree.
@@ -125,27 +146,6 @@
             <summary>
             If necessary, carry a data model 
             </summary>
-        </member>
-        <member name="M:Dawnx.DawnObject.Json(System.Object)">
-            <summary>
-            Serializes the specified object to a JSON string.
-            </summary>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnString.GetFromJson``1(System.String)">
-            <summary>
-            Deserializes the JSON to a .NET object.
-            </summary>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnString.GetFromJson(System.String)">
-            <summary>
-            Deserializes the JSON to a .NET object.
-            </summary>
-            <param name="this"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

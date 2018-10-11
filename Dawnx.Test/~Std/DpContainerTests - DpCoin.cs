@@ -4,19 +4,10 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Dawnx.Test._Std
+namespace Dawnx.Test
 {
-    public class DpContainerTests
+    public partial class DpContainerTests
     {
-        public class DpFeb : DpContainer<int, int>
-        {
-            public override int StateTransfer(int n)
-            {
-                if (n == 0 || n == 1) return 1;
-                return this[n - 1] + this[n - 2];
-            }
-        }
-
         public class DpCoin : DpContainer<int, (int CoinCount, int[] Coins)>
         {
             private int[] CoinValues = new[] { 1, 2, 4, 5 };
@@ -31,12 +22,6 @@ namespace Dawnx.Test._Std
                     .First();
                 return this[n - take_v].For(_ => (_.CoinCount + 1, _.Coins.Concat(new[] { take_v }).ToArray()));
             }
-        }
-
-        [Fact]
-        public void DpFebTest()
-        {
-            Assert.Equal(1836311903, new DpFeb()[45]);
         }
 
         [Fact]

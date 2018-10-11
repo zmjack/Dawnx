@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Dawnx
+namespace Dawnx.AspNetCore
 {
     public static partial class DawnObject
     {

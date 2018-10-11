@@ -4,5 +4,26 @@
         <name>Dawnx.Net</name>
     </assembly>
     <members>
+        <member name="M:Dawnx.Net.Http.IResponseProcessor.Process(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            If this method cannot determine response, it should be return null.
+            </summary>
+            <param name="web"></param>
+            <param name="response"></param>
+            <param name="method"></param>
+            <param name="enctype"></param>
+            <param name="url"></param>
+            <param name="updata"></param>
+            <param name="upfiles"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Net.Http.LoginProcessor.LoginProcess(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse)">
+            <summary>
+            If this method cannot determine response, it should be return null.
+            </summary>
+            <param name="web"></param>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

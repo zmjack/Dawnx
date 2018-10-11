@@ -10,10 +10,18 @@ namespace Dawnx.Test
     {
         public class DpCoin : DpContainer<int, (int CoinCount, int[] Coins)>
         {
-            private int[] CoinValues = new[] { 1, 2, 4, 5 };
+            public int[] CoinValues { get; private set; }
+
+            public DpCoin(int[] coinValues)
+            {
+                CoinValues = CoinValues;
+            }
 
             public override (int CoinCount, int[] Coins) StateTransfer(int n)
             {
+                // dp(n) = 0                    if  n=0
+                // dp(n) = min[d(n-v) + 1]      if  n-v>=0, v={CoinValues}
+
                 if (n == 0) return (0, new int[0]);
 
                 var take_v = CoinValues
@@ -27,9 +35,11 @@ namespace Dawnx.Test
         [Fact]
         public void DpCoinTest()
         {
-            var dpCoinResult = new DpCoin()[8];
-            Assert.Equal(2, dpCoinResult.CoinCount);
-            Assert.Equal(new[] { 4, 4 }, dpCoinResult.Coins);
+            var dpCoin = new DpCoin(new[] { 1, 2, 4, 5 });
+            var result8 = dpCoin[8];
+
+            Assert.Equal(2, result8.CoinCount);
+            Assert.Equal(new[] { 4, 4 }, result8.Coins);
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,27 +9,56 @@ namespace Dawnx.Test
 {
     public partial class DpContainerTests
     {
-        public class DpKnapsacks : DpContainer<int, int>
+        public class DpKnapsack : DpContainer<(int toGoods, int residualWeight), (int TotalValue, int[] GoodWeights)>
         {
-            private (int Size, int Value)[] Goods = new[]
-            {
-                (1, 2)
-            };
+            public (int Weight, int Value)[] Goods { get; private set; }
 
-            public override int StateTransfer(int n)
+            public DpKnapsack((int Weight, int Value)[] goods)
             {
-                //dp[i]=max(dp[i-c[j]])+w[j],dp[i])
-                if (n == 0 || n == 1) return 1;
-                return this[n - 1] + this[n - 2];
+                Goods = goods;
+            }
+
+            public (int TotalValue, int[] GoodWeights) this[int residualWeight]
+                => this[(Goods.Length - 1, residualWeight)];
+
+            public override (int TotalValue, int[] GoodWeights) StateTransfer((int toGoods, int residualWeight) pair)
+            {
+                // define: i as toGoods, j as knapsackWeight
+                // dp(i, j) = 0                                         if  i=0, j<w[0]
+                // dp(i, j) = v[0]                                      if  i=0, j>=w[0]
+                // dp(i, j) = dp(i-1, j)                                if  i>0, j-w[i]<0
+                // dp(i, j) = max(dp(i-1, j), dp(i-1, j-w[i]) + v[i])   if  i>0, j-w[i]>=0
+
+                int i = pair.toGoods, j = pair.residualWeight;
+
+                if (i == 0 && j < Goods[0].Weight) return (0, new int[0]);
+                if (i == 0 && j >= Goods[0].Weight) return (Goods[0].Value, new[] { Goods[0].Weight });
+                if (i > 0 && j - Goods[i].Weight < 0) return this[(i - 1, j)];
+
+                var choice = new[]
+                {
+                    (Take: false, TotalValue: this[(i - 1, j)].TotalValue),
+                    (Take: true, TotalValue: this[(i - 1, j - Goods[i].Weight)].TotalValue + Goods[i].Value),
+                }.WhereMax(x => x.TotalValue).First();
+
+                if (choice.Take)
+                    return (choice.TotalValue, this[(i - 1, j - Goods[i].Weight)].GoodWeights.Concat(new[] { Goods[i].Weight }).ToArray());
+                else return this[(i - 1, j)];
             }
         }
 
         [Fact]
         public void DpKnapsacksTest()
         {
-            var dpCoinResult = new DpCoin()[8];
-            Assert.Equal(2, dpCoinResult.CoinCount);
-            Assert.Equal(new[] { 4, 4 }, dpCoinResult.Coins);
+            var dpKnapsack = new DpKnapsack(new[] { (10, 60), (20, 100), (30, 120) });
+            var result30 = dpKnapsack[30];
+            var result50 = dpKnapsack[50];
+
+            Assert.Equal(160, result30.TotalValue);
+            Assert.Equal(new[] { 10, 20 }, result30.GoodWeights);
+
+            Assert.Equal(220, result50.TotalValue);
+            Assert.Equal(new[] { 20, 30 }, result50.GoodWeights);
         }
 
     }

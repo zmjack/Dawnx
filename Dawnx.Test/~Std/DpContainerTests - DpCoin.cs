@@ -20,7 +20,7 @@ namespace Dawnx.Test
             public override (int CoinCount, int[] Coins) StateTransfer(int n)
             {
                 // dp(n) = 0                    if  n=0
-                // dp(n) = min[d(n-v) + 1]      if  n-v>=0, v={CoinValues}
+                // dp(n) = min{v| d(n-v) + 1}      if  n-v>=0, v={CoinValues}
 
                 if (n == 0) return (0, new int[0]);
 

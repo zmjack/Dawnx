@@ -48,7 +48,7 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void DpKnapsacksTest()
+        public void DpKnapsackTest()
         {
             var dpKnapsack = new DpKnapsack(new[] { (10, 60), (20, 100), (30, 120) });
             var result30 = dpKnapsack[30];

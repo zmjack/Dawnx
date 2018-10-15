@@ -9,7 +9,7 @@ namespace Dawnx
     public static class ViewModel<TModel>
         where TModel : new()
     {
-        public static Type InstanceType = new TModel().GetType();
+        public static readonly Type InstanceType = typeof(TModel);
 
         public static string DisplayName<TRet>(Expression<Func<TModel, TRet>> expression)
         {

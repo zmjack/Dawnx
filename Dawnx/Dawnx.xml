@@ -694,7 +694,6 @@
             Converts the specified string into a Hex-encoded string(UTF-8).
             </summary>
             <param name="this"></param>
-            <param name="encoding"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.HexEncode(System.String,System.Text.Encoding)">
@@ -928,6 +927,22 @@
             If set 'strict', null string will be replaced by default of the source.
             </summary>
             <param name="strict"></param>
+        </member>
+        <member name="M:Dawnx.Utilities.Base64Utility.ConvertBase64ToUrlBase64(System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as url safe base-64 digits, to
+                an equivalent 8-bit unsigned integer array.
+            </summary>
+            <param name="base64"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.Base64Utility.ConvertUrlBase64ToBase64(System.String)">
+            <summary>
+            Converts an array of 8-bit unsigned integers to its equivalent string representation
+                that is encoded with url safe base-64 digits.
+            </summary>
+            <param name="urlBase64"></param>
+            <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.ColorUtility.CreateFromAhsv(System.Single,System.Single,System.Single)">
             <summary>

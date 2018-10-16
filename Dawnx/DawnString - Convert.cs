@@ -84,7 +84,6 @@ namespace Dawnx
         /// Converts the specified string into a Hex-encoded string(UTF-8).
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="encoding"></param>
         /// <returns></returns>
         public static string HexEncode(this string @this)
             => @this.Bytes(Encoding.UTF8).HexString();

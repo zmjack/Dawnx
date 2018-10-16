@@ -1,5 +1,6 @@
 using Dawnx.Enums;
 using Dawnx.Net.Http;
+using Dawnx.Net.Http.Processors;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,4 +1,5 @@
 ﻿using Dawnx.Enums;
+using Dawnx.Net.Http.Processors;
 using Dawnx.Utilities;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +11,7 @@ using System.Text;
 
 namespace Dawnx.Net.Http
 {
-    public class WebAccess
+    public partial class WebAccess
     {
         static WebAccess()
         {
@@ -25,8 +26,8 @@ namespace Dawnx.Net.Http
         public event ProgressHandler UploadProgress;
 
         public WebRequestStateContainer StateContainer { get; private set; }
-        public LinkedList<IResponseProcessor> ResponseProcessors { get; private set; }
-            = new LinkedList<IResponseProcessor>().Self(_ => _.AddLast(new RedirectProcessor()));
+        public LinkedList<IProcessor> ResponseProcessors { get; private set; }
+            = new LinkedList<IProcessor>().Self(_ => _.AddLast(new RedirectProcessor()));
 
         public WebAccess() : this(new WebRequestStateContainer()) { }
         public WebAccess(WebRequestStateContainer config)
@@ -36,29 +37,29 @@ namespace Dawnx.Net.Http
             else StateContainer = new WebRequestStateContainer();
         }
 
-        private LinkedListNode<IResponseProcessor> FindProcessorNode(string processorFullName)
+        private LinkedListNode<IProcessor> FindProcessorNode(string processorFullName)
         {
             for (var node = ResponseProcessors.First; node != null; node = node.Next)
                 if (node.Value.GetType().FullName == processorFullName) return node;
             return null;
         }
 
-        public void AddProcessor(IResponseProcessor processor)
+        public void AddProcessor(IProcessor processor)
         {
             var findNode = FindProcessorNode(processor.GetType().FullName);
             if (findNode is null)
                 ResponseProcessors.AddLast(processor);
             else throw new ArgumentException("Only one processor can be added for each type.");
         }
-        public void AddProcessorBefore<TFindProcessor>(IResponseProcessor processor)
-            where TFindProcessor : IResponseProcessor
+        public void AddProcessorBefore<TFindProcessor>(IProcessor processor)
+            where TFindProcessor : IProcessor
         {
             var findNode = FindProcessorNode(processor.GetType().FullName);
             if (findNode is null)
             {
                 var targetNode = FindProcessorNode(typeof(TFindProcessor).FullName);
                 if (targetNode != null)
-                    ResponseProcessors.AddBefore(targetNode, new LinkedListNode<IResponseProcessor>(processor));
+                    ResponseProcessors.AddBefore(targetNode, new LinkedListNode<IProcessor>(processor));
                 else ResponseProcessors.AddLast(processor);
             }
             else throw new ArgumentException("Only one processor can be added for each type.");
@@ -67,76 +68,6 @@ namespace Dawnx.Net.Http
 
         public int AllowRedirectTimes { get; set; } = 10;
         public int RedirectTimes { get; set; } = 0;
-
-        // If update is Dictionary
-        public string Get(string url, Dictionary<string, object> updata = null)
-            => ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
-        public string Post(string url, Dictionary<string, object> updata = null)
-            => ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
-        public string PostJson(string url, Dictionary<string, object> updata = null)
-            => ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, updata, null);
-        public string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
-            => ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles);
-
-        public TRet Get<TRet>(string url, Dictionary<string, object> updata = null)
-            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null));
-        public TRet Post<TRet>(string url, Dictionary<string, object> updata = null)
-            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null));
-        public TRet PostJson<TRet>(string url, Dictionary<string, object> updata = null)
-            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, updata, null));
-        public TRet Up<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
-            => JsonConvert.DeserializeObject<TRet>(ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles));
-
-        public void GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
-        public void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
-        public void PostJsonDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_JSON, url, updata, null, bufferSize);
-        public void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
-        // End
-
-        // If update is object
-        public string Get(string url, object updata)
-            => ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null);
-        public string Post(string url, object updata)
-            => ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null);
-        public string PostJson(string url, object updata)
-            => ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, ObjectUtility.CovertToDictionary(updata), null);
-        public string Up(string url, object updata, Dictionary<string, object> upfiles = null)
-            => ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, ObjectUtility.CovertToDictionary(updata), upfiles);
-
-        public TRet Get<TRet>(string url, object updata)
-            => JsonConvert.DeserializeObject<TRet>(
-                ReadString(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null));
-        public TRet Post<TRet>(string url, object updata)
-            => JsonConvert.DeserializeObject<TRet>(
-                ReadString(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null));
-        public TRet PostJson<TRet>(string url, object updata)
-            => JsonConvert.DeserializeObject<TRet>(
-                ReadString(HttpVerb.POST, MediaType.APPLICATION_JSON, url, ObjectUtility.CovertToDictionary(updata), null));
-        public TRet Up<TRet>(string url, object updata, Dictionary<string, object> upfiles = null)
-            => JsonConvert.DeserializeObject<TRet>(
-                ReadString(HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, ObjectUtility.CovertToDictionary(updata), upfiles));
-
-        public void GetDownload(Stream receiver, string url, object updata,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null, bufferSize);
-        public void PostDownload(Stream receiver, string url, object updata,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, ObjectUtility.CovertToDictionary(updata), null, bufferSize);
-        public void PostJsonDownload(Stream receiver, string url, object updata,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MediaType.APPLICATION_JSON, url, ObjectUtility.CovertToDictionary(updata), null, bufferSize);
-        public void UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null,
-            int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MediaType.MULTIPART_FORM_DATA, url, ObjectUtility.CovertToDictionary(updata), upfiles, bufferSize);
-        // End
 
         public void Download(
             Stream receiver,

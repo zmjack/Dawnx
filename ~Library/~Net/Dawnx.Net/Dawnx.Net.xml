@@ -4,7 +4,7 @@
         <name>Dawnx.Net</name>
     </assembly>
     <members>
-        <member name="M:Dawnx.Net.Http.IResponseProcessor.Process(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Dawnx.Net.Http.IProcessor.Process(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             If this method cannot determine response, it should be return null.
             </summary>
@@ -17,7 +17,7 @@
             <param name="upfiles"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Net.Http.LoginProcessor.LoginProcess(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse)">
+        <member name="M:Dawnx.Net.Http.Processors.LoginProcessor.LoginProcess(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse)">
             <summary>
             If this method cannot determine response, it should be return null.
             </summary>

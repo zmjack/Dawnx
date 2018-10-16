@@ -14,13 +14,13 @@ namespace Dawnx.Test
 
             public DpCoin(int[] coinValues)
             {
-                CoinValues = CoinValues;
+                CoinValues = coinValues;
             }
 
             public override (int CoinCount, int[] Coins) StateTransfer(int n)
             {
-                // dp(n) = 0                    if  n=0
-                // dp(n) = min{v| d(n-v) + 1}      if  n-v>=0, v={CoinValues}
+                // dp(n) = 0                        if  n=0
+                // dp(n) = min{v| d(n-v) + 1}       if  n-v>=0, v={CoinValues}
 
                 if (n == 0) return (0, new int[0]);
 

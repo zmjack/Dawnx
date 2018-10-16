@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Dawnx.Net.Http
+namespace Dawnx.Net.Http.Processors
 {
-    public class RedirectProcessor : IResponseProcessor
+    public class RedirectProcessor : IProcessor
     {
         public HttpWebResponse Process(
             WebAccess web, HttpWebResponse response,

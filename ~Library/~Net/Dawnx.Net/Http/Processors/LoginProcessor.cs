@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 
-namespace Dawnx.Net.Http
+namespace Dawnx.Net.Http.Processors
 {
-    public abstract class LoginProcessor : IResponseProcessor
+    public abstract class LoginProcessor : IProcessor
     {
         /// <summary>
         /// If this method cannot determine response, it should be return null.
@@ -13,7 +13,7 @@ namespace Dawnx.Net.Http
         /// <returns></returns>
         public abstract HttpWebResponse LoginProcess(WebAccess web, HttpWebResponse response);
 
-        HttpWebResponse IResponseProcessor.Process(
+        HttpWebResponse IProcessor.Process(
             WebAccess web, HttpWebResponse response,
             string method, string enctype, string url,
             Dictionary<string, object> updata,

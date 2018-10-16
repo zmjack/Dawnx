@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Dawnx.Net.Http
 {
-    public interface IResponseProcessor
+    public interface IProcessor
     {
         /// <summary>
         /// If this method cannot determine response, it should be return null.

@@ -58,27 +58,39 @@ namespace Dawnx.Net.Test
                 "lztl7XTjm5R8FaHJALgWLw", "");
         }
 
+        private RSA CreateRsa(JToken jwk)
+        {
+            var alg = jwk["alg"].Value<string>();
+            var kid = jwk["kid"].Value<string>();
+
+            return RSA.Create().Self(_ =>
+            {
+                _.ImportParameters(new RSAParameters
+                {
+                    Exponent = Base64Utility.ConvertUrlBase64ToBase64(
+                        jwk["e"].Value<string>()).BytesFromBase64(),
+                    Modulus = Base64Utility.ConvertUrlBase64ToBase64(
+                        jwk["n"].Value<string>()).BytesFromBase64(),
+                });
+            });
+        }
+
         [Fact]
         public void Test2()
         {
             var web = new WebAccess();
-            var config = web.GetFor<JToken>("http://localhost.dawnx.net:5000/.well-known/openid-configuration");
-            var jwk = web.GetFor<JToken>(config["jwks_uri"].ToString())["keys"][0];
+            var config = web.GetFor("http://localhost.dawnx.net:5000/.well-known/openid-configuration");
+            var jwks_url = config["jwks_uri"].Value<string>();
+            var rsa = CreateRsa(web.GetFor(jwks_url)["keys"][0]);
 
-            //var token_url = config["subject_types_supported"]["token_endpoint"];
-            //    //=http://localhost.dawnx.net:5000/connect/token
-            var e = jwk["e"].ToString();
-            var n = jwk["n"].ToString();
+            var token_url = config["subject_types_supported"]["token_endpoint"].Value<string>();
 
-            var alg = jwk["alg"].ToString();
-            var kid = jwk["kid"].ToString();
-
-            var rsa = RSA.Create();
-            rsa.ImportParameters(new RSAParameters
+            var token = web.Post(token_url, new
             {
-                Exponent = Base64Utility.ConvertUrlBase64ToBase64(e).BytesFromBase64(),
-                Modulus = Base64Utility.ConvertUrlBase64ToBase64(n).BytesFromBase64(),
+                grant_type = "client_credentials",
+                scope = "api1",
             });
+            //    //=http://localhost.dawnx.net:5000/connect/token
 
         }
 

@@ -58,17 +58,20 @@ namespace Dawnx.Net.Test
                 "lztl7XTjm5R8FaHJALgWLw", "");
         }
 
+        [Fact]
         public void Test2()
         {
             var web = new WebAccess();
-            var config = web.GetFor("http://localhost.dawnx.net:5000/.well-known/openid-configuration");
-            var jwks = web.GetFor<JObject>(config["jwks_uri"].ToString())["keys"][0];
+            var config = web.GetFor<JToken>("http://localhost.dawnx.net:5000/.well-known/openid-configuration");
+            var jwk = web.GetFor<JToken>(config["jwks_uri"].ToString())["keys"][0];
 
-            var e = jwks["e"].ToString();
-            var n = jwks["n"].ToString();
+            //var token_url = config["subject_types_supported"]["token_endpoint"];
+            //    //=http://localhost.dawnx.net:5000/connect/token
+            var e = jwk["e"].ToString();
+            var n = jwk["n"].ToString();
 
-            var alg = jwks["alg"].ToString();
-            var kid = jwks["kid"].ToString();
+            var alg = jwk["alg"].ToString();
+            var kid = jwk["kid"].ToString();
 
             var rsa = RSA.Create();
             rsa.ImportParameters(new RSAParameters

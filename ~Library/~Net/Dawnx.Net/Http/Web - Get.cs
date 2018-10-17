@@ -1,4 +1,5 @@
 ﻿using Dawnx.Enums;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -25,10 +26,10 @@ namespace Dawnx.Net.Http
             WebRequestStateContainer config = null)
             => new WebAccess(config).GetFor<TRet>(url, updata);
 
-        public static Dictionary<string, object> GetFor(string url, Dictionary<string, object> updata = null,
+        public static JToken GetFor(string url, Dictionary<string, object> updata = null,
             WebRequestStateContainer config = null)
             => new WebAccess(config).GetFor(url, updata);
-        public static Dictionary<string, object> GetFor(string url, object updata,
+        public static JToken GetFor(string url, object updata,
             WebRequestStateContainer config = null)
             => new WebAccess(config).GetFor(url, updata);
 

@@ -1,6 +1,7 @@
 ﻿using Dawnx.Enums;
 using Dawnx.Utilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,9 +35,9 @@ namespace Dawnx.Net.Http
         public TRet GetFor<TRet>(string url, object updata)
             => GetFor<TRet>(url, ObjectUtility.CovertToDictionary(updata));
 
-        public Dictionary<string, object> GetFor(string url, Dictionary<string, object> updata = null)
-            => JsonConvert.DeserializeObject<Dictionary<string, object>>(Get(url, updata));
-        public Dictionary<string, object> GetFor(string url, object updata)
+        public JToken GetFor(string url, Dictionary<string, object> updata = null)
+            => JsonConvert.DeserializeObject<JToken>(Get(url, updata));
+        public JToken GetFor(string url, object updata)
             => GetFor(url, ObjectUtility.CovertToDictionary(updata));
 
     }

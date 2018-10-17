@@ -1,4 +1,5 @@
 ﻿using Dawnx.Enums;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -22,9 +23,9 @@ namespace Dawnx.Net.Http
         public static TRet UpFor<TRet>(string url, object updata, Dictionary<string, object> upfiles = null, WebRequestStateContainer config = null)
             => new WebAccess(config).UpFor<TRet>(url, updata, upfiles);
 
-        public static Dictionary<string, object> UpFor(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, WebRequestStateContainer config = null)
+        public static JToken UpFor(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, WebRequestStateContainer config = null)
             => new WebAccess(config).UpFor(url, updata, upfiles);
-        public static Dictionary<string, object> UpFor(string url, object updata, Dictionary<string, object> upfiles = null, WebRequestStateContainer config = null)
+        public static JToken UpFor(string url, object updata, Dictionary<string, object> upfiles = null, WebRequestStateContainer config = null)
             => new WebAccess(config).UpFor(url, updata, upfiles);
 
     }

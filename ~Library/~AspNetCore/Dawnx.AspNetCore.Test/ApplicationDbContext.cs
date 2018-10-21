@@ -33,7 +33,7 @@ namespace Dawnx.AspNetCore.Test
         }
     }
 
-    public class SimpleModel : IEntity<SimpleModel>, IEntityMonitor
+    public class SimpleModel : IEntity<SimpleModel>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -58,10 +58,6 @@ namespace Dawnx.AspNetCore.Test
 
         [Track(typeof(RegexUtility), nameof(RegexUtility.IPRange) + "(" + nameof(ForTrim) + ")")]
         public string Automatic { get; set; }
-        
-        public void OnModify(IEnumerable<PropertyEntry> entries)
-        {
-            //throw new NotImplementedException();
-        }
+
     }
 }

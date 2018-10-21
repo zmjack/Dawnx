@@ -1,5 +1,6 @@
 ﻿using Dawnx.Utilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,7 @@ namespace Dawnx.AspNetCore.Test
         }
     }
 
-    public class SimpleModel
+    public class SimpleModel : IEntity<SimpleModel>, IEntityMonitor
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -57,5 +58,10 @@ namespace Dawnx.AspNetCore.Test
 
         [Track(typeof(RegexUtility), nameof(RegexUtility.IPRange) + "(" + nameof(ForTrim) + ")")]
         public string Automatic { get; set; }
+        
+        public void OnModify(IEnumerable<PropertyEntry> entries)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

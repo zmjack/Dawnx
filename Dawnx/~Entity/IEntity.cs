@@ -43,7 +43,7 @@ namespace Dawnx
 
             // Copy values
             foreach (var prop in props)
-                prop.SetValue(@this, prop.GetValue(model), null);
+                prop.SetValue(@this, prop.GetValue(model));
 
             return @this;
         }
@@ -81,7 +81,7 @@ namespace Dawnx
 
             // Copy values
             foreach (var prop in props)
-                prop.SetValue(@this, prop.GetValue(model), null);
+                prop.SetValue(@this, prop.GetValue(model));
 
             return @this;
         }

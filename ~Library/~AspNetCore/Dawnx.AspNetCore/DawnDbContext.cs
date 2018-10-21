@@ -22,8 +22,11 @@ namespace Dawnx.AspNetCore
             var entries = @this.ChangeTracker.Entries().ToArray();
             foreach (var entry in entries)
             {
-                var allProps = entry.Entity.GetType().GetProperties().Where(x => x.CanWrite).ToArray();
-                ResolveTrackAttributes(entry, allProps);
+                if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
+                {
+                    var props = entry.Entity.GetType().GetProperties().Where(x => x.CanWrite).ToArray();
+                    ResolveTrackAttributes(entry, props);
+                }
             }
         }
 
@@ -89,7 +92,7 @@ namespace Dawnx.AspNetCore
                     var references = new[] { type.Assembly.FullName };
 
                     //If the invoked method is 'Method<T>(this T @this),
-                    //  then the correct pattern is '@this.Method'
+                    //  the correct pattern is '@this.Method'
                     shell = CSharpScript.Create($"using static {type.Namespace}.{type.Name};",
                         ScriptOptions.Default.AddReferences(references), entityType)
                         .ContinueWith(csharp);

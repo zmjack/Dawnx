@@ -27,6 +27,9 @@ namespace Dawnx.AspNetCore
                     var props = entry.Entity.GetType().GetProperties().Where(x => x.CanWrite).ToArray();
                     ResolveTrackAttributes(entry, props);
                 }
+
+                var monitor = EntityMonitor.GetMonitor(entry.Entity.GetType().FullName, entry.State);
+                monitor(entry.Properties);
             }
         }
 

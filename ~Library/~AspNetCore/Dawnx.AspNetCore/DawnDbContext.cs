@@ -19,17 +19,26 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public static void IntelliTrack(this DbContext @this, bool acceptAllChangesOnSuccess)
         {
-            var entries = @this.ChangeTracker.Entries().ToArray();
+            var entries = @this.ChangeTracker.Entries()
+                .Where(x => x.State.In(EntityState.Added, EntityState.Modified, EntityState.Deleted))
+                .ToArray();
+
             foreach (var entry in entries)
             {
+                // Resolve TrackAttributes
+                var entity = entry.Entity;
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
                 {
-                    var props = entry.Entity.GetType().GetProperties().Where(x => x.CanWrite).ToArray();
+                    var props = entity.GetType().GetProperties().Where(x => x.CanWrite).ToArray();
                     ResolveTrackAttributes(entry, props);
                 }
 
-                var monitor = EntityMonitor.GetMonitor(entry.Entity.GetType().FullName, entry.State);
-                monitor(entry.Properties);
+                // Resolve Monitors
+                if (!(entity as IEntityMonitor)?.MonitorExecutor.IsNullOrWhiteSpace() ?? false)
+                {
+                    var monitor = EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State);
+                    monitor?.Invoke((entity as IEntityMonitor).MonitorExecutor, entry.Properties);
+                }
             }
         }
 

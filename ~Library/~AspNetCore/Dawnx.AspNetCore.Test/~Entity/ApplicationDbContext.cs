@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 
 namespace Dawnx.AspNetCore.Test
 {
-    public class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
             : base(new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase("default").Options)
         {
         }
 
+        public DbSet<TrackModel> TrackModels { get; set; }
         public DbSet<SimpleModel> SimpleModels { get; set; }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -33,31 +34,4 @@ namespace Dawnx.AspNetCore.Test
         }
     }
 
-    public class SimpleModel : IEntity<SimpleModel>
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
-        [TrackCreationTime]
-        public DateTime CreationTime { get; set; }
-
-        [TrackLastWriteTime]
-        public DateTime LastWriteTime { get; set; }
-
-        [TrackTrim]
-        public string ForTrim { get; set; }
-
-        [TrackUpper]
-        public string ForUpper { get; set; }
-
-        [TrackLower]
-        public string ForLower { get; set; }
-
-        [TrackCondensed]
-        public string ForCondensed { get; set; }
-
-        [Track(typeof(RegexUtility), nameof(RegexUtility.IPRange) + "(" + nameof(ForTrim) + ")")]
-        public string Automatic { get; set; }
-
-    }
 }

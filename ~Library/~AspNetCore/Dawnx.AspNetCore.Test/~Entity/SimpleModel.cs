@@ -1,4 +1,5 @@
-﻿using Dawnx.Utilities;
+﻿using Dawnx.AspNetCore.Entity;
+using Dawnx.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;

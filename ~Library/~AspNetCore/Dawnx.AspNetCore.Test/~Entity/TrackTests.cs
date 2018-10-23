@@ -43,7 +43,6 @@ namespace Dawnx.AspNetCore.Test
                 Assert.Equal(origin.ForLower, model.ForLower);
                 Assert.Equal(origin.ForUpper, model.ForUpper);
                 Assert.Equal(origin.ForCondensed, model.ForCondensed);
-                Assert.Equal(origin.Automatic, model.Automatic);
 
                 context.TrackModels.Remove(model);
                 context.SaveChanges();

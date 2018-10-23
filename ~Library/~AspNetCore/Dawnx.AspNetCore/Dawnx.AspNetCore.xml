@@ -120,13 +120,6 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
-            <summary>
-            Gets user's menu from the tree.
-            </summary>
-            <param name="user"></param>
-            <returns></returns>
-        </member>
         <member name="F:Dawnx.AspNetCore.SimpleResponse.state">
             <summary>
             A simple code describing the state of the service invocation
@@ -146,6 +139,13 @@
             <summary>
             If necessary, carry a data model 
             </summary>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets user's menu from the tree.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

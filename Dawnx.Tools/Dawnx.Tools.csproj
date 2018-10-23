@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyName>dotnet-dawnx</AssemblyName>
+    <AssemblyName>dotnet-nx</AssemblyName>
     <RootNamespace>Dawnx.Tools</RootNamespace>
     <Company>dawnx.net</Company>
     <Authors>dawnx.net</Authors>
@@ -23,7 +23,7 @@
     <Copyright>Copyright © dawnx.net 2018</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
-    <Version>1.5.15</Version>
+    <Version>1.5.16</Version>
     <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
 

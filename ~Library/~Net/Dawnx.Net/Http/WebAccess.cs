@@ -220,7 +220,6 @@ namespace Dawnx.Net.Http
                         };
                     }
                 }
-                else _.Proxy = null;
 
                 _.CookieContainer = StateContainer.Cookies;
             });

@@ -49,13 +49,13 @@ namespace Dawnx.Net.Test
                 Base64Utility.ConvertBase64ToUrlBase64(jwt_payload.Base64Encode()));
 
             // VERIFY SIGNATURE
-            Assert.Equal(
-                "ot1PHUJS-32DPnCzT_CSZUhpLaRaxU4Dy8aonpb9fJyxFVXuRFp4e7-oCgPq9EA_" +
-                "Q87UnPQ7gC0BGWFUDEzvC8fY6wIoJcSqe57qY4W12BeOBtpBcxJ0U_H6Sc4P8zCb" +
-                "ZkRMD6DvbYK6dLSDcFmh8Gj44f6abjZMqKqVGm-mE-y-zr10SfYdPCK-7z5W4t0M" +
-                "Al9H7k-ptchnVAHztg9L0seq2TX88TsIbdnGSrknM_KDSaJugr2lfINMffGpSxuK" +
-                "poL-sZW4XbczXHduCn11_n_DuJ8SJIeIhpa6kSO8dq7ElD5vTLesyD3_UJEZ2cuL" +
-                "lztl7XTjm5R8FaHJALgWLw", "");
+            //Assert.Equal(
+            //    "ot1PHUJS-32DPnCzT_CSZUhpLaRaxU4Dy8aonpb9fJyxFVXuRFp4e7-oCgPq9EA_" +
+            //    "Q87UnPQ7gC0BGWFUDEzvC8fY6wIoJcSqe57qY4W12BeOBtpBcxJ0U_H6Sc4P8zCb" +
+            //    "ZkRMD6DvbYK6dLSDcFmh8Gj44f6abjZMqKqVGm-mE-y-zr10SfYdPCK-7z5W4t0M" +
+            //    "Al9H7k-ptchnVAHztg9L0seq2TX88TsIbdnGSrknM_KDSaJugr2lfINMffGpSxuK" +
+            //    "poL-sZW4XbczXHduCn11_n_DuJ8SJIeIhpa6kSO8dq7ElD5vTLesyD3_UJEZ2cuL" +
+            //    "lztl7XTjm5R8FaHJALgWLw", "");
         }
 
         private RSA CreateRsa(JToken jwk)
@@ -73,25 +73,6 @@ namespace Dawnx.Net.Test
                         jwk["n"].Value<string>()).BytesFromBase64(),
                 });
             });
-        }
-
-        [Fact]
-        public void Test2()
-        {
-            var web = new WebAccess();
-            var config = web.GetFor("http://localhost.dawnx.net:5000/.well-known/openid-configuration");
-            var jwks_url = config["jwks_uri"].Value<string>();
-            var rsa = CreateRsa(web.GetFor(jwks_url)["keys"][0]);
-
-            var token_url = config["subject_types_supported"]["token_endpoint"].Value<string>();
-
-            var token = web.Post(token_url, new
-            {
-                grant_type = "client_credentials",
-                scope = "api1",
-            });
-            //    //=http://localhost.dawnx.net:5000/connect/token
-
         }
 
     }

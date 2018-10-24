@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Dawnx.Net.Http
 {
+    //TODO: to complete this class
     public class HttpResponse
     {
         private byte[] _Origin;

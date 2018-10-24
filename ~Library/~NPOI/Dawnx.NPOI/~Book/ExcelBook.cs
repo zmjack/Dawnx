@@ -14,6 +14,19 @@ namespace Dawnx.NPOI
         public string FilePath { get; private set; }
         public ExcelVersion Version { get; private set; }
 
+        public string MediaType
+        {
+            get
+            {
+                switch (Version)
+                {
+                    case ExcelVersion.Excel2003: return Enums.MediaType.APPLICATION_MS_EXCEL_2003;
+                    case ExcelVersion.Excel2007: return Enums.MediaType.APPLICATION_MS_EXCEL_2007;
+                    default: return string.Empty;
+                }
+            }
+        }
+
         public ExcelBook(ExcelVersion version)
         {
             Version = version;

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Dawnx.Algorithms.String;
+using Dawnx.Ranges;
 
 namespace Dawnx
 {
@@ -196,7 +198,28 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Unique(this string @this) 
+        public static string Unique(this string @this)
             => new Regex(@"[\s]{2,}").Replace(@this.NormalizeNewLine().Replace(Environment.NewLine, " ").Trim(), " ");
+
+        /// <summary>
+        /// Projects the specified string to a new string by using regular expressions.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public static string Project(this string @this, Regex regex, string target = null)
+        {
+            //TODO: to fix $ symbol analysis. (eg. $$1)
+            var match = regex.Match(@this);
+            if (match.Success)
+            {
+                if (target is null)
+                    return new IntegerRange(1, match.Groups.Count).Select(i => $"${i}").Join("");
+                else return regex.Replace(@this, target);
+            }
+            else return null;
+        }
+
     }
 }

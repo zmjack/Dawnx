@@ -12,18 +12,23 @@ namespace Dawnx.Utilities
         /// <returns></returns>
         public static string CommonStarts(params string[] strings)
         {
-            var minLength = strings.Min(x => x.Length);
-            var sb = new StringBuilder(minLength);
-
-            for (int i = 0; i < minLength; i++)
+            if (strings.Length == 0) return string.Empty;
+            else if (strings.Length == 1) return strings[0];
+            else
             {
-                var take = strings[0][i];
-                if (strings.All(x => x[i] == take))
-                    sb.Append(take);
-                else break;
-            }
+                var minLength = strings.Min(x => x.Length);
+                var sb = new StringBuilder(minLength);
 
-            return sb.ToString();
+                for (int i = 0; i < minLength; i++)
+                {
+                    var take = strings[0][i];
+                    if (strings.All(x => x[i] == take))
+                        sb.Append(take);
+                    else break;
+                }
+
+                return sb.ToString();
+            }
         }
 
     }

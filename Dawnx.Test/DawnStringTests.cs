@@ -75,5 +75,8 @@ namespace Dawnx.Test
             Assert.Equal("123 456 7890", "  123\r\n 456 7890".Unique());
         }
 
+        [Fact]
+        pbulic 
+
     }
 }

@@ -169,7 +169,9 @@ namespace Dawnx
         }
 
         /// <summary>
-        /// Divides a string into multi-lines. If the string is null, return string[0].
+        /// Divides a string into multi-lines. If the string is null, return string[0]. 
+        /// (Maybe you shall use NormalizeNewLine before to convert the NewLine 
+        ///     which is defined in other system into the current system's.)
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
@@ -206,7 +208,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <param name="regex"></param>
-        /// <param name=""></param>
+        /// <param name="target"></param>
         /// <returns></returns>
         public static string Project(this string @this, Regex regex, string target = null)
         {

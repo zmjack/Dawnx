@@ -870,7 +870,9 @@
         </member>
         <member name="M:Dawnx.DawnString.GetLines(System.String)">
             <summary>
-            Divides a string into multi-lines. If the string is null, return string[0].
+            Divides a string into multi-lines. If the string is null, return string[0]. 
+            (Maybe you shall use NormalizeNewLine before to convert the NewLine 
+                which is defined in other system into the current system's.)
             </summary>
             <param name="this"></param>
             <returns></returns>
@@ -881,6 +883,15 @@
                 and replaces multiple spaces with a single.
             </summary>
             <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.Project(System.String,System.Text.RegularExpressions.Regex,System.String)">
+            <summary>
+            Projects the specified string to a new string by using regular expressions.
+            </summary>
+            <param name="this"></param>
+            <param name="regex"></param>
+            <param name="target"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnUInt32.IsOdd(System.UInt32)">

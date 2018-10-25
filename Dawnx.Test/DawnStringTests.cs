@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dawnx.Test
@@ -76,7 +77,11 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        pbulic 
+        public void Project()
+        {
+            var userName = "zmjack(1)";
+            Assert.Equal("zmjack", userName.Project(new Regex(@"(.+?)(?:(?=\()|(?=ги)|$)")));
+        }
 
     }
 }

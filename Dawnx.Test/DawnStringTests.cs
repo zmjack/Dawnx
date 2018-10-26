@@ -79,8 +79,11 @@ namespace Dawnx.Test
         [Fact]
         public void Project()
         {
-            var userName = "zmjack(1)";
-            Assert.Equal("zmjack", userName.Project(new Regex(@"(.+?)(?:(?=\()|(?=ги)|$)")));
+            var regex = new Regex(@"(.+?)(?:(?=\()|(?=ги)|$)");
+            Assert.Equal("zmjack", "zmjack(1)".Project(regex).Trim());
+            Assert.Equal("zmjack", "zmjack (1)".Project(regex).Trim());
+            Assert.Equal("zmjack", "zmjack (".Project(regex).Trim());
+            Assert.Equal("zmjack", "zmjack".Project(regex).Trim());
         }
 
     }

@@ -217,7 +217,7 @@ namespace Dawnx
             if (match.Success)
             {
                 if (target is null)
-                    return new IntegerRange(1, match.Groups.Count).Select(i => match.Groups[i].Value).Join("");
+                    return new IntegerRange(1, match.Groups.Count - 1).Select(i => match.Groups[i].Value).Join("");
                 else return regex.Replace(@this, target);
             }
             else return null;

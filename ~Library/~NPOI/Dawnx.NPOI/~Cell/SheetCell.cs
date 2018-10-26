@@ -70,7 +70,9 @@ namespace Dawnx.NPOI
 
                 case CValue v:
                     SetValue(v.Value);
-                    SetCStyle(v.Style);
+                    if (!(v.Style is null))
+                        SetCStyle(v.Style);
+
                     break;
 
                 case object v: String = v.ToString(); break;

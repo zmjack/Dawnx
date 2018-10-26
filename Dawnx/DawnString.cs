@@ -170,7 +170,7 @@ namespace Dawnx
 
         /// <summary>
         /// Divides a string into multi-lines. If the string is null, return string[0]. 
-        /// (Maybe you shall use NormalizeNewLine before to convert the NewLine 
+        /// (Maybe you shall use <see cref="NormalizeNewLine"/> before to convert the NewLine 
         ///     which is defined in other system into the current system's.)
         /// </summary>
         /// <param name="this"></param>

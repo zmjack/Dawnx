@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 namespace Dawnx
@@ -49,6 +50,27 @@ namespace Dawnx
         /// <returns></returns>
         public static bool In<TSource>(this TSource @this, IEnumerable<TSource> sequence)
             => sequence.Contains(@this);
-        
+
+        /// <summary>
+        /// Converts the specified object to <see cref="ExpandoObject"/>.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static ExpandoObject ToExpandoObject(this object @this)
+        {
+            var obj = new ExpandoObject();
+            var objDict = obj as IDictionary<string, object>;
+
+            var props = @this.GetType().GetProperties();
+            foreach (var prop in props)
+            {
+                var value = prop.GetValue(@this);
+                if (value.GetType().Name.StartsWith("<>f__AnonymousType"))
+                    objDict[prop.Name] = ToExpandoObject(value);
+                else objDict[prop.Name] = value;
+            }
+            return obj;
+        }
+
     }
 }

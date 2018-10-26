@@ -634,6 +634,13 @@
             <param name="enumerable"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnObject.ToExpandoObject(System.Object)">
+            <summary>
+            Converts the specified object to <see cref="T:System.Dynamic.ExpandoObject"/>.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnString.Bytes(System.String)">
             <summary>
             Encodes all the characters in the specified string into a sequence of bytes(UTF-8), then returns it.
@@ -871,7 +878,7 @@
         <member name="M:Dawnx.DawnString.GetLines(System.String)">
             <summary>
             Divides a string into multi-lines. If the string is null, return string[0]. 
-            (Maybe you shall use NormalizeNewLine before to convert the NewLine 
+            (Maybe you shall use <see cref="M:Dawnx.DawnString.NormalizeNewLine(System.String)"/> before to convert the NewLine 
                 which is defined in other system into the current system's.)
             </summary>
             <param name="this"></param>

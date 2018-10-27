@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Dawnx.AspNetCore.Entity
 {
-    public delegate void MonitorInvoker(object state, object model, IEnumerable<PropertyEntry> propertyEntries);
+    public delegate void MonitorInvoker(object model, object carry, IEnumerable<PropertyEntry> propertyEntries);
 
     public static class EntityMonitor
     {

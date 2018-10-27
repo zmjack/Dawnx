@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Dawnx.AspNetCore.Entity
 {
-    public delegate void MonitorInvoker(string executor, IEnumerable<PropertyEntry> propertyEntries);
+    public delegate void MonitorInvoker(object state, object model, IEnumerable<PropertyEntry> propertyEntries);
 
     public static class EntityMonitor
     {
@@ -14,8 +14,7 @@ namespace Dawnx.AspNetCore.Entity
         public static Dictionary<string, object> ModifyMonitors { get; private set; } = new Dictionary<string, object>();
         public static Dictionary<string, object> DeleteMonitors { get; private set; } = new Dictionary<string, object>();
 
-
-        public static void RegisterMonitor<TEntity>(EntityState type, MonitorInvoker invoker)
+        public static void Register<TEntity>(EntityState type, MonitorInvoker invoker)
         {
             switch (type)
             {

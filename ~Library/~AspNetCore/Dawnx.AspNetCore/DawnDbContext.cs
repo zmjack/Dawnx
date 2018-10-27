@@ -35,10 +35,11 @@ namespace Dawnx.AspNetCore
                 }
 
                 // Resolve Monitors
-                if (!(entity as IEntityMonitor)?.MonitorExecutor.IsNullOrWhiteSpace() ?? false)
+                var entityMonitor = entity as IEntityMonitor;
+                if (entityMonitor?.IsMonitorEnabled() ?? false)
                 {
-                    var monitor = EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State);
-                    monitor?.Invoke((entity as IEntityMonitor).MonitorExecutor, entry.Properties);
+                    EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State)?
+                        .Invoke(entityMonitor.MonitorState, entity, entry.Properties);
                 }
             }
         }

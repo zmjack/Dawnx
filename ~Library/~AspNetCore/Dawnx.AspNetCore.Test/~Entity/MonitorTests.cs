@@ -20,19 +20,19 @@ namespace Dawnx.AspNetCore.Test
         {
             var log = new List<string>();
 
-            EntityMonitor.RegisterMonitor<SimpleModel>(EntityState.Added, new MonitorInvoker((user, properties) =>
+            EntityMonitor.Register<SimpleModel>(EntityState.Added, new MonitorInvoker((state, entity, properties) =>
             {
-                log.Add($"{user}\t{nameof(EntityState.Added)}");
+                log.Add($"{state}\t{nameof(EntityState.Added)}");
             }));
 
-            EntityMonitor.RegisterMonitor<SimpleModel>(EntityState.Modified, new MonitorInvoker((user, properties) =>
+            EntityMonitor.Register<SimpleModel>(EntityState.Modified, new MonitorInvoker((state, entity, properties) =>
             {
-                log.Add($"{user}\t{nameof(EntityState.Modified)}");
+                log.Add($"{state}\t{nameof(EntityState.Modified)}");
             }));
 
-            EntityMonitor.RegisterMonitor<SimpleModel>(EntityState.Deleted, new MonitorInvoker((user, properties) =>
+            EntityMonitor.Register<SimpleModel>(EntityState.Deleted, new MonitorInvoker((state, entity, properties) =>
             {
-                log.Add($"{user}\t{nameof(EntityState.Deleted)}");
+                log.Add($"{state}\t{nameof(EntityState.Deleted)}");
             }));
 
             using (var context = new ApplicationDbContext())
@@ -47,27 +47,27 @@ namespace Dawnx.AspNetCore.Test
                 // Added
                 var item = new SimpleModel
                 {
-                    MonitorExecutor = "u1",
                     ProductName = "b",
-                };
+                }.EnableMonitor("u1");
                 context.Add(item);
                 context.SaveChanges();
-                Assert.Equal($"{item.MonitorExecutor}\t{nameof(EntityState.Added)}", log.Last());
+                Assert.Equal($"u1\t{nameof(EntityState.Added)}", log.Last());
 
                 // Modified
                 var result = context.SimpleModels.First();
-                result.MonitorExecutor = "u1";
                 result.ProductName = "B";
+                result.EnableMonitor("u2");
                 context.SaveChanges();
-                Assert.Equal($"{result.MonitorExecutor}\t{nameof(EntityState.Modified)}", log.Last());
+                Assert.Equal($"u2\t{nameof(EntityState.Modified)}", log.Last());
 
                 // Deleted
-                context.RemoveRange(context.SimpleModels.Each(_ => _.MonitorExecutor = "u2"));
+                context.SimpleModels.AsEnumerable().EnableMonitor("u3");
+                context.RemoveRange(context.SimpleModels);
                 context.SaveChanges();
                 Assert.Equal(new[]
                 {
-                    $"{result.MonitorExecutor}\t{nameof(EntityState.Deleted)}",
-                    $"{result.MonitorExecutor}\t{nameof(EntityState.Deleted)}",
+                    $"{result.MonitorState as string}\t{nameof(EntityState.Deleted)}",
+                    $"{result.MonitorState as string}\t{nameof(EntityState.Deleted)}",
                 }, log.TakeLast(2));
             }
 

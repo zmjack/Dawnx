@@ -20,21 +20,6 @@ namespace Dawnx.AspNetCore.Test
         public string ProductName { get; set; }
 
         [NotMapped]
-        public string MonitorExecutor { get; set; }
-
-        public void OnAdd(IEnumerable<PropertyEntry> entries)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnModity(IEnumerable<PropertyEntry> entries)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnDelete(IEnumerable<PropertyEntry> entries)
-        {
-            throw new NotImplementedException();
-        }
+        public object MonitorState { get; set; }        
     }
 }

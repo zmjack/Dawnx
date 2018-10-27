@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dawnx.Test
@@ -73,6 +74,16 @@ namespace Dawnx.Test
             Assert.Equal("123 456 7890", "  123  456 7890".Unique());
             Assert.Equal("123 456 7890", "  123\r\n456 7890".Unique());
             Assert.Equal("123 456 7890", "  123\r\n 456 7890".Unique());
+        }
+
+        [Fact]
+        public void Project()
+        {
+            var regex = new Regex(@"(.+?)(?:(?=\()|(?=ги)|$)");
+            Assert.Equal("zmjack", "zmjack(1)".Project(regex).Trim());
+            Assert.Equal("zmjack", "zmjack (1)".Project(regex).Trim());
+            Assert.Equal("zmjack", "zmjack (".Project(regex).Trim());
+            Assert.Equal("zmjack", "zmjack".Project(regex).Trim());
         }
 
     }

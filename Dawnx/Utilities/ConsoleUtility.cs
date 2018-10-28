@@ -82,7 +82,7 @@ namespace Dawnx
                 }
                 else
                 {
-                    Console.Write("─".Times(lengths[i] + TABLE_CELL_PADDING_LENGTH * 2));
+                    Console.Write("─".Replicate(lengths[i] + TABLE_CELL_PADDING_LENGTH * 2));
                 }
 
                 if (i == ubound) Console.Write(format[2]);

@@ -20,19 +20,19 @@ namespace Dawnx.AspNetCore.Test
         {
             var log = new List<string>();
 
-            EntityMonitor.Register<SimpleModel>(EntityState.Added, new MonitorInvoker((state, entity, properties) =>
+            EntityMonitor.RegisterForAdded(new MonitorInvoker<SimpleModel>((model, carry, properties) =>
             {
-                log.Add($"{state}\t{nameof(EntityState.Added)}");
+                log.Add($"{carry}\t{nameof(EntityState.Added)}");
             }));
 
-            EntityMonitor.Register<SimpleModel>(EntityState.Modified, new MonitorInvoker((state, entity, properties) =>
+            EntityMonitor.RegisterForModified(new MonitorInvoker<SimpleModel>((model, carry, properties) =>
             {
-                log.Add($"{state}\t{nameof(EntityState.Modified)}");
+                log.Add($"{carry}\t{nameof(EntityState.Modified)}");
             }));
 
-            EntityMonitor.Register<SimpleModel>(EntityState.Deleted, new MonitorInvoker((state, entity, properties) =>
+            EntityMonitor.RegisterForDeleted(new MonitorInvoker<SimpleModel>((model, carry, properties) =>
             {
-                log.Add($"{state}\t{nameof(EntityState.Deleted)}");
+                log.Add($"{carry}\t{nameof(EntityState.Deleted)}");
             }));
 
             using (var context = new ApplicationDbContext())

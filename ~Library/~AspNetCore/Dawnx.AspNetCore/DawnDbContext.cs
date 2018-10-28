@@ -39,7 +39,7 @@ namespace Dawnx.AspNetCore
                 if (entityMonitor?.IsMonitorEnabled() ?? false)
                 {
                     EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State)?
-                        .Invoke(entity, entityMonitor.MonitorState, entry.Properties);
+                        .DynamicInvoke(entity, entityMonitor.MonitorState, entry.Properties);
                 }
             }
         }

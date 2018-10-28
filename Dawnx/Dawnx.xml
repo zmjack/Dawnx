@@ -851,7 +851,7 @@
             <param name="pos"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.Times(System.String,System.Int32)">
+        <member name="M:Dawnx.DawnString.Replicate(System.String,System.Int32)">
             <summary>
             Returns a string which is equivalent to adding it to itself n times.
             </summary>

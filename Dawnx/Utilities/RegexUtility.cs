@@ -108,10 +108,10 @@ namespace Dawnx.Utilities
                 for (int count = toLength; count >= fromLength; count--)
                 {
                     if (count == toLength)
-                        parts.Add(NumberRange($"1{"0".Times(count - 1)}", to));
+                        parts.Add(NumberRange($"1{"0".Replicate(count - 1)}", to));
                     else if (count == fromLength)
-                        parts.Add(NumberRange(from, "9".Times(count)));
-                    else parts.Add("\\d".Times(count));
+                        parts.Add(NumberRange(from, "9".Replicate(count)));
+                    else parts.Add("\\d".Replicate(count));
                 }
                 return parts.Join("|");
             }

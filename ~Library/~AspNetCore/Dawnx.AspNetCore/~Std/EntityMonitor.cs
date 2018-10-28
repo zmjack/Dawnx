@@ -1,61 +1,48 @@
 ﻿using Dawnx.Entity;
+using Dawnx.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Dawnx.AspNetCore
 {
-    public delegate void CommonMonitorInvoker<TEntity>(EntityState state, TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
-        where TEntity : IEntityMonitor;
-    public delegate void StateMonitorInvoker<TEntity>(TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
-        where TEntity : IEntityMonitor;
-
     public static class EntityMonitor
     {
-        public static Dictionary<string, Delegate> AddedMonitors { get; private set; } = new Dictionary<string, Delegate>();
-        public static Dictionary<string, Delegate> ModifiedMonitors { get; private set; } = new Dictionary<string, Delegate>();
-        public static Dictionary<string, Delegate> DeletedMonitors { get; private set; } = new Dictionary<string, Delegate>();
         public static Dictionary<string, Delegate> Monitors { get; private set; } = new Dictionary<string, Delegate>();
 
-        public static void RegisterForAdded<TEntity>(StateMonitorInvoker<TEntity> invoker)
-            where TEntity : IEntityMonitor
-            => AddedMonitors[typeof(TEntity).FullName] = invoker;
-        public static void RegisterForModified<TEntity>(StateMonitorInvoker<TEntity> invoker)
-            where TEntity : IEntityMonitor
-            => ModifiedMonitors[typeof(TEntity).FullName] = invoker;
-        public static void RegisterForDeleted<TEntity>(StateMonitorInvoker<TEntity> invoker)
-            where TEntity : IEntityMonitor
-            => DeletedMonitors[typeof(TEntity).FullName] = invoker;
-        public static void Register<TEntity>(CommonMonitorInvoker<TEntity> invoker)
+        public static void Register<TEntity>(Action<EntityMonitorInvokerParameter<TEntity>> invoker)
             where TEntity : IEntityMonitor
             => Monitors[typeof(TEntity).FullName] = invoker;
 
-        public static Delegate GetMonitor(string entityFullName, EntityState type)
-        {
-            Delegate action = null;
-            switch (type)
-            {
-                case EntityState.Added:
-                    AddedMonitors.TryGetValue(entityFullName, out action);
-                    break;
-
-                case EntityState.Modified:
-                    ModifiedMonitors.TryGetValue(entityFullName, out action);
-                    break;
-
-                case EntityState.Deleted:
-                    DeletedMonitors.TryGetValue(entityFullName, out action);
-                    break;
-            }
-
-            return action;
-        }
-
-        public static Delegate GetCommonMonitor(string entityFullName)
+        public static Delegate GetMonitor(string entityFullName)
         {
             Monitors.TryGetValue(entityFullName, out var action);
             return action;
+        }
+
+        public static void WriteLog<TEntity>(IEntityMonitorLog log,
+            EntityState state, TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
+            where TEntity : IEntityMonitor
+        {
+            //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue
+            var type = typeof(TEntity);
+            var keyProps = type.GetProperties()
+                .Where(x => x.GetCustomAttributes(typeof(KeyAttribute), true).Any());
+
+            log.ModelClassName = type.FullName;
+            log.MonitorEvent = state.ToString();
+            log.ModelKeys = keyProps.Select(prop => prop.GetValue(model)).Json();
+            log.ChangeValues = (state == EntityState.Modified ? propertyEntries.Where(x => x.IsModified) : propertyEntries)
+                .Select(x => new EntityMonitorChangeValue
+                {
+                    FieldName = x.Metadata.Name,
+                    FieldDisplayName = DataAnnotationUtility.GetDisplayName(x.Metadata.PropertyInfo),
+                    OldValue = x.OriginalValue.Json(),
+                    Value = x.CurrentValue.Json(),
+                }).Json();
         }
 
     }

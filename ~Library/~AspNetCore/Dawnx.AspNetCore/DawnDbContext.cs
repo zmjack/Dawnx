@@ -38,11 +38,14 @@ namespace Dawnx.AspNetCore
                 var entityMonitor = entity as IEntityMonitor;
                 if (!(entityMonitor is null))
                 {
-                    EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State)?
-                        .DynamicInvoke(entity, entityMonitor.MonitorCarry, entry.Properties);
+                    var paramType = typeof(EntityMonitorInvokerParameter<>).MakeGenericType(entity.GetType());
+                    var param = Activator.CreateInstance(paramType) as IEntityMonitorInvokerParameter;
+                    param.State = entry.State;
+                    param.Entity = entity;
+                    param.Carry = entityMonitor.MonitorCarry;
+                    param.PropertyEntries = entry.Properties;
 
-                    EntityMonitor.GetCommonMonitor(entity.GetType().FullName)?
-                        .DynamicInvoke(entry.State, entity, entityMonitor.MonitorCarry, entry.Properties);
+                    EntityMonitor.GetMonitor(entity.GetType().FullName)?.DynamicInvoke(param);
                 }
             }
         }

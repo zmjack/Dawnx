@@ -13,20 +13,21 @@ namespace Dawnx.AspNetCore.Test
         {
             var log = new List<string>();
 
-            EntityMonitor.RegisterForAdded(new StateMonitorInvoker<SimpleModel>((model, carry, properties) =>
+            EntityMonitor.Register<SimpleModel>(param =>
             {
-                log.Add($"{carry}\t{nameof(EntityState.Added)}");
-            }));
-
-            EntityMonitor.RegisterForModified(new StateMonitorInvoker<SimpleModel>((model, carry, properties) =>
-            {
-                log.Add($"{carry}\t{nameof(EntityState.Modified)}");
-            }));
-
-            EntityMonitor.RegisterForDeleted(new StateMonitorInvoker<SimpleModel>((model, carry, properties) =>
-            {
-                log.Add($"{carry}\t{nameof(EntityState.Deleted)}");
-            }));
+                switch (param.State)
+                {
+                    case EntityState.Added:
+                        log.Add($"{param.Carry}\t{nameof(EntityState.Added)}");
+                        break;
+                    case EntityState.Modified:
+                        log.Add($"{param.Carry}\t{nameof(EntityState.Modified)}");
+                        break;
+                    case EntityState.Deleted:
+                        log.Add($"{param.Carry}\t{nameof(EntityState.Deleted)}");
+                        break;
+                }
+            });
 
             using (var context = new ApplicationDbContext())
             {
@@ -35,7 +36,7 @@ namespace Dawnx.AspNetCore.Test
                     ProductName = "A",
                 });
                 context.SaveChanges();
-                Assert.Empty(log);
+                Assert.Equal($"\t{nameof(EntityState.Added)}", log.Last());
 
                 // Added
                 var item = new SimpleModel

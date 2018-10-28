@@ -27,7 +27,7 @@ namespace Dawnx.AspNetCore
         public static void RegisterForDeleted<TEntity>(StateMonitorInvoker<TEntity> invoker)
             where TEntity : IEntityMonitor
             => DeletedMonitors[typeof(TEntity).FullName] = invoker;
-        public static void Register<TEntity>(StateMonitorInvoker<TEntity> invoker)
+        public static void Register<TEntity>(CommonMonitorInvoker<TEntity> invoker)
             where TEntity : IEntityMonitor
             => Monitors[typeof(TEntity).FullName] = invoker;
 

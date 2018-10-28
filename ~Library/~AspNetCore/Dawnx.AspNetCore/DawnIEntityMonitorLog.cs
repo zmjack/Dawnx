@@ -7,7 +7,7 @@ namespace Dawnx.AspNetCore
 {
     public static class DawnIEntityMonitorLog
     {
-        public static TEntityMonitorLog Fill<TEntityMonitorLog, TEntity>(this TEntityMonitorLog @this, EntityMonitorInvokerParameter<TEntity> param)
+        public static TEntityMonitorLog FillMonitorLog<TEntityMonitorLog, TEntity>(this TEntityMonitorLog @this, EntityMonitorInvokerParameter<TEntity> param)
             where TEntityMonitorLog : IEntityMonitorLog
             where TEntity : IEntityMonitor
         {

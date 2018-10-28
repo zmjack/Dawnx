@@ -1,15 +1,13 @@
-﻿using Dawnx.Utilities;
+﻿using Dawnx.Entity;
+using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
-namespace Dawnx.Entity
+namespace Dawnx
 {
-    public interface IEntity<TSelf> : IEntity
-        where TSelf : class, IEntity<TSelf>, new()
-    { }
-
     public static partial class DawnIEntity
     {
         public static string DisplayName<TEntity, TRet>(this IEnumerable<IEntity<TEntity>> @this, Expression<Func<TEntity, TRet>> expression)

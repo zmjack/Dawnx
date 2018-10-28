@@ -23,8 +23,7 @@ namespace Dawnx.AspNetCore
             return action;
         }
 
-        public static void WriteLog<TEntity>(IEntityMonitorLog log,
-            EntityState state, TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
+        public static void WriteLog<TEntity>(IEntityMonitorLog log, EntityMonitorInvokerParameter<TEntity> param)
             where TEntity : IEntityMonitor
         {
             //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue
@@ -32,10 +31,11 @@ namespace Dawnx.AspNetCore
             var keyProps = type.GetProperties()
                 .Where(x => x.GetCustomAttributes(typeof(KeyAttribute), true).Any());
 
+            log.MonitorTime = DateTime.Now;
+            log.MonitorEvent = param.State.ToString();
             log.ModelClassName = type.FullName;
-            log.MonitorEvent = state.ToString();
-            log.ModelKeys = keyProps.Select(prop => prop.GetValue(model)).Json();
-            log.ChangeValues = (state == EntityState.Modified ? propertyEntries.Where(x => x.IsModified) : propertyEntries)
+            log.ModelKeys = keyProps.Select(prop => prop.GetValue(param.Entity)).Json();
+            log.ChangeValues = (param.State == EntityState.Modified ? param.PropertyEntries.Where(x => x.IsModified) : param.PropertyEntries)
                 .Select(x => new EntityMonitorChangeValue
                 {
                     FieldName = x.Metadata.Name,

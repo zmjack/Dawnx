@@ -19,7 +19,7 @@ namespace Dawnx.AspNetCore
         where TEntity : IEntityMonitor
     {
         public EntityState State { get; set; }
-        public TEntity Model
+        public TEntity Entity
         {
             get => (TEntity)(this as IEntityMonitorInvokerParameter).Entity;
             set => (this as IEntityMonitorInvokerParameter).Entity = value;

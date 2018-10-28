@@ -4,40 +4,24 @@ namespace Dawnx.Entity
 {
     public interface IEntityMonitor
     {
-        object MonitorState { get; set; }
+        object MonitorCarry { get; set; }
     }
 
     public static class DawnIEntityMonitor
     {
-        public static TEntityMonitor EnableMonitor<TEntityMonitor>(this TEntityMonitor @this, object state)
+        public static TEntityMonitor MonitorCarry<TEntityMonitor>(this TEntityMonitor @this, object carry)
             where TEntityMonitor : IEntityMonitor
         {
-            @this.MonitorState = state;
+            @this.MonitorCarry = carry;
             return @this;
         }
-        public static IEnumerable<TEntityMonitor> EnableMonitor<TEntityMonitor>(this IEnumerable<TEntityMonitor> @this, object state)
+        public static IEnumerable<TEntityMonitor> MonitorCarry<TEntityMonitor>(this IEnumerable<TEntityMonitor> @this, object carry)
             where TEntityMonitor : IEntityMonitor
         {
-            @this.Each(_ => EnableMonitor(_, state));
+            @this.Each(_ => MonitorCarry(_, carry));
             return @this;
         }
-
-        public static TEntityMonitor DisableMonitor<TEntityMonitor>(this TEntityMonitor @this)
-            where TEntityMonitor : IEntityMonitor
-        {
-            @this.MonitorState = null;
-            return @this;
-        }
-        public static IEnumerable<TEntityMonitor> DisableMonitor<TEntityMonitor>(this IEnumerable<TEntityMonitor> @this)
-            where TEntityMonitor : IEntityMonitor
-        {
-            @this.Each(_ => DisableMonitor(_));
-            return @this;
-        }
-
-        public static bool IsMonitorEnabled(this IEntityMonitor @this)
-            => !(@this.MonitorState is null);
-
+        
     }
 
 }

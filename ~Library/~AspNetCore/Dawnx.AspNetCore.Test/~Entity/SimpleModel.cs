@@ -13,6 +13,6 @@ namespace Dawnx.AspNetCore.Test
         public string ProductName { get; set; }
 
         [NotMapped]
-        public object MonitorState { get; set; }        
+        public object MonitorCarry { get; set; }        
     }
 }

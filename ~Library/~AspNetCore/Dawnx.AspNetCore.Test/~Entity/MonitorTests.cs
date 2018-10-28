@@ -41,7 +41,7 @@ namespace Dawnx.AspNetCore.Test
                 var item = new SimpleModel
                 {
                     ProductName = "b",
-                }.EnableMonitor("u1");
+                }.MonitorCarry("u1");
                 context.Add(item);
                 context.SaveChanges();
                 Assert.Equal($"u1\t{nameof(EntityState.Added)}", log.Last());
@@ -49,18 +49,18 @@ namespace Dawnx.AspNetCore.Test
                 // Modified
                 var result = context.SimpleModels.First();
                 result.ProductName = "B";
-                result.EnableMonitor("u2");
+                result.MonitorCarry("u2");
                 context.SaveChanges();
                 Assert.Equal($"u2\t{nameof(EntityState.Modified)}", log.Last());
 
                 // Deleted
-                context.SimpleModels.AsEnumerable().EnableMonitor("u3");
+                context.SimpleModels.AsEnumerable().MonitorCarry("u3");
                 context.RemoveRange(context.SimpleModels);
                 context.SaveChanges();
                 Assert.Equal(new[]
                 {
-                    $"{result.MonitorState as string}\t{nameof(EntityState.Deleted)}",
-                    $"{result.MonitorState as string}\t{nameof(EntityState.Deleted)}",
+                    $"{result.MonitorCarry as string}\t{nameof(EntityState.Deleted)}",
+                    $"{result.MonitorCarry as string}\t{nameof(EntityState.Deleted)}",
                 }, log.TakeLast(2));
             }
 

@@ -36,13 +36,13 @@ namespace Dawnx.AspNetCore
 
                 // Resolve Monitors
                 var entityMonitor = entity as IEntityMonitor;
-                if (entityMonitor?.IsMonitorEnabled() ?? false)
+                if (!(entityMonitor is null))
                 {
                     EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State)?
-                        .DynamicInvoke(entity, entityMonitor.MonitorState, entry.Properties);
+                        .DynamicInvoke(entity, entityMonitor.MonitorCarry, entry.Properties);
 
                     EntityMonitor.GetCommonMonitor(entity.GetType().FullName)?
-                        .DynamicInvoke(entry.State, entity, entityMonitor.MonitorState, entry.Properties);
+                        .DynamicInvoke(entry.State, entity, entityMonitor.MonitorCarry, entry.Properties);
                 }
             }
         }

@@ -6,46 +6,55 @@ using System.Collections.Generic;
 
 namespace Dawnx.AspNetCore
 {
-    public delegate void MonitorInvoker<TEntity>(TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
+    public delegate void CommonMonitorInvoker<TEntity>(EntityState state, TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
+        where TEntity : IEntityMonitor;
+    public delegate void StateMonitorInvoker<TEntity>(TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
         where TEntity : IEntityMonitor;
 
     public static class EntityMonitor
     {
-        public static Dictionary<string, Delegate> AddMonitors { get; private set; } = new Dictionary<string, Delegate>();
-        public static Dictionary<string, Delegate> ModifyMonitors { get; private set; } = new Dictionary<string, Delegate>();
-        public static Dictionary<string, Delegate> DeleteMonitors { get; private set; } = new Dictionary<string, Delegate>();
+        public static Dictionary<string, Delegate> AddedMonitors { get; private set; } = new Dictionary<string, Delegate>();
+        public static Dictionary<string, Delegate> ModifiedMonitors { get; private set; } = new Dictionary<string, Delegate>();
+        public static Dictionary<string, Delegate> DeletedMonitors { get; private set; } = new Dictionary<string, Delegate>();
+        public static Dictionary<string, Delegate> Monitors { get; private set; } = new Dictionary<string, Delegate>();
 
-        public static void RegisterForAdded<TEntity>(MonitorInvoker<TEntity> invoker)
+        public static void RegisterForAdded<TEntity>(StateMonitorInvoker<TEntity> invoker)
             where TEntity : IEntityMonitor
-            => AddMonitors[typeof(TEntity).FullName] = invoker;
-        public static void RegisterForModified<TEntity>(MonitorInvoker<TEntity> invoker)
+            => AddedMonitors[typeof(TEntity).FullName] = invoker;
+        public static void RegisterForModified<TEntity>(StateMonitorInvoker<TEntity> invoker)
             where TEntity : IEntityMonitor
-            => ModifyMonitors[typeof(TEntity).FullName] = invoker;
-        public static void RegisterForDeleted<TEntity>(MonitorInvoker<TEntity> invoker)
+            => ModifiedMonitors[typeof(TEntity).FullName] = invoker;
+        public static void RegisterForDeleted<TEntity>(StateMonitorInvoker<TEntity> invoker)
             where TEntity : IEntityMonitor
-            => DeleteMonitors[typeof(TEntity).FullName] = invoker;
+            => DeletedMonitors[typeof(TEntity).FullName] = invoker;
+        public static void Register<TEntity>(StateMonitorInvoker<TEntity> invoker)
+            where TEntity : IEntityMonitor
+            => Monitors[typeof(TEntity).FullName] = invoker;
 
-        public static MonitorInvoker<TEntity> GetMonitor<TEntity>(EntityState type)
-            where TEntity : IEntityMonitor
-            => GetMonitor(typeof(TEntity).FullName, type) as MonitorInvoker<TEntity>;
         public static Delegate GetMonitor(string entityFullName, EntityState type)
         {
             Delegate action = null;
             switch (type)
             {
                 case EntityState.Added:
-                    AddMonitors.TryGetValue(entityFullName, out action);
+                    AddedMonitors.TryGetValue(entityFullName, out action);
                     break;
 
                 case EntityState.Modified:
-                    ModifyMonitors.TryGetValue(entityFullName, out action);
+                    ModifiedMonitors.TryGetValue(entityFullName, out action);
                     break;
 
                 case EntityState.Deleted:
-                    DeleteMonitors.TryGetValue(entityFullName, out action);
+                    DeletedMonitors.TryGetValue(entityFullName, out action);
                     break;
             }
 
+            return action;
+        }
+
+        public static Delegate GetCommonMonitor(string entityFullName)
+        {
+            Monitors.TryGetValue(entityFullName, out var action);
             return action;
         }
 

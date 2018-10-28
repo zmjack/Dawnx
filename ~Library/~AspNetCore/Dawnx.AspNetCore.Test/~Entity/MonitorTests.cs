@@ -13,17 +13,17 @@ namespace Dawnx.AspNetCore.Test
         {
             var log = new List<string>();
 
-            EntityMonitor.RegisterForAdded(new MonitorInvoker<SimpleModel>((model, carry, properties) =>
+            EntityMonitor.RegisterForAdded(new StateMonitorInvoker<SimpleModel>((model, carry, properties) =>
             {
                 log.Add($"{carry}\t{nameof(EntityState.Added)}");
             }));
 
-            EntityMonitor.RegisterForModified(new MonitorInvoker<SimpleModel>((model, carry, properties) =>
+            EntityMonitor.RegisterForModified(new StateMonitorInvoker<SimpleModel>((model, carry, properties) =>
             {
                 log.Add($"{carry}\t{nameof(EntityState.Modified)}");
             }));
 
-            EntityMonitor.RegisterForDeleted(new MonitorInvoker<SimpleModel>((model, carry, properties) =>
+            EntityMonitor.RegisterForDeleted(new StateMonitorInvoker<SimpleModel>((model, carry, properties) =>
             {
                 log.Add($"{carry}\t{nameof(EntityState.Deleted)}");
             }));

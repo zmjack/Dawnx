@@ -40,6 +40,9 @@ namespace Dawnx.AspNetCore
                 {
                     EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State)?
                         .DynamicInvoke(entity, entityMonitor.MonitorState, entry.Properties);
+
+                    EntityMonitor.GetCommonMonitor(entity.GetType().FullName)?
+                        .DynamicInvoke(entry.State, entity, entityMonitor.MonitorState, entry.Properties);
                 }
             }
         }

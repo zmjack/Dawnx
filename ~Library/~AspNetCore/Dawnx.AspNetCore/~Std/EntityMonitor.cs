@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dawnx.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Dawnx.AspNetCore.Entity
+namespace Dawnx.AspNetCore
 {
     public delegate void MonitorInvoker<TEntity>(TEntity model, dynamic carry, IEnumerable<PropertyEntry> propertyEntries)
         where TEntity : IEntityMonitor;

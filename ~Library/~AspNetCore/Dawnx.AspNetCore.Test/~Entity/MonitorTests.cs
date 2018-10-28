@@ -1,15 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Xunit;
-using Dawnx.AspNetCore;
-using System.Threading;
-using System.Threading.Tasks;
-using Dawnx.Utilities;
 using System.Linq;
 using System.Collections.Generic;
-using Dawnx.AspNetCore.Entity;
+using Dawnx.Entity;
 
 namespace Dawnx.AspNetCore.Test
 {

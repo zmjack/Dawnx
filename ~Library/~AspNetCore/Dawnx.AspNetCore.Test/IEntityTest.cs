@@ -1,7 +1,7 @@
 using Dawnx.Analysises;
 using Dawnx.AspNetCore.Reflection;
+using Dawnx.Entity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 

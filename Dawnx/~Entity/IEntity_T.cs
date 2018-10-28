@@ -1,13 +1,10 @@
 ﻿using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Text.RegularExpressions;
 
-namespace Dawnx
+namespace Dawnx.Entity
 {
     public interface IEntity<TSelf> : IEntity
         where TSelf : class, IEntity<TSelf>, new()

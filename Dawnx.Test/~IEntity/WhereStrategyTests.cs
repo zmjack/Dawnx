@@ -1,4 +1,5 @@
 using Dawnx;
+using Dawnx.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

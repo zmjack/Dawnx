@@ -1,13 +1,8 @@
-﻿using Dawnx.Utilities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Dawnx.Entity;
+using Dawnx.Utilities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Dawnx.AspNetCore.Test
 {

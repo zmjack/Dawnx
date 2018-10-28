@@ -1,4 +1,4 @@
-﻿using Dawnx.AspNetCore.Entity;
+﻿using Dawnx.Entity;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;

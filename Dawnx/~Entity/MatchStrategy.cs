@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Dawnx
+namespace Dawnx.Entity
 {
     public class MatchStrategy<TEntity> : WhereStrategy<TEntity>
     {

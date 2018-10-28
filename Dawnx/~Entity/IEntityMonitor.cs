@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Dawnx.AspNetCore.Entity
+namespace Dawnx.Entity
 {
     public interface IEntityMonitor
     {

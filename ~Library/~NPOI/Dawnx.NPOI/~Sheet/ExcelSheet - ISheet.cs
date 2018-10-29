@@ -80,9 +80,9 @@ namespace Dawnx.NPOI
 
         public IRow CopyRow(int sourceIndex, int targetIndex) => MapedSheet.CopyRow(sourceIndex, targetIndex);
 
-        public ISheet CopySheet(string Name) => MapedSheet.CopySheet(Name);
+        ISheet ISheet.CopySheet(string Name) => MapedSheet.CopySheet(Name);
 
-        public ISheet CopySheet(string Name, bool copyStyle) => MapedSheet.CopySheet(Name, copyStyle);
+        ISheet ISheet.CopySheet(string Name, bool copyStyle) => MapedSheet.CopySheet(Name, copyStyle);
 
         public IDrawing CreateDrawingPatriarch() => MapedSheet.CreateDrawingPatriarch();
 

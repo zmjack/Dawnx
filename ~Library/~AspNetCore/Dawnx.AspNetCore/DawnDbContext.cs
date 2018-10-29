@@ -1,4 +1,4 @@
-﻿using Dawnx.AspNetCore.Entity;
+﻿using Dawnx.Entity;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
@@ -35,10 +35,17 @@ namespace Dawnx.AspNetCore
                 }
 
                 // Resolve Monitors
-                if (!(entity as IEntityMonitor)?.MonitorExecutor.IsNullOrWhiteSpace() ?? false)
+                var entityMonitor = entity as IEntityMonitor;
+                if (!(entityMonitor is null))
                 {
-                    var monitor = EntityMonitor.GetMonitor(entity.GetType().FullName, entry.State);
-                    monitor?.Invoke((entity as IEntityMonitor).MonitorExecutor, entry.Properties);
+                    var paramType = typeof(EntityMonitorInvokerParameter<>).MakeGenericType(entity.GetType());
+                    var param = Activator.CreateInstance(paramType) as IEntityMonitorInvokerParameter;
+                    param.State = entry.State;
+                    param.Entity = entity;
+                    param.Carry = entityMonitor.MonitorCarry;
+                    param.PropertyEntries = entry.Properties;
+
+                    EntityMonitor.GetMonitor(entity.GetType().FullName)?.DynamicInvoke(param);
                 }
             }
         }

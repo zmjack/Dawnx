@@ -177,6 +177,38 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0)">
+            <summary>
+            Accept all property values which are can be read and write from another model.
+                (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')
+            </summary>
+            <typeparam name="TEntity">Instance of IEntity</typeparam>
+            <param name="this">Source model</param>
+            <param name="model">The model which provide values</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Accept the specified property values from another model.
+            </summary>
+            <typeparam name="TEntity">Instance of IEntity</typeparam>
+            <param name="this">Source model</param>
+            <param name="model">The model which provide values</param>
+            <param name="includes">Specifies properties that are applied to the source model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEntity.AcceptBut``1(``0,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Accept all property values which are can be read and write from another model,
+                but exclude the specified properties.
+                (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')
+            </summary>
+            <typeparam name="TEntity">Instance of IEntity</typeparam>
+            <param name="this">Source model</param>
+            <param name="model">The model which provide values</param>
+            <param name="excludes">Specifies properties that aren't applied to the source model.</param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
             Do action for each item.
@@ -361,7 +393,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnIQueryable.WhereStrategy``1(System.Linq.IQueryable{``0},Dawnx.IWhereStrategy{``0})">
+        <member name="M:Dawnx.DawnIQueryable.WhereStrategy``1(System.Linq.IQueryable{``0},Dawnx.Entity.IWhereStrategy{``0})">
             <summary>
             Use a WhereStragtegy to generate a where expression.
             </summary>
@@ -851,7 +883,7 @@
             <param name="pos"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.Times(System.String,System.Int32)">
+        <member name="M:Dawnx.DawnString.Replicate(System.String,System.Int32)">
             <summary>
             Returns a string which is equivalent to adding it to itself n times.
             </summary>
@@ -928,6 +960,16 @@
             </summary>
             <param name="this"></param>
             <returns></returns>
+        </member>
+        <member name="T:Dawnx.Entity.IEntity">
+            <summary>
+            Use <see cref="T:Dawnx.Entity.IEntity"/> to define entity classes to get some useful extension methods.
+            </summary>
+        </member>
+        <member name="T:Dawnx.Entity.IEntity`1">
+            <summary>
+            Use <see cref="T:Dawnx.Entity.IEntity"/> to define entity classes to get some useful extension methods.
+            </summary>
         </member>
         <member name="T:Dawnx.Enums.MediaType">
             <summary>
@@ -1031,51 +1073,6 @@
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
         </member>
-        <member name="T:Dawnx.IEntity">
-            <summary>
-            Use <see cref="T:Dawnx.IEntity"/> to define entity classes to get some useful extension methods.
-            </summary>
-        </member>
-        <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0)">
-            <summary>
-            Accept all property values which are can be read and write from another model.
-                (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')
-            </summary>
-            <typeparam name="TEntity">Instance of IEntity</typeparam>
-            <param name="this">Source model</param>
-            <param name="model">The model which provide values</param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Accept the specified property values from another model.
-            </summary>
-            <typeparam name="TEntity">Instance of IEntity</typeparam>
-            <param name="this">Source model</param>
-            <param name="model">The model which provide values</param>
-            <param name="includes">Specifies properties that are applied to the source model.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEntity.AcceptBut``1(``0,``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Accept all property values which are can be read and write from another model,
-                but exclude the specified properties.
-                (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')
-            </summary>
-            <typeparam name="TEntity">Instance of IEntity</typeparam>
-            <param name="this">Source model</param>
-            <param name="model">The model which provide values</param>
-            <param name="excludes">Specifies properties that aren't applied to the source model.</param>
-            <returns></returns>
-        </member>
-        <member name="T:Dawnx.SqlScope`3">
-            <summary>
-            Easy to use and secure SQL Executor
-            </summary>
-            <typeparam name="TDbConnection"></typeparam>
-            <typeparam name="TDbCommand"></typeparam>
-            <typeparam name="TDbParameter"></typeparam>
-        </member>
         <member name="M:Dawnx.Range.Create(System.Int32)">
             <summary>
             The range type represents an immutable sequence of numbers
@@ -1106,6 +1103,14 @@
             </summary>
             <typeparam name="T"></typeparam>
             <typeparam name="TSelf"></typeparam>
+        </member>
+        <member name="T:Dawnx.SqlScope`3">
+            <summary>
+            Easy to use and secure SQL Executor
+            </summary>
+            <typeparam name="TDbConnection"></typeparam>
+            <typeparam name="TDbCommand"></typeparam>
+            <typeparam name="TDbParameter"></typeparam>
         </member>
     </members>
 </doc>

@@ -1,11 +1,7 @@
-﻿using Dawnx.Net.Http;
-using Dawnx.Utilities;
+﻿using Dawnx.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
-using System.Text;
 using Xunit;
 
 namespace Dawnx.Net.Test

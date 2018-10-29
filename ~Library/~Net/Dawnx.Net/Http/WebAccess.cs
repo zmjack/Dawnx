@@ -1,6 +1,5 @@
 ﻿using Dawnx.Enums;
 using Dawnx.Net.Http.Processors;
-using Dawnx.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

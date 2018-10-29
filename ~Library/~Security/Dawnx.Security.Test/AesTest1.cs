@@ -13,13 +13,13 @@ namespace Dawnx.Security.Test
         public void Test1()
         {
             var key16 = Convert.ToBase64String(Encoding.Default.GetBytes(
-                new StringGenerator("$w".Times(16)).Take(1)[0]));
+                new StringGenerator("$w".Replicate(16)).Take(1)[0]));
             var key24 = Convert.ToBase64String(Encoding.Default.GetBytes(
-                new StringGenerator("$w".Times(24)).Take(1)[0]));
+                new StringGenerator("$w".Replicate(24)).Take(1)[0]));
             var key32 = Convert.ToBase64String(Encoding.Default.GetBytes(
-                new StringGenerator("$w".Times(32)).Take(1)[0]));
+                new StringGenerator("$w".Replicate(32)).Take(1)[0]));
             var key48 = Convert.ToBase64String(Encoding.Default.GetBytes(
-                new StringGenerator("$w".Times(48)).Take(1)[0]));
+                new StringGenerator("$w".Replicate(48)).Take(1)[0]));
 
             var text = Guid.NewGuid().ToString();
             var data = Encoding.UTF8.GetBytes(text);

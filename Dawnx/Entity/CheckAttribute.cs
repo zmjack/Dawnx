@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dawnx
+namespace Dawnx.Entity
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class CheckAttribute : ValidationAttribute

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx
+namespace Dawnx.Entity
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class TrackLastWriteTimeAttribute : Attribute { }

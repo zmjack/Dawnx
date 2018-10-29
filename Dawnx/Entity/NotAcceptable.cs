@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace Dawnx
+namespace Dawnx.Entity
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class TrackLowerAttribute : Attribute { }
+    public class NotAcceptable : Attribute { }
 }

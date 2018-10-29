@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Entity;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 

@@ -131,7 +131,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="times"></param>
         /// <returns></returns>
-        public static string Times(this string @this, int times)
+        public static string Replicate(this string @this, int times)
         {
             var sb = new StringBuilder(@this.Length * times);
             for (int i = 0; i < times; i++)

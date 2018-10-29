@@ -1,17 +1,14 @@
-﻿using Dawnx.Utilities;
+﻿using Dawnx.Entity;
+using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Dawnx
 {
-    /// <summary>
-    /// Use <see cref="IEntity"/> to define entity classes to get some useful extension methods.
-    /// </summary>
-    public interface IEntity { }
-
     public static partial class DawnIEntity
     {
         /// <summary>

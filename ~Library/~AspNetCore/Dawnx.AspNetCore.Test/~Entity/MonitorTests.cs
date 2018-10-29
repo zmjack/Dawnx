@@ -1,15 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Xunit;
-using Dawnx.AspNetCore;
-using System.Threading;
-using System.Threading.Tasks;
-using Dawnx.Utilities;
 using System.Linq;
 using System.Collections.Generic;
-using Dawnx.AspNetCore.Entity;
+using Dawnx.Entity;
 
 namespace Dawnx.AspNetCore.Test
 {
@@ -20,20 +13,21 @@ namespace Dawnx.AspNetCore.Test
         {
             var log = new List<string>();
 
-            EntityMonitor.RegisterMonitor<SimpleModel>(EntityState.Added, new MonitorInvoker((user, properties) =>
+            EntityMonitor.Register<SimpleModel>(param =>
             {
-                log.Add($"{user}\t{nameof(EntityState.Added)}");
-            }));
-
-            EntityMonitor.RegisterMonitor<SimpleModel>(EntityState.Modified, new MonitorInvoker((user, properties) =>
-            {
-                log.Add($"{user}\t{nameof(EntityState.Modified)}");
-            }));
-
-            EntityMonitor.RegisterMonitor<SimpleModel>(EntityState.Deleted, new MonitorInvoker((user, properties) =>
-            {
-                log.Add($"{user}\t{nameof(EntityState.Deleted)}");
-            }));
+                switch (param.State)
+                {
+                    case EntityState.Added:
+                        log.Add($"{param.Carry}\t{nameof(EntityState.Added)}");
+                        break;
+                    case EntityState.Modified:
+                        log.Add($"{param.Carry}\t{nameof(EntityState.Modified)}");
+                        break;
+                    case EntityState.Deleted:
+                        log.Add($"{param.Carry}\t{nameof(EntityState.Deleted)}");
+                        break;
+                }
+            });
 
             using (var context = new ApplicationDbContext())
             {
@@ -42,32 +36,32 @@ namespace Dawnx.AspNetCore.Test
                     ProductName = "A",
                 });
                 context.SaveChanges();
-                Assert.Empty(log);
+                Assert.Equal($"\t{nameof(EntityState.Added)}", log.Last());
 
                 // Added
                 var item = new SimpleModel
                 {
-                    MonitorExecutor = "u1",
                     ProductName = "b",
-                };
+                }.MonitorCarry("u1");
                 context.Add(item);
                 context.SaveChanges();
-                Assert.Equal($"{item.MonitorExecutor}\t{nameof(EntityState.Added)}", log.Last());
+                Assert.Equal($"u1\t{nameof(EntityState.Added)}", log.Last());
 
                 // Modified
                 var result = context.SimpleModels.First();
-                result.MonitorExecutor = "u1";
                 result.ProductName = "B";
+                result.MonitorCarry("u2");
                 context.SaveChanges();
-                Assert.Equal($"{result.MonitorExecutor}\t{nameof(EntityState.Modified)}", log.Last());
+                Assert.Equal($"u2\t{nameof(EntityState.Modified)}", log.Last());
 
                 // Deleted
-                context.RemoveRange(context.SimpleModels.Each(_ => _.MonitorExecutor = "u2"));
+                context.SimpleModels.AsEnumerable().MonitorCarry("u3");
+                context.RemoveRange(context.SimpleModels);
                 context.SaveChanges();
                 Assert.Equal(new[]
                 {
-                    $"{result.MonitorExecutor}\t{nameof(EntityState.Deleted)}",
-                    $"{result.MonitorExecutor}\t{nameof(EntityState.Deleted)}",
+                    $"{result.MonitorCarry as string}\t{nameof(EntityState.Deleted)}",
+                    $"{result.MonitorCarry as string}\t{nameof(EntityState.Deleted)}",
                 }, log.TakeLast(2));
             }
 

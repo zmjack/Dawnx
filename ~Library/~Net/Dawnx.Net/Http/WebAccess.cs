@@ -263,5 +263,30 @@ namespace Dawnx.Net.Http
             else return new[] { dvalue?.ToString() ?? "" };
         }
 
+        /// <summary>
+        /// Sets HttpRequestHeaders for next request.
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <returns></returns>
+        public WebAccess WithHeaders(Dictionary<HttpRequestHeader, string> headers)
+        {
+            StateContainer.Headers.Clear();
+            foreach (var header in headers)
+                StateContainer.Headers.Add(header.Key.ToString(), header.Value);
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// Sets HttpRequestHeaders for next request.
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <returns></returns>
+        public WebAccess WithHeaders(Dictionary<string, string> headers)
+        {
+            StateContainer.Headers = headers;
+            return this;
+        }
+
     }
 }

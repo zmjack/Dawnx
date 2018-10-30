@@ -34,10 +34,15 @@
         </member>
         <member name="M:Dawnx.Net.Http.WebAccess.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
-            
             Sets HttpRequestHeaders for next request.
             </summary>
             <param name="headers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Net.Http.WebAccess.WithNoHeaders">
+            <summary>
+            Sets HttpRequestHeaders to null for next request.
+            </summary>
             <returns></returns>
         </member>
     </members>

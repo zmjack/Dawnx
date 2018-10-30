@@ -285,7 +285,6 @@ namespace Dawnx.Net.Http
         }
 
         /// <summary>
-        /// 
         /// Sets HttpRequestHeaders for next request.
         /// </summary>
         /// <param name="headers"></param>
@@ -293,6 +292,16 @@ namespace Dawnx.Net.Http
         public WebAccess WithHeaders(Dictionary<string, string> headers)
         {
             StateContainer.Headers = headers;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets HttpRequestHeaders to null for next request.
+        /// </summary>
+        /// <returns></returns>
+        public WebAccess WithNoHeaders()
+        {
+            StateContainer.Headers = null;
             return this;
         }
 

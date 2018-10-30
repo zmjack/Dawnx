@@ -68,6 +68,8 @@ namespace Dawnx.Net.Http
         public int AllowRedirectTimes { get; set; } = 10;
         public int RedirectTimes { get; set; } = 0;
 
+        public virtual bool Ready() => true;
+
         public void Download(
             Stream receiver,
             string method, string enctype, string url,
@@ -128,6 +130,8 @@ namespace Dawnx.Net.Http
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
+            if (!Ready()) throw new WebException("Instance is not ready to request.");
+
             method = method.ToLower();
             enctype = enctype.ToLower();
 

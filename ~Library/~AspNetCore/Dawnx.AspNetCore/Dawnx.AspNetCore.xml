@@ -28,7 +28,7 @@
             <param name="acceptAllChangesOnSuccess"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPath(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.Path(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.PathBase}{@this.Path}".
                 eg. /controller/action
@@ -56,6 +56,14 @@
             <summary>
             Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
                 eg. http://dawnx.net/controller/action?id=1
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlWithoutQuery(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}".
+                eg. http://dawnx.net/controller/action
             </summary>
             <param name="this"></param>
             <returns></returns>

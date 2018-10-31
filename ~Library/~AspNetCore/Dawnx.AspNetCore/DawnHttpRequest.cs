@@ -13,7 +13,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string UrlPath(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}";
+        public static string Path(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}";
 
         /// <summary>
         /// Returns $"{@this.PathBase}{@this.Path}{@this.QueryString}".
@@ -39,6 +39,15 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public static string Url(this HttpRequest @this)
             => $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}";
+
+        /// <summary>
+        /// Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}".
+        ///     eg. http://dawnx.net/controller/action
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string UrlWithoutQuery(this HttpRequest @this)
+            => $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}";
 
         /// <summary>
         /// Determines whether the access device is a mobile.

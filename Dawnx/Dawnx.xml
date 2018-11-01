@@ -155,14 +155,14 @@
         </member>
         <member name="M:Dawnx.DawnDateTime.UnixTimeMilliseconds(System.DateTime)">
             <summary>
-            Gets the Unix Timestamp(milliseconds) of the specified DateTime.
+            Gets the Unix Timestamp(milliseconds) of the specified DateTime(UTC).
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnDateTime.UnixTimeSeconds(System.DateTime)">
             <summary>
-            Gets the Unix Timestamp(seconds) of the specified DateTime.
+            Gets the Unix Timestamp(seconds) of the specified DateTime(UTC).
             </summary>
             <param name="this"></param>
             <returns></returns>
@@ -1023,30 +1023,36 @@
             <param name="value">[0,1]</param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.UnixMinValue">
+            <summary>
+            Gets the DateTime(UTC) of UnixMinValue.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.Utilities.DateTimeUtility.FromUnixSeconds(System.Int64)">
             <summary>
-            Converts the sepecified Unix TimeStamp(seconds) to DateTime.
+            Converts the sepecified Unix TimeStamp(seconds) to DateTime(UTC).
             </summary>
             <param name="seconds"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.DateTimeUtility.FromUnixMilliseconds(System.Int64)">
             <summary>
-            Converts the sepecified Unix TimeStamp(milliseconds) to DateTime.
+            Converts the sepecified Unix TimeStamp(milliseconds) to DateTime(UTC).
             </summary>
             <param name="milliseconds"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.DateTimeUtility.ToUnixTimeMilliseconds(System.DateTime)">
             <summary>
-            Gets the Unix Timestamp(milliseconds) of the specified DateTime.
+            Gets the Unix Timestamp(milliseconds) of the specified DateTime(UTC).
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.DateTimeUtility.ToUnixTimeSeconds(System.DateTime)">
             <summary>
-            Gets the Unix Timestamp(seconds) of the specified DateTime.
+            Gets the Unix Timestamp(seconds) of the specified DateTime(UTC).
             </summary>
             <param name="this"></param>
             <returns></returns>

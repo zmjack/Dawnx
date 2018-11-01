@@ -1023,6 +1023,34 @@
             <param name="value">[0,1]</param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.FromUnixSeconds(System.Int64)">
+            <summary>
+            Converts the sepecified Unix TimeStamp(seconds) to DateTime.
+            </summary>
+            <param name="seconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.FromUnixMilliseconds(System.Int64)">
+            <summary>
+            Converts the sepecified Unix TimeStamp(milliseconds) to DateTime.
+            </summary>
+            <param name="milliseconds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.ToUnixTimeMilliseconds(System.DateTime)">
+            <summary>
+            Gets the Unix Timestamp(milliseconds) of the specified DateTime.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.ToUnixTimeSeconds(System.DateTime)">
+            <summary>
+            Gets the Unix Timestamp(seconds) of the specified DateTime.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.Utilities.IPUtility.GetLongString(System.Net.IPAddress)">
             <summary>
             Converts a <see cref="T:System.Net.IPAddress"/>  into a long IP string.

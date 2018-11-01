@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 
 namespace Dawnx
 {
@@ -93,7 +94,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <returns></returns>
         public static long UnixTimeMilliseconds(this DateTime @this)
-            => (@this.ToUniversalTime().Ticks - 621355968000000000) / 10000;
+            => DateTimeUtility.ToUnixTimeMilliseconds(@this);
 
         /// <summary>
         /// Gets the Unix Timestamp(seconds) of the specified DateTime.
@@ -101,7 +102,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <returns></returns>
         public static long UnixTimeSeconds(this DateTime @this)
-            => UnixTimeMilliseconds(@this) / 1000;
+            => DateTimeUtility.ToUnixTimeSeconds(@this);
 
         private static int CastCycleDays(int days, bool isBackward)
         {

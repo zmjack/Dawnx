@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using Xunit;
 
 namespace Dawnx.Test
@@ -33,6 +34,12 @@ namespace Dawnx.Test
 
             Assert.Equal(57600, dt.UnixTimeSeconds());
             Assert.Equal(57600000, dt.UnixTimeMilliseconds());
+
+            Assert.Equal(dt, DateTimeUtility.FromUnixSeconds(57600));
+            Assert.Equal(dt, DateTimeUtility.FromUnixMilliseconds(57600_000));
+
+            Assert.Equal(new DateTime(2018, 10, 31, 15, 55, 17),
+                DateTimeUtility.FromUnixSeconds(1540972517).ToLocalTime());
         }
 
     }

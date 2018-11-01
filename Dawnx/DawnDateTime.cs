@@ -89,7 +89,7 @@ namespace Dawnx
         }
 
         /// <summary>
-        /// Gets the Unix Timestamp(milliseconds) of the specified DateTime.
+        /// Gets the Unix Timestamp(milliseconds) of the specified DateTime(UTC).
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
@@ -97,7 +97,7 @@ namespace Dawnx
             => DateTimeUtility.ToUnixTimeMilliseconds(@this);
 
         /// <summary>
-        /// Gets the Unix Timestamp(seconds) of the specified DateTime.
+        /// Gets the Unix Timestamp(seconds) of the specified DateTime(UTC).
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>

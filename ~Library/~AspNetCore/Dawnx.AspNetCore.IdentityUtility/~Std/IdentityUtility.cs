@@ -22,6 +22,9 @@ namespace Dawnx.AspNetCore.IdentityUtility
             else return false;
         }
 
+        /// <summary>
+        /// Advanced option include Role management.
+        /// </summary>
         public static class Advanced
         {
             public static bool AllowAnonymous = false;

@@ -103,14 +103,7 @@ namespace Dawnx.Net.OAuth
 
         public void RefreshTokens()
         {
-            if (RefreshToken is null)
-            {
-                var token = PostFor(DiscoveryResult.TokenEndPointUrl, OpenAuth.RequestBody);
-                AccessToken = token["access_token"].Value<string>();
-                RefreshToken = token["refresh_token"]?.Value<string>();
-                TokenType = token["token_type"].Value<string>();
-            }
-            else
+            if (!(RefreshToken is null))
             {
                 var token = PostFor(DiscoveryResult.TokenEndPointUrl, new
                 {
@@ -129,6 +122,20 @@ namespace Dawnx.Net.OAuth
                     new AuthenticationToken { Name = "token_type", Value = TokenType },
                 });
                 HttpContext.SignInAsync(auth.Principal, auth.Properties).Wait();
+
+                return;
+            }
+            else
+            {
+                if (!(OpenAuth is null))
+                {
+                    var token = PostFor(DiscoveryResult.TokenEndPointUrl, OpenAuth.RequestBody);
+                    AccessToken = token["access_token"].Value<string>();
+                    RefreshToken = token["refresh_token"]?.Value<string>();
+                    TokenType = token["token_type"].Value<string>();
+                    return;
+                }
+                else throw new InvalidOperationException("AccessToken is expired and it's cannot be refreshed.");
             }
         }
 
@@ -145,6 +152,7 @@ namespace Dawnx.Net.OAuth
 
             if (!IsAccessTokenValid)
                 RefreshTokens();
+
             if (IsAccessTokenValid)
             {
                 WithHeaders(new Dictionary<string, string>

@@ -46,7 +46,7 @@ namespace Dawnx.Net.OAuth
                     //        match.Groups[3].Value).Base64Decode()) as JToken;       // Verify Signature
 
                     if (!(HttpContext is null))
-                        HttpContext.AuthenticateAsync(null).Result.Properties.Items[".Token.access_token"] = value;
+                        HttpContext.AuthenticateAsync(null).Result.Properties.UpdateTokenValue("access_token", value);
                 }
                 else throw new ArgumentException("Invalid AccessToken.");
             }
@@ -58,7 +58,7 @@ namespace Dawnx.Net.OAuth
             {
                 _RefreshToken = value;
                 if (!(HttpContext is null))
-                    HttpContext.AuthenticateAsync(null).Result.Properties.Items[".Token.refresh_token"] = value;
+                    HttpContext.AuthenticateAsync(null).Result.Properties.UpdateTokenValue("refresh_token", value);
             }
         }
         public IOpenAuth OpenAuth { get; }
@@ -73,16 +73,15 @@ namespace Dawnx.Net.OAuth
             .For(_ => DateTimeUtility.FromUnixSeconds(_["nbf"].Value<int>())) ?? DateTimeUtility.UnixMinValue();
         public DateTime ExpirationTimeUTC => Payload?
             .For(_ => DateTimeUtility.FromUnixSeconds(_["exp"].Value<int>())) ?? DateTimeUtility.UnixMinValue();
-        public DateTime SlidingExpirationTimeUTC
-            => NotValidBeforeUTC.AddSeconds((ExpirationTimeUTC - NotValidBeforeUTC).TotalSeconds / 2);
 
-        public bool IsAccessTokenValid => DateTime.UtcNow <= SlidingExpirationTimeUTC;
+        public bool IsAccessTokenValid => DateTime.UtcNow.For(_ => NotValidBeforeUTC <= _ && _ <= ExpirationTimeUTC);
 
-        public OpenClient(string authorization, string accessToken, string refreshToken)
+        public OpenClient(string authorization, string accessToken, string refreshToken, string tokenType)
         {
             Authorization = authorization;
             AccessToken = accessToken;
             RefreshToken = refreshToken;
+            TokenType = tokenType;
             DiscoveryResult = new OpenDiscoveryClient(Issuer).Discovery();
         }
 
@@ -95,8 +94,9 @@ namespace Dawnx.Net.OAuth
 
         public OpenClient(OpenAuth_ClientCredentials openAuth, HttpContext context)
             : this(openAuth.Authorization,
-                  context.AuthenticateAsync(null).Result.Properties.Items[".Token.access_token"],
-                  context.AuthenticateAsync(null).Result.Properties.Items[".Token.refresh_token"])
+                  context.AuthenticateAsync(null).Result.Properties.GetTokenValue("access_token"),
+                  context.AuthenticateAsync(null).Result.Properties.GetTokenValue("refresh_token"),
+                  context.AuthenticateAsync(null).Result.Properties.GetTokenValue("token_type"))
         {
             HttpContext = context;
         }
@@ -120,6 +120,15 @@ namespace Dawnx.Net.OAuth
                 AccessToken = token["access_token"].Value<string>();
                 RefreshToken = token["refresh_token"]?.Value<string>();
                 TokenType = token["token_type"].Value<string>();
+
+                var auth = HttpContext.AuthenticateAsync(null).Result;
+                auth.Properties.StoreTokens(new[]
+                {
+                    new AuthenticationToken { Name = "access_token", Value = AccessToken },
+                    new AuthenticationToken { Name = "refresh_token", Value = RefreshToken },
+                    new AuthenticationToken { Name = "token_type", Value = TokenType },
+                });
+                HttpContext.SignInAsync(auth.Principal, auth.Properties).Wait();
             }
         }
 

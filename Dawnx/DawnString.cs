@@ -223,5 +223,36 @@ namespace Dawnx
             else return null;
         }
 
+        /// <summary>
+        /// Returns a new string which is consisting of many units by the specified length number of characters.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="separator"></param>
+        /// <param name="unitLength"></param>
+        /// <param name="padRight"></param>
+        /// <returns></returns>
+        public static string UnitInsert(this string @this, int unitLength, string separator = " ", bool padRight = false)
+        {
+            var sb = new StringBuilder(@this.Length + (int)Math.Ceiling((double)@this.Length / unitLength));
+            int pos;
+
+            if (!padRight)
+                pos = (@this.Length % unitLength).For(_ => _ > 0 ? _ : unitLength);
+            else pos = unitLength;
+
+            foreach (var ch in @this)
+            {
+                if (pos == 0)
+                {
+                    sb.Append(separator);
+                    pos = unitLength;
+                }
+
+                sb.Append(ch);
+                pos--;
+            }
+            return sb.ToString();
+        }
+
     }
 }

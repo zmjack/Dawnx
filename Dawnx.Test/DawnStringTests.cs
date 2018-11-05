@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Xunit;
@@ -86,5 +87,18 @@ namespace Dawnx.Test
             Assert.Equal("zmjack", "zmjack".Project(regex).Trim());
         }
 
+        [Fact]
+        public void Insert()
+        {
+            Assert.Equal("", "".UnitInsert(4, " "));
+            Assert.Equal("", "".UnitInsert(4, " ", true));
+            Assert.Equal("1 2345", "12345".UnitInsert(4, " "));
+            Assert.Equal("1234 5", "12345".UnitInsert(4, " ", true));
+            Assert.Equal("1234 5678", "12345678".UnitInsert(4, " "));
+            Assert.Equal("1234 5678", "12345678".UnitInsert(4, " ", true));
+            Assert.Equal("1 2345 6789", "123456789".UnitInsert(4, " "));
+            Assert.Equal("1234 5678 9", "123456789".UnitInsert(4, " ", true));
+        }
+               
     }
 }

@@ -933,6 +933,16 @@
             <param name="target"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.UnitInsert(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            Returns a new string which is consisting of many units by the specified length number of characters.
+            </summary>
+            <param name="this"></param>
+            <param name="separator"></param>
+            <param name="unitLength"></param>
+            <param name="padRight"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnUInt32.IsOdd(System.UInt32)">
             <summary>
             Returns whether the specified number is odd.

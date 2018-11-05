@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Dawnx.Algorithms.Math
 {
-    public class Matrix : ICloneable
+    public partial class Matrix : ICloneable
     {
         public int RowLength { get; private set; }
         public int ColumnLength { get; private set; }

@@ -5,6 +5,33 @@ namespace Dawnx.Algorithms.Math.Test
     public class MatrixTest
     {
         [Fact]
+        public void NewDiagonalTest()
+        {
+            Assert.Equal(new double[,]
+            {
+                { 1, 0, 0 },
+                { 0, 2, 0 },
+                { 0, 0, 3 },
+            }, Matrix.NewDiagonal(new double[] { 1, 2, 3 }).Values);
+
+            Assert.Equal(new double[,]
+            {
+                { 0, 1, 0, 0 },
+                { 0, 0, 2, 0 },
+                { 0, 0, 0, 3 },
+                { 0, 0, 0, 0 },
+            }, Matrix.NewDiagonal(new double[] { 1, 2, 3 }, 1).Values);
+
+            Assert.Equal(new double[,]
+            {
+                { 0, 0, 0, 0 },
+                { 1, 0, 0, 0 },
+                { 0, 2, 0, 0 },
+                { 0, 0, 3, 0 },
+            }, Matrix.NewDiagonal(new double[] { 1, 2, 3 }, -1).Values);
+        }
+
+        [Fact]
         public void FindEquationSolution1()
         {
             new Matrix(new double[,]

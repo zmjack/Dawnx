@@ -1,10 +1,4 @@
-﻿using Dawnx.Net.Http;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Net.OAuth
+﻿namespace Dawnx.Net.OAuth
 {
     public class OpenDiscoveryResult
     {

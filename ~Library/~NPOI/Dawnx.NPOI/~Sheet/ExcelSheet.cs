@@ -209,11 +209,12 @@ namespace Dawnx.NPOI
                 if (@break) break;
 
                 var item = new TModel();
-                props.Each((prop, i) =>
+                foreach (var prop in props.AsVI())
                 {
-                    var cell = this[(dataStart.row + rowOffset, pos.col + i)];
-                    prop.SetValue(item, converter.Convert(prop, cell.GetValue()));
-                });
+                    var propInfo = prop.Value;
+                    var cell = this[(dataStart.row + rowOffset, pos.col + prop.Index)];
+                    propInfo.SetValue(item, converter.Convert(propInfo, cell.GetValue()));
+                }
                 ret.Add(item);
             }
 

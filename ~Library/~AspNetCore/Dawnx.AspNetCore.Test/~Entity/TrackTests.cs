@@ -1,6 +1,5 @@
 using Xunit;
 using System.Linq;
-using Dawnx.Entity;
 
 namespace Dawnx.AspNetCore.Test
 {

@@ -71,40 +71,27 @@ namespace Dawnx.NPOI.Test
         }
 
         [Fact]
-        public void Test2()
+        public void FetchTest()
         {
             var book = new ExcelBook("test.xlsx");
             var models = book[0].Fetch<Model>("A2", m => new { m.Supplier, m.Product, m.ReleaseDate });
 
-            Assert.Equal(10, book[0].LastRowNum);
-
-            Assert.Equal(ExcelVersion.Excel2007, ExcelBook.GetVersion("test2.xlsx"));
-
-            book[0]["A10"].SetValue("123");
-            book[0]["B10"].SetValue("123");
-
-            book.SaveAs("result2.xlsx");
+            Assert.Equal("Company 101", models[0].Supplier);
+            Assert.Equal("Ag", models[0].Product);
+            Assert.Equal(new DateTime(2018, 1, 1), models[0].ReleaseDate);
         }
 
         [Fact]
-        public void Test3()
+        public void VersionTest()
         {
-            var book = new ExcelBook("test.xlsx");
-            var sheet = book.CreateSheet("Display");
-
-            sheet[(0, 0)].SetValue("Hyproca 1897 Mama\r\nº£ÆÕÅµ¿­1897ÂèÂè");
-
-            var style_content = book.CStyle(x => x.Center().CellColor(new RGBColor(220, 230, 241)).SetFont("ºÚÌå", 10, RGBColor.Black).FullBorder());
-
-            sheet["A1"].SetCStyle(style_content);
-            book.SaveAs("1.xlsx");
+            Assert.Equal(ExcelVersion.Excel2007, ExcelBook.GetVersion("no_file.xlsx"));
         }
 
         public class Model
         {
             public string Supplier { get; set; }
             public string Product { get; set; }
-            public string ReleaseDate { get; set; }
+            public DateTime ReleaseDate { get; set; }
         }
 
     }

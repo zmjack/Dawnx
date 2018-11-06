@@ -8,12 +8,17 @@ namespace Dawnx.Reflection
     {
         private bool _strict;
 
-        public DefaultBasicTypeConverter() : this(true) { }
+        public DefaultBasicTypeConverter()
+            : this(strict: true) { }
+
         /// <summary>
         /// If set 'strict', null string will be replaced by default of the source.
         /// </summary>
         /// <param name="strict"></param>
-        public DefaultBasicTypeConverter(bool strict) { _strict = strict; }
+        public DefaultBasicTypeConverter(bool strict)
+        {
+            _strict = strict;
+        }
 
         public object Convert(PropertyInfo prop, object source) => Convert(prop.PropertyType, source, prop);
         public object Convert(FieldInfo field, object source) => Convert(field.FieldType, source, field);
@@ -44,7 +49,8 @@ namespace Dawnx.Reflection
         {
             if (_strict)
             {
-                if (IsNullOrWhiteSpaceString(source)) return default(T);
+                if (source is string && (source as string).IsNullOrWhiteSpace())
+                    return default(T);
                 else return func(source);
             }
             else
@@ -84,8 +90,6 @@ namespace Dawnx.Reflection
             => ConvertTo(source, provider, System.Convert.ToString);
         public virtual object ConvertToDateTime(object source, ICustomAttributeProvider provider)
             => ConvertTo(source, provider, System.Convert.ToDateTime);
-
-        public bool IsNullOrWhiteSpaceString(object source) => source is string && (source as string).IsNullOrWhiteSpace();
 
     }
 }

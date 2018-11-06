@@ -213,7 +213,9 @@ namespace Dawnx.NPOI
                 {
                     var propInfo = prop.Value;
                     var cell = this[(dataStart.row + rowOffset, pos.col + prop.Index)];
-                    propInfo.SetValue(item, converter.Convert(propInfo, cell.GetValue()));
+                    if (propInfo.PropertyType == typeof(DateTime))
+                        propInfo.SetValue(item, converter.Convert(propInfo, cell.DateTime));
+                    else propInfo.SetValue(item, converter.Convert(propInfo, cell.GetValue()));
                 }
                 ret.Add(item);
             }

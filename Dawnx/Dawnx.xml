@@ -924,7 +924,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.Project(System.String,System.String)">
+        <member name="M:Dawnx.DawnString.Project(System.String,System.String,System.String)">
             <summary>
             Projects the specified string to a new string by using regular expressions (using Single-line Mode).
             </summary>

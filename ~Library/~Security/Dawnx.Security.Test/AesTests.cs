@@ -7,7 +7,7 @@ using Dawnx.Security.AesSecurity;
 
 namespace Dawnx.Security.Test
 {
-    public class AesTest1
+    public class AesTests
     {
         [Fact]
         public void Test1()

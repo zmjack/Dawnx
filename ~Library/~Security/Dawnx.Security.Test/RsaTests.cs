@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dawnx.Security.Test
 {
-    public class RSATest1
+    public class RsaTests
     {
         [Fact]
         public void ImportPublicPemTest()

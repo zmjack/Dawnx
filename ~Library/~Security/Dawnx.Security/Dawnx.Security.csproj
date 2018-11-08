@@ -11,7 +11,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Dawnx Contributors</Authors>
     <Owners>zmjack</Owners>
-    <Version>1.5.29</Version>
+    <Version>1.5.30</Version>
     <Company>dawnx.net</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
@@ -31,6 +31,10 @@
     <LangVersion>default</LangVersion>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />

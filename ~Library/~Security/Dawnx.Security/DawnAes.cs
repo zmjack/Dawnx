@@ -22,7 +22,6 @@ namespace Dawnx.Security
         /// </summary>
         /// <param name="this"></param>
         /// <param name="data"></param>
-        /// <param name="key">'key' must be 128 bits(16 bytes) or 192 bits (24 bytes) or 256 bits(32 bytes).</param>
         /// <returns></returns>
         public static byte[] Encrypt<TAesCombiner>(this Aes @this, byte[] data)
             where TAesCombiner : IAesCombiner, new()
@@ -33,9 +32,7 @@ namespace Dawnx.Security
             var encryptor = @this.CreateEncryptor();
             var encryptor_memory = new MemoryStream();
             using (var crypto = new CryptoStream(encryptor_memory, encryptor, CryptoStreamMode.Write))
-            {
                 crypto.Write(data, 0, data.Length);
-            }
 
             var ciphertext = encryptor_memory.ToArray();
             return combiner.Combine(ciphertext, iv);

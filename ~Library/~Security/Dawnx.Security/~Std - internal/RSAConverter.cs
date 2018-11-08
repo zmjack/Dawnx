@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace Dawnx.Security
 {
-    internal class RSAConverter
+    internal class RsaConverter
     {
         public static byte[] ParamsToPem(RSAParameters parameters, bool includePrivateParameters)
         {

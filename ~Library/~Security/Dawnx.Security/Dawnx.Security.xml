@@ -9,7 +9,6 @@
             </summary>
             <param name="this"></param>
             <param name="data"></param>
-            <param name="key">'key' must be 128 bits(16 bytes) or 192 bits (24 bytes) or 256 bits(32 bytes).</param>
             <returns></returns>
         </member>
     </members>

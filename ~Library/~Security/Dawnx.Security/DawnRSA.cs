@@ -54,7 +54,7 @@ namespace Dawnx.Security
                 .Replace($"-----BEGIN {keyName} KEY-----", string.Empty)
                 .Replace($"-----END {keyName} KEY-----", string.Empty);
             var pem = Convert.FromBase64String(pemString);
-            var @params = RSAConverter.ParamsFromPem(pem, keyName == "PRIVATE");
+            var @params = RsaConverter.ParamsFromPem(pem, keyName == "PRIVATE");
 
             @this.ImportParameters(@params);
         }
@@ -96,7 +96,7 @@ namespace Dawnx.Security
             var keyName = includePrivateParameters ? "PRIVATE" : "PUBLIC";
             var @params = @this.ExportParameters(includePrivateParameters);
             var base64 = string.Join(Environment.NewLine, Convert.ToBase64String(
-                RSAConverter.ParamsToPem(@params, includePrivateParameters))
+                RsaConverter.ParamsToPem(@params, includePrivateParameters))
                 .ToCharArray().Distribute(64).Select(a => new string(a.ToArray())));
 
             return $"-----BEGIN {keyName} KEY-----\r\n{base64}\r\n-----END {keyName} KEY-----";

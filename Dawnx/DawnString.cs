@@ -209,8 +209,8 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="regex"></param>
         /// <returns></returns>
-        public static string Project(this string @this, string regex)
-            => Project(@this, new Regex(regex, RegexOptions.Singleline));
+        public static string Project(this string @this, string regex, string target = null)
+            => Project(@this, new Regex(regex, RegexOptions.Singleline), target);
 
         /// <summary>
         /// Projects the specified string to a new string by using regular expressions.

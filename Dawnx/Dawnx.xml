@@ -924,6 +924,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.Project(System.String,System.String)">
+            <summary>
+            Projects the specified string to a new string by using regular expressions (using Single-line Mode).
+            </summary>
+            <param name="this"></param>
+            <param name="regex"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnString.Project(System.String,System.Text.RegularExpressions.Regex,System.String)">
             <summary>
             Projects the specified string to a new string by using regular expressions.

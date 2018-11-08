@@ -204,6 +204,15 @@ namespace Dawnx
             => new Regex(@"[\s]{2,}").Replace(@this.NormalizeNewLine().Replace(Environment.NewLine, " ").Trim(), " ");
 
         /// <summary>
+        /// Projects the specified string to a new string by using regular expressions (using Single-line Mode).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <returns></returns>
+        public static string Project(this string @this, string regex)
+            => Project(@this, new Regex(regex, RegexOptions.Singleline));
+
+        /// <summary>
         /// Projects the specified string to a new string by using regular expressions.
         /// </summary>
         /// <param name="this"></param>

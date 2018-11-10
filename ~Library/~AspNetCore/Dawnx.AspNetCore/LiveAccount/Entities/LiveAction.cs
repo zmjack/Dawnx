@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dawnx.AspNetCore.LiveAccount
+namespace Dawnx.AspNetCore.LiveAccount.Entities
 {
-    public class LiveAction : IEntity
+    public class LiveAction : IEntity<LiveAction>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -20,11 +20,11 @@ namespace Dawnx.AspNetCore.LiveAccount
         [StringLength(127)]
         public string Action { get; set; }
 
-        public bool IsValid { get; set; }
+        public bool IsExisted { get; set; }
 
-        public bool IsMarked { get; set; }
+        public bool IsEnabled { get; set; }
 
-        public string Name => $"/ {Area} / {Controller} / {Action}";
+        public string Name => $"/ {Area ?? "[NoArea]"} / {Controller ?? "[NoController]"} / {Action}";
 
         public virtual ICollection<LiveOperationAction> OperationActions { get; set; }
 

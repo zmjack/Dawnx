@@ -1,11 +1,11 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Actions.IndexModel
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Actions";
 
-    var __LiveAction__ = new Dawnx.AspNetCore.LiveAccount.LiveAction();
-    var Items = ViewBag.Items as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveAction>;
+    var Items = ViewBag.Items as IEnumerable<LiveAction>;
 }
 
 <h2>LiveAction</h2>
@@ -28,23 +28,23 @@
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => __LiveAction__.Area)</th>
-            <th>@Html.DisplayNameFor(model => __LiveAction__.Controller)</th>
-            <th>@Html.DisplayNameFor(model => __LiveAction__.Action)</th>
-            <th>@Html.DisplayNameFor(model => __LiveAction__.IsMarked)</th>
-            <th>@Html.DisplayNameFor(model => __LiveAction__.IsValid)</th>
+            <th>@(ViewModel<LiveAction>.DisplayName(_ => _.Area))</th>
+            <th>@(ViewModel<LiveAction>.DisplayName(_ => _.Controller))</th>
+            <th>@(ViewModel<LiveAction>.DisplayName(_ => _.Action))</th>
+            <th>@(ViewModel<LiveAction>.DisplayName(_ => _.IsExisted))</th>
+            <th>@(ViewModel<LiveAction>.DisplayName(_ => _.IsEnabled))</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Items.OrderBy(x => x.IsValid).ThenBy(x => x.Area).ThenBy(x => x.Controller).ThenBy(x => x.Action))
+        @foreach (var item in Items.OrderBy(x => x.IsExisted).ThenBy(x => x.IsEnabled).ThenBy(x => x.Area).ThenBy(x => x.Controller).ThenBy(x => x.Action))
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Area)</td>
-                <td>@Html.DisplayFor(modelItem => item.Controller)</td>
-                <td>@Html.DisplayFor(modelItem => item.Action)</td>
-                <td>@Html.DisplayFor(modelItem => item.IsMarked)</td>
-                <td>@Html.DisplayFor(modelItem => item.IsValid)</td>
+                <td>@item.Display(_ => _.Area)</td>
+                <td>@item.Display(_ => _.Controller)</td>
+                <td>@item.Display(_ => _.Action)</td>
+                <td>@item.Display(_ => _.IsExisted)</td>
+                <td>@item.Display(_ => _.IsEnabled)</td>
             </tr>
         }
     </tbody>

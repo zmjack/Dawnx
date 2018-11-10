@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dawnx.AspNetCore.LiveAccount
+namespace Dawnx.AspNetCore.LiveAccount.Entities
 {
-    public class LiveRole : IEntity
+    public class LiveOperation : IEntity<LiveOperation>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -15,6 +15,6 @@ namespace Dawnx.AspNetCore.LiveAccount
         public string Name { get; set; }
 
         public ICollection<LiveRoleOperation> RoleOperations { get; set; }
-        public ICollection<LiveUserRole> UserRoles { get; set; }
+        public ICollection<LiveOperationAction> OperationActions { get; set; }
     }
 }

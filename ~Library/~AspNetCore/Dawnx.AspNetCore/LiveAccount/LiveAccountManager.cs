@@ -7,7 +7,7 @@ using System.Linq;
 namespace Dawnx.AspNetCore.LiveAccount
 {
     public partial class LiveAccountManager<TDbContext>
-        where TDbContext : IdentityDbContext, ILiveAccount
+        where TDbContext : IdentityDbContext, ILiveAccountDbContext
     {
         private readonly TDbContext _context;
 
@@ -35,7 +35,7 @@ namespace Dawnx.AspNetCore.LiveAccount
                 .SelectMany(x => x.RoleLink.RoleOperations)
                 .SelectMany(x => x.OperationLink.OperationActions)
                 .Select(x => x.ActionLink)
-                .Where(x => x.IsValid)
+                .Where(x => x.IsExisted)
                 .ToArray();
 
             return allowedActions.Any(x =>

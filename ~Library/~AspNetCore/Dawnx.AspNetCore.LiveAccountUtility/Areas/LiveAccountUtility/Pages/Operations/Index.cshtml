@@ -1,14 +1,15 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations.IndexModel
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Operations";
 
-    var __LiveOperation__ = new Dawnx.AspNetCore.LiveAccount.LiveOperation();
-    var Items = ViewBag.Items as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveOperation>;
+    var __LiveOperation__ = new LiveOperation();
+    var Items = ViewBag.Items as IEnumerable<LiveOperation>;
 }
 
-<h2>Roles</h2>
+<h2>Operations</h2>
 
 <p>
     <a href="Create">Create New</a>

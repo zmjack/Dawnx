@@ -1,10 +1,11 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations.CreateModel
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Create";
 
-    var LiveActions = ViewBag.LiveActions as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveAction>;
+    var LiveActions = ViewBag.LiveActions as IEnumerable<LiveAction>;
 }
 
 <h2>Create</h2>

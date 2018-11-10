@@ -1,11 +1,12 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Users.DetailsModel
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Details";
 
-    var LiveRoles = ViewBag.LiveRoles as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRole>;
-    var UserLiveRoles = ViewBag.UserLiveRoles as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRole>;
+    var LiveRoles = ViewBag.LiveRoles as IEnumerable<LiveRole>;
+    var UserLiveRoles = ViewBag.UserLiveRoles as IEnumerable<LiveRole>;
 }
 
 <h2>Details</h2>

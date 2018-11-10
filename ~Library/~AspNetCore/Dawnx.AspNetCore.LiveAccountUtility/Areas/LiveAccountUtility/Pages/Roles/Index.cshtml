@@ -1,13 +1,14 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles.IndexModel
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Roles";
 
-    var __LiveRole__ = new Dawnx.AspNetCore.LiveAccount.LiveRole();
-    var LiveRoles = ViewBag.LiveRoles as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRole>;
-    var LiveOperation = ViewBag.LiveOperation as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveOperation>;
-    var LiveRoleOperations = ViewBag.LiveRoleOperations as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRoleOperation>;
+    var __LiveRole__ = new LiveRole();
+    var LiveRoles = ViewBag.LiveRoles as IEnumerable<LiveRole>;
+    var LiveOperation = ViewBag.LiveOperation as IEnumerable<LiveOperation>;
+    var LiveRoleOperations = ViewBag.LiveRoleOperations as IEnumerable<LiveRoleOperation>;
 }
 
 <h2>LiveRole</h2>

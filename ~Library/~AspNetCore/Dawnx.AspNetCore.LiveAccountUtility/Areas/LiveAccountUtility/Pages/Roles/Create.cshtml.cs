@@ -1,4 +1,5 @@
 ﻿using Dawnx.AspNetCore.LiveAccount;
+using Dawnx.AspNetCore.LiveAccount.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

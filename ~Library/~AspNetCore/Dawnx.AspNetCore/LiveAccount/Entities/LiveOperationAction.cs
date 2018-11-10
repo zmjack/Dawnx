@@ -3,9 +3,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Dawnx.AspNetCore.LiveAccount
+namespace Dawnx.AspNetCore.LiveAccount.Entities
 {
-    public class LiveOperationAction : IEntity
+    public class LiveOperationAction : IEntity<LiveOperationAction>
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }

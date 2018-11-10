@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Dawnx.AspNetCore.LiveAccount.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ using System.Text.RegularExpressions;
 namespace Dawnx.AspNetCore.LiveAccount
 {
     public partial class LiveAccountManager<TDbContext> : ILiveAccountManager
-        where TDbContext : IdentityDbContext, ILiveAccount
+        where TDbContext : IdentityDbContext, ILiveAccountDbContext
     {
         public DbContext Context => _context;
         public void SaveChanges() => _context.SaveChanges();
@@ -35,7 +36,7 @@ namespace Dawnx.AspNetCore.LiveAccount
 
         public void ClearInvalidActions()
         {
-            LiveActions.RemoveRange(LiveActions.Where(x => !x.IsValid));
+            LiveActions.RemoveRange(LiveActions.Where(x => !x.IsExisted));
             SaveChanges();
         }
 
@@ -65,7 +66,7 @@ namespace Dawnx.AspNetCore.LiveAccount
 
         public void SyncActions()
         {
-            LiveActions.Each(x => x.IsValid = false);
+            LiveActions.Each(x => x.IsExisted = false);
             SaveChanges();
 
             var controllerTypes = Assembly.GetEntryAssembly().GetTypesWhichExtends<Controller>(true);
@@ -73,19 +74,24 @@ namespace Dawnx.AspNetCore.LiveAccount
             {
                 var areaAttr = controllerType.GetCustomAttribute<AreaAttribute>();
 
-                foreach (var method in controllerType.GetMethods(
-                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-                {
-                    var liveAuthorizeAttr = method.GetCustomAttribute<LiveAuthorizeAttribute>();
-                    var liveAction = new LiveAction
+                var liveActions = controllerType
+                    .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                    .Select(method =>
                     {
-                        Area = areaAttr?.RouteValue,
-                        Controller = new Regex("^(.+?)(?:Controller)?$").Replace(controllerType.Name, "$1"),
-                        Action = method.Name,
-                        IsValid = true,
-                        IsMarked = liveAuthorizeAttr != null,
-                    };
+                        var liveAuthorizeAttr = method.GetCustomAttribute<LiveAuthorizeAttribute>();
+                        return new LiveAction
+                        {
+                            Area = areaAttr?.RouteValue,
+                            Controller = controllerType.Name.Project("^(.+?)(?:Controller)?$"),
+                            Action = method.Name,
+                            IsExisted = true,
+                            IsEnabled = liveAuthorizeAttr != null,
+                        };
+                    })
+                    .Distinct(x => x.Name);
 
+                foreach (var liveAction in liveActions)
+                {
                     var find = LiveActions.FirstOrDefault(x =>
                         x.Area == liveAction.Area
                         && x.Controller == liveAction.Controller
@@ -93,8 +99,8 @@ namespace Dawnx.AspNetCore.LiveAccount
 
                     if (find != null)
                     {
-                        find.IsValid = true;
-                        find.IsMarked = liveAuthorizeAttr != null;
+                        find.IsExisted = liveAction.IsExisted;
+                        find.IsEnabled = liveAction.IsEnabled;
                     }
                     else LiveActions.Add(liveAction);
                 }

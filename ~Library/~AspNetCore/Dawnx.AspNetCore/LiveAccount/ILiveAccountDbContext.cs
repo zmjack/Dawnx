@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Dawnx.AspNetCore.LiveAccount.Entities;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public interface ILiveAccount
+    public interface ILiveAccountDbContext
     {
         DbSet<LiveRole> LiveRoles { get; set; }
         DbSet<LiveUserRole> LiveUserRoles { get; set; }

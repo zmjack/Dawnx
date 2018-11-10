@@ -1,13 +1,15 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Users.IndexModel
+@using Microsoft.AspNetCore.Identity
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Users";
 
-    var __IdentityUser__ = new Microsoft.AspNetCore.Identity.IdentityUser();
-    var Users = ViewBag.Users as IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>;
-    var LiveRoles = ViewBag.LiveRoles as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveRole>;
-    var LiveUserRoles = ViewBag.LiveUserRoles as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveUserRole>;
+    var __IdentityUser__ = new IdentityUser();
+    var Users = ViewBag.Users as IEnumerable<IdentityUser>;
+    var LiveRoles = ViewBag.LiveRoles as IEnumerable<LiveRole>;
+    var LiveUserRoles = ViewBag.LiveUserRoles as IEnumerable<LiveUserRole>;
 }
 
 <h2>LiveUser</h2>

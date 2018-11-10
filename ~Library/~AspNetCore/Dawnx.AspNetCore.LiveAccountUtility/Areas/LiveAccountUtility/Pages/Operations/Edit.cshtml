@@ -1,11 +1,12 @@
 ﻿@page
 @model Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations.EditModel
+@using Dawnx.AspNetCore.LiveAccount.Entities
 
 @{
     ViewBag.Title = "Edit";
 
-    var LiveActions = ViewBag.LiveActions as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveAction>;
-    var OperationLiveActions = ViewBag.OperationLiveActions as IEnumerable<Dawnx.AspNetCore.LiveAccount.LiveAction>;
+    var LiveActions = ViewBag.LiveActions as IEnumerable<LiveAction>;
+    var OperationLiveActions = ViewBag.OperationLiveActions as IEnumerable<LiveAction>;
 }
 
 <h2>Edit</h2>

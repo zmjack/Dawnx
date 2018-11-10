@@ -13,7 +13,7 @@ namespace Dawnx.AspNetCore.Test
         {
             var log = new List<string>();
 
-            EntityMonitor.Register<SimpleModel>(param =>
+            EntityMonitor.Register<EntityMonitorModel>(param =>
             {
                 switch (param.State)
                 {
@@ -31,7 +31,7 @@ namespace Dawnx.AspNetCore.Test
 
             using (var context = new ApplicationDbContext())
             {
-                context.Add(new SimpleModel
+                context.Add(new EntityMonitorModel
                 {
                     ProductName = "A",
                 });
@@ -39,7 +39,7 @@ namespace Dawnx.AspNetCore.Test
                 Assert.Equal($"\t{nameof(EntityState.Added)}", log.Last());
 
                 // Added
-                var item = new SimpleModel
+                var item = new EntityMonitorModel
                 {
                     ProductName = "b",
                 }.MonitorCarry("u1");
@@ -48,15 +48,15 @@ namespace Dawnx.AspNetCore.Test
                 Assert.Equal($"u1\t{nameof(EntityState.Added)}", log.Last());
 
                 // Modified
-                var result = context.SimpleModels.First();
+                var result = context.EntityMonitorModels.First();
                 result.ProductName = "B";
                 result.MonitorCarry("u2");
                 context.SaveChanges();
                 Assert.Equal($"u2\t{nameof(EntityState.Modified)}", log.Last());
 
                 // Deleted
-                context.SimpleModels.AsEnumerable().MonitorCarry("u3");
-                context.RemoveRange(context.SimpleModels);
+                context.EntityMonitorModels.AsEnumerable().MonitorCarry("u3");
+                context.RemoveRange(context.EntityMonitorModels);
                 context.SaveChanges();
                 Assert.Equal(new[]
                 {

@@ -1,5 +1,6 @@
 using Xunit;
 using System.Linq;
+using System;
 
 namespace Dawnx.AspNetCore.Test
 {
@@ -38,7 +39,48 @@ namespace Dawnx.AspNetCore.Test
                 context.TrackModels.Remove(model);
                 context.SaveChanges();
 
-                Assert.False(context.SimpleModels.Any());
+                Assert.False(context.EntityMonitorModels.Any());
+            }
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var model = new SimpleModel
+                {
+                    Name = "zmjack",
+                    Age = 18,
+                };
+                context.Add(model);
+                context.SaveChanges();
+            }
+
+            Guid id;
+            using (var context = new ApplicationDbContext())
+            {
+                var result = context.SimpleModels.First();
+                id = result.Id;
+                Assert.Equal(18, result.Age);
+            }
+
+            using (var context = new ApplicationDbContext())
+            {
+                var item = new SimpleModel
+                {
+                    Id = id,
+                    Name = "zmjack",
+                    Age = 27,
+                };
+                context.SimpleModels.Update(item);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext())
+            {
+                var result = context.SimpleModels.First();
+                Assert.Equal(27, result.Age);
             }
 
         }

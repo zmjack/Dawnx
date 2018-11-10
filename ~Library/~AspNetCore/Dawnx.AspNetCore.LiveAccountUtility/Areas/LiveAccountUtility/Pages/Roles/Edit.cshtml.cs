@@ -41,9 +41,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
         {
             if (!LiveAccountUtility.Authority?.Advanced?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
-
-            Input = _liveAccountManager.LiveRoles.Find(Guid.Parse(Request.Query["Id"]));
-
+            
             ViewData["LiveOperations"] = _liveAccountManager.LiveOperations.ToArray();
             ViewData["RoleLiveOperations"] = _liveAccountManager.GetRoleOperations(Input.Id);
 

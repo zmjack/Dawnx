@@ -42,9 +42,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
         {
             if (!LiveAccountUtility.Authority?.User?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
-
-            Input = _liveAccountManager.Users.Find(Request.Query["Id"]);
-
+            
             ViewData["LiveRoles"] = _liveAccountManager.LiveRoles.ToArray();
             ViewData["UserLiveRoles"] = _liveAccountManager.GetUserRoles(Input.UserName);
 

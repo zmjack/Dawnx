@@ -42,8 +42,6 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations
             if (!LiveAccountUtility.Authority?.Advanced?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
-            Input = _liveAccountManager.LiveOperations.Find(Guid.Parse(Request.Query["Id"]));
-
             ViewData["LiveActions"] = _liveAccountManager.LiveActions.ToArray();
             ViewData["OperationLiveActions"] = _liveAccountManager.GetOperationActions(Input.Id);
 

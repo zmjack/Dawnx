@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dawnx.AspNetCore.Test
 {
-    public class SimpleModel : IEntity<SimpleModel>
+    public class EntityMonitorModel : IEntity<EntityMonitorModel>, IEntityMonitor
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
-        public int Age { get; set; }
-
+        [NotMapped]
+        public object MonitorCarry { get; set; }        
     }
 }

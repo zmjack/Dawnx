@@ -78,14 +78,15 @@ namespace Dawnx.AspNetCore.LiveAccount
                     .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                     .Select(method =>
                     {
-                        var liveAuthorizeAttr = method.GetCustomAttribute<LiveAuthorizeAttribute>();
+                        var isEnabled = !(controllerType.GetCustomAttribute<LiveAuthorizeAttribute>() is null)
+                            || !(method.GetCustomAttribute<LiveAuthorizeAttribute>() is null);
                         return new LiveAction
                         {
                             Area = areaAttr?.RouteValue,
                             Controller = controllerType.Name.Project("^(.+?)(?:Controller)?$"),
                             Action = method.Name,
                             IsExisted = true,
-                            IsEnabled = liveAuthorizeAttr != null,
+                            IsEnabled = isEnabled,
                         };
                     })
                     .Distinct(x => x.Name);

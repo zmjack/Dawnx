@@ -23,8 +23,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.UserControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             Input = _userManager.FindByIdAsync(Request.Query["Id"]).Result;
             return Page();
@@ -32,8 +32,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnPost()
         {
-            if (!IdentityUtility.UserControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             if (ModelState.IsValid)
             {

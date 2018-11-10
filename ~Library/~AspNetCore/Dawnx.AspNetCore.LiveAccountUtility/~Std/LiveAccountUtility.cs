@@ -6,7 +6,13 @@ namespace Dawnx.AspNetCore.LiveAccountUtility
 {
     public static class LiveAccountUtility
     {
-        public static AuthorityUtility NormalControlPanel = new AuthorityUtility();
-        public static AuthorityUtility RoleAndOperationControlPanel = new AuthorityUtility();
+        public static LiveAccountAuthority Authority;
     }
+
+    public class LiveAccountAuthority
+    {
+        public Authority User { get; set; }
+        public Authority Advanced { get; set; }
+    }
+
 }

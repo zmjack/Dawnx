@@ -20,8 +20,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.UserControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             if (HttpContext.Request.Path.ToString().EndsWith("Users/"))
                 return Redirect("Index");

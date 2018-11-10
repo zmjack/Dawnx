@@ -29,8 +29,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!IdentityUtility.RoleControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.Authority?.Role?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             var role = await _roleManager.FindByIdAsync(Input.Id);
             var result = await _roleManager.UpdateAsync(role);

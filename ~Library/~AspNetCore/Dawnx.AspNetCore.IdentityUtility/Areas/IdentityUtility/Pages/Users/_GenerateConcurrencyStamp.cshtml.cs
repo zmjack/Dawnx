@@ -28,8 +28,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnPost()
         {
-            if (!IdentityUtility.UserControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             var user = _userManager.FindByIdAsync(Input.Id).Result;
             var result = _userManager.UpdateAsync(user).Result;

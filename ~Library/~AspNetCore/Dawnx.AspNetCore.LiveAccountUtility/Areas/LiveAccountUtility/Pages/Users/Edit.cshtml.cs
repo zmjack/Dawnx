@@ -27,8 +27,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 
         public IActionResult OnGet()
         {
-            if (!LiveAccountUtility.NormalControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             Input = _liveAccountManager.Users.Find(Request.Query["Id"]);
 
@@ -40,8 +40,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 
         public IActionResult OnPost()
         {
-            if (!LiveAccountUtility.NormalControlPanel.IsUserAllowed(User))
-                throw AuthorityUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+                throw Authority.New_UnauthorizedAccessException;
 
             Input = _liveAccountManager.Users.Find(Request.Query["Id"]);
 

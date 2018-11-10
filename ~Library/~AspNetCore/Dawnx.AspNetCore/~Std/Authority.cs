@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Dawnx.AspNetCore
 {
-    public class AuthorityUtility
+    public class Authority
     {
         public static UnauthorizedAccessException New_UnauthorizedAccessException =>
             new UnauthorizedAccessException("The current user is not allowed to access this resource.");

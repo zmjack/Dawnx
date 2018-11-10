@@ -25,8 +25,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
 
         public IActionResult OnGet()
         {
-            if (!LiveAccountUtility.Advanced.IsUserAllowed(User))
-                throw LiveAccountUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.RoleAndOperationControlPanel.IsUserAllowed(User))
+                throw AuthorityUtility.New_UnauthorizedAccessException;
 
             ViewData["LiveOperations"] = _liveAccountManager.LiveOperations.ToArray();
 
@@ -35,8 +35,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
 
         public IActionResult OnPost()
         {
-            if (!LiveAccountUtility.Advanced.IsUserAllowed(User))
-                throw LiveAccountUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.RoleAndOperationControlPanel.IsUserAllowed(User))
+                throw AuthorityUtility.New_UnauthorizedAccessException;
 
             ViewData["LiveOperations"] = _liveAccountManager.LiveRoleOperations.ToArray();
 

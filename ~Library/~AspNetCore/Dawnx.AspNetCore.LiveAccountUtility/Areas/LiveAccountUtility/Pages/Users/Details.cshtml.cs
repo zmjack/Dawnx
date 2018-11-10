@@ -26,8 +26,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 
         public IActionResult OnGet()
         {
-            if (!LiveAccountUtility.IsUserAllowed(User))
-                throw LiveAccountUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.NormalControlPanel.IsUserAllowed(User))
+                throw AuthorityUtility.New_UnauthorizedAccessException;
 
             Input = _liveAccountManager.Users.Find(Guid.Parse(Request.Query["Id"]));
 

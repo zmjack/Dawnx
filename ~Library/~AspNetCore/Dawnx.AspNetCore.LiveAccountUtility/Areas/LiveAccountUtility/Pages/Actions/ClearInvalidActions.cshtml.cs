@@ -20,7 +20,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Actions
 
         public IActionResult OnPost()
         {
-            if (!LiveAccountUtility.IsUserAllowed(User)) throw LiveAccountUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.NormalControlPanel.IsUserAllowed(User)) throw AuthorityUtility.New_UnauthorizedAccessException;
 
             _liveAccountManager.ClearInvalidActions();
             return Redirect("Index");

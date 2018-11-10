@@ -16,7 +16,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
-    <Description>Provides some extensions to help you use RSA or AES easily.</Description>
+    <Description>Help you easily use RSA or AES.</Description>
     <Copyright>Copyright © dawnx.net 2018</Copyright>
   </PropertyGroup>
 

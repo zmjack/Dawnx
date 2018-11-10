@@ -24,8 +24,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.Advanced.IsUserAllowed(User))
-                throw IdentityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.RoleControlPanel.IsUserAllowed(User))
+                throw AuthorityUtility.New_UnauthorizedAccessException;
 
             Input = _roleManager.FindByIdAsync(Request.Query["Id"]).Result;
             return Page();
@@ -33,8 +33,8 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public IActionResult OnPost()
         {
-            if (!IdentityUtility.Advanced.IsUserAllowed(User))
-                throw IdentityUtility.New_UnauthorizedAccessException;
+            if (!IdentityUtility.RoleControlPanel.IsUserAllowed(User))
+                throw AuthorityUtility.New_UnauthorizedAccessException;
 
             if (ModelState.IsValid)
             {

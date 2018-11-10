@@ -4,10 +4,5 @@
         <name>Dawnx.AspNetCore.IdentityUtility</name>
     </assembly>
     <members>
-        <member name="T:Dawnx.AspNetCore.IdentityUtility.IdentityUtility.Advanced">
-            <summary>
-            Advanced option include Role management.
-            </summary>
-        </member>
     </members>
 </doc>

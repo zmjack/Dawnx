@@ -21,8 +21,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 
         public IActionResult OnGet()
         {
-            if (!LiveAccountUtility.IsUserAllowed(User))
-                throw LiveAccountUtility.New_UnauthorizedAccessException;
+            if (!LiveAccountUtility.NormalControlPanel.IsUserAllowed(User))
+                throw AuthorityUtility.New_UnauthorizedAccessException;
 
             if (HttpContext.Request.Path.ToString().EndsWith("Users/"))
                 return Redirect("Index");

@@ -74,6 +74,13 @@ namespace Dawnx.AspNetCore
         }
 
         /// <summary>
+        /// Gets the request body string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string BodyString(this HttpRequest @this) => BodyString(@this, Encoding.UTF8);
+
+        /// <summary>
         /// Gets the request body string.
         /// </summary>
         /// <param name="this"></param>
@@ -87,6 +94,13 @@ namespace Dawnx.AspNetCore
         }
 
         /// <summary>
+        /// Deserializes the body(UTF-8), which is json, to a .NET object.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static object BodyJsonDecode(this HttpRequest @this) => BodyJsonDecode(@this, Encoding.UTF8);
+
+        /// <summary>
         /// Deserializes the body, which is json, to a .NET object.
         /// </summary>
         /// <param name="this"></param>
@@ -94,6 +108,14 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public static object BodyJsonDecode(this HttpRequest @this, Encoding encoding)
             => BodyString(@this, encoding).GetFromJson();
+
+        /// <summary>
+        /// Deserializes the body(UTF-8), which is json, to a .NET object.
+        /// </summary>
+        /// <typeparam name="TRet"></typeparam>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static TRet BodyJsonDecode<TRet>(this HttpRequest @this) => BodyJsonDecode<TRet>(@this);
 
         /// <summary>
         /// Deserializes the body, which is json, to a .NET object.

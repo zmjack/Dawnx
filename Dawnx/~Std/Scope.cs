@@ -18,8 +18,8 @@ namespace Dawnx
         public Scope(T model)
         {
             DoubleCheck.Do(
-                lockTarget: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
-                checkCondition: () => Scopes is null,
+                locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
+                condition: () => Scopes is null,
                 task: () => Scopes = new Stack<Scope<T, TSelf>>());
 
             Model = model;

@@ -7,19 +7,19 @@ namespace Dawnx.Patterns
     /// </summary>
     public static class DoubleCheck
     {
-        public static void Do(string lockTarget, Func<bool> checkCondition, Action task)
+        public static void Do(string locker, Func<bool> condition, Action task)
         {
-            if (checkCondition())
-                lock (lockTarget)
-                    if (checkCondition())
+            if (condition())
+                lock (locker)
+                    if (condition())
                         task();
         }
-        
-        public static void Do<T>(ref T lockObj, Func<bool> checkCondition, Action task)
+
+        public static void Do<T>(ref T locker, Func<bool> condition, Action task)
         {
-            if (checkCondition())
-                lock (lockObj)
-                    if (checkCondition())
+            if (condition())
+                lock (locker)
+                    if (condition())
                         task();
         }
 

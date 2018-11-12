@@ -89,7 +89,7 @@ namespace Dawnx.AspNetCore
         public static string BodyString(this HttpRequest @this, Encoding encoding)
         {
             var memory = new MemoryStream();
-            @this.Body.WriteProcess(memory, 256 * 1024);
+            @this.Body.WriteTo(memory, 256 * 1024);
             return memory.ToArray().String(encoding);
         }
 

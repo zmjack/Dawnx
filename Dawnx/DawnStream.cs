@@ -15,10 +15,10 @@ namespace Dawnx
                 processing(@this, buffer, readLength);
         }
 
-        public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize)
-            => WriteProcess(@this, writeTarget, bufferSize, (_writeTarget, _buffer, _totalWrittenLength) => { });
+        public static void WriteTo(this Stream @this, Stream writeTarget, int bufferSize)
+            => WriteTo(@this, writeTarget, bufferSize, (_writeTarget, _buffer, _totalWrittenLength) => { });
 
-        public static void WriteProcess(this Stream @this, Stream writeTarget, int bufferSize, WriteProcessingHandler processing)
+        public static void WriteTo(this Stream @this, Stream writeTarget, int bufferSize, WriteProcessingHandler processing)
         {
             int totalWritten = 0;
             ReadProcess(@this, bufferSize, (readTarget, buffer, readLength) =>

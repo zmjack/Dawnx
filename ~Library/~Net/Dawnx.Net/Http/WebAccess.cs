@@ -239,7 +239,7 @@ namespace Dawnx.Net.Http
                 request.ContentLength = bodyStream.Length;
                 using (var stream = request.GetRequestStream())
                 {
-                    bodyStream.WriteProcess(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
+                    bodyStream.WriteTo(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
                     {
                         UploadProgress?.Invoke(this, url, totalWrittenLength, bodyStream.Length);
                     });

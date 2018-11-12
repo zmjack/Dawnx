@@ -35,7 +35,7 @@ namespace Dawnx.IO
 
             Stream.Seek(0, SeekOrigin.Begin);
             var ret = new byte[count].Self(_ => Stream.Read(_, 0, count));
-            Stream = new MemoryStream().Self(_ => Stream.WriteProcess(_, BufferSize));
+            Stream = new MemoryStream().Self(_ => Stream.WriteTo(_, BufferSize));
 
             return ret;
         }
@@ -43,7 +43,7 @@ namespace Dawnx.IO
         public void Remove(int count)
         {
             Stream.Seek(count, SeekOrigin.Begin);
-            Stream = new MemoryStream().Self(_ => Stream.WriteProcess(_, BufferSize));
+            Stream = new MemoryStream().Self(_ => Stream.WriteTo(_, BufferSize));
         }
 
     }

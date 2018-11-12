@@ -82,6 +82,13 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyString(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Gets the request body string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyString(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
             <summary>
             Gets the request body string.
@@ -90,12 +97,27 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Deserializes the body(UTF-8), which is json, to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
             <summary>
             Deserializes the body, which is json, to a .NET object.
             </summary>
             <param name="this"></param>
             <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Deserializes the body(UTF-8), which is json, to a .NET object.
+            </summary>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">

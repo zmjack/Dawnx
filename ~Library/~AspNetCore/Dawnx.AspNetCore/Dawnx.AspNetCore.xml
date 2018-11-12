@@ -28,7 +28,7 @@
             <param name="acceptAllChangesOnSuccess"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.Path(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.PathBase}{@this.Path}".
                 eg. /controller/action
@@ -36,7 +36,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.PathQuery(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPathQuery(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.PathBase}{@this.Path}{@this.QueryString}".
                 eg. /controller/action?id=1
@@ -44,7 +44,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.SchemeHost(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlSchemeHost(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.Scheme}://{@this.Host}".
                 eg. http://dawnx.net
@@ -60,7 +60,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlWithoutQuery(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlSchemeHostPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}".
                 eg. http://dawnx.net/controller/action

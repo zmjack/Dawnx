@@ -13,7 +13,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Path(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}";
+        public static string UrlPath(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}";
 
         /// <summary>
         /// Returns $"{@this.PathBase}{@this.Path}{@this.QueryString}".
@@ -21,7 +21,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string PathQuery(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}{@this.QueryString}";
+        public static string UrlPathQuery(this HttpRequest @this) => $"{@this.PathBase}{@this.Path}{@this.QueryString}";
 
         /// <summary>
         /// Returns $"{@this.Scheme}://{@this.Host}".
@@ -29,7 +29,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string SchemeHost(this HttpRequest @this) => $"{@this.Scheme}://{@this.Host}";
+        public static string UrlSchemeHost(this HttpRequest @this) => $"{@this.Scheme}://{@this.Host}";
 
         /// <summary>
         /// Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
@@ -46,7 +46,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string UrlWithoutQuery(this HttpRequest @this)
+        public static string UrlSchemeHostPath(this HttpRequest @this)
             => $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}";
 
         /// <summary>

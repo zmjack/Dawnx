@@ -177,5 +177,79 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.#ctor">
+            <summary>
+            Creates a new <see cref="T:Dawnx.AspNetCore.ZipStream"/> whose data will be stored on a stream.
+            </summary>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.#ctor(System.String)">
+            <summary>
+            Opens a Zip file with the given name for reading.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.#ctor(System.IO.Stream)">
+            <summary>
+            Opens a Zip file reading the given System.IO.Stream.
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddFile(System.String,System.String)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="path"></param>
+            <param name="entryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddFile(System.IO.Stream,System.String)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="inStream"></param>
+            <param name="entryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddData(System.Byte[],System.String)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="bytes"></param>
+            <param name="entryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddData(System.String,System.String)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="text"></param>
+            <param name="entryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.SetPassword(System.String)">
+            <summary>
+            Set the password to be used for encrypting/decrypting files.
+            </summary>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.SetComment(System.String)">
+            <summary>
+            Set the file comment to be recorded.
+            </summary>
+            <param name="comment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.Save">
+            <summary>
+            Save the Zip file.
+            </summary>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.SaveAs(System.String)">
+            <summary>
+            Save the Zip file as a new file.
+            </summary>
+            <param name="path"></param>
+        </member>
     </members>
 </doc>

@@ -9,7 +9,7 @@ namespace Dawnx.AspNetCore
     {
         static ZipStream()
         {
-            //ZipConstants.DefaultCodePage = Encoding.UTF8.CodePage;
+            ZipConstants.DefaultCodePage = 0;
         }
 
     }

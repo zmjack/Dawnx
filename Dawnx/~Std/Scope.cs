@@ -8,19 +8,19 @@ namespace Dawnx
     /// <summary>
     /// Cooperate with 'using' keyword using thread safe <see cref="Scope{T, TSelf}"/>.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TModel"></typeparam>
     /// <typeparam name="TSelf"></typeparam>
-    public abstract class Scope<T, TSelf> : IDisposable
-        where TSelf : Scope<T, TSelf>
+    public abstract class Scope<TModel, TSelf> : IDisposable
+        where TSelf : Scope<TModel, TSelf>
     {
-        public T Model { get; protected set; }
+        public TModel Model { get; protected set; }
         
-        public Scope(T model)
+        public Scope(TModel model)
         {
             DoubleCheck.Do(
                 locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
                 condition: () => Scopes is null,
-                task: () => Scopes = new Stack<Scope<T, TSelf>>());
+                task: () => Scopes = new Stack<Scope<TModel, TSelf>>());
 
             Model = model;
             Scopes.Push(this);
@@ -31,9 +31,9 @@ namespace Dawnx
 
         //Use TSelf to make sure ThreadStatic working correctly.
         [ThreadStatic]
-        public static Stack<Scope<T, TSelf>> Scopes;
+        public static Stack<Scope<TModel, TSelf>> Scopes;
 
-        public static Scope<T, TSelf> Current => Scopes?.Peek();
+        public static Scope<TModel, TSelf> Current => Scopes?.Peek();
 
     }
 }

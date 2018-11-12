@@ -1154,7 +1154,7 @@
             <summary>
             Cooperate with 'using' keyword using thread safe <see cref="T:Dawnx.Scope`2"/>.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="TModel"></typeparam>
             <typeparam name="TSelf"></typeparam>
         </member>
         <member name="T:Dawnx.SqlScope`3">

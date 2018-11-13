@@ -4,10 +4,10 @@ using System.IO;
 
 namespace Dawnx.AspNetCore
 {
-    public partial class ZipStream
+    public partial class ZipStream : IDisposable
     {
         private Stream MappedStream;
-        private ZipFile StoredZipFile;
+        public ZipFile ZipFile { get; private set; }
 
         /// <summary>
         /// Creates a new <see cref="ZipStream"/> whose data will be stored on a stream.
@@ -15,8 +15,7 @@ namespace Dawnx.AspNetCore
         public ZipStream()
         {
             MappedStream = new MemoryStream();
-            StoredZipFile = ZipFile.Create(MappedStream);
-            StoredZipFile.BeginUpdate();
+            ZipFile = ZipFile.Create(MappedStream);
         }
 
         /// <summary>
@@ -26,7 +25,7 @@ namespace Dawnx.AspNetCore
         public ZipStream(string path)
         {
             MappedStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite);
-            StoredZipFile = new ZipFile(MappedStream);
+            ZipFile = new ZipFile(MappedStream);
         }
 
         /// <summary>
@@ -36,18 +35,17 @@ namespace Dawnx.AspNetCore
         public ZipStream(Stream stream)
         {
             MappedStream = stream;
-            StoredZipFile = new ZipFile(stream);
+            ZipFile = new ZipFile(stream);
         }
 
         /// <summary>
-        /// Add a file entry with data.
+        /// Add a <see cref="ZipEntry"/> that contains no data.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="entryName"></param>
+        /// <param name="entry"></param>
         /// <returns></returns>
-        public ZipStream AddFile(string path, string entryName)
+        public ZipStream AddEntry(ZipEntry entry)
         {
-            StoredZipFile.Add(path, entryName);
+            ZipFile.Add(entry);
             return this;
         }
 
@@ -57,33 +55,46 @@ namespace Dawnx.AspNetCore
         /// <param name="inStream"></param>
         /// <param name="entryName"></param>
         /// <returns></returns>
-        public ZipStream AddFile(Stream inStream, string entryName)
+        public ZipStream AddEntry(string entryName, Stream inStream,
+            CompressionMethod compressionMethod = CompressionMethod.Deflated)
         {
-            StoredZipFile.Add(new StaticDataSource(inStream), entryName);
+            using (new UpdateScope(this))
+                ZipFile.Add(new StaticDataSource(inStream), entryName, compressionMethod, true);
             return this;
         }
-
         /// <summary>
         /// Add a file entry with data.
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="entryName"></param>
         /// <returns></returns>
-        public ZipStream AddData(byte[] bytes, string entryName)
-        {
-            StoredZipFile.Add(new StaticDataSource(new MemoryStream(bytes)), entryName);
-            return this;
-        }
+        public ZipStream AddEntry(string entryName, byte[] bytes,
+            CompressionMethod compressionMethod = CompressionMethod.Deflated)
+            => AddEntry(entryName, new MemoryStream(bytes), compressionMethod);
 
         /// <summary>
         /// Add a file entry with data.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="path"></param>
         /// <param name="entryName"></param>
         /// <returns></returns>
-        public ZipStream AddData(string text, string entryName)
+        public ZipStream AddFileEntry(string entryName, string path,
+            CompressionMethod compressionMethod = CompressionMethod.Deflated)
         {
-            StoredZipFile.Add(new StaticDataSource(new MemoryStream(text.Bytes())), entryName);
+            using (var file = new FileStream(path, FileMode.Open, FileAccess.Read))
+                AddEntry(entryName, file, compressionMethod);
+            return this;
+        }
+
+        /// <summary>
+        /// Add a directory entry to the archive.
+        /// </summary>
+        /// <param name="dictionaryName"></param>
+        /// <returns></returns>
+        public ZipStream AddDictionary(string dictionaryName)
+        {
+            using (new UpdateScope(this))
+                ZipFile.AddDirectory(dictionaryName);
             return this;
         }
 
@@ -94,7 +105,7 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public ZipStream SetPassword(string password)
         {
-            StoredZipFile.Password = password;
+            ZipFile.Password = password;
             return this;
         }
 
@@ -105,16 +116,8 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public ZipStream SetComment(string comment)
         {
-            StoredZipFile.SetComment(comment);
+            ZipFile.SetComment(comment);
             return this;
-        }
-
-        /// <summary>
-        /// Save the Zip file.
-        /// </summary>
-        public void Save()
-        {
-            StoredZipFile.CommitUpdate();
         }
 
         /// <summary>
@@ -123,13 +126,21 @@ namespace Dawnx.AspNetCore
         /// <param name="path"></param>
         public void SaveAs(string path)
         {
-            var position = Position;
-            Save();
+            var position = MappedStream.Position;
 
-            Seek(0, SeekOrigin.Begin);
+            MappedStream.Seek(0, SeekOrigin.Begin);
             using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
-                this.WriteTo(file, 1024 * 1024);
-            Seek(position, SeekOrigin.Begin);
+            {
+                // The default ZipFile's buffer size is 4096
+                MappedStream.WriteTo(file, 4096);
+            }
+            MappedStream.Seek(position, SeekOrigin.Begin);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            MappedStream.Dispose();
+            base.Dispose(disposing);
         }
 
     }

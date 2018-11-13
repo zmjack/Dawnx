@@ -6,7 +6,34 @@ using System.Threading;
 namespace Dawnx
 {
     /// <summary>
-    /// Cooperate with 'using' keyword using thread safe <see cref="Scope{T, TSelf}"/>.
+    /// Cooperate with 'using' keyword to use thread safe <see cref="Scope{TSelf}"/>.
+    /// </summary>
+    /// <typeparam name="TSelf"></typeparam>
+    public abstract class Scope<TSelf> : IDisposable
+        where TSelf : Scope<TSelf>
+    {
+        public Scope()
+        {
+            DoubleCheck.Do(
+                locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
+                condition: () => Scopes is null,
+                task: () => Scopes = new Stack<Scope<TSelf>>());
+            Scopes.Push(this);
+        }
+        public void Dispose() { Disposing(); Scopes.Pop(); }
+
+        public virtual void Disposing() { }
+
+        // Use TSelf to make sure the ThreadStatic attribute working correctly.
+        [ThreadStatic]
+        public static Stack<Scope<TSelf>> Scopes;
+
+        public static Scope<TSelf> Current => Scopes?.Peek();
+
+    }
+
+    /// <summary>
+    /// Cooperate with 'using' keyword to use thread safe <see cref="Scope{T, TSelf}"/>.
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     /// <typeparam name="TSelf"></typeparam>
@@ -14,14 +41,13 @@ namespace Dawnx
         where TSelf : Scope<TModel, TSelf>
     {
         public TModel Model { get; protected set; }
-        
+
         public Scope(TModel model)
         {
             DoubleCheck.Do(
                 locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
                 condition: () => Scopes is null,
                 task: () => Scopes = new Stack<Scope<TModel, TSelf>>());
-
             Model = model;
             Scopes.Push(this);
         }
@@ -29,7 +55,7 @@ namespace Dawnx
 
         public virtual void Disposing() { }
 
-        //Use TSelf to make sure ThreadStatic working correctly.
+        // Use TSelf to make sure the ThreadStatic attribute working correctly.
         [ThreadStatic]
         public static Stack<Scope<TModel, TSelf>> Scopes;
 

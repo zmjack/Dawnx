@@ -100,10 +100,10 @@ namespace Dawnx.Algorithms.Tree.Test
             Assert.Equal(tree["A"].Trees.Select(x => x.Key), new[] { "A-a" });
             Assert.Equal(tree["A"].Leafs.Select(x => x.Key), new[] { "A-b" });
 
-            Assert.True(tree["A"].IsTree);
-            Assert.True(tree["B"].IsLeaf);
-            Assert.False(tree["A"].IsLeaf);
-            Assert.False(tree["B"].IsTree);
+            Assert.True(tree["A"].IsTreeNode);
+            Assert.True(tree["B"].IsLeafNode);
+            Assert.False(tree["A"].IsLeafNode);
+            Assert.False(tree["B"].IsTreeNode);
 
             Assert.Equal(tree["A"].RecursiveChildren.Select(x => x.Key), new[] { "A-a", "A-a-1", "A-a-1-i", "A-b" });
             Assert.Equal(tree["A"].RecursiveTrees.Select(x => x.Key), new[] { "A-a", "A-a-1" });

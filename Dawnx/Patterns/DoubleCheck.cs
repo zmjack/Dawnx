@@ -2,13 +2,11 @@
 
 namespace Dawnx.Patterns
 {
-    /// <summary>
-    /// Double-checked locking pattern: if(condition) -> lock(locker) -> if(condition) -> do(task).
-    /// </summary>
     public static class DoubleCheck
     {
         /// <summary>
-        /// Do task with Double-checked locking pattern.
+        /// Do a task with Double-checked locking pattern:
+        ///     if(condition) -> lock(locker) -> if(condition) -> do(task).
         /// </summary>
         /// <param name="locker"></param>
         /// <param name="condition"></param>
@@ -22,13 +20,14 @@ namespace Dawnx.Patterns
         }
 
         /// <summary>
-        /// Do task with Double-checked locking pattern.
+        /// Do a task with Double-checked locking pattern:
+        ///     if(condition) -> lock(locker) -> if(condition) -> do(task).
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TLocker"></typeparam>
         /// <param name="locker"></param>
         /// <param name="condition"></param>
         /// <param name="task"></param>
-        public static void Do<T>(T locker, Func<bool> condition, Action task)
+        public static void Do<TLocker>(TLocker locker, Func<bool> condition, Action task)
         {
             if (condition())
                 lock (locker)

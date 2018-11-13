@@ -194,7 +194,14 @@
             </summary>
             <param name="stream"></param>
         </member>
-        <member name="M:Dawnx.AspNetCore.ZipStream.AddData(System.String,System.IO.Stream,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(ICSharpCode.SharpZipLib.Zip.ZipEntry)">
+            <summary>
+            Add a <see cref="T:ICSharpCode.SharpZipLib.Zip.ZipEntry"/> that contains no data.
+            </summary>
+            <param name="entry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(System.String,System.IO.Stream,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
             <summary>
             Add a file entry with data.
             </summary>
@@ -202,7 +209,7 @@
             <param name="entryName"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.ZipStream.AddData(System.String,System.Byte[],ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(System.String,System.Byte[],ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
             <summary>
             Add a file entry with data.
             </summary>
@@ -210,12 +217,19 @@
             <param name="entryName"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.ZipStream.AddFile(System.String,System.String,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddFileEntry(System.String,System.String,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
             <summary>
             Add a file entry with data.
             </summary>
             <param name="path"></param>
             <param name="entryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddDictionary(System.String)">
+            <summary>
+            Add a directory entry to the archive.
+            </summary>
+            <param name="dictionaryName"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.ZipStream.SetPassword(System.String)">

@@ -29,8 +29,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
             if (HttpContext.Request.Path.ToString().EndsWith("Users"))
                 return Redirect("Users/Index");
 
-            ViewData["Users"] = _liveAccountManager.Users.ToArray();
-            ViewData["LiveRoles"] = _liveAccountManager.LiveRoles.ToArray();
+            ViewData["Users"] = _liveAccountManager.Users.OrderBy(x => x.UserName).ToArray();
+            ViewData["LiveRoles"] = _liveAccountManager.LiveRoles.OrderBy(x => x.Name).ToArray();
             ViewData["LiveUserRoles"] = _liveAccountManager.LiveUserRoles.ToArray();
 
             return Page();

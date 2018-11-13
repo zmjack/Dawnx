@@ -1150,9 +1150,15 @@
             <param name="stop"></param>
             <param name="scan"></param>
         </member>
+        <member name="T:Dawnx.Scope`1">
+            <summary>
+            Cooperate with 'using' keyword to use thread safe <see cref="T:Dawnx.Scope`1"/>.
+            </summary>
+            <typeparam name="TSelf"></typeparam>
+        </member>
         <member name="T:Dawnx.Scope`2">
             <summary>
-            Cooperate with 'using' keyword using thread safe <see cref="T:Dawnx.Scope`2"/>.
+            Cooperate with 'using' keyword to use thread safe <see cref="T:Dawnx.Scope`2"/>.
             </summary>
             <typeparam name="TModel"></typeparam>
             <typeparam name="TSelf"></typeparam>

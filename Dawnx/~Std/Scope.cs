@@ -14,10 +14,10 @@ namespace Dawnx
     {
         public Scope()
         {
-            DoubleCheck.Do(
+            DoubleCheck.Do<string>(
                 locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
-                condition: () => Scopes is null,
-                task: () => Scopes = new Stack<Scope<TSelf>>());
+                @if: () => Scopes is null,
+                then: () => Scopes = new Stack<Scope<TSelf>>());
             Scopes.Push(this);
         }
         public void Dispose() { Disposing(); Scopes.Pop(); }
@@ -44,10 +44,10 @@ namespace Dawnx
 
         public Scope(TModel model)
         {
-            DoubleCheck.Do(
+            DoubleCheck.Do<string>(
                 locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
-                condition: () => Scopes is null,
-                task: () => Scopes = new Stack<Scope<TModel, TSelf>>());
+                @if: () => Scopes is null,
+                then: () => Scopes = new Stack<Scope<TModel, TSelf>>());
             Model = model;
             Scopes.Push(this);
         }

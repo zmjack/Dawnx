@@ -6,33 +6,33 @@ namespace Dawnx.Patterns
     {
         /// <summary>
         /// Do a task with Double-checked locking pattern:
-        ///     if(condition) -> lock(locker) -> if(condition) -> do(task).
+        ///     if(@if) -> lock(@locker) -> if(@if) -> do(@then).
         /// </summary>
         /// <param name="locker"></param>
-        /// <param name="condition"></param>
-        /// <param name="task"></param>
-        public static void Do(string locker, Func<bool> condition, Action task)
+        /// <param name="@if"></param>
+        /// <param name="then"></param>
+        public static void Do(string locker, Func<bool> @if, Action then)
         {
-            if (condition())
+            if (@if())
                 lock (locker)
-                    if (condition())
-                        task();
+                    if (@if())
+                        then();
         }
 
         /// <summary>
         /// Do a task with Double-checked locking pattern:
-        ///     if(condition) -> lock(locker) -> if(condition) -> do(task).
+        ///     if(@if) -> lock(@locker) -> if(@if) -> do(@then).
         /// </summary>
         /// <typeparam name="TLocker"></typeparam>
         /// <param name="locker"></param>
-        /// <param name="condition"></param>
-        /// <param name="task"></param>
-        public static void Do<TLocker>(TLocker locker, Func<bool> condition, Action task)
+        /// <param name="if"></param>
+        /// <param name="then"></param>
+        public static void Do<TLocker>(TLocker locker, Func<bool> @if, Action then)
         {
-            if (condition())
+            if (@if())
                 lock (locker)
-                    if (condition())
-                        task();
+                    if (@if())
+                        then();
         }
 
     }

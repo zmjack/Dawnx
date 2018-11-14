@@ -1,4 +1,4 @@
-﻿using Dawnx.Enums;
+﻿using Dawnx.Definition;
 using Dawnx.IO;
 using Dawnx.Utilities;
 using System;

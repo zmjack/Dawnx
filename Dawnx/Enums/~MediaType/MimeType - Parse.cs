@@ -1,14 +1,15 @@
 ﻿using System.IO;
 
-namespace Dawnx.Enums
+namespace Dawnx.Definition
 {
     /// <summary>
     /// MIME Type definitions
     /// (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
     /// </summary>
-    public static partial class MediaType
+    public static partial class MimeType
     {
-        public static string GetFrom(string filePath)
+        //TODO: Need to fill this
+        public static string Parse(string filePath)
         {
             switch (Path.GetExtension(filePath))
             {

@@ -1,4 +1,4 @@
-﻿using Dawnx.Enums;
+﻿using Dawnx.Definition;
 using Dawnx.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,7 +12,7 @@ namespace Dawnx.Net.Http
         public string Get(string url, Dictionary<string, object> updata = null)
         {
             return ReadString(
-                HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
+                HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
                 url, updata, null);
         }
         public string Get(string url, object updata) => Get(url, ObjectUtility.CovertToDictionary(updata));
@@ -20,7 +20,7 @@ namespace Dawnx.Net.Http
         public void GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
         {
             Download(receiver,
-                HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
+                HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
                 url, updata, null, bufferSize);
         }
         public void GetDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)

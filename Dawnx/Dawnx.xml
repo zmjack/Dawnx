@@ -990,16 +990,30 @@
             Use <see cref="T:Dawnx.Entity.IEntity"/> to define entity classes to get some useful extension methods.
             </summary>
         </member>
-        <member name="T:Dawnx.Enums.MediaType">
+        <member name="T:Dawnx.Definition.MimeType">
             <summary>
             MIME Type definitions
             (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
             </summary>
         </member>
-        <member name="T:Dawnx.Patterns.DoubleCheck">
+        <member name="M:Dawnx.Patterns.DoubleCheck.Do(System.String,System.Func{System.Boolean},System.Action)">
             <summary>
-            Double-checked locking pattern: if -> lock -> if -> dosth.
+            Do a task with Double-checked locking pattern:
+                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
             </summary>
+            <param name="locker"></param>
+            <param name="@if"></param>
+            <param name="then"></param>
+        </member>
+        <member name="M:Dawnx.Patterns.DoubleCheck.Do``1(``0,System.Func{System.Boolean},System.Action)">
+            <summary>
+            Do a task with Double-checked locking pattern:
+                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
+            </summary>
+            <typeparam name="TLocker"></typeparam>
+            <param name="locker"></param>
+            <param name="if"></param>
+            <param name="then"></param>
         </member>
         <member name="M:Dawnx.Reflection.DefaultBasicTypeConverter.#ctor(System.Boolean)">
             <summary>

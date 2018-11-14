@@ -1,4 +1,4 @@
-using Dawnx.Enums;
+using Dawnx.Definition;
 using Dawnx.Net.Http;
 using Dawnx.Net.Http.Processors;
 using System;
@@ -105,7 +105,7 @@ namespace Dawnx.Net.Test
                     var match_RequestToken = new Regex(@"<input name=""__RequestVerificationToken"" type=""hidden"" value=""(.+?)"" />").Match(html);
                     if (match_RequestToken.Success)
                     {
-                        return web.GetResponse(HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
+                        return web.GetResponse(HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
                             uri.AbsoluteUri,
                             new Dictionary<string, object>
                             {

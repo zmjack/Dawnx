@@ -1,4 +1,4 @@
-﻿using Dawnx.Enums;
+﻿using Dawnx.Definition;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -25,7 +25,7 @@ namespace Dawnx.Net.Http.Processors
                 if (!location.IsNullOrWhiteSpace() && web.RedirectTimes < web.AllowRedirectTimes)
                 {
                     web.RedirectTimes++;
-                    return web.GetResponse(HttpVerb.GET, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, location, null, null);
+                    return web.GetResponse(HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, location, null, null);
                 }
                 else throw new WebException("Too many automatic redirections were attempted.");
             }

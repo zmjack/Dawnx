@@ -1,4 +1,4 @@
-﻿using Dawnx.Enums;
+﻿using Dawnx.Definition;
 using Dawnx.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,14 +12,14 @@ namespace Dawnx.Net.Http
         public string Post(string url, Dictionary<string, object> updata = null)
         {
             return ReadString(
-                HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED,
+                HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
                 url, updata, null);
         }
         public string Post(string url, object updata) => Post(url, ObjectUtility.CovertToDictionary(updata));
 
         public void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
         {
-            Download(receiver, HttpVerb.POST, MediaType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
+            Download(receiver, HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
         }
         public void PostDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => PostDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), bufferSize);

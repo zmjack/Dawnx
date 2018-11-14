@@ -1,4 +1,5 @@
-﻿using NPOI.HSSF.UserModel;
+﻿using Dawnx.Definition;
+using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -20,8 +21,8 @@ namespace Dawnx.NPOI
             {
                 switch (Version)
                 {
-                    case ExcelVersion.Excel2003: return Enums.MediaType.APPLICATION_MS_EXCEL_2003;
-                    case ExcelVersion.Excel2007: return Enums.MediaType.APPLICATION_MS_EXCEL_2007;
+                    case ExcelVersion.Excel2003: return MimeType.Microsoft.EXCEL_2003;
+                    case ExcelVersion.Excel2007: return MimeType.Microsoft.EXCEL_2007;
                     default: return string.Empty;
                 }
             }

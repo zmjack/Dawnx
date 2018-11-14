@@ -1,4 +1,4 @@
-﻿using Dawnx.Enums;
+﻿using Dawnx.Definition;
 using Dawnx.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,7 +12,7 @@ namespace Dawnx.Net.Http
         public string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
         {
             return ReadString(
-                HttpVerb.POST, MediaType.MULTIPART_FORM_DATA,
+                HttpVerb.POST, MimeType.MULTIPART_FORM_DATA,
                 url, updata, upfiles);
         }
         public string Up(string url, object updata, Dictionary<string, object> upfiles = null)
@@ -21,7 +21,7 @@ namespace Dawnx.Net.Http
         public void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
         {
             Download(receiver,
-                HttpVerb.POST, MediaType.MULTIPART_FORM_DATA,
+                HttpVerb.POST, MimeType.MULTIPART_FORM_DATA,
                 url, updata, upfiles, bufferSize);
         }
         public void UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)

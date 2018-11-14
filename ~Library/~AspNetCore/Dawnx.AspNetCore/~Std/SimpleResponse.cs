@@ -1,4 +1,6 @@
-﻿namespace Dawnx.AspNetCore
+﻿using System;
+
+namespace Dawnx.AspNetCore
 {
     public class SimpleResponse
     {
@@ -24,6 +26,8 @@
 
         public const string SuccessState = "success";
         public static SimpleResponse SuccessResponse => new SimpleResponse { state = SuccessState };
+
+        [Obsolete("This member will be removed in the next version.")]
         public bool Success => state == SuccessState;
 
     }

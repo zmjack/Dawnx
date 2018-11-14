@@ -980,6 +980,12 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="T:Dawnx.Definition.MimeType">
+            <summary>
+            MIME Type definitions
+            (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
+            </summary>
+        </member>
         <member name="T:Dawnx.Entity.IEntity">
             <summary>
             Use <see cref="T:Dawnx.Entity.IEntity"/> to define entity classes to get some useful extension methods.
@@ -988,12 +994,6 @@
         <member name="T:Dawnx.Entity.IEntity`1">
             <summary>
             Use <see cref="T:Dawnx.Entity.IEntity"/> to define entity classes to get some useful extension methods.
-            </summary>
-        </member>
-        <member name="T:Dawnx.Definition.MimeType">
-            <summary>
-            MIME Type definitions
-            (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
             </summary>
         </member>
         <member name="M:Dawnx.Patterns.DoubleCheck.Do(System.String,System.Func{System.Boolean},System.Action)">

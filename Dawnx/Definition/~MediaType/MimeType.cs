@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Dawnx.Definition
 {
@@ -9,6 +10,7 @@ namespace Dawnx.Definition
     public static partial class MimeType
     {
         //TODO: Need to fill this
+        [Obsolete("Devloping")]
         public static string Parse(string filePath)
         {
             switch (Path.GetExtension(filePath))

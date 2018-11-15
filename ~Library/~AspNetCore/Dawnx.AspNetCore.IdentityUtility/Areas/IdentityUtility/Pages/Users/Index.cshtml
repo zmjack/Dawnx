@@ -25,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Items)
+        @foreach (var item in Items.OrderBy(x => x.UserName))
         {
             var id_ConcurrencyStamp = Guid.NewGuid();
 

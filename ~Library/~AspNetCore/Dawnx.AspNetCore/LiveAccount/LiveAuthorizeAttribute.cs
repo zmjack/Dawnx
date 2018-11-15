@@ -5,6 +5,11 @@ namespace Dawnx.AspNetCore.LiveAccount
 {
     public class LiveAuthorizeAttribute : ActionFilterAttribute
     {
+        public LiveAuthorizeAttribute()
+        {
+            Order = 100;
+        }
+
         public override void OnActionExecuted(ActionExecutedContext context)
         {
         }

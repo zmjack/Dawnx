@@ -10,6 +10,7 @@ namespace Dawnx.AspNetCore
     {
         public static HtmlString JValidate<TModel>(this HtmlHelper @this, VI<TModel> model)
         {
+            //TODO: Use this method to generate js validation code.
             return new HtmlString("");
         }
 

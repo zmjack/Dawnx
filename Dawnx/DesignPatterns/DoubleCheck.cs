@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx.Patterns
+namespace Dawnx.DesignPatterns
 {
     public static class DoubleCheck
     {

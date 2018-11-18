@@ -1,4 +1,4 @@
-﻿using Dawnx.DesignPatterns;
+﻿using Dawnx.Patterns;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,7 +14,7 @@ namespace Dawnx
     {
         public Scope()
         {
-            DoubleCheck.Do<string>(
+            UseDoubleCheck.Do<string>(
                 locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
                 @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TSelf>>());
@@ -44,7 +44,7 @@ namespace Dawnx
 
         public Scope(TModel model)
         {
-            DoubleCheck.Do<string>(
+            UseDoubleCheck.Do<string>(
                 locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
                 @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TModel, TSelf>>());

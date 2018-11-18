@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Dawnx.DesignPatterns
+namespace Dawnx.Patterns
 {
-    public static class DoubleCheck
+    public static class UseDoubleCheck
     {
         /// <summary>
         /// Do a task with Double-checked locking pattern:

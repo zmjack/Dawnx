@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 
-namespace Dawnx.DesignPatterns
+namespace Dawnx.Patterns
 {
-    public static class SpinLock
+    public static class UseSpinLock
     {
         /// <summary>
         /// Do a task with SpinLock pattern:

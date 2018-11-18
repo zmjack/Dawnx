@@ -1008,7 +1008,15 @@
         <member name="M:Dawnx.DesignPatterns.SpinLock.Do(System.Action,System.Func{System.Boolean})">
             <summary>
             Do a task with SpinLock pattern:
-                do(@task) until(@until)
+                do { @task; sleep(10 millisecs); } until(@until)
+            </summary>
+            <param name="until"></param>
+            <param name="task"></param>
+        </member>
+        <member name="M:Dawnx.DesignPatterns.SpinLock.Do(System.Action,System.Func{System.Boolean},System.TimeSpan)">
+            <summary>
+            Do a task with SpinLock pattern:
+                do { @task; sleep(@frequency); } until(@until)
             </summary>
             <param name="until"></param>
             <param name="task"></param>

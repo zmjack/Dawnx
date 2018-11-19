@@ -10,7 +10,7 @@ namespace Dawnx
         ///     and is commonly used for looping a specific number of times in for loops.
         /// </summary>
         /// <param name="stop"></param>
-        public static int[] Create(int stop) => new IntegerRange(stop - 1).ToArray();
+        public static IntegerRange Create(int stop) => new IntegerRange(stop - 1);
 
         /// <summary>
         /// The range type represents an immutable sequence of numbers
@@ -18,7 +18,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="start"></param>
         /// <param name="stop"></param>
-        public static int[] Create(int start, int stop) => new IntegerRange(start, stop - 1).ToArray();
+        public static IntegerRange Create(int start, int stop) => new IntegerRange(start, stop - 1);
 
         /// <summary>
         /// The range type represents an immutable sequence of numbers
@@ -27,7 +27,7 @@ namespace Dawnx
         /// <param name="start"></param>
         /// <param name="stop"></param>
         /// <param name="scan"></param>
-        public static int[] Create(int start, int stop, int scan) => new IntegerRange(start, stop - 1, scan).ToArray();
+        public static IntegerRange Create(int start, int stop, int scan) => new IntegerRange(start, stop - 1, scan);
 
     }
 }

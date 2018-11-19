@@ -34,12 +34,14 @@ namespace Dawnx.Algorithms.Math
             var ret = new double[RowLength];
             if (IsAugmentedMatrix)
             {
-                var divisor = SelectDeterminant(Range.Create(RowLength));
+                var divisor = SelectDeterminant(Range.Create(RowLength).ToArray());
 
                 Range.Create(RowLength).Each(i =>
                 {
-                    var dividend = SelectDeterminant(Range.Create(RowLength)
-                        .Self(_ => _[i] = ColumnLength - 1).ToArray());
+                    var dividend = SelectDeterminant(
+                        Range.Create(RowLength).ToArray()
+                            .Self(_ => _[i] = ColumnLength - 1)
+                            .ToArray());
                     ret[i] = dividend.Value / divisor.Value;
                 });
 

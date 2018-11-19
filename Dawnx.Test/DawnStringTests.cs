@@ -1,3 +1,4 @@
+using Dawnx.Definition;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -65,6 +66,10 @@ namespace Dawnx.Test
             Assert.Equal(new[] { "123", "456" }, $"123{Environment.NewLine}456".GetLines());
             Assert.Equal(new[] { "123", "456" }, $"123{Environment.NewLine}456{Environment.NewLine}".GetLines());
             Assert.Equal(new[] { "123", "456", " " }, $"123{Environment.NewLine}456{Environment.NewLine} ".GetLines());
+
+            Assert.Equal(new string[0], nullString.GetLines());
+            Assert.Equal(new[] { "123", "456" }, $"123{ControlChars.Lf}456".GetLines(true));
+            Assert.Equal(new[] { "123", "456" }, $"123{ControlChars.CrLf}456".GetLines(true));
         }
 
         [Fact]
@@ -98,6 +103,6 @@ namespace Dawnx.Test
             Assert.Equal("1 2345 6789", "123456789".UnitInsert(4, " "));
             Assert.Equal("1234 5678 9", "123456789".UnitInsert(4, " ", true));
         }
-               
+
     }
 }

@@ -14,7 +14,7 @@ namespace Dawnx.Net.Http
     {
         static WebAccess()
         {
-            //TODO: If WebClient can not run in netcore 2.1+ normally, delete it.
+            // Ensure WebClient runs correctly in the netcore 2.1+.
             AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
         }
 
@@ -262,7 +262,6 @@ namespace Dawnx.Net.Http
         private static IEnumerable<string> NormalizeStringValues(object dvalue)
         {
             //TODO: This method limit the urlencode ability of urlencode, because it support only 1 level search.
-            //Need to be optimized.
             if (dvalue is Array)
             {
                 return (dvalue as Array).OfType<object>()

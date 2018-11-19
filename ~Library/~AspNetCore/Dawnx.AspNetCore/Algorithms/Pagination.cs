@@ -1,4 +1,6 @@
-﻿namespace Dawnx.AspNetCore.Algorithms
+﻿using System.Linq;
+
+namespace Dawnx.AspNetCore.Algorithms
 {
     public static class Pagination
     {
@@ -42,7 +44,7 @@
                     end = pageSize;
                 }
             }
-            return Range.Create(start, end + 1);
+            return Range.Create(start, end + 1).ToArray();
         }
     }
 }

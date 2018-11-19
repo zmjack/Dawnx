@@ -156,7 +156,9 @@ namespace Dawnx
         /// <returns></returns>
         public static string NormalizeNewLine(this string @this)
         {
-            //TODO: Is \r allowed ?
+            // If a string come from non-Unix platforms, then its NewLine is "\r\n".
+            // If a string come from Unix platforms, then its NewLine is "\n".
+
             switch (Environment.NewLine)
             {
                 case "\r\n":
@@ -170,13 +172,17 @@ namespace Dawnx
 
         /// <summary>
         /// Divides a string into multi-lines. If the string is null, return string[0]. 
-        /// (Maybe you shall use <see cref="NormalizeNewLine"/> before to convert the NewLine 
+        /// (Perhaps you should set `normalizeNewLine` to true to convert the NewLine 
         ///     which is defined in other system into the current system's.)
         /// </summary>
         /// <param name="this"></param>
+        /// <param name="normalizeNewLine"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetLines(this string @this)
+        public static IEnumerable<string> GetLines(this string @this, bool normalizeNewLine = false)
         {
+            if (normalizeNewLine)
+                @this = @this.NormalizeNewLine();
+
             if (@this != null)
             {
                 var newLineLength = Environment.NewLine.Length;
@@ -222,12 +228,12 @@ namespace Dawnx
         /// <returns></returns>
         public static string Project(this string @this, Regex regex, string target = null)
         {
-            //TODO: to fix $ symbol analysis. (eg. $$1)
             var match = regex.Match(@this);
             if (match.Success)
             {
                 if (target is null)
-                    return new IntegerRange(1, match.Groups.Count - 1).Select(i => match.Groups[i].Value).Join("");
+                    return new IntegerRange(1, match.Groups.Count - 1)
+                        .Select(i => match.Groups[i].Value).Join("");
                 else return regex.Replace(@this, target);
             }
             else return null;

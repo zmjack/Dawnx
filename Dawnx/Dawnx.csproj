@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dawnx.Lite\Dawnx.Lite.csproj" />
+    <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-
-namespace Dawnx.AspNetCore.LiveAccountUtility
+﻿namespace Dawnx.AspNetCore.LiveAccountUtility
 {
     public static class LiveAccountUtility
     {

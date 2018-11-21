@@ -34,7 +34,6 @@ namespace Dawnx.AspNetCore
                     var type = _.GetType(className);
                     if (type != null) return type;
                     else throw new EntryPointNotFoundException($"Can not find class '{className}'");
-
                 })
                 .For(_ =>
                 {

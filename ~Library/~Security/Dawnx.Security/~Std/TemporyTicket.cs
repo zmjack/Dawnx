@@ -1,7 +1,6 @@
 ﻿using Dawnx.Security.AesSecurity;
 using Newtonsoft.Json;
 using System;
-using System.Security.Cryptography;
 
 namespace Dawnx.Security
 {

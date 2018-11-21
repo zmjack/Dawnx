@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Definition
+﻿namespace Dawnx.Definition
 {
     public static partial class MimeType
     {

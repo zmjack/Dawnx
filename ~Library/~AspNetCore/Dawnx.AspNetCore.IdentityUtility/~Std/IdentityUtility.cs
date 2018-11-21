@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-
-namespace Dawnx.AspNetCore.IdentityUtility
+﻿namespace Dawnx.AspNetCore.IdentityUtility
 {
     public static class IdentityUtility
     {

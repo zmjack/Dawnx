@@ -2,7 +2,7 @@
 
 namespace Dawnx.AspNetCore
 {
-    [Obsolete("Use TemporyTicket to instead.")]
+    [Obsolete("Use TemporaryTicket to instead.")]
     public class SimpleAuthMessage
     {
         public DateTime Expire { get; set; }

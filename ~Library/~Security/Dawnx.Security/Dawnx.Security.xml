@@ -11,9 +11,9 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="P:Dawnx.Security.TemporyTicket.IsValid">
+        <member name="P:Dawnx.Security.TemporaryTicket.IsValid">
             <summary>
-            Checks whether the ticket is valid. (The default <see cref="F:Dawnx.Security.TemporyTicket.SlideOffsetForExpiration"/> is 10 minutes.)
+            Checks whether the ticket is valid. (The default <see cref="F:Dawnx.Security.TemporaryTicket.SlideOffsetForExpiration"/> is 10 minutes.)
             </summary>
         </member>
     </members>

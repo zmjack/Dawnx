@@ -12,10 +12,8 @@ namespace DawnxDevloping
         static void Main(string[] args)
         {
             G1(2000);
-            G2(1000000);
-
-            var generator = new IdGenerator(() => DateTime.Now.Ticks.ToString());
-            G3(generator, 1000000);
+            G2(800000);
+            G3(800000);
         }
 
         static void G1(int level)
@@ -60,8 +58,9 @@ namespace DawnxDevloping
             }
         }
 
-        static void G3(IdGenerator generator, int level)
+        static void G3(int level)
         {
+            var generator = new IdGenerator(() => DateTime.Now.Ticks.ToString());
             using (var probe = PerformanceProbe.Create(nameof(G3)))
             {
                 var ret = Concurrency.Run((runId) =>

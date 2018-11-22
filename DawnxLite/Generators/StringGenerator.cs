@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dawnx.Generators
 {
-    public class StringGenerator
+    public class StringGenerator : IGenerator
     {
         public string Format { get; private set; }
         public double AllowedProbability { get; private set; }
@@ -32,9 +32,6 @@ namespace Dawnx.Generators
             return (MaxCount - count - excepts.Length) / MaxCount;
         }
 
-        public string TakeOne() => Take(1)[0];
-        public string TakeOne(string[] excepts) => Take(1, excepts)[0];
-
         public string[] Take(int count)
         {
             if (AfterProbability(count) < AllowedProbability)
@@ -42,6 +39,7 @@ namespace Dawnx.Generators
 
             return Generate(count);
         }
+        public string TakeOne() => Take(1)[0];
 
         public string[] Take(int count, string[] excepts)
         {
@@ -54,6 +52,7 @@ namespace Dawnx.Generators
 
             return list.ToArray();
         }
+        public string TakeOne(string[] excepts) => Take(1, excepts)[0];
 
         private string[] Generate(int count)
         {

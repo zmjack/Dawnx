@@ -7,7 +7,7 @@ namespace Dawnx.Patterns
     {
         /// <summary>
         /// Do a task with SpinLock pattern:
-        ///     do { @task; } until(@until)
+        ///     do { @task(); } until(@until())
         /// </summary>
         /// <param name="until"></param>
         /// <param name="task"></param>
@@ -19,7 +19,7 @@ namespace Dawnx.Patterns
 
         /// <summary>
         /// Do a task with SpinLock pattern:
-        ///     do { @task; sleep(@frequency); } until(@until)
+        ///     do { @task(); sleep(@frequency); } until(@until())
         /// </summary>
         /// <param name="until"></param>
         /// <param name="task"></param>
@@ -31,6 +31,38 @@ namespace Dawnx.Patterns
                 Thread.Sleep(frequency);
             }
             while (!until());
+        }
+
+        /// <summary>
+        /// Do a task with SpinLock pattern:
+        ///     do { $param=@task(); sleep(@frequency); } until(@until($param))
+        /// </summary>
+        /// <param name="until"></param>
+        /// <param name="task"></param>
+        public static TRet Do<TRet>(Func<TRet> task, Func<TRet, bool> until)
+        {
+            TRet ret;
+            do { ret = task(); }
+            while (!until(ret));
+            return ret;
+        }
+
+        /// <summary>
+        /// Do a task with SpinLock pattern:
+        ///     do { $param=@task(); sleep(@frequency); } until(@until($param))
+        /// </summary>
+        /// <param name="until"></param>
+        /// <param name="task"></param>
+        public static TRet Do<TRet>(Func<TRet> task, Func<TRet, bool> until, TimeSpan frequency)
+        {
+            TRet ret;
+            do
+            {
+                ret = task();
+                Thread.Sleep(frequency);
+            }
+            while (!until(ret));
+            return ret;
         }
 
     }

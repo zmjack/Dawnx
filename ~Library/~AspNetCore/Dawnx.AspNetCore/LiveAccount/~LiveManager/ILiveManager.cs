@@ -6,12 +6,12 @@ using System;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public interface ILiveAccountManager
+    public interface ILiveManager
     {
         DbContext Context { get; }
         void SaveChanges();
 
-        LiveAccountTransaction FastProcessing { get; }
+        LiveTransaction FastProcessing { get; }
         bool CheckAuthorization(ActionExecutingContext actionExecutingContext);
 
         #region

@@ -10,8 +10,8 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
     [AllowAnonymous]
     public class IndexModel : PageModel
     {
-        private readonly ILiveAccountManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveAccountManager>(LiveAccountDependencyInjection.LiveAccountService);
+        private readonly ILiveManager _liveAccountManager
+            = DIUtility.GetEntryService<ILiveManager>(LiveDependencyInjection.LiveAccountService);
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)

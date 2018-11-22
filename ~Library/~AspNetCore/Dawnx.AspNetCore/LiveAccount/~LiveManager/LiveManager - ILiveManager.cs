@@ -10,8 +10,8 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public partial class LiveAccountManager<TDbContext> : ILiveAccountManager
-        where TDbContext : IdentityDbContext, ILiveAccountDbContext
+    public partial class LiveManager<TDbContext> : ILiveManager
+        where TDbContext : IdentityDbContext, ILiveDbContext
     {
         public DbContext Context => _context;
         public void SaveChanges() => _context.SaveChanges();
@@ -136,7 +136,9 @@ namespace Dawnx.AspNetCore.LiveAccount
 
             return LiveUserRoles
                 .Include(x => x.RoleLink)
-                .Where(x => x.User == userId).Select(x => x.RoleLink).ToArray();
+                .Where(x => x.User == userId)
+                .Select(x => x.RoleLink)
+                .ToArray();
         }
 
         public void SetUserRoles(string userName, Guid[] liveRoleIds)
@@ -232,5 +234,37 @@ namespace Dawnx.AspNetCore.LiveAccount
                 .Select(x => x.ActionLink)
                 .ToArray();
         }
+
+        public LiveOperation[] GetUserOperations(string userName)
+        {
+            var normalizedUserName = userName.ToUpper();
+            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
+
+            return LiveUserRoles
+                .Include(x => x.RoleLink).ThenInclude(x => x.RoleOperations)
+                .Where(x => x.User == userId)
+                .SelectMany(x => x.RoleLink.RoleOperations)
+                .Select(x => x.OperationLink)
+                .Distinct().ToArray();
+        }
+
+        public LiveAction[] GetUserActions(string userName)
+        {
+            var normalizedUserName = userName.ToUpper();
+            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
+
+            return LiveUserRoles
+                .Include(x => x.RoleLink)
+                    .ThenInclude(x => x.RoleOperations)
+                    .ThenInclude(x => x.OperationLink)
+                    .ThenInclude(x => x.OperationActions)
+                    .ThenInclude(x => x.ActionLink)
+                .Where(x => x.User == userId)
+                .SelectMany(x => x.RoleLink.RoleOperations)
+                .SelectMany(x => x.OperationLink.OperationActions)
+                .Select(x => x.ActionLink)
+                .Distinct().ToArray();
+        }
+
     }
 }

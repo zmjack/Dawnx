@@ -16,7 +16,7 @@ namespace Dawnx.AspNetCore.LiveAccount
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var liveAccountService = DIUtility.GetEntryService<ILiveAccountManager>(LiveAccountDependencyInjection.LiveAccountService);
+            var liveAccountService = DIUtility.GetEntryService<ILiveManager>(LiveDependencyInjection.LiveAccountService);
 
             if (!liveAccountService.CheckAuthorization(context))
                 throw new UnauthorizedAccessException($"LiveAccount authorize faild.");

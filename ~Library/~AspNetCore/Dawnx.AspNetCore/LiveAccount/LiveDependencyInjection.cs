@@ -4,15 +4,15 @@ using System;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public static class LiveAccountDependencyInjection
+    public static class LiveDependencyInjection
     {
         public static Type LiveAccountService { get; private set; }
 
         public static void AddLiveAccount<TDbContext>(this IServiceCollection @this)
-            where TDbContext : IdentityDbContext, ILiveAccountDbContext
+            where TDbContext : IdentityDbContext, ILiveDbContext
         {
-            @this.AddScoped<LiveAccountManager<TDbContext>>();
-            LiveAccountService = typeof(LiveAccountManager<TDbContext>);
+            @this.AddScoped<LiveManager<TDbContext>>();
+            LiveAccountService = typeof(LiveManager<TDbContext>);
         }
 
     }

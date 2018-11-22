@@ -6,17 +6,17 @@ using System.Linq;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public partial class LiveAccountManager<TDbContext>
-        where TDbContext : IdentityDbContext, ILiveAccountDbContext
+    public partial class LiveManager<TDbContext>
+        where TDbContext : IdentityDbContext, ILiveDbContext
     {
         private readonly TDbContext _context;
 
-        public LiveAccountManager()
+        public LiveManager()
         {
             _context = DIUtility.GetEntryService<TDbContext>();
         }
 
-        public LiveAccountTransaction FastProcessing => new LiveAccountTransaction(this);
+        public LiveTransaction FastProcessing => new LiveTransaction(this);
 
         public bool CheckAuthorization(ActionExecutingContext actionExecutingContext)
         {

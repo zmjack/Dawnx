@@ -2,13 +2,13 @@
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public class LiveAccountTransaction : Scope<IDbContextTransaction, LiveAccountTransaction>
+    public class LiveTransaction : Scope<IDbContextTransaction, LiveTransaction>
     {
-        public LiveAccountTransaction(ILiveAccountManager manager)
+        public LiveTransaction(ILiveManager manager)
             : this(manager.Context.Database.BeginTransaction())
         {
         }
-        private LiveAccountTransaction(IDbContextTransaction model) : base(model) { }
+        private LiveTransaction(IDbContextTransaction model) : base(model) { }
 
         public override void Disposing()
         {

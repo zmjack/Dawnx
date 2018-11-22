@@ -3,7 +3,7 @@ using Dawnx.AspNetCore.LiveAccount.Entities;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public interface ILiveAccountDbContext
+    public interface ILiveDbContext
     {
         DbSet<LiveRole> LiveRoles { get; set; }
         DbSet<LiveUserRole> LiveUserRoles { get; set; }

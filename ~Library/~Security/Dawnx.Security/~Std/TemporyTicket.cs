@@ -4,13 +4,13 @@ using System;
 
 namespace Dawnx.Security
 {
-    public class TemporyTicket
+    public class TemporaryTicket
     {
         public static TimeSpan SlideOffsetForExpiration = TimeSpan.FromMinutes(10);
-        public static TemporyTicket Parse(AesProvider aesProvider, string ciphertext)
+        public static TemporaryTicket Parse(AesProvider aesProvider, string ciphertext)
         {
             var json = aesProvider.Decrypt(ciphertext.BytesFromBase64()).String();
-            return JsonConvert.DeserializeObject<TemporyTicket>(json);
+            return JsonConvert.DeserializeObject<TemporaryTicket>(json);
         }
 
         /// <summary>

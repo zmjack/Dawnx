@@ -10,10 +10,12 @@ namespace Dawnx.Generators
     {
         private Func<string> _Method;
         private string _PrevGeneratedCode;
+        private string _Locker;
 
         public IdGenerator(Func<string> method)
         {
             _Method = method;
+            _Locker = string.Intern($"{GetType().FullName} {GetHashCode()}");
         }
 
         public string[] Take(int count)
@@ -38,8 +40,7 @@ namespace Dawnx.Generators
 
         public string TakeOne()
         {
-            var locker = string.Intern($"{GetType().FullName} {GetHashCode()}");
-            lock (locker)
+            lock (_Locker)
             {
                 var code = UseSpinLock.Do(task: () =>
                 {

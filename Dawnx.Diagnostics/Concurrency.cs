@@ -7,25 +7,48 @@ namespace Dawnx.Diagnostics
 {
     public class Concurrency
     {
-        public static ConcurrentDictionary<string, int> Run(
-            Action<string> task,
-            int concurrencyLevel = 1)
-        {
-            return Run(i => { task(i); return 0; }, concurrencyLevel);
-        }
-        public static ConcurrentDictionary<string, TRet> Run<TRet>(
-            Func<string, TRet> task,
-            int concurrencyLevel = 1)
-        {
-            var ret = new ConcurrentDictionary<string, TRet>();
+        public delegate void TaskDelegate(string runId);
+        public delegate TRet FuncDelegate<TRet>(string runId);
 
-            if (concurrencyLevel < 1)
+        /// <summary>
+        /// Use mutil-thread to simulate concurrent scenarios.
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="level"></param>
+        /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
+        /// <returns></returns>
+        public static ConcurrentDictionary<string, int> Run(
+            TaskDelegate task,
+            int level = 1,
+            int threadCount = 0)
+        {
+            return Run(i => { task(i); return 0; }, level);
+        }
+
+        /// <summary>
+        /// Use mutil-thread to simulate concurrent scenarios.
+        /// </summary>
+        /// <typeparam name="TRet"></typeparam>
+        /// <param name="task"></param>
+        /// <param name="level"></param>
+        /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
+        /// <returns></returns>
+        public static ConcurrentDictionary<string, TRet> Run<TRet>(
+            FuncDelegate<TRet> task,
+            int level = 1,
+            int threadCount = 0)
+        {
+            if (level < 1)
                 throw new ArgumentException("The `level` must be greater than 0.");
 
-            var div = concurrencyLevel / Environment.ProcessorCount;
-            var mod = concurrencyLevel % Environment.ProcessorCount;
+            if (threadCount == 0)
+                threadCount = Environment.ProcessorCount;
 
-            var threadCount = Math.Min(concurrencyLevel, Environment.ProcessorCount);
+            var div = level / threadCount;
+            var mod = level % threadCount;
+            threadCount = Math.Min(level, threadCount);
+
+            var ret = new ConcurrentDictionary<string, TRet>();
 
             var threads = new Thread[threadCount];
             foreach (var tid in Range.Create(threadCount))
@@ -47,7 +70,7 @@ namespace Dawnx.Diagnostics
 
             UseSpinLock.Do(
                 task: () => { },
-                until: () => ret.Count == concurrencyLevel);
+                until: () => ret.Count == level);
 
             return ret;
         }

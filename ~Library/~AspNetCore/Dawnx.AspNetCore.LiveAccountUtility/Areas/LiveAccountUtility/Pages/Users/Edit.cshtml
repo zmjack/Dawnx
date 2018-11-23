@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group">
-                <label>LiveRoles</label>
+                <label>LiveRoles <a href="#" onclick="$('.live_operation').toggle()">Show operations</a></label>
                 <ul>
                     @foreach (var liveRole in LiveRoles)
                     {
@@ -34,10 +34,13 @@
                         <li>
                             <input type="checkbox" id="@id" name="liveRoles" value="@liveRole.Id"
                                    @(liveRole.In(UserLiveRoles) ? "checked" : "") />
-                            <label for="@id">
-                                @liveRole.Name
-                                (@liveRole.RoleOperations.Select(x => x.OperationLink.Name).Join(","))
-                            </label>
+                            <label for="@id">@liveRole.Name</label>
+                            <ul class="live_operation" style="color:#a9a9a9">
+                                @foreach (var operationName in liveRole.RoleOperations.Select(x => x.OperationLink.Name))
+                                {
+                                    <li>@operationName</li>
+                                }
+                            </ul>
                         </li>
                     }
                 </ul>

@@ -34,7 +34,10 @@
                         <li>
                             <input type="checkbox" id="@id" name="liveRoles" value="@liveRole.Id"
                                    @(liveRole.In(UserLiveRoles) ? "checked" : "") />
-                            <label for="@id">@liveRole.Name</label>
+                            <label for="@id">
+                                @liveRole.Name
+                                (@liveRole.RoleOperations.Select(x => x.OperationLink.Name).Join(","))
+                            </label>
                         </li>
                     }
                 </ul>

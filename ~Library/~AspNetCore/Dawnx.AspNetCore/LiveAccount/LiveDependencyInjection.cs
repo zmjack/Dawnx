@@ -9,7 +9,7 @@ namespace Dawnx.AspNetCore.LiveAccount
         public static Type LiveAccountService { get; private set; }
 
         public static void AddLiveAccount<TDbContext>(this IServiceCollection @this)
-            where TDbContext : IdentityDbContext, ILiveDbContext
+            where TDbContext : IdentityDbContext, ILiveAccountDbContext
         {
             @this.AddScoped<LiveManager<TDbContext>>();
             LiveAccountService = typeof(LiveManager<TDbContext>);

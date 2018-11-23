@@ -7,6 +7,7 @@ using System.Linq;
 using Dawnx.AspNetCore.LiveAccount;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 {
@@ -32,7 +33,9 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 
             Input = _liveAccountManager.Users.Find(Request.Query["Id"]);
 
-            ViewData["LiveRoles"] = _liveAccountManager.LiveRoles.ToArray();
+            ViewData["LiveRoles"] = _liveAccountManager.LiveRoles
+                .Include(x => x.RoleOperations).ThenInclude(x => x.OperationLink)
+                .ToArray();
             ViewData["UserLiveRoles"] = _liveAccountManager.GetUserRoles(Input.UserName);
 
             return Page();
@@ -42,8 +45,10 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
         {
             if (!LiveAccountUtility.Authority?.User?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
-            
-            ViewData["LiveRoles"] = _liveAccountManager.LiveRoles.ToArray();
+
+            ViewData["LiveRoles"] = _liveAccountManager.LiveRoles
+                .Include(x => x.RoleOperations).ThenInclude(x => x.OperationLink)
+                .ToArray();
             ViewData["UserLiveRoles"] = _liveAccountManager.GetUserRoles(Input.UserName);
 
             if (ModelState.IsValid)

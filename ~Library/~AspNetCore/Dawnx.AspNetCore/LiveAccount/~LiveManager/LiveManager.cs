@@ -7,7 +7,7 @@ using System.Linq;
 namespace Dawnx.AspNetCore.LiveAccount
 {
     public partial class LiveManager<TDbContext>
-        where TDbContext : IdentityDbContext, ILiveDbContext
+        where TDbContext : IdentityDbContext, ILiveAccountDbContext
     {
         private readonly TDbContext _context;
 

@@ -60,6 +60,6 @@ namespace Dawnx.AspNetCore.LiveAccount
         LiveAction[] GetUserActions(string userName);
 
         bool IsUserInRole(string userName, Guid liveRoleId);
-        bool IsUserHasAction(string userName, string action, string controller, string area = null);
+        bool IsUserAction(string userName, string action, string controller, string area = null);
     }
 }

@@ -274,7 +274,7 @@ namespace Dawnx.AspNetCore.LiveAccount
             return LiveUserRoles.Any(x => x.User == userId && x.Role == liveRole);
         }
 
-        public bool IsUserHasAction(string userName, string action, string controller, string area = null)
+        public bool IsUserAction(string userName, string action, string controller, string area = null)
         {
             var normalizedUserName = userName.ToUpper();
             var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;

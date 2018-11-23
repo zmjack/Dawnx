@@ -38,7 +38,6 @@ namespace Dawnx.AspNetCore.LiveAccount
 
         #region LiveRoleUser
         void SetUserRoles(string userName, Guid[] liveRoleIds);
-        bool UserInRole(string userName, Guid liveRoleId);
         LiveRole[] GetUserRoles(string userName);
         #endregion
 
@@ -57,5 +56,10 @@ namespace Dawnx.AspNetCore.LiveAccount
         void ClearInvalidActions();
         #endregion
 
+        LiveOperation[] GetUserOperations(string userName);
+        LiveAction[] GetUserActions(string userName);
+
+        bool IsUserInRole(string userName, Guid liveRoleId);
+        bool IsUserHasAction(string userName, string action, string controller, string area = null);
     }
 }

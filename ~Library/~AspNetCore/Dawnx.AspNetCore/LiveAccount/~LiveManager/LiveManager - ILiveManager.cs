@@ -121,26 +121,6 @@ namespace Dawnx.AspNetCore.LiveAccount
             SaveChanges();
         }
 
-        public bool UserInRole(string userName, Guid liveRole)
-        {
-            var normalizedUserName = userName.ToUpper();
-            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
-
-            return LiveUserRoles.Any(x => x.User == userId && x.Role == liveRole);
-        }
-
-        public LiveRole[] GetUserRoles(string userName)
-        {
-            var normalizedUserName = userName.ToUpper();
-            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
-
-            return LiveUserRoles
-                .Include(x => x.RoleLink)
-                .Where(x => x.User == userId)
-                .Select(x => x.RoleLink)
-                .ToArray();
-        }
-
         public void SetUserRoles(string userName, Guid[] liveRoleIds)
         {
             var normalizedUserName = userName.ToUpper();
@@ -167,6 +147,20 @@ namespace Dawnx.AspNetCore.LiveAccount
                 }
             }
             SaveChanges();
+        }
+
+        public LiveRole[] GetUserRoles(string userName)
+        {
+            if (userName is null) return new LiveRole[0];
+
+            var normalizedUserName = userName.ToUpper();
+            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
+
+            return LiveUserRoles
+                .Include(x => x.RoleLink)
+                .Where(x => x.User == userId)
+                .Select(x => x.RoleLink)
+                .ToArray();
         }
 
         public void SetRoleOperations(Guid liveRoleId, Guid[] liveOperationIds)
@@ -237,11 +231,15 @@ namespace Dawnx.AspNetCore.LiveAccount
 
         public LiveOperation[] GetUserOperations(string userName)
         {
+            if (userName is null) return new LiveOperation[0];
+
             var normalizedUserName = userName.ToUpper();
             var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
 
             return LiveUserRoles
-                .Include(x => x.RoleLink).ThenInclude(x => x.RoleOperations)
+                .Include(x => x.RoleLink)
+                    .ThenInclude(x => x.RoleOperations)
+                    .ThenInclude(x => x.OperationLink)
                 .Where(x => x.User == userId)
                 .SelectMany(x => x.RoleLink.RoleOperations)
                 .Select(x => x.OperationLink)
@@ -250,6 +248,8 @@ namespace Dawnx.AspNetCore.LiveAccount
 
         public LiveAction[] GetUserActions(string userName)
         {
+            if (userName is null) return new LiveAction[0];
+
             var normalizedUserName = userName.ToUpper();
             var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
 
@@ -264,6 +264,34 @@ namespace Dawnx.AspNetCore.LiveAccount
                 .SelectMany(x => x.OperationLink.OperationActions)
                 .Select(x => x.ActionLink)
                 .Distinct().ToArray();
+        }
+
+        public bool IsUserInRole(string userName, Guid liveRole)
+        {
+            var normalizedUserName = userName.ToUpper();
+            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
+
+            return LiveUserRoles.Any(x => x.User == userId && x.Role == liveRole);
+        }
+
+        public bool IsUserHasAction(string userName, string action, string controller, string area = null)
+        {
+            var normalizedUserName = userName.ToUpper();
+            var userId = Users.First(x => x.NormalizedUserName == normalizedUserName).Id;
+
+            return LiveUserRoles
+                .Include(x => x.RoleLink)
+                    .ThenInclude(x => x.RoleOperations)
+                    .ThenInclude(x => x.OperationLink)
+                    .ThenInclude(x => x.OperationActions)
+                    .ThenInclude(x => x.ActionLink)
+                .Where(x => x.User == userId)
+                .SelectMany(x => x.RoleLink.RoleOperations)
+                .SelectMany(x => x.OperationLink.OperationActions)
+                .Any(x =>
+                    x.ActionLink.Action == action
+                    && x.ActionLink.Controller == controller
+                    && x.ActionLink.Area == area);
         }
 
     }

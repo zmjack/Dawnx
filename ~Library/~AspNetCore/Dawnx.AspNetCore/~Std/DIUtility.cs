@@ -15,13 +15,15 @@ namespace Dawnx.AspNetCore
         {
             var webHost = GetWebHost();
 
-            return (webHost.Services
-                .GetService(type) as TService)
-                .For(_ =>
-                {
-                    if (_ != null) return _;
-                    else throw new EntryPointNotFoundException($"Can not find service.");
-                });
+            try
+            {
+                var service = webHost.Services.GetService(type) as TService;
+                return service;
+            }
+            catch (ArgumentNullException exception)
+            {
+                throw new EntryPointNotFoundException($"Can not find service.", exception);
+            }
         }
 
         private static IWebHost GetWebHost()

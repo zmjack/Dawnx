@@ -7,6 +7,9 @@
     <Version>1.6.0</Version>
     <Description>Test tool set.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseUrl />
+    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>

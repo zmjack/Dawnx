@@ -8,6 +8,8 @@
     <Company>dawnx.net</Company>
     <Description>Dawnx lite version. Less dependencies.</Description>
     <RootNamespace>Dawnx</RootNamespace>
+    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

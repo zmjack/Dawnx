@@ -15,7 +15,6 @@ namespace Dawnx.AspNetCore.LiveAccount
         bool CheckAuthorization(ActionExecutingContext actionExecutingContext);
 
         #region
-        DbSet<IdentityUser> Users { get; }
         DbSet<LiveRole> LiveRoles { get; }
         DbSet<LiveRoleOperation> LiveRoleOperations { get; }
         DbSet<LiveUserRole> LiveUserRoles { get; }

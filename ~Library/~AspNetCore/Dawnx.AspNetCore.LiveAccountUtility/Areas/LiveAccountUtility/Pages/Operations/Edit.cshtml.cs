@@ -5,6 +5,7 @@ using Dawnx.AspNetCore.LiveAccount.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations

@@ -8,6 +8,7 @@ using Dawnx.AspNetCore.LiveAccount;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
 {
@@ -24,14 +25,15 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
         }
 
         [BindProperty]
-        public IdentityUser Input { get; set; }
+        public IdentityUser<string> Input { get; set; }
 
         public IActionResult OnGet()
         {
             if (!LiveAccountUtility.Authority?.User?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
-            Input = _liveAccountManager.Users.Find(Request.Query["Id"]);
+            var user = ((dynamic)_liveAccountManager).Users.Find(Request.Query["Id"]);
+            Input = user as IdentityUser<string>;
 
             ViewData["LiveRoles"] = _liveAccountManager.LiveRoles
                 .Include(x => x.RoleOperations).ThenInclude(x => x.OperationLink)

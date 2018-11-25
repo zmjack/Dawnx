@@ -12,8 +12,8 @@ namespace Dawnx.AspNetCore
             new UnauthorizedAccessException("The current user is not allowed to access this resource.");
 
         public bool AllowAnonymous = false;
-        public string[] AllowRoles = new string[0];
         public string[] AllowUsers = new string[0];
+        public string[] AllowRoles = new string[0];
 
         public bool IsUserAllowed(ClaimsPrincipal user)
         {

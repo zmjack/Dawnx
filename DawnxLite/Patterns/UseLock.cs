@@ -7,19 +7,32 @@ namespace Dawnx.Patterns
 {
     public static class UseLock
     {
-        public static void Do(object lockObj, TimeSpan timeout, Action task)
+        public static bool TryDo(object lockObj, TimeSpan timeout, Action task)
         {
-            bool lockTaken = false;
-            try
+            if (Monitor.TryEnter(lockObj, timeout))
             {
-                Monitor.TryEnter(lockObj, timeout, ref lockTaken);
-                task();
+                try
+                {
+                    task();
+                    return true;
+                }
+                finally { Monitor.Exit(lockObj); }
             }
-            finally
+            else return false;
+        }
+
+        public static bool TryDo(object lockObj, Action task)
+        {
+            if (Monitor.TryEnter(lockObj))
             {
-                if (lockTaken)
-                    Monitor.Exit(lockObj);
+                try
+                {
+                    task();
+                    return true;
+                }
+                finally { Monitor.Exit(lockObj); }
             }
+            else return false;
         }
 
     }

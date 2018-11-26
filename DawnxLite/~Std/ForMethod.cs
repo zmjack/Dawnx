@@ -10,6 +10,7 @@ namespace Dawnx
 
         public Func<TRet, bool> Condition { get; set; } = DefaultConditionMethod;
         public Func<TModel, TRet>[] Methods { get; set; }
+        public TRet DefaultReturn { get; set; } = default(TRet);
     }
 
 }

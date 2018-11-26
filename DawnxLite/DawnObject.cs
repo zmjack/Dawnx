@@ -65,7 +65,8 @@ namespace Dawnx
                 if (forMethod.Condition(result))
                     return result;
             }
-            return default(TRet);
+
+            return forMethod.DefaultReturn;
         }
 
         /// <summary>

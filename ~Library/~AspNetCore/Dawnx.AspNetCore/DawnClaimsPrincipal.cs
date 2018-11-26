@@ -24,11 +24,24 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public static IEnumerable<string> GetRoles(this ClaimsPrincipal @this)
         {
-            var roleClaimType = (@this.Identity as ClaimsIdentity)?.RoleClaimType ?? ClaimTypes.Role;
+            var claimType = (@this.Identity as ClaimsIdentity)?.RoleClaimType ?? ClaimTypes.Role;
+            return @this.Claims
+                .Where(x => x.Type == claimType)
+                .Select(x => x.Value);
+        }
 
-            return from claim in @this.Claims
-                   where claim.Type == roleClaimType
-                   select claim.Value;
+        /// <summary>
+        /// Returns ID of the specified ClaimsPrincipal.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string GetId(this ClaimsPrincipal @this)
+        {
+            var claimType = ClaimTypes.NameIdentifier;
+            return @this.Claims
+                .Where(x => x.Type == claimType)
+                .Select(x => x.Value)
+                .First();
         }
 
     }

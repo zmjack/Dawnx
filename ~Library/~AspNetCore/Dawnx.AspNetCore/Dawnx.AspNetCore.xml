@@ -20,6 +20,13 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetId(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Returns ID of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnDbContext.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
             <summary>
             This method should be called before 'base.SaveChanges'.

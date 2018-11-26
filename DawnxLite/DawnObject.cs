@@ -8,6 +8,24 @@ namespace Dawnx
     public static partial class DawnObject
     {
         /// <summary>
+        /// Determines whether the specified object is null.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static bool IsNull<TSelf>(this TSelf @this)
+            where TSelf : class
+            => @this is null;
+
+        /// <summary>
+        /// Determines whether the specified object is not null.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static bool IsNotNull<TSelf>(this TSelf @this)
+            where TSelf : class
+            => !(@this is null);
+
+        /// <summary>
         /// Do a task for itself.
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>
@@ -21,7 +39,7 @@ namespace Dawnx
         }
 
         /// <summary>
-        /// Casts the element to the specified type through the convert method.
+        /// Casts the element to the specified type through the specified convert method.
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>
         /// <typeparam name="TRet"></typeparam>
@@ -30,6 +48,25 @@ namespace Dawnx
         /// <returns></returns>
         public static TRet For<TSelf, TRet>(this TSelf @this, Func<TSelf, TRet> convert)
             => convert(@this);
+
+        /// <summary>
+        /// Casts the element to the specified type through the specified ForMethod.
+        /// </summary>
+        /// <typeparam name="TSelf"></typeparam>
+        /// <typeparam name="TRet"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="convert"></param>
+        /// <returns></returns>
+        public static TRet For<TSelf, TRet>(this TSelf @this, ForMethod<TSelf, TRet> forMethod)
+        {
+            foreach (var project in forMethod.Methods)
+            {
+                var result = project(@this);
+                if (forMethod.Condition(result))
+                    return result;
+            }
+            return default(TRet);
+        }
 
         /// <summary>
         /// Determines whether the specified element in a sequence by using the default equality comparer.

@@ -10,13 +10,13 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public partial class LiveManager<TDbContext> : ILiveManager
-        where TDbContext : IdentityDbContext, ILiveAccountDbContext
+    public partial class LiveManager<TDbContext, TUser> : ILiveManager
+        where TDbContext : IdentityDbContext<TUser>, ILiveAccountDbContext
+        where TUser : IdentityUser
     {
         public DbContext Context => _context;
         public void SaveChanges() => _context.SaveChanges();
 
-        public DbSet<IdentityUser> Users => _context.Users;
         public DbSet<LiveRole> LiveRoles => _context.LiveRoles;
         public DbSet<LiveRoleOperation> LiveRoleOperations => _context.LiveRoleOperations;
         public DbSet<LiveUserRole> LiveUserRoles => _context.LiveUserRoles;

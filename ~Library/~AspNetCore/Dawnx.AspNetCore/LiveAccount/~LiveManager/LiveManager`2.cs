@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -6,8 +7,9 @@ using System.Linq;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public partial class LiveManager<TDbContext>
-        where TDbContext : IdentityDbContext, ILiveAccountDbContext
+    public partial class LiveManager<TDbContext, TUser>
+        where TDbContext : IdentityDbContext<TUser>, ILiveAccountDbContext
+        where TUser : IdentityUser
     {
         private readonly TDbContext _context;
 
@@ -15,6 +17,8 @@ namespace Dawnx.AspNetCore.LiveAccount
         {
             _context = DIUtility.GetEntryService<TDbContext>();
         }
+
+        public DbSet<TUser> Users => _context.Users;
 
         public LiveTransaction FastProcessing => new LiveTransaction(this);
 

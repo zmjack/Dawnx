@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
@@ -22,14 +23,15 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
         }
 
         [BindProperty]
-        public IdentityUser Input { get; set; }
+        public IdentityUser<string> Input { get; set; }
 
         public IActionResult OnGet()
         {
             if (!LiveAccountUtility.Authority?.User?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
-            Input = _liveAccountManager.Users.Find(Guid.Parse(Request.Query["Id"]));
+            var user = ((dynamic)_liveAccountManager).Users.Find(Request.Query["Id"]);
+            Input = user as IdentityUser<string>;
 
             ViewData["LiveRoles"] = _liveAccountManager.LiveRoles.ToArray();
             ViewData["UserLiveRoles"] = _liveAccountManager.GetUserRoles(Input.UserName);

@@ -23,9 +23,13 @@ namespace Dawnx.AspNetCore
         /// <param name="this"></param>
         /// <returns></returns>
         public static IEnumerable<string> GetRoles(this ClaimsPrincipal @this)
-            => from claim in @this.Claims
-               where claim.Type == ClaimTypes.Role
-               select claim.Value;
+        {
+            var roleClaimType = (@this.Identity as ClaimsIdentity)?.RoleClaimType ?? ClaimTypes.Role;
+
+            return from claim in @this.Claims
+                   where claim.Type == roleClaimType
+                   select claim.Value;
+        }
 
     }
 }

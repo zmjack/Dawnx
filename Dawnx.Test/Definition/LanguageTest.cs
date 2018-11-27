@@ -11,9 +11,9 @@ namespace Dawnx.Test.Definition
         [Fact]
         public void ChooseLanguage()
         {
-            Assert.True("你好".IsMatch($"^{Unicode.Language.Chinese}+$"));
-            Assert.True("こんにちは".IsMatch($"^{Unicode.Language.Japanese}+$"));
-            Assert.True("안녕".IsMatch($"^{Unicode.Language.Korean}+$"));
+            Assert.True("你好".IsMatch($"^{Unicode.Chinese}+$"));
+            Assert.True("こんにちは".IsMatch($"^{Unicode.Japanese}+$"));
+            Assert.True("안녕".IsMatch($"^{Unicode.Korean}+$"));
         }
 
     }

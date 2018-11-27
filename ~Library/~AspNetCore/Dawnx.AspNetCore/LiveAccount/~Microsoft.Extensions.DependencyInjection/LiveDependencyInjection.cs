@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class LiveDependencyInjection
+    public static class LiveAccountExtensions
     {
         public static Type LiveAccountService { get; private set; }
 

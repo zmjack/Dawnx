@@ -1,4 +1,6 @@
-﻿using Dawnx.Entity;
+﻿using Dawnx;
+using Dawnx.AspNetCore;
+using Dawnx.Entity;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Dawnx.AspNetCore
+namespace Microsoft.EntityFrameworkCore
 {
-    public static class DawnDbContext
+    public static class IntelliTrackExtensions
     {
         /// <summary>
         /// This method should be called before 'base.SaveChanges'.

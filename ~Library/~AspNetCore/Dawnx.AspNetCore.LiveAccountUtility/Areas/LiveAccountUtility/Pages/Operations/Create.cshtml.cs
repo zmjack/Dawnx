@@ -14,7 +14,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations
     public class CreateModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveDependencyInjection.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
         private readonly ILogger<CreateModel> _logger;
 
         public CreateModel(ILogger<CreateModel> logger)

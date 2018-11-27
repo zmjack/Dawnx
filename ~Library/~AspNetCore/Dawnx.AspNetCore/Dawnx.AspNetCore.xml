@@ -27,14 +27,6 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnDbContext.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
-            <summary>
-            This method should be called before 'base.SaveChanges'.
-            </summary>
-            <param name="this"></param>
-            <param name="acceptAllChangesOnSuccess"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPath(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Returns $"{@this.PathBase}{@this.Path}".
@@ -258,6 +250,14 @@
             Save the Zip file as a new file.
             </summary>
             <param name="path"></param>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.IntelliTrackExtensions.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
+            <summary>
+            This method should be called before 'base.SaveChanges'.
+            </summary>
+            <param name="this"></param>
+            <param name="acceptAllChangesOnSuccess"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

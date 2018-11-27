@@ -12,7 +12,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
     public class IndexModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveDependencyInjection.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)

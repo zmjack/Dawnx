@@ -14,7 +14,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations
     public class EditModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveDependencyInjection.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
         private readonly ILogger<EditModel> _logger;
 
         public EditModel(ILogger<EditModel> logger)

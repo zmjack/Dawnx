@@ -11,7 +11,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Actions
     public class SyncActionsModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveDependencyInjection.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
         private readonly ILogger<SyncActionsModel> _logger;
 
         public SyncActionsModel(ILogger<SyncActionsModel> logger)

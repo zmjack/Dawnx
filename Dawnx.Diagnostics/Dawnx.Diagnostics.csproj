@@ -12,6 +12,10 @@
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\TeamProjects\Dawnx\Dawnx.Diagnostics\Dawnx.Diagnostics.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
   </ItemGroup>

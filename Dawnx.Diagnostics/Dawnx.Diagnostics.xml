@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dawnx.Diagnostics</name>
+    </assembly>
+    <members>
+        <member name="M:Dawnx.Diagnostics.Concurrency.Run(Dawnx.Diagnostics.Concurrency.TaskDelegate,System.Int32,System.Int32)">
+            <summary>
+            Use mutil-thread to simulate concurrent scenarios.
+            </summary>
+            <param name="task"></param>
+            <param name="level"></param>
+            <param name="threadCount">If the value is 0, <see cref="P:System.Environment.ProcessorCount"/> will be used.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Diagnostics.Concurrency.Run``1(Dawnx.Diagnostics.Concurrency.FuncDelegate{``0},System.Int32,System.Int32)">
+            <summary>
+            Use mutil-thread to simulate concurrent scenarios.
+            </summary>
+            <typeparam name="TRet"></typeparam>
+            <param name="task"></param>
+            <param name="level"></param>
+            <param name="threadCount">If the value is 0, <see cref="P:System.Environment.ProcessorCount"/> will be used.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

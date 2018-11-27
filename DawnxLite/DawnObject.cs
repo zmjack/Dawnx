@@ -66,7 +66,7 @@ namespace Dawnx
                     return result;
             }
 
-            return forMethod.DefaultReturn;
+            return forMethod.DefaultReturn(@this);
         }
 
         /// <summary>

@@ -59,7 +59,7 @@ namespace Dawnx
         /// <returns></returns>
         public static TRet For<TSelf, TRet>(this TSelf @this, ForMethod<TSelf, TRet> forMethod)
         {
-            foreach (var project in forMethod.Methods)
+            foreach (var project in forMethod.Filters)
             {
                 var result = project(@this);
                 if (forMethod.Condition(result))

@@ -8,10 +8,6 @@ namespace Dawnx.Utilities
 {
     public static class RegexUtility
     {
-        public static readonly string ChineseChars = @"[\u4e00-\u9fa5]";
-        public static readonly string KoreanChars = @"[\uac00-\ud7ff]";
-        public static readonly string JapanChars = @"[\u0800-\u4e00]";
-
         /// <summary>
         /// Compile IPv4RangeRegexExp to Regex.
         /// </summary>
@@ -68,7 +64,7 @@ namespace Dawnx.Utilities
             if (from < to) return NumberRange(from.ToString(), to.ToString());
             else if (from == to) return from.ToString();
             else return "";
-        }        
+        }
         private static string NumberRange(string from, string to)
         {
             var fromLength = from.Length;

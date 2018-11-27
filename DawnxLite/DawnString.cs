@@ -73,7 +73,7 @@ namespace Dawnx
         /// <param name="regex"></param>
         /// <returns></returns>
         public static bool IsMatch(this string @this, string regex)
-            => new Regex(regex).Match(@this).Success;
+            => new Regex(regex, RegexOptions.Singleline).Match(@this).Success;
 
         /// <summary>
         /// Indicates whether the string matches the specified regular expression.

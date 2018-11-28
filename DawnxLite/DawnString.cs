@@ -47,6 +47,8 @@ namespace Dawnx
         /// Returns centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space).
         /// </summary>
         /// <param name="this"></param>
+        /// <param name="width"></param>
+        /// <param name="fillChar"></param>
         /// <returns></returns>
         public static string Center(this string @this, int width, char fillChar = ' ')
         {

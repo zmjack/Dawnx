@@ -22,7 +22,7 @@ namespace Dawnx.Tools
             });
 
             var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-            if (resp.Success)
+            if (resp.state == SimpleResponse.SuccessState)
             {
                 var outFile = $"{jsonFile}/../{Path.GetFileNameWithoutExtension(jsonFile)}.cs";
 

@@ -20,7 +20,7 @@ namespace Dawnx.Tools
             });
 
             var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-            if (resp.Success)
+            if (resp.state == SimpleResponse.SuccessState)
             {
                 //TODO: New feture
                 throw new NotSupportedException();

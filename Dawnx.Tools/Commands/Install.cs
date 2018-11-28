@@ -21,7 +21,7 @@ namespace Dawnx.Tools
             try
             {
                 var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-                if (resp.Success)
+                if (resp.state == SimpleResponse.SuccessState)
                 {
                     var model = resp.model as JObject;
                     var cli_version = model["cli_version"].Value<string>();
@@ -107,12 +107,12 @@ namespace Dawnx.Tools
                                 if (FileUtility.CheckMD5(saveas, md5))
                                 {
                                     fileVerifySuccess++;
-                                    Console.WriteLine(" Safe  ");
+                                    Console.WriteLine("Safe".Center(7));
                                 }
                                 else
                                 {
                                     fileVerifyFailed++;
-                                    Console.WriteLine("WARNING");
+                                    Console.WriteLine("WARNING".Center(7));
                                 }
                                 #endregion
                             }
@@ -123,7 +123,7 @@ namespace Dawnx.Tools
                                 fileDownload++;
 
                                 Console.SetCursorPosition(72, Console.CursorTop);
-                                Console.WriteLine(" Found ");
+                                Console.WriteLine("Found".Center(7));
                             }
                         }
 
@@ -136,16 +136,20 @@ namespace Dawnx.Tools
                         Console.WriteLine($"---- All files has been downloaded using engine Dawnx.Net.Http.Web ----{Environment.NewLine}");
 
                         // Setup
-                        if (AlertUtility.AskYN("Setup now?"))
+                        void extractFiles()
                         {
-                            Console.WriteLine();
                             foreach (var file in extractFileList)
                             {
                                 ZipFile.ExtractToDirectory(file, Directory.GetCurrentDirectory(), true);
                                 Console.WriteLine($"Extract {file} done.");
                             }
                             Console.WriteLine($"---- Extract files completed ----{Environment.NewLine}");
-                        }
+                        };
+
+                        if (fileVerifyFailed > 0)
+                            if (AlertUtility.AskYN("Setup now?")) extractFiles();
+                            else { }
+                        else extractFiles();
                     }
                     else Console.WriteLine($"Install service requires the lowest cli tool version: {cli_version}.");
                 }

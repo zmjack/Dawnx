@@ -25,10 +25,7 @@ namespace Dawnx.AspNetCore
         public object model;
 
         public const string SuccessState = "success";
-        public static SimpleResponse SuccessResponse => new SimpleResponse { state = SuccessState };
-
-        [Obsolete("This member will be removed in the next version.")]
-        public bool Success => state == SuccessState;
+        public static SimpleResponse SuccessResponse => new SimpleResponse { state = SuccessState };        
 
     }
 }

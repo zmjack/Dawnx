@@ -5,6 +5,23 @@ namespace Dawnx
     public static partial class DawnArray
     {
         /// <summary>
+        /// Gets the index of the first element in the array.
+        ///     Usually, LBound() returns 0, since arrays are zero-based by default.
+        ///     but in some rare cases they are not.
+        ///     For example, you use Array.CreateInstance(Type, int[], int[]) to create an Array.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static int LBound(this Array @this) => @this.GetLowerBound(0);
+
+        /// <summary>
+        /// Gets the index of the last element in the array.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static int UBound(this Array @this) => @this.GetUpperBound(0);
+
+        /// <summary>
         /// Do a task for itself.
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>

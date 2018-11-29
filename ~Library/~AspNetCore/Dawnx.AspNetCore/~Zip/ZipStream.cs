@@ -54,6 +54,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="inStream"></param>
         /// <param name="entryName"></param>
+        /// <param name="compressionMethod"></param>
         /// <returns></returns>
         public ZipStream AddEntry(string entryName, Stream inStream,
             CompressionMethod compressionMethod = CompressionMethod.Deflated)
@@ -67,6 +68,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="entryName"></param>
+        /// <param name="compressionMethod"></param>
         /// <returns></returns>
         public ZipStream AddEntry(string entryName, byte[] bytes,
             CompressionMethod compressionMethod = CompressionMethod.Deflated)
@@ -77,6 +79,7 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="path"></param>
         /// <param name="entryName"></param>
+        /// <param name="compressionMethod"></param>
         /// <returns></returns>
         public ZipStream AddFileEntry(string entryName, string path,
             CompressionMethod compressionMethod = CompressionMethod.Deflated)

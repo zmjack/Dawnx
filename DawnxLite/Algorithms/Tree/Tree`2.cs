@@ -20,7 +20,7 @@ namespace Dawnx.Algorithms.Tree
 
                     default:
                         Model = (TModel)modelType.GetConstructor(new Type[0]).Invoke(null);
-                        _Key = Model?.GetHashCode().ToString();
+                        Key = NewKey();
                         break;
                 }
             }
@@ -29,6 +29,8 @@ namespace Dawnx.Algorithms.Tree
         {
             Model = model;
         }
+
+        public virtual string NewKey() => GetHashCode().ToString();
 
         public Guid Id { get; set; }
         public TSelf Parent { get; private set; }
@@ -87,6 +89,7 @@ namespace Dawnx.Algorithms.Tree
             }
         }
 
+        public virtual char Separator => '/';
         public string Path
         {
             get
@@ -96,15 +99,22 @@ namespace Dawnx.Algorithms.Tree
                 for (var node = this; node.Parent != null; node = node.Parent)
                     path.Push(node.Parent);
 
-                return string.Join("/", path.Select(node => node.Key));
+                return string.Join(Separator.ToString(), path.Select(node => node.Key));
             }
         }
 
-        public void Add(string key, TSelf node)
+        public Tree<TSelf, TModel> Find(string path) => Find(path.TrimStart(Separator).Split(Separator));
+        public Tree<TSelf, TModel> Find(params string[] pathKeys)
         {
-            node.Key = key;
-            Add(node);
+            var currentNode = this;
+            foreach (var key in pathKeys)
+            {
+                currentNode = currentNode.Children.FirstOrDefault(x => x.Key == key);
+                if (currentNode is null) return null;
+            }
+            return currentNode;
         }
+
         public void Add(TSelf node)
         {
             node.Parent = this as TSelf;
@@ -114,6 +124,36 @@ namespace Dawnx.Algorithms.Tree
         {
             nodes.AsParallel().ForAll(node => node.Parent = this as TSelf);
             nodes.Each(node => Add(node));
+        }
+        public void AddEntry(string path, TSelf node) => AddEntry(path.TrimStart(Separator).Split(Separator), node);
+        public void AddEntry(string[] pathKeys, TSelf node)
+        {
+            var ubound = pathKeys.UBound();
+            var currentNode = this;
+            foreach (var vi in pathKeys.AsVI())
+            {
+                var key = vi.Value;
+                var subNode = currentNode.Children.FirstOrDefault(x => x.Key == key);
+                if (subNode is null)
+                {
+                    if (vi.Index < ubound)
+                    {
+                        var newNode = new TSelf();
+                        if (!key.IsNullOrEmpty())
+                            newNode.Key = key;
+
+                        currentNode.Add(newNode);
+                        currentNode = newNode;
+                    }
+                    else
+                    {
+                        if (key.IsNullOrEmpty())
+                            currentNode.Add(node);
+                        else currentNode.Add(node.Self(_ => _.Key = key));
+                    }
+                }
+                else currentNode = subNode;
+            }
         }
 
         public TSelf Clone() => (this as ICloneable).Clone() as TSelf;

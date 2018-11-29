@@ -23,25 +23,40 @@ namespace Dawnx.Algorithms.Tree.Test
         [Fact]
         public void Test1()
         {
+            var tree1 = GetTree1();
+            var tree2 = GetTree2();
+            CheckTree(tree1);
+            CheckTree(tree2);
 
-            var tree11 = new Tree
-            {
-                ["A"] = new Tree
-                {
-                    ["A-a"] = new Tree
-                    {
-                        ["A-a-1"] = new Tree
-                        {
-                            ["A-a-1-i"] = new Tree()
-                        }
-                    },
-                    ["A-b"] = new Tree()
-                },
-                ["B"] = new Tree()
-            };
+            var find = tree1.Find("A/A-a");
+            Assert.Equal("A-a-1", find.Children.First().Key);
 
+            tree1.AddEntry("B/I/II/", new EntityTree { Model = new Entity { Name = "III" } });
+            tree1.AddEntry("B/i/ii/iii", new EntityTree());
+            tree1.AddEntry("C", new EntityTree());
+            tree1.AddEntry("D//d", new EntityTree());
 
-            var tree = new EntityTree
+            Assert.True(tree1.Description.IsMatch(@"A
+  A-a
+    A-a-1
+      A-a-1-i
+  A-b
+B
+  I
+    II
+      III
+  i
+    ii
+      iii
+C
+D
+  \d+
+    d"));
+        }
+
+        private EntityTree GetTree1()
+        {
+            return new EntityTree
             {
                 ["A"] = new EntityTree
                 {
@@ -56,8 +71,11 @@ namespace Dawnx.Algorithms.Tree.Test
                 },
                 ["B"] = new EntityTree()
             };
+        }
 
-            var tree2 = EntityTree.Create(new[]
+        private EntityTree GetTree2()
+        {
+            return EntityTree.Create(new[]
             {
                 new Entity
                 {
@@ -88,9 +106,6 @@ namespace Dawnx.Algorithms.Tree.Test
                     Id = Guid.Parse("DE33BC2D-4D7A-4997-8ABF-D23A1EE0B883"), Name = "B",
                 },
             });
-
-            CheckTree(tree);
-            CheckTree(tree2);
         }
 
         private void CheckTree(EntityTree tree)

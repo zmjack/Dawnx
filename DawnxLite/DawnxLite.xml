@@ -48,6 +48,23 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnArray.LBound(System.Array)">
+            <summary>
+            Gets the index of the first element in the array.
+                Usually, LBound() returns 0, since arrays are zero-based by default.
+                but in some rare cases they are not.
+                For example, you use Array.CreateInstance(Type, int[], int[]) to create an Array.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.UBound(System.Array)">
+            <summary>
+            Gets the index of the last element in the array.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnArray.Self``1(``0[],System.Action{``0[],System.Int32})">
             <summary>
             Do a task for itself.
@@ -798,6 +815,8 @@
             Returns centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space).
             </summary>
             <param name="this"></param>
+            <param name="width"></param>
+            <param name="fillChar"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.IsMatch(System.String,System.String)">

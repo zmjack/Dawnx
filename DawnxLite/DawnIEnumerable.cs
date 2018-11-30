@@ -129,6 +129,7 @@ namespace Dawnx
             {
                 case TSource[] array: count = array.Length; break;
                 case ICollection<TSource> collection: count = collection.Count; break;
+                case IQueryable<TSource> querable: count = querable.Count(); break;
                 default: count = @this.Count(); break;
             }
             return (int)Math.Ceiling((double)count / pageSize);

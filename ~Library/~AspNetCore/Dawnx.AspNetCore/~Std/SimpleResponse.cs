@@ -2,6 +2,7 @@
 
 namespace Dawnx.AspNetCore
 {
+    [Obsolete("Use JSend instead of SimpleResponse.")]
     public class SimpleResponse
     {
         /// <summary>
@@ -25,7 +26,7 @@ namespace Dawnx.AspNetCore
         public object model;
 
         public const string SuccessState = "success";
-        public static SimpleResponse SuccessResponse => new SimpleResponse { state = SuccessState };        
+        public static SimpleResponse SuccessResponse => new SimpleResponse { state = SuccessState };
 
     }
 }

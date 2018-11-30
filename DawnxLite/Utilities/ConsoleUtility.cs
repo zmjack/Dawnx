@@ -18,7 +18,6 @@ namespace Dawnx
         public static int GetConsoleLength(string text)
         {
             int ret = 0;
-            bool @continue = false;
             foreach (var ch in text)
             {
                 if (ch < 128) ret += 1;
@@ -35,7 +34,6 @@ namespace Dawnx
         public static int GetCountOfDoubleBytesChar(string text)
         {
             int ret = 0;
-            bool @continue = false;
             foreach (var ch in text)
                 if (ch >= 128) ret++;
             return ret;

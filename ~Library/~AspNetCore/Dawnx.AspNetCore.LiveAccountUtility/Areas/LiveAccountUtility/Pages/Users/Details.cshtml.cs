@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Dawnx.AspNetCore.LiveAccount;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

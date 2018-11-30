@@ -156,7 +156,7 @@ namespace Dawnx.Tools
                 else AlertUtility.PrintErrorMessage(resp);
 
             }
-            catch (JsonReaderException ex)
+            catch (JsonReaderException)
             {
                 Console.WriteLine("Error occurred, the server response is:");
                 Console.WriteLine(respJson);

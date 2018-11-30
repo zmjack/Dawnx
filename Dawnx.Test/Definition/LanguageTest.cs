@@ -1,7 +1,4 @@
 ﻿using Dawnx.Definition;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Dawnx.Test.Definition

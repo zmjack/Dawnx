@@ -14,21 +14,20 @@ namespace Dawnx.Tools
             if (!AlertUtility.ConfirmUseOnlineService()) return;
             Console.WriteLine("Connect to dawnx service...");
 
-            var respJson = Web.Post($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
+            var resp = Web.PostFor<JSend>($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
             {
                 ["Namespace"] = ProjectUtility.RootNamespace,
                 ["ClassName"] = Path.GetFileNameWithoutExtension(jsonFile),
                 ["Json"] = File.ReadAllText(jsonFile),
             });
 
-            var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-            if (resp.state == SimpleResponse.SuccessState)
+            if (resp.IsSuccess())
             {
                 var outFile = $"{jsonFile}/../{Path.GetFileNameWithoutExtension(jsonFile)}.cs";
 
                 using (var stream = new FileStream(outFile, FileMode.Create))
                 using (var writer = new StreamWriter(stream))
-                    writer.Write(resp.model as string);
+                    writer.Write(resp.data as string);
 
                 Console.WriteLine($"{resp.message}");
                 Console.WriteLine($"  File Saved: {Path.GetFullPath(outFile)}");

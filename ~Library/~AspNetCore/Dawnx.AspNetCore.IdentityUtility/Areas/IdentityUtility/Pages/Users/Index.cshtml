@@ -57,9 +57,9 @@
                 Input: { Id: id }
             },
             success: function (resp) {
-                switch (resp.state) {
+                switch (resp.status) {
                     case 'success':
-                        $('#' + eid).html(resp.model);
+                        $('#' + eid).html(resp.data);
                         break;
                 }
             },

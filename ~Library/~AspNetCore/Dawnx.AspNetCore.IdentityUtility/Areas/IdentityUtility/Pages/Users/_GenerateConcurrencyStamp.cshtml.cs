@@ -36,20 +36,18 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
             if (result.Succeeded)
             {
                 _logger.LogInformation($"Generate ConcurrencyStamp for Role {user.Id}({user.UserName}) succeeded.");
-                return new JsonResult(new SimpleResponse
+                return new JsonResult(new JSend.Success
                 {
-                    state = "success",
-                    model = user.ConcurrencyStamp,
+                    data = user.ConcurrencyStamp,
                 });
             }
             else
             {
                 _logger.LogInformation($"Generate ConcurrencyStamp for Role {user.Id}({user.UserName}) faild.");
-                return new JsonResult(new SimpleResponse
+                return new JsonResult(new JSend.Error
                 {
-                    state = "faild",
-                    status = "Invalid ConcurrencyStamp generation attempt.",
-                    message = "Generate ConcurrencyStamp faild.",
+                    code = 1,
+                    message = "Invalid ConcurrencyStamp generation attempt.",
                 });
             }
         }

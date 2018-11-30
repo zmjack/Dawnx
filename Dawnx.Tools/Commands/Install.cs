@@ -13,17 +13,16 @@ namespace Dawnx.Tools
     {
         public static void Install(string name)
         {
-            var respJson = Web.Post($"{Program.SUPPORT_URL}/Install", new Dictionary<string, object>
+            var resp = Web.PostFor<JSend>($"{Program.SUPPORT_URL}/Install", new Dictionary<string, object>
             {
                 ["name"] = name,
             });
 
             try
             {
-                var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-                if (resp.state == SimpleResponse.SuccessState)
+                if (resp.IsSuccess())
                 {
-                    var model = resp.model as JObject;
+                    var model = resp.data as JObject;
                     var cli_version = model["cli_version"].Value<string>();
 
                     if (new Version(Program.CLI_VERSION) >= new Version(cli_version))
@@ -156,10 +155,9 @@ namespace Dawnx.Tools
                 else AlertUtility.PrintErrorMessage(resp);
 
             }
-            catch (JsonReaderException)
+            catch (JsonReaderException ex)
             {
-                Console.WriteLine("Error occurred, the server response is:");
-                Console.WriteLine(respJson);
+                Console.WriteLine($"Error occurred. ({ex.Message})");
             }
         }
 

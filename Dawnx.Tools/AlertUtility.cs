@@ -8,16 +8,17 @@ namespace Dawnx.Tools
         public static bool ConfirmUseOnlineService()
         {
             Console.WriteLine("This is a online sevice, you will upload your file to dawnx.net.");
-            Console.WriteLine("  BUT, we will not collect the documents which you provided.");
+            Console.WriteLine("  BUT, we will NOT COLLECT the files you upload.");
             Console.WriteLine();
 
             return AskYN("Are you sure to use this service, and upload your file?");
         }
 
-        public static void PrintErrorMessage(SimpleResponse resp)
+        public static void PrintErrorMessage(JSend resp)
         {
-            Console.WriteLine($"  state: {resp.state}");
-            Console.WriteLine($"  status: {resp.status}");
+            Console.WriteLine($"  status:  {resp.status}");
+            Console.WriteLine($"  data:    {resp.data}");
+            Console.WriteLine($"  code:    {resp.code}");
             Console.WriteLine($"  message: {resp.message}");
         }
 

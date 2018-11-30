@@ -13,14 +13,13 @@ namespace Dawnx.Tools
             if (!AlertUtility.ConfirmUseOnlineService()) return;
             Console.WriteLine("Connect to dawnx service...");
 
-            var respJson = Web.Post($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
+            var resp = Web.PostFor<JSend>($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
             {
                 ["Namespace"] = ProjectUtility.RootNamespace,
                 ["Name"] = name,
             });
 
-            var resp = JsonConvert.DeserializeObject<SimpleResponse>(respJson);
-            if (resp.state == SimpleResponse.SuccessState)
+            if (resp.IsSuccess())
             {
                 //TODO: New feture
                 throw new NotSupportedException();

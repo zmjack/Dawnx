@@ -1180,16 +1180,28 @@
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
         </member>
-        <member name="T:Dawnx.JSend.Success">
+        <member name="T:Dawnx.JSend.Error">
             <summary>
-            All went well, and (usually) some data was returned.
+            There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied.
             </summary>
         </member>
-        <member name="F:Dawnx.JSend.Success.data">
+        <member name="P:Dawnx.JSend.Error.message">
             <summary>
             Required Key:
-                Acts as the wrapper for any data returned by the API call.
-                If the call returns no data, data should be set to null.
+                A meaningful, end-user-readable (or at the least log-worthy) message, explaining what went wrong.
+            </summary>
+        </member>
+        <member name="P:Dawnx.JSend.Error.code">
+            <summary>
+            Optional Key:
+                A numeric code corresponding to the error, if applicable.
+            </summary>
+        </member>
+        <member name="P:Dawnx.JSend.Error.data">
+            <summary>
+            Optional Key:
+                A generic container for any other information about the error,
+                    i.e.the conditions that caused the error, stack traces, etc.
             </summary>
         </member>
         <member name="T:Dawnx.JSend.Fail">
@@ -1197,7 +1209,7 @@
             There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied.
             </summary>
         </member>
-        <member name="F:Dawnx.JSend.Fail.data">
+        <member name="P:Dawnx.JSend.Fail.data">
             <summary>
             Required Key:
                 Provides the wrapper for the details of why the request failed.
@@ -1205,26 +1217,16 @@
                 the response object's keys SHOULD correspond to those POST values.
             </summary>
         </member>
-        <member name="T:Dawnx.JSend.Error">
+        <member name="T:Dawnx.JSend.Success">
             <summary>
-            There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied.
+            All went well, and (usually) some data was returned.
             </summary>
         </member>
-        <member name="F:Dawnx.JSend.Error.message">
+        <member name="P:Dawnx.JSend.Success.data">
             <summary>
             Required Key:
-                A meaningful, end-user-readable (or at the least log-worthy) message, explaining what went wrong.
-            </summary>
-        </member>
-        <member name="F:Dawnx.JSend.Error.code">
-            <summary>
-            A numeric code corresponding to the error, if applicable.
-            </summary>
-        </member>
-        <member name="F:Dawnx.JSend.Error.data">
-            <summary>
-            A generic container for any other information about the error,
-                i.e.the conditions that caused the error, stack traces, etc.
+                Acts as the wrapper for any data returned by the API call.
+                If the call returns no data, data should be set to null.
             </summary>
         </member>
         <member name="M:Dawnx.Range.Create(System.Int32)">

@@ -15,7 +15,7 @@ namespace Dawnx
             PageNumber = page;
             PageSize = pageSize;
             PageCount = source.PageCount(pageSize);
-            Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+            Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize).ToArray();
         }
 
     }

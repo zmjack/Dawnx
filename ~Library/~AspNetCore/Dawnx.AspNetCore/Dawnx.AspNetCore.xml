@@ -206,6 +206,7 @@
             </summary>
             <param name="inStream"></param>
             <param name="entryName"></param>
+            <param name="compressionMethod"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(System.String,System.Byte[],ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
@@ -214,6 +215,7 @@
             </summary>
             <param name="bytes"></param>
             <param name="entryName"></param>
+            <param name="compressionMethod"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.ZipStream.AddFileEntry(System.String,System.String,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
@@ -222,6 +224,7 @@
             </summary>
             <param name="path"></param>
             <param name="entryName"></param>
+            <param name="compressionMethod"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.ZipStream.AddDictionary(System.String)">

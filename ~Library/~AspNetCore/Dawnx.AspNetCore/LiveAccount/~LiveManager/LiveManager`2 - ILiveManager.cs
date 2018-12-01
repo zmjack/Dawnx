@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 namespace Dawnx.AspNetCore.LiveAccount
 {
     public partial class LiveManager<TDbContext, TUser> : ILiveManager
-        where TDbContext : IdentityDbContext<TUser>, ILiveAccountDbContext
+        where TDbContext : IdentityDbContext<TUser, IdentityRole, string>, ILiveAccountDbContext
         where TUser : IdentityUser
     {
         public DbContext Context => _context;

@@ -12,7 +12,7 @@ namespace Dawnx
         /// </summary>
         public class Fail : IJSend
         {
-            public string status => FAIL_STATUS;
+            public string status => JSendConst.FAIL_STATUS;
 
             /// <summary>
             /// Required Key:
@@ -22,8 +22,27 @@ namespace Dawnx
             /// </summary>
             public dynamic data { get; set; }
 
-            int IJSend.code { get; set; }
-            dynamic IJSend.message { get; set; }
+            string IJSend.code { get; set; }
+            string IJSend.message { get; set; }
+        }
+
+        /// <summary>
+        /// There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied.
+        /// </summary>
+        public class Fail<TData> : IJSend<TData>
+        {
+            public string status => JSendConst.FAIL_STATUS;
+
+            /// <summary>
+            /// Required Key:
+            ///     Provides the wrapper for the details of why the request failed.
+            ///     If the reasons for failure correspond to POST values,
+            ///     the response object's keys SHOULD correspond to those POST values.
+            /// </summary>
+            public TData data { get; set; }
+
+            string IJSend<TData>.code { get; set; }
+            string IJSend<TData>.message { get; set; }
         }
     }
 #pragma warning restore

@@ -47,7 +47,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
                 _logger.LogInformation($"Generate ConcurrencyStamp for Role {role.Id}({role.Name}) faild.");
                 return new JsonResult(new JSend.Error
                 {
-                    code = 1,
+                    code = "1",
                     message = "Invalid ConcurrencyStamp generation attempt.",
                 });
             }

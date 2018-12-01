@@ -5,19 +5,17 @@ namespace Dawnx
     public interface IJSend
     {
         string status { get; }
-        dynamic data { get; set; }
+        object data { get; set; }
 
         string code { get; set; }
         string message { get; set; }
     }
 
-    public interface IJSend<TData>
+    public static class IJSendExtension
     {
-        string status { get; }
-        TData data { get; set; }
-
-        string code { get; set; }
-        string message { get; set; }
+        public static bool IsSuccess(this IJSend @this) => @this.status == JSendConst.SUCCESS_STATUS;
+        public static bool IsFail(this IJSend @this) => @this.status == JSendConst.FAIL_STATUS;
+        public static bool IsError(this IJSend @this) => @this.status == JSendConst.ERROR_STATUS;
     }
 #pragma warning restore
 }

@@ -7,27 +7,41 @@ namespace Dawnx
     public partial class JSend : IJSend
     {
         public string status { get; set; }
-        public dynamic data { get; set; }
+        public object data { get; set; }
 
         public string code { get; set; }
         public string message { get; set; }
 
-        public bool IsSuccess() => status == JSendConst.SUCCESS_STATUS;
-        public bool IsFail() => status == JSendConst.FAIL_STATUS;
-        public bool IsError() => status == JSendConst.ERROR_STATUS;
+        public static JSend Parse(IJSend jSend)
+        {
+            return new JSend
+            {
+                code = jSend.code,
+                data = jSend.data,
+                message = jSend.message,
+                status = jSend.status,
+            };
+        }
     }
 
-    public partial class JSend<TData> : IJSend<TData>
+    public partial class JSend<TData> : JSend
     {
-        public string status { get; set; }
-        public TData data { get; set; }
+        public new TData data
+        {
+            get => (TData)base.data;
+            set => base.data = value;
+        }
 
-        public string code { get; set; }
-        public string message { get; set; }
-
-        public bool IsSuccess() => status == JSendConst.SUCCESS_STATUS;
-        public bool IsFail() => status == JSendConst.FAIL_STATUS;
-        public bool IsError() => status == JSendConst.ERROR_STATUS;
+        public static new JSend<TData> Parse(IJSend jSend)
+        {
+            return new JSend<TData>
+            {
+                code = jSend.code,
+                data = (TData)jSend.data,
+                message = jSend.message,
+                status = jSend.status,
+            };
+        }
     }
 #pragma warning restore
 }

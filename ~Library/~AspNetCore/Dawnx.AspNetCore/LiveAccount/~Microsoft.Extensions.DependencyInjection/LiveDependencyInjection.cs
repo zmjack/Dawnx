@@ -10,14 +10,14 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Type LiveAccountService { get; private set; }
 
         public static void AddLiveAccount<TDbContext>(this IServiceCollection @this)
-            where TDbContext : IdentityDbContext<IdentityUser>, ILiveAccountDbContext
+            where TDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>, ILiveAccountDbContext
         {
             @this.AddScoped<LiveManager<TDbContext>>();
             LiveAccountService = typeof(LiveManager<TDbContext>);
         }
 
         public static void AddLiveAccount<TDbContext, TUser>(this IServiceCollection @this)
-            where TDbContext : IdentityDbContext<TUser>, ILiveAccountDbContext
+            where TDbContext : IdentityDbContext<TUser, IdentityRole, string>, ILiveAccountDbContext
             where TUser : IdentityUser
         {
             @this.AddScoped<LiveManager<TDbContext, TUser>>();

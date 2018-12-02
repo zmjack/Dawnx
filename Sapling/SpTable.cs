@@ -7,16 +7,16 @@ using System.Reflection;
 
 namespace Sapling
 {
-    public class SaplingTable
+    public class SpTable
     {
-        public static SaplingTable<TModel> Create<TModel>(IEnumerable<TModel> models)
-            => new SaplingTable<TModel>(models);
+        public static SpTable<TModel> Create<TModel>(IEnumerable<TModel> models)
+            => new SpTable<TModel>(models);
     }
 
-    public class SaplingTable<TModel> : ISaplingTable
+    public class SpTable<TModel> : ISpTable
     {
-        public SaplingTable() { }
-        public SaplingTable(IEnumerable<TModel> models)
+        public SpTable() { }
+        public SpTable(IEnumerable<TModel> models)
         {
             var props = typeof(TModel).GetProperties();
             var keyProp = props.SingleOrDefault(x => x.GetCustomAttribute<KeyAttribute>() != null);
@@ -66,9 +66,9 @@ namespace Sapling
         public string[] Types { get; set; }
         public KeyValuePair<string, Dictionary<string, string>>[] Rows
         {
-            get => (this as ISaplingTable).Rows as KeyValuePair<string, Dictionary<string, string>>[];
-            set => (this as ISaplingTable).Rows = value;
+            get => (this as ISpTable).Rows as KeyValuePair<string, Dictionary<string, string>>[];
+            set => (this as ISpTable).Rows = value;
         }
-        object ISaplingTable.Rows { get; set; }
+        object ISpTable.Rows { get; set; }
     }
 }

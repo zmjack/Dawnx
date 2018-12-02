@@ -938,6 +938,14 @@
             <param name="padRight"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.CapitalizeFirst(System.String,System.Boolean)">
+            <summary>
+            Returns a copy of the string with its first character capitalized.
+            </summary>
+            <param name="this"></param>
+            <param name="isSet"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnUInt32.IsOdd(System.UInt32)">
             <summary>
             Returns whether the specified number is odd.

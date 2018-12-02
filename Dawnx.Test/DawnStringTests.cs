@@ -104,5 +104,12 @@ namespace Dawnx.Test
             Assert.Equal("1234 5678 9", "123456789".UnitInsert(4, " ", true));
         }
 
+        [Fact]
+        public void CapitalizeFirst()
+        {
+            Assert.Equal("zmjack", "Zmjack".CapitalizeFirst(false));
+            Assert.Equal("Zmjack", "Zmjack".CapitalizeFirst());
+        }
+
     }
 }

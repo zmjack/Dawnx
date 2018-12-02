@@ -274,5 +274,22 @@ namespace Dawnx
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Returns a copy of the string with its first character capitalized.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="isSet"></param>
+        /// <returns></returns>
+        public static string CapitalizeFirst(this string @this, bool set = true)
+        {
+            var chars = @this.ToCharArray();
+            if (chars.Length > 0)
+            {
+                if (set) chars[0] = char.ToUpper(chars[0]);
+                else chars[0] = char.ToLower(chars[0]);
+            }
+            return new string(chars);
+        }
+
     }
 }

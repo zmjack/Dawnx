@@ -7,9 +7,10 @@ namespace Sapling
 {
     public static class SpUploadBox
     {
-        public static JSend JSendConfig(string statUrl, string uploadUrl)
+        public class Config : ISaplingConfig
         {
-            return JSend.Success.Create(new { statUrl, uploadUrl });
+            public string StatUrl { get; set; }
+            public string UploadUrl { get; set; }
         }
     }
 }

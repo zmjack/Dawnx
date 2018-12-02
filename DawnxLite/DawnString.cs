@@ -213,6 +213,7 @@ namespace Dawnx
 
         /// <summary>
         /// Projects the specified string to a new string by using regular expressions (using Single-line Mode).
+        ///     If there is no match, this method returns null.
         /// </summary>
         /// <param name="this"></param>
         /// <param name="regex"></param>
@@ -223,6 +224,7 @@ namespace Dawnx
 
         /// <summary>
         /// Projects the specified string to a new string by using regular expressions.
+        ///     If there is no match, this method returns null.
         /// </summary>
         /// <param name="this"></param>
         /// <param name="regex"></param>

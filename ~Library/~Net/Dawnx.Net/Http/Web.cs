@@ -7,6 +7,10 @@ namespace Dawnx.Net.Http
 {
     public partial class Web
     {
+        public static void RegisterProxy(bool enabledByDefault)
+        {
+            WebRequestStateContainer.ProxyEnabledByDefault = enabledByDefault;
+        }
         public static void RegisterProxy(bool enabledByDefault, string address, string username, string password)
         {
             WebRequestStateContainer.ProxyEnabledByDefault = enabledByDefault;
@@ -20,7 +24,7 @@ namespace Dawnx.Net.Http
         public static void RegisterSystemLogin(bool value) => WebRequestStateContainer.SystemLoginByDefault = value;
         public static void RegisterUserAgent(string userAgent) => WebRequestStateContainer.DefaultUserAgent = userAgent;
         public static void RegisterEncoding(string encoding) => WebRequestStateContainer.DefaultEncoding = encoding;
-        
+
         public static void Download(Stream receiver,
             string method, string url,
             string enctype = MimeType.APPLICATION_X_WWW_FORM_URLENCODED,

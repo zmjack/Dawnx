@@ -21,6 +21,7 @@ namespace Dawnx.Tools
                 Directory.CreateDirectory(DOWNLOAD_DIRECTORY);
 
             Web.RegisterSystemLogin(true);
+            Web.RegisterProxy(true);
 
             Console.CursorVisible = false;
             try

@@ -132,7 +132,7 @@ namespace Dawnx.NPOI
                 (startRow + rowLength - 1, Cursor.col + colLength - 1));
         }
 
-        public SheetRange Print(params object[] values) => Print(values, false);
+        public SheetRange PrintLine(params object[] values) => Print(values, false);
         public SheetRange Print(object[] values, bool reserveCursor)
         {
             var startRow = Cursor.row;

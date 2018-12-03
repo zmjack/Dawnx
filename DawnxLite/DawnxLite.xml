@@ -1239,6 +1239,21 @@
                 If the call returns no data, data should be set to null.
             </summary>
         </member>
+        <member name="M:Dawnx.Locker.Get``1(System.Object[])">
+            <summary>
+            Craetes a special reference of string from the system.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="strs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Locker.Get(System.Object[])">
+            <summary>
+            Craetes a special reference of string from the system.
+            </summary>
+            <param name="strs"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.Range.Create(System.Int32)">
             <summary>
             The range type represents an immutable sequence of numbers

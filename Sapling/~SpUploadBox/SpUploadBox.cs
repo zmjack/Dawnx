@@ -11,7 +11,7 @@ namespace Sapling
         {
             public string StatUrl { get; set; }
             public string PreviewUrl { get; set; }
-            public string UploadUrl { get; set; }
+            public string SubmitUrl { get; set; }
         }
     }
 }

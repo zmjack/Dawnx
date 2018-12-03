@@ -1,6 +1,6 @@
 ﻿namespace Sapling
 {
-    public interface ISpTable
+    public interface ISpTableSource
     {
         string[] Headers { get; set; }
         string[] Types { get; set; }

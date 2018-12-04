@@ -22,7 +22,7 @@ namespace Dawnx.NPOI.Test
 
             sampleSheet.SetCursor("C2");
 
-            sampleSheet.Print("Suplier", "Product", "Quantity", "Release Date", "Describe");
+            sampleSheet.PrintLine("Suplier", "Product", "Quantity", "Release Date", "Describe");
             sampleSheet.Print(new object[,]
             {
                 { "Company 101", "Ag", 1, DateTime.Parse("2017-1-1"), "[??]" },

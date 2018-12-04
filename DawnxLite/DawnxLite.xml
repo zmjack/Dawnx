@@ -65,6 +65,15 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnArray.Init``1(``0[],System.Func{System.Int32,``0})">
+            <summary>
+            Use a method to initailize each element of an array.
+            </summary>
+            <typeparam name="TSelf"></typeparam>
+            <param name="this"></param>
+            <param name="initMethod"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnArray.Self``1(``0[],System.Action{``0[],System.Int32})">
             <summary>
             Do a task for itself.

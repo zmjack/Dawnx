@@ -22,6 +22,21 @@ namespace Dawnx
         public static int UBound(this Array @this) => @this.GetUpperBound(0);
 
         /// <summary>
+        /// Use a method to initailize each element of an array.
+        /// </summary>
+        /// <typeparam name="TSelf"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="initMethod"></param>
+        /// <returns></returns>
+        public static TSelf[] Init<TSelf>(this TSelf[] @this, Func<int, TSelf> initMethod)
+        {
+            int i = 0;
+            foreach (var item in @this)
+                @this[i] = initMethod(i);
+            return @this;
+        }
+
+        /// <summary>
         /// Do a task for itself.
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>

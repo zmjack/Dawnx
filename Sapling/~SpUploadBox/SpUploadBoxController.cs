@@ -6,7 +6,7 @@ namespace Sapling
 {
     public abstract class SpUploadBoxController : Controller
     {
-        public virtual JsonResult Index()
+        public virtual JsonResult Config()
         {
             return Json(JSend.Success.Create(new SpUploadBox.Config
             {
@@ -17,7 +17,7 @@ namespace Sapling
         }
 
         public abstract JsonResult Stat(string tag);
-        public abstract ViewResult Preview(string tag);
+        public abstract IActionResult Preview(string tag);
         public abstract JsonResult Submit(string tag);
     }
 }

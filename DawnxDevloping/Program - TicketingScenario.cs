@@ -1,11 +1,7 @@
 ﻿using Dawnx;
 using Dawnx.Diagnostics;
-using Dawnx.Generators;
-using Dawnx.Patterns;
 using System;
-using System.Linq;
 using System.Text;
-using System.Threading;
 
 namespace DawnxDevloping
 {

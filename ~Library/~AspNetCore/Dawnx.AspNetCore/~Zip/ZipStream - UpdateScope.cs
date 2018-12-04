@@ -1,10 +1,4 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace Dawnx.AspNetCore
+﻿namespace Dawnx.AspNetCore
 {
     public partial class ZipStream
     {

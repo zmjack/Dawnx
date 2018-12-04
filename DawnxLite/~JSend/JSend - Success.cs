@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace Dawnx
+﻿namespace Dawnx
 {
 #pragma warning disable IDE1006
 

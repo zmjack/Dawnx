@@ -21,7 +21,7 @@
 - slot-scope:	The parameter is match with ***StatUrl*** response from backend.
 
 ```html
-<sp-upload-box caption="Caption" allow="jpg|png" tag="a"
+<sp-upload-box caption="Caption" allow="jpg|png" tag="none"
                submit-text="Import" select-text="Select file"
                config="@Url.Action("Config", "SpUploadBox")"
                v-on:submitted="on_upload">

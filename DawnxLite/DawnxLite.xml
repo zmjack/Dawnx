@@ -1017,6 +1017,41 @@
                 Halfwidth_and_Fullwidth_Forms.
             </summary>
         </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.B">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.KB">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.MB">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.GB">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.TB">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.PB">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.Unit.Storage.EB">
+            <summary>
+            Unit: Byte
+            </summary>
+        </member>
         <member name="T:Dawnx.Definition.MimeType">
             <summary>
             MIME Type definitions

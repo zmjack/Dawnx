@@ -1,6 +1,5 @@
 ﻿using Dawnx;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Sapling
 {
@@ -8,11 +7,11 @@ namespace Sapling
     {
         public virtual JsonResult Config()
         {
-            return Json(JSend.Success.Create(new SpUploadBox.Config
+            return Json(JSend.Success.Create(new
             {
-                StatUrl = Url.Action(nameof(Stat)),
-                PreviewUrl = Url.Action(nameof(Preview)),
-                SubmitUrl = Url.Action(nameof(Submit)),
+                statUrl = Url.Action(nameof(Stat)),
+                previewUrl = Url.Action(nameof(Preview)),
+                submitUrl = Url.Action(nameof(Submit)),
             }));
         }
 

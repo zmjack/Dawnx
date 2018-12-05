@@ -5,7 +5,7 @@
 **props**:
 
 - config:	Set a link to load the configuration.
-  ​		The response must be a ***JSend*** packet which defined ***StatUrl***, ***PreviewUrl***, ***SubmitUrl***.
+  ​		The response must be a **JSend** packet which defined ***StatUrl***, ***PreviewUrl***, ***SubmitUrl***.
 - allow:	Determines what type of file is allowed to upload.
 - caption:	The caption will display on a striking place.
 - tag:		The tag will be send to the backend while the component doing anything.
@@ -18,7 +18,7 @@
 
 **template**:
 
-- slot-scope:	The parameter is match with ***StatUrl*** response from backend.
+- slot-scope:	The parameters is match with ***StatUrl*** response from backend.
 
 ```html
 <sp-upload-box caption="Caption" allow="jpg|png" tag="none"

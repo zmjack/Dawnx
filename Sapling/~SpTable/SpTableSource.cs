@@ -17,13 +17,13 @@ namespace Sapling
 
             Headers = props.Select(x => DataAnnotationUtility.GetDisplayName(x)).ToArray();
             Types = props.Select(x =>
+            {
+                var name = x.PropertyType.FullName;
+                switch (name)
                 {
-                    var name = x.PropertyType.FullName;
-                    switch (name)
+                    case string s when s == BasicTypeUtility.@string: return "String";
+                    case string s when s.In(new[]
                     {
-                        case string s when s == BasicTypeUtility.@string: return "String";
-                        case string s when s.In(new[]
-                        {
                         BasicTypeUtility.@byte,
                         BasicTypeUtility.@sbyte,
                         BasicTypeUtility.@short,
@@ -35,25 +35,23 @@ namespace Sapling
                         BasicTypeUtility.@float,
                         BasicTypeUtility.@double,
                         BasicTypeUtility.@decimal,
-                        }):
-                            return "Number";
-                        case string s when s == BasicTypeUtility.@bool: return "Boolean";
-                        case string s when s.EndsWith("[]"): return "Array";
-                        case string s when s == BasicTypeUtility.DateTime: return "Date";
-                        default: return "Object";
-                    }
-                }).ToArray();
-            Rows = models
-                .Select(x =>
-                            {
-                                var key = keyProp?.GetValue(x).ToString() ?? "";
-                                var ret = new Dictionary<string, string>();
-                                foreach (var prop in props)
-                                    ret.Add(prop.Name, DataAnnotationUtility.GetDisplayString(x, prop.Name));
+                    }):
+                        return "Number";
+                    case string s when s == BasicTypeUtility.@bool: return "Boolean";
+                    case string s when s.EndsWith("[]"): return "Array";
+                    case string s when s == BasicTypeUtility.DateTime: return "Date";
+                    default: return "Object";
+                }
+            }).ToArray();
+            Rows = models.Select(x =>
+            {
+                var key = keyProp?.GetValue(x).ToString() ?? "";
+                var ret = new Dictionary<string, string>();
+                foreach (var prop in props)
+                    ret.Add(prop.Name, DataAnnotationUtility.GetDisplayString(x, prop.Name));
 
-                                return new KeyValuePair<string, Dictionary<string, string>>(key, ret);
-                            })
-                            .ToArray();
+                return new KeyValuePair<string, Dictionary<string, string>>(key, ret);
+            }).ToArray();
         }
 
         public string[] Headers { get; set; }

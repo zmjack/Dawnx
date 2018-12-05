@@ -102,7 +102,7 @@ namespace Dawnx.Net.Test
                     using (var reader = new StreamReader(stream))
                         html = reader.ReadToEnd();
 
-                    var match_RequestToken = new Regex(@"<input name=""__RequestVerificationToken"".+ value=""(.+?)"" />").Match(html);
+                    var match_RequestToken = new Regex(@"<input name=""__RequestVerificationToken"".+? value=""(.+?)"".+?/>").Match(html);
                     if (match_RequestToken.Success)
                     {
                         return web.GetResponse(HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,

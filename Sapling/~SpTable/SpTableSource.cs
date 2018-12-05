@@ -10,11 +10,18 @@ namespace Sapling
     public class SpTableSource<TModel> : ISpTableSource
     {
         internal SpTableSource() { }
+        internal SpTableSource(PagedEnumerable<TModel> models)
+            : this(models, models.PageNumber, models.PageSize, models.PageCount) { }
         internal SpTableSource(IEnumerable<TModel> models)
+            : this(models, 1, models.Count(), 1) { }
+        internal SpTableSource(IEnumerable<TModel> models, int page, int pageSize, int pageCount)
         {
             var props = typeof(TModel).GetProperties();
             var keyProp = props.SingleOrDefault(x => x.GetCustomAttribute<KeyAttribute>() != null);
 
+            Page = page;
+            PageSize = pageSize;
+            PageCount = pageCount;
             Headers = props.Select(x => DataAnnotationUtility.GetDisplayName(x)).ToArray();
             Types = props.Select(x =>
             {
@@ -54,6 +61,9 @@ namespace Sapling
             }).ToArray();
         }
 
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public int PageCount { get; set; }
         public string[] Headers { get; set; }
         public string[] Types { get; set; }
         public KeyValuePair<string, Dictionary<string, string>>[] Rows

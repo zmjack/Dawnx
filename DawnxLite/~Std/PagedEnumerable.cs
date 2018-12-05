@@ -12,7 +12,9 @@ namespace Dawnx
         public int PageCount { get; protected set; }
         public bool IsFristPage => PageNumber == 1;
         public bool IsLastPage => PageNumber == PageCount;
-        
+
+        protected PagedEnumerable() { }
+
         public PagedEnumerable(IEnumerable<T> source, int page, int pageSize)
         {
             PageSize = pageSize;

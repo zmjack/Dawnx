@@ -11,7 +11,17 @@ namespace Dawnx
         public IQueryProvider Provider => (Items as IQueryable<T>).Provider;
 
         public PagedQueryable(IQueryable<T> source, int page, int pageSize)
-            : base(source, page, pageSize) { }
+        {
+            PageSize = pageSize;
+            PageCount = source.PageCount(pageSize);
+            switch (page)
+            {
+                case int p when p < 1: PageNumber = 1; break;
+                case int p when p > PageCount: PageNumber = PageCount; break;
+                default: PageNumber = page; break;
+            }
+            Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+        }
 
     }
 

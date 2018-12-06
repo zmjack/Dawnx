@@ -6,11 +6,5 @@
         {
             normal, blank, large, overflow, lightbox
         }
-
-        public class Config : ISaplingConfig
-        {
-            public DialogType dialogType { get; set; }
-        }
-
     }
 }

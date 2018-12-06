@@ -16,6 +16,10 @@
     <DocumentationFile>D:\TeamProjects\Dawnx\Dawnx.Diagnostics\Dawnx.Diagnostics.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
   </ItemGroup>

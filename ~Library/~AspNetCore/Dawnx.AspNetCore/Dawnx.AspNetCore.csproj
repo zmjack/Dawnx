@@ -32,6 +32,7 @@
     <LangVersion>default</LangVersion>
     <DocumentationFile></DocumentationFile>
     <WarningLevel>3</WarningLevel>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

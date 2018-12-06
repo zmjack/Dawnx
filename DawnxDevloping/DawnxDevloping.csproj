@@ -5,9 +5,14 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
-    <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
+    <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\Sapling\Sapling.csproj" />
   </ItemGroup>
 
 </Project>

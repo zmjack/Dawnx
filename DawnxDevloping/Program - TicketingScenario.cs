@@ -1,4 +1,5 @@
-﻿using Dawnx;
+﻿#if USE
+using Dawnx;
 using Dawnx.Diagnostics;
 using System;
 using System.Text;
@@ -32,3 +33,4 @@ namespace DawnxDevloping
 
     }
 }
+#endif

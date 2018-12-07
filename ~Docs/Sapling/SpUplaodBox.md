@@ -2,46 +2,55 @@
 
 ### Front-End
 
-**props**:
+**Props**:
 
-- config:	Set a link to load the configuration.
-  ​		The response must be a **JSend** packet which defined ***StatUrl***, ***PreviewUrl***, ***SubmitUrl***.
-- allow:	Determines what type of file is allowed to upload.
-- caption:	The caption will display on a striking place.
-- tag:		The tag will be send to the backend while the component doing anything.
-- submit-text:	Determines the text of *submit* button.
-- select-text:	Determines the text of *Select file* button.
+- **config**:			Set a link to load the configuration.
+  ​				The response must be a **JSend** packet which defined ***StatUrl***, ***PreviewUrl***, ***SubmitUrl***.
+- **event**:			Bind a **Vue** instance to listen events.
+- tag:				The tag will be send to the backend while the component doing anything.
+- allow:			Determines what type of file is allowed to upload.
+- caption:			The caption will display on a striking place.
+- submit-text:		Determines the text of *submit* button.
+- select-text:		Determines the text of *Select file* button.
 
-**events**:
+**On events**:
 
-- submitted:	If the preview confirms, the event will be called.
+- submitted:		If the preview confirms, the event will be called.
 
-**template**:
+**Emit events | Calls**:
+
+- refresh:			Refresh stat info.
+
+**Slots**:
 
 - slot-scope:	The parameters is match with ***StatUrl*** response from backend.
 
-```html
-<sp-upload-box caption="Caption" allow="jpg|png" tag="none"
-               submit-text="Import" select-text="Select file"
-               config="@Url.Action("Config", "SpUploadBox")"
-               v-on:submitted="on_upload">
-    <template slot-scope="{scope}">
-        <span>{{scope}} Records</span>
-    </template>
-</sp-upload-box>
-```
+**Template**:
 
 ```html
+<!--if need to listen for events-->
 <script>
-    new Vue({
-        el: '#app',
-        methods:{
-            on_upload: function() {
-                window.location.reload();
-            }
+    var eventVue = new Vue({
+        created: function () {
+            // emit events
+            this.$emit(def_sp_upload_box + ".refresh");
+            
+            // on events
+            this.$on(def_sp_upload_box + ":submitted", function (vue, data) {});
         }
     })
 </script>
+```
+
+```html
+<sp-upload-box config="@Url.Action("Config", "SpUploadBox")"
+               caption="Caption" allow="jpg|png" tag="none"
+               submit-text="Import" select-text="Select file"
+               event="eventVue">
+    <template slot-scope="scope">
+        <span>{{scope.data.count}} Records</span>
+    </template>
+</sp-upload-box>
 ```
 
 
@@ -49,6 +58,30 @@
 ### Backend
 
 Usually, you can simply create a new class through extend ***SpUploadBoxController***.
+
+```C#
+public class SpUploadBoxController : Sapling.SpUploadBoxController
+{
+    public override JsonResult Stat(string tag)
+    {
+        var count = new Random().Next();
+        return Json(JSend.Success.Create(new { count }));
+    }
+
+    public override IActionResult Preview(string tag)
+    {
+		return View();
+    }
+
+    [HttpPost]
+    public override JsonResult Submit(string tag)
+    {
+		return Json(JSend.Success.Create());
+    }
+}
+```
+
+The abstract class is defined as:
 
 ```C#
 public abstract class SpUploadBoxController : Controller

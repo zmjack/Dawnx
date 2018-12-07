@@ -19,6 +19,7 @@ namespace Dawnx
         ///     that is encoded with hex digits.
         /// </summary>
         /// <param name="this"></param>
+        /// <param name="separator"></param>
         /// <returns></returns>
         public static string HexString(this byte[] @this, string separator = "")
         {

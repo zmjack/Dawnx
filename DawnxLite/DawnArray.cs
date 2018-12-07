@@ -41,6 +41,7 @@ namespace Dawnx
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>
         /// <param name="this"></param>
+        /// <param name="task"></param>
         /// <returns></returns>
         public static TSelf[] Self<TSelf>(this TSelf[] @this, Action<TSelf[], int> task)
         {

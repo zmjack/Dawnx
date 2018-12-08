@@ -106,6 +106,24 @@ namespace Dawnx
             => DateTimeUtility.ToUnixTimeSeconds(@this);
 
         /// <summary>
+        /// Get the start point of the sepecified month.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static DateTime StartOfMonth(this DateTime @this) => new DateTime(@this.Year, @this.Month, 1, 0, 0, 0, 0, @this.Kind);
+
+        /// <summary>
+        /// Get the end point of the sepecified month.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static DateTime EndOfMonth(this DateTime @this)
+        {
+            return new DateTime(@this.Year, @this.Month, 1, 0, 0, 0, 0, @this.Kind)
+                .AddMonths(1).AddMilliseconds(-1);
+        }
+
+        /// <summary>
         /// Get the start point of the sepecified day.
         /// </summary>
         /// <param name="this"></param>
@@ -117,7 +135,11 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static DateTime EndOfDay(this DateTime @this) => @this.AddDays(1).Date.AddMilliseconds(-1);
+        public static DateTime EndOfDay(this DateTime @this)
+        {
+            return new DateTime(@this.Year, @this.Month, @this.Day, 0, 0, 0, 0, @this.Kind)
+                .AddDays(1).AddMilliseconds(-1);
+        }
 
         private static int CastCycleDays(int days, bool isBackward)
         {

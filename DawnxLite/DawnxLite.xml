@@ -202,6 +202,20 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnDateTime.StartOfMonth(System.DateTime)">
+            <summary>
+            Get the start point of the sepecified month.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.EndOfMonth(System.DateTime)">
+            <summary>
+            Get the end point of the sepecified month.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnDateTime.StartOfDay(System.DateTime)">
             <summary>
             Get the start point of the sepecified day.

@@ -24,18 +24,28 @@ This class provides some extension functions to generate SQL to query database r
   This invoke will generate a SQL query string like this:
 
   ```SQL
-  SELECT * FROM Emplyees WHERE First_Name like '%Bill%' or Last_Name like '%Bill%';
+  SELECT [x].[Id], [x].[First_Name], [x].[Last_Name]
+  FROM [Emplyees] AS [x]
+  WHERE (CHARINDEX(N'Bill', [x].[First_Name]) > 0)
+  	OR (CHARINDEX(N'Bill', [x].[Last_Name]) > 0);
   ```
 
 - **WhereMatch**
   Different from **WhereMatch**, this statement will perform an exact match:
 
   ```SQL
-  SELECT * FROM Emplyees WHERE First_Name = '%Bill%' or Last_Name = '%Bill%';
+  SELECT [x].[Id], [x].[First_Name], [x].[Last_Name]
+  FROM [Emplyees] AS [x]
+  WHERE [x].[First_Name] = N'Bill' OR [x].[Last_Name] = N'Bill'
   ```
+
+- **WhereMax**
+  WhereMax
+
+- **WhereMin**
+  WhereMin
 
 - **WhereInRange**
   (Not supportted yet)
   Queries records which is start at a time and end at another time.
 
-- 

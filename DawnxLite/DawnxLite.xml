@@ -1138,6 +1138,20 @@
             </summary>
             <param name="strict"></param>
         </member>
+        <member name="M:Dawnx.Sequences.LetterSequence.GetNumber(System.String)">
+            <summary>
+            Gets the number of letter. It's start at 0. (For example, "A" is 0).
+            </summary>
+            <param name="letter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Sequences.LetterSequence.GetLetter(System.Int32)">
+            <summary>
+            Gets the letter of number. It's start at "A". (For example, 0 is "A").
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.Utilities.Base64Utility.ConvertBase64ToUrlBase64(System.String)">
             <summary>
             Converts the specified string, which encodes binary data as url safe base-64 digits, to

@@ -46,24 +46,30 @@ namespace Dawnx.Utilities
         /// <summary>
         /// Gets the range of months.
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
         /// <returns></returns>
-        public static IEnumerable<DateTime> GetMonths(DateTime start, DateTime end)
+        public static IEnumerable<DateTime> GetMonths(DateTime startDate, DateTime endDate)
         {
-            for (var dt = new DateTime(start.Year, start.Month, 1); dt <= end; dt.AddMonths(1))
+            startDate = new DateTime(startDate.Year, startDate.Month, 1);
+            endDate = new DateTime(endDate.Year, endDate.Month, 1);
+
+            for (var dt = startDate; dt <= endDate; dt = dt.AddMonths(1))
                 yield return dt;
         }
 
         /// <summary>
         /// Gets the range of days.
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
         /// <returns></returns>
-        public static IEnumerable<DateTime> GetDays(DateTime start, DateTime end)
+        public static IEnumerable<DateTime> GetDays(DateTime startDate, DateTime endDate)
         {
-            for (var dt = new DateTime(start.Year, start.Month, start.Day); dt <= end; dt.AddDays(1))
+            startDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
+            endDate = new DateTime(endDate.Year, endDate.Month, endDate.Day);
+
+            for (var dt = startDate; dt <= endDate; dt = dt.AddDays(1))
                 yield return dt;
         }
 

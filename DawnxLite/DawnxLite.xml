@@ -1211,16 +1211,16 @@
             <summary>
             Gets the range of months.
             </summary>
-            <param name="start"></param>
-            <param name="end"></param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.DateTimeUtility.GetDays(System.DateTime,System.DateTime)">
             <summary>
             Gets the range of days.
             </summary>
-            <param name="start"></param>
-            <param name="end"></param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.IPUtility.GetLongString(System.Net.IPAddress)">

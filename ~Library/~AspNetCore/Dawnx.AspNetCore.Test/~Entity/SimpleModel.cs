@@ -14,5 +14,7 @@ namespace Dawnx.AspNetCore.Test
 
         public int Age { get; set; }
 
+        public DateTime Birthday { get; set; }
+
     }
 }

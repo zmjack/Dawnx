@@ -11,9 +11,10 @@ namespace Dawnx.AspNetCore.Test
         public void Test1()
         {
             using (var context = new ApplicationDbContext(
-                new DbContextOptionsBuilder().UseSqlServer("Server=localhost;Database=database;uid=username;pwd=password").Options))
+                new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1;Database=db;uid=username;pwd=password").Options))
             {
-                var s = context.SimpleModels.WhereMatch("Bill", x => new { x.Age, x.Name }).ToSql();
+                var now = DateTime.Now;
+                var s = context.SimpleModels.WhereSearch("Bill", x => new { x.Age, x.Name }).ToSql();
             }
         }
 

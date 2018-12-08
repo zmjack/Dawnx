@@ -24,6 +24,7 @@ This class provides some extension functions to generate SQL to query database r
   This invoke will generate a SQL query string like this:
 
   ```SQL
+  /* SQL Server Demo */
   SELECT [x].[Id], [x].[First_Name], [x].[Last_Name]
   FROM [Emplyees] AS [x]
   WHERE (CHARINDEX(N'Bill', [x].[First_Name]) > 0)
@@ -34,16 +35,11 @@ This class provides some extension functions to generate SQL to query database r
   Different from **WhereMatch**, this statement will perform an exact match:
 
   ```SQL
+  /* SQL Server Demo */
   SELECT [x].[Id], [x].[First_Name], [x].[Last_Name]
   FROM [Emplyees] AS [x]
   WHERE [x].[First_Name] = N'Bill' OR [x].[Last_Name] = N'Bill'
   ```
-
-- **WhereMax**
-  WhereMax
-
-- **WhereMin**
-  WhereMin
 
 - **WhereInRange**
   (Not supportted yet)

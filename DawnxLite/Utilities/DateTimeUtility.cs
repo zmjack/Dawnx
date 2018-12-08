@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Dawnx.Utilities
 {
@@ -41,6 +42,30 @@ namespace Dawnx.Utilities
         /// <returns></returns>
         public static long ToUnixTimeSeconds(DateTime @this)
             => ToUnixTimeMilliseconds(@this) / 1000;
+
+        /// <summary>
+        /// Gets the range of months.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static IEnumerable<DateTime> GetMonths(DateTime start, DateTime end)
+        {
+            for (var dt = new DateTime(start.Year, start.Month, 1); dt <= end; dt.AddMonths(1))
+                yield return dt;
+        }
+
+        /// <summary>
+        /// Gets the range of days.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static IEnumerable<DateTime> GetDays(DateTime start, DateTime end)
+        {
+            for (var dt = new DateTime(start.Year, start.Month, start.Day); dt <= end; dt.AddDays(1))
+                yield return dt;
+        }
 
     }
 }

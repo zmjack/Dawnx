@@ -202,6 +202,20 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnDateTime.StartOfDay(System.DateTime)">
+            <summary>
+            Get the start point of the sepecified day.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnDateTime.EndOfDay(System.DateTime)">
+            <summary>
+            Get the end point of the sepecified day.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnICollection.SelectPage``1(System.Collections.Generic.ICollection{``0},System.Int32,System.Int32)">
             <summary>
             Projects page elements of a sequence into a new form.
@@ -1191,6 +1205,22 @@
             Gets the Unix Timestamp(seconds) of the specified DateTime(UTC).
             </summary>
             <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.GetMonths(System.DateTime,System.DateTime)">
+            <summary>
+            Gets the range of months.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.GetDays(System.DateTime,System.DateTime)">
+            <summary>
+            Gets the range of days.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.IPUtility.GetLongString(System.Net.IPAddress)">

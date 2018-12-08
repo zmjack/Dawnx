@@ -80,7 +80,7 @@ namespace Dawnx
         /// <returns></returns>
         public static int Week(this DateTime @this, DayOfWeek weekStart)
         {
-            var day1 = new System.DateTime(@this.Year, 1, 1);
+            var day1 = new DateTime(@this.Year, 1, 1);
             var day1Week_day1 = PastDay(day1, weekStart, false);
 
             if (day1Week_day1.Year == @this.Year)
@@ -104,6 +104,20 @@ namespace Dawnx
         public static long UnixTimeSeconds(this DateTime @this)
             => DateTimeUtility.ToUnixTimeSeconds(@this);
 
+        /// <summary>
+        /// Get the start point of the sepecified day.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static DateTime StartOfDay(this DateTime @this) => @this.Date;
+
+        /// <summary>
+        /// Get the end point of the sepecified day.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static DateTime EndOfDay(this DateTime @this) => @this.AddDays(1).Date.AddMilliseconds(-1);
+
         private static int CastCycleDays(int days, bool isBackward)
         {
             days = days % 7;
@@ -112,6 +126,8 @@ namespace Dawnx
                 return days > 0 ? days - 7 : days;
             else return days < 0 ? days + 7 : days;
         }
+
+
 
     }
 }

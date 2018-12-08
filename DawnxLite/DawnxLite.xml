@@ -23,6 +23,7 @@
                 that is encoded with hex digits.
             </summary>
             <param name="this"></param>
+            <param name="separator"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnArray.String(System.Byte[])">
@@ -80,6 +81,7 @@
             </summary>
             <typeparam name="TSelf"></typeparam>
             <param name="this"></param>
+            <param name="task"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnArray.IndexOf``1(``0[],``0)">
@@ -128,6 +130,13 @@
             <param name="this"></param>
             <param name="pageNumber">'pageNumber' starts at 1</param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnBoolean.Not(System.Boolean)">
+            <summary>
+            Invert the Boolean value.
+            </summary>
+            <param name="this"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnDateTime.FirstDayOfMonth(System.DateTime)">

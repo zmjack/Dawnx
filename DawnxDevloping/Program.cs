@@ -1,5 +1,6 @@
 ﻿using Dawnx;
 using Dawnx.Diagnostics;
+using Dawnx.Sequences;
 using Sapling;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,7 @@ namespace DawnxDevloping
 
         static void Main(string[] args)
         {
+            Console.WriteLine(LetterSequence.GetNumber("B"));
         }
 
     }

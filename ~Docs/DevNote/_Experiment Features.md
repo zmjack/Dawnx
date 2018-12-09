@@ -8,3 +8,6 @@
 
 - [ ] SqlGenerator: WhereInRange
 
+### Dawnx.NPOI
+
+- [ ] Support for copying sheet range.

@@ -20,6 +20,48 @@ namespace Dawnx.AspNetCore
         }
         private static QueryCompilerVersion _QueryCompilerVersion = QueryCompilerVersion.Unknown;
 
+        /// <summary>
+        /// Gets the provider name of database.
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string GetStorageName<TEntity>(this IQueryable<TEntity> @this)
+            where TEntity : class
+        {
+            var queryCompiler = @this.Provider
+                .GetFieldValue<EntityQueryProvider>("_queryCompiler") as QueryCompiler;
+
+            var executionStrategyFactoryName = queryCompiler
+                .GetFieldValue<QueryCompiler>("_queryContextFactory")
+                .GetPropertyValue<RelationalQueryContextFactory>("ExecutionStrategyFactory")
+                .ToString();
+
+            switch (executionStrategyFactoryName)
+            {
+                case string name when name.Contains(Definition.DatabaseProvider.Cosmos): return Definition.DatabaseProvider.Cosmos;
+                case string name when name.Contains(Definition.DatabaseProvider.Firebird): return Definition.DatabaseProvider.Firebird;
+                case string name when name.Contains(Definition.DatabaseProvider.IBM): return Definition.DatabaseProvider.IBM;
+                case string name when name.Contains(Definition.DatabaseProvider.Jet): return Definition.DatabaseProvider.Jet;
+                case string name when name.Contains(Definition.DatabaseProvider.MyCat): return Definition.DatabaseProvider.MyCat;
+                case string name when name.Contains(Definition.DatabaseProvider.MySql): return Definition.DatabaseProvider.MySql;
+                case string name when name.Contains(Definition.DatabaseProvider.OpenEdge): return Definition.DatabaseProvider.OpenEdge;
+                case string name when name.Contains(Definition.DatabaseProvider.Oracle): return Definition.DatabaseProvider.Oracle;
+                case string name when name.Contains(Definition.DatabaseProvider.PostgreSQL): return Definition.DatabaseProvider.PostgreSQL;
+                case string name when name.Contains(Definition.DatabaseProvider.Sqlite): return Definition.DatabaseProvider.Sqlite;
+                case string name when name.Contains(Definition.DatabaseProvider.SqlServer): return Definition.DatabaseProvider.SqlServer;
+                case string name when name.Contains(Definition.DatabaseProvider.SqlServerCompact35): return Definition.DatabaseProvider.SqlServerCompact35;
+                case string name when name.Contains(Definition.DatabaseProvider.SqlServerCompact40): return Definition.DatabaseProvider.SqlServerCompact40;
+                default: return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the generated Sql string.
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="this"></param>
+        /// <returns></returns>
         public static string ToSql<TEntity>(this IQueryable<TEntity> @this)
             where TEntity : class
         {

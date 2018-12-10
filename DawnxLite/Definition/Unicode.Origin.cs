@@ -4,7 +4,7 @@
     {
         public static class Origin
         {
-            // Ref: https://unicode-table.com/en/blocks/control-character/
+            // Refer: https://unicode-table.com/en/blocks/control-character/
             public const string Control_character = @"\u0000-\u001F";
             public const string Basic_Latin = @"\u0020-\u007F";
             public const string Latin_1_Supplement = @"\u0080-\u00FF";

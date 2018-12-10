@@ -1,4 +1,5 @@
-﻿using Dawnx;
+﻿#if USE
+using Dawnx;
 using Dawnx.Diagnostics;
 using Dawnx.Sequences;
 using Sapling;
@@ -23,3 +24,4 @@ namespace DawnxDevloping
 
     }
 }
+#endif

@@ -7,27 +7,18 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.Entity
 {
-    public class WhereStrategy<TEntity> : IWhereStrategy<TEntity>
+    public class WhereStringStrategy<TEntity> : IWhereStrategy<TEntity>
     {
-        private readonly string _searchString;
-        private Expression<Func<TEntity, object>> _expression;
-        private Func<Expression, Expression, Expression> _binaryGenerator;
-
         public Expression<Func<TEntity, bool>> StrategyExpression { get; private set; }
 
-        public WhereStrategy(Func<Expression, Expression, Expression> binaryGenerator, string searchString, Expression<Func<TEntity, object>> expression)
+        public WhereStringStrategy(Expression<Func<TEntity, object>> inExp, Func<Expression, Expression, Expression> compareExp, string searchString)
         {
             if (!searchString.IsNullOrWhiteSpace())
-            {
-                _binaryGenerator = binaryGenerator;
-                _searchString = searchString;
-                _expression = expression;
-                StrategyExpression = GenerateExpression();
-            }
+                StrategyExpression = GenerateExpression(inExp, compareExp, searchString);
             else StrategyExpression = x => true;
         }
 
-        private ParameterExpression[] GetParameterExpressions(Expression expression)
+        private ParameterExpression[] GetParameters(Expression expression)
         {
             if (expression is null) return new ParameterExpression[0];
 
@@ -40,15 +31,15 @@ namespace Dawnx.Entity
             switch (expression)
             {
                 case MemberExpression exp:
-                    return GetParameterExpressions(exp.Expression);
+                    return GetParameters(exp.Expression);
                 case UnaryExpression exp:
-                    return GetParameterExpressions(exp.Operand);
+                    return GetParameters(exp.Operand);
                 case MethodCallExpression exp:
-                    return GetParameterExpressions(exp.Object)
-                        .Concat(exp.Arguments.SelectMany(x => GetParameterExpressions(x)))
+                    return GetParameters(exp.Object)
+                        .Concat(exp.Arguments.SelectMany(x => GetParameters(x)))
                         .ToArray();
                 case NewExpression exp:
-                    return exp.Arguments.SelectMany(x => GetParameterExpressions(x)).ToArray();
+                    return exp.Arguments.SelectMany(x => GetParameters(x)).ToArray();
 
                 default: return new ParameterExpression[0];
             }
@@ -60,22 +51,24 @@ namespace Dawnx.Entity
                 return expression;
             else if (expression.Type.GetInterface(typeof(IEnumerable).FullName) != null)
             {
-                var ienumerableGenericType = new[] { expression.Type }.Concat(expression.Type.GetInterfaces()).For(_ =>
-                {
-                    var regex = new Regex(@"System\.Collections\.Generic\.IEnumerable`1\[(.+)\]");
-                    foreach (var @interface in _)
+                var ienumerableGenericType = new[] { expression.Type }
+                    .Concat(expression.Type.GetInterfaces()).For(_ =>
                     {
-                        var match = regex.Match(@interface.ToString());
-                        if (match.Success)
-                            return Type.GetType(match.Groups[1].Value);
-                    }
+                        var regex = new Regex(@"System\.Collections\.Generic\.IEnumerable`1\[(.+)\]");
+                        foreach (var @interface in _)
+                        {
+                            var match = regex.Match(@interface.ToString());
+                            if (match.Success)
+                                return Type.GetType(match.Groups[1].Value);
+                        }
 
-                    throw new NotSupportedException("Only IEnumerable<T> is supported.");
-                });
+                        throw new NotSupportedException("Only IEnumerable<T> is supported.");
+                    });
 
                 if (ienumerableGenericType != typeof(string))
                 {
-                    // If the T of IEnumerable<T> is not string, use System.Linq.Enumerable.Select method to convert it into string
+                    // If the T of IEnumerable<T> is not string,
+                    // use System.Linq.Enumerable.Select method to convert it into string
                     var selectMethod = typeof(Enumerable)
                         .GetMethodViaFormatName("System.Collections.Generic.IEnumerable`1[TResult] Select[TSource,TResult](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,TResult])")
                         .MakeGenericMethod(ienumerableGenericType, typeof(string));
@@ -90,11 +83,14 @@ namespace Dawnx.Entity
             else return Expression.Call(expression, typeof(object).GetMethod(nameof(object.ToString)));
         }
 
-        private Expression<Func<TEntity, bool>> GenerateExpression()
+        private Expression<Func<TEntity, bool>> GenerateExpression(
+            Expression<Func<TEntity, object>> inExpression,
+            Func<Expression, Expression, Expression> binaryGenerator,
+            string searchString)
         {
-            Expression rightExp = Expression.Constant(_searchString);
+            Expression rightExp = Expression.Constant(searchString);
 
-            switch (_expression.Body)
+            switch (inExpression.Body)
             {
                 case NewExpression exp:
                     Expression leftExp = null;
@@ -102,15 +98,15 @@ namespace Dawnx.Entity
                     foreach (var argExp in exp.Arguments)
                     {
                         if (leftExp is null)
-                            leftExp = _binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp);
+                            leftExp = binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp);
                         else leftExp = Expression.OrElse(leftExp,
-                            _binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp));
+                            binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp));
                     }
-                    return Expression.Lambda<Func<TEntity, bool>>(leftExp, _expression.Parameters);
+                    return Expression.Lambda<Func<TEntity, bool>>(leftExp, inExpression.Parameters);
 
                 default:
                     return Expression.Lambda<Func<TEntity, bool>>
-                        (_binaryGenerator(GetReturnStringOrArrayExpression(_expression.Body), rightExp), _expression.Parameters);
+                        (binaryGenerator(GetReturnStringOrArrayExpression(inExpression.Body), rightExp), inExpression.Parameters);
             }
         }
 

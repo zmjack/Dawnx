@@ -54,45 +54,45 @@ namespace Dawnx.Test
                 });
                 context.SaveChanges();
 
-                new SearchStrategy<CompLevel>("Ashe", x => new { Names = x.People.Select(p => p.Name) }).Self(_ =>
+                new WhereSearchStrategy<CompLevel>("Ashe", x => new { Names = x.People.Select(p => p.Name) }).Self(_ =>
                     Assert.Equal(new[] { "Platinum1" }, context.CompLevels.WhereStrategy(_).Select(x => x.Name).ToArray()));
-                new MatchStrategy<CompLevel>("30", x => new { levels = x.People.Select(p => p.Level) }).Self(_ =>
+                new WhereMatchStrategy<CompLevel>("30", x => new { levels = x.People.Select(p => p.Level) }).Self(_ =>
                     Assert.Equal(new[] { "Gold1", "Platinum1" }, context.CompLevels.WhereStrategy(_).Select(x => x.Name).ToArray()));
-                new SearchStrategy<Person>("at", x => new { x.CompLevelLink.Name }).Self(_ =>
+                new WhereSearchStrategy<Person>("at", x => new { x.CompLevelLink.Name }).Self(_ =>
                     Assert.Equal(new[] { "Ashe", "Anivia" }, context.People.WhereStrategy(_).Select(x => x.Name).ToArray()));
 
                 //MatchStrategy
-                TestCheck(new MatchStrategy<CompLevel>("22", x => x.Name), context.CompLevels,
+                TestCheck(new WhereMatchStrategy<CompLevel>("22", x => x.Name), context.CompLevels,
                     0, "x => x.Name.Equals(\"22\")");
-                TestCheck(new MatchStrategy<CompLevel>("22", x => x.Level), context.CompLevels,
+                TestCheck(new WhereMatchStrategy<CompLevel>("22", x => x.Level), context.CompLevels,
                     1, "x => Convert(x.Level, Object).ToString().Equals(\"22\")");
-                TestCheck(new MatchStrategy<CompLevel>("22", x => x.Level.ToString()), context.CompLevels,
+                TestCheck(new WhereMatchStrategy<CompLevel>("22", x => x.Level.ToString()), context.CompLevels,
                     1, "x => x.Level.ToString().Equals(\"22\")");
-                TestCheck(new MatchStrategy<CompLevel>("22", x => new { x.Name }), context.CompLevels,
+                TestCheck(new WhereMatchStrategy<CompLevel>("22", x => new { x.Name }), context.CompLevels,
                     0, "x => x.Name.Equals(\"22\")");
-                TestCheck(new MatchStrategy<CompLevel>("22", x => new { x.Name, x.Level }), context.CompLevels,
+                TestCheck(new WhereMatchStrategy<CompLevel>("22", x => new { x.Name, x.Level }), context.CompLevels,
                     1, "x => (x.Name.Equals(\"22\") OrElse x.Level.ToString().Equals(\"22\"))");
-                TestCheck(new MatchStrategy<CompLevel>("22", x => new { x.Name, Level = x.Level.ToString() }), context.CompLevels,
+                TestCheck(new WhereMatchStrategy<CompLevel>("22", x => new { x.Name, Level = x.Level.ToString() }), context.CompLevels,
                     1, "x => (x.Name.Equals(\"22\") OrElse x.Level.ToString().Equals(\"22\"))");
 
                 //SearchStrategy
-                TestCheck(new SearchStrategy<CompLevel>("1", x => x.Name), context.CompLevels,
+                TestCheck(new WhereSearchStrategy<CompLevel>("1", x => x.Name), context.CompLevels,
                     4, "x => x.Name.Contains(\"1\")");
-                TestCheck(new SearchStrategy<CompLevel>("1", x => x.Level), context.CompLevels,
+                TestCheck(new WhereSearchStrategy<CompLevel>("1", x => x.Level), context.CompLevels,
                     4, "x => Convert(x.Level, Object).ToString().Contains(\"1\")");
-                TestCheck(new SearchStrategy<CompLevel>("1", x => x.Level.ToString()), context.CompLevels,
+                TestCheck(new WhereSearchStrategy<CompLevel>("1", x => x.Level.ToString()), context.CompLevels,
                     4, "x => x.Level.ToString().Contains(\"1\")");
-                TestCheck(new SearchStrategy<CompLevel>("1", x => new { x.Name }), context.CompLevels,
+                TestCheck(new WhereSearchStrategy<CompLevel>("1", x => new { x.Name }), context.CompLevels,
                     4, "x => x.Name.Contains(\"1\")");
-                TestCheck(new SearchStrategy<CompLevel>("1", x => new { x.Name, x.Level }), context.CompLevels,
+                TestCheck(new WhereSearchStrategy<CompLevel>("1", x => new { x.Name, x.Level }), context.CompLevels,
                     5, "x => (x.Name.Contains(\"1\") OrElse x.Level.ToString().Contains(\"1\"))");
-                TestCheck(new SearchStrategy<CompLevel>("1", x => new { x.Name, Level = x.Level.ToString() }), context.CompLevels,
+                TestCheck(new WhereSearchStrategy<CompLevel>("1", x => new { x.Name, Level = x.Level.ToString() }), context.CompLevels,
                     5, "x => (x.Name.Contains(\"1\") OrElse x.Level.ToString().Contains(\"1\"))");
 
             }
         }
 
-        private void TestCheck<T>(WhereStrategy<T> strategy, DbSet<T> dbSet, int count, string strategyExpression)
+        private void TestCheck<T>(WhereStringStrategy<T> strategy, DbSet<T> dbSet, int count, string strategyExpression)
             where T : class
         {
             Assert.Equal(strategyExpression, strategy.StrategyExpression.ToString());

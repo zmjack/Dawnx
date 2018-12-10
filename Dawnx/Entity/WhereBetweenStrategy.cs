@@ -1,0 +1,86 @@
+﻿using Dawnx.Reflection;
+using Dawnx.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+
+namespace Dawnx.Entity
+{
+    public class WhereBetweenStrategy<TEntity> : IWhereStrategy<TEntity>
+    {
+        public Expression<Func<TEntity, bool>> StrategyExpression { get; }
+
+        private static MethodInfo _Method_op_LessThan
+            = typeof(DateTime).GetMethodViaFormatName("Boolean op_LessThan(System.DateTime, System.DateTime)");
+
+        public WhereBetweenStrategy(
+            Expression<Func<TEntity, DateTime>> startExp,
+            Expression<Func<TEntity, DateTime>> memberExp,
+            Expression<Func<TEntity, DateTime>> endExp)
+        {
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.AndAlso(
+                    Expression.LessThanOrEqual(
+                        ExpressionUtility.RebindParameter(startExp.Body, startExp.Parameters[0], memberExp.Parameters[0]),
+                        memberExp.Body,
+                        false, _Method_op_LessThan),
+                    Expression.LessThanOrEqual(
+                        memberExp.Body,
+                        ExpressionUtility.RebindParameter(endExp.Body, endExp.Parameters[0], memberExp.Parameters[0]),
+                        false, _Method_op_LessThan)), memberExp.Parameters);
+        }
+
+        public WhereBetweenStrategy(
+            DateTime start,
+            Expression<Func<TEntity, DateTime>> memberExp,
+            Expression<Func<TEntity, DateTime>> endExp)
+        {
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.AndAlso(
+                    Expression.LessThanOrEqual(
+                        Expression.Constant(start),
+                        memberExp.Body,
+                        false, _Method_op_LessThan),
+                    Expression.LessThanOrEqual(
+                        memberExp.Body,
+                        ExpressionUtility.RebindParameter(endExp.Body, endExp.Parameters[0], memberExp.Parameters[0]),
+                        false, _Method_op_LessThan)), memberExp.Parameters);
+        }
+
+        public WhereBetweenStrategy(
+            Expression<Func<TEntity, DateTime>> startExp,
+            Expression<Func<TEntity, DateTime>> memberExp,
+            DateTime end)
+        {
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.AndAlso(
+                    Expression.LessThanOrEqual(
+                        ExpressionUtility.RebindParameter(startExp.Body, startExp.Parameters[0], memberExp.Parameters[0]),
+                        memberExp.Body,
+                        false, _Method_op_LessThan),
+                    Expression.LessThanOrEqual(
+                        memberExp.Body,
+                        Expression.Constant(end),
+                        false, _Method_op_LessThan)), memberExp.Parameters);
+        }
+
+        public WhereBetweenStrategy(
+            DateTime start,
+            Expression<Func<TEntity, DateTime>> memberExp,
+            DateTime end)
+        {
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.AndAlso(
+                    Expression.LessThanOrEqual(
+                        Expression.Constant(start),
+                        memberExp.Body,
+                        false, _Method_op_LessThan),
+                    Expression.LessThanOrEqual(
+                        memberExp.Body,
+                        Expression.Constant(end),
+                        false, _Method_op_LessThan)), memberExp.Parameters);
+        }
+    }
+}

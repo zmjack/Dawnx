@@ -40,7 +40,7 @@ This class provides some extension functions to generate SQL to query database r
   ```
 
 - **WhereMatch**
-  Different from **WhereMatch**, this statement will perform an exact match:
+  Different from **WhereSearch**, this statement will perform an exact match:
 
   ```SQL
   /* SQL Server */

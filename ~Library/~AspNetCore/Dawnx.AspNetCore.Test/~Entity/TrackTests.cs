@@ -50,7 +50,7 @@ namespace Dawnx.AspNetCore.Test
             {
                 var model = new SimpleModel
                 {
-                    Name = "zmjack",
+                    NickName = "zmjack",
                     Age = 18,
                 };
                 context.Add(model);
@@ -70,7 +70,7 @@ namespace Dawnx.AspNetCore.Test
                 var item = new SimpleModel
                 {
                     Id = id,
-                    Name = "zmjack",
+                    NickName = "zmjack",
                     Age = 27,
                 };
                 context.SimpleModels.Update(item);

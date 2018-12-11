@@ -6,7 +6,7 @@
     <Company>dawnx.net</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.7.8</Version>
+    <Version>1.7.9</Version>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <Description />
   </PropertyGroup>

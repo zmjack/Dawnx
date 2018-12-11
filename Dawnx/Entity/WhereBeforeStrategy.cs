@@ -27,6 +27,7 @@ namespace Dawnx.Entity
                 Expression.LessThanOrEqual(left, right, false, _Method_op_LessThan)
                 : Expression.LessThan(left, right, false, _Method_op_LessThan), memberExp.Parameters);
         }
+
         public WhereBeforeStrategy(
             Expression<Func<TEntity, DateTime>> memberExp,
             DateTime before,

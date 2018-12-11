@@ -128,6 +128,22 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnIQueryable.GetStorageName``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Gets the provider name of database.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnIQueryable.ToSql``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Gets the generated Sql string.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnObject.Json(System.Object)">
             <summary>
             Serializes the specified object to a JSON string.

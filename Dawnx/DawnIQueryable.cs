@@ -22,6 +22,7 @@ namespace Dawnx
 
         public static IQueryable<TEntity> WhereMatch<TEntity>(this IQueryable<TEntity> @this, string searchString, Expression<Func<TEntity, object>> searchMembers)
             => @this.WhereStrategy(new WhereMatchStrategy<TEntity>(searchString, searchMembers));
+
         public static IQueryable<TEntity> WhereBetween<TEntity>(this IQueryable<TEntity> @this,
             Expression<Func<TEntity, DateTime>> startExp,
             Expression<Func<TEntity, DateTime>> memberExp,

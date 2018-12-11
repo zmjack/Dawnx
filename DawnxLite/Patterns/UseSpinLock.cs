@@ -7,7 +7,7 @@ namespace Dawnx.Patterns
     {
         /// <summary>
         /// Do a task with SpinLock pattern:
-        ///     do { @task(); } until(@until())
+        ///     do { @task() } until(@until())
         /// </summary>
         /// <param name="until"></param>
         /// <param name="task"></param>
@@ -19,7 +19,7 @@ namespace Dawnx.Patterns
 
         /// <summary>
         /// Do a task with SpinLock pattern:
-        ///     do { @task(); sleep(@frequency); } until(@until())
+        ///     do { @task(); sleep(@frequency) } until(@until())
         /// </summary>
         /// <param name="until"></param>
         /// <param name="task"></param>

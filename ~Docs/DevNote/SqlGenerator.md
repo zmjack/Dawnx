@@ -58,7 +58,11 @@ This class provides some extension functions to generate SQL to query database r
   	OR `x`.`Last_Name` = 'Bill'
   ```
 
-- **WhereInRange**
+- **WhereBetween**
   (Not supportted yet)
   Queries records which is start at a time and end at another time.
+
+- WhereBefore
+
+- WhereAfter
 

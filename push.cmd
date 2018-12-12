@@ -16,6 +16,4 @@ nuget push "~Library/~Security/Dawnx.Security/bin/Release/Dawnx.Security.1.7.9.n
 ::==== ~Xml ====
 nuget push "~Library/~Xml/Dawnx.Xml/bin/Release/Dawnx.Xml.1.7.9.nupkg" -source nuget.org
 
-::==== Sapling ====
-nuget push "Sapling/bin/Release/Sapling.1.7.9.nupkg" -source nuget.org
 pause

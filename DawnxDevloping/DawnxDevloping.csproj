@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\Sapling\Sapling.csproj" />
   </ItemGroup>
 
 </Project>

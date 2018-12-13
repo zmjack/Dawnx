@@ -1114,10 +1114,26 @@
             <param name="if"></param>
             <param name="then"></param>
         </member>
+        <member name="M:Dawnx.Patterns.UseLock.TryDo(System.Object,System.TimeSpan,System.Action)">
+            <summary>
+            Do a task with Lock pattern:
+                if TryEnter(@lockObj, @timeout) try { @task } finally { Exit(@lockObj) }
+            </summary>
+            <param name="lockObj"></param>
+            <param name="timeout"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Patterns.UseLock.TryDo(System.Object,System.Action)">
+            <summary>
+            Do a task with Lock pattern:
+                if TryEnter(@lockObj) try { @task } finally { Exit(@lockObj) }
+            </summary>
+        </member>
         <member name="M:Dawnx.Patterns.UseSpinLock.Do(System.Action,System.Func{System.Boolean})">
             <summary>
             Do a task with SpinLock pattern:
-                do { @task(); } until(@until())
+                do { @task() } until(@until())
             </summary>
             <param name="until"></param>
             <param name="task"></param>
@@ -1125,7 +1141,7 @@
         <member name="M:Dawnx.Patterns.UseSpinLock.Do(System.Action,System.Func{System.Boolean},System.TimeSpan)">
             <summary>
             Do a task with SpinLock pattern:
-                do { @task(); sleep(@frequency); } until(@until())
+                do { @task(); sleep(@frequency) } until(@until())
             </summary>
             <param name="until"></param>
             <param name="task"></param>

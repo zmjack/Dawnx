@@ -16,8 +16,8 @@ namespace Dawnx.Entity
             = typeof(DateTime).GetMethodViaFormatName("Boolean op_LessThan(System.DateTime, System.DateTime)");
 
         public WhereBetweenStrategy(
-            Expression<Func<TEntity, DateTime>> startExp,
             Expression<Func<TEntity, DateTime>> memberExp,
+            Expression<Func<TEntity, DateTime>> startExp,
             Expression<Func<TEntity, DateTime>> endExp)
         {
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
@@ -33,8 +33,8 @@ namespace Dawnx.Entity
         }
 
         public WhereBetweenStrategy(
-            DateTime start,
             Expression<Func<TEntity, DateTime>> memberExp,
+            DateTime start,
             Expression<Func<TEntity, DateTime>> endExp)
         {
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
@@ -50,8 +50,8 @@ namespace Dawnx.Entity
         }
 
         public WhereBetweenStrategy(
-            Expression<Func<TEntity, DateTime>> startExp,
             Expression<Func<TEntity, DateTime>> memberExp,
+            Expression<Func<TEntity, DateTime>> startExp,
             DateTime end)
         {
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
@@ -67,8 +67,8 @@ namespace Dawnx.Entity
         }
 
         public WhereBetweenStrategy(
-            DateTime start,
             Expression<Func<TEntity, DateTime>> memberExp,
+            DateTime start,
             DateTime end)
         {
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(

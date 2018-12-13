@@ -18,3 +18,24 @@ This library consists of three parts:
 - Warppers
 - Fully innovative part
 
+
+
+## Basic methods
+
+### For
+
+Returns a new instance from another instance. This method can help you write more compact code, especially if you want to initialize some properties which are computed by complex logic in a class or struct without use another variable.
+
+```C#
+new SimpleClass
+{
+    Today = DateTime.Now.For(_ =>
+    {
+        if (_.Day <= 7) return "Holiday";
+        else if (_.DayOfWeek == DayOfWeek.Saturday)
+            || _.DayOfWeek == DayOfWeek.Sunday) return "Weekend";
+        else return "Weekday";
+    }),
+}
+```
+

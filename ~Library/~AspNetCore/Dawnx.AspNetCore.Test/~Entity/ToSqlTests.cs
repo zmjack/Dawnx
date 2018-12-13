@@ -27,8 +27,9 @@ namespace Dawnx.AspNetCore.Test
 
             var sqls = new[]
             {
+                sqlserver.SimpleModels.WhereNot(x=>x.NickName == "zmjack").ToSql(),
                 sqlserver.SimpleModels.WhereBetween(x => x.Birthday, x => x.Birthday, x => x.Birthday).ToSql(),
-                sqlserver.SimpleModels.WhereBetween(x => now, x => x.Birthday, now).ToSql(),
+                sqlserver.SimpleModels.WhereBetween(x => x.Birthday, x => now, now).ToSql(),
                 sqlserver.SimpleModels.WhereAfter(x => x.Birthday, x => now).ToSql(),
                 //mysql.SimpleModels.Where(x => x.Birthday < now).ToSql(),
                 //sqlserver.SimpleModels.Where(x => x.Birthday < now).ToSql(),

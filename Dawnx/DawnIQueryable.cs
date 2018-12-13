@@ -24,28 +24,28 @@ namespace Dawnx
             => @this.WhereStrategy(new WhereMatchStrategy<TEntity>(searchString, searchMembers));
 
         public static IQueryable<TEntity> WhereBetween<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, DateTime>> memberExp,
             Expression<Func<TEntity, DateTime>> startExp,
-            Expression<Func<TEntity, DateTime>> memberExp,
             Expression<Func<TEntity, DateTime>> endExp)
-            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(startExp, memberExp, endExp));
+            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(memberExp, startExp, endExp));
 
         public static IQueryable<TEntity> WhereBetween<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, DateTime>> memberExp,
             DateTime start,
-            Expression<Func<TEntity, DateTime>> memberExp,
             Expression<Func<TEntity, DateTime>> endExp)
-            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(start, memberExp, endExp));
+            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(memberExp, start, endExp));
 
         public static IQueryable<TEntity> WhereBetween<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, DateTime>> memberExp,
             Expression<Func<TEntity, DateTime>> startExp,
-            Expression<Func<TEntity, DateTime>> memberExp,
             DateTime end)
-            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(startExp, memberExp, end));
+            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(memberExp, startExp, end));
 
         public static IQueryable<TEntity> WhereBetween<TEntity>(this IQueryable<TEntity> @this,
-            DateTime start,
             Expression<Func<TEntity, DateTime>> memberExp,
+            DateTime start,
             DateTime end)
-            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(start, memberExp, end));
+            => @this.WhereStrategy(new WhereBetweenStrategy<TEntity>(memberExp, start, end));
 
         public static IQueryable<TEntity> WhereAfter<TEntity>(this IQueryable<TEntity> @this,
             Expression<Func<TEntity, DateTime>> memberExp,
@@ -91,6 +91,10 @@ namespace Dawnx
         /// <returns></returns>
         public static int PageCount<TSource>(this IQueryable<TSource> @this, int pageSize)
             => (int)Math.Ceiling((double)@this.Count() / pageSize);
+
+        public static IQueryable<TSource> WhereNot<TSource>(this IQueryable<TSource> @this, Expression<Func<TSource, bool>> predicate)
+            => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters));
+
     }
 
 }

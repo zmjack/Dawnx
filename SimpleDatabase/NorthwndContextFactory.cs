@@ -2,18 +2,17 @@
 using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
-namespace SimpleDatabase.Data
+namespace SimpleDatabase
 {
     public class NorthwndContextFactory : IDesignTimeDbContextFactory<NorthwndContext>
     {
         public NorthwndContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<NorthwndContext>();
-            optionsBuilder.UseSqlite("filename=SimpleDatabase.db");
-
-            return new NorthwndContext(optionsBuilder.Options);
+            return new NorthwndContext(new DbContextOptionsBuilder()
+                .UseSqlite("filename=sources\\northwnd.db").Options);
         }
     }
 

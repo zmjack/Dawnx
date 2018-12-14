@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SimpleDatabase.Data.SimpleDatabase
+namespace SimpleDatabase.Northwnd
 {
-    public partial class Customer
+    public partial class Supplier
     {
-        [StringLength(5)]
-        public string CustomerID { get; set; }
+        public int SupplierID { get; set; }
 
         [Required]
         [StringLength(40)]
@@ -40,11 +39,8 @@ namespace SimpleDatabase.Data.SimpleDatabase
         [StringLength(24)]
         public string Fax { get; set; }
         
-        public virtual ICollection<Order> Orders { get; set; }
-
-        public virtual ICollection<CustomerCustomerDemo> CustomerCustomerDemos { get; set; }
+        public string HomePage { get; set; }
         
-        public virtual IEnumerable<CustomerDemographic> CustomerDemographics
-            => CustomerCustomerDemos.Select(x => x.CustomerDemographic);
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

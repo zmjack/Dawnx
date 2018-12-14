@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SimpleDatabase.Data.SimpleDatabase
+namespace SimpleDatabase.Northwnd
 {
     [Table("Order Details")]
     public partial class Order_Detail

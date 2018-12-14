@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace SimpleDatabase.Data.SimpleDatabase
+namespace SimpleDatabase.Northwnd
 {
     public partial class Territory
     {

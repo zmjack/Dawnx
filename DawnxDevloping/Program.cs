@@ -2,7 +2,7 @@
 using Dawnx;
 using Dawnx.Sequences;
 using Microsoft.EntityFrameworkCore;
-using SimpleDatabase.Data;
+using SimpleDatabase;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,8 +14,7 @@ namespace DawnxDevloping
     {
         static void Main(string[] args)
         {
-            using (var context = new NorthwndContext(new DbContextOptionsBuilder()
-                .UseSqlite(SimpleDatabase.Sources.Northwnd_ConnectionString).Options))
+            using (var context = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
             }
         }

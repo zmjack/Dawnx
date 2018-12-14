@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleDatabase.Data;
+using SimpleDatabase;
 
 namespace SimpleDatabase.Migrations
 {
@@ -16,7 +16,7 @@ namespace SimpleDatabase.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Category", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Category", b =>
                 {
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd();
@@ -34,7 +34,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Customer", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Customer", b =>
                 {
                     b.Property<string>("CustomerID")
                         .ValueGeneratedOnAdd()
@@ -76,7 +76,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.CustomerCustomerDemo", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.CustomerCustomerDemo", b =>
                 {
                     b.Property<string>("CustomerTypeID")
                         .HasMaxLength(10);
@@ -91,7 +91,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("CustomerCustomerDemos");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.CustomerDemographic", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.CustomerDemographic", b =>
                 {
                     b.Property<string>("CustomerTypeID")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("CustomerDemographics");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Employee", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Employee", b =>
                 {
                     b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd();
@@ -164,7 +164,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.EmployeeTerritory", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.EmployeeTerritory", b =>
                 {
                     b.Property<int>("EmployeeID");
 
@@ -178,7 +178,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("EmployeeTerritories");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Order", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Order", b =>
                 {
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd();
@@ -227,7 +227,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Order_Detail", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Order_Detail", b =>
                 {
                     b.Property<int>("OrderID");
 
@@ -246,7 +246,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Order Details");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Product", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Product", b =>
                 {
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd();
@@ -281,7 +281,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Region", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Region", b =>
                 {
                     b.Property<int>("RegionID");
 
@@ -294,7 +294,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Region");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Shipper", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Shipper", b =>
                 {
                     b.Property<int>("ShipperID")
                         .ValueGeneratedOnAdd();
@@ -311,7 +311,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Shippers");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Supplier", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Supplier", b =>
                 {
                     b.Property<int>("SupplierID")
                         .ValueGeneratedOnAdd();
@@ -354,7 +354,7 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Territory", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Territory", b =>
                 {
                     b.Property<string>("TerritoryID")
                         .ValueGeneratedOnAdd()
@@ -373,81 +373,81 @@ namespace SimpleDatabase.Migrations
                     b.ToTable("Territories");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.CustomerCustomerDemo", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.CustomerCustomerDemo", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Customer", "Customer")
+                    b.HasOne("SimpleDatabase.Northwnd.Customer", "Customer")
                         .WithMany("CustomerCustomerDemos")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.CustomerDemographic", "CustomerDemographic")
+                    b.HasOne("SimpleDatabase.Northwnd.CustomerDemographic", "CustomerDemographic")
                         .WithMany("CustomerCustomerDemos")
                         .HasForeignKey("CustomerTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Employee", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Employee", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Employee", "Superordinate")
+                    b.HasOne("SimpleDatabase.Northwnd.Employee", "Superordinate")
                         .WithMany("Subordinates")
                         .HasForeignKey("ReportsTo");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.EmployeeTerritory", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.EmployeeTerritory", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Employee", "Employee")
+                    b.HasOne("SimpleDatabase.Northwnd.Employee", "Employee")
                         .WithMany("EmployeeTerritories")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Territory", "Territory")
+                    b.HasOne("SimpleDatabase.Northwnd.Territory", "Territory")
                         .WithMany("EmployeeTerritories")
                         .HasForeignKey("TerritoryID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Order", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Order", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Customer", "Customer")
+                    b.HasOne("SimpleDatabase.Northwnd.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerID");
 
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Employee", "Employee")
+                    b.HasOne("SimpleDatabase.Northwnd.Employee", "Employee")
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeID");
 
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Shipper", "Shipper")
+                    b.HasOne("SimpleDatabase.Northwnd.Shipper", "Shipper")
                         .WithMany("Orders")
                         .HasForeignKey("ShipVia");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Order_Detail", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Order_Detail", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Order", "Order")
+                    b.HasOne("SimpleDatabase.Northwnd.Order", "Order")
                         .WithMany("Order_Details")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Product", "Product")
+                    b.HasOne("SimpleDatabase.Northwnd.Product", "Product")
                         .WithMany("Order_Details")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Product", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Product", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Category", "Category")
+                    b.HasOne("SimpleDatabase.Northwnd.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID");
 
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Supplier", "Supplier")
+                    b.HasOne("SimpleDatabase.Northwnd.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierID");
                 });
 
-            modelBuilder.Entity("SimpleDatabase.Data.SimpleDatabase.Territory", b =>
+            modelBuilder.Entity("SimpleDatabase.Northwnd.Territory", b =>
                 {
-                    b.HasOne("SimpleDatabase.Data.SimpleDatabase.Region", "Region")
+                    b.HasOne("SimpleDatabase.Northwnd.Region", "Region")
                         .WithMany("Territories")
                         .HasForeignKey("RegionID")
                         .OnDelete(DeleteBehavior.Restrict);

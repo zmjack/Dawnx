@@ -8,6 +8,7 @@ using Dawnx.Entity;
 using System.Globalization;
 using Dawnx.Utilities;
 using System.Reflection;
+using SimpleData;
 
 namespace Dawnx.AspNetCore.Test
 {
@@ -24,6 +25,11 @@ namespace Dawnx.AspNetCore.Test
                 new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1;Database=db;uid=username;pwd=password").Options);
 
             var now = DateTime.Now.AddDays(-1).AddHours(-2);
+
+            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
+            {
+
+            }
 
             var sqls = new[]
             {

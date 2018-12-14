@@ -14,23 +14,34 @@ namespace Dawnx.AspNetCore.Test
 {
     public class ToSqlTests
     {
+        private DbContextOptions MySqlOptions = new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1").Options;
+        private DbContextOptions SqlServerOptions = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
+        private DbContextOptions SqliteOptions = SimpleSources.NorthwndOptions;
+
         [Fact]
         public void Test1()
         {
-            var mysqlOptions = new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1").Options;
-            var sqlserverOptions = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Employees
+                    .WhereSearch("London", e => new
+                    {
+                        ProductName = e.Orders
+                            .SelectMany(o => o.Order_Details)
+                            .Select(x => x.Product.ProductName),
+                        ShipCountry = e.Orders.Select(x => x.ShipCountry),
+                        ShipRegion = e.Orders.Select(x => x.ShipRegion),
+                        ShipCity = e.Orders.Select(x => x.ShipCity),
+                        ShipAddress = e.Orders.Select(x => x.ShipAddress),
+                    });
+                var sql = query.ToSql();
+            }
 
             var now = DateTime.Now.AddDays(-1).AddHours(-2);
 
-            using (var mysql = new NorthwndContext(mysqlOptions))
-            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
+            using (var mysql = new NorthwndContext(MySqlOptions))
+            using (var sqlite = new NorthwndContext(SqliteOptions))
             {
-                var sql = sqlite.Employees
-                    .Where(e => e.Orders
-                        .SelectMany(o => o.Order_Details)
-                        .Select(x => x.Product.ProductName)
-                        .Contains("Tofu")).ToSql();
-
                 var employees_WhoSelled_AllKindsOfTofu = sqlite.Employees
                     .WhereSearch("Tofu", e => new
                     {

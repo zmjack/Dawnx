@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\SimpleDatabase\SimpleDatabase.csproj" />
   </ItemGroup>
 
 </Project>

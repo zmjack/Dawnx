@@ -1,25 +1,23 @@
-﻿#if USE
+﻿#if !USE
 using Dawnx;
-using Dawnx.Diagnostics;
 using Dawnx.Sequences;
-using Sapling;
+using Microsoft.EntityFrameworkCore;
+using SimpleDatabase.Data;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace DawnxDevloping
 {
     class Program
     {
-        public class Cls
-        {
-            [Display(Name = "AAA")]
-            public int AA { get; set; }
-        }
-
         static void Main(string[] args)
         {
-            Console.WriteLine(LetterSequence.GetNumber("B"));
+            using (var context = new NorthwndContext(new DbContextOptionsBuilder()
+                .UseSqlite(SimpleDatabase.Sources.Northwnd_ConnectionString).Options))
+            {
+            }
         }
 
     }

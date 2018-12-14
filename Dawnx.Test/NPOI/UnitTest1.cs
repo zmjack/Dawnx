@@ -73,7 +73,7 @@ namespace Dawnx.NPOI.Test
         [Fact]
         public void FetchTest()
         {
-            var book = new ExcelBook("test.xlsx");
+            var book = new ExcelBook("NPOI/test.xlsx");
             var models = book[0].Fetch<Model>("A2", m => new { m.Supplier, m.Product, m.ReleaseDate });
 
             Assert.Equal("Company 101", models[0].Supplier);

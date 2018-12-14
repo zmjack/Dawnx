@@ -24,15 +24,43 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="MySql.Data" Version="6.10.8" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
+    <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\~Library\~AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
+    <ProjectReference Include="..\~Library\~Net\Dawnx.Net\Dawnx.Net.csproj" />
+    <ProjectReference Include="..\~Library\~NPOI\Dawnx.NPOI\Dawnx.NPOI.csproj" />
+    <ProjectReference Include="..\~Library\~Security\Dawnx.Security\Dawnx.Security.csproj" />
+    <ProjectReference Include="..\~Library\~Xml\Dawnx.Xml\Dawnx.Xml.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Net\file.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Net\file1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Net\file2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="NPOI\test.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Xml\" />
   </ItemGroup>
 
 </Project>

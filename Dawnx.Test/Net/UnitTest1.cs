@@ -21,8 +21,8 @@ namespace Dawnx.Net.Test
         };
         private Dictionary<string, object> upfiles = new Dictionary<string, object>
         {
-            ["file"] = "file.txt",
-            ["files"] = new[] { "file1.txt", "file2.txt" },
+            ["file"] = "Net/file.txt",
+            ["files"] = new[] { "Net/file1.txt", "Net/file2.txt" },
         };
 
         private object updataObj = new

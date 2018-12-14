@@ -18,7 +18,7 @@ namespace Dawnx.AspNetCore.Test
         public void Test1()
         {
             var mysqlOptions = new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1").Options;
-            var sqlserver = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
+            var sqlserverOptions = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
 
             var now = DateTime.Now.AddDays(-1).AddHours(-2);
 

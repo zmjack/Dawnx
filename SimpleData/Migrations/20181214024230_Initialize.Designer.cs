@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleDatabase;
+using SimpleData;
 
-namespace SimpleDatabase.Migrations
+namespace SimpleData.Migrations
 {
     [DbContext(typeof(NorthwndContext))]
     [Migration("20181214024230_Initialize")]

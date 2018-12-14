@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using SimpleDatabase.Northwnd;
+using SimpleData.Northwnd;
 
-namespace SimpleDatabase
+namespace SimpleData
 {
     public class NorthwndContext : DbContext
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleDatabase.Northwnd
+namespace SimpleData.Northwnd
 {
     public partial class Shipper
     {

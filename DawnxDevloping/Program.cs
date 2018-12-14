@@ -2,7 +2,7 @@
 using Dawnx;
 using Dawnx.Sequences;
 using Microsoft.EntityFrameworkCore;
-using SimpleDatabase;
+using SimpleData;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +16,8 @@ namespace DawnxDevloping
         {
             using (var context = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
+                foreach (var order in context.Orders)
+                    Console.WriteLine(order.ShippedDate);
             }
         }
 

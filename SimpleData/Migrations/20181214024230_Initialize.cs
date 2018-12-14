@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SimpleDatabase.Migrations
+namespace SimpleData.Migrations
 {
     public partial class Initialize : Migration
     {

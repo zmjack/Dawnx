@@ -6,6 +6,9 @@
     <Authors>zmjack</Authors>
     <Company>dawnx.net</Company>
     <IncludeContentFilesProjectOutputGroup>true</IncludeContentFilesProjectOutputGroup>
+    <Description>Simple databases for code first.</Description>
+    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace SimpleDatabase
+namespace SimpleData
 {
     public class NorthwndContextFactory : IDesignTimeDbContextFactory<NorthwndContext>
     {

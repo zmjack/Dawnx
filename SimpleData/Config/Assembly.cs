@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleDatabase.Config
+namespace SimpleData.Config
 {
     public static class Assembly
     {

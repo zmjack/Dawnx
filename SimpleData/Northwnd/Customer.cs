@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace SimpleDatabase.Northwnd
+namespace SimpleData.Northwnd
 {
     public partial class Customer
     {

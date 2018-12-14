@@ -3,9 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SimpleDatabase;
+using SimpleData;
 
-namespace SimpleDatabase.Migrations
+namespace SimpleData.Migrations
 {
     [DbContext(typeof(NorthwndContext))]
     partial class SimpleDatabaseContextModelSnapshot : ModelSnapshot

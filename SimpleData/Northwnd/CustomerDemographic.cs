@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace SimpleDatabase.Northwnd
+namespace SimpleData.Northwnd
 {
     public partial class CustomerDemographic
     {

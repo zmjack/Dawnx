@@ -1,6 +1,7 @@
 ﻿using Dawnx.Utilities;
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace Dawnx
 {
@@ -110,7 +111,21 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static DateTime StartOfMonth(this DateTime @this) => new DateTime(@this.Year, @this.Month, 1, 0, 0, 0, 0, @this.Kind);
+        public static DateTime BeginningOfYear(this DateTime @this) => new DateTime(@this.Year, 1, 1, 0, 0, 0, 0, @this.Kind);
+
+        /// <summary>
+        /// Get the end point of the sepecified month.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static DateTime EndOfYear(this DateTime @this) => new DateTime(@this.Year, 12, 31, 23, 59, 59, 999, @this.Kind);
+
+        /// <summary>
+        /// Get the start point of the sepecified month.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static DateTime BeginningOfMonth(this DateTime @this) => new DateTime(@this.Year, @this.Month, 1, 0, 0, 0, 0, @this.Kind);
 
         /// <summary>
         /// Get the end point of the sepecified month.
@@ -119,8 +134,16 @@ namespace Dawnx
         /// <returns></returns>
         public static DateTime EndOfMonth(this DateTime @this)
         {
-            return new DateTime(@this.Year, @this.Month, 1, 0, 0, 0, 0, @this.Kind)
-                .AddMonths(1).AddMilliseconds(-1);
+            if (new[] { 1, 3, 5, 7, 8, 10, 12 }.Contains(@this.Month))
+                return new DateTime(@this.Year, @this.Month, 31, 23, 59, 59, 999, @this.Kind);
+            else if (new[] { 4, 6, 9, 11 }.Contains(@this.Month))
+                return new DateTime(@this.Year, @this.Month, 30, 23, 59, 59, 999, @this.Kind);
+            else
+            {
+                if (DateTime.IsLeapYear(@this.Year))
+                    return new DateTime(@this.Year, @this.Month, 29, 23, 59, 59, 999, @this.Kind);
+                else return new DateTime(@this.Year, @this.Month, 28, 23, 59, 59, 999, @this.Kind);
+            }
         }
 
         /// <summary>
@@ -128,18 +151,14 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static DateTime StartOfDay(this DateTime @this) => @this.Date;
+        public static DateTime BeginningOfDay(this DateTime @this) => @this.Date;
 
         /// <summary>
         /// Get the end point of the sepecified day.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static DateTime EndOfDay(this DateTime @this)
-        {
-            return new DateTime(@this.Year, @this.Month, @this.Day, 0, 0, 0, 0, @this.Kind)
-                .AddDays(1).AddMilliseconds(-1);
-        }
+        public static DateTime EndOfDay(this DateTime @this) => new DateTime(@this.Year, @this.Month, @this.Day, 23, 59, 59, 999, @this.Kind);
 
         private static int CastCycleDays(int days, bool isBackward)
         {

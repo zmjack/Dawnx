@@ -30,12 +30,12 @@ namespace Dawnx.Ranges
 
                 case Unit.Month:
                     Start = new DateTime(start.Year, start.Month, 1);
-                    End = new DateTime(end.Year, end.Month, 1);
+                    End = new DateTime(end.Year, end.Month, 1).LastDayOfMonth();
                     break;
 
                 case Unit.Year:
                     Start = new DateTime(start.Year, 1, 1);
-                    End = new DateTime(end.Year, 1, 1);
+                    End = new DateTime(end.Year, 12, 31);
                     break;
             }
 

@@ -7,6 +7,22 @@ namespace Dawnx.Test
     public class DawnDateTimeTest
     {
         [Fact]
+        public void BeginningOrEndTest()
+        {
+            var today = new DateTime(2012, 4, 16, 22, 23, 24);
+
+            Assert.Equal(new DateTime(2012, 1, 1, 0, 0, 0, 0), today.BeginningOfYear());
+            Assert.Equal(new DateTime(2012, 4, 1, 0, 0, 0, 0), today.BeginningOfMonth());
+            Assert.Equal(new DateTime(2012, 4, 16, 0, 0, 0, 0), today.BeginningOfDay());
+            Assert.Equal(new DateTime(2012, 12, 31, 23, 59, 59, 999), today.EndOfYear());
+            Assert.Equal(new DateTime(2012, 4, 30, 23, 59, 59, 999), today.EndOfMonth());
+            Assert.Equal(new DateTime(2012, 4, 16, 23, 59, 59, 999), today.EndOfDay());
+
+            Assert.Equal(new DateTime(2000, 2, 29, 23, 59, 59, 999), new DateTime(2000, 2, 16).EndOfMonth());
+            Assert.Equal(new DateTime(2001, 2, 28, 23, 59, 59, 999), new DateTime(2001, 2, 16).EndOfMonth());
+        }
+
+        [Fact]
         public void Test1()
         {
             /* 2012 - 04
@@ -33,7 +49,7 @@ namespace Dawnx.Test
             Assert.Equal("2012/4/15 22:23:24", today.PastDay(DayOfWeek.Sunday, true).ToString());
             Assert.Equal("2012/4/22 22:23:24", today.FutureDay(DayOfWeek.Sunday, false).ToString());
             Assert.Equal("2012/4/22 22:23:24", today.FutureDay(DayOfWeek.Sunday, true).ToString());
-            
+
             Assert.Equal(2, today.WeekInMonth(DayOfWeek.Friday));
             Assert.Equal(3, today.WeekInMonth(DayOfWeek.Sunday));
         }

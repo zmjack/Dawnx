@@ -6,13 +6,15 @@
     <Authors>zmjack</Authors>
     <Company>dawnx.net</Company>
     <IncludeContentFilesProjectOutputGroup>true</IncludeContentFilesProjectOutputGroup>
-    <Description>Simple databases for code first.</Description>
+    <Description>Simple databases for code first.
+In this version, the Northwnd database is included.</Description>
     <Copyright>Copyright © dawnx.net 2018</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>

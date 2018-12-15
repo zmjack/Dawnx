@@ -349,7 +349,7 @@
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnIEnumerable.Distinct``1(System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+        <member name="M:Dawnx.DawnIEnumerable.DistinctByValue``1(System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
             <summary>
             Returns distinct elements from a sequence by using a specified properties to compare values.
             </summary>

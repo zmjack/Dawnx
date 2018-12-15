@@ -1,9 +1,9 @@
 ﻿namespace Dawnx.Generators
 {
-    public interface IGenerator
+    public interface IGenerator<T>
     {
-        string[] Take(int count);
-        string TakeOne();
+        T[] Take(int count);
+        T TakeOne();
     }
 
 }

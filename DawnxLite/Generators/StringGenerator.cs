@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dawnx.Generators
 {
-    public class StringGenerator : IGenerator
+    public class StringGenerator : IGenerator<string>
     {
         public string Format { get; private set; }
         public double AllowedProbability { get; private set; }

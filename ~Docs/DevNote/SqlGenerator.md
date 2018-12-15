@@ -4,7 +4,7 @@ This class provides some extension functions to generate SQL to query database r
 
 
 
-### How to test?
+### How to try it?
 
 Firstly, you should install the **SimpleData** package through **Nuget**.
 
@@ -98,7 +98,9 @@ The Entity Framework provides some basic query extensions, but using it to devel
   (Not supportted yet)
   Queries records which is start at a time and end at another time.
 
-- WhereBefore
+- **WhereBefore**
 
-- WhereAfter
+- **WhereAfter**
+
+- **WhereIn**
 

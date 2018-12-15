@@ -254,7 +254,7 @@ namespace Dawnx
         /// <param name="second"></param>
         /// <param name="compareMethod"></param>
         /// <returns></returns>
-        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, object>> expression)
+        public static IEnumerable<TSource> DistinctByValue<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, object>> expression)
                 => Enumerable.Distinct(source, new ExactEqualityComparer<TSource>(expression));
 
         /// <summary>

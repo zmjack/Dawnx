@@ -88,7 +88,7 @@ namespace Dawnx.AspNetCore.LiveAccount
                             IsEnabled = isEnabled,
                         };
                     })
-                    .Distinct(x => x.Name);
+                    .DistinctByValue(x => x.Name);
 
                 foreach (var liveAction in liveActions)
                 {

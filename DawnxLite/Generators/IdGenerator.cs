@@ -4,31 +4,29 @@ using System.Collections.Generic;
 
 namespace Dawnx.Generators
 {
-    public class IdGenerator : IGenerator
+    public class IdGenerator<T> : IGenerator<T>
     {
-        private Func<string> _Method;
-        private string _PrevGeneratedCode;
+        private Func<T> _Method;
+        private T _PrevGeneratedCode;
         private string _Locker;
 
-        public IdGenerator(Func<string> method)
+        public IdGenerator(Func<T> method)
         {
             _Method = method;
             _Locker = string.Intern($"{GetType().FullName} {GetHashCode()}");
         }
 
-        public string[] Take(int count)
+        public T[] Take(int count)
         {
-            var locker = $"{GetType().FullName} {GetHashCode()}";
-
-            var ret = new List<string>();
-            lock (string.Intern(locker))
+            var ret = new List<T>();
+            lock (_Locker)
             {
                 foreach (var i in Range.Create(count))
                 {
                     var code = UseSpinLock.Do(task: () =>
                     {
                         return _Method();
-                    }, until: x => x != _PrevGeneratedCode);
+                    }, until: x => !x.Equals(_PrevGeneratedCode));
                     _PrevGeneratedCode = code;
                     ret.Add(code);
                 }
@@ -36,14 +34,14 @@ namespace Dawnx.Generators
             return ret.ToArray();
         }
 
-        public string TakeOne()
+        public T TakeOne()
         {
             lock (_Locker)
             {
                 var code = UseSpinLock.Do(task: () =>
                 {
                     return _Method();
-                }, until: x => x != _PrevGeneratedCode);
+                }, until: x => x.Equals(_PrevGeneratedCode));
                 _PrevGeneratedCode = code;
                 return code;
             }

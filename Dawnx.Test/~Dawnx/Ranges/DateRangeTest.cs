@@ -10,7 +10,7 @@ namespace Dawnx.Test.Ranges
     public class DateRangeTest
     {
         [Fact]
-        public void Test1()
+        public void RangeTest()
         {
             Assert.Equal(new[]
             {

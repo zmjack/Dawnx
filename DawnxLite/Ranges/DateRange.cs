@@ -65,5 +65,9 @@ namespace Dawnx.Ranges
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        public bool IsInRange(DateTime value)
+        {
+            return Start <= value && value <= End;
+        }
     }
 }

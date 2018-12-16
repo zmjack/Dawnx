@@ -27,5 +27,11 @@ namespace Dawnx.Ranges
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        public bool IsInRange(int value)
+        {
+            if (Start <= value && value <= End)
+                return (value - Start) % Step == 0;
+            else return false;
+        }
     }
 }

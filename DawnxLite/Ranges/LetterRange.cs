@@ -29,5 +29,12 @@ namespace Dawnx.Ranges
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        public bool IsInRange(string value)
+        {
+            var number = LetterSequence.GetNumber(value);
+            if (Start <= number && number <= End)
+                return (number - Start) % Step == 0;
+            else return false;
+        }
     }
 }

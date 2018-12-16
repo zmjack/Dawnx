@@ -11,6 +11,15 @@ namespace Dawnx
         /// <param name="strs"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Get<T>() => string.Intern(typeof(T).FullName);
+
+        /// <summary>
+        /// Craetes a special reference of string from the system.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="strs"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Get<T>(params object[] strs)
         {
             return string.Intern($"{typeof(T).FullName}{"\0"}{strs.Join("\0")}");

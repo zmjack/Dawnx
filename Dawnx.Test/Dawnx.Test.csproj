@@ -35,14 +35,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
+    <ProjectReference Include="..\Dawnx.Tools\Dawnx.Tools.csproj" />
     <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
     <ProjectReference Include="..\SimpleData\SimpleData.csproj" />
-    <ProjectReference Include="..\~Library\~AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
-    <ProjectReference Include="..\~Library\~Net\Dawnx.Net\Dawnx.Net.csproj" />
-    <ProjectReference Include="..\~Library\~NPOI\Dawnx.NPOI\Dawnx.NPOI.csproj" />
-    <ProjectReference Include="..\~Library\~Security\Dawnx.Security\Dawnx.Security.csproj" />
-    <ProjectReference Include="..\~Library\~Xml\Dawnx.Xml\Dawnx.Xml.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.NPOI\Dawnx.NPOI.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.Security\Dawnx.Security.csproj" />
+    <ProjectReference Include="..\~Library\Dawnx.Xml\Dawnx.Xml.csproj" />
   </ItemGroup>
 
   <ItemGroup>

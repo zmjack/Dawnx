@@ -13,18 +13,17 @@
     <Authors>Dawnx Contributors</Authors>
     <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
-    <Description>Provides IdentityUtility for AspNetCoreApp 2.1+. Use it to manage IdentityUsers and IdentityRoles easily.</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <Description>Provides LiveAccountUtility for AspNetCoreApp 2.1+. Use it to manage LiveAccount easily.</Description>
     <Copyright>Copyright © dawnx.net 2018</Copyright>
-    <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
-    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.xml</DocumentationFile>
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -41,45 +40,57 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
     <ProjectReference Include="..\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Areas\IdentityUtility\Pages\Index.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Actions\ClearInvalidActions.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Roles\Details.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Actions\SyncActions.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Roles\_GenerateConcurrencyStamp.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Actions\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Roles\Edit.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Roles\Index.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Operations\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Roles\Create.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Operations\Delete.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Users\Create.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Operations\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Users\Delete.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Operations\Edit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Users\Details.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Operations\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Users\Edit.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Roles\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Users\Index.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Roles\Delete.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\IdentityUtility\Pages\Users\_GenerateConcurrencyStamp.cshtml">
+    <Content Update="Areas\LiveAccountUtility\Pages\Roles\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\LiveAccountUtility\Pages\Roles\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\LiveAccountUtility\Pages\Users\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\LiveAccountUtility\Pages\Users\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\LiveAccountUtility\Pages\Users\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

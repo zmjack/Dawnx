@@ -9,23 +9,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Provides a more convenient way to access the network.</Description>
-    <Company>dawnx.net</Company>
     <Authors>Dawnx Contributors</Authors>
     <Owners>zmjack</Owners>
-    <Authors>Dawnx Contributors</Authors>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>dawnx.net</Company>
     <Version>1.7.13</Version>
-    <Copyright>Copyright © dawnx.net 2018</Copyright>
-    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <PackageId>Dawnx.NPOI</PackageId>
+    <Product>Dawnx.NPOI</Product>
+    <Description>Helps to create report application esasily.</Description>
+    <Copyright>Copyright © dawnx.net 2018</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <LangVersion>7.3</LangVersion>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
-    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~Net\Dawnx.Net\Dawnx.Net.xml</DocumentationFile>
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~NPOI\Dawnx.NPOI\Dawnx.NPOI.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -35,14 +36,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
+    <PackageReference Include="DotNetCore.NPOI" Version="1.0.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Dawnx\Dawnx.csproj" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
   </ItemGroup>
 
 </Project>

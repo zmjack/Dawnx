@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
-    <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\SimpleData\SimpleData.csproj" />
+    <ProjectReference Include="..\..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\..\SimpleData\SimpleData.csproj" />
   </ItemGroup>
 
 </Project>

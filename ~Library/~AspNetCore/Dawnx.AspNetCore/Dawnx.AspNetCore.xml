@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dawnx.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.Menu``1(System.Security.Claims.ClaimsPrincipal,Dawnx.AspNetCore.ClaimsMenu{``0})">
+            <summary>
+            Returns user's menu from the specified menu.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="this"></param>
+            <param name="menu"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetRoles(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Returns roles of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetId(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Returns ID of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPath(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.PathBase}{@this.Path}".
+                eg. /controller/action
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlPathQuery(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.PathBase}{@this.Path}{@this.QueryString}".
+                eg. /controller/action?id=1
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlSchemeHost(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}".
+                eg. http://dawnx.net
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.Url(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
+                eg. http://dawnx.net/controller/action?id=1
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlSchemeHostPath(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}".
+                eg. http://dawnx.net/controller/action
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.IsMobile(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Determines whether the access device is a mobile.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.IsTablet(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Determines whether the access device is a tablet.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyString(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Gets the request body string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyString(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            Gets the request body string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Deserializes the body(UTF-8), which is json, to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            Deserializes the body, which is json, to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Deserializes the body(UTF-8), which is json, to a .NET object.
+            </summary>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+            <summary>
+            Deserializes the body, which is json, to a .NET object.
+            </summary>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnIQueryable.GetStorageName``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Gets the provider name of database.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnIQueryable.ToSql``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Gets the generated Sql string.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnObject.Json(System.Object)">
+            <summary>
+            Serializes the specified object to a JSON string.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnString.GetFromJson``1(System.String)">
+            <summary>
+            Deserializes the JSON to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnString.GetFromJson(System.String)">
+            <summary>
+            Deserializes the JSON to a .NET object.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.state">
+            <summary>
+            A simple code describing the state of the service invocation
+            </summary>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.status">
+            <summary>
+            The detailed information
+            </summary>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.message">
+            <summary>
+            A friendly message that tells client that the status
+            </summary>
+        </member>
+        <member name="F:Dawnx.AspNetCore.SimpleResponse.model">
+            <summary>
+            If necessary, carry a data model 
+            </summary>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ClaimsMenu`1.UserMenu(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Gets user's menu from the tree.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.#ctor">
+            <summary>
+            Creates a new <see cref="T:Dawnx.AspNetCore.ZipStream"/> whose data will be stored on a stream.
+            </summary>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.#ctor(System.String)">
+            <summary>
+            Opens a Zip file with the given name for reading.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.#ctor(System.IO.Stream)">
+            <summary>
+            Opens a Zip file reading the given System.IO.Stream.
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(ICSharpCode.SharpZipLib.Zip.ZipEntry)">
+            <summary>
+            Add a <see cref="T:ICSharpCode.SharpZipLib.Zip.ZipEntry"/> that contains no data.
+            </summary>
+            <param name="entry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(System.String,System.IO.Stream,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="inStream"></param>
+            <param name="entryName"></param>
+            <param name="compressionMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddEntry(System.String,System.Byte[],ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="bytes"></param>
+            <param name="entryName"></param>
+            <param name="compressionMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddFileEntry(System.String,System.String,ICSharpCode.SharpZipLib.Zip.CompressionMethod)">
+            <summary>
+            Add a file entry with data.
+            </summary>
+            <param name="path"></param>
+            <param name="entryName"></param>
+            <param name="compressionMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.AddDictionary(System.String)">
+            <summary>
+            Add a directory entry to the archive.
+            </summary>
+            <param name="dictionaryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.SetPassword(System.String)">
+            <summary>
+            Set the password to be used for encrypting/decrypting files.
+            </summary>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.SetComment(System.String)">
+            <summary>
+            Set the file comment to be recorded.
+            </summary>
+            <param name="comment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.ZipStream.SaveAs(System.String)">
+            <summary>
+            Save the Zip file as a new file.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.IntelliTrackExtensions.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
+            <summary>
+            This method should be called before 'base.SaveChanges'.
+            </summary>
+            <param name="this"></param>
+            <param name="acceptAllChangesOnSuccess"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

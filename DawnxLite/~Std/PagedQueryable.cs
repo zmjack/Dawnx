@@ -14,15 +14,19 @@ namespace Dawnx
         {
             PageSize = pageSize;
             PageCount = source.PageCount(pageSize);
-            switch (page)
+
+            if (PageCount > 0)
             {
-                case int p when p < 1: PageNumber = 1; break;
-                case int p when p > PageCount: PageNumber = PageCount; break;
-                default: PageNumber = page; break;
+                switch (page)
+                {
+                    case int p when p < 1: PageNumber = 1; break;
+                    case int p when p > PageCount: PageNumber = PageCount; break;
+                    default: PageNumber = page; break;
+                }
+                Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
             }
-            Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+            else Items = source;
         }
 
     }
-
 }

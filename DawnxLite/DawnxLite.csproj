@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx Contributors</Authors>
-    <Version>1.7.13.1</Version>
+    <Version>1.7.14</Version>
     <Company>dawnx.net</Company>
     <Description>Dawnx lite version. Less dependencies.</Description>
     <RootNamespace>Dawnx</RootNamespace>

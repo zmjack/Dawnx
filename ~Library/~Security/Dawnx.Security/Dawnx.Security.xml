@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dawnx.Security</name>
+    </assembly>
+    <members>
+        <member name="M:Dawnx.Security.DawnAes.Encrypt``1(System.Security.Cryptography.Aes,System.Byte[])">
+            <summary>
+            </summary>
+            <param name="this"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Dawnx.Security.TemporaryTicket.IsValid">
+            <summary>
+            Checks whether the ticket is valid. (The default <see cref="F:Dawnx.Security.TemporaryTicket.SlideOffsetForExpiration"/> is 10 minutes.)
+            </summary>
+        </member>
+    </members>
+</doc>

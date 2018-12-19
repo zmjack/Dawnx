@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Dawnx
 {
-
     public interface IPageable : IEnumerable
     {
         int PageNumber { get; }

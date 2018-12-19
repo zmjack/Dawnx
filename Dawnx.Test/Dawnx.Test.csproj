@@ -28,6 +28,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="MySql.Data" Version="6.10.8" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.4" />
+    <PackageReference Include="SimpleData" Version="1.0.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
@@ -38,7 +39,6 @@
     <ProjectReference Include="..\Dawnx.Tools\Dawnx.Tools.csproj" />
     <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\SimpleData\SimpleData.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />

@@ -9,6 +9,36 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.GetConsoleLength(System.String)">
+            <summary>
+            Gets the console length.
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.GetCountOfDoubleBytesChar(System.String)">
+            <summary>
+            Gets the count of double bytes char.
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
+            <summary>
+            Gets table line, like ┌┬┐(specified by the format value).
+            </summary>
+            <param name="lengths"></param>
+            <param name="format"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console table for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
         <member name="M:Dawnx.DawnArray.Base64String(System.Byte[])">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
@@ -1326,35 +1356,13 @@
             <param name="strings"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.ConsoleUtility.GetConsoleLength(System.String)">
+        <member name="T:Dawnx.SqlScope`3">
             <summary>
-            Gets the console length.
+            Easy to use and secure SQL Executor
             </summary>
-            <param name="text"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.ConsoleUtility.GetCountOfDoubleBytesChar(System.String)">
-            <summary>
-            Gets the count of double bytes char.
-            </summary>
-            <param name="text"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
-            <summary>
-            Gets table line, like ┌┬┐(specified by the format value).
-            </summary>
-            <param name="lengths"></param>
-            <param name="format"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console table for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
+            <typeparam name="TDbConnection"></typeparam>
+            <typeparam name="TDbCommand"></typeparam>
+            <typeparam name="TDbParameter"></typeparam>
         </member>
         <member name="T:Dawnx.JSend.Error`1">
             <summary>
@@ -1431,14 +1439,6 @@
             </summary>
             <typeparam name="TModel"></typeparam>
             <typeparam name="TSelf"></typeparam>
-        </member>
-        <member name="T:Dawnx.SqlScope`3">
-            <summary>
-            Easy to use and secure SQL Executor
-            </summary>
-            <typeparam name="TDbConnection"></typeparam>
-            <typeparam name="TDbCommand"></typeparam>
-            <typeparam name="TDbParameter"></typeparam>
         </member>
     </members>
 </doc>

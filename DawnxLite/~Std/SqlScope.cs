@@ -1,4 +1,5 @@
-﻿using Dawnx.Utilities;
+﻿using Dawnx.Ranges;
+using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -45,7 +46,7 @@ namespace Dawnx
             while (reader.Read())
             {
                 var dict = new Dictionary<string, object>();
-                foreach (var i in Range.Create(reader.FieldCount))
+                foreach (var i in IntegerRange.Create(reader.FieldCount))
                     dict[reader.GetName(i)] = reader.GetValue(i);
 
                 yield return dict;
@@ -58,7 +59,7 @@ namespace Dawnx
             var values = formattableSql.GetArguments();
             var sql = formattableSql.Format;
 
-            var range = Range.Create(formattableSql.ArgumentCount);
+            var range = IntegerRange.Create(formattableSql.ArgumentCount);
             foreach (var i in range)
                 sql = sql.Replace($"{{{i}}}", $"@p{i}");
 

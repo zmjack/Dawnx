@@ -44,6 +44,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="lengths"></param>
         /// <param name="format"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
         private static void PrintTableLine(int[] lengths, string format, object[] data = null)
         {

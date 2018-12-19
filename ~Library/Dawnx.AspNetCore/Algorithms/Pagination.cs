@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Dawnx.Ranges;
+using System.Linq;
 
 namespace Dawnx.AspNetCore.Algorithms
 {
@@ -44,7 +45,7 @@ namespace Dawnx.AspNetCore.Algorithms
                     end = pageSize;
                 }
             }
-            return Range.Create(start, end + 1).ToArray();
+            return IntegerRange.Create(start, end + 1).ToArray();
         }
     }
 }

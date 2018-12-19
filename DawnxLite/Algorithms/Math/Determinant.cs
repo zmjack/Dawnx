@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Ranges;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,7 +36,7 @@ namespace Dawnx.Algorithms.Math
             {
                 double ret = 0;
                 var colGroups = new HashSet<int[]>()
-                    .Self(_ => CalcGroups(_, 0, Range.Create(DimensionLength), new int[0] { }));
+                    .Self(_ => CalcGroups(_, 0, IntegerRange.Create(DimensionLength), new int[0] { }));
 
                 foreach (var colGroup in colGroups)
                 {

@@ -1,4 +1,5 @@
 ﻿using Dawnx.Patterns;
+using Dawnx.Ranges;
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -51,12 +52,12 @@ namespace Dawnx.Diagnostics
             var ret = new ConcurrentDictionary<string, TRet>();
 
             var threads = new Thread[threadCount];
-            foreach (var tid in Range.Create(threadCount))
+            foreach (var tid in IntegerRange.Create(threadCount))
             {
                 threads[tid] = new Thread(() =>
                 {
                     var s_count = tid < mod ? div + 1 : div;
-                    foreach (var tsid in Range.Create(s_count))
+                    foreach (var tsid in IntegerRange.Create(s_count))
                     {
                         var id = $"{tid}:{tsid}";
                         var taskRet = task(id);

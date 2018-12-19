@@ -63,14 +63,7 @@ namespace Dawnx.NPOI
                 return new SheetCell(this, icol);
             }
         }
-        public SheetCell this[string cellName]
-        {
-            get
-            {
-                var pos = GetCellPos(cellName);
-                return this[(pos.row, pos.col)];
-            }
-        }
+        public SheetCell this[string cellName] => this[GetCellPos(cellName)];
 
         public SheetRange this[(int row, int col) start, (int row, int col) end]
             => new SheetRange(this, start, end);
@@ -166,7 +159,7 @@ namespace Dawnx.NPOI
             var converter = new DefaultBasicTypeConverter(false);
             var ret = new List<TModel>();
             var pos = GetCellPos(startCell);
-            (int row, int col) dataStart = (pos.row, pos.col);
+            (int row, int col) = (pos.row, pos.col);
             PropertyInfo[] props;
 
             var propNames = new string[0];
@@ -212,7 +205,7 @@ namespace Dawnx.NPOI
                 foreach (var prop in props.AsVI())
                 {
                     var propInfo = prop.Value;
-                    var cell = this[(dataStart.row + rowOffset, pos.col + prop.Index)];
+                    var cell = this[(row + rowOffset, pos.col + prop.Index)];
                     if (propInfo.PropertyType == typeof(DateTime))
                         propInfo.SetValue(item, converter.Convert(propInfo, cell.DateTime));
                     else propInfo.SetValue(item, converter.Convert(propInfo, cell.GetValue()));
@@ -312,7 +305,7 @@ namespace Dawnx.NPOI
         {
             get
             {
-                return Range.Create(NumMergedRegions).Select(
+                return IntegerRange.Create(NumMergedRegions).Select(
                     i => GetMergedRegion(i).For(_ => new SheetRange(this, (_.FirstRow, _.FirstColumn), (_.LastRow, _.LastColumn))));
             }
         }

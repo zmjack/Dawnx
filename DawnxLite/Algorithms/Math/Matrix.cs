@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Ranges;
+using System;
 using System.Linq;
 
 namespace Dawnx.Algorithms.Math
@@ -34,12 +35,12 @@ namespace Dawnx.Algorithms.Math
             var ret = new double[RowLength];
             if (IsAugmentedMatrix)
             {
-                var divisor = SelectDeterminant(Range.Create(RowLength).ToArray());
+                var divisor = SelectDeterminant(IntegerRange.Create(RowLength).ToArray());
 
-                Range.Create(RowLength).Each(i =>
+                IntegerRange.Create(RowLength).Each(i =>
                 {
                     var dividend = SelectDeterminant(
-                        Range.Create(RowLength).ToArray()
+                        IntegerRange.Create(RowLength).ToArray()
                             .Self(_ => _[i] = ColumnLength - 1)
                             .ToArray());
                     ret[i] = dividend.Value / divisor.Value;
@@ -85,7 +86,7 @@ namespace Dawnx.Algorithms.Math
                 var retValues = new double[retRowLength, retColumnLenth];
                 for (int i = 0; i < retRowLength; i++)
                     for (int j = 0; j < retColumnLenth; j++)
-                        retValues[i, j] = Range.Create(length).Sum(x => matrix1[i, x] * matrix2[x, j]);
+                        retValues[i, j] = IntegerRange.Create(length).Sum(x => matrix1[i, x] * matrix2[x, j]);
 
                 return new Matrix(retValues);
             }

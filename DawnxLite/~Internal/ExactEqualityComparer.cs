@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Dawnx
 {
-    public class ExactEqualityComparer<T> : IEqualityComparer<T>
+    internal class ExactEqualityComparer<T> : IEqualityComparer<T>
     {
         private Expression<Func<T, object>> _expression;
 

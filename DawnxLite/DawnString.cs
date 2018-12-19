@@ -61,9 +61,9 @@ namespace Dawnx
             if (total.IsOdd()) left += 1;
 
             var sb = new StringBuilder(width);
-            Range.Create(left).Each(i => sb.Append(fillChar));
+            IntegerRange.Create(left).Each(i => sb.Append(fillChar));
             sb.Append(@this);
-            Range.Create(right).Each(i => sb.Append(fillChar));
+            IntegerRange.Create(right).Each(i => sb.Append(fillChar));
 
             return sb.ToString();
         }

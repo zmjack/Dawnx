@@ -15,7 +15,7 @@ namespace Dawnx
         public Scope()
         {
             UseDoubleCheck.Do<string>(
-                locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
+                locker: Locker.Get<Scope<TSelf>>(Thread.CurrentThread.ManagedThreadId.ToString()),
                 @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TSelf>>());
             Scopes.Push(this);

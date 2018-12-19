@@ -1,4 +1,4 @@
-﻿namespace Dawnx
+﻿namespace Dawnx.Algorithms.Container
 {
     public abstract partial class DpContainer<TIn, TOut>
     {

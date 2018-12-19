@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Dawnx
+namespace Dawnx.Algorithms.Container
 {
     public abstract partial class DpContainer<TIn, TOut> : IDictionary<TIn, TOut>
     {

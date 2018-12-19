@@ -1,4 +1,5 @@
 ﻿using Dawnx.Generators;
+using Dawnx.Ranges;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -19,7 +20,7 @@ namespace Dawnx.Test.Generators
                 taken.AddRange(items);
             }
 
-            Assert.Equal(Range.Create(100), taken.Select(x => int.Parse(x)).OrderBy(x => x));
+            Assert.Equal(IntegerRange.Create(100), taken.Select(x => int.Parse(x)).OrderBy(x => x));
         }
     }
 }

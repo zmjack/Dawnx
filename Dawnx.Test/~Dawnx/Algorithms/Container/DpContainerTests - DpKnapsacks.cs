@@ -1,12 +1,19 @@
-﻿using System.Linq;
+﻿using Dawnx.Algorithms.Container;
+using System.Linq;
 using Xunit;
 
 namespace Dawnx.Test
 {
     public partial class DpContainerTests
     {
-        public class DpKnapsack : DpContainer<(int toGoods, int residualWeight), (int TotalValue, int[] GoodWeights)>
+        public class DpKnapsack : DpContainer<(int toGoods, int residualWeight), DpKnapsack.Result>
         {
+            public class Result
+            {
+                public int TotalValue;
+                public int[] GoodWeights;
+            }
+
             public (int Weight, int Value)[] Goods { get; private set; }
 
             public DpKnapsack((int Weight, int Value)[] goods)
@@ -14,10 +21,10 @@ namespace Dawnx.Test
                 Goods = goods;
             }
 
-            public (int TotalValue, int[] GoodWeights) this[int residualWeight]
+            public Result this[int residualWeight]
                 => this[(Goods.Length - 1, residualWeight)];
 
-            public override (int TotalValue, int[] GoodWeights) StateTransfer((int toGoods, int residualWeight) pair)
+            public override Result StateTransfer((int toGoods, int residualWeight) pair)
             {
                 // define: i as toGoods, j as knapsackWeight
                 // dp(i, j) = 0                                         if  i=0, j<w[0]
@@ -27,18 +34,27 @@ namespace Dawnx.Test
 
                 int i = pair.toGoods, j = pair.residualWeight;
 
-                if (i == 0 && j < Goods[0].Weight) return (0, new int[0]);
-                if (i == 0 && j >= Goods[0].Weight) return (Goods[0].Value, new[] { Goods[0].Weight });
+                if (i == 0 && j < Goods[0].Weight)
+                    return new Result { TotalValue = 0, GoodWeights = new int[0] };
+                if (i == 0 && j >= Goods[0].Weight)
+                    return new Result { TotalValue = Goods[0].Value, GoodWeights = new[] { Goods[0].Weight } };
                 if (i > 0 && j - Goods[i].Weight < 0) return this[(i - 1, j)];
 
-                var choice = new[]
+                var (take, totalValue) = new[]
                 {
-                    (Take: false, TotalValue: this[(i - 1, j)].TotalValue),
+                    (Take: false,  this[(i - 1, j)].TotalValue),
                     (Take: true, TotalValue: this[(i - 1, j - Goods[i].Weight)].TotalValue + Goods[i].Value),
                 }.WhereMax(x => x.TotalValue).First();
 
-                if (choice.Take)
-                    return (choice.TotalValue, this[(i - 1, j - Goods[i].Weight)].GoodWeights.Concat(new[] { Goods[i].Weight }).ToArray());
+                if (take)
+                {
+                    return new Result
+                    {
+                        TotalValue = totalValue,
+                        GoodWeights = this[(i - 1, j - Goods[i].Weight)].GoodWeights
+                            .Concat(new[] { Goods[i].Weight }).ToArray(),
+                    };
+                }
                 else return this[(i - 1, j)];
             }
         }

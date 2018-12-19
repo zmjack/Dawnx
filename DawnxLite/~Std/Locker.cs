@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Dawnx
 {
@@ -7,22 +8,12 @@ namespace Dawnx
         /// <summary>
         /// Craetes a special reference of string from the system.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="strs"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Get<T>() => string.Intern(typeof(T).FullName);
-
-        /// <summary>
-        /// Craetes a special reference of string from the system.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="strs"></param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Get<T>(params object[] strs)
+        public static string Get<T>(params string[] strs)
         {
-            return string.Intern($"{typeof(T).FullName}{"\0"}{strs.Join("\0")}");
+            return string.Intern($"{typeof(T).FullName}\0{strs.Join("\0")}");
         }
 
         /// <summary>
@@ -31,9 +22,9 @@ namespace Dawnx
         /// <param name="strs"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Get(params object[] strs)
+        public static string Get(params string[] strs)
         {
-            return string.Intern($"{strs.Join("\0")}");
+            return string.Intern(strs.Join("\0"));
         }
 
     }

@@ -42,7 +42,7 @@ namespace Dawnx.Test
 
                 var (take, totalValue) = new[]
                 {
-                    (Take: false,  this[(i - 1, j)].TotalValue),
+                    (Take: false,  TotalValue: this[(i - 1, j)].TotalValue),
                     (Take: true, TotalValue: this[(i - 1, j - Goods[i].Weight)].TotalValue + Goods[i].Value),
                 }.WhereMax(x => x.TotalValue).First();
 

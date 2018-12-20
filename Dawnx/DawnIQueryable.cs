@@ -8,19 +8,54 @@ namespace Dawnx
     public static partial class DawnIQueryable
     {
         /// <summary>
+        /// Use an OrderByStrategy to generate an orberby expression.
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="strategy"></param>
+        /// <returns></returns>
+        public static IOrderedQueryable<TEntity> OrderByCaseStrategy<TEntity>(this IQueryable<TEntity> @this, IOrderStrategy<TEntity> strategy)
+            => @this.OrderBy(strategy.StrategyExpression);
+
+        public static IOrderedQueryable<TEntity> OrderByCase<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, string>> memberExp,
+            string[] orderValues)
+            => @this.OrderByCaseStrategy(new OrderByCaseStrategy<TEntity>(memberExp, orderValues));
+
+        /// <summary>
+        /// Use an OrderByStrategy to generate an orberby expression.
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="strategy"></param>
+        /// <returns></returns>
+        public static IOrderedQueryable<TEntity> OrderByCaseDescendingStrategy<TEntity>(this IQueryable<TEntity> @this, IOrderStrategy<TEntity> strategy)
+            => @this.OrderByDescending(strategy.StrategyExpression);
+
+        public static IOrderedQueryable<TEntity> OrderByCaseDescending<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, string>> memberExp,
+            string[] orderValues)
+            => @this.OrderByCaseDescendingStrategy(new OrderByCaseStrategy<TEntity>(memberExp, orderValues));
+
+        /// <summary>
         /// Use a WhereStragtegy to generate a where expression.
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="this"></param>
         /// <param name="strategy"></param>
         /// <returns></returns>
-        public static IQueryable<TEntity> WhereStrategy<TEntity>(this IQueryable<TEntity> @this, IWhereStrategy<TEntity> strategy)
+        public static IQueryable<TEntity> WhereStrategy<TEntity>(this IQueryable<TEntity> @this,
+            IWhereStrategy<TEntity> strategy)
             => @this.Where(strategy.StrategyExpression);
 
-        public static IQueryable<TEntity> WhereSearch<TEntity>(this IQueryable<TEntity> @this, string searchString, Expression<Func<TEntity, object>> searchMembers)
+        public static IQueryable<TEntity> WhereSearch<TEntity>(this IQueryable<TEntity> @this,
+            string searchString,
+            Expression<Func<TEntity, object>> searchMembers)
             => @this.WhereStrategy(new WhereSearchStrategy<TEntity>(searchString, searchMembers));
 
-        public static IQueryable<TEntity> WhereMatch<TEntity>(this IQueryable<TEntity> @this, string searchString, Expression<Func<TEntity, object>> searchMembers)
+        public static IQueryable<TEntity> WhereMatch<TEntity>(this IQueryable<TEntity> @this,
+            string searchString,
+            Expression<Func<TEntity, object>> searchMembers)
             => @this.WhereStrategy(new WhereMatchStrategy<TEntity>(searchString, searchMembers));
 
         public static IQueryable<TEntity> WhereBetween<TEntity>(this IQueryable<TEntity> @this,

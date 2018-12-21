@@ -1,4 +1,4 @@
-﻿#if !USE
+﻿#if USE
 using Dawnx;
 using Dawnx.Sequences;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using Dawnx.AspNetCore;
+using Dawnx.Diagnostics;
+using Dawnx.Test;
 
 namespace DawnxDevloping
 {
@@ -17,20 +19,9 @@ namespace DawnxDevloping
         {
             using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
-                A();
-                var st = new System.Diagnostics.StackTrace();
-                var frames = st.GetFrames();
-                Console.WriteLine(st.GetFrame(0).ToString());
             }
         }
 
-        static void A()
-        {
-            var st = new System.Diagnostics.StackTrace();
-            var frames = st.GetFrames();
-
-            st.GetFrame(0).
-        }
 
     }
 }

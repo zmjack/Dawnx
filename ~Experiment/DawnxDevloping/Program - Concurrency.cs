@@ -1,4 +1,4 @@
-﻿#if USE
+﻿#if !USE
 using Dawnx.Diagnostics;
 using Dawnx.Generators;
 using Dawnx.Patterns;
@@ -12,16 +12,31 @@ namespace DawnxDevloping
     {
         static void Main(string[] args)
         {
+            Wrong(2000);
             G1(2000);
             G2(800000);
             G3(800000);
+        }
+
+        static void Wrong(int level)
+        {
+            using (var probe = PerformanceProbe.Create(nameof(Wrong)))
+            {
+                var ret = Concurrency.Run(() =>
+                {
+                    return DateTime.Now.Ticks.ToString();
+                }, level);
+
+                Console.WriteLine(ret.Count);
+                Console.WriteLine(ret.Select(x => x.Value).Distinct().Count());
+            }
         }
 
         static void G1(int level)
         {
             using (var probe = PerformanceProbe.Create(nameof(G1)))
             {
-                var ret = Concurrency.Run((runId) =>
+                var ret = Concurrency.Run(() =>
                 {
                     lock ("aa")
                     {
@@ -40,7 +55,7 @@ namespace DawnxDevloping
         {
             using (var probe = PerformanceProbe.Create(nameof(G2)))
             {
-                var ret = Concurrency.Run((runId) =>
+                var ret = Concurrency.Run(() =>
                 {
                     lock ("aa")
                     {
@@ -61,10 +76,10 @@ namespace DawnxDevloping
 
         static void G3(int level)
         {
-            var generator = new IdGenerator(() => DateTime.Now.Ticks.ToString());
+            var generator = new IdGenerator<string>(() => DateTime.Now.Ticks.ToString());
             using (var probe = PerformanceProbe.Create(nameof(G3)))
             {
-                var ret = Concurrency.Run((runId) =>
+                var ret = Concurrency.Run(() =>
                 {
                     return generator.TakeOne();
                 }, level);

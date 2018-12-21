@@ -1,4 +1,5 @@
-﻿using Dawnx.Patterns;
+﻿using Dawnx.Lock;
+using Dawnx.Patterns;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,8 +15,8 @@ namespace Dawnx
     {
         public Scope()
         {
-            UseDoubleCheck.Do<string>(
-                locker: Locker.Get<Scope<TSelf>>(Thread.CurrentThread.ManagedThreadId.ToString()),
+            UseDoubleCheck.Do(
+                @lock: TypeTsLock<Scope<TSelf>>.InternString,
                 @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TSelf>>());
             Scopes.Push(this);
@@ -44,8 +45,8 @@ namespace Dawnx
 
         public Scope(TModel model)
         {
-            UseDoubleCheck.Do<string>(
-                locker: $"{Thread.CurrentThread.ManagedThreadId} {GetType().FullName}",
+            UseDoubleCheck.Do(
+                @lock: TypeTsLock<Scope<TModel, TSelf>>.InternString,
                 @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TModel, TSelf>>());
             Model = model;
@@ -59,7 +60,7 @@ namespace Dawnx
         [ThreadStatic]
         public static Stack<Scope<TModel, TSelf>> Scopes;
 
-        public static Scope<TModel, TSelf> Current => Scopes?.Peek();
+        public static Scope<TModel, TSelf> Current => (Scopes?.Count > 0 ? Scopes.Peek() : null) ?? null;
 
     }
 }

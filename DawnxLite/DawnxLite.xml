@@ -39,6 +39,14 @@
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
         </member>
+        <member name="T:Dawnx.Data.SqlScope`3">
+            <summary>
+            Easy to use and secure SQL Executor
+            </summary>
+            <typeparam name="TDbConnection"></typeparam>
+            <typeparam name="TDbCommand"></typeparam>
+            <typeparam name="TDbParameter"></typeparam>
+        </member>
         <member name="M:Dawnx.DawnArray.Base64String(System.Byte[])">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
@@ -1139,40 +1147,14 @@
             (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
             </summary>
         </member>
-        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do(System.String,System.Func{System.Boolean},System.Action)">
+        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do(System.Object,System.Func{System.Boolean},System.Action)">
             <summary>
             Do a task with Double-checked locking pattern:
                 if(@if) -> lock(@locker) -> if(@if) -> do(@then).
             </summary>
-            <param name="locker"></param>
-            <param name="@if"></param>
-            <param name="then"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do``1(``0,System.Func{System.Boolean},System.Action)">
-            <summary>
-            Do a task with Double-checked locking pattern:
-                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
-            </summary>
-            <typeparam name="TLocker"></typeparam>
-            <param name="locker"></param>
+            <param name="lock"></param>
             <param name="if"></param>
             <param name="then"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseLock.TryDo(System.Object,System.TimeSpan,System.Action)">
-            <summary>
-            Do a task with Lock pattern:
-                if TryEnter(@lockObj, @timeout) try { @task } finally { Exit(@lockObj) }
-            </summary>
-            <param name="lockObj"></param>
-            <param name="timeout"></param>
-            <param name="task"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Patterns.UseLock.TryDo(System.Object,System.Action)">
-            <summary>
-            Do a task with Lock pattern:
-                if TryEnter(@lockObj) try { @task } finally { Exit(@lockObj) }
-            </summary>
         </member>
         <member name="M:Dawnx.Patterns.UseSpinLock.Do(System.Action,System.Func{System.Boolean})">
             <summary>
@@ -1356,14 +1338,6 @@
             <param name="strings"></param>
             <returns></returns>
         </member>
-        <member name="T:Dawnx.SqlScope`3">
-            <summary>
-            Easy to use and secure SQL Executor
-            </summary>
-            <typeparam name="TDbConnection"></typeparam>
-            <typeparam name="TDbCommand"></typeparam>
-            <typeparam name="TDbParameter"></typeparam>
-        </member>
         <member name="T:Dawnx.JSend.Error`1">
             <summary>
             There was a problem with the data submitted, or some pre-condition of the API call wasn't satisfied.
@@ -1412,20 +1386,6 @@
                 Acts as the wrapper for any data returned by the API call.
                 If the call returns no data, data should be set to null.
             </summary>
-        </member>
-        <member name="M:Dawnx.Locker.Get``1(System.String[])">
-            <summary>
-            Craetes a special reference of string from the system.
-            </summary>
-            <param name="strs"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Locker.Get(System.String[])">
-            <summary>
-            Craetes a special reference of string from the system.
-            </summary>
-            <param name="strs"></param>
-            <returns></returns>
         </member>
         <member name="T:Dawnx.Scope`1">
             <summary>

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Dawnx
+namespace Dawnx.Data
 {
     public interface IPageable : IEnumerable
     {

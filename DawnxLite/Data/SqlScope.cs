@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 
-namespace Dawnx
+namespace Dawnx.Data
 {
     /// <summary>
     /// Easy to use and secure SQL Executor

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dawnx
+namespace Dawnx.Data
 {
     public class PagedEnumerable<T> : IPageable<T>, IEnumerable<T>
     {

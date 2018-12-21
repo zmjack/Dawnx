@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Dawnx
+namespace Dawnx.Data
 {
     public class PagedQueryable<T> : PagedEnumerable<T>, IQueryable<T>
     {

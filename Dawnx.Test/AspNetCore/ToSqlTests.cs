@@ -14,9 +14,9 @@ namespace Dawnx.AspNetCore.Test
 {
     public class ToSqlTests
     {
-        private DbContextOptions MySqlOptions = new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1").Options;
-        private DbContextOptions SqlServerOptions = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
-        private DbContextOptions SqliteOptions = SimpleSources.NorthwndOptions;
+        private readonly DbContextOptions MySqlOptions = new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1").Options;
+        private readonly DbContextOptions SqlServerOptions = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
+        private readonly DbContextOptions SqliteOptions = SimpleSources.NorthwndOptions;
         
         [Fact]
         public void Test1()

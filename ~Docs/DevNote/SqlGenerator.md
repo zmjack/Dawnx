@@ -36,44 +36,55 @@ WHERE "x"."City" = 'London';
 
 ### Extension Simples
 
-The Entity Framework provides some basic query extensions, but using it to develop business applications is not simple enough. So, we provide more query extensions to help developers solve their business problems simply.
+The Entity Framework provides some basic query extensions, but using it to develop business applications is not simple enough. So, we provide more query extensions to help developers solve their business problems.
+
+First of all, "**DbContext sqlite**" is defined as:
+
+```C#
+var sqlite = new NorthwndContext(SqliteOptions);
+```
+
+The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/northwnd.db**".
 
 - **WhereSearch**
 
-  **Declare**:
+  Queries records which is contains the specified string in one or any fields.
+
+  For example, if you want to query ***Sweet*** in the field ***Description*** (table **Categories**):
 
   ```C#
-  public static IQueryable<TEntity> WhereMatch<TEntity>(
-      this IQueryable<TEntity> @this,
-      string searchString, 
-      Expression<Func<TEntity, object>> searchMembers)
+  sqlite.Employees.WhereSearch("Steven", x => x.First_Name);
   ```
 
-  Queries records which is contains the specified string in any fields.
+  This invoke will generate a SQL query string:
 
-  For example, if you want to query ***Bill*** in field ***First_Name*** or ***Last_Name***:
+  ```sqlite
+  SELECT "x"."CategoryID", "x"."CategoryName", "x"."Description", "x"."Picture"
+  FROM "Categories" AS "x"
+  WHERE instr("x"."Description", 'Sweet') > 0;
+  ```
+
+  ----
+
+  And, if you want to query ***An*** in the field ***FirstName*** or ***LastName*** (table ***employees***):
 
   ```C#
-  _context.Employees.WhereSearch("Bill", x => new { x.First_Name, x.Last_Name });
+  sqlite.Employees.WhereSearch("An", x => new { x.FirstName, x.LastName })
   ```
 
-  This invoke will generate a SQL query string like this:
+  The SQL is:
 
-  ```mssql
-  /* SQL Server */
-  SELECT [x].[Id], [x].[First_Name], [x].[Last_Name]
-  FROM [Emplyees] AS [x]
-  WHERE (CHARINDEX(N'Bill', [x].[First_Name]) > 0)
-  	OR (CHARINDEX(N'Bill', [x].[Last_Name]) > 0);
+  ```sqlite
+  SELECT "x"."EmployeeID", "x"."Address", "x"."BirthDate", "x"."City", "x"."Country", "x"."Extension", "x"."FirstName", "x"."HireDate", "x"."HomePhone", "x"."LastName", "x"."Notes", "x"."Photo", "x"."PhotoPath", "x"."PostalCode", "x"."Region", "x"."ReportsTo", "x"."Title", "x"."TitleOfCourtesy"
+  FROM "Employees" AS "x"
+  WHERE (instr("x"."FirstName", 'An') > 0) OR (instr("x"."LastName", 'An') > 0);
   ```
 
-  ```mysql
-  /* MySql */
-  SELECT `x`.`Id`, `x`.`First_Name`, `x`.`Last_Name`,
-  FROM `Emplyees` AS `x`
-  WHERE (LOCATE('Bill', `x`.`First_Name`) > 0)
-  	OR (LOCATE('Bill', `x`.`Last_Name`) > 0);
-  ```
+  ----
+
+  As you see, this method supports some abilities to search  single string in more than one field. In some complex scenarios, we also allowed you to query a string in any table which is connected by foreign keys.
+
+  For example, if you want to query 
 
 - **WhereMatch**
   Different from **WhereSearch**, this statement will perform an exact match:

@@ -19,6 +19,23 @@ namespace Dawnx.AspNetCore.Test
         private DbContextOptions SqliteOptions = SimpleSources.NorthwndOptions;
 
         [Fact]
+        public void Test()
+        {
+            string sql;
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                sql = sqlite.Employees
+                    .WhereSearch("Tofu", e => new
+                    {
+                        ProductName = e.Orders
+                            .SelectMany(o => o.Order_Details)
+                            .Select(x => x.Product.ProductName)
+                    }).ToSql();
+           }
+
+        }
+
+        [Fact]
         public void Test1()
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))

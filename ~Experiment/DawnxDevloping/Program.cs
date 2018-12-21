@@ -17,29 +17,19 @@ namespace DawnxDevloping
         {
             using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
-                var orderValues = new[]
-                {
-                    "Nancy",
-                    "Andrew",
-                    "Janet",
-                    "Margaret",
-                    "Steven",
-                    "Michael",
-                    "Robert",
-                    "Laura",
-                    "Anne",
-                };
-
-                var query = sqlite.Employees.OrderBy(x => x.FirstName == "Nancy" ? 1 : x.FirstName == "Andrew" ? 2 : 3);
-                var sql = query.ToSql();
-
-                var ss1 = sqlite.Employees.OrderByCase(x => x.FirstName, orderValues).ToSql();
-                var ss2 = sqlite.Employees.OrderByCaseDescending(x => x.FirstName, orderValues).ToArray();
-
-
-                foreach (var order in sqlite.Orders)
-                    Console.WriteLine(order.ShippedDate);
+                A();
+                var st = new System.Diagnostics.StackTrace();
+                var frames = st.GetFrames();
+                Console.WriteLine(st.GetFrame(0).ToString());
             }
+        }
+
+        static void A()
+        {
+            var st = new System.Diagnostics.StackTrace();
+            var frames = st.GetFrames();
+
+            st.GetFrame(0).
         }
 
     }

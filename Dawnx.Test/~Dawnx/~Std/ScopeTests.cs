@@ -1,3 +1,4 @@
+using Dawnx.Diagnostics;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,36 +12,38 @@ namespace Dawnx.Test
     public class ScopeTests
     {
         [Fact]
-        public void Test1()
+        public void NestTest()
         {
-            var t1 = Task.Run(() =>
+            Assert.Null(StringScope.Current);
+            using (new StringScope("outter"))
+            {
+                Assert.Equal("outter", StringScope.Current.Model);
+
+                using (new StringScope("inner"))
+                {
+                    Assert.Equal("inner", StringScope.Current.Model);
+                    Assert.Equal(2, StringScope.Scopes.Count);
+                }
+            }
+        }
+
+        [Fact]
+        public void ConcurrencyTest()
+        {
+            Concurrency.Run(() =>
             {
                 Assert.Null(StringScope.Current);
-                using (var scope1 = new StringScope("123"))
+                using (new StringScope("outter"))
                 {
-                    Assert.Equal("123", StringScope.Current.Model);
+                    Assert.Equal("outter", StringScope.Current.Model);
 
-                    using (var scope2 = new StringScope("234"))
+                    using (new StringScope("inner"))
                     {
-                        Assert.Equal("234", StringScope.Current.Model);
+                        Assert.Equal("inner", StringScope.Current.Model);
+                        Assert.Equal(2, StringScope.Scopes.Count);
                     }
                 }
-            });
-
-            var t2 = Task.Run(() =>
-            {
-                using (var scope1 = new StringScope("111"))
-                {
-                    Assert.Equal("111", StringScope.Current.Model);
-
-                    using (var scope2 = new StringScope("222"))
-                    {
-                        Assert.Equal("222", StringScope.Current.Model);
-                    }
-                }
-            });
-
-            Task.WaitAll(t1, t2);
+            }, level: 20, threadCount: 4);
         }
 
     }

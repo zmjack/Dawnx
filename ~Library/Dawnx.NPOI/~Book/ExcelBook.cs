@@ -1,4 +1,5 @@
 ﻿using Dawnx.Definition;
+using Dawnx.Ranges;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -54,7 +55,7 @@ namespace Dawnx.NPOI
 
         public short GetDataFormat(string format) => MapedWorkbook.CreateDataFormat().GetFormat(format);
 
-        public IEnumerable<ICellStyle> CellStyles => Range.Create(NumCellStyles).Select(i => GetCellStyleAt((short)i));
+        public IEnumerable<ICellStyle> CellStyles => IntegerRange.Create(NumCellStyles).Select(i => GetCellStyleAt((short)i));
         public IEnumerable<CStyle> CStyles => CellStyles.Select(x => new CStyle(this, x));
         public CStyle CStyleAt(short index) => new CStyle(this, GetCellStyleAt(index));
         public CStyle CStyle(Action<CStyleApplier> init) => CStyle(CStyleApplier.Create(init));
@@ -66,7 +67,7 @@ namespace Dawnx.NPOI
             else return find;
         }
 
-        public IEnumerable<IFont> Fonts => Range.Create(NumberOfFonts).Select(i => GetFontAt((short)i));
+        public IEnumerable<IFont> Fonts => IntegerRange.Create(NumberOfFonts).Select(i => GetFontAt((short)i));
         public IEnumerable<CFont> CFonts => Fonts.Select(x => new CFont(this, x));
         public CFont CFontAt(short index) => new CFont(this, GetFontAt(index));
         public CFont CFont(Action<CFontApplier> init) => CFont(CFontApplier.Create(init));

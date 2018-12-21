@@ -1,4 +1,5 @@
 ﻿using Dawnx.Patterns;
+using Dawnx.Ranges;
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -7,8 +8,16 @@ namespace Dawnx.Diagnostics
 {
     public class Concurrency
     {
-        public delegate void TaskDelegate(string runId);
-        public delegate TRet FuncDelegate<TRet>(string runId);
+        public delegate void TaskDelegate(int threadId, int invokeNumber);
+        public delegate TRet FuncDelegate<TRet>(int threadId, int invokeNumber);
+
+        public static ConcurrentDictionary<(int ThreadId, int InvokeNumber), int> Run(
+            Action task,
+            int level,
+            int threadCount = 0)
+        {
+            return Run((threadId, invokeNumber) => { task(); return 0; }, level, threadCount);
+        }
 
         /// <summary>
         /// Use mutil-thread to simulate concurrent scenarios.
@@ -17,12 +26,20 @@ namespace Dawnx.Diagnostics
         /// <param name="level"></param>
         /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
         /// <returns></returns>
-        public static ConcurrentDictionary<string, int> Run(
+        public static ConcurrentDictionary<(int ThreadId, int InvokeNumber), int> Run(
             TaskDelegate task,
             int level = 1,
             int threadCount = 0)
         {
-            return Run(i => { task(i); return 0; }, level);
+            return Run((threadId, invokeNumber) => { task(threadId, invokeNumber); return 0; }, level, threadCount);
+        }
+
+        public static ConcurrentDictionary<(int ThreadId, int InvokeNumber), TRet> Run<TRet>(
+            Func<TRet> task,
+            int level,
+            int threadCount = 0)
+        {
+            return Run((threadId, invokeNumber) => task(), level, threadCount);
         }
 
         /// <summary>
@@ -33,10 +50,10 @@ namespace Dawnx.Diagnostics
         /// <param name="level"></param>
         /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
         /// <returns></returns>
-        public static ConcurrentDictionary<string, TRet> Run<TRet>(
+        public static ConcurrentDictionary<(int ThreadNumber, int InvokeNumber), TRet> Run<TRet>(
             FuncDelegate<TRet> task,
-            int level = 1,
-            int threadCount = 0)
+            int level,
+            int threadCount)
         {
             if (level < 1)
                 throw new ArgumentException("The `level` must be greater than 0.");
@@ -48,19 +65,19 @@ namespace Dawnx.Diagnostics
             var mod = level % threadCount;
             threadCount = Math.Min(level, threadCount);
 
-            var ret = new ConcurrentDictionary<string, TRet>();
+            var ret = new ConcurrentDictionary<(int ThreadNumber, int InvokeNumber), TRet>();
 
             var threads = new Thread[threadCount];
-            foreach (var tid in Range.Create(threadCount))
+            foreach (var threadNumber in IntegerRange.Create(threadCount))
             {
-                threads[tid] = new Thread(() =>
+                threads[threadNumber] = new Thread(() =>
                 {
-                    var s_count = tid < mod ? div + 1 : div;
-                    foreach (var tsid in Range.Create(s_count))
+                    var s_count = threadNumber < mod ? div + 1 : div;
+                    foreach (var invokeNumber in IntegerRange.Create(s_count))
                     {
-                        var id = $"{tid}:{tsid}";
-                        var taskRet = task(id);
-                        ret.GetOrAdd(id, taskRet);
+                        var threadId = Thread.CurrentThread.ManagedThreadId;
+                        var taskRet = task(threadId, invokeNumber);
+                        ret.GetOrAdd((threadId, invokeNumber), taskRet);
                     }
                 });
             }

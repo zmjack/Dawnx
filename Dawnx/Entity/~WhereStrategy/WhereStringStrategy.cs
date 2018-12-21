@@ -84,13 +84,13 @@ namespace Dawnx.Entity
         }
 
         private Expression<Func<TEntity, bool>> GenerateExpression(
-            Expression<Func<TEntity, object>> inExpression,
-            Func<Expression, Expression, Expression> binaryGenerator,
+            Expression<Func<TEntity, object>> inExp,
+            Func<Expression, Expression, Expression> compareExp,
             string searchString)
         {
             Expression rightExp = Expression.Constant(searchString);
 
-            switch (inExpression.Body)
+            switch (inExp.Body)
             {
                 case NewExpression exp:
                     Expression leftExp = null;
@@ -98,15 +98,15 @@ namespace Dawnx.Entity
                     foreach (var argExp in exp.Arguments)
                     {
                         if (leftExp is null)
-                            leftExp = binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp);
+                            leftExp = compareExp(GetReturnStringOrArrayExpression(argExp), rightExp);
                         else leftExp = Expression.OrElse(leftExp,
-                            binaryGenerator(GetReturnStringOrArrayExpression(argExp), rightExp));
+                            compareExp(GetReturnStringOrArrayExpression(argExp), rightExp));
                     }
-                    return Expression.Lambda<Func<TEntity, bool>>(leftExp, inExpression.Parameters);
+                    return Expression.Lambda<Func<TEntity, bool>>(leftExp, inExp.Parameters);
 
                 default:
-                    return Expression.Lambda<Func<TEntity, bool>>
-                        (binaryGenerator(GetReturnStringOrArrayExpression(inExpression.Body), rightExp), inExpression.Parameters);
+                    return Expression.Lambda<Func<TEntity, bool>>(
+                        compareExp(GetReturnStringOrArrayExpression(inExp.Body), rightExp), inExp.Parameters);
             }
         }
 

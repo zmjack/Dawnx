@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Ranges;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -9,7 +10,7 @@ namespace Dawnx.Algorithms.Graph.Test
         [Fact]
         public void Test1()
         {
-            var points = Range.Create(7)
+            var points = IntegerRange.Create(7)
                 .Select(i => new GraphPoint { Id = Guid.NewGuid(), Name = $"v{i}" })
                 .ToArray();
 

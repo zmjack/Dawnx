@@ -9,6 +9,36 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.GetConsoleLength(System.String)">
+            <summary>
+            Gets the console length.
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.GetCountOfDoubleBytesChar(System.String)">
+            <summary>
+            Gets the count of double bytes char.
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
+            <summary>
+            Gets table line, like ┌┬┐(specified by the format value).
+            </summary>
+            <param name="lengths"></param>
+            <param name="format"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Con.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console table for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
         <member name="M:Dawnx.DawnArray.Base64String(System.Byte[])">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
@@ -1176,6 +1206,30 @@
             <param name="until"></param>
             <param name="task"></param>
         </member>
+        <member name="M:Dawnx.Ranges.IntegerRange.Create(System.Int32)">
+            <summary>
+            The range type represents an immutable sequence of numbers
+                and is commonly used for looping a specific number of times in for loops.
+            </summary>
+            <param name="stop"></param>
+        </member>
+        <member name="M:Dawnx.Ranges.IntegerRange.Create(System.Int32,System.Int32)">
+            <summary>
+            The range type represents an immutable sequence of numbers
+                and is commonly used for looping a specific number of times in for loops.
+            </summary>
+            <param name="start"></param>
+            <param name="stop"></param>
+        </member>
+        <member name="M:Dawnx.Ranges.IntegerRange.Create(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The range type represents an immutable sequence of numbers
+                and is commonly used for looping a specific number of times in for loops.
+            </summary>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <param name="scan"></param>
+        </member>
         <member name="M:Dawnx.Reflection.DefaultBasicTypeConverter.#ctor(System.Boolean)">
             <summary>
             If set 'strict', null string will be replaced by default of the source.
@@ -1302,34 +1356,13 @@
             <param name="strings"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.ConsoleUtility.GetConsoleLength(System.String)">
+        <member name="T:Dawnx.SqlScope`3">
             <summary>
-            Gets the console length.
+            Easy to use and secure SQL Executor
             </summary>
-            <param name="text"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.ConsoleUtility.GetCountOfDoubleBytesChar(System.String)">
-            <summary>
-            Gets the count of double bytes char.
-            </summary>
-            <param name="text"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
-            <summary>
-            Gets table line, like ┌┬┐(specified by the format value).
-            </summary>
-            <param name="lengths"></param>
-            <param name="format"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console table for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
+            <typeparam name="TDbConnection"></typeparam>
+            <typeparam name="TDbCommand"></typeparam>
+            <typeparam name="TDbParameter"></typeparam>
         </member>
         <member name="T:Dawnx.JSend.Error`1">
             <summary>
@@ -1380,52 +1413,19 @@
                 If the call returns no data, data should be set to null.
             </summary>
         </member>
-        <member name="M:Dawnx.Locker.Get``1">
-            <summary>
-            Craetes a special reference of string from the system.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="strs"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Locker.Get``1(System.Object[])">
-            <summary>
-            Craetes a special reference of string from the system.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="strs"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Locker.Get(System.Object[])">
+        <member name="M:Dawnx.Locker.Get``1(System.String[])">
             <summary>
             Craetes a special reference of string from the system.
             </summary>
             <param name="strs"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Range.Create(System.Int32)">
+        <member name="M:Dawnx.Locker.Get(System.String[])">
             <summary>
-            The range type represents an immutable sequence of numbers
-                and is commonly used for looping a specific number of times in for loops.
+            Craetes a special reference of string from the system.
             </summary>
-            <param name="stop"></param>
-        </member>
-        <member name="M:Dawnx.Range.Create(System.Int32,System.Int32)">
-            <summary>
-            The range type represents an immutable sequence of numbers
-                and is commonly used for looping a specific number of times in for loops.
-            </summary>
-            <param name="start"></param>
-            <param name="stop"></param>
-        </member>
-        <member name="M:Dawnx.Range.Create(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            The range type represents an immutable sequence of numbers
-                and is commonly used for looping a specific number of times in for loops.
-            </summary>
-            <param name="start"></param>
-            <param name="stop"></param>
-            <param name="scan"></param>
+            <param name="strs"></param>
+            <returns></returns>
         </member>
         <member name="T:Dawnx.Scope`1">
             <summary>
@@ -1439,14 +1439,6 @@
             </summary>
             <typeparam name="TModel"></typeparam>
             <typeparam name="TSelf"></typeparam>
-        </member>
-        <member name="T:Dawnx.SqlScope`3">
-            <summary>
-            Easy to use and secure SQL Executor
-            </summary>
-            <typeparam name="TDbConnection"></typeparam>
-            <typeparam name="TDbCommand"></typeparam>
-            <typeparam name="TDbParameter"></typeparam>
         </member>
     </members>
 </doc>

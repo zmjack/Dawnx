@@ -1,3 +1,4 @@
+using Dawnx.Ranges;
 using System;
 using Xunit;
 
@@ -10,7 +11,7 @@ namespace Dawnx.Test
         {
             var random = new Random();
             var arr = new int[1000000];
-            Range.Create(arr.Length).Each(i => arr[i] = i);
+            IntegerRange.Create(arr.Length).Each(i => arr[i] = i);
             arr.Shuffle();
         }
 

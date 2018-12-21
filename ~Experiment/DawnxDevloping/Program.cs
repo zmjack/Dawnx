@@ -1,4 +1,4 @@
-﻿#if !USE
+﻿#if USE
 using Dawnx;
 using Dawnx.Sequences;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +7,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using Dawnx.AspNetCore;
+using Dawnx.Diagnostics;
+using Dawnx.Test;
 
 namespace DawnxDevloping
 {
@@ -14,12 +17,11 @@ namespace DawnxDevloping
     {
         static void Main(string[] args)
         {
-            using (var context = new NorthwndContext(SimpleSources.NorthwndOptions))
+            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
-                foreach (var order in context.Orders)
-                    Console.WriteLine(order.ShippedDate);
             }
         }
+
 
     }
 }

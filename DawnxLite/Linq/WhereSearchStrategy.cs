@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Dawnx.Entity
+namespace Dawnx.Linq
 {
     public class WhereSearchStrategy<TEntity> : WhereStringStrategy<TEntity>
     {

@@ -16,14 +16,14 @@ namespace Dawnx.Diagnostics
         where TStorage : PerformanceProbeStorage<TCarryObject>, new()
         where TCarryObject : class
     {
-        private Stopwatch _watch = new Stopwatch();
+        private Stopwatch Watch { get; } = new Stopwatch();
         private TStorage _storage = new TStorage();
 
         public TCarryObject Carry { get; }
         public string CallerMemberName { get; }
         public string CallerFilePath { get; }
         public int CallerLineNumber { get; }
-        public long ElapsedMilliseconds => _watch.ElapsedMilliseconds;
+        public long ElapsedMilliseconds => Watch.ElapsedMilliseconds;
 
         protected PerformanceProbe(TCarryObject carry, string callerFilePath, int callerLineNumber, string callerMemberName)
         {
@@ -31,7 +31,7 @@ namespace Dawnx.Diagnostics
             CallerFilePath = callerFilePath;
             CallerMemberName = callerMemberName;
             CallerLineNumber = callerLineNumber;
-            _watch.Start();
+            Watch.Start();
         }
 
         public static PerformanceProbe<TStorage, TCarryObject> Create(
@@ -43,7 +43,7 @@ namespace Dawnx.Diagnostics
 
         public void Dispose()
         {
-            _watch.Stop();
+            Watch.Stop();
             _storage.StorePerformanceData(Carry, CallerFilePath, CallerLineNumber, CallerMemberName, ElapsedMilliseconds);
         }
 

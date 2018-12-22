@@ -1,4 +1,4 @@
-﻿using Dawnx.Entity;
+﻿using Dawnx.Linq;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -36,7 +36,7 @@ namespace Dawnx
             Expression<Func<TEntity, string>> memberExp,
             string[] orderValues)
             => @this.OrderByCaseDescendingStrategy(new OrderByCaseStrategy<TEntity>(memberExp, orderValues));
-        
+
     }
 
 }

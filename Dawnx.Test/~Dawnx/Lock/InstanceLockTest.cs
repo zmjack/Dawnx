@@ -26,7 +26,7 @@ namespace Dawnx.Test.Lock
 
             using (var probe = PerformanceProbe.Create())
             {
-                var result = Concurrency.Run((threadNumber, invokeNumber) =>
+                var result = Concurrency.Run(resultId =>
                 {
                     try
                     {

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Dawnx.Entity
+namespace Dawnx.Linq
 {
     public class WhereBetweenStrategy<TEntity> : IWhereStrategy<TEntity>
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
-namespace Dawnx.Entity
+namespace Dawnx.Linq
 {
     public class WhereStringStrategy<TEntity> : IWhereStrategy<TEntity>
     {

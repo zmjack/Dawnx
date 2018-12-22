@@ -1,5 +1,5 @@
 ﻿using Dawnx.Data;
-using Dawnx.Entity;
+using Dawnx.Linq;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

@@ -8,7 +8,6 @@ using Remotion.Linq;
 using Remotion.Linq.Parsing.Structure;
 using Dawnx;
 using Dawnx.Reflection;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dawnx.AspNetCore
 {

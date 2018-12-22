@@ -1,10 +1,8 @@
 ﻿using Dawnx.Reflection;
 using Dawnx.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Dawnx.Linq
 {

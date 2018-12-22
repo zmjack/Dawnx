@@ -1,5 +1,4 @@
 using Dawnx.Diagnostics;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Dawnx.Test

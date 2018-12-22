@@ -2,12 +2,6 @@ using Xunit;
 using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using Dawnx.Reflection;
-using Dawnx.Entity;
-using System.Globalization;
-using Dawnx.Utilities;
-using System.Reflection;
 using SimpleData;
 
 namespace Dawnx.AspNetCore.Test

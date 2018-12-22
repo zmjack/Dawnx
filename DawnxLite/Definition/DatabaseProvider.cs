@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Definition
+﻿namespace Dawnx.Definition
 {
     // Refer:(2018-12-10) https://docs.microsoft.com/en-us/ef/core/providers/index
     public static class DatabaseProvider

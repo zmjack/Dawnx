@@ -1,13 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.EntityFrameworkCore.Storage;
-using Remotion.Linq;
-using Remotion.Linq.Parsing.Structure;
-using Dawnx;
-using Dawnx.Reflection;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dawnx.AspNetCore

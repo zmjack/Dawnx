@@ -8,9 +8,6 @@ namespace Dawnx.Diagnostics
 {
     public class Concurrency
     {
-        public delegate void TaskDelegate(ConcurrencyResultId resultId);
-        public delegate TRet FuncDelegate<TRet>(ConcurrencyResultId resultId);
-
         public static ConcurrentDictionary<ConcurrencyResultId, int> Run(
             Action task,
             int level,
@@ -27,7 +24,7 @@ namespace Dawnx.Diagnostics
         /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
         /// <returns></returns>
         public static ConcurrentDictionary<ConcurrencyResultId, int> Run(
-            TaskDelegate task,
+            Action<ConcurrencyResultId> task,
             int level = 1,
             int threadCount = 0)
         {
@@ -51,7 +48,7 @@ namespace Dawnx.Diagnostics
         /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
         /// <returns></returns>
         public static ConcurrentDictionary<ConcurrencyResultId, TRet> Run<TRet>(
-            FuncDelegate<TRet> task,
+            Func<ConcurrencyResultId, TRet> task,
             int level,
             int threadCount)
         {

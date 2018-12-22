@@ -6,29 +6,37 @@ namespace Dawnx.Diagnostics
 {
     public abstract class ConcurrencyCase<TTaskRet>
     {
-        public string Name { get; }
         public abstract int Level { get; }
         public abstract int ThreadCount { get; }
         public abstract bool Validate(ConcurrentDictionary<ConcurrencyResultId, TTaskRet> result);
 
-        public ConcurrencyCase(string name) { Name = name; }
+        public virtual void BeforeRun() { }
+        public virtual void Complete() { }
 
         public ConcurrencyCaseResult<TTaskRet> Run(Func<TTaskRet> task)
         {
+            ConcurrentDictionary<ConcurrencyResultId, TTaskRet> taskReturns;
+
             var watch = new Stopwatch();
+            BeforeRun();
             watch.Start();
-            var taskReturns = Concurrency.Run(task, Level, ThreadCount);
+            taskReturns = Concurrency.Run(task, Level, ThreadCount);
             watch.Stop();
-            return new ConcurrencyCaseResult<TTaskRet>(Validate(taskReturns), taskReturns, watch.ElapsedMilliseconds);
+
+            return new ConcurrencyCaseResult<TTaskRet>(Validate(taskReturns), taskReturns, watch.Elapsed);
         }
 
-        public ConcurrencyCaseResult<TTaskRet> Run(Concurrency.FuncDelegate<TTaskRet> task)
+        public ConcurrencyCaseResult<TTaskRet> Run(Func<ConcurrencyResultId, TTaskRet> task)
         {
+            ConcurrentDictionary<ConcurrencyResultId, TTaskRet> taskReturns;
+
             var watch = new Stopwatch();
+            BeforeRun();
             watch.Start();
-            var taskReturns = Concurrency.Run(task, Level, ThreadCount);
+            taskReturns = Concurrency.Run(task, Level, ThreadCount);
             watch.Stop();
-            return new ConcurrencyCaseResult<TTaskRet>(Validate(taskReturns), taskReturns, watch.ElapsedMilliseconds);
+
+            return new ConcurrencyCaseResult<TTaskRet>(Validate(taskReturns), taskReturns, watch.Elapsed);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 
 namespace Dawnx.Diagnostics
 {
@@ -6,13 +7,13 @@ namespace Dawnx.Diagnostics
     {
         public bool IsValid { get; }
         public ConcurrentDictionary<ConcurrencyResultId, TTaskRet> TaskResults { get; }
-        public long ElapsedMilliseconds { get; }
+        public TimeSpan Elapsed { get; }
 
-        public ConcurrencyCaseResult(bool isValid, ConcurrentDictionary<ConcurrencyResultId, TTaskRet> taskResults, long elapsedMilliseconds)
+        public ConcurrencyCaseResult(bool isValid, ConcurrentDictionary<ConcurrencyResultId, TTaskRet> taskResults, TimeSpan elapsed)
         {
             IsValid = isValid;
             TaskResults = taskResults;
-            ElapsedMilliseconds = elapsedMilliseconds;
+            Elapsed = elapsed;
         }
     }
 }

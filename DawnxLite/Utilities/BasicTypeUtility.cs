@@ -21,6 +21,7 @@ namespace Dawnx.Utilities
         public const string @string = "System.String";
         public const string @decimal = "System.Decimal";
         public const string DateTime = "System.DateTime";
+        public const string Enum = "System.Enum";
 
         public static readonly string[] AllFullNames = new string[]
         {
@@ -29,12 +30,15 @@ namespace Dawnx.Utilities
             @int, @uint,
             @long, @ulong,
             @float, @double,
-            @string, @decimal, DateTime
+            @string, @decimal,
+            DateTime,
         };
         public static readonly string[] AllArrayFullNames = AllFullNames.Select(x => $"{x}[]").ToArray();
 
-        public static bool IsBasicType(object obj) => obj.GetType().FullName.In(AllFullNames);
-        public static bool IsBasicType(Type type) => type.FullName.In(AllFullNames);
+        public static bool IsBasicType(object obj)
+            => obj.GetType().FullName.In(AllFullNames) || obj.GetType().BaseType?.FullName == Enum;
+        public static bool IsBasicType(Type type)
+            => type.FullName.In(AllFullNames) || type.BaseType?.FullName == Enum;
 
         public static MethodInfo GetMethodForToString(Type type)
         {
@@ -55,8 +59,12 @@ namespace Dawnx.Utilities
                 case "System.String": return typeof(string).GetMethod("ToString");
                 case "System.Decimal": return typeof(decimal).GetMethod("ToString");
                 case "System.DateTime": return typeof(DateTime).GetMethod("ToString");
-                default: throw new NotSupportedException();
+                default:
+                    if (type.BaseType?.FullName == "System.Enum")
+                        return typeof(Enum).GetMethod("ToString");
+                    else throw new NotSupportedException();
             }
+
         }
 
     }

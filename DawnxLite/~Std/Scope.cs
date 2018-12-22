@@ -16,8 +16,6 @@ namespace Dawnx
         public Scope()
         {
             UseDoubleCheck.Do(
-                @lock: TypeTsLock<Scope<TSelf>>.InternString,
-                @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TSelf>>());
             Scopes.Push(this);
         }
@@ -46,8 +44,6 @@ namespace Dawnx
         public Scope(TModel model)
         {
             UseDoubleCheck.Do(
-                @lock: TypeTsLock<Scope<TModel, TSelf>>.InternString,
-                @if: () => Scopes is null,
                 then: () => Scopes = new Stack<Scope<TModel, TSelf>>());
             Model = model;
             Scopes.Push(this);

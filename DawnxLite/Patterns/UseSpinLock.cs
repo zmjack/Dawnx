@@ -23,6 +23,7 @@ namespace Dawnx.Patterns
         /// </summary>
         /// <param name="until"></param>
         /// <param name="task"></param>
+        /// <param name="frequency"></param>
         public static void Do(Action task, Func<bool> until, TimeSpan frequency)
         {
             do
@@ -52,6 +53,7 @@ namespace Dawnx.Patterns
         ///     do { $param=@task(); sleep(@frequency); } until(@until($param))
         /// </summary>
         /// <param name="until"></param>
+        /// <param name="task"></param>
         /// <param name="task"></param>
         public static TRet Do<TRet>(Func<TRet> task, Func<TRet, bool> until, TimeSpan frequency)
         {

@@ -8,10 +8,10 @@ namespace Dawnx.Patterns
         /// Do a task with Double-checked locking pattern:
         ///     if(@if) -> lock(@locker) -> if(@if) -> do(@then).
         /// </summary>
-        /// <param name="lock"></param>
         /// <param name="if"></param>
+        /// <param name="lock"></param>
         /// <param name="then"></param>
-        public static void Do(object @lock, Func<bool> @if, Action then)
+        public static void Do(Func<bool> @if, object @lock, Action then)
         {
             if (@if())
                 lock (@lock)

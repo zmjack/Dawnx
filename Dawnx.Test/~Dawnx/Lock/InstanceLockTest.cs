@@ -9,17 +9,20 @@ namespace Dawnx.Test.Lock
 {
     public class InstanceLockTest
     {
+        public enum Sex { Male, Female }
+
         public class Model
         {
             public int Year { get; set; }
             public int Month { get; set; }
             public object Obj { get; set; }
+            public Sex Sex { get; set; }
         }
 
         [Fact]
         public void Test()
         {
-            var ModelLock_YearMonth = new InstanceLock<Model>(x => x.Year, x => x.Month);
+            var ModelLock_YearMonth = new InstanceLock<Model>(x => x.Year, x => x.Month, x => x.Sex);
             var model = new Model { Year = 2012, Month = 4, };
 
             using (var probe = PerformanceProbe.Create())

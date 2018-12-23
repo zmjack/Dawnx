@@ -82,13 +82,19 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void Project()
+        public void Project1()
         {
             var regex = new Regex(@"(.+?)(?:(?=\()|(?=ги)|$)");
             Assert.Equal("zmjack", "zmjack(1)".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack (1)".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack (".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack".Project(regex).Trim());
+        }
+
+        [Fact]
+        public void Project2()
+        {
+            Assert.Equal("ja", "zmjack".Project(@"(ja)", "$1"));
         }
 
         [Fact]

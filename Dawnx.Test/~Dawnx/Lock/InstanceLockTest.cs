@@ -10,7 +10,7 @@ namespace Dawnx.Test.Lock
     public class InstanceLockTest
     {
         public enum Sex { Male, Female }
-
+        
         public class Model
         {
             public int Year { get; set; }

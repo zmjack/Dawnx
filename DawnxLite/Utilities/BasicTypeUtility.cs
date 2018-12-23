@@ -21,6 +21,7 @@ namespace Dawnx.Utilities
         public const string @string = "System.String";
         public const string @decimal = "System.Decimal";
         public const string DateTime = "System.DateTime";
+        public const string Guid = "System.Guid";
         public const string Enum = "System.Enum";
 
         public static readonly string[] AllFullNames = new string[]
@@ -31,7 +32,7 @@ namespace Dawnx.Utilities
             @long, @ulong,
             @float, @double,
             @string, @decimal,
-            DateTime,
+            DateTime, Guid,
         };
         public static readonly string[] AllArrayFullNames = AllFullNames.Select(x => $"{x}[]").ToArray();
 
@@ -59,6 +60,7 @@ namespace Dawnx.Utilities
                 case "System.String": return typeof(string).GetMethod("ToString");
                 case "System.Decimal": return typeof(decimal).GetMethod("ToString");
                 case "System.DateTime": return typeof(DateTime).GetMethod("ToString");
+                case "System.Guid": return typeof(Guid).GetMethod("ToString");
                 default:
                     if (type.BaseType?.FullName == "System.Enum")
                         return typeof(Enum).GetMethod("ToString");

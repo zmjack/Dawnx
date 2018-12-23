@@ -23,5 +23,6 @@ namespace Dawnx.Reflection
         object ConvertToUInt16(object source, ICustomAttributeProvider provider);
         object ConvertToUInt32(object source, ICustomAttributeProvider provider);
         object ConvertToUInt64(object source, ICustomAttributeProvider provider);
+        object ConvertToGuid(object source, ICustomAttributeProvider provider);
     }
 }

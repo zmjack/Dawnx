@@ -41,6 +41,7 @@ namespace Dawnx.Reflection
                 case BasicTypeUtility.@decimal: return ConvertToDecimal(source, provider);
                 case BasicTypeUtility.@string: return ConvertToString(source, provider);
                 case BasicTypeUtility.DateTime: return ConvertToDateTime(source, provider);
+                case BasicTypeUtility.Guid: return ConvertToGuid(source, provider);
                 default: return source;
             }
         }
@@ -90,6 +91,8 @@ namespace Dawnx.Reflection
             => ConvertTo(source, provider, System.Convert.ToString);
         public virtual object ConvertToDateTime(object source, ICustomAttributeProvider provider)
             => ConvertTo(source, provider, System.Convert.ToDateTime);
+        public virtual object ConvertToGuid(object source, ICustomAttributeProvider provider)
+            => ConvertTo(source, provider, obj => Guid.Parse(obj.ToString()));
 
     }
 }

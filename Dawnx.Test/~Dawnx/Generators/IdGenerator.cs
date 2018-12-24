@@ -15,7 +15,7 @@ namespace Dawnx.Test.Generators
             var generator = new IdGenerator<string>(() => DateTime.Now.Ticks.ToString());
             var level = 2000;
 
-            var result = Concurrency.Run(() =>
+            var result = Concurrency.Run(cid =>
             {
                 return generator.TakeOne();
             }, level: level);

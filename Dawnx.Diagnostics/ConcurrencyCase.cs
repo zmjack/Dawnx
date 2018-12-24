@@ -13,19 +13,6 @@ namespace Dawnx.Diagnostics
         public virtual void BeforeRun() { }
         public virtual void Complete() { }
 
-        public ConcurrencyCaseResult<TTaskRet> Run(Func<TTaskRet> task)
-        {
-            ConcurrentDictionary<ConcurrencyResultId, TTaskRet> taskReturns;
-
-            var watch = new Stopwatch();
-            BeforeRun();
-            watch.Start();
-            taskReturns = Concurrency.Run(task, Level, ThreadCount);
-            watch.Stop();
-
-            return new ConcurrencyCaseResult<TTaskRet>(Validate(taskReturns), taskReturns, watch.Elapsed);
-        }
-
         public ConcurrencyCaseResult<TTaskRet> Run(Func<ConcurrencyResultId, TTaskRet> task)
         {
             ConcurrentDictionary<ConcurrencyResultId, TTaskRet> taskReturns;

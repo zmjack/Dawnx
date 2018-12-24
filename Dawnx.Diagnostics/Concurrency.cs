@@ -8,37 +8,6 @@ namespace Dawnx.Diagnostics
 {
     public class Concurrency
     {
-        public static ConcurrentDictionary<ConcurrencyResultId, int> Run(
-            Action task,
-            int level,
-            int threadCount = 0)
-        {
-            return Run((resultId) => { task(); return 0; }, level, threadCount);
-        }
-
-        /// <summary>
-        /// Use mutil-thread to simulate concurrent scenarios.
-        /// </summary>
-        /// <param name="task"></param>
-        /// <param name="level"></param>
-        /// <param name="threadCount">If the value is 0, <see cref="Environment.ProcessorCount"/> will be used.</param>
-        /// <returns></returns>
-        public static ConcurrentDictionary<ConcurrencyResultId, int> Run(
-            Action<ConcurrencyResultId> task,
-            int level = 1,
-            int threadCount = 0)
-        {
-            return Run((resultId) => { task(resultId); return 0; }, level, threadCount);
-        }
-
-        public static ConcurrentDictionary<ConcurrencyResultId, TRet> Run<TRet>(
-            Func<TRet> task,
-            int level,
-            int threadCount = 0)
-        {
-            return Run((resultId) => task(), level, threadCount);
-        }
-
         /// <summary>
         /// Use mutil-thread to simulate concurrent scenarios.
         /// </summary>
@@ -50,7 +19,7 @@ namespace Dawnx.Diagnostics
         public static ConcurrentDictionary<ConcurrencyResultId, TRet> Run<TRet>(
             Func<ConcurrencyResultId, TRet> task,
             int level,
-            int threadCount)
+            int threadCount = 0)
         {
             if (level < 1)
                 throw new ArgumentException("The `level` must be greater than 0.");

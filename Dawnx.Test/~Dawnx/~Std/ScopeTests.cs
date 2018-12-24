@@ -29,7 +29,7 @@ namespace Dawnx.Test
         [Fact]
         public void ConcurrencyTest()
         {
-            Concurrency.Run(() =>
+            Concurrency.Run(cid =>
             {
                 Assert.Null(StringScope.Current);
                 using (new StringScope("outter"))
@@ -42,6 +42,7 @@ namespace Dawnx.Test
                         Assert.Equal(2, StringScope.Scopes.Count);
                     }
                 }
+                return 0;
             }, level: 20, threadCount: 4);
         }
 

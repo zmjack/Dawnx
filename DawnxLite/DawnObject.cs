@@ -50,23 +50,23 @@ namespace Dawnx
             => convert(@this);
 
         /// <summary>
-        /// Casts the element to the specified type through the specified ForMethod.
+        /// Casts the element to the specified type through the specified filter method.
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>
         /// <typeparam name="TRet"></typeparam>
         /// <param name="this"></param>
         /// <param name="convert"></param>
         /// <returns></returns>
-        public static TRet For<TSelf, TRet>(this TSelf @this, ForMethod<TSelf, TRet> forMethod)
+        public static TRet For<TSelf, TRet>(this TSelf @this, Func<TSelf, TRet>[] filters)
+            where TRet : class
         {
-            foreach (var project in forMethod.Filters)
+            foreach (var project in filters)
             {
                 var result = project(@this);
-                if (forMethod.Condition(result))
+                if (!(result is null))
                     return result;
             }
-
-            return forMethod.DefaultReturn(@this);
+            return null;
         }
 
         /// <summary>

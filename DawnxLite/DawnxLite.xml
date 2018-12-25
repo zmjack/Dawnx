@@ -338,6 +338,45 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnIEnumerable.DistinctByValue``1(System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Returns distinct elements from a sequence by using a specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.ExceptByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set difference of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.UnionByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set union of two sequences by using a specified properties.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.IntersectByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set intersection of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
             Do action for each item.
@@ -428,45 +467,6 @@
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnIEnumerable.DistinctByValue``1(System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Returns distinct elements from a sequence by using a specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="source"></param>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.ExceptByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Produces the set difference of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.UnionByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Produces the set union of two sequences by using a specified properties.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.IntersectByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Produces the set intersection of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.DawnInt32.IsOdd(System.Int32)">
             <summary>
             Returns whether the specified number is odd.
@@ -546,6 +546,45 @@
             <typeparam name="TSource"></typeparam>
             <param name="this"></param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.DistinctByValue``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Returns distinct elements from a sequence by using a specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.ExceptByValue``1(System.Linq.IQueryable{``0},System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set difference of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.UnionByValue``1(System.Linq.IQueryable{``0},System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set union of two sequences by using a specified properties.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.IntersectByValue``1(System.Linq.IQueryable{``0},System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Produces the set intersection of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="expression"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnJaggedArray.Each``1(``0[][],System.Action{``0,System.Int32,System.Int32})">
@@ -789,9 +828,9 @@
             <param name="convert"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnObject.For``2(``0,Dawnx.ForMethod{``0,``1})">
+        <member name="M:Dawnx.DawnObject.For``2(``0,System.Func{``0,``1}[])">
             <summary>
-            Casts the element to the specified type through the specified ForMethod.
+            Casts the element to the specified type through the specified filter method.
             </summary>
             <typeparam name="TSelf"></typeparam>
             <typeparam name="TRet"></typeparam>
@@ -1058,6 +1097,16 @@
             Returns a new string which is normalized by the newline string of current environment.
             </summary>
             <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetPureLines(System.String,System.Boolean)">
+            <summary>
+            Divides a string into multi-lines (ignore Empty or WhiteSpace). If the string is null, return string[0]. 
+            (Perhaps you should set `normalizeNewLine` to true to convert the NewLine 
+                which is defined in other system into the current system's.)
+            </summary>
+            <param name="this"></param>
+            <param name="normalizeNewLine"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.GetLines(System.String,System.Boolean)">

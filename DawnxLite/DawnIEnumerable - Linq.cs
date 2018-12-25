@@ -42,6 +42,48 @@ namespace Dawnx
         public static IEnumerable<TSource> WhereNot<TSource>(this IEnumerable<TSource> @this, Expression<Func<TSource, bool>> predicate)
             => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters).Compile());
 
+        /// <summary>
+        /// Returns distinct elements from a sequence by using a specified properties to compare values.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> DistinctByValue<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, object>> expression)
+                => Enumerable.Distinct(source, new ExactEqualityComparer<TSource>(expression));
+
+        /// <summary>
+        /// Produces the set difference of two sequences by using the specified properties to compare values.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> ExceptByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Expression<Func<TSource, object>> expression)
+            => Enumerable.Except(first, second, new ExactEqualityComparer<TSource>(expression));
+
+        /// <summary>
+        /// Produces the set union of two sequences by using a specified properties.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> UnionByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Expression<Func<TSource, object>> expression)
+            => Enumerable.Union(first, second, new ExactEqualityComparer<TSource>(expression));
+
+        /// <summary>
+        /// Produces the set intersection of two sequences by using the specified properties to compare values.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> IntersectByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Expression<Func<TSource, object>> expression)
+            => Enumerable.Intersect(first, second, new ExactEqualityComparer<TSource>(expression));
     }
 
 }

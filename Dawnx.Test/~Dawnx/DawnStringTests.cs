@@ -63,13 +63,25 @@ namespace Dawnx.Test
         {
             string nullString = null;
             Assert.Equal(new string[0], nullString.GetLines());
-            Assert.Equal(new[] { "123", "456" }, $"123{Environment.NewLine}456".GetLines());
-            Assert.Equal(new[] { "123", "456" }, $"123{Environment.NewLine}456{Environment.NewLine}".GetLines());
-            Assert.Equal(new[] { "123", "456", " " }, $"123{Environment.NewLine}456{Environment.NewLine} ".GetLines());
+            Assert.Equal(new[] { "1", "2" }, $"1{Environment.NewLine}2".GetLines());
+            Assert.Equal(new[] { "1", "2" }, $"1{Environment.NewLine}2{Environment.NewLine}".GetLines());
+            Assert.Equal(new[] { "1", " " }, $"1{Environment.NewLine} ".GetLines());
+            Assert.Equal(new[] { "", "1", " " }, $"{Environment.NewLine}1{Environment.NewLine} ".GetLines());
 
             Assert.Equal(new string[0], nullString.GetLines());
-            Assert.Equal(new[] { "123", "456" }, $"123{ControlChars.Lf}456".GetLines(true));
-            Assert.Equal(new[] { "123", "456" }, $"123{ControlChars.CrLf}456".GetLines(true));
+            Assert.Equal(new[] { "1", "2" }, $"1{ControlChars.Lf}2".GetLines(true));
+            Assert.Equal(new[] { "1", "2" }, $"1{ControlChars.CrLf}2".GetLines(true));
+        }
+
+        [Fact]
+        public void GetPureLines()
+        {
+            string nullString = null;
+            Assert.Equal(new string[0], nullString.GetPureLines());
+            Assert.Equal(new[] { "1", "2" }, $"1{Environment.NewLine}2".GetPureLines());
+            Assert.Equal(new[] { "1", "2" }, $"1{Environment.NewLine}2{Environment.NewLine}".GetPureLines());
+            Assert.Equal(new[] { "1" }, $"1{Environment.NewLine} ".GetPureLines());
+            Assert.Equal(new[] { "1" }, $"{Environment.NewLine}1{Environment.NewLine} ".GetPureLines());
         }
 
         [Fact]

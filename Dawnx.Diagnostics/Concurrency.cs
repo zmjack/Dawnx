@@ -42,8 +42,15 @@ namespace Dawnx.Diagnostics
                     foreach (var invokeNumber in IntegerRange.Create(s_count))
                     {
                         var threadId = Thread.CurrentThread.ManagedThreadId;
-                        var taskRet = task(new ConcurrencyResultId(threadId, invokeNumber));
-                        ret.GetOrAdd(new ConcurrencyResultId(threadId, invokeNumber), taskRet);
+                        try
+                        {
+                            var taskRet = task(new ConcurrencyResultId(threadId, invokeNumber));
+                            ret.GetOrAdd(new ConcurrencyResultId(threadId, invokeNumber), taskRet);
+                        }
+                        catch
+                        {
+                            ret.GetOrAdd(new ConcurrencyResultId(threadId, invokeNumber), default(TRet));
+                        }
                     }
                 });
             }
@@ -53,7 +60,8 @@ namespace Dawnx.Diagnostics
 
             UseSpinLock.Do(
                 task: () => { },
-                until: () => ret.Count == level);
+                until: () => ret.Count == level,
+                frequency: TimeSpan.FromSeconds(0.5));
 
             return ret;
         }

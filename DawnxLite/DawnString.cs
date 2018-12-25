@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -173,6 +174,17 @@ namespace Dawnx
         }
 
         /// <summary>
+        /// Divides a string into multi-lines (ignore Empty or WhiteSpace). If the string is null, return string[0]. 
+        /// (Perhaps you should set `normalizeNewLine` to true to convert the NewLine 
+        ///     which is defined in other system into the current system's.)
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="normalizeNewLine"></param>
+        /// <returns></returns>
+        public static IEnumerable<string> GetPureLines(this string @this, bool normalizeNewLine = false)
+            => GetLines(@this, normalizeNewLine, true);
+
+        /// <summary>
         /// Divides a string into multi-lines. If the string is null, return string[0]. 
         /// (Perhaps you should set `normalizeNewLine` to true to convert the NewLine 
         ///     which is defined in other system into the current system's.)
@@ -181,6 +193,9 @@ namespace Dawnx
         /// <param name="normalizeNewLine"></param>
         /// <returns></returns>
         public static IEnumerable<string> GetLines(this string @this, bool normalizeNewLine = false)
+            => GetLines(@this, normalizeNewLine, false);
+
+        private static IEnumerable<string> GetLines(this string @this, bool normalizeNewLine = false, bool ignoreEmptyOrWhiteSpace = false)
         {
             if (normalizeNewLine)
                 @this = @this.NormalizeNewLine();
@@ -193,12 +208,18 @@ namespace Dawnx
 
                 while ((findIndex = @this.IndexOf(Environment.NewLine, startIndex)) >= 0)
                 {
-                    yield return @this.Slice(startIndex, findIndex);
+                    var line = @this.Slice(startIndex, findIndex);
                     startIndex = findIndex + newLineLength;
+                    if (!(ignoreEmptyOrWhiteSpace && string.IsNullOrWhiteSpace(line)))
+                        yield return line;
                 }
 
                 if (startIndex != @this.Length)
-                    yield return @this.Slice(startIndex, @this.Length);
+                {
+                    var line = @this.Slice(startIndex, @this.Length);
+                    if (!(ignoreEmptyOrWhiteSpace && string.IsNullOrWhiteSpace(line)))
+                        yield return line;
+                }
             }
         }
 

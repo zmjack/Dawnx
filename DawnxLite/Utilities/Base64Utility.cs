@@ -23,7 +23,7 @@ namespace Dawnx.Utilities
         /// <returns></returns>
         public static string ConvertUrlBase64ToBase64(string urlBase64)
         {
-            var padding = "=".Replicate((urlBase64.Length % 4).For(_ =>
+            var padding = "=".Repeat((urlBase64.Length % 4).For(_ =>
             {
                 switch (_)
                 {

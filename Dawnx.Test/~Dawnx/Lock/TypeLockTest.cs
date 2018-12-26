@@ -28,7 +28,7 @@ namespace Dawnx.Test.Lock
 
                 Assert.Equal(1, result.Values.Count(x => x == "Entered"));
                 Assert.Equal(1, result.Values.Count(x => x == "Exception"));
-                Assert.True(probe.ElapsedMilliseconds < 1500);
+                Assert.True(probe.ElapsedMilliseconds < 1900);
             }
         }
 

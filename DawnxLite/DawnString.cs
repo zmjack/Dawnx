@@ -134,7 +134,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="times"></param>
         /// <returns></returns>
-        public static string Replicate(this string @this, int times)
+        public static string Repeat(this string @this, int times)
         {
             var sb = new StringBuilder(@this.Length * times);
             for (int i = 0; i < times; i++)
@@ -231,6 +231,50 @@ namespace Dawnx
         /// <returns></returns>
         public static string Unique(this string @this)
             => new Regex(@"[\s]{2,}").Replace(@this.NormalizeNewLine().Replace(Environment.NewLine, " ").Trim(), " ");
+
+        /// <summary>
+        /// In a specified input string, replaces all strings that match a regular expression
+        //      pattern with a specified replacement string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name="replacement"></param>
+        /// <returns></returns>
+        public static string RegexReplace(this string @this, string regex, string replacement)
+            => new Regex(regex, RegexOptions.Singleline).Replace(@this, replacement);
+
+        /// <summary>
+        /// In a specified input string, replaces all strings that match a regular expression
+        //      pattern with a specified replacement string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name="replacement"></param>
+        /// <returns></returns>
+        public static string RegexReplace(this string @this, Regex regex, string replacement)
+            => regex.Replace(@this, replacement);
+
+        /// <summary>
+        /// In a specified input string, replaces all strings that match a regular expression
+        //      pattern with a specified replacement string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name="replacement"></param>
+        /// <returns></returns>
+        public static string RegexReplace(this string @this, string regex, MatchEvaluator evaluator)
+            => new Regex(regex, RegexOptions.Singleline).Replace(@this, evaluator);
+
+        /// <summary>
+        /// In a specified input string, replaces all strings that match a regular expression
+        //      pattern with a specified replacement string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name="replacement"></param>
+        /// <returns></returns>
+        public static string RegexReplace(this string @this, Regex regex, MatchEvaluator evaluator)
+            => regex.Replace(@this, evaluator);
 
         /// <summary>
         /// Projects the specified string to a new string by using regular expressions (using Single-line Mode).

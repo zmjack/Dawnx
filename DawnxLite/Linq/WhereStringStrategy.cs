@@ -25,8 +25,9 @@ namespace Dawnx.Linq
             if (expression is ParameterExpression)
                 return new[] { expression as ParameterExpression };
 
+            //TODO: Maybe this expression can be converted to another expression in static.
             if (expression.NodeType == ExpressionType.Lambda)
-                return Enumerable.ToArray(((dynamic)expression).Parameters);
+                return Enumerable.ToArray((expression as LambdaExpression).Parameters);
 
             switch (expression)
             {

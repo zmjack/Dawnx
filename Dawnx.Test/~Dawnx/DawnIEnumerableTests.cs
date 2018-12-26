@@ -51,5 +51,12 @@ namespace Dawnx.Test
             Assert.Equal(IntegerRange.Create(5, 10), items.SelectPage(2, 5).ToArray());
         }
 
+        [Fact]
+        public void DistinctByValueTest()
+        {
+            var s = new[] { "a1", "a2", "b1", "b2" };
+            Assert.Equal(new[] { "a1", "b1" }, s.DistinctByValue(x => x.CharAt(0)));
+        }
+
     }
 }

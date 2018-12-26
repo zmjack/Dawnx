@@ -13,7 +13,7 @@ namespace Dawnx.Test
         {
             var ds = "123";
 
-            Assert.Equal("123123123", ds.Replicate(3));
+            Assert.Equal("123123123", ds.Repeat(3));
             Assert.Equal("12", ds.Slice(0, -1));
             Assert.Equal("1", ds.Slice(0, 1));
             Assert.Equal("23", ds.Slice(1));

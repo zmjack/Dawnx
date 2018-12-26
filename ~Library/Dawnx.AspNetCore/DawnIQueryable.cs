@@ -62,7 +62,6 @@ namespace Dawnx.AspNetCore
         /// <param name="this"></param>
         /// <returns></returns>
         public static string ToSql<TEntity>(this IQueryable<TEntity> @this)
-            where TEntity : class
         {
             if (@this is EntityQueryable<TEntity>)
             {

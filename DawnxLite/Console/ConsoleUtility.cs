@@ -81,7 +81,7 @@ namespace Dawnx.Con
                 }
                 else
                 {
-                    Console.Write("─".Replicate(lengths[i] + TABLE_CELL_PADDING_LENGTH * 2));
+                    Console.Write("─".Repeat(lengths[i] + TABLE_CELL_PADDING_LENGTH * 2));
                 }
 
                 if (i == ubound) Console.Write(format[2]);

@@ -104,10 +104,10 @@ namespace Dawnx.Utilities
                 for (int count = toLength; count >= fromLength; count--)
                 {
                     if (count == toLength)
-                        parts.Add(NumberRange($"1{"0".Replicate(count - 1)}", to));
+                        parts.Add(NumberRange($"1{"0".Repeat(count - 1)}", to));
                     else if (count == fromLength)
-                        parts.Add(NumberRange(from, "9".Replicate(count)));
-                    else parts.Add("\\d".Replicate(count));
+                        parts.Add(NumberRange(from, "9".Repeat(count)));
+                    else parts.Add("\\d".Repeat(count));
                 }
                 return parts.Join("|");
             }

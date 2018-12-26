@@ -30,22 +30,7 @@ namespace Dawnx.AspNetCore.Data
             TableAlias = match.Groups[3].Value;
             WhereString = match.Groups[4].Value.Replace(TableAlias, TableName);
         }
-
-        public UpdateWrapper<TEntity> Update() => new UpdateWrapper<TEntity>(this);
-        public DeleteWrapper<TEntity> WrapDelete() => new DeleteWrapper<TEntity>(this);
-
-        public int Update(Action<UpdateWrapper<TEntity>> setter)
-        {
-            var wrapper = Update();
-            setter(wrapper);
-            return DbContext.Database.ExecuteSqlCommand(wrapper.ToSql());
-        }
-
-        public int Delete()
-        {
-            var wrapper = WrapDelete();
-            return DbContext.Database.ExecuteSqlCommand(wrapper.ToSql());
-        }
+    
     }
 
 }

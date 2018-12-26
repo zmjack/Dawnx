@@ -20,6 +20,6 @@ namespace Dawnx.AspNetCore.Data
             return $"DELETE FROM {WhereWrapper.TableName} WHERE {WhereWrapper.WhereString}";
         }
 
-        public int Execute() => WhereWrapper.DbContext.Database.ExecuteSqlCommand(ToSql());
+        public int Save() => WhereWrapper.DbContext.Database.ExecuteSqlCommand(ToSql());
     }
 }

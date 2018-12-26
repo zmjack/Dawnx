@@ -51,7 +51,7 @@ namespace DawnxDevloping
             {
                 var query = sqlite.Test.TryDelete(x => x.Type == "C");
                 Console.WriteLine(query.ToSql());
-                Console.WriteLine(query.Execute());
+                Console.WriteLine(query.Save());
             }
 
             //using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))

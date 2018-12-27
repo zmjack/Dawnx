@@ -25,46 +25,34 @@ namespace DawnxDevloping
 {
     class Program
     {
-        class DB : DbContext
-        {
-            public DB()
-                : base(new DbContextOptionsBuilder()
-                .UseSqlite("filename=C:/Users/19558/Documents/aa.db").Options)
-            //.UseMySql("server=.").Options)
-            {
-            }
-
-            public DbSet<Test> Test { get; set; }
-        }
-
-        public class Test : IEntity
-        {
-            [Key]
-            public int Id { get; set; }
-
-            public string Type { get; set; }
-
-            public int Data { get; set; }
-        }
-
         static void Main(string[] args)
         {
-            using (var sqlite = new DB())
+            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
+            using (var mysql = new NorthwndContext(new DbContextOptionsBuilder()
+                .UseMySql("server=127.0.0.1;database=Northwnd").Options))
             {
-                //var max = sqlite.Test.Max(y => y.Data);
-                //var query = sqlite.Test.Where(x => x.Data == max);
+                //var max = mysql.Order_Details.Max(y => y.UnitPrice);
+                //var query = mysql.Order_Details.Where(x => x.UnitPrice == max);
 
-                var max = sqlite.Test
-                    .GroupBy(x => x.Type)
+                var max = mysql.Order_Details
+                    .GroupBy(x => x.OrderID)
                     .Select(g => new
                     {
                         g.Key,
-                        max_Data = g.Max(x => x.Data),
-                    }).Select(x => $"{x.Key.ToString()} {x.max_Data}");
+                        max_Data = g.Max(x => x.UnitPrice),
+                    }).ToArray().Select(x => $"{x.Key.ToString()} {x.max_Data}");
+                //Console.WriteLine(max);
 
+                //max = sqlite.Order_Details
+                //    .GroupBy(x => x.OrderID)
+                //    .Select(g => new
+                //    {
+                //        g.Key,
+                //        max_Data = g.Max(x => x.UnitPrice),
+                //    }).ToArray().Select(x => $"{x.Key.ToString()} {x.max_Data}");
 
-                var query = sqlite.Test
-                    .Where(x => max.Contains(x.Type.ToString() + " " + x.Data));
+                var query = mysql.Order_Details
+                    .Where(x => max.Contains(x.OrderID + " " + x.UnitPrice));
 
                 //var query = sqlite.Test.GroupBy(x => new { x.Type, x.Data }).Select(g => new
                 //{
@@ -72,10 +60,11 @@ namespace DawnxDevloping
                 //    Max = g.Max(gx => gx.Data),
                 //});
 
-
-                var result = query.ToArray();
                 Console.WriteLine(query.ToSql());
-                Console.WriteLine(result.Select(x => x.Id).Join(" "));
+
+                //var result = query.ToArray();
+                //Console.WriteLine(query.ToSql());
+                //Console.WriteLine(result.Count());
             }
 
             //using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))

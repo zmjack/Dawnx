@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dawnx.Utilities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,8 +27,13 @@ namespace Dawnx.AspNetCore.Data
             if (expression.Body.NodeType == ExpressionType.MemberAccess)
             {
                 var body = (expression.Body as MemberExpression).Member;
-                FieldChanges.Add(body.GetCustomAttribute<ColumnAttribute>()?.Name ?? body.Name,
-                    $"{WhereWrapper.ReferenceTag}{value.ToString()}{WhereWrapper.ReferenceTag}");
+                string setValue;
+
+                if (BasicTypeUtility.IsNumberType(value))
+                    setValue = value.ToString();
+                else setValue = $"'{value.ToString()}'";
+
+                FieldChanges.Add(body.GetCustomAttribute<ColumnAttribute>()?.Name ?? body.Name, setValue);
             }
             return this;
         }
@@ -37,7 +43,11 @@ namespace Dawnx.AspNetCore.Data
             if (!FieldChanges.Any())
                 throw new ArgumentException("The `set` statement is null.");
 
-            var set = FieldChanges.Select(x => $"{WhereWrapper.ReferenceTag}{x.Key}{WhereWrapper.ReferenceTag}={x.Value}").Join(",");
+            var set = FieldChanges.Select(x =>
+            {
+                var key = $"{WhereWrapper.ReferenceTagA}{x.Key}{WhereWrapper.ReferenceTagB}";
+                return $"{key}={x.Value.ToString()}";
+            }).Join(",");
             return $"UPDATE {WhereWrapper.TableName} SET {set} WHERE {WhereWrapper.WhereString}";
         }
 

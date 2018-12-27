@@ -28,7 +28,9 @@ namespace DawnxDevloping
         class DB : DbContext
         {
             public DB()
-                : base(new DbContextOptionsBuilder().UseSqlite("filename=C:/Users/19558/Documents/aa.db").Options)
+                : base(new DbContextOptionsBuilder()
+                .UseSqlite("filename=C:/Users/19558/Documents/aa.db").Options)
+            //.UseMySql("server=.").Options)
             {
             }
 
@@ -42,28 +44,52 @@ namespace DawnxDevloping
 
             public string Type { get; set; }
 
-            public string Data { get; set; }
+            public int Data { get; set; }
         }
 
         static void Main(string[] args)
         {
             using (var sqlite = new DB())
             {
-                var query = sqlite.Test.TryDelete(x => x.Type == "C");
+                //var max = sqlite.Test.Max(y => y.Data);
+                //var query = sqlite.Test.Where(x => x.Data == max);
+
+                var max = sqlite.Test
+                    .GroupBy(x => x.Type)
+                    .Select(g => new
+                    {
+                        g.Key,
+                        max_Data = g.Max(x => x.Data),
+                    }).Select(x => $"{x.Key.ToString()} {x.max_Data}");
+
+
+                var query = sqlite.Test
+                    .Where(x => max.Contains(x.Type.ToString() + " " + x.Data));
+
+                //var query = sqlite.Test.GroupBy(x => new { x.Type, x.Data }).Select(g => new
+                //{
+                //    g.Key,
+                //    Max = g.Max(gx => gx.Data),
+                //});
+
+
+                var result = query.ToArray();
                 Console.WriteLine(query.ToSql());
-                Console.WriteLine(query.Save());
+                Console.WriteLine(result.Select(x => x.Id).Join(" "));
             }
 
             //using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
+            //using (var sqlite = new NorthwndContext(
+            //    new DbContextOptionsBuilder().UseSqlite("server=.").Options))
             //{
-            //    var query = sqlite.Orders
-            //        .TryUpdate(x => x.Order_Details.Any(y => y.OrderID == 10248))
-            //        .Set(x => x.ShipCity, "Reims");
+            //    var query = sqlite.Order_Details
+            //        .GroupBy(x => x.OrderID)
+            //        .Take(2);
             //    var sql = query.ToSql();
             //    //var result = query.ToArray();
 
             //    Console.WriteLine(sql);
-            //    Console.WriteLine(query.Execute());
+            //    //Console.WriteLine(query.Save());
             //}
         }
 

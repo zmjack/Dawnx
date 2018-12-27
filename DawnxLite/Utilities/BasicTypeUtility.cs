@@ -36,10 +36,24 @@ namespace Dawnx.Utilities
         };
         public static readonly string[] AllArrayFullNames = AllFullNames.Select(x => $"{x}[]").ToArray();
 
+        public static readonly string[] NumberTypeNames = new string[]
+        {
+            @byte, @sbyte,
+            @short, @ushort,
+            @int, @uint,
+            @long, @ulong,
+            @float, @double,
+            @decimal,
+        };
+        public static readonly string[] NumberTypeArrayNames = NumberTypeNames.Select(x => $"{x}[]").ToArray();
+
         public static bool IsBasicType(object obj)
             => obj.GetType().FullName.In(AllFullNames) || obj.GetType().BaseType?.FullName == Enum;
         public static bool IsBasicType(Type type)
             => type.FullName.In(AllFullNames) || type.BaseType?.FullName == Enum;
+
+        public static bool IsNumberType(object obj) => obj.GetType().FullName.In(NumberTypeNames);
+        public static bool IsNumberType(Type type) => type.FullName.In(NumberTypeNames);
 
         public static MethodInfo GetMethodForToString(Type type)
         {

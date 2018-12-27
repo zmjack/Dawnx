@@ -113,5 +113,35 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
 - **WhereAfter**
 
-- **WhereIn**
+- **WhereMax**
+
+- **WhereMin**
+
+- **TryUpdate**
+
+  ```C#
+  sqlite.Orders
+  	.TryUpdate(x => x.Order_Details.Any(y => y.Discount >= 0.02))
+      .Set(x => x.ShipCity, "Reims");
+  ```
+
+  ```sqlite
+  UPDATE "Orders" SET "ShipCity"='Reims' WHERE EXISTS (
+      SELECT 1
+      FROM "Order Details" AS "y"
+      WHERE ("y"."Discount" >= 0.02) AND ("Orders"."OrderID" = "y"."OrderID"));
+  ```
+
+- **TryDelete**
+
+  ```C#
+  sqlite.Orders.TryDelete(x => x.Order_Details.Any(y => y.Discount >= 0.02));
+  ```
+
+  ```sqlite
+  DELETE FROM "Orders" WHERE EXISTS (
+      SELECT 1
+      FROM "Order Details" AS "y"
+      WHERE ("y"."Discount" >= 0.02) AND ("Orders"."OrderID" = "y"."OrderID"));
+  ```
 

@@ -35,24 +35,9 @@ namespace DawnxDevloping
                 //var max = mysql.Order_Details.Max(y => y.UnitPrice);
                 //var query = mysql.Order_Details.Where(x => x.UnitPrice == max);
 
-                Console.WriteLine(
-                sqlite.Employees.GroupBy(x => x.TitleOfCourtesy)
-    .Select(g => new
-    {
-        TitleOfCourtesy = g.Key,
-        BirthDate = g.Max(x => x.BirthDate),
-    }).ToSql());
+                var query = sqlite.Employees.Where(x => !x.BirthDate.HasValue);
+                var sql = query.ToSql();
 
-                var groupMaxArray = sqlite.Employees.WhereGroupMax(_ => _
-                    .GroupBy(x => x.TitleOfCourtesy)
-                    .Select(g => new
-                    {
-                        TitleOfCourtesy = g.Key,
-                        BirthDate = g.Max(x => x.BirthDate),
-                    }));
-
-                var query = groupMaxArray.ToArray();
-                var sql = groupMaxArray.ToSql();
                 Console.WriteLine(sql);
             }
 

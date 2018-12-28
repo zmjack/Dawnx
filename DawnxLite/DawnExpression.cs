@@ -19,15 +19,15 @@ namespace Dawnx
             var parameter = @this.First().Parameters[0];
 
             return Expression.Lambda(@this.Aggregate(null as Expression, (acc, exp) =>
-           {
-               if (acc is null)
-                   return exp.Body;
-               else
-               {
-                   var rebindExp = RebindParameter(exp, exp.Parameters[0], parameter);
-                   return binary(acc, rebindExp.Body);
-               }
-           }), parameter) as TLambdaExpression;
+            {
+                if (acc is null)
+                    return exp.Body;
+                else
+                {
+                    var rebindExp = RebindParameter(exp, exp.Parameters[0], parameter);
+                    return binary(acc, rebindExp.Body);
+                }
+            }), parameter) as TLambdaExpression;
         }
     }
 

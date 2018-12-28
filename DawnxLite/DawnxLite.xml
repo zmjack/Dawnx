@@ -548,45 +548,6 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnIQueryable.DistinctByValue``1(System.Linq.IQueryable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Returns distinct elements from a sequence by using a specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="source"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.ExceptByValue``1(System.Linq.IQueryable{``0},System.Linq.IQueryable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Produces the set difference of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.UnionByValue``1(System.Linq.IQueryable{``0},System.Linq.IQueryable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Produces the set union of two sequences by using a specified properties.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.IntersectByValue``1(System.Linq.IQueryable{``0},System.Linq.IQueryable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Produces the set intersection of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.DawnJaggedArray.Each``1(``0[][],System.Action{``0,System.Int32,System.Int32})">
             <summary>
             Do action for each item of multidimensional array.
@@ -835,7 +796,7 @@
             <typeparam name="TSelf"></typeparam>
             <typeparam name="TRet"></typeparam>
             <param name="this"></param>
-            <param name="convert"></param>
+            <param name="filters"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnObject.In``1(``0,``0[])">
@@ -844,7 +805,7 @@
             </summary>
             <typeparam name="TSource"></typeparam>
             <param name="this"></param>
-            <param name="enumerable"></param>
+            <param name="sequence"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnObject.In``1(``0,System.Collections.Generic.IEnumerable{``0})">
@@ -853,12 +814,26 @@
             </summary>
             <typeparam name="TSource"></typeparam>
             <param name="this"></param>
-            <param name="enumerable"></param>
+            <param name="sequence"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnObject.ToExpandoObject(System.Object)">
             <summary>
             Converts the specified object to <see cref="T:System.Dynamic.ExpandoObject"/>.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.GetDictionaryFromAnonymous(System.Object)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.Dictionary`2"/> from an anonymouse type.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnObject.GetLinearDictionaryFromAnonymous(System.Object)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.Dictionary`2"/> from an anonymouse type.
             </summary>
             <param name="this"></param>
             <returns></returns>

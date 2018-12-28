@@ -24,7 +24,7 @@ namespace Dawnx.Utilities
         public const string Guid = "System.Guid";
         public const string Enum = "System.Enum";
 
-        public static readonly string[] AllFullNames = new string[]
+        public static readonly string[] FullNames = new string[]
         {
             @bool, @byte, @sbyte, @char,
             @short, @ushort,
@@ -34,9 +34,13 @@ namespace Dawnx.Utilities
             @string, @decimal,
             DateTime, Guid,
         };
-        public static readonly string[] AllArrayFullNames = AllFullNames.Select(x => $"{x}[]").ToArray();
+        public static readonly string[] ArrayFullNames = FullNames.Select(x => $"{x}[]").ToArray();
 
-        public static readonly string[] NumberTypeNames = new string[]
+        public static readonly string[] FullNames_AddNullables = FullNames.Select(x =>
+            $"System.Nullable`1[[{x}, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]").ToArray();
+        public static readonly string[] ArrayFullNames_AddNullables = FullNames_AddNullables.Select(x => $"{x}[]").ToArray();
+
+        public static readonly string[] NumberFullNames = new string[]
         {
             @byte, @sbyte,
             @short, @ushort,
@@ -45,38 +49,57 @@ namespace Dawnx.Utilities
             @float, @double,
             @decimal,
         };
-        public static readonly string[] NumberTypeArrayNames = NumberTypeNames.Select(x => $"{x}[]").ToArray();
+        public static readonly string[] NumberArrayFullNames = NumberFullNames.Select(x => $"{x}[]").ToArray();
 
-        public static bool IsBasicType(object obj)
-            => obj.GetType().FullName.In(AllFullNames) || obj.GetType().BaseType?.FullName == Enum;
-        public static bool IsBasicType(Type type)
-            => type.FullName.In(AllFullNames) || type.BaseType?.FullName == Enum;
+        public static readonly string[] NumberFullNames_AddNullables = NumberFullNames.Select(x =>
+            $"System.Nullable`1[[{x}, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]").ToArray();
+        public static readonly string[] NumberArrayFullNames_AddNullables = NumberFullNames_AddNullables.Select(x => $"{x}[]").ToArray();
 
-        public static bool IsNumberType(object obj) => obj.GetType().FullName.In(NumberTypeNames);
-        public static bool IsNumberType(Type type) => type.FullName.In(NumberTypeNames);
+        public static bool IsBasicType(object obj, bool includeNullable = false) => IsBasicType(obj.GetType(), includeNullable);
+        public static bool IsBasicType(Type type, bool includeNullable = false)
+        {
+            var ret = FullNames.Contains(type.FullName) || type.BaseType?.FullName == Enum;
+
+            if (includeNullable)
+                return ret || FullNames_AddNullables.Contains(type.FullName);
+            else return ret;
+        }
+
+        public static bool IsNumberType(object obj, bool includeNullable = false) => IsNumberType(obj.GetType(), includeNullable);
+        public static bool IsNumberType(Type type, bool includeNullable = false)
+        {
+            var ret = NumberFullNames.Contains(type.FullName);
+
+            if (includeNullable)
+                return ret || NumberFullNames_AddNullables.Contains(type.FullName);
+            else return ret;
+        }
+
+        public static bool IsNullableType(object obj) => IsNullableType(obj.GetType());
+        public static bool IsNullableType(Type type) => type.FullName.StartsWith("System.Nullable");
 
         public static MethodInfo GetMethodForToString(Type type)
         {
             switch (type.FullName)
             {
-                case "System.Boolean": return typeof(bool).GetMethod("ToString");
-                case "System.Byte": return typeof(byte).GetMethod("ToString");
-                case "System.SByte": return typeof(sbyte).GetMethod("ToString");
-                case "System.Char": return typeof(char).GetMethod("ToString");
-                case "System.Int16": return typeof(short).GetMethod("ToString");
-                case "System.UInt16": return typeof(ushort).GetMethod("ToString");
-                case "System.Int32": return typeof(int).GetMethod("ToString");
-                case "System.UInt32": return typeof(uint).GetMethod("ToString");
-                case "System.Int64": return typeof(long).GetMethod("ToString");
-                case "System.UInt64": return typeof(ulong).GetMethod("ToString");
-                case "System.Single": return typeof(float).GetMethod("ToString");
-                case "System.Double": return typeof(double).GetMethod("ToString");
-                case "System.String": return typeof(string).GetMethod("ToString");
-                case "System.Decimal": return typeof(decimal).GetMethod("ToString");
-                case "System.DateTime": return typeof(DateTime).GetMethod("ToString");
-                case "System.Guid": return typeof(Guid).GetMethod("ToString");
+                case @bool: return typeof(bool).GetMethod("ToString");
+                case @byte: return typeof(byte).GetMethod("ToString");
+                case @sbyte: return typeof(sbyte).GetMethod("ToString");
+                case @char: return typeof(char).GetMethod("ToString");
+                case @short: return typeof(short).GetMethod("ToString");
+                case @ushort: return typeof(ushort).GetMethod("ToString");
+                case @int: return typeof(int).GetMethod("ToString");
+                case @uint: return typeof(uint).GetMethod("ToString");
+                case @long: return typeof(long).GetMethod("ToString");
+                case @ulong: return typeof(ulong).GetMethod("ToString");
+                case @float: return typeof(float).GetMethod("ToString");
+                case @double: return typeof(double).GetMethod("ToString");
+                case @string: return typeof(string).GetMethod("ToString");
+                case @decimal: return typeof(decimal).GetMethod("ToString");
+                case DateTime: return typeof(DateTime).GetMethod("ToString");
+                case Guid: return typeof(Guid).GetMethod("ToString");
                 default:
-                    if (type.BaseType?.FullName == "System.Enum")
+                    if (type.BaseType?.FullName == Enum)
                         return typeof(Enum).GetMethod("ToString");
                     else throw new NotSupportedException();
             }

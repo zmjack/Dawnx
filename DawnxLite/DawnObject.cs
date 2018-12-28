@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace Dawnx
         /// <typeparam name="TSelf"></typeparam>
         /// <typeparam name="TRet"></typeparam>
         /// <param name="this"></param>
-        /// <param name="convert"></param>
+        /// <param name="filters"></param>
         /// <returns></returns>
         public static TRet For<TSelf, TRet>(this TSelf @this, Func<TSelf, TRet>[] filters)
             where TRet : class
@@ -74,7 +75,7 @@ namespace Dawnx
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <param name="this"></param>
-        /// <param name="enumerable"></param>
+        /// <param name="sequence"></param>
         /// <returns></returns>
         public static bool In<TSource>(this TSource @this, params TSource[] sequence)
             => sequence.Contains(@this);
@@ -84,7 +85,7 @@ namespace Dawnx
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <param name="this"></param>
-        /// <param name="enumerable"></param>
+        /// <param name="sequence"></param>
         /// <returns></returns>
         public static bool In<TSource>(this TSource @this, IEnumerable<TSource> sequence)
             => sequence.Contains(@this);

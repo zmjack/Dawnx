@@ -71,7 +71,7 @@ namespace Dawnx.Linq
                     // If the T of IEnumerable<T> is not string,
                     // use System.Linq.Enumerable.Select method to convert it into string
                     var selectMethod = typeof(Enumerable)
-                        .GetMethodViaFormatName("System.Collections.Generic.IEnumerable`1[TResult] Select[TSource,TResult](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,TResult])")
+                        .GetMethodViaQualifiedName("System.Collections.Generic.IEnumerable`1[TResult] Select[TSource,TResult](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,TResult])")
                         .MakeGenericMethod(ienumerableGenericType, typeof(string));
 
                     var parameter = Expression.Parameter(ienumerableGenericType);

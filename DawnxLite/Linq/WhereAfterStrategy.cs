@@ -11,7 +11,7 @@ namespace Dawnx.Linq
         public Expression<Func<TEntity, bool>> StrategyExpression { get; }
 
         private static MethodInfo _Method_op_LessThan
-            = typeof(DateTime).GetMethodViaFormatName("Boolean op_LessThan(System.DateTime, System.DateTime)");
+            = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_LessThan(System.DateTime, System.DateTime)");
 
         public WhereAfterStrategy(
             Expression<Func<TEntity, DateTime>> memberExp,

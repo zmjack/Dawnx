@@ -20,7 +20,7 @@ namespace Dawnx.Linq
                 {
                     var parameter = Expression.Parameter(typeof(string));
                     var anyMethod = typeof(Enumerable)
-                        .GetMethodViaFormatName("Boolean Any[TSource](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,System.Boolean])")
+                        .GetMethodViaQualifiedName("Boolean Any[TSource](System.Collections.Generic.IEnumerable`1[TSource], System.Func`2[TSource,System.Boolean])")
                         .MakeGenericMethod(typeof(string));
                     var lambda = Expression.Lambda<Func<string, bool>>(
                         Expression.Call(parameter, typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), secharStringExp), parameter);

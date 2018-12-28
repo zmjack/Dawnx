@@ -6,7 +6,7 @@ namespace Dawnx.Reflection
 {
     public static class Reflection_DawnType
     {
-        public static MethodInfo GetMethodViaFormatName(this Type @this, string formatName)
+        public static MethodInfo GetMethodViaQualifiedName(this Type @this, string formatName)
         {
             return @this.GetMethods().First(x => x.ToString() == formatName);
         }

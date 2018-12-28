@@ -119,7 +119,33 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
 - **OrderByCase**
 
-- 
+- **WhereGroupMax**
+
+  ```C#
+  sqlite.Employees.WhereGroupMax(_ => _
+  	.GroupBy(x => x.TitleOfCourtesy)
+  	.Select(g => new
+  	{
+  		TitleOfCourtesy = g.Key,
+  		BirthDate = g.Max(x => x.BirthDate),
+  	}));
+  ```
+
+  This invoke will generated two SQL string, the first is:
+
+  ```sqlite
+  SELECT "x"."TitleOfCourtesy", MAX("x"."BirthDate") AS "BirthDate"
+  FROM "Employees" AS "x"
+  GROUP BY "x"."TitleOfCourtesy";
+  ```
+
+  the follow SQL will use all the field of the first result as it's where condition. So, the follow SQL string is:
+
+  ```sqlite
+  SELECT "e"."EmployeeID", "e"."Address", "e"."BirthDate", "e"."City", "e"."Country", "e"."Extension", "e"."FirstName", "e"."HireDate", "e"."HomePhone", "e"."LastName", "e"."Notes", "e"."Photo", "e"."PhotoPath", "e"."PostalCode", "e"."Region", "e"."ReportsTo", "e"."Title", "e"."TitleOfCourtesy"
+  FROM "Employees" AS "e"
+  WHERE (((("e"."TitleOfCourtesy" = 'Dr.') AND ("e"."BirthDate" = '1952-02-19 00:00:00')) OR (("e"."TitleOfCourtesy" = 'Mr.') AND ("e"."BirthDate" = '1963-07-02 00:00:00'))) OR (("e"."TitleOfCourtesy" = 'Mrs.') AND ("e"."BirthDate" = '1937-09-19 00:00:00'))) OR (("e"."TitleOfCourtesy" = 'Ms.') AND ("e"."BirthDate" = '1966-01-27 00:00:00'));
+  ```
 
 - **TryUpdate**
 

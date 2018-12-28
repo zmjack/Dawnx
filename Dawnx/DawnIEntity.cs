@@ -35,7 +35,7 @@ namespace Dawnx
                             nameof(TrackLastWriteTimeAttribute)
                         }));
                 }))
-                .Where(x => x.PropertyType.FullName.In(BasicTypeUtility.AllFullNames) || x.PropertyType.IsValueType);
+                .Where(x => x.PropertyType.FullName.In(BasicTypeUtility.FullNames) || x.PropertyType.IsValueType);
 
             // Copy values
             foreach (var prop in props)
@@ -124,7 +124,7 @@ namespace Dawnx
                             nameof(TrackLastWriteTimeAttribute)
                         }));
                 }))
-                .Where(x => x.PropertyType.FullName.In(BasicTypeUtility.AllFullNames) || x.PropertyType.IsValueType);
+                .Where(x => x.PropertyType.FullName.In(BasicTypeUtility.FullNames) || x.PropertyType.IsValueType);
 
             props = props.Where(x => !propNames.Contains(x.Name));
 

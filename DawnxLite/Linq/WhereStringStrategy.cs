@@ -94,16 +94,14 @@ namespace Dawnx.Linq
             switch (inExp.Body)
             {
                 case NewExpression exp:
-                    Expression leftExp = null;
-
-                    foreach (var argExp in exp.Arguments)
+                    var lambdaExp = exp.Arguments.Aggregate(null as Expression, (acc, argExp) =>
                     {
-                        if (leftExp is null)
-                            leftExp = compareExp(GetReturnStringOrArrayExpression(argExp), rightExp);
-                        else leftExp = Expression.OrElse(leftExp,
+                        if (acc is null)
+                            return compareExp(GetReturnStringOrArrayExpression(argExp), rightExp);
+                        else return Expression.OrElse(acc,
                             compareExp(GetReturnStringOrArrayExpression(argExp), rightExp));
-                    }
-                    return Expression.Lambda<Func<TEntity, bool>>(leftExp, inExp.Parameters);
+                    });
+                    return Expression.Lambda<Func<TEntity, bool>>(lambdaExp, inExp.Parameters);
 
                 default:
                     return Expression.Lambda<Func<TEntity, bool>>(

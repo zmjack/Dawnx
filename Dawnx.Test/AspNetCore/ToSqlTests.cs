@@ -11,7 +11,7 @@ namespace Dawnx.AspNetCore.Test
         private readonly DbContextOptions MySqlOptions = new DbContextOptionsBuilder().UseMySql("Server=127.0.0.1").Options;
         private readonly DbContextOptions SqlServerOptions = new DbContextOptionsBuilder().UseSqlServer("Server=127.0.0.1").Options;
         private readonly DbContextOptions SqliteOptions = SimpleSources.NorthwndOptions;
-        
+
         [Fact]
         public void Test()
         {
@@ -25,8 +25,21 @@ namespace Dawnx.AspNetCore.Test
                             .SelectMany(o => o.Order_Details)
                             .Select(x => x.Product.ProductName)
                     }).ToSql();
-           }
+            }
+        }
 
+        [Fact]
+        public void OrderByCaseTest()
+        {
+            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
+            {
+                var originResult = sqlite.Regions;
+                var customizedOrderResult =
+                    sqlite.Regions.OrderByCase(x => x.RegionDescription, new[] { "Northern", "Eastern", "Western", "Southern" });
+
+                Assert.Equal(new[] { 1, 2, 3, 4 }, originResult.Select(x => x.RegionID));
+                Assert.Equal(new[] { 3, 1, 2, 4 }, customizedOrderResult.Select(x => x.RegionID));
+            }
         }
 
         [Fact]

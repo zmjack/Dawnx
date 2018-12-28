@@ -21,12 +21,12 @@ namespace Dawnx.Linq
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
                 Expression.AndAlso(
                     Expression.LessThanOrEqual(
-                        ExpressionUtility.RebindParameter(startExp.Body, startExp.Parameters[0], memberExp.Parameters[0]),
+                        startExp.Body.RebindParameter(startExp.Parameters[0], memberExp.Parameters[0]),
                         memberExp.Body,
                         false, _Method_op_LessThan),
                     Expression.LessThanOrEqual(
                         memberExp.Body,
-                        ExpressionUtility.RebindParameter(endExp.Body, endExp.Parameters[0], memberExp.Parameters[0]),
+                        endExp.Body.RebindParameter(endExp.Parameters[0], memberExp.Parameters[0]),
                         false, _Method_op_LessThan)), memberExp.Parameters);
         }
 
@@ -43,7 +43,7 @@ namespace Dawnx.Linq
                         false, _Method_op_LessThan),
                     Expression.LessThanOrEqual(
                         memberExp.Body,
-                        ExpressionUtility.RebindParameter(endExp.Body, endExp.Parameters[0], memberExp.Parameters[0]),
+                        endExp.Body.RebindParameter(endExp.Parameters[0], memberExp.Parameters[0]),
                         false, _Method_op_LessThan)), memberExp.Parameters);
         }
 
@@ -55,7 +55,7 @@ namespace Dawnx.Linq
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
                 Expression.AndAlso(
                     Expression.LessThanOrEqual(
-                        ExpressionUtility.RebindParameter(startExp.Body, startExp.Parameters[0], memberExp.Parameters[0]),
+                        startExp.Body.RebindParameter(startExp.Parameters[0], memberExp.Parameters[0]),
                         memberExp.Body,
                         false, _Method_op_LessThan),
                     Expression.LessThanOrEqual(

@@ -19,7 +19,7 @@ namespace Dawnx.Linq
             bool includePoint)
         {
             var left = memberExp.Body;
-            var right = ExpressionUtility.RebindParameter(afterExp.Body, afterExp.Parameters[0], memberExp.Parameters[0]);
+            var right = afterExp.Body.RebindParameter(afterExp.Parameters[0], memberExp.Parameters[0]);
 
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(includePoint ?
                 Expression.GreaterThanOrEqual(left, right, false, _Method_op_LessThan)

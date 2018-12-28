@@ -74,8 +74,8 @@ namespace Dawnx
 
         public static IEnumerable<TSource> WhereMax<TSource, TResult>(this IEnumerable<TSource> @this, Func<TSource, TResult> selector)
         {
-            var min = @this.Max(selector);
-            return @this.Where(x => selector(x).Equals(min));
+            var max = @this.Max(selector);
+            return @this.Where(x => selector(x).Equals(max));
         }
 
         /// <summary>

@@ -31,48 +31,48 @@ namespace Dawnx
         public static IQueryable<TSource> WhereNot<TSource>(this IQueryable<TSource> @this, Expression<Func<TSource, bool>> predicate)
             => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters));
 
-        /// <summary>
-        /// Returns distinct elements from a sequence by using a specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IQueryable<TSource> DistinctByValue<TSource>(this IQueryable<TSource> source, Func<TSource, object> compare)
-                => Queryable.Distinct(source, new ExactEqualityComparer<TSource>(compare));
+        ///// <summary>
+        ///// Returns distinct elements from a sequence by using a specified properties to compare values.
+        ///// </summary>
+        ///// <typeparam name="TSource"></typeparam>
+        ///// <param name="source"></param>
+        ///// <param name="compare"></param>
+        ///// <returns></returns>
+        //public static IQueryable<TSource> DistinctByValue<TSource>(this IQueryable<TSource> source, Func<TSource, object> compare)
+        //        => Queryable.Distinct(source, new ExactEqualityComparer<TSource>(compare));
 
-        /// <summary>
-        /// Produces the set difference of two sequences by using the specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IQueryable<TSource> ExceptByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
-            => Queryable.Except(first, second, new ExactEqualityComparer<TSource>(compare));
+        ///// <summary>
+        ///// Produces the set difference of two sequences by using the specified properties to compare values.
+        ///// </summary>
+        ///// <typeparam name="TSource"></typeparam>
+        ///// <param name="first"></param>
+        ///// <param name="second"></param>
+        ///// <param name="compare"></param>
+        ///// <returns></returns>
+        //public static IQueryable<TSource> ExceptByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
+        //    => Queryable.Except(first, second, new ExactEqualityComparer<TSource>(compare));
 
-        /// <summary>
-        /// Produces the set union of two sequences by using a specified properties.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IQueryable<TSource> UnionByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
-            => Queryable.Union(first, second, new ExactEqualityComparer<TSource>(compare));
+        ///// <summary>
+        ///// Produces the set union of two sequences by using a specified properties.
+        ///// </summary>
+        ///// <typeparam name="TSource"></typeparam>
+        ///// <param name="first"></param>
+        ///// <param name="second"></param>
+        ///// <param name="compare"></param>
+        ///// <returns></returns>
+        //public static IQueryable<TSource> UnionByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
+        //    => Queryable.Union(first, second, new ExactEqualityComparer<TSource>(compare));
 
-        /// <summary>
-        /// Produces the set intersection of two sequences by using the specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IQueryable<TSource> IntersectByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
-            => Queryable.Intersect(first, second, new ExactEqualityComparer<TSource>(compare));
+        ///// <summary>
+        ///// Produces the set intersection of two sequences by using the specified properties to compare values.
+        ///// </summary>
+        ///// <typeparam name="TSource"></typeparam>
+        ///// <param name="first"></param>
+        ///// <param name="second"></param>
+        ///// <param name="compare"></param>
+        ///// <returns></returns>
+        //public static IQueryable<TSource> IntersectByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
+        //    => Queryable.Intersect(first, second, new ExactEqualityComparer<TSource>(compare));
     }
 
 }

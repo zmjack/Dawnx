@@ -34,14 +34,19 @@ namespace DawnxDevloping
                 //var max = mysql.Order_Details.Max(y => y.UnitPrice);
                 //var query = mysql.Order_Details.Where(x => x.UnitPrice == max);
 
-                var max = mysql.Order_Details
-                    .GroupBy(x => x.OrderID)
-                    .Select(g => new
-                    {
-                        g.Key,
-                        max_Data = g.Max(x => x.UnitPrice),
-                    }).ToArray().Select(x => $"{x.Key.ToString()} {x.max_Data}");
-                //Console.WriteLine(max);
+                mysql.Order_Details.GroupBy(x => x.OrderID).Select(g => new
+                {
+                    max = g.Max(x => x.UnitPrice),
+                });
+
+                var max = mysql.Order_Details.WhereGroupMax(k => k.OrderID, m => m.UnitPrice);
+                //.GroupBy(x => x.OrderID)
+                //.Select(g => new
+                //{
+                //    g.Key,
+                //    max_Data = (g as IQueryable<Order_Detail>).Max(x => x.UnitPrice),
+                //}).Select(x => $"{x.Key.ToString()} {x.max_Data}").ToSql();
+                Console.WriteLine(max);
 
                 //max = sqlite.Order_Details
                 //    .GroupBy(x => x.OrderID)
@@ -51,8 +56,8 @@ namespace DawnxDevloping
                 //        max_Data = g.Max(x => x.UnitPrice),
                 //    }).ToArray().Select(x => $"{x.Key.ToString()} {x.max_Data}");
 
-                var query = mysql.Order_Details
-                    .Where(x => max.Contains(x.OrderID + " " + x.UnitPrice));
+                var query = mysql.Order_Details.GroupBy(x => x.OrderID).Select(g => g.WhereMax(x => x.UnitPrice));
+                //var query = mysql.Order_Details.WhereMax(x => x.UnitPrice);
 
                 //var query = sqlite.Test.GroupBy(x => new { x.Type, x.Data }).Select(g => new
                 //{

@@ -1,8 +1,6 @@
 ﻿using SimpleData.Northwnd;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using Xunit;
 
 namespace Dawnx.Test

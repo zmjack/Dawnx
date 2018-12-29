@@ -34,7 +34,7 @@ WHERE "x"."City" = 'London';
 
 
 
-### Extension Simples
+### Use simple database (Northwnd)
 
 The Entity Framework provides some basic query extensions, but using it to develop business applications is not simple enough. So, we provide more query extensions to help developers solve their business problems.
 
@@ -45,6 +45,10 @@ var sqlite = new NorthwndContext(SqliteOptions);
 ```
 
 The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/northwnd.db**".
+
+
+
+### Extension Simples
 
 - **WhereSearch**
 
@@ -119,10 +123,12 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
 - **OrderByCase**
 
+- **OrderByCaseDescending**
+
 - **WhereMultiOr**
 
   ```C#
-  sqlite.Employees.WhereGroupMax(_ => _
+  sqlite.Employees.WhereMultiOr(_ => _
   	.GroupBy(x => x.TitleOfCourtesy)
   	.Select(g => new
   	{

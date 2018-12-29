@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace DawnxDevloping
+namespace Dawnx
 {
-    public static partial class DawnIQueryable
+    public static partial class DawnIEnumerable
     {
-        public static IQueryable<TSource> WhereGroupMax<TSource>(this IQueryable<TSource> @this,
-            Func<IQueryable<TSource>, IEnumerable<object>> getGroupSelectArray_AnonSource)
+        public static IEnumerable<TSource> WhereMultiOr<TSource>(this IEnumerable<TSource> @this,
+            Func<IEnumerable<TSource>, IEnumerable<object>> getGroupSelectArray_AnonSource)
         {
             var groupSelectArray_AnonSource = getGroupSelectArray_AnonSource(@this).ToArray();
             var parameter = Expression.Parameter(typeof(TSource));
@@ -44,7 +44,7 @@ namespace DawnxDevloping
                 }).LambdaJoin(Expression.AndAlso);
             }).LambdaJoin(Expression.OrElse);
 
-            return @this.Where(whereExp);
+            return @this.Where(whereExp.Compile());
         }
     }
 }

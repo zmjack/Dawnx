@@ -119,7 +119,7 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
 - **OrderByCase**
 
-- **WhereGroupMax**
+- **WhereMultiOr**
 
   ```C#
   sqlite.Employees.WhereGroupMax(_ => _

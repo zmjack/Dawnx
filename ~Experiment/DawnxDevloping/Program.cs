@@ -13,6 +13,8 @@ namespace DawnxDevloping
 
         static void Main(string[] args)
         {
+            Console.WriteLine(SimpleSources.NorthwndSource);
+
             using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
             using (var mysql = new NorthwndContext(new DbContextOptionsBuilder()
                 .UseMySql("server=127.0.0.1;database=Northwnd").Options))

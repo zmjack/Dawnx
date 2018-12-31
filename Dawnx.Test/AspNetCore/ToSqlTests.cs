@@ -31,14 +31,20 @@ namespace Dawnx.AspNetCore.Test
         [Fact]
         public void OrderByCaseTest()
         {
+            //  RegionID    RegionDescription
+            //  1   Eastern
+            //  2   Western
+            //  3   Northern
+            //  4   Southern
+
             using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
                 var originResult = sqlite.Regions;
-                var customizedOrderResult =
+                var orderedResult =
                     sqlite.Regions.OrderByCase(x => x.RegionDescription, new[] { "Northern", "Eastern", "Western", "Southern" });
 
                 Assert.Equal(new[] { 1, 2, 3, 4 }, originResult.Select(x => x.RegionID));
-                Assert.Equal(new[] { 3, 1, 2, 4 }, customizedOrderResult.Select(x => x.RegionID));
+                Assert.Equal(new[] { 3, 1, 2, 4 }, orderedResult.Select(x => x.RegionID));
             }
         }
 

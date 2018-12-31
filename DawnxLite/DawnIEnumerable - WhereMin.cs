@@ -7,47 +7,35 @@ namespace Dawnx
 {
     public static partial class DawnIEnumerable
     {
-        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, int>> selector)
+        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
         {
-            var min = source.Min(selector.Compile());
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(min)), selector.Parameters);
-            return source.Where(whereExp.Compile());
+            var min = source.Min(selector);
+            return source.Where(x => selector(x).Equals(min));
         }
-        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, long>> selector)
+        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
         {
-            var min = source.Min(selector.Compile());
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(min)), selector.Parameters);
-            return source.Where(whereExp.Compile());
+            var min = source.Min(selector);
+            return source.Where(x => selector(x).Equals(min));
         }
-        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, float>> selector)
+        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector)
         {
-            var min = source.Min(selector.Compile());
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(min)), selector.Parameters);
-            return source.Where(whereExp.Compile());
+            var min = source.Min(selector);
+            return source.Where(x => selector(x).Equals(min));
         }
-        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, double>> selector)
+        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector)
         {
-            var min = source.Min(selector.Compile());
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(min)), selector.Parameters);
-            return source.Where(whereExp.Compile());
+            var min = source.Min(selector);
+            return source.Where(x => selector(x).Equals(min));
         }
-        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Expression<Func<TSource, decimal>> selector)
+        public static IEnumerable<TSource> WhereMin<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
         {
-            var min = source.Min(selector.Compile());
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(min)), selector.Parameters);
-            return source.Where(whereExp.Compile());
+            var min = source.Min(selector);
+            return source.Where(x => selector(x).Equals(min));
         }
-        public static IEnumerable<TSource> WhereMin<TSource, TResult>(this IEnumerable<TSource> source, Expression<Func<TSource, TResult>> selector)
+        public static IEnumerable<TSource> WhereMin<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
-            var min = source.Min(selector.Compile());
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(min)), selector.Parameters);
-            return source.Where(whereExp.Compile());
+            var min = source.Min(selector);
+            return source.Where(x => selector(x).Equals(min));
         }
     }
 }

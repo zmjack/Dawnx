@@ -64,19 +64,7 @@ namespace Dawnx
                 task(item, i++);
             return @this;
         }
-
-        public static IEnumerable<TSource> WhereMin<TSource, TResult>(this IEnumerable<TSource> @this, Func<TSource, TResult> selector)
-        {
-            var min = @this.Min(selector);
-            return @this.Where(x => selector(x).Equals(min));
-        }
-
-        public static IEnumerable<TSource> WhereMax<TSource, TResult>(this IEnumerable<TSource> @this, Func<TSource, TResult> selector)
-        {
-            var max = @this.Max(selector);
-            return @this.Where(x => selector(x).Equals(max));
-        }
-
+        
         /// <summary>
         /// Returns a collection of tuples containing values and indexes.
         /// </summary>

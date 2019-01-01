@@ -32,5 +32,4 @@ namespace Dawnx
         public static TSource MaxOrDefault<TSource>(this IQueryable<TSource> source, TSource @default = default(TSource))
             => source.Any() ? source.Max() : @default;
     }
-
 }

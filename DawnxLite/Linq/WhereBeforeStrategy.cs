@@ -9,8 +9,8 @@ namespace Dawnx.Linq
     {
         public Expression<Func<TEntity, bool>> StrategyExpression { get; }
 
-        private static MethodInfo _Method_op_LessThan
-            = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_LessThan(System.DateTime, System.DateTime)");
+        private static MethodInfo _Method_op_LessThanOrEqual
+            = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_LessThanOrEqual(System.DateTime, System.DateTime)");
 
         public WhereBeforeStrategy(
             Expression<Func<TEntity, DateTime>> memberExp,
@@ -21,8 +21,8 @@ namespace Dawnx.Linq
             var right = beforeExp.Body.RebindParameter(beforeExp.Parameters[0], memberExp.Parameters[0]);
 
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(includePoint ?
-                Expression.LessThanOrEqual(left, right, false, _Method_op_LessThan)
-                : Expression.LessThan(left, right, false, _Method_op_LessThan), memberExp.Parameters);
+                Expression.LessThanOrEqual(left, right, false, _Method_op_LessThanOrEqual)
+                : Expression.LessThan(left, right, false, _Method_op_LessThanOrEqual), memberExp.Parameters);
         }
 
         public WhereBeforeStrategy(
@@ -34,8 +34,8 @@ namespace Dawnx.Linq
             var right = Expression.Constant(before);
 
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(includePoint ?
-                Expression.LessThanOrEqual(left, right, false, _Method_op_LessThan)
-                : Expression.LessThan(left, right, false, _Method_op_LessThan), memberExp.Parameters);
+                Expression.LessThanOrEqual(left, right, true, _Method_op_LessThanOrEqual)
+                : Expression.LessThan(left, right, true, _Method_op_LessThanOrEqual), memberExp.Parameters);
         }
     }
 }

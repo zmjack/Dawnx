@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Dawnx.Test
 {
-    public class WhereStrategyTests
+    public class WhereSearchTests
     {
         [Fact]
         public void Test1()
@@ -54,12 +54,15 @@ namespace Dawnx.Test
                 });
                 context.SaveChanges();
 
-                new WhereSearchStrategy<CompLevel>("Ashe", x => new { Names = x.People.Select(p => p.Name) }).Self(_ =>
-                    Assert.Equal(new[] { "Platinum1" }, context.CompLevels.WhereStrategy(_).Select(x => x.Name).ToArray()));
-                new WhereMatchStrategy<CompLevel>("30", x => new { levels = x.People.Select(p => p.Level) }).Self(_ =>
-                    Assert.Equal(new[] { "Gold1", "Platinum1" }, context.CompLevels.WhereStrategy(_).Select(x => x.Name).ToArray()));
-                new WhereSearchStrategy<Person>("at", x => new { x.CompLevelLink.Name }).Self(_ =>
-                    Assert.Equal(new[] { "Ashe", "Anivia" }, context.People.WhereStrategy(_).Select(x => x.Name).ToArray()));
+                Assert.Equal(new[] { "Platinum1" },
+                    context.CompLevels.WhereSearch("Ashe",
+                        x => new { Names = x.People.Select(p => p.Name) }).Select(x => x.Name).ToArray());
+                Assert.Equal(new[] { "Gold1", "Platinum1" },
+                    context.CompLevels.WhereMatch("30",
+                        x => new { levels = x.People.Select(p => p.Level) }).Select(x => x.Name).ToArray());
+                Assert.Equal(new[] { "Ashe", "Anivia" },
+                    context.People.WhereSearch("at",
+                        x => new { x.CompLevelLink.Name }).Select(x => x.Name).ToArray());
 
                 //MatchStrategy
                 TestCheck(new WhereMatchStrategy<CompLevel>("22", x => x.Name), context.CompLevels,

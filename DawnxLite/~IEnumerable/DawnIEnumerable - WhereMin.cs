@@ -37,5 +37,6 @@ namespace Dawnx
             var min = source.Min(selector);
             return source.Where(x => selector(x).Equals(min));
         }
+
     }
 }

@@ -27,6 +27,6 @@ namespace Dawnx
             => source.Any() ? source.Average() : @default;
         public static decimal AverageOrDefault(this IQueryable<decimal> source, decimal @default = default(decimal))
             => source.Any() ? source.Average() : @default;
-    }
 
+    }
 }

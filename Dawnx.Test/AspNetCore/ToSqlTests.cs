@@ -29,6 +29,17 @@ namespace Dawnx.AspNetCore.Test
         }
 
         [Fact]
+        public void WhereBetweenTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Employees.ToArray()
+                    .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
+                var result = query.ToArray();
+            }
+        }
+
+        [Fact]
         public void OrderByCaseTest()
         {
             //  RegionID    RegionDescription
@@ -42,7 +53,7 @@ namespace Dawnx.AspNetCore.Test
                 var originResult = sqlite.Regions;
                 var orderedResult =
                     sqlite.Regions.OrderByCase(x => x.RegionDescription, new[] { "Northern", "Eastern", "Western", "Southern" });
-                
+
                 Assert.Equal(new[] { 1, 2, 3, 4 }, originResult.Select(x => x.RegionID));
                 Assert.Equal(new[] { 3, 1, 2, 4 }, orderedResult.Select(x => x.RegionID));
             }

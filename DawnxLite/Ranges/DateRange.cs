@@ -24,17 +24,17 @@ namespace Dawnx.Ranges
             {
                 case Unit.Day:
                     Start = new DateTime(start.Year, start.Month, start.Day);
-                    End = new DateTime(end.Year, end.Month, end.Day);
+                    End = new DateTime(end.Year, end.Month, end.Day).EndOfDay();
                     break;
 
                 case Unit.Month:
                     Start = new DateTime(start.Year, start.Month, 1);
-                    End = new DateTime(end.Year, end.Month, 1).LastDayOfMonth();
+                    End = new DateTime(end.Year, end.Month, 1).EndOfMonth();
                     break;
 
                 case Unit.Year:
                     Start = new DateTime(start.Year, 1, 1);
-                    End = new DateTime(end.Year, 12, 31);
+                    End = new DateTime(end.Year, 12, 31).EndOfYear();
                     break;
             }
 

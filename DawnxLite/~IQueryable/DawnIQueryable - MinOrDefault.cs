@@ -31,6 +31,6 @@ namespace Dawnx
             => source.Any() ? source.Min() : @default;
         public static TSource MinOrDefault<TSource>(this IQueryable<TSource> source, TSource @default = default(TSource))
             => source.Any() ? source.Min() : @default;
-    }
 
+    }
 }

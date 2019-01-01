@@ -7,10 +7,10 @@ using System.Linq.Expressions;
 
 namespace Dawnx
 {
-    public static partial class DawnIEnumerable
+    public static partial class DawnIQueryable
     {
-        public static IEnumerable<TSource> WhereMultiOr<TSource>(this IEnumerable<TSource> @this,
-            Func<IEnumerable<TSource>, IEnumerable<object>> getGroupSelectArray_AnonSource)
+        public static IQueryable<TSource> WhereMultiOr<TSource>(this IQueryable<TSource> @this,
+            Func<IQueryable<TSource>, IEnumerable<object>> getGroupSelectArray_AnonSource)
         {
             var groupSelectArray_AnonSource = getGroupSelectArray_AnonSource(@this).ToArray();
             var parameter = Expression.Parameter(typeof(TSource));
@@ -44,7 +44,8 @@ namespace Dawnx
                 }).LambdaJoin(Expression.AndAlso);
             }).LambdaJoin(Expression.OrElse);
 
-            return @this.Where(whereExp.Compile());
+            return @this.Where(whereExp);
         }
+
     }
 }

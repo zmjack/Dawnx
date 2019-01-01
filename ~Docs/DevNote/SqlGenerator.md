@@ -110,8 +110,8 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
   ```
 
 - **WhereBetween**
-  (Not supportted yet)
   Queries records which is start at a time and end at another time.
+  Note: Support type DateTime?: If member expression's result is null, then the main expression's result is false.
 
 - **WhereBefore**
 

@@ -42,7 +42,7 @@ namespace Dawnx.AspNetCore.Test
                 var originResult = sqlite.Regions;
                 var orderedResult =
                     sqlite.Regions.OrderByCase(x => x.RegionDescription, new[] { "Northern", "Eastern", "Western", "Southern" });
-
+                
                 Assert.Equal(new[] { 1, 2, 3, 4 }, originResult.Select(x => x.RegionID));
                 Assert.Equal(new[] { 3, 1, 2, 4 }, orderedResult.Select(x => x.RegionID));
             }

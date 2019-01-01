@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dawnx.Test", "Dawnx.Test\Da
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A99F3EC-3818-4804-9D02-0F154681F0D4}"
 	ProjectSection(SolutionItems) = preProject
+		cloc.txt = cloc.txt
 		jenkins.cmd = jenkins.cmd
 		LICENSE = LICENSE
 		push.cmd = push.cmd

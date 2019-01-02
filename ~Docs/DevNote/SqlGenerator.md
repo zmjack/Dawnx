@@ -111,7 +111,25 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
 - **WhereBetween**
   Queries records which is start at a time and end at another time.
-  Note: Support type DateTime?: If member expression's result is null, then the main expression's result is false.
+
+  Note: Support type **DateTime?**: If member expression's result is null, then the main expression's result is false. Here is the simple:
+
+  ```c#
+  sqlite.Employees.WhereBetween(x => x.BirthDate, 
+  	new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
+  ```
+
+  ```sqlite
+  SELECT "x"."EmployeeID", "x"."Address", "x"."BirthDate", "x"."City", "x"."Country", "x"."Extension", "x"."FirstName", "x"."HireDate", "x"."HomePhone", "x"."LastName", "x"."Notes", "x"."Photo", "x"."PhotoPath", "x"."PostalCode", "x"."Region", "x"."ReportsTo", "x"."Title", "x"."TitleOfCourtesy"
+  FROM "Employees" AS "x"
+  WHERE CASE
+      WHEN "x"."BirthDate" IS NOT NULL
+      THEN CASE
+          WHEN ('1960-05-01 00:00:00' <= "x"."BirthDate") AND ("x"."BirthDate" <= '1960-05-31 00:00:00')
+          THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+      END ELSE CAST(0 AS BIT)
+  END = 1;
+  ```
 
 - **WhereBefore**
 

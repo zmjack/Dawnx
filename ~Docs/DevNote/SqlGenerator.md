@@ -125,6 +125,10 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
 - **OrderByCaseDescending**
 
+- **ThenByCase**
+
+- **ThenByCaseDescending**
+
 - **WhereMultiOr**
 
   ```C#

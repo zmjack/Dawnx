@@ -7,15 +7,15 @@ namespace Dawnx
 {
     public static partial class DawnIQueryable
     {
-        public static IOrderedQueryable<TEntity> OrderByCase<TEntity>(this IQueryable<TEntity> @this,
-            Expression<Func<TEntity, string>> memberExp,
-            string[] orderValues)
-            => @this.OrderByCaseStrategy(new OrderByCaseStrategy<TEntity>(memberExp, orderValues));
-        
-        public static IOrderedQueryable<TEntity> OrderByCaseDescending<TEntity>(this IQueryable<TEntity> @this,
-            Expression<Func<TEntity, string>> memberExp,
-            string[] orderValues)
-            => @this.OrderByCaseDescendingStrategy(new OrderByCaseStrategy<TEntity>(memberExp, orderValues));
+        public static IOrderedQueryable<TEntity> OrderByCase<TEntity, TRet>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, TRet>> memberExp,
+            TRet[] orderValues)
+            => @this.OrderByCaseStrategy(new OrderByCaseStrategy<TEntity, TRet>(memberExp, orderValues));
+
+        public static IOrderedQueryable<TEntity> OrderByCaseDescending<TEntity, TRet>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, TRet>> memberExp,
+            TRet[] orderValues)
+            => @this.OrderByCaseDescendingStrategy(new OrderByCaseStrategy<TEntity, TRet>(memberExp, orderValues));
 
     }
 }

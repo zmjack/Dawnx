@@ -308,6 +308,33 @@ namespace Dawnx
         }
 
         /// <summary>
+        /// Projects the specified string to a new string by using regular expressions (using Single-line Mode).
+        ///     If there is no match, this method returns null.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static string[] ProjectToArray(this string @this, string regex)
+            => ProjectToArray(@this, new Regex(regex, RegexOptions.Singleline));
+
+        /// <summary>
+        /// Projects the specified string to a new string by using regular expressions.
+        ///     If there is no match, this method returns null.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="regex"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static string[] ProjectToArray(this string @this, Regex regex)
+        {
+            var match = regex.Match(@this);
+            if (match.Success)
+                return match.Groups.OfType<Group>().Select(x => x.Value).ToArray();
+            else return null;
+        }
+
+        /// <summary>
         /// Returns a new string which is consisting of many units by the specified length number of characters.
         /// </summary>
         /// <param name="this"></param>

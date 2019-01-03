@@ -110,6 +110,12 @@ namespace Dawnx.Test
         }
 
         [Fact]
+        public void ProjectToArray()
+        {
+            Assert.Equal(new[] { "zmjack", "zm", "ck" }, "zmjack".ProjectToArray(@"(zm).+?(ck)"));
+        }
+
+        [Fact]
         public void Insert()
         {
             Assert.Equal("", "".UnitInsert(4, " "));

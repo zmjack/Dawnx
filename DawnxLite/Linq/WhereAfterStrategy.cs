@@ -11,7 +11,6 @@ namespace Dawnx.Linq
     {
         public Expression<Func<TEntity, bool>> StrategyExpression { get; }
 
-        private static MethodInfo _Method_String_SubString = typeof(string).GetMethodViaQualifiedName("System.String Substring(Int32)");
         private static MethodInfo _Method_String_Concat = typeof(string).GetMethodViaQualifiedName("System.String Concat(System.Object, System.Object)");
         private static MethodInfo _Method_String_CompareeTo = typeof(string).GetMethodViaQualifiedName("Int32 CompareTo(System.String)");
         private static MethodInfo _Method_DateTime_op_GreaterThanOrEqual = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_GreaterThanOrEqual(System.DateTime, System.DateTime)");

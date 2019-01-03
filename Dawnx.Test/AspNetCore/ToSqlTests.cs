@@ -1,11 +1,7 @@
-using Dawnx.Ranges;
-using Dawnx.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SimpleData;
-using SimpleData.Northwnd;
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using Xunit;
 
 namespace Dawnx.AspNetCore.Test

@@ -1,5 +1,10 @@
-﻿using System.Linq;
+﻿using Dawnx.Ranges;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Dawnx.Utilities
 {
@@ -29,6 +34,61 @@ namespace Dawnx.Utilities
 
                 return sb.ToString();
             }
+        }
+
+        /// <summary>
+        /// Projects some strings back into an instance's field or property.
+        /// </summary>
+        /// <typeparam name="TClass"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="instance"></param>
+        /// <param name="projectExp"></param>
+        public static void ReverseProject<TClass>(string source, TClass instance, Expression<Func<TClass, FormattableString>> projectExp)
+            where TClass : class
+        {
+            var arguments = (projectExp.Body as MethodCallExpression)?.Arguments;
+            if (arguments is null)
+                throw new ArgumentException($"The argument `{nameof(projectExp)}` must be return a single line FormattableString.");
+
+            var format = (arguments[0] as ConstantExpression).Value.ToString();
+            var members = (arguments[1] as NewArrayExpression).Expressions.Select(exp =>
+            {
+                switch (exp)
+                {
+                    case MemberExpression memberExp: return memberExp.Member;
+                    case UnaryExpression unaryExp: return (unaryExp.Operand as MemberExpression).Member;
+                    default: throw new ArgumentException("At least one member info can't be accessed.");
+                }
+            }).ToArray();
+
+            var prePattern = new[] { "\\", "/", "+", "*", "[", "]", "(", ")", "?", "|", "^" }
+                .Aggregate(format, (_acc, ch) => _acc.Replace(ch, $"\\{ch}"));
+            var pattern = new IntegerRange(0, members.Length - 1)
+                .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.+?)").Replace($"{{{i}}}", @"(.+)"));
+            var regex = new Regex(pattern, RegexOptions.Singleline);
+
+            var match = regex.Match(source);
+            if (match.Success)
+            {
+                foreach (var i in new IntegerRange(1, members.Length))
+                {
+                    var value = match.Groups[i].Value;
+                    switch (members[i - 1])
+                    {
+                        case FieldInfo member:
+                            member.SetValue(instance, Convert.ChangeType(value, member.FieldType));
+                            break;
+
+                        case PropertyInfo member:
+                            member.SetValue(instance, Convert.ChangeType(value, member.PropertyType));
+                            break;
+
+                        default:
+                            throw new ArgumentException($"The access member must be {nameof(FieldInfo)} of {nameof(PropertyInfo)}.");
+                    }
+                }
+            }
+            else throw new ArgumentException($"The argument `{nameof(projectExp)}` can not match the specified string.");
         }
 
     }

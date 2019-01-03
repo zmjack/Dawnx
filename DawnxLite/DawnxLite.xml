@@ -891,6 +891,26 @@
             <param name="target"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.ProjectToArray(System.String,System.String)">
+            <summary>
+            Projects the specified string to a new string by using regular expressions (using Single-line Mode).
+                If there is no match, this method returns null.
+            </summary>
+            <param name="this"></param>
+            <param name="regex"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.ProjectToArray(System.String,System.Text.RegularExpressions.Regex)">
+            <summary>
+            Projects the specified string to a new string by using regular expressions.
+                If there is no match, this method returns null.
+            </summary>
+            <param name="this"></param>
+            <param name="regex"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnString.UnitInsert(System.String,System.Int32,System.String,System.Boolean)">
             <summary>
             Returns a new string which is consisting of many units by the specified length number of characters.
@@ -1218,6 +1238,15 @@
             </summary>
             <param name="strings"></param>
             <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.StringUtility.ReverseProject``1(System.String,``0,System.Linq.Expressions.Expression{System.Func{``0,System.FormattableString}})">
+            <summary>
+            Projects some strings back into an instance's field or property.
+            </summary>
+            <typeparam name="TClass"></typeparam>
+            <param name="source"></param>
+            <param name="instance"></param>
+            <param name="projectExp"></param>
         </member>
         <member name="M:Dawnx.DawnIEnumerable.OrderByCaseStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
             <summary>

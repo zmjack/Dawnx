@@ -4,18 +4,19 @@ using System.Linq.Expressions;
 
 namespace Dawnx.Linq
 {
-    public class OrderByCaseStrategy<TEntity> : IOrderStrategy<TEntity>
+    public class OrderByCaseStrategy<TEntity, TRet> : IOrderStrategy<TEntity>
     {
         public Expression<Func<TEntity, int>> StrategyExpression { get; }
-        
+
         public OrderByCaseStrategy(
-            Expression<Func<TEntity, string>> memberExp,
-            string[] orderValues)
+            Expression<Func<TEntity, TRet>> memberExp,
+            TRet[] orderValues)
         {
             var valueLenth = orderValues.Length;
             var lambdaExp = orderValues.Reverse().AsVI().Aggregate(null as Expression, (acc, vi) =>
             {
                 var compareExp = Expression.Equal(memberExp.Body, Expression.Constant(vi.Value));
+
                 if (acc is null)
                 {
                     return

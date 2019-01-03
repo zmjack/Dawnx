@@ -1,3 +1,4 @@
+using Dawnx.Ranges;
 using Dawnx.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SimpleData;
@@ -46,57 +47,17 @@ namespace Dawnx.AspNetCore.Test
             }
         }
 
-
-        public class SqlDateTime
-        {
-            public int Year { get; set; }
-            public int Month { get; set; }
-            public int Day { get; set; }
-
-            public int Hour { get; set; }
-            public int Minute { get; set; }
-            public int Second { get; set; }
-        }
-        public Expression<Func<TEntity, bool>> WhereBeforeDev<TEntity>(//IQueryable<TEntity> @this,
-            Expression<Func<TEntity, int>> yearExp,
-            Expression<Func<TEntity, int>> monthExp,
-            Expression<Func<TEntity, int>> dayExp)
-        //SqlDateTime before)
-        {
-            var parameters = yearExp.Parameters;
-
-            var _Method_String_Concat = typeof(string).GetMethodViaQualifiedName("System.String Concat(System.Object, System.Object)");
-
-            return Expression.Lambda<Func<TEntity, bool>>(
-                Expression.GreaterThan(
-                    Expression.Call(
-                        Expression.Add(
-                            Expression.Add(
-                                Expression.Convert(yearExp.Body, typeof(object)),
-                                Expression.Convert(monthExp.Body.RebindParameter(monthExp.Parameters[0], parameters[0]), typeof(object)),
-                                _Method_String_Concat),
-                            Expression.Convert(dayExp.Body.RebindParameter(dayExp.Parameters[0], parameters[0]), typeof(object)),
-                            _Method_String_Concat),
-                        typeof(string).GetMethodViaQualifiedName("Int32 CompareTo(System.String)"),
-                        Expression.Constant("2017-1-1")),
-                    Expression.Constant(0)),
-                parameters);
-        }
-
         [Fact]
         public void WhereTest()
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))
             {
-                Expression<Func<Employee, bool>> e = x => ("" + x.EmployeeID).CompareTo("1") > 0;
-                var exp = WhereBeforeDev<Employee>(x => x.EmployeeID, x => x.EmployeeID, x => x.EmployeeID);
-
-                var query = sqlite.Employees.Where(exp);
-
+                var query = sqlite.Employees
+                    .WhereAfter(x => x.Country, x => x.EmployeeID, x => x.EmployeeID, DateTime.Now);
                 var sql = query.ToSql();
 
-                var result = query.ToArray();
-                Assert.Single(result);
+                //var result = query.ToArray();
+                //Assert.Single(result);
             }
         }
 

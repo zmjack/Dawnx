@@ -10,14 +10,22 @@ namespace Dawnx
         public static IQueryable<TEntity> WhereAfter<TEntity>(this IQueryable<TEntity> @this,
             Expression<Func<TEntity, DateTime>> memberExp,
             Expression<Func<TEntity, DateTime>> afterExp,
-            bool includePoint = false)
+            bool includePoint = true)
             => @this.WhereStrategy(new WhereAfterStrategy<TEntity>(memberExp, afterExp, includePoint));
 
         public static IQueryable<TEntity> WhereAfter<TEntity>(this IQueryable<TEntity> @this,
             Expression<Func<TEntity, DateTime>> memberExp,
             DateTime after,
-            bool includePoint = false)
+            bool includePoint = true)
             => @this.WhereStrategy(new WhereAfterStrategy<TEntity>(memberExp, after, includePoint));
-        
+
+        public static IQueryable<TEntity> WhereAfter<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, object>> yearExp,
+            Expression<Func<TEntity, object>> monthExp,
+            Expression<Func<TEntity, object>> dayExp,
+            DateTime before,
+            bool includePoint = true)
+            => @this.WhereStrategy(new WhereAfterStrategy<TEntity>(yearExp, monthExp, dayExp, before, includePoint));
+
     }
 }

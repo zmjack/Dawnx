@@ -37,18 +37,18 @@ namespace Dawnx.Utilities
         }
 
         /// <summary>
-        /// Projects some strings back into an instance's field or property.
+        /// Projects some strings back into an instance's field or property. (Using `?` on the right side of a variable disables greedy matching)
         /// </summary>
         /// <typeparam name="TClass"></typeparam>
         /// <param name="source"></param>
         /// <param name="instance"></param>
-        /// <param name="projectExp"></param>
-        public static void ReverseProject<TClass>(string source, TClass instance, Expression<Func<TClass, FormattableString>> projectExp)
+        /// <param name="patternExp"></param>
+        public static void PatternMatch<TClass>(string source, TClass instance, Expression<Func<TClass, FormattableString>> patternExp)
             where TClass : class
         {
-            var arguments = (projectExp.Body as MethodCallExpression)?.Arguments;
+            var arguments = (patternExp.Body as MethodCallExpression)?.Arguments;
             if (arguments is null)
-                throw new ArgumentException($"The argument `{nameof(projectExp)}` must be return a single line FormattableString.");
+                throw new ArgumentException($"The argument `{nameof(patternExp)}` must be return a single line FormattableString.");
 
             var format = (arguments[0] as ConstantExpression).Value.ToString();
             var members = (arguments[1] as NewArrayExpression).Expressions.Select(exp =>
@@ -88,7 +88,7 @@ namespace Dawnx.Utilities
                     }
                 }
             }
-            else throw new ArgumentException($"The argument `{nameof(projectExp)}` can not match the specified string.");
+            else throw new ArgumentException($"The argument `{nameof(patternExp)}` can not match the specified string.");
         }
 
     }

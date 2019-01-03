@@ -1239,14 +1239,14 @@
             <param name="strings"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Utilities.StringUtility.ReverseProject``1(System.String,``0,System.Linq.Expressions.Expression{System.Func{``0,System.FormattableString}})">
+        <member name="M:Dawnx.Utilities.StringUtility.PatternMatch``1(System.String,``0,System.Linq.Expressions.Expression{System.Func{``0,System.FormattableString}})">
             <summary>
-            Projects some strings back into an instance's field or property.
+            Projects some strings back into an instance's field or property. (Using `?` on the right side of a variable disables greedy matching)
             </summary>
             <typeparam name="TClass"></typeparam>
             <param name="source"></param>
             <param name="instance"></param>
-            <param name="projectExp"></param>
+            <param name="patternExp"></param>
         </member>
         <member name="M:Dawnx.DawnIEnumerable.OrderByCaseStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
             <summary>

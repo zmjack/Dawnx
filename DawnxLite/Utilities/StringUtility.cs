@@ -64,7 +64,8 @@ namespace Dawnx.Utilities
             var prePattern = new[] { "\\", "/", "+", "*", "[", "]", "(", ")", "?", "|", "^" }
                 .Aggregate(format, (_acc, ch) => _acc.Replace(ch, $"\\{ch}"));
             var pattern = new IntegerRange(0, members.Length - 1)
-                .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.+?)").Replace($"{{{i}}}", @"(.+)"));
+                .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.+?)").Replace($"{{{i}}}", @"(.+)"))
+                .For(_ => $"^{_}$");
             var regex = new Regex(pattern, RegexOptions.Singleline);
 
             var match = regex.Match(source);

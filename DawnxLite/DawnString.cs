@@ -315,7 +315,7 @@ namespace Dawnx
         /// <param name="regex"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static string[] ProjectToArray(this string @this, string regex)
+        public static string[][] ProjectToArray(this string @this, string regex)
             => ProjectToArray(@this, new Regex(regex, RegexOptions.Singleline));
 
         /// <summary>
@@ -326,11 +326,12 @@ namespace Dawnx
         /// <param name="regex"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static string[] ProjectToArray(this string @this, Regex regex)
+        public static string[][] ProjectToArray(this string @this, Regex regex)
         {
             var match = regex.Match(@this);
             if (match.Success)
-                return match.Groups.OfType<Group>().Select(x => x.Value).ToArray();
+                return match.Groups.OfType<Group>()
+                    .Select(g => g.Captures.OfType<Capture>().Select(c => c.Value).ToArray()).ToArray();
             else return null;
         }
 

@@ -46,6 +46,17 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="convert"></param>
         /// <returns></returns>
+        [Obsolete("This method should be only used in development environments.")]
+        public static TRet For<TSelf, TRet>(this TSelf @this, TRet convert) => convert;
+
+        /// <summary>
+        /// Casts the element to the specified type through the specified convert method.
+        /// </summary>
+        /// <typeparam name="TSelf"></typeparam>
+        /// <typeparam name="TRet"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="convert"></param>
+        /// <returns></returns>
         public static TRet For<TSelf, TRet>(this TSelf @this, Func<TSelf, TRet> convert)
             => convert(@this);
 

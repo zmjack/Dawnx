@@ -112,7 +112,11 @@ namespace Dawnx.Test
         [Fact]
         public void ProjectToArray()
         {
-            Assert.Equal(new[] { "zmjack", "zm", "ck" }, "zmjack".ProjectToArray(@"(zm).+?(ck)"));
+            Assert.Equal(new string[][]
+            {
+                new [] { "A|1|11|B|2|22" },
+                new [] { "A|1|11", "B|2|22" },
+            }, "A|1|11|B|2|22".ProjectToArray(@"(?:(?:^|\|)(.+?\|.+?\|.+?)(?=\||$))*"));
         }
 
         [Fact]

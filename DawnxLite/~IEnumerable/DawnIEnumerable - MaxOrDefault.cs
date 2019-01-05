@@ -16,6 +16,16 @@ namespace Dawnx
             => source.Any() ? source.Max(selector) : @default;
         public static decimal MaxOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector, decimal @default = default(decimal))
             => source.Any() ? source.Max(selector) : @default;
+        public static int? MaxOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector, int? @default = default(int?))
+            => source.Any() ? source.Max(selector) : @default;
+        public static long? MaxOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector, long? @default = default(long?))
+            => source.Any() ? source.Max(selector) : @default;
+        public static float? MaxOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector, float? @default = default(float?))
+            => source.Any() ? source.Max(selector) : @default;
+        public static double? MaxOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector, double? @default = default(double?))
+            => source.Any() ? source.Max(selector) : @default;
+        public static decimal? MaxOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector, decimal? @default = default(decimal?))
+            => source.Any() ? source.Max(selector) : @default;
         public static TResult MaxOrDefault<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector, TResult @default = default(TResult))
             => source.Any() ? source.Max(selector) : @default;
 

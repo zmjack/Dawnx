@@ -558,6 +558,16 @@
             <param name="task"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnObject.For``2(``0,``1)">
+            <summary>
+            Casts the element to the specified type through the specified convert method.
+            </summary>
+            <typeparam name="TSelf"></typeparam>
+            <typeparam name="TRet"></typeparam>
+            <param name="this"></param>
+            <param name="convert"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnObject.For``2(``0,System.Func{``0,``1})">
             <summary>
             Casts the element to the specified type through the specified convert method.

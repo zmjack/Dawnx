@@ -136,18 +136,82 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 - **WhereAfter**
 
 - **WhereMax**
+  Selects the entire record with the largest value for a field.
 
 - **WhereMin**
+  Selects the entire record with the smallest value for a field.
 
 - **OrderByCase**
+  Queries records and order the result by a specified sequence.
+
+  ```c#
+  sqlite.Regions
+  	.OrderByCase(x => x.RegionDescription, 
+                   new[] { "Northern", "Eastern", "Western", "Southern" });
+  ```
+
+  ```sqlite
+  SELECT "x"."RegionID", "x"."RegionDescription"
+  FROM "Region" AS "x"
+  ORDER BY CASE
+      WHEN "x"."RegionDescription" = 'Northern'
+      THEN 0 ELSE CASE
+          WHEN "x"."RegionDescription" = 'Eastern'
+          THEN 1 ELSE CASE
+              WHEN "x"."RegionDescription" = 'Western'
+              THEN 2 ELSE CASE
+                  WHEN "x"."RegionDescription" = 'Southern'
+                  THEN 3 ELSE 4
+              END
+          END
+      END
+  END;
+  ```
 
 - **OrderByCaseDescending**
+  Same as **OrderByCase**, but use descending order.
 
 - **ThenByCase**
-  (NOT SUPPORTED YET)
+
+  ```c#
+  sqlite.Regions
+  	.OrderByCase(x => x.RegionDescription, 
+                   new[] { "Northern", "Eastern", "Western", "Southern" })
+      .ThenByCase(x => x.RegionID, new[] { 4, 3, 2, 1 })
+  ```
+
+  ```sqlite
+  SELECT "x"."RegionID", "x"."RegionDescription"
+  FROM "Region" AS "x"
+  ORDER BY CASE
+      WHEN "x"."RegionDescription" = 'Northern'
+      THEN 0 ELSE CASE
+          WHEN "x"."RegionDescription" = 'Eastern'
+          THEN 1 ELSE CASE
+              WHEN "x"."RegionDescription" = 'Western'
+              THEN 2 ELSE CASE
+                  WHEN "x"."RegionDescription" = 'Southern'
+                  THEN 3 ELSE 4
+              END
+          END
+      END
+  END, CASE
+      WHEN "x"."RegionID" = 4
+      THEN 0 ELSE CASE
+          WHEN "x"."RegionID" = 3
+          THEN 1 ELSE CASE
+              WHEN "x"."RegionID" = 2
+              THEN 2 ELSE CASE
+                  WHEN "x"."RegionID" = 1
+                  THEN 3 ELSE 4
+              END
+          END
+      END
+  END;
+  ```
 
 - **ThenByCaseDescending**
-  (NOT SUPPORTED YET)
+  Same as **ThenByCase**, but use descending order.
 
 - **WhereMultiOr**
 

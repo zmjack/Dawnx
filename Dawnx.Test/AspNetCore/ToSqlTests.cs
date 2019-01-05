@@ -44,6 +44,33 @@ namespace Dawnx.AspNetCore.Test
         }
 
         [Fact]
+        public void WhereMinTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Products.WhereMinOrDefault(x => x.UnitPrice);
+
+                //var result = query.ToArray();
+                //Assert.Single(result);
+            }
+        }
+
+        [Fact]
+        public void WhereMaxTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Employees
+                    .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
+
+                var sql = query.ToSql();
+
+                var result = query.ToArray();
+                Assert.Single(result);
+            }
+        }
+
+        [Fact]
         public void WhereTest()
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))

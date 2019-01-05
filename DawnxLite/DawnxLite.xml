@@ -1260,7 +1260,7 @@
         </member>
         <member name="M:Dawnx.DawnIEnumerable.OrderByCaseStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
             <summary>
-            Use an OrderByStrategy to generate an orberby expression.
+            Use an OrderStrategy to generate an orberby expression.
             </summary>
             <typeparam name="TEntity"></typeparam>
             <param name="this"></param>
@@ -1269,7 +1269,25 @@
         </member>
         <member name="M:Dawnx.DawnIEnumerable.OrderByCaseDescendingStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
             <summary>
-            Use an OrderByStrategy to generate an orberby expression.
+            Use an OrderStrategy to generate an orberby expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <param name="strategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.ThenByCaseStrategy``1(System.Linq.IOrderedEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
+            <summary>
+            Use an OrderStrategy to generate an orberby expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <param name="strategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.ThenByCaseDescendingStrategy``1(System.Linq.IOrderedEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
+            <summary>
+            Use an OrderStrategy to generate an orberby expression.
             </summary>
             <typeparam name="TEntity"></typeparam>
             <param name="this"></param>
@@ -1435,7 +1453,7 @@
         </member>
         <member name="M:Dawnx.DawnIQueryable.OrderByCaseStrategy``1(System.Linq.IQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
             <summary>
-            Use an OrderByStrategy to generate an orberby expression.
+            Use an OrderStrategy to generate an orberby expression.
             </summary>
             <typeparam name="TEntity"></typeparam>
             <param name="this"></param>
@@ -1444,7 +1462,25 @@
         </member>
         <member name="M:Dawnx.DawnIQueryable.OrderByCaseDescendingStrategy``1(System.Linq.IQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
             <summary>
-            Use an OrderByStrategy to generate an orberby expression.
+            Use an OrderStrategy to generate an orberby expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <param name="strategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.ThenByCaseStrategy``1(System.Linq.IOrderedQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
+            <summary>
+            Use an OrderStrategy to generate an orberby expression.
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="this"></param>
+            <param name="strategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIQueryable.ThenByCaseDescendingStrategy``1(System.Linq.IOrderedQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
+            <summary>
+            Use an OrderStrategy to generate an orberby expression.
             </summary>
             <typeparam name="TEntity"></typeparam>
             <param name="this"></param>

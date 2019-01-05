@@ -50,8 +50,8 @@ namespace Dawnx.AspNetCore.Test
             {
                 var query = sqlite.Products.WhereMinOrDefault(x => x.UnitPrice);
 
-                //var result = query.ToArray();
-                //Assert.Single(result);
+                var result = query.ToArray();
+                Assert.Single(result);
             }
         }
 

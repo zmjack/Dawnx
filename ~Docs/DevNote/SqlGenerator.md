@@ -86,9 +86,43 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
   ----
 
-  As you see, this method supports some abilities to search  single string in more than one field. In some complex scenarios, we also allowed you to query a string in any table which is connected by foreign keys.
+  As you see, this method supports some abilities to search single string in more than one field.
 
-  For example, if you want to query 
+  In some complex scenarios, we also allowed you to query a string in any table which is connected by foreign keys.
+
+  For example, if you want to query who sold product to customer ***QUICK***:
+
+  ```c#
+  sqlite.Employees.WhereSearch("QUICK", x => x.Orders.Select(o => o.CustomerID));
+  ```
+
+  ```sqlite
+  SELECT "x"."EmployeeID", "x"."Address", "x"."BirthDate", "x"."City", "x"."Country", "x"."Extension", "x"."FirstName", "x"."HireDate", "x"."HomePhone", "x"."LastName", "x"."Notes", "x"."Photo", "x"."PhotoPath", "x"."PostalCode", "x"."Region", "x"."ReportsTo", "x"."Title", "x"."TitleOfCourtesy"
+  FROM "Employees" AS "x"
+  WHERE EXISTS (
+      SELECT 1
+      FROM "Orders" AS "o"
+      WHERE (instr("o"."CustomerID", 'QUICK') > 0) AND ("x"."EmployeeID" = "o"."EmployeeID"));
+  ```
+
+  ----
+
+  In addition, we may also need to use some other special queries. For example, you want to search for another string in many fields.
+
+  This is an example of querying ***tofu*** and ***pkg*** in the fields ***ProductName*** and ***QuantityPerUnit***.
+
+  ```c#
+  sqlite.Products.WhereSearch(new[] { "Tofu", "pkg" }, x => new 
+  { 
+  	x.ProductName, x.QuantityPerUnit
+  })
+  ```
+
+  ```sqlite
+  SELECT "x"."ProductID", "x"."CategoryID", "x"."Discontinued", "x"."ProductName", "x"."QuantityPerUnit", "x"."ReorderLevel", "x"."SupplierID", "x"."UnitPrice", "x"."UnitsInStock", "x"."UnitsOnOrder"
+  FROM "Products" AS "x"
+  WHERE ((instr("x"."ProductName", 'Tofu') > 0) OR (instr("x"."QuantityPerUnit", 'Tofu') > 0)) AND ((instr("x"."ProductName", 'pkg') > 0) OR (instr("x"."QuantityPerUnit", 'pkg') > 0));
+  ```
 
 - **WhereMatch**
   Different from **WhereSearch**, this statement will perform an exact match:

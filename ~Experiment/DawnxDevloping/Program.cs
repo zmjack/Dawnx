@@ -3,6 +3,9 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Internal;
 using Dawnx.Algorithms.StringAlgorithm;
+using SimpleData;
+using Dawnx;
+using Dawnx.AspNetCore;
 
 namespace DawnxDevloping
 {
@@ -11,9 +14,17 @@ namespace DawnxDevloping
 
         static void Main(string[] args)
         {
-            var mm = new MaxMatching(new[] { "计算", "计算语言学", "课程", "有", "意思" });
-            var s = mm.GetWords("计算语言学课程有意思");
-            Console.WriteLine(s.Join(","));
+            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
+            {
+                var sql = sqlite.Employees
+                    .WhereSearch("QUICK", x => x.Orders.Select(o => o.CustomerID))
+                    .ToSql();
+
+                var s = sqlite.Products
+                    .WhereSearch(new[] { "Tofu", "pkg" }, x => new { x.ProductName, x.QuantityPerUnit });
+                Console.WriteLine(s.ToSql());
+                Console.WriteLine(s.Select(x => x.ProductName).ToArray().Join(","));
+            }
 
         }
 

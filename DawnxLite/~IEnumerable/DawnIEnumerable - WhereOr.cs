@@ -7,15 +7,21 @@ using System.Linq.Expressions;
 
 namespace Dawnx
 {
-    public static partial class DawnIQueryable
+    public static partial class DawnIEnumerable
     {
-        public static IQueryable<TSource> WhereMultiOr<TSource>(this IQueryable<TSource> @this,
-            Func<IQueryable<TSource>, IEnumerable<object>> getGroupSelectArray_AnonSource)
+        public static IEnumerable<TSource> WhereOr<TSource>(this IEnumerable<TSource> @this, Expression<Func<TSource, bool>>[] predicates)
         {
-            var groupSelectArray_AnonSource = getGroupSelectArray_AnonSource(@this).ToArray();
+            var parameter = predicates[0].Parameters[0];
+            return @this.Where(predicates
+                .Select(predicate => predicate.RebindParameter(predicate.Parameters[0], parameter))
+                .LambdaJoin(Expression.OrElse).Compile());
+        }
+
+        public static IEnumerable<TSource> WhereOr<TSource, TAnonymous>(this IEnumerable<TSource> @this, IEnumerable<TAnonymous> anonymousArray)
+        {
             var parameter = Expression.Parameter(typeof(TSource));
 
-            var whereExp = groupSelectArray_AnonSource.Select(group =>
+            var whereExp = anonymousArray.Select(group =>
             {
                 var dict = ObjectUtility.GetPropertyPureDictionary(group);
                 return dict.Keys.Select(key =>
@@ -44,7 +50,7 @@ namespace Dawnx
                 }).LambdaJoin(Expression.AndAlso);
             }).LambdaJoin(Expression.OrElse);
 
-            return @this.Where(whereExp);
+            return @this.Where(whereExp.Compile());
         }
 
     }

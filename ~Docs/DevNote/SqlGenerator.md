@@ -247,10 +247,10 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 - **ThenByCaseDescending**
   Same as **ThenByCase**, but use descending order.
 
-- **WhereMultiOr**
+- **WhereQueryOr**
 
   ```C#
-  sqlite.Employees.WhereMultiOr(_ => _
+  sqlite.Employees.WhereQueryOr(sqlite.Employees
   	.GroupBy(x => x.TitleOfCourtesy)
   	.Select(g => new
   	{

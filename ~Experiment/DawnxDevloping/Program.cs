@@ -6,6 +6,8 @@ using Dawnx.Algorithms.StringAlgorithm;
 using SimpleData;
 using Dawnx;
 using Dawnx.AspNetCore;
+using System.Linq.Expressions;
+using SimpleData.Northwnd;
 
 namespace DawnxDevloping
 {
@@ -16,14 +18,6 @@ namespace DawnxDevloping
         {
             using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
             {
-                var sql = sqlite.Employees
-                    .WhereSearch("QUICK", x => x.Orders.Select(o => o.CustomerID))
-                    .ToSql();
-
-                var s = sqlite.Products
-                    .WhereSearch(new[] { "Tofu", "pkg" }, x => new { x.ProductName, x.QuantityPerUnit });
-                Console.WriteLine(s.ToSql());
-                Console.WriteLine(s.Select(x => x.ProductName).ToArray().Join(","));
             }
 
         }

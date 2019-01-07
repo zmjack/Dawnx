@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Dawnx.Algorithms.String
+namespace Dawnx.Algorithms.StringAlgorithm
 {
     public class Kmp
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dawnx.Algorithms.Math
+namespace Dawnx.Algorithms.MathAlgorithm
 {
     public class Determinant
     {

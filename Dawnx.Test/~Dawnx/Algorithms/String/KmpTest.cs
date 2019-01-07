@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Dawnx.Algorithms.String.Test
+namespace Dawnx.Algorithms.StringAlgorithm.Test
 {
     public class KmpTest
     {

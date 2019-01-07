@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Dawnx.Algorithms.Math.Test
+namespace Dawnx.Algorithms.MathAlgorithm.Test
 {
     public class DeterminantTest
     {

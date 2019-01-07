@@ -1,9 +1,6 @@
 ﻿#if !USE
 using System;
 using System.Linq;
-using SimpleData;
-using Dawnx.AspNetCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Dawnx.Algorithms.StringAlgorithm;
 

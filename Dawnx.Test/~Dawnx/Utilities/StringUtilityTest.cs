@@ -8,7 +8,7 @@ namespace Dawnx.Test.Utilities
         public class Simple
         {
             public int A { get; set; }
-            public double B { get; set; }
+            public string B { get; set; }
             public string C { get; set; }
             public string D;
         }
@@ -23,10 +23,10 @@ namespace Dawnx.Test.Utilities
         public void ReverseProjecTest()
         {
             var simple = new Simple();
-            StringUtility.PatternMatch("1|2|3.1|3.2|45", simple, x => $"{x.A}?|{x.B}?|{x.C}|{x.D}?");
+            StringUtility.Extract("1||3.1|3.2|45", simple, x => $"{x.A}?|{x.B}?|{x.C}|{x.D}?");
 
             Assert.Equal(1, simple.A);
-            Assert.Equal(2, simple.B);
+            Assert.Equal("", simple.B);
             Assert.Equal("3.1|3.2", simple.C);
             Assert.Equal("45", simple.D);
         }

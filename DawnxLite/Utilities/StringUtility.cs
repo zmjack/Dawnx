@@ -43,7 +43,7 @@ namespace Dawnx.Utilities
         /// <param name="source"></param>
         /// <param name="instance"></param>
         /// <param name="patternExp"></param>
-        public static void PatternMatch<TClass>(string source, TClass instance, Expression<Func<TClass, FormattableString>> patternExp)
+        public static void Extract<TClass>(string source, TClass instance, Expression<Func<TClass, FormattableString>> patternExp)
             where TClass : class
         {
             var arguments = (patternExp.Body as MethodCallExpression)?.Arguments;
@@ -64,7 +64,7 @@ namespace Dawnx.Utilities
             var prePattern = new[] { "\\", "/", "+", "*", "[", "]", "(", ")", "?", "|", "^" }
                 .Aggregate(format, (_acc, ch) => _acc.Replace(ch, $"\\{ch}"));
             var pattern = new IntegerRange(0, members.Length - 1)
-                .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.+?)").Replace($"{{{i}}}", @"(.+)"))
+                .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.*?)").Replace($"{{{i}}}", @"(.*)"))
                 .For(_ => $"^{_}$");
             var regex = new Regex(pattern, RegexOptions.Singleline);
 

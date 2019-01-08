@@ -7,17 +7,23 @@ using System.Linq.Expressions;
 
 namespace Dawnx
 {
-    public static partial class DawnIEnumerable
+    public static partial class DawnIQueryable
     {
-        public static IEnumerable<TSource> WhereMultiOr<TSource>(this IEnumerable<TSource> @this,
-            Func<IEnumerable<TSource>, IEnumerable<object>> getGroupSelectArray_AnonSource)
+        public static IQueryable<TSource> WhereOr<TSource>(this IQueryable<TSource> @this, Expression<Func<TSource, bool>>[] predicates)
         {
-            var groupSelectArray_AnonSource = getGroupSelectArray_AnonSource(@this).ToArray();
+            var parameter = predicates[0].Parameters[0];
+            return @this.Where(predicates
+                .Select(predicate => predicate.RebindParameter(predicate.Parameters[0], parameter))
+                .LambdaJoin(Expression.OrElse));
+        }
+
+        public static IQueryable<TSource> WhereOr<TSource, TAnonymous>(this IQueryable<TSource> @this, IEnumerable<TAnonymous> anonymousArray)
+        {
             var parameter = Expression.Parameter(typeof(TSource));
 
-            var whereExp = groupSelectArray_AnonSource.Select(group =>
+            var whereExp = anonymousArray.Select(anonymous =>
             {
-                var dict = ObjectUtility.GetPropertyPureDictionary(group);
+                var dict = ObjectUtility.GetPropertyPureDictionary(anonymous);
                 return dict.Keys.Select(key =>
                 {
                     var value = dict[key];
@@ -44,7 +50,7 @@ namespace Dawnx
                 }).LambdaJoin(Expression.AndAlso);
             }).LambdaJoin(Expression.OrElse);
 
-            return @this.Where(whereExp.Compile());
+            return @this.Where(whereExp);
         }
 
     }

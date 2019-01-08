@@ -17,5 +17,15 @@ namespace Dawnx
             TRet[] orderValues)
             => @this.OrderByCaseDescendingStrategy(new OrderByCaseStrategy<TEntity, TRet>(memberExp, orderValues));
 
+        public static IOrderedQueryable<TEntity> ThenByCase<TEntity, TRet>(this IOrderedQueryable<TEntity> @this,
+            Expression<Func<TEntity, TRet>> memberExp,
+            TRet[] orderValues)
+            => @this.ThenByCaseStrategy(new OrderByCaseStrategy<TEntity, TRet>(memberExp, orderValues));
+
+        public static IOrderedQueryable<TEntity> ThenByCaseDescending<TEntity, TRet>(this IOrderedQueryable<TEntity> @this,
+            Expression<Func<TEntity, TRet>> memberExp,
+            TRet[] orderValues)
+            => @this.ThenByCaseDescendingStrategy(new OrderByCaseStrategy<TEntity, TRet>(memberExp, orderValues));
+
     }
 }

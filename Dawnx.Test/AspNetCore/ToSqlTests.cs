@@ -44,6 +44,33 @@ namespace Dawnx.AspNetCore.Test
         }
 
         [Fact]
+        public void WhereMinTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Products.WhereMinOrDefault(x => x.UnitPrice);
+
+                var result = query.ToArray();
+                Assert.Single(result);
+            }
+        }
+
+        [Fact]
+        public void WhereMaxTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Employees
+                    .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
+
+                var sql = query.ToSql();
+
+                var result = query.ToArray();
+                Assert.Single(result);
+            }
+        }
+
+        [Fact]
         public void WhereTest()
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))
@@ -149,18 +176,6 @@ namespace Dawnx.AspNetCore.Test
                 var sql3 = employees_WhoSelled_LongLifeTofu.ToSql();
             }
             return;
-
-            //var sqls = new[]
-            //{
-            //    sqlserver.SimpleModels.WhereNot(x=>x.NickName == "zmjack").ToSql(),
-            //    sqlserver.SimpleModels.WhereBetween(x => x.Birthday, x => x.Birthday, x => x.Birthday).ToSql(),
-            //    sqlserver.SimpleModels.WhereBetween(x => x.Birthday, x => now, now).ToSql(),
-            //    sqlserver.SimpleModels.WhereAfter(x => x.Birthday, x => now).ToSql(),
-            //    //mysql.SimpleModels.Where(x => x.Birthday < now).ToSql(),
-            //    //sqlserver.SimpleModels.Where(x => x.Birthday < now).ToSql(),
-            //};
-
-            //var s = mysql.SimpleModels.WhereMatch("Bill", x => new { x.Age, x.NickName }).ToSql();
         }
 
     }

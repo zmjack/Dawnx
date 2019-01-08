@@ -1,9 +1,8 @@
-﻿using Dawnx.Algorithms.Math;
-using Dawnx.Ranges;
+﻿using Dawnx.Ranges;
 using System.Linq;
 using Xunit;
 
-namespace Dawnx.Test.Algorithms.Math
+namespace Dawnx.Algorithms.MathAlgorithm.Test
 {
     public class ForecastTest
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Dawnx.Algorithms.Math
+namespace Dawnx.Algorithms.MathAlgorithm
 {
     public static class Forecast
     {

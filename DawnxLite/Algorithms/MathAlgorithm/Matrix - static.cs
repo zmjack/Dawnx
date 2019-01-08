@@ -1,6 +1,6 @@
 ﻿using Dawnx.Ranges;
 
-namespace Dawnx.Algorithms.Math
+namespace Dawnx.Algorithms.MathAlgorithm
 {
     public partial class Matrix
     {

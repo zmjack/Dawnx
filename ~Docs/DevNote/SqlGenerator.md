@@ -86,9 +86,43 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
   ----
 
-  As you see, this method supports some abilities to search  single string in more than one field. In some complex scenarios, we also allowed you to query a string in any table which is connected by foreign keys.
+  As you see, this method supports some abilities to search single string in more than one field.
 
-  For example, if you want to query 
+  In some complex scenarios, we also allowed you to query a string in any table which is connected by foreign keys.
+
+  For example, if you want to query who sold product to customer ***QUICK***:
+
+  ```c#
+  sqlite.Employees.WhereSearch("QUICK", x => x.Orders.Select(o => o.CustomerID));
+  ```
+
+  ```sqlite
+  SELECT "x"."EmployeeID", "x"."Address", "x"."BirthDate", "x"."City", "x"."Country", "x"."Extension", "x"."FirstName", "x"."HireDate", "x"."HomePhone", "x"."LastName", "x"."Notes", "x"."Photo", "x"."PhotoPath", "x"."PostalCode", "x"."Region", "x"."ReportsTo", "x"."Title", "x"."TitleOfCourtesy"
+  FROM "Employees" AS "x"
+  WHERE EXISTS (
+      SELECT 1
+      FROM "Orders" AS "o"
+      WHERE (instr("o"."CustomerID", 'QUICK') > 0) AND ("x"."EmployeeID" = "o"."EmployeeID"));
+  ```
+
+  ----
+
+  In addition, we may also need to use some other special queries. For example, you want to search for another string in many fields.
+
+  This is an example of querying ***tofu*** and ***pkg*** in the fields ***ProductName*** and ***QuantityPerUnit***.
+
+  ```c#
+  sqlite.Products.WhereSearch(new[] { "Tofu", "pkg" }, x => new 
+  { 
+  	x.ProductName, x.QuantityPerUnit
+  })
+  ```
+
+  ```sqlite
+  SELECT "x"."ProductID", "x"."CategoryID", "x"."Discontinued", "x"."ProductName", "x"."QuantityPerUnit", "x"."ReorderLevel", "x"."SupplierID", "x"."UnitPrice", "x"."UnitsInStock", "x"."UnitsOnOrder"
+  FROM "Products" AS "x"
+  WHERE ((instr("x"."ProductName", 'Tofu') > 0) OR (instr("x"."QuantityPerUnit", 'Tofu') > 0)) AND ((instr("x"."ProductName", 'pkg') > 0) OR (instr("x"."QuantityPerUnit", 'pkg') > 0));
+  ```
 
 - **WhereMatch**
   Different from **WhereSearch**, this statement will perform an exact match:
@@ -136,23 +170,87 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 - **WhereAfter**
 
 - **WhereMax**
+  Selects the entire record with the largest value for a field.
 
 - **WhereMin**
+  Selects the entire record with the smallest value for a field.
 
 - **OrderByCase**
+  Queries records and order the result by a specified sequence.
+
+  ```c#
+  sqlite.Regions
+  	.OrderByCase(x => x.RegionDescription, 
+                   new[] { "Northern", "Eastern", "Western", "Southern" });
+  ```
+
+  ```sqlite
+  SELECT "x"."RegionID", "x"."RegionDescription"
+  FROM "Region" AS "x"
+  ORDER BY CASE
+      WHEN "x"."RegionDescription" = 'Northern'
+      THEN 0 ELSE CASE
+          WHEN "x"."RegionDescription" = 'Eastern'
+          THEN 1 ELSE CASE
+              WHEN "x"."RegionDescription" = 'Western'
+              THEN 2 ELSE CASE
+                  WHEN "x"."RegionDescription" = 'Southern'
+                  THEN 3 ELSE 4
+              END
+          END
+      END
+  END;
+  ```
 
 - **OrderByCaseDescending**
+  Same as **OrderByCase**, but use descending order.
 
 - **ThenByCase**
-  (NOT SUPPORTED YET)
+
+  ```c#
+  sqlite.Regions
+  	.OrderByCase(x => x.RegionDescription, 
+                   new[] { "Northern", "Eastern", "Western", "Southern" })
+      .ThenByCase(x => x.RegionID, new[] { 4, 3, 2, 1 })
+  ```
+
+  ```sqlite
+  SELECT "x"."RegionID", "x"."RegionDescription"
+  FROM "Region" AS "x"
+  ORDER BY CASE
+      WHEN "x"."RegionDescription" = 'Northern'
+      THEN 0 ELSE CASE
+          WHEN "x"."RegionDescription" = 'Eastern'
+          THEN 1 ELSE CASE
+              WHEN "x"."RegionDescription" = 'Western'
+              THEN 2 ELSE CASE
+                  WHEN "x"."RegionDescription" = 'Southern'
+                  THEN 3 ELSE 4
+              END
+          END
+      END
+  END, CASE
+      WHEN "x"."RegionID" = 4
+      THEN 0 ELSE CASE
+          WHEN "x"."RegionID" = 3
+          THEN 1 ELSE CASE
+              WHEN "x"."RegionID" = 2
+              THEN 2 ELSE CASE
+                  WHEN "x"."RegionID" = 1
+                  THEN 3 ELSE 4
+              END
+          END
+      END
+  END;
+  ```
 
 - **ThenByCaseDescending**
-  (NOT SUPPORTED YET)
+  Same as **ThenByCase**, but use descending order.
 
-- **WhereMultiOr**
+- **WhereOr**
 
   ```C#
-  sqlite.Employees.WhereMultiOr(_ => _
+  sqlite.Employees.WhereOr(sqlite.Employees
   	.GroupBy(x => x.TitleOfCourtesy)
   	.Select(g => new
   	{

@@ -4,6 +4,14 @@
         <name>Dawnx.AspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Dawnx.AspNetCore.DawnClaimArray.GetClaims(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String)">
+            <summary>
+            Gets the value of `sub`. If the claims don't contains it, return null.
+            </summary>
+            <param name="this"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.Menu``1(System.Security.Claims.ClaimsPrincipal,Dawnx.AspNetCore.ClaimsMenu{``0})">
             <summary>
             Returns user's menu from the specified menu.

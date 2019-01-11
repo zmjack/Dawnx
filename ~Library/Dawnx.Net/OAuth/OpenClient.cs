@@ -90,7 +90,7 @@ namespace Dawnx.Net.OAuth
             DiscoveryResult = new OpenDiscoveryClient(authority).Discovery();
         }
 
-        public OpenClient(OpenAuth_ClientCredentials openAuth, HttpContext context)
+        public OpenClient(OpenAuth.ClientCredentialsAuth openAuth, HttpContext context)
             : this(openAuth.Authorization,
                   context.AuthenticateAsync(null).Result.Properties.GetTokenValue("access_token"),
                   context.AuthenticateAsync(null).Result.Properties.GetTokenValue("refresh_token"),

@@ -15,10 +15,10 @@ namespace Dawnx.Data
 
         protected PagedEnumerable() { }
 
-        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize)
+        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize, int? pageCount = null)
         {
             PageSize = pageSize;
-            PageCount = source.PageCount(pageSize);
+            PageCount = pageCount ?? source.PageCount(pageSize);
 
             if (PageCount > 0)
             {

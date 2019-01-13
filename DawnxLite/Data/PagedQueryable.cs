@@ -28,7 +28,7 @@ namespace Dawnx.Data
             else Items = source;
         }
 
-        public PagedEnumerable<T> ToArray()
+        public PagedEnumerable<T> ToEnumerable()
         {
             return new PagedEnumerable<T>((this as IQueryable<T>).ToArray(), PageNumber, PageSize, PageCount);
         }

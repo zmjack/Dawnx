@@ -4,6 +4,12 @@
         <name>Dawnx.AspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Dawnx.AspNetCore.AppSupport.AppRegistryManager`2.BeginAutoTransaction">
+            <summary>
+            Begin IsolationLevel.Serializable level transaction.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimArray.GetClaims(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String)">
             <summary>
             Gets the value of `sub`. If the claims don't contains it, return null.

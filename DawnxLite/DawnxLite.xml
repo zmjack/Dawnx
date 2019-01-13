@@ -1042,6 +1042,30 @@
             (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
             </summary>
         </member>
+        <member name="T:Dawnx.Lock.InstanceLock`1">
+            <summary>
+            Instance Lock
+            </summary>
+            <typeparam name="TInstance"></typeparam>
+        </member>
+        <member name="T:Dawnx.Lock.InstanceTsLock`1">
+            <summary>
+            Instance thread safe lock, inherits from <see cref="T:Dawnx.Lock.InstanceLock`1" />.
+            </summary>
+            <typeparam name="TInstance"></typeparam>
+        </member>
+        <member name="T:Dawnx.Lock.TypeLock`1">
+            <summary>
+            Type lock
+            </summary>
+            <typeparam name="TType"></typeparam>
+        </member>
+        <member name="T:Dawnx.Lock.TypeTsLock`1">
+            <summary>
+            Type thread safe lock, inherits from <see cref="T:Dawnx.Lock.InstanceLock`1" />.
+            </summary>
+            <typeparam name="TType"></typeparam>
+        </member>
         <member name="M:Dawnx.Patterns.UseDoubleCheck.Do(System.Func{System.Boolean},System.Object,System.Action)">
             <summary>
             Do a task with Double-checked locking pattern:

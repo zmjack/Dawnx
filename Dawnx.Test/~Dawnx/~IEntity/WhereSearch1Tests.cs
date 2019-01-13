@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Dawnx.Test
 {
-    public class WhereSearchTests
+    public class WhereSearch1Tests
     {
         [Fact]
         public void Test1()

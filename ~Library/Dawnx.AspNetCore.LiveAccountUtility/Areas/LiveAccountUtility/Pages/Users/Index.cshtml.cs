@@ -13,7 +13,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Users
     public class IndexModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveManagerService.ServiceType);
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)

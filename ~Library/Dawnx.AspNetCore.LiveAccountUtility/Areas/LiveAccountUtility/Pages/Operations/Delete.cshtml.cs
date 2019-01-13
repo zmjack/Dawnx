@@ -12,7 +12,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Operations
     public class DeleteModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveManagerService.ServiceType);
         private readonly ILogger<DeleteModel> _logger;
 
         public DeleteModel(ILogger<DeleteModel> logger)

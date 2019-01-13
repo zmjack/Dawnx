@@ -11,7 +11,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Actions
     public class ClearInvalidActionsModel : PageModel
     {
         private readonly ILiveManager _liveAccountManager
-            = DIUtility.GetEntryService<ILiveManager>(LiveAccountExtensions.LiveAccountService);
+            = DIUtility.GetEntryService<ILiveManager>(LiveManagerService.ServiceType);
         private readonly ILogger<ClearInvalidActionsModel> _logger;
 
         public ClearInvalidActionsModel(ILogger<ClearInvalidActionsModel> logger)

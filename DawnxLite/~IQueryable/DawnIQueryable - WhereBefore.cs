@@ -20,6 +20,18 @@ namespace Dawnx
             => @this.WhereStrategy(new WhereBeforeStrategy<TEntity>(memberExp, before, includePoint));
 
         public static IQueryable<TEntity> WhereBefore<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, DateTime?>> memberExp,
+            Expression<Func<TEntity, DateTime>> beforeExp,
+            bool liftNullToTrue, bool includePoint = true)
+            => @this.WhereStrategy(new WhereBeforeStrategy<TEntity>(memberExp, beforeExp, liftNullToTrue, includePoint));
+
+        public static IQueryable<TEntity> WhereBefore<TEntity>(this IQueryable<TEntity> @this,
+            Expression<Func<TEntity, DateTime?>> memberExp,
+            DateTime before,
+            bool liftNullToTrue, bool includePoint = true)
+            => @this.WhereStrategy(new WhereBeforeStrategy<TEntity>(memberExp, before, liftNullToTrue, includePoint));
+
+        public static IQueryable<TEntity> WhereBefore<TEntity>(this IQueryable<TEntity> @this,
             Expression<Func<TEntity, object>> yearExp,
             Expression<Func<TEntity, object>> monthExp,
             Expression<Func<TEntity, object>> dayExp,

@@ -144,7 +144,7 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
   ```
 
 - **WhereBetween**
-  Queries records which is start at a time and end at another time.
+  Queries records which is start at a specified time and end at another time.
 
   Note: Support type **Nullable\<DateTime\>**: If member expression's result is null, then the main expression's result is false. Here is the simple:
 

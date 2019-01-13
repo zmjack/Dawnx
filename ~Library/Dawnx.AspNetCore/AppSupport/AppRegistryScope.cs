@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dawnx.AspNetCore.LiveRegistry.Entities
+namespace Dawnx.AspNetCore.AppSupport.Entities
 {
     public enum AppRegistryScope
     {

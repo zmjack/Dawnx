@@ -15,6 +15,8 @@ namespace Dawnx.Linq
         private static MethodInfo _Method_String_CompareeTo = typeof(string).GetMethodViaQualifiedName("Int32 CompareTo(System.String)");
         private static MethodInfo _Method_DateTime_op_LessThanOrEqual = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_LessThanOrEqual(System.DateTime, System.DateTime)");
         private static MethodInfo _Method_DateTime_op_LessThan = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_LessThan(System.DateTime, System.DateTime)");
+        private static PropertyInfo _Property_DateTime_HasValue = typeof(DateTime?).GetProperty(nameof(Nullable<DateTime>.HasValue));
+        private static PropertyInfo _Property_DateTime_Value = typeof(DateTime?).GetProperty(nameof(Nullable<DateTime>.Value));
 
         public WhereBeforeStrategy(
             Expression<Func<TEntity, DateTime>> memberExp,
@@ -40,6 +42,42 @@ namespace Dawnx.Linq
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(includePoint ?
                 Expression.LessThanOrEqual(left, right, false, _Method_DateTime_op_LessThanOrEqual)
                 : Expression.LessThan(left, right, false, _Method_DateTime_op_LessThan), memberExp.Parameters);
+        }
+
+        public WhereBeforeStrategy(
+            Expression<Func<TEntity, DateTime?>> memberExp,
+            Expression<Func<TEntity, DateTime>> beforeExp,
+            bool liftNullToTrue, bool includePoint)
+        {
+            var left = memberExp.Body;
+            var right = beforeExp.Body.RebindParameter(beforeExp.Parameters[0], memberExp.Parameters[0]);
+
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.Condition(
+                    Expression.Not(Expression.Property(memberExp.Body, _Property_DateTime_HasValue)),
+                        Expression.Constant(liftNullToTrue),
+                        includePoint
+                            ? Expression.LessThanOrEqual(Expression.Property(left, _Property_DateTime_Value), right, false, _Method_DateTime_op_LessThanOrEqual)
+                            : Expression.LessThan(left, right, false, _Method_DateTime_op_LessThan)),
+                memberExp.Parameters);
+        }
+
+        public WhereBeforeStrategy(
+            Expression<Func<TEntity, DateTime?>> memberExp,
+            DateTime before,
+            bool liftNullToTrue, bool includePoint)
+        {
+            var left = memberExp.Body;
+            var right = Expression.Constant(before);
+
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.Condition(
+                    Expression.Not(Expression.Property(memberExp.Body, _Property_DateTime_HasValue)),
+                        Expression.Constant(liftNullToTrue),
+                        includePoint
+                            ? Expression.LessThanOrEqual(Expression.Property(left, _Property_DateTime_Value), right, false, _Method_DateTime_op_LessThanOrEqual)
+                            : Expression.LessThan(left, right, false, _Method_DateTime_op_LessThan)),
+                memberExp.Parameters);
         }
 
         public WhereBeforeStrategy(

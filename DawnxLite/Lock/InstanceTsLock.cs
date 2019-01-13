@@ -5,6 +5,10 @@ using System.Threading;
 
 namespace Dawnx.Lock
 {
+    /// <summary>
+    /// Instance thread safe lock, inherits from <see cref="InstanceLock{TInstance}" />.
+    /// </summary>
+    /// <typeparam name="TInstance"></typeparam>
     public class InstanceTsLock<TInstance> : InstanceLock<TInstance>
     {
         public InstanceTsLock(params Expression<Func<TInstance, object>>[] flagExpressions) : base(flagExpressions)

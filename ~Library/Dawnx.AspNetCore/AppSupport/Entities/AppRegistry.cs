@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Dawnx.AspNetCore.LiveRegistry.Entities
+namespace Dawnx.AspNetCore.AppSupport.Entities
 {
     public class AppRegistry
     {
@@ -11,6 +11,8 @@ namespace Dawnx.AspNetCore.LiveRegistry.Entities
         public Guid Id { get; set; }
 
         public AppRegistryScope Scope { get; set; }
+
+        public string Group { get; set; }
 
         public string Key { get; set; }
 

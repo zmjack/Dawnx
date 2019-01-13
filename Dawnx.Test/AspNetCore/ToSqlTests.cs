@@ -29,15 +29,28 @@ namespace Dawnx.AspNetCore.Test
         }
 
         [Fact]
+        public void WhereBeforeTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Employees
+                    .WhereBefore(x => x.BirthDate, new DateTime(1960, 5, 31), true);
+
+                var sql = query.ToSql();
+
+                var result = query.ToArray();
+                Assert.Equal(6, result.Length);
+            }
+        }
+
+        [Fact]
         public void WhereBetweenTest()
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))
             {
                 var query = sqlite.Employees
                     .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
-
-                var sql = query.ToSql();
-
+                
                 var result = query.ToArray();
                 Assert.Single(result);
             }
@@ -62,9 +75,7 @@ namespace Dawnx.AspNetCore.Test
             {
                 var query = sqlite.Employees
                     .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
-
-                var sql = query.ToSql();
-
+                
                 var result = query.ToArray();
                 Assert.Single(result);
             }
@@ -76,7 +87,11 @@ namespace Dawnx.AspNetCore.Test
             using (var sqlite = new NorthwndContext(SqliteOptions))
             {
                 var query = sqlite.Employees
-                    .WhereAfter(x => x.Country, x => x.EmployeeID, x => x.EmployeeID, DateTime.Now);
+                    .WhereAfter(
+                        yearExp: x => x.Country,
+                        monthExp: x => x.EmployeeID,
+                        dayExp: x => x.EmployeeID,
+                        after: DateTime.Now);
                 var sql = query.ToSql();
 
                 //var result = query.ToArray();

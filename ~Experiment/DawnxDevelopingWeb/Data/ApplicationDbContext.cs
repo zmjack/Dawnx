@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Dawnx.AspNetCore.AppSupport;
+using Dawnx.AspNetCore.AppSupport.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DawnxDevelopingWeb.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext, IAppRegistryDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+        public DbSet<AppRegistry> AppRegistries { get; set; }
     }
 }

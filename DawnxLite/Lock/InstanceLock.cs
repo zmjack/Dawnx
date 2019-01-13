@@ -5,6 +5,10 @@ using System.Linq.Expressions;
 
 namespace Dawnx.Lock
 {
+    /// <summary>
+    /// Instance Lock
+    /// </summary>
+    /// <typeparam name="TInstance"></typeparam>
     public class InstanceLock<TInstance>
     {
         public Expression<Func<TInstance, object>>[] FlagExpressions { get; }

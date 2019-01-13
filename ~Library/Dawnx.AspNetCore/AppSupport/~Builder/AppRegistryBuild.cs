@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dawnx.AspNetCore.LiveRegistry
+namespace Dawnx.AspNetCore.AppSupport
 {
     public static class AppRegistryBuild
     {

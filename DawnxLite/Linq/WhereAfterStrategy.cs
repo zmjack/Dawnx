@@ -15,6 +15,8 @@ namespace Dawnx.Linq
         private static MethodInfo _Method_String_CompareeTo = typeof(string).GetMethodViaQualifiedName("Int32 CompareTo(System.String)");
         private static MethodInfo _Method_DateTime_op_GreaterThanOrEqual = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_GreaterThanOrEqual(System.DateTime, System.DateTime)");
         private static MethodInfo _Method_DateTime_op_GreaterThan = typeof(DateTime).GetMethodViaQualifiedName("Boolean op_GreaterThan(System.DateTime, System.DateTime)");
+        private static PropertyInfo _Property_DateTime_HasValue = typeof(DateTime?).GetProperty(nameof(Nullable<DateTime>.HasValue));
+        private static PropertyInfo _Property_DateTime_Value = typeof(DateTime?).GetProperty(nameof(Nullable<DateTime>.Value));
 
         public WhereAfterStrategy(
             Expression<Func<TEntity, DateTime>> memberExp,
@@ -40,6 +42,42 @@ namespace Dawnx.Linq
             StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(includePoint ?
                 Expression.GreaterThanOrEqual(left, right, false, _Method_DateTime_op_GreaterThanOrEqual)
                 : Expression.GreaterThan(left, right, false, _Method_DateTime_op_GreaterThan), memberExp.Parameters);
+        }
+
+        public WhereAfterStrategy(
+            Expression<Func<TEntity, DateTime?>> memberExp,
+            Expression<Func<TEntity, DateTime>> afterExp,
+            bool liftNullToTrue, bool includePoint)
+        {
+            var left = memberExp.Body;
+            var right = afterExp.Body.RebindParameter(afterExp.Parameters[0], memberExp.Parameters[0]);
+
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.Condition(
+                    Expression.Not(Expression.Property(memberExp.Body, _Property_DateTime_HasValue)),
+                        Expression.Constant(liftNullToTrue),
+                        includePoint
+                            ? Expression.GreaterThanOrEqual(Expression.Property(left, _Property_DateTime_Value), right, false, _Method_DateTime_op_GreaterThanOrEqual)
+                            : Expression.GreaterThan(left, right, false, _Method_DateTime_op_GreaterThan)),
+                memberExp.Parameters);
+        }
+
+        public WhereAfterStrategy(
+            Expression<Func<TEntity, DateTime?>> memberExp,
+            DateTime after,
+            bool liftNullToTrue, bool includePoint)
+        {
+            var left = memberExp.Body;
+            var right = Expression.Constant(after);
+
+            StrategyExpression = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.Condition(
+                    Expression.Not(Expression.Property(memberExp.Body, _Property_DateTime_HasValue)),
+                        Expression.Constant(liftNullToTrue),
+                        includePoint
+                            ? Expression.GreaterThanOrEqual(Expression.Property(left, _Property_DateTime_Value), right, false, _Method_DateTime_op_GreaterThanOrEqual)
+                            : Expression.GreaterThan(left, right, false, _Method_DateTime_op_GreaterThan)),
+                memberExp.Parameters);
         }
 
         public WhereAfterStrategy(

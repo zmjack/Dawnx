@@ -1,7 +1,7 @@
-﻿using Dawnx.AspNetCore.LiveRegistry.Entities;
+﻿using Dawnx.AspNetCore.AppSupport.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dawnx.AspNetCore.LiveRegistry
+namespace Dawnx.AspNetCore.AppSupport
 {
     public interface IAppRegistryDbContext
     {

@@ -24,6 +24,7 @@ namespace DawnxDevelopingWeb.Controllers
             using (_appRegistryManager.BeginAutoTransaction())
             {
                 var item = _appRegistryManager.GetGlobalItem();
+                item.AllowedCount = 5;
                 _appRegistryManager.SaveChanges();
             }
 

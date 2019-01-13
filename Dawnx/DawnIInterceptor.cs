@@ -7,14 +7,14 @@ namespace Dawnx
         public static T Proxy<T>(this T @this)
             where T : class, IInterceptor, new()
         {
-            return new ProxyGenerator().CreateClassProxy<T>(new T());
+            return new ProxyGenerator().CreateClassProxyWithTarget(@this);
         }
 
         public static T Proxy<T, TIntercetor>(this T @this, TIntercetor Intercetor)
             where T : class
             where TIntercetor : class, IInterceptor
         {
-            return new ProxyGenerator().CreateClassProxy<T>(Intercetor);
+            return new ProxyGenerator().CreateClassProxyWithTarget(@this, Intercetor);
         }
 
     }

@@ -18,9 +18,14 @@ namespace Dawnx.Lock
         {
             var isAllExpressionValid = flagExpressions.All(x =>
             {
-                if (x.Body.NodeType == ExpressionType.Convert)
-                    return BasicTypeUtility.IsBasicType((x.Body as UnaryExpression).Operand.Type);
-                else return false;
+                switch (x.Body.NodeType)
+                {
+                    case ExpressionType.Convert:
+                        return BasicTypeUtility.IsBasicType((x.Body as UnaryExpression).Operand.Type);
+                    case ExpressionType.MemberAccess:
+                        return BasicTypeUtility.IsBasicType(x.Body.Type);
+                    default: return false;
+                }
             });
 
             if (!isAllExpressionValid)
@@ -34,9 +39,9 @@ namespace Dawnx.Lock
         {
             return string.Intern(
                 typeof(TInstance).FullName + "\0"
-                + FlagLambdas.Select(x => x(instance).ToString()).Join("\0"));
+                + FlagLambdas.Select(x => x(instance)?.ToString() ?? "").Join("\0"));
         }
-        
+
         public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Get(InternString(instance), timeout);
         public Lock Begin(TInstance instance, int millisecondsTimeout) => Lock.Get(InternString(instance), millisecondsTimeout);
     }

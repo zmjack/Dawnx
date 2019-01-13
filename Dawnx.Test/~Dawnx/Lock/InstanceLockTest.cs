@@ -17,6 +17,7 @@ namespace Dawnx.Test.Lock
             public int Month { get; set; }
             public object Obj { get; set; }
             public Sex Sex { get; set; }
+            public string Name { get; set; }
         }
 
         [Fact]
@@ -24,7 +25,7 @@ namespace Dawnx.Test.Lock
         {
             var ModelLock_YearMonth = new InstanceLock<Model>(x => x.Year, x => x.Month, x => x.Sex);
             var model = new Model { Year = 2012, Month = 4, };
-
+            
             using (var probe = PerformanceProbe.Create())
             {
                 var result = Concurrency.Run(resultId =>

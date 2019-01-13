@@ -18,7 +18,7 @@ namespace Dawnx.AspNetCore.AppSupport.Entities
         [StringLength(255)]
         public string Key { get; set; }
 
-        [StringLength(65535)]
+        [StringLength(255)]
         public string Value { get; set; }
 
         public bool IsValid { get; set; }

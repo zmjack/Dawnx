@@ -47,7 +47,7 @@ namespace Dawnx.AspNetCore.AppSupport
         public void SetGlobalItemValue(string key, object value)
         {
             if (Scope<IDbContextTransaction, AppRegistryTransaction<TDbContext, TAppRegistryItem>>.Current is null)
-                throw new ExecutionEngineException("This method require an transation.");
+                throw new MemberAccessException("This method require an transation.");
 
             var item = Context.AppRegistries
                 .Where(x => x.Scope == AppRegistryScope.Global)
@@ -86,7 +86,7 @@ namespace Dawnx.AspNetCore.AppSupport
         public void SetPersionItemValue(string group, string key, object value)
         {
             if (Scope<IDbContextTransaction, AppRegistryTransaction<TDbContext, TAppRegistryItem>>.Current is null)
-                throw new ExecutionEngineException("This method require an transation.");
+                throw new MemberAccessException("This method require an transation.");
 
             var item = Context.AppRegistries
                 .Where(x => x.Scope == AppRegistryScope.Personal)

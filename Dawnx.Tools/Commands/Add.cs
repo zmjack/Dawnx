@@ -1,4 +1,4 @@
-﻿using Dawnx.Net.Http;
+﻿using Dawnx.Net.Web;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +11,7 @@ namespace Dawnx.Tools
             if (!AlertUtility.ConfirmUseOnlineService()) return;
             Console.WriteLine("Connect to dawnx service...");
 
-            var resp = Web.PostFor<JSend>($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
+            var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
             {
                 ["Namespace"] = ProjectUtility.RootNamespace,
                 ["Name"] = name,

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Dawnx.Net.Http.Processors
+namespace Dawnx.Net.Web.Processors
 {
     public class RedirectProcessor : IProcessor
     {
         public HttpWebResponse Process(
-            WebAccess web, HttpWebResponse response,
+            HttpAccess web, HttpWebResponse response,
             string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
@@ -24,6 +24,7 @@ namespace Dawnx.Net.Http.Processors
 
                 if (!location.IsNullOrWhiteSpace() && web.RedirectTimes < web.AllowRedirectTimes)
                 {
+                    OnRedirect?.Invoke(location);
                     web.RedirectTimes++;
                     return web.GetResponse(HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, location, null, null);
                 }
@@ -32,5 +33,9 @@ namespace Dawnx.Net.Http.Processors
 
             return null;
         }
+
+        public delegate void OnRedirectHandler(string location);
+        public event OnRedirectHandler OnRedirect;
+
     }
 }

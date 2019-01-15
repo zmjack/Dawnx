@@ -1,4 +1,4 @@
-﻿using Dawnx.Net.Http;
+﻿using Dawnx.Net.Web;
 using Dawnx.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.Net.OAuth
 {
-    public class OpenClient : WebAccess
+    public class OpenClient : HttpAccess
     {
         private string _AccessToken;
         private string _RefreshToken;

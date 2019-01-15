@@ -1,4 +1,4 @@
-﻿namespace Dawnx.Net.Http
+﻿namespace Dawnx.Net.Web
 {
     public class ProxyInfo
     {

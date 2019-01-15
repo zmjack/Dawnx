@@ -3,6 +3,7 @@ using System.Net;
 
 namespace Dawnx.Net.Http
 {
+    [System.Obsolete("Use Web.Http.* instead. (This class will be removed in v1.9)")]
     public class WebRequestStateContainer
     {
         public string Encoding = DefaultEncoding;

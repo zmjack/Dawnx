@@ -1,5 +1,5 @@
 ﻿using Dawnx.Analysises;
-using Dawnx.Net.Http;
+using Dawnx.Net.Web;
 using System;
 using System.IO;
 using System.Reflection;
@@ -20,8 +20,8 @@ namespace Dawnx.Tools
             if (!Directory.Exists(DOWNLOAD_DIRECTORY))
                 Directory.CreateDirectory(DOWNLOAD_DIRECTORY);
 
-            Web.RegisterSystemLogin(true);
-            Web.RegisterProxy(true);
+            Http.RegisterSystemLogin(true);
+            Http.RegisterProxy(true);
 
             Console.CursorVisible = false;
             try

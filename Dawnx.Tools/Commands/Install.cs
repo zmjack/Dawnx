@@ -1,4 +1,4 @@
-﻿using Dawnx.Net.Http;
+﻿using Dawnx.Net.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,7 +12,7 @@ namespace Dawnx.Tools
     {
         public static void Install(string name)
         {
-            var resp = Web.PostFor<JSend>($"{Program.SUPPORT_URL}/Install", new Dictionary<string, object>
+            var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/Install", new Dictionary<string, object>
             {
                 ["name"] = name,
             });
@@ -57,7 +57,7 @@ namespace Dawnx.Tools
                                 #region Download files
                                 using (var file = new FileStream(saveas, FileMode.Create))
                                 {
-                                    var web = new WebAccess();
+                                    var web = new HttpAccess();
                                     web.DownloadProgress += (sender, _url, received, length) =>
                                     {
                                         Console.SetCursorPosition(72, Console.CursorTop);

@@ -1,4 +1,4 @@
-﻿using Dawnx.Net.Http;
+﻿using Dawnx.Net.Web;
 using Newtonsoft.Json.Linq;
 
 namespace Dawnx.Net.OAuth
@@ -17,7 +17,7 @@ namespace Dawnx.Net.OAuth
 
         public OpenDiscoveryResult Discovery()
         {
-            var config = Web.GetFor(OpenConfigUrl);
+            var config = Web.Http.GetFor(OpenConfigUrl);
             return new OpenDiscoveryResult
             {
                 Authority = Authority,

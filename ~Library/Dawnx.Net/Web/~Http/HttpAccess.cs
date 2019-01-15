@@ -1,5 +1,5 @@
 ﻿using Dawnx.Definition;
-using Dawnx.Net.Http.Processors;
+using Dawnx.Net.Web.Processors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,11 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace Dawnx.Net.Http
+namespace Dawnx.Net.Web
 {
-    public partial class WebAccess
+    public partial class HttpAccess
     {
-        static WebAccess()
+        static HttpAccess()
         {
             // Ensure WebClient runs correctly in the netcore 2.1+.
             AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
@@ -20,20 +20,20 @@ namespace Dawnx.Net.Http
 
         public const int RECOMMENDED_BUFFER_SIZE = 256 * 1024;      // 256 KB
 
-        public delegate void ProgressHandler(WebAccess sender, string url, long done, long length);
+        public delegate void ProgressHandler(HttpAccess sender, string url, long done, long length);
         public event ProgressHandler DownloadProgress;
         public event ProgressHandler UploadProgress;
 
-        public WebRequestStateContainer StateContainer { get; private set; }
+        public HttpStateContainer StateContainer { get; private set; }
         public LinkedList<IProcessor> ResponseProcessors { get; private set; }
             = new LinkedList<IProcessor>().Self(_ => _.AddLast(new RedirectProcessor()));
 
-        public WebAccess() : this(new WebRequestStateContainer()) { }
-        public WebAccess(WebRequestStateContainer config)
+        public HttpAccess() : this(new HttpStateContainer()) { }
+        public HttpAccess(HttpStateContainer config)
         {
             if (config != null)
                 StateContainer = config;
-            else StateContainer = new WebRequestStateContainer();
+            else StateContainer = new HttpStateContainer();
         }
 
         private LinkedListNode<IProcessor> FindProcessorNode(string processorFullName)
@@ -48,7 +48,7 @@ namespace Dawnx.Net.Http
             var findNode = FindProcessorNode(processor.GetType().FullName);
             if (findNode is null)
                 ResponseProcessors.AddLast(processor);
-            else throw new ArgumentException("Only one processor can be added for each type.");
+            else throw new ArgumentException("Each type of processor can only be added once.");
         }
         public void AddProcessorBefore<TFindProcessor>(IProcessor processor)
             where TFindProcessor : IProcessor
@@ -61,9 +61,9 @@ namespace Dawnx.Net.Http
                     ResponseProcessors.AddBefore(targetNode, new LinkedListNode<IProcessor>(processor));
                 else ResponseProcessors.AddLast(processor);
             }
-            else throw new ArgumentException("Only one processor can be added for each type.");
+            else throw new ArgumentException("Each type of processor can only be added once.");
         }
-        public void ClearProcessor() => ResponseProcessors.Clear();
+        public void ClearProcessors() => ResponseProcessors.Clear();
 
         public int AllowRedirectTimes { get; set; } = 10;
         public int RedirectTimes { get; set; } = 0;
@@ -275,7 +275,7 @@ namespace Dawnx.Net.Http
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public WebAccess WithHeaders(Dictionary<HttpRequestHeader, string> headers)
+        public HttpAccess WithHeaders(Dictionary<HttpRequestHeader, string> headers)
         {
             StateContainer.Headers.Clear();
             foreach (var header in headers)
@@ -288,7 +288,7 @@ namespace Dawnx.Net.Http
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public WebAccess WithHeaders(Dictionary<string, string> headers)
+        public HttpAccess WithHeaders(Dictionary<string, string> headers)
         {
             StateContainer.Headers = headers;
             return this;
@@ -298,7 +298,7 @@ namespace Dawnx.Net.Http
         /// Sets HttpRequestHeaders to null for next request.
         /// </summary>
         /// <returns></returns>
-        public WebAccess WithNoHeaders()
+        public HttpAccess WithNoHeaders()
         {
             StateContainer.Headers = null;
             return this;

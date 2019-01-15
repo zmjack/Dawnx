@@ -1,6 +1,6 @@
 using Dawnx.Definition;
-using Dawnx.Net.Http;
-using Dawnx.Net.Http.Processors;
+using Dawnx.Net.Web;
+using Dawnx.Net.Web.Processors;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,10 +38,10 @@ namespace Dawnx.Net.Test
         {
             Assert.Equal(
                 "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
-                Web.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
+                Web.Http.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
             Assert.Equal(
                 "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
-                Web.PostJson("http://dev.dawnx.net/Http/RestJson", updataObj));
+                Web.Http.PostJson("http://dev.dawnx.net/Http/RestJson", updataObj));
         }
 
         [Fact]
@@ -49,29 +49,29 @@ namespace Dawnx.Net.Test
         {
             Assert.Equal(
                 "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
-                Web.Get("http://dev.dawnx.net/Http", updata));
+                Web.Http.Get("http://dev.dawnx.net/Http", updata));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
-                Web.Post("http://dev.dawnx.net/Http", updata));
+                Web.Http.Post("http://dev.dawnx.net/Http", updata));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",
-                Web.Up("http://dev.dawnx.net/Http", updata, upfiles));
+                Web.Http.Up("http://dev.dawnx.net/Http", updata, upfiles));
 
             Assert.Equal(
                 "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
-                Web.Get("http://dev.dawnx.net/Http", updataObj));
+                Web.Http.Get("http://dev.dawnx.net/Http", updataObj));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
-                Web.Post("http://dev.dawnx.net/Http", updataObj));
+                Web.Http.Post("http://dev.dawnx.net/Http", updataObj));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",
-                Web.Up("http://dev.dawnx.net/Http", updata, upfiles));
+                Web.Http.Up("http://dev.dawnx.net/Http", updata, upfiles));
         }
 
         [Fact]
         public void WebAccessCookiesTest()
         {
-            var web = new WebAccess();
+            var web = new HttpAccess();
             Assert.Equal("{\"SetTime1\":[\"1991-01-01\"],\"SetTime2\":[\"2012-04-16\"]}",
                 web.Post("http://dev.dawnx.net/Http/SetCookies", new Dictionary<string, object>
                 {
@@ -86,13 +86,13 @@ namespace Dawnx.Net.Test
         [Fact]
         public void WebAccessAuthLoginTest()
         {
-            var web = new WebAccess().Self(_ => _.AddProcessor(new DevLoginProcessor()));
+            var web = new HttpAccess().Self(_ => _.AddProcessor(new DevLoginProcessor()));
             Assert.Equal("jack@zmland.com", web.Get("http://dev.dawnx.net/AuthInfo"));
         }
 
         public class DevLoginProcessor : LoginProcessor
         {
-            public override HttpWebResponse LoginProcess(WebAccess web, HttpWebResponse response)
+            public override HttpWebResponse LoginProcess(HttpAccess web, HttpWebResponse response)
             {
                 var uri = response.ResponseUri;
                 if (uri.LocalPath == "/Identity/Account/Login")

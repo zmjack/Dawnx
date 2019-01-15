@@ -11,3 +11,8 @@
 ### Dawnx.NPOI
 
 - [ ] Support for copying sheet range.
+
+### Dawnx.AI
+
+- [ ] Match string for searching something from string array.(To query records using Enum)
+

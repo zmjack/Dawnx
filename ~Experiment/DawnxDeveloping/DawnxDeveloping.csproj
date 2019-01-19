@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.13" />
     <PackageReference Include="SimpleData" Version="1.0.6" />
   </ItemGroup>
 

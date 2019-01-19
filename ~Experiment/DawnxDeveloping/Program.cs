@@ -10,29 +10,42 @@ using System.Linq.Expressions;
 using SimpleData.Northwnd;
 using Dawnx.Net.Web;
 using Dawnx.Net.Web.Processors;
+using HtmlAgilityPack;
+using System.Collections.Generic;
 
 namespace DawnxDevloping
 {
     class Program
     {
+        static IEnumerable<HtmlNode> GetPureNodes(IEnumerable<HtmlNode> nodes)
+        {
+            foreach (var node in nodes)
+            {
+                switch (node.Name)
+                {
+                    case "#text": break;
+                    case "ol":
+                        foreach (var item in GetPureNodes(node.ChildNodes))
+                            yield return item;
+                        break;
+
+                    default: yield return node; break;
+                }
+            }
+        }
 
         static void Main(string[] args)
         {
-            var web = new HttpAccess();
-            web.ClearProcessors();
-            web.AddProcessor(new RedirectProcessor().Self(_ => _.OnRedirect += __OnRedirect));
-            var s = web.Get("http://aka.ms");
-
-            using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
-            {
-            }
-
+            var doc = new HtmlDocument();
+            doc.LoadHtml(@"
+<h2 id=""Title1"">1-2</h2>
+<h3 id=""Title1"">1-2-1</h3>
+<ol>
+<li></li>
+</ol>");
+            var pureNodes = GetPureNodes(doc.DocumentNode.ChildNodes).ToArray();
         }
 
-        private static void __OnRedirect(string location)
-        {
-            Console.WriteLine(location);
-        }
     }
 }
 #endif

@@ -6,7 +6,8 @@
 
 ### Dawnx.AspNetCore
 
-- [ ] SqlGenerator: WhereInRange
+- [x] HttpContext.GetAccessToken()
+- [x] HttpContext.GetRefreshToken()
 
 ### Dawnx.NPOI
 

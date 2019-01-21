@@ -7,13 +7,23 @@ namespace Dawnx.Test
     public class DawnIEnumerableTests
     {
         [Fact]
-        public void Test1()
+        public void DistributeAlignLeftTest()
         {
             var arr = new[] { 1, 2, 3, 4, 5, 6, 7 };
             var rets = arr.Distribute(3).ToArray();
             Assert.Equal(string.Join(",", new[] { 1, 2, 3 }), string.Join(",", rets[0]));
             Assert.Equal(string.Join(",", new[] { 4, 5, 6 }), string.Join(",", rets[1]));
             Assert.Equal(string.Join(",", new[] { 7 }), string.Join(",", rets[2]));
+        }
+
+        [Fact]
+        public void DistributeAlignRightTest()
+        {
+            var arr = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var rets = arr.Distribute(3, true).ToArray();
+            Assert.Equal(string.Join(",", new[] { 1 }), string.Join(",", rets[0]));
+            Assert.Equal(string.Join(",", new[] { 2, 3, 4 }), string.Join(",", rets[1]));
+            Assert.Equal(string.Join(",", new[] { 5, 6, 7 }), string.Join(",", rets[2]));
         }
 
         [Fact]

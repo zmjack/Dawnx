@@ -2,11 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Version>1.8.19</Version>
+    <Authors>zmjack</Authors>
+    <Company>dawnx.net</Company>
+    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
+    <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>提供中文本地化开发支持库。</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\DawnxLite\DawnxLite.csproj" />
-    <ProjectReference Include="..\Dawnx.Localization\Dawnx.Localization.csproj" />
   </ItemGroup>
 
 </Project>

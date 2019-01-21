@@ -46,6 +46,7 @@
     <ProjectReference Include="..\~Library\Dawnx.NPOI\Dawnx.NPOI.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.Security\Dawnx.Security.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.Xml\Dawnx.Xml.csproj" />
+    <ProjectReference Include="..\~Localization\Dawnx.Chinese\Dawnx.Chinese.csproj" />
   </ItemGroup>
 
   <ItemGroup>

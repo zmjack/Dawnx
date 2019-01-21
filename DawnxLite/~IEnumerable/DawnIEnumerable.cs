@@ -64,7 +64,7 @@ namespace Dawnx
                 task(item, i++);
             return @this;
         }
-        
+
         /// <summary>
         /// Returns a collection of tuples containing values and indexes.
         /// </summary>
@@ -179,11 +179,11 @@ namespace Dawnx
         /// <param name="count"></param>
         /// <returns></returns>
         public static IEnumerable<TSource[]> Distribute<TSource>(
-            this IEnumerable<TSource> @this, int count)
+            this IEnumerable<TSource> @this, int count, bool alignRight = false)
         {
             if (@this.Any())
             {
-                var index = 0;
+                var index = alignRight ? count - @this.Count() % count : 0;
                 var group = new List<TSource>();
 
                 foreach (var item in @this)

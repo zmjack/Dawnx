@@ -4,45 +4,12 @@
         <name>Dawnx.Net</name>
     </assembly>
     <members>
-        <member name="M:Dawnx.Net.Http.IProcessor.Process(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Dawnx.Net.Web.FtpAccess.NewRequest(System.String,System.String)">
             <summary>
-            If this method cannot determine response, it should be return null.
+            
             </summary>
-            <param name="web"></param>
-            <param name="response"></param>
-            <param name="method"></param>
-            <param name="enctype"></param>
-            <param name="url"></param>
-            <param name="updata"></param>
-            <param name="upfiles"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Net.Http.Processors.LoginProcessor.LoginProcess(Dawnx.Net.Http.WebAccess,System.Net.HttpWebResponse)">
-            <summary>
-            If this method cannot determine response, it should be return null.
-            </summary>
-            <param name="web"></param>
-            <param name="response"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Net.Http.WebAccess.WithHeaders(System.Collections.Generic.Dictionary{System.Net.HttpRequestHeader,System.String})">
-            <summary>
-            Sets HttpRequestHeaders for next request.
-            </summary>
-            <param name="headers"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Net.Http.WebAccess.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Sets HttpRequestHeaders for next request.
-            </summary>
-            <param name="headers"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Net.Http.WebAccess.WithNoHeaders">
-            <summary>
-            Sets HttpRequestHeaders to null for next request.
-            </summary>
+            <param name="relativePath"></param>
+            <param name="method">(Be recommended to use WebRequestMethods or FtpVerb.)</param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Net.Web.HttpAccess.WithHeaders(System.Collections.Generic.Dictionary{System.Net.HttpRequestHeader,System.String})">

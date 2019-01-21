@@ -967,6 +967,71 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="F:Dawnx.Definition.FtpVerb.APPE">
+            <summary>
+            AppendFile
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.DELE">
+            <summary>
+            DeleteFile
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.RETR">
+            <summary>
+            DownloadFile
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.MDTM">
+            <summary>
+            GetDateTimestamp
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.SIZE">
+            <summary>
+            GetFileSize
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.NLST">
+            <summary>
+            ListDirectory
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.LIST">
+            <summary>
+            ListDirectoryDetails
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.MKD">
+            <summary>
+            MakeDirectory
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.PWD">
+            <summary>
+            PrintWorkingDirectory
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.RMD">
+            <summary>
+            RemoveDirectory
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.RENAME">
+            <summary>
+            Rename
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.STOR">
+            <summary>
+            UploadFile
+            </summary>
+        </member>
+        <member name="F:Dawnx.Definition.FtpVerb.STOU">
+            <summary>
+            UploadFileWithUniqueName
+            </summary>
+        </member>
         <member name="F:Dawnx.Definition.Unicode.Chinese">
             <summary>
             The Chinese includes

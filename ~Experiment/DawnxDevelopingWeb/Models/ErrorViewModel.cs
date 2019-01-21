@@ -1,5 +1,3 @@
-using System;
-
 namespace DawnxDevelopingWeb.Models
 {
     public class ErrorViewModel

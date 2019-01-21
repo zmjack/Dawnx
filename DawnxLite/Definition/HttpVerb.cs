@@ -2,11 +2,11 @@
 {
     public static class HttpVerb
     {
-        public static string GET = "get";
-        public static string PUT = "put";
-        public static string HEAD = "head";
-        public static string POST = "post";
-        public static string DEBUG = "debug";
-        public static string DELETE = "delete";
+        public static string GET = "GET";
+        public static string PUT = "PUT";
+        public static string HEAD = "HEAD";
+        public static string POST = "POST";
+        public static string DEBUG = "DEBUG";
+        public static string DELETE = "DELETE";
     }
 }

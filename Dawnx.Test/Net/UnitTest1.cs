@@ -38,10 +38,10 @@ namespace Dawnx.Net.Test
         {
             Assert.Equal(
                 "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
-                Web.Http.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
+                Http.PostJson("http://dev.dawnx.net/Http/RestJson", updata));
             Assert.Equal(
                 "{\"str\":\"str\",\"strs\":[\"str1\",\"str2\"],\"num\":1,\"nums\":[2.1,2.2]}",
-                Web.Http.PostJson("http://dev.dawnx.net/Http/RestJson", updataObj));
+                Http.PostJson("http://dev.dawnx.net/Http/RestJson", updataObj));
         }
 
         [Fact]
@@ -49,23 +49,23 @@ namespace Dawnx.Net.Test
         {
             Assert.Equal(
                 "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
-                Web.Http.Get("http://dev.dawnx.net/Http", updata));
+                Http.Get("http://dev.dawnx.net/Http", updata));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
-                Web.Http.Post("http://dev.dawnx.net/Http", updata));
+                Http.Post("http://dev.dawnx.net/Http", updata));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",
-                Web.Http.Up("http://dev.dawnx.net/Http", updata, upfiles));
+                Http.Up("http://dev.dawnx.net/Http", updata, upfiles));
 
             Assert.Equal(
                 "{\"verb\":\"GET\",\"query\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"form\":{},\"files\":{}}",
-                Web.Http.Get("http://dev.dawnx.net/Http", updataObj));
+                Http.Get("http://dev.dawnx.net/Http", updataObj));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{}}",
-                Web.Http.Post("http://dev.dawnx.net/Http", updataObj));
+                Http.Post("http://dev.dawnx.net/Http", updataObj));
             Assert.Equal(
                 "{\"verb\":\"POST\",\"query\":{},\"form\":{\"str\":[\"str\"],\"strs\":[\"str1\",\"str2\"],\"num\":[\"1\"],\"nums\":[\"2.1\",\"2.2\"]},\"files\":{\"file\":[\"file.txt|7\"],\"files\":[\"file1.txt|5\",\"file2.txt|5\"]}}",
-                Web.Http.Up("http://dev.dawnx.net/Http", updata, upfiles));
+                Http.Up("http://dev.dawnx.net/Http", updata, upfiles));
         }
 
         [Fact]

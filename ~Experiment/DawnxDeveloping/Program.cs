@@ -1,49 +1,32 @@
 ﻿#if !USE
-using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore.Internal;
-using Dawnx.Algorithms.StringAlgorithm;
-using SimpleData;
 using Dawnx;
-using Dawnx.AspNetCore;
-using System.Linq.Expressions;
-using SimpleData.Northwnd;
-using Dawnx.Net.Web;
-using Dawnx.Net.Web.Processors;
+using System.Linq;
 using HtmlAgilityPack;
 using System.Collections.Generic;
+using Dawnx.Net.Web;
+using System.IO;
 
 namespace DawnxDevloping
 {
     class Program
     {
-        static IEnumerable<HtmlNode> GetPureNodes(IEnumerable<HtmlNode> nodes)
-        {
-            foreach (var node in nodes)
-            {
-                switch (node.Name)
-                {
-                    case "#text": break;
-                    case "ol":
-                        foreach (var item in GetPureNodes(node.ChildNodes))
-                            yield return item;
-                        break;
-
-                    default: yield return node; break;
-                }
-            }
-        }
-
         static void Main(string[] args)
         {
-            var doc = new HtmlDocument();
-            doc.LoadHtml(@"
-<h2 id=""Title1"">1-2</h2>
-<h3 id=""Title1"">1-2-1</h3>
-<ol>
-<li></li>
-</ol>");
-            var pureNodes = GetPureNodes(doc.DocumentNode.ChildNodes).ToArray();
+            var ftp = new FtpAccess("ftp://127.0.0.1");
+            string ss;
+
+            ftp.MakeDirectory("地地地");
+
+            using (var file = new FileStream(@"C:\Users\19558\Desktop\[TOC].md", FileMode.Open))
+                ftp.UploadFile(file, "1.md");
+
+            using (var file = new FileStream(@"D:\Temp\1.md", FileMode.Create))
+                ftp.DownloadFile(file, "1.md");
+
+            var s = ftp.ListDirectoryDetails("");
+
+            var tree1 = ftp.ListTree("", true).Description;
+            var tree2 = ftp.ListTree("地", true).Description;
         }
 
     }

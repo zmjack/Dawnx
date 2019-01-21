@@ -1,5 +1,4 @@
-﻿using Dawnx.Net.Web;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace Dawnx.Net.OAuth
 {

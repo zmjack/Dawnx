@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Chinese
+﻿namespace Dawnx.Chinese
 {
     public class CurrencyOption
     {

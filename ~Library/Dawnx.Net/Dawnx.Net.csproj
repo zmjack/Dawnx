@@ -45,8 +45,4 @@
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Web\~Ftp\" />
-  </ItemGroup>
-
 </Project>

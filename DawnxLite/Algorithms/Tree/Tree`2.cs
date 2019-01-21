@@ -115,6 +115,8 @@ namespace Dawnx.Algorithms.Tree
             return currentNode;
         }
 
+        public void Clear() => Children.Clear();
+
         public void Add(TSelf node)
         {
             node.Parent = this as TSelf;
@@ -166,25 +168,24 @@ namespace Dawnx.Algorithms.Tree
             };
         }
 
-        public string Description
+        public string Description => GetDescription(x => x.Key);
+
+        public string GetDescription(Func<Tree<TSelf, TModel>, string> selector)
         {
-            get
+            var tree = new StringBuilder();
+            if (!IsRoot)
+                tree.AppendLine(selector(this));
+
+            foreach (var child in Children)
             {
-                var tree = new StringBuilder();
                 if (!IsRoot)
-                    tree.AppendLine(Key);
-
-                foreach (var child in Children)
-                {
-                    if (!IsRoot)
-                        tree.AppendLine("  " + child.Description.Replace("\r\n", "\r\n  "));
-                    else tree.AppendLine(child.Description);
-                }
-
-                if (tree.Length > 0)
-                    return tree.ToString().Slice(0, -2);
-                else return "";
+                    tree.AppendLine("  " + child.GetDescription(selector).Replace("\r\n", "\r\n  "));
+                else tree.AppendLine(child.GetDescription(selector));
             }
+
+            if (tree.Length > 0)
+                return tree.ToString().Slice(0, -2);
+            else return "";
         }
 
         public TSelf this[string key]

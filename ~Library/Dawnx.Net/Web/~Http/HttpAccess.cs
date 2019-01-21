@@ -136,7 +136,7 @@ namespace Dawnx.Net.Web
             if (!Ready(method, enctype, url, updata, upfiles))
                 throw new WebException("Instance is not ready to request.");
 
-            method = method.ToLower();
+            method = method.ToUpper();
             enctype = enctype.ToLower();
 
             if (updata is null)

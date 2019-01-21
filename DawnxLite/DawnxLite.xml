@@ -1466,7 +1466,7 @@
             <param name="Classify"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnIEnumerable.Distribute``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Boolean)">
             <summary>
             Projects each element of the specified array into a new distributed array collection by its index.
             </summary>

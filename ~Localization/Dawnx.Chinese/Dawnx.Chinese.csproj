@@ -13,6 +13,10 @@
     <Description>提供中文本地化开发支持库。</Description>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Localization\Dawnx.Chinese\Dawnx.Chinese.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\DawnxLite\DawnxLite.csproj" />
   </ItemGroup>

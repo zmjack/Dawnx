@@ -25,7 +25,7 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\~AspNetCore\Dawnx.AspNetCore\Dawnx.AspNetCore.xml</DocumentationFile>
+    <DocumentationFile>D:\TeamProjects\Dawnx\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

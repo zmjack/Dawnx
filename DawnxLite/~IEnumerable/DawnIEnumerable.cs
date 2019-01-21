@@ -177,6 +177,7 @@ namespace Dawnx
         /// <typeparam name="TSource"></typeparam>
         /// <param name="this"></param>
         /// <param name="count"></param>
+        /// <param name="alignRight"></param>
         /// <returns></returns>
         public static IEnumerable<TSource[]> Distribute<TSource>(
             this IEnumerable<TSource> @this, int count, bool alignRight = false)

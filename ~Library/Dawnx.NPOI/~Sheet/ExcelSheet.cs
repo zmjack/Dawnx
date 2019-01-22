@@ -290,9 +290,14 @@ namespace Dawnx.NPOI
 
                     var cstyle = cell.GetCStyle();
                     var value = cell.GetValue();
-
                     var graphics = Graphics.FromImage(new Bitmap(1, 1));
-                    var fontSize = graphics.MeasureString(value.ToString(), new Font(cstyle.Font.FontName, cstyle.Font.FontSize));
+                    string valueString;
+
+                    if (value is double)
+                        valueString = ((double)value).ToString(cstyle.DataFormat);
+                    else valueString = value.ToString();
+
+                    var fontSize = graphics.MeasureString(valueString, new Font(cstyle.Font.FontName, cstyle.Font.FontSize));
                     var width = fontSize.Width > 0 ? (int)((COLUMN_BORDER_PX + AUTO_SIZE_PADDING_PX + fontSize.Width) / EXCEL_WIDTH_PER_PX) : 0;
 
                     if (width > maxWidth) maxWidth = width;

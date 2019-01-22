@@ -383,5 +383,62 @@ namespace Dawnx
             return new string(chars);
         }
 
+        public static int ConsoleWidth(this string @this)
+            => @this.Aggregate(0, (acc, cur) => acc += cur.ConsoleWidth());
+
+        public static string PadLeftCon(this string @this, int totalWidth) => PadLeftCon(@this, totalWidth, ' ');
+        public static string PadLeftCon(this string @this, int totalWidth, char paddingChar)
+        {
+            if (totalWidth < 0) throw new ArgumentOutOfRangeException(
+                $"Non-negative number required.{Environment.NewLine}" +
+                $"Parameter name: totalWidth");
+
+            var fillWidth = totalWidth - ConsoleWidth(@this);
+            if (fillWidth > 0)
+            {
+                var fillBlank = false;
+                var padWidth = 0;
+
+                if (paddingChar.ConsoleWidth() == 2)
+                {
+                    padWidth = @this.Length + fillWidth / 2;
+                    fillBlank = fillWidth.IsOdd();
+                }
+                else padWidth = @this.Length + fillWidth;
+
+                if (fillBlank)
+                    return " " + @this.PadLeft(padWidth, paddingChar);
+                else return @this.PadLeft(padWidth, paddingChar);
+            }
+            else return @this;
+        }
+
+        public static string PadRightCon(this string @this, int totalWidth) => PadRightCon(@this, totalWidth, ' ');
+        public static string PadRightCon(this string @this, int totalWidth, char paddingChar)
+        {
+            if (totalWidth < 0) throw new ArgumentOutOfRangeException(
+                $"Non-negative number required.{Environment.NewLine}" +
+                $"Parameter name: totalWidth");
+
+            var fillWidth = totalWidth - ConsoleWidth(@this);
+            if (fillWidth > 0)
+            {
+                var fillBlank = false;
+                var padWidth = 0;
+
+                if (paddingChar.ConsoleWidth() == 2)
+                {
+                    padWidth = @this.Length + fillWidth / 2;
+                    fillBlank = fillWidth.IsOdd();
+                }
+                else padWidth = @this.Length + fillWidth;
+
+                if (fillBlank)
+                    return @this.PadRight(padWidth, paddingChar) + " ";
+                else return @this.PadRight(padWidth, paddingChar);
+            }
+            else return @this;
+        }
+
     }
 }

@@ -139,5 +139,40 @@ namespace Dawnx.Test
             Assert.Equal("Zmjack", "Zmjack".CapitalizeFirst());
         }
 
+        [Fact]
+        public void ConsoleWidth()
+        {
+            Assert.Equal(7, "English".ConsoleWidth());
+            Assert.Equal(4, "中文".ConsoleWidth());
+        }
+
+        [Fact]
+        public void PadLeftU()
+        {
+            Assert.Equal("English", "English".PadLeftCon(1));
+            Assert.Equal(" English", "English".PadLeftCon(8));
+
+            Assert.Equal("中文", "中文".PadLeftCon(1));
+            Assert.Equal(" 中文", "中文".PadLeftCon(5));
+            Assert.Equal(" 中文", "中文".PadLeftCon(5, '嗯'));
+            Assert.Equal("嗯中文", "中文".PadLeftCon(6, '嗯'));
+            Assert.Equal(".中文", "中文".PadLeftCon(5, '.'));
+            Assert.Equal("..中文", "中文".PadLeftCon(6, '.'));
+        }
+
+        [Fact]
+        public void PadRightU()
+        {
+            Assert.Equal("English", "English".PadRightCon(1));
+            Assert.Equal("English ", "English".PadRightCon(8));
+
+            Assert.Equal("中文", "中文".PadRightCon(1));
+            Assert.Equal("中文 ", "中文".PadRightCon(5));
+            Assert.Equal("中文 ", "中文".PadRightCon(5, '嗯'));
+            Assert.Equal("中文嗯", "中文".PadRightCon(6, '嗯'));
+            Assert.Equal("中文.", "中文".PadRightCon(5, '.'));
+            Assert.Equal("中文..", "中文".PadRightCon(6, '.'));
+        }
+
     }
 }

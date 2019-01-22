@@ -40,6 +40,8 @@ namespace Dawnx.Net.Web
 
             switch (Platform)
             {
+                //TODO: To check the file name part, if the file name contains at least one blank.
+
                 case EPlatform.Windows:
                     // if Windows
                     /* 08-10-11  12:02PM       <DIR>          Version2

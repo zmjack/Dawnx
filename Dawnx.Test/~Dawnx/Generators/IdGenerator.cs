@@ -13,7 +13,7 @@ namespace Dawnx.Test.Generators
         public void Test1()
         {
             var generator = new IdGenerator<string>(() => DateTime.Now.Ticks.ToString());
-            var level = 2000;
+            var level = 100;
 
             var result = Concurrency.Run(cid =>
             {

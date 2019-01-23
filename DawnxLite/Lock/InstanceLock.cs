@@ -11,6 +11,7 @@ namespace Dawnx.Lock
     /// <typeparam name="TInstance"></typeparam>
     public class InstanceLock<TInstance>
     {
+        public string Identifier { get; }
         public Expression<Func<TInstance, object>>[] FlagExpressions { get; }
         protected Func<TInstance, object>[] FlagLambdas { get; }
 
@@ -35,15 +36,23 @@ namespace Dawnx.Lock
             FlagLambdas = FlagExpressions.Select(x => x.Compile()).ToArray();
         }
 
+        protected InstanceLock(string identifier, params Expression<Func<TInstance, object>>[] flagExpressions)
+            : this(flagExpressions)
+        {
+            Identifier = identifier;
+        }
+
         public static InstanceLock<TInstance> Get(params Expression<Func<TInstance, object>>[] flagExpressions)
             => new InstanceLock<TInstance>(flagExpressions);
+        public static InstanceLock<TInstance> Get(string identifier, params Expression<Func<TInstance, object>>[] flagExpressions)
+            => new InstanceLock<TInstance>(identifier, flagExpressions);
 
-        public virtual string InternString(TInstance instance, string identifier = "")
+        public virtual string InternString(TInstance instance)
         {
             return string.Intern(
                 $"{typeof(TInstance).FullName} " +
                 $"{FlagLambdas.Select(x => x(instance).ToString()).Join(" ")} " +
-                $"({identifier})");
+                $"({Identifier})");
         }
 
         public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Get(InternString(instance), timeout);

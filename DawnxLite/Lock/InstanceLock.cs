@@ -24,8 +24,6 @@ namespace Dawnx.Lock
                         return BasicTypeUtility.IsBasicType((x.Body as UnaryExpression).Operand.Type);
                     case ExpressionType.MemberAccess:
                         return BasicTypeUtility.IsBasicType(x.Body.Type);
-                    case ExpressionType.Constant:
-                        return BasicTypeUtility.IsBasicType((x.Body as ConstantExpression).Type);
                     default: return false;
                 }
             });
@@ -40,11 +38,12 @@ namespace Dawnx.Lock
         public static InstanceLock<TInstance> Get(params Expression<Func<TInstance, object>>[] flagExpressions)
             => new InstanceLock<TInstance>(flagExpressions);
 
-        public virtual string InternString(TInstance instance)
+        public virtual string InternString(TInstance instance, string identifier = "")
         {
             return string.Intern(
-                typeof(TInstance).FullName + "\0"
-                + FlagLambdas.Select(x => x(instance)?.ToString() ?? "").Join("\0"));
+                $"{typeof(TInstance).FullName} " +
+                $"{FlagLambdas.Select(x => x(instance).ToString()).Join(" ")} " +
+                $"({identifier})");
         }
 
         public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Get(InternString(instance), timeout);

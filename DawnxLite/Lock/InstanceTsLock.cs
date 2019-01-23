@@ -11,12 +11,13 @@ namespace Dawnx.Lock
     /// <typeparam name="TInstance"></typeparam>
     public class InstanceTsLock<TInstance> : InstanceLock<TInstance>
     {
-        public override string InternString(TInstance instance)
+        public override string InternString(TInstance instance, string identifier)
         {
             return string.Intern(
-                Thread.CurrentThread.ManagedThreadId.ToString() + "\0"
-                + typeof(TInstance).FullName + "\0"
-                + FlagLambdas.Select(x => x(instance).ToString()).Join("\0"));
+                $"<{Thread.CurrentThread.ManagedThreadId.ToString()}> " +
+                $"{typeof(TInstance).FullName} " +
+                $"{FlagLambdas.Select(x => x(instance).ToString()).Join(" ")} " +
+                $"({identifier})");
         }
     }
 }

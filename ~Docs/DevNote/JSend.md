@@ -46,7 +46,7 @@ or like this, if the response indicate fail:
 
 One thing need to be figure it out in the fail response, that is:
 
-- The response object's keys SHOULD correspond to those POST values.
+- data: The response object's keys SHOULD correspond to those POST values.
 
 
 

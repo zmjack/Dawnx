@@ -35,6 +35,23 @@ A basic JSend-compliant response is as simple as this:
 }
 ```
 
+or like this, if the response indicate fail:
+
+```json
+{
+    "status" : "fail",
+    "data" : { "title" : "A title is required" }
+}
+```
+
+One thing need to be figure it out in the fail response, that is:
+
+- The response object's keys SHOULD correspond to those POST values.
+
+
+
+### JSend Standard
+
 When setting up a JSON API, you'll have all kinds of different types of calls and responses. JSend separates responses into some basic types, and defines required and optional keys for each type:
 
 | **Type** | **Description**                                              | **Required Keys** | **Optional Keys** |

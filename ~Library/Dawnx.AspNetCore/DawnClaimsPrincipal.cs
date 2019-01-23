@@ -7,7 +7,7 @@ namespace Dawnx.AspNetCore
     public static class DawnClaimsPrincipal
     {
         /// <summary>
-        /// Returns user's menu from the specified menu.
+        /// Gets user's menu from the specified menu.
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="this"></param>
@@ -18,7 +18,7 @@ namespace Dawnx.AspNetCore
             => menu.UserMenu(@this);
 
         /// <summary>
-        /// Returns roles of the specified ClaimsPrincipal.
+        /// Gets roles of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
@@ -31,13 +31,41 @@ namespace Dawnx.AspNetCore
         }
 
         /// <summary>
-        /// Returns ID of the specified ClaimsPrincipal.
+        /// Gets ID of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
         public static string GetId(this ClaimsPrincipal @this)
         {
             var claimType = ClaimTypes.NameIdentifier;
+            return @this.Claims
+                .Where(x => x.Type == claimType)
+                .Select(x => x.Value)
+                .First();
+        }
+
+        /// <summary>
+        /// Gets claims of the specified cliam type of the specified ClaimsPrincipal.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="claimType"></param>
+        /// <returns></returns>
+        public static string[] GetClaims(this ClaimsPrincipal @this, string claimType)
+        {
+            return @this.Claims
+                .Where(x => x.Type == claimType)
+                .Select(x => x.Value)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Gets the first claim of the specified cliam type of the specified ClaimsPrincipal.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="claimType"></param>
+        /// <returns></returns>
+        public static string GetClaim(this ClaimsPrincipal @this, string claimType)
+        {
             return @this.Claims
                 .Where(x => x.Type == claimType)
                 .Select(x => x.Value)

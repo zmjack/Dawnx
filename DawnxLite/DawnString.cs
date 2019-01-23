@@ -383,23 +383,43 @@ namespace Dawnx
             return new string(chars);
         }
 
-        public static int ConsoleWidth(this string @this)
-            => @this.Aggregate(0, (acc, cur) => acc += cur.ConsoleWidth());
+        /// <summary>
+        /// Gets the length of the specified string as Ascii.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static int GetWidthA(this string @this)
+            => @this.Aggregate(0, (acc, cur) => acc += cur.GetWidthA());
 
-        public static string PadLeftCon(this string @this, int totalWidth) => PadLeftCon(@this, totalWidth, ' ');
-        public static string PadLeftCon(this string @this, int totalWidth, char paddingChar)
+        /// <summary>
+        /// Returns a new string that right-aligns the characters in this string by padding
+        ///     them on the right with a specified Ascii character, for a specified total length.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="totalWidth"></param>
+        /// <returns></returns>
+        public static string PadLeftA(this string @this, int totalWidth) => PadLeftA(@this, totalWidth, ' ');
+        /// <summary>
+        /// Returns a new string that right-aligns the characters in this string by padding
+        ///     them on the right with a specified Ascii character, for a specified total length.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="totalWidth"></param>
+        /// <param name="paddingChar"></param>
+        /// <returns></returns>
+        public static string PadLeftA(this string @this, int totalWidth, char paddingChar)
         {
             if (totalWidth < 0) throw new ArgumentOutOfRangeException(
                 $"Non-negative number required.{Environment.NewLine}" +
                 $"Parameter name: totalWidth");
 
-            var fillWidth = totalWidth - ConsoleWidth(@this);
+            var fillWidth = totalWidth - GetWidthA(@this);
             if (fillWidth > 0)
             {
                 var fillBlank = false;
                 var padWidth = 0;
 
-                if (paddingChar.ConsoleWidth() == 2)
+                if (paddingChar.GetWidthA() == 2)
                 {
                     padWidth = @this.Length + fillWidth / 2;
                     fillBlank = fillWidth.IsOdd();
@@ -413,20 +433,35 @@ namespace Dawnx
             else return @this;
         }
 
-        public static string PadRightCon(this string @this, int totalWidth) => PadRightCon(@this, totalWidth, ' ');
-        public static string PadRightCon(this string @this, int totalWidth, char paddingChar)
+        /// <summary>
+        /// Returns a new string that left-aligns the characters in this string by padding
+        ///     them on the right with a specified Ascii character, for a specified total length.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="totalWidth"></param>
+        /// <returns></returns>
+        public static string PadRightA(this string @this, int totalWidth) => PadRightA(@this, totalWidth, ' ');
+        /// <summary>
+        /// Returns a new string that left-aligns the characters in this string by padding
+        ///     them on the right with a specified Ascii character, for a specified total length.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="totalWidth"></param>
+        /// <param name="paddingChar"></param>
+        /// <returns></returns>
+        public static string PadRightA(this string @this, int totalWidth, char paddingChar)
         {
             if (totalWidth < 0) throw new ArgumentOutOfRangeException(
                 $"Non-negative number required.{Environment.NewLine}" +
                 $"Parameter name: totalWidth");
 
-            var fillWidth = totalWidth - ConsoleWidth(@this);
+            var fillWidth = totalWidth - GetWidthA(@this);
             if (fillWidth > 0)
             {
                 var fillBlank = false;
                 var padWidth = 0;
 
-                if (paddingChar.ConsoleWidth() == 2)
+                if (paddingChar.GetWidthA() == 2)
                 {
                     padWidth = @this.Length + fillWidth / 2;
                     fillBlank = fillWidth.IsOdd();

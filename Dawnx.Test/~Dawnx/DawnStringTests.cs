@@ -142,36 +142,36 @@ namespace Dawnx.Test
         [Fact]
         public void ConsoleWidth()
         {
-            Assert.Equal(7, "English".ConsoleWidth());
-            Assert.Equal(4, "中文".ConsoleWidth());
+            Assert.Equal(7, "English".GetWidthA());
+            Assert.Equal(4, "中文".GetWidthA());
         }
 
         [Fact]
         public void PadLeftU()
         {
-            Assert.Equal("English", "English".PadLeftCon(1));
-            Assert.Equal(" English", "English".PadLeftCon(8));
+            Assert.Equal("English", "English".PadLeftA(1));
+            Assert.Equal(" English", "English".PadLeftA(8));
 
-            Assert.Equal("中文", "中文".PadLeftCon(1));
-            Assert.Equal(" 中文", "中文".PadLeftCon(5));
-            Assert.Equal(" 中文", "中文".PadLeftCon(5, '嗯'));
-            Assert.Equal("嗯中文", "中文".PadLeftCon(6, '嗯'));
-            Assert.Equal(".中文", "中文".PadLeftCon(5, '.'));
-            Assert.Equal("..中文", "中文".PadLeftCon(6, '.'));
+            Assert.Equal("中文", "中文".PadLeftA(1));
+            Assert.Equal(" 中文", "中文".PadLeftA(5));
+            Assert.Equal(" 中文", "中文".PadLeftA(5, '嗯'));
+            Assert.Equal("嗯中文", "中文".PadLeftA(6, '嗯'));
+            Assert.Equal(".中文", "中文".PadLeftA(5, '.'));
+            Assert.Equal("..中文", "中文".PadLeftA(6, '.'));
         }
 
         [Fact]
         public void PadRightU()
         {
-            Assert.Equal("English", "English".PadRightCon(1));
-            Assert.Equal("English ", "English".PadRightCon(8));
+            Assert.Equal("English", "English".PadRightA(1));
+            Assert.Equal("English ", "English".PadRightA(8));
 
-            Assert.Equal("中文", "中文".PadRightCon(1));
-            Assert.Equal("中文 ", "中文".PadRightCon(5));
-            Assert.Equal("中文 ", "中文".PadRightCon(5, '嗯'));
-            Assert.Equal("中文嗯", "中文".PadRightCon(6, '嗯'));
-            Assert.Equal("中文.", "中文".PadRightCon(5, '.'));
-            Assert.Equal("中文..", "中文".PadRightCon(6, '.'));
+            Assert.Equal("中文", "中文".PadRightA(1));
+            Assert.Equal("中文 ", "中文".PadRightA(5));
+            Assert.Equal("中文 ", "中文".PadRightA(5, '嗯'));
+            Assert.Equal("中文嗯", "中文".PadRightA(6, '嗯'));
+            Assert.Equal("中文.", "中文".PadRightA(5, '.'));
+            Assert.Equal("中文..", "中文".PadRightA(6, '.'));
         }
 
     }

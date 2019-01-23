@@ -23,9 +23,9 @@ namespace Dawnx.Test.Lock
         [Fact]
         public void Test()
         {
-            var ModelLock_YearMonth = new InstanceLock<Model>(x => x.Year, x => x.Month, x => x.Sex);
+            var ModelLock_YearMonth = InstanceLock<Model>.Get(x => x.Year, x => x.Month, x => x.Sex);
             var model = new Model { Year = 2012, Month = 4, };
-            
+
             using (var probe = PerformanceProbe.Create())
             {
                 var result = Concurrency.Run(resultId =>
@@ -50,7 +50,7 @@ namespace Dawnx.Test.Lock
         [Fact]
         public void TestWrongInitialize()
         {
-            Assert.ThrowsAny<ArgumentException>(() => new InstanceLock<Model>(x => x.Year, x => x.Obj));
+            Assert.ThrowsAny<ArgumentException>(() => InstanceLock<Model>.Get(x => x.Year, x => x.Obj));
         }
 
     }

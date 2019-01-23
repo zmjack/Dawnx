@@ -11,10 +11,6 @@ namespace Dawnx.Lock
     /// <typeparam name="TInstance"></typeparam>
     public class InstanceTsLock<TInstance> : InstanceLock<TInstance>
     {
-        public InstanceTsLock(params Expression<Func<TInstance, object>>[] flagExpressions) : base(flagExpressions)
-        {
-        }
-
         public override string InternString(TInstance instance)
         {
             return string.Intern(

@@ -177,6 +177,13 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnChar.GetWidthA(System.Char)">
+            <summary>
+            Gets the length of the specified char as Ascii.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnDateTime.FirstDayOfMonth(System.DateTime)">
             <summary>
             Gets the first day of the month.
@@ -937,6 +944,51 @@
             </summary>
             <param name="this"></param>
             <param name="isSet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.GetWidthA(System.String)">
+            <summary>
+            Gets the length of the specified string as Ascii.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.PadLeftA(System.String,System.Int32)">
+            <summary>
+            Returns a new string that right-aligns the characters in this string by padding
+                them on the right with a specified Ascii character, for a specified total length.
+            </summary>
+            <param name="this"></param>
+            <param name="totalWidth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.PadLeftA(System.String,System.Int32,System.Char)">
+            <summary>
+            Returns a new string that right-aligns the characters in this string by padding
+                them on the right with a specified Ascii character, for a specified total length.
+            </summary>
+            <param name="this"></param>
+            <param name="totalWidth"></param>
+            <param name="paddingChar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.PadRightA(System.String,System.Int32)">
+            <summary>
+            Returns a new string that left-aligns the characters in this string by padding
+                them on the right with a specified Ascii character, for a specified total length.
+            </summary>
+            <param name="this"></param>
+            <param name="totalWidth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.PadRightA(System.String,System.Int32,System.Char)">
+            <summary>
+            Returns a new string that left-aligns the characters in this string by padding
+                them on the right with a specified Ascii character, for a specified total length.
+            </summary>
+            <param name="this"></param>
+            <param name="totalWidth"></param>
+            <param name="paddingChar"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnUInt32.IsOdd(System.UInt32)">

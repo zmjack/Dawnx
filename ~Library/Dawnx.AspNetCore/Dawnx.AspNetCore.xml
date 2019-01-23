@@ -10,17 +10,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnClaimArray.GetClaims(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String)">
-            <summary>
-            Gets the value of `sub`. If the claims don't contains it, return null.
-            </summary>
-            <param name="this"></param>
-            <param name="type"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.Menu``1(System.Security.Claims.ClaimsPrincipal,Dawnx.AspNetCore.ClaimsMenu{``0})">
             <summary>
-            Returns user's menu from the specified menu.
+            Gets user's menu from the specified menu.
             </summary>
             <typeparam name="TModel"></typeparam>
             <param name="this"></param>
@@ -29,14 +21,44 @@
         </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetRoles(System.Security.Claims.ClaimsPrincipal)">
             <summary>
-            Returns roles of the specified ClaimsPrincipal.
+            Gets roles of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetId(System.Security.Claims.ClaimsPrincipal)">
             <summary>
-            Returns ID of the specified ClaimsPrincipal.
+            Gets ID of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaims(System.Security.Claims.ClaimsPrincipal,System.String)">
+            <summary>
+            Gets claims of the specified cliam type of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <param name="claimType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaim(System.Security.Claims.ClaimsPrincipal,System.String)">
+            <summary>
+            Gets the first claim of the specified cliam type of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <param name="claimType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpContext.GetAccessToken(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Same as: GetTokenAsync("access_token").Result;
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpContext.GetRefreshToken(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Same as: GetTokenAsync("refresh_token").Result;
             </summary>
             <param name="this"></param>
             <returns></returns>

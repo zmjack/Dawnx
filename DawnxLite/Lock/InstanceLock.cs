@@ -14,7 +14,7 @@ namespace Dawnx.Lock
         public Expression<Func<TInstance, object>>[] FlagExpressions { get; }
         protected Func<TInstance, object>[] FlagLambdas { get; }
 
-        public InstanceLock(params Expression<Func<TInstance, object>>[] flagExpressions)
+        protected InstanceLock(params Expression<Func<TInstance, object>>[] flagExpressions)
         {
             var isAllExpressionValid = flagExpressions.All(x =>
             {
@@ -34,6 +34,9 @@ namespace Dawnx.Lock
             FlagExpressions = flagExpressions;
             FlagLambdas = FlagExpressions.Select(x => x.Compile()).ToArray();
         }
+
+        public static InstanceLock<TInstance> Get(params Expression<Func<TInstance, object>>[] flagExpressions)
+            => new InstanceLock<TInstance>(flagExpressions);
 
         public virtual string InternString(TInstance instance)
         {

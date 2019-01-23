@@ -11,11 +11,13 @@ namespace Dawnx.Chinese
         private static readonly string[] Levels = new string[] { "亿", "万", "" };
         private static readonly string[] LowerSingleUnits = new string[] { "千", "百", "十", "" };
         private static readonly string[] UpperSingleUnits = new string[] { "仟", "佰", "拾", "" };
-        private static readonly string[] Unit = new string[] { "元", "角", "分" };
 
-        public static string GetString(double money, CurrencyOption option) => GetString((int)money, (int)money % 1, option);
-        public static string GetString(int integer, int fractional, CurrencyOption option)
+        public static string GetString(double money, CurrencyOption option) => GetString((int)money, (int)(money * 100 % 100), option);
+        public static string GetString(int integer, int fractional100, CurrencyOption option)
         {
+            if (!(0 <= fractional100 && fractional100 <= 99))
+                throw new ArgumentException($"The argument `{nameof(fractional100)}` must be between 0 and 99.");
+
             string GetPartString(char[] singles, string level)
             {
                 if (!singles.Any()) return string.Empty;
@@ -28,6 +30,7 @@ namespace Dawnx.Chinese
                     case CurrencyOption.ETarget.Upper: zeroValue = UpperValues[0]; break;
                     default: throw new NotSupportedException();
                 }
+
                 var zero = false;
                 foreach (var vi in singles.AsVI())
                 {
@@ -61,14 +64,37 @@ namespace Dawnx.Chinese
             }
 
             var levelParts = integer.ToString().Distribute(4, true).ToArray();
-            var str = levelParts.Select((v, i) => GetPartString(v, Levels[Levels.Length - levelParts.Length + i])).Join("");
+            var ret = levelParts.Select((v, i) => GetPartString(v, Levels[Levels.Length - levelParts.Length + i])).Join("");
 
-            if (option.IsSimplified && (str.StartsWith("一十") || str.StartsWith("壹拾")))
-                return str.Substring(1);
-            else return str;
+            if (option.IsSimplified && (ret.StartsWith("一十") || ret.StartsWith("壹拾")))
+                ret = ret.Substring(1);
+
+            if (fractional100 == 0)
+                return $"{ret}元整";
+            else if (fractional100 % 10 == 0)
+            {
+                switch (option.Target)
+                {
+                    case CurrencyOption.ETarget.Lower: return $"{ret}元{LowerValues[fractional100 / 10]}角整";
+                    case CurrencyOption.ETarget.Upper: return $"{ret}元{UpperValues[fractional100 / 10]}角整";
+                    default: throw new NotSupportedException();
+                }
+            }
+            else
+            {
+                switch (option.Target)
+                {
+                    case CurrencyOption.ETarget.Lower: return $"{ret}元{LowerValues[fractional100 / 10]}角{LowerValues[fractional100 % 10]}分";
+                    case CurrencyOption.ETarget.Upper: return $"{ret}元{UpperValues[fractional100 / 10]}角{UpperValues[fractional100 % 10]}分";
+                    default: throw new NotSupportedException();
+                }
+            }
         }
 
-        //public static double GetDouble(string str) => _Instance._GetDouble(str);
+        public static double GetDouble(string str)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

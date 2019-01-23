@@ -1,6 +1,7 @@
 ﻿using Dawnx.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Dawnx
@@ -37,7 +38,19 @@ namespace Dawnx
             Expression<Func<TEntity, object>> dayExp,
             DateTime before,
             bool includePoint = true)
-            => @this.WhereStrategy(new WhereBeforeStrategy<TEntity>(yearExp, monthExp, dayExp, before, includePoint));
+        {
+            string GetPart(TEntity x, Expression<Func<TEntity, object>> exp, int totalWidth)
+            {
+                return exp.Compile()(x).ToString().PadLeft(totalWidth, '0');
+            }
+
+            return @this.Where(x =>
+            {
+                if (includePoint)
+                    return string.CompareOrdinal($"{GetPart(x, yearExp, 4)}-{GetPart(x, monthExp, 2)}-{GetPart(x, dayExp, 2)}", before.ToString("yyyy-MM-dd")) <= 0;
+                else return string.CompareOrdinal($"{GetPart(x, yearExp, 4)}-{GetPart(x, monthExp, 2)}-{GetPart(x, dayExp, 2)}", before.ToString("yyyy-MM-dd")) < 0;
+            });
+        }
 
     }
 }

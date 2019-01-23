@@ -215,6 +215,58 @@ namespace Dawnx.NPOI
         }
         #endregion
 
+        public CStyleApplier GetApplier()
+        {
+            return CStyleApplier.Create(x =>
+            {
+                // Alignment
+                x.Alignment = Alignment;
+                x.VerticalAlignment = VerticalAlignment;
+
+                // Border
+                x.BorderLeft = BorderLeft;
+                x.LeftBorderColor = LeftBorderColor;
+                x.BorderRight = BorderRight;
+                x.RightBorderColor = RightBorderColor;
+                x.BorderTop = BorderTop;
+                x.TopBorderColor = TopBorderColor;
+                x.BorderBottom = BorderBottom;
+                x.BottomBorderColor = BottomBorderColor;
+                x.BorderDiagonalLineStyle = BorderDiagonalLineStyle;
+                x.BorderDiagonalColor = BorderDiagonalColor;
+                x.BorderDiagonal = BorderDiagonal;
+
+                // Fill
+                x.FillPattern = FillPattern;
+                x.FillBackgroundColor = FillBackgroundColor;
+                x.FillForegroundColor = FillForegroundColor;
+
+                // Font
+                x.Font = CFontApplier.Create(f =>
+                {
+                    f.FontName = Font.FontName;
+                    f.FontSize = Font.FontSize;
+                    f.IsBold = Font.IsBold;
+                    f.IsItalic = Font.IsItalic;
+                    f.IsStrikeout = Font.IsStrikeout;
+                    f.Underline = Font.Underline;
+                    f.TypeOffset = Font.TypeOffset;
+                    f.FontColor = Font.FontColor;
+                });
+
+                // DataFormat
+                x.DataFormat = DataFormat;
+
+                // Others
+                x.Rotation = Rotation;
+                x.Indention = Indention;
+                x.WrapText = WrapText;
+                x.IsLocked = IsLocked;
+                x.IsHidden = IsHidden;
+                x.ShrinkToFit = ShrinkToFit;
+            });
+        }
+
         internal bool InterfaceValuesEqual(CStyleApplier obj)
         {
             var instance = obj as ICStyle;

@@ -23,7 +23,7 @@ namespace Dawnx.Test.Lock
         [Fact]
         public void Test()
         {
-            var ModelLock_YearMonth = InstanceLock<Model>.Get(x => x.Year, x => x.Month, x => x.Sex);
+            var ModelLock_YearMonth = InstanceLock<Model>.Get(x => x.Year, x => x.Month, x => x.Sex, x => "123");
             var model = new Model { Year = 2012, Month = 4, };
 
             using (var probe = PerformanceProbe.Create())

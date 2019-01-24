@@ -7,7 +7,7 @@ namespace Dawnx.AspNetCore.AppSupport
 {
     public class AppRegistryTransaction<TDbContext, TAppRegistryItem> : Scope<IDbContextTransaction, AppRegistryTransaction<TDbContext, TAppRegistryItem>>
         where TDbContext : DbContext, IAppRegistryDbContext
-        where TAppRegistryItem : class, new()
+        where TAppRegistryItem : class, IAppRegistryItem, new()
     {
         public AppRegistryTransaction(AppRegistryManager<TDbContext, TAppRegistryItem> manager)
             : this(manager.Context.Database.BeginTransaction(IsolationLevel.Serializable))

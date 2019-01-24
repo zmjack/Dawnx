@@ -41,31 +41,31 @@ namespace Dawnx.Chinese.Test
         [Fact]
         public void IntegerUpperTest()
         {
-            Assert.Equal("拾万零壹元整", CurrencyUtility.GetString(10_0001, new CurrencyOption
+            Assert.Equal("拾万零壹圆整", CurrencyUtility.GetString(10_0001, new CurrencyOption
             {
                 IsSimplified = true,
                 Target = CurrencyOption.ETarget.Upper,
             }));
 
-            Assert.Equal("壹拾万零壹元整", CurrencyUtility.GetString(10_0001, new CurrencyOption
+            Assert.Equal("壹拾万零壹圆整", CurrencyUtility.GetString(10_0001, new CurrencyOption
             {
                 IsSimplified = false,
                 Target = CurrencyOption.ETarget.Upper,
             }));
 
-            Assert.Equal("壹拾万零壹佰零壹元整", CurrencyUtility.GetString(10_0101, new CurrencyOption
+            Assert.Equal("壹拾万零壹佰零壹圆整", CurrencyUtility.GetString(10_0101, new CurrencyOption
             {
                 IsSimplified = false,
                 Target = CurrencyOption.ETarget.Upper,
             }));
 
-            Assert.Equal("壹拾万壹仟零壹元整", CurrencyUtility.GetString(10_1001, new CurrencyOption
+            Assert.Equal("壹拾万壹仟零壹圆整", CurrencyUtility.GetString(10_1001, new CurrencyOption
             {
                 IsSimplified = false,
                 Target = CurrencyOption.ETarget.Upper,
             }));
 
-            Assert.Equal("壹拾万壹仟零壹拾元整", CurrencyUtility.GetString(10_1010, new CurrencyOption
+            Assert.Equal("壹拾万壹仟零壹拾圆整", CurrencyUtility.GetString(10_1010, new CurrencyOption
             {
                 IsSimplified = false,
                 Target = CurrencyOption.ETarget.Upper,

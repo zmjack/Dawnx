@@ -12,7 +12,7 @@ namespace Dawnx.AspNetCore.AppSupport
 {
     public class AppRegistryManager<TDbContext, TAppRegistryItem>
         where TDbContext : DbContext, IAppRegistryDbContext
-        where TAppRegistryItem : class, new()
+        where TAppRegistryItem : class, IAppRegistryItem, new()
     {
         public TDbContext Context { get; private set; }
 

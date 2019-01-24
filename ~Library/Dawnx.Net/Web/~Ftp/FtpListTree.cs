@@ -80,7 +80,7 @@ namespace Dawnx.Net.Web
                     AddRange(lines.Select(line =>
                     {
                         var groups = line.ProjectToArray(@"^(d?).+?\s+\d+\s+.+?\s+.+?\s+(\d+)\s+(.+)\s+(.+)$");
-                        var lastWriteTime = DateTime.Parse(groups[3][0]);
+                        //var lastWriteTime = DateTime.Parse(groups[3][0]);
                         var isDirectory = groups[1][0] == "d";
                         var size = long.Parse(groups[2][0]);
                         var name = groups[4][0];
@@ -88,7 +88,8 @@ namespace Dawnx.Net.Web
                         var item = new FtpListTree(FtpAccess, isDirectory ? $"{RelativePath}/{name}/" : "");
                         item.Model.Self(_ =>
                         {
-                            _.LastWriteTime = lastWriteTime;
+                            // LastWriteTime doesn't have a year component, so we decided to ignore it
+                            //_.LastWriteTime = lastWriteTime;
                             _.Type = isDirectory ? FtpListItem.ItemType.Directory : FtpListItem.ItemType.File;
                             _.Size = size;
                             _.Name = name;

@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static void AddAppRegistry<TDbContext, TAppRegistryItem>(this IServiceCollection @this)
             where TDbContext : DbContext, IAppRegistryDbContext
-            where TAppRegistryItem : class, new()
+            where TAppRegistryItem : class, IAppRegistryItem, new()
         {
             @this.AddScoped<AppRegistryManager<TDbContext, TAppRegistryItem>>();
             ServiceType = typeof(AppRegistryManager<TDbContext, TAppRegistryItem>);

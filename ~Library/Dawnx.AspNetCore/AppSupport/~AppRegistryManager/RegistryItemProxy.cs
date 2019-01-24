@@ -8,7 +8,7 @@ namespace Dawnx.AspNetCore.AppSupport
 {
     public class RegistryItemProxy<TDbContext, TAppRegistryItem> : IInterceptor
         where TDbContext : DbContext, IAppRegistryDbContext
-        where TAppRegistryItem : class, new()
+        where TAppRegistryItem : class, IAppRegistryItem, new()
     {
         private readonly AppRegistryManager<TDbContext, TAppRegistryItem> _manager;
 

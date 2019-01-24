@@ -41,7 +41,7 @@ namespace Dawnx.NPOI
         #endregion
 
         #region Font
-        public CFontApplier Font { get; } = CFontApplier.Create(null);
+        public CFontApplier Font { get; set; } = CFontApplier.Create(null);
         #endregion
 
         #region DataFormat

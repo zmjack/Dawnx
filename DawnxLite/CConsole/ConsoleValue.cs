@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx.Con
+namespace Dawnx.CConsole
 {
     public class ConsoleValue
     {

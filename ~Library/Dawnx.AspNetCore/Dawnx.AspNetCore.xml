@@ -4,6 +4,11 @@
         <name>Dawnx.AspNetCore</name>
     </assembly>
     <members>
+        <member name="T:Dawnx.AspNetCore.AppSupport.IAppRegistryItem">
+            <summary>
+            (Hint: Each Properties should be virtual property)
+            </summary>
+        </member>
         <member name="M:Dawnx.AspNetCore.AppSupport.AppRegistryManager`2.BeginAutoTransaction">
             <summary>
             Begin IsolationLevel.Serializable level transaction.

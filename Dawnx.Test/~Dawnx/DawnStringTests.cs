@@ -142,8 +142,8 @@ namespace Dawnx.Test
         [Fact]
         public void ConsoleWidth()
         {
-            Assert.Equal(7, "English".GetWidthA());
-            Assert.Equal(4, "中文".GetWidthA());
+            Assert.Equal(7, "English".GetLengthA());
+            Assert.Equal(4, "中文".GetLengthA());
         }
 
         [Fact]

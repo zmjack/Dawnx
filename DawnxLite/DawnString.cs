@@ -388,8 +388,8 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static int GetWidthA(this string @this)
-            => @this.Aggregate(0, (acc, cur) => acc += cur.GetWidthA());
+        public static int GetLengthA(this string @this)
+            => @this.Aggregate(0, (acc, cur) => acc += cur.GetLengthA());
 
         /// <summary>
         /// Returns a new string that right-aligns the characters in this string by padding
@@ -413,13 +413,13 @@ namespace Dawnx
                 $"Non-negative number required.{Environment.NewLine}" +
                 $"Parameter name: totalWidth");
 
-            var fillWidth = totalWidth - GetWidthA(@this);
+            var fillWidth = totalWidth - GetLengthA(@this);
             if (fillWidth > 0)
             {
                 var fillBlank = false;
                 var padWidth = 0;
 
-                if (paddingChar.GetWidthA() == 2)
+                if (paddingChar.GetLengthA() == 2)
                 {
                     padWidth = @this.Length + fillWidth / 2;
                     fillBlank = fillWidth.IsOdd();
@@ -455,13 +455,13 @@ namespace Dawnx
                 $"Non-negative number required.{Environment.NewLine}" +
                 $"Parameter name: totalWidth");
 
-            var fillWidth = totalWidth - GetWidthA(@this);
+            var fillWidth = totalWidth - GetLengthA(@this);
             if (fillWidth > 0)
             {
                 var fillBlank = false;
                 var padWidth = 0;
 
-                if (paddingChar.GetWidthA() == 2)
+                if (paddingChar.GetLengthA() == 2)
                 {
                     padWidth = @this.Length + fillWidth / 2;
                     fillBlank = fillWidth.IsOdd();

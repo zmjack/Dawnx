@@ -9,21 +9,7 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
-        <member name="M:Dawnx.Con.ConsoleUtility.GetConsoleLength(System.String)">
-            <summary>
-            Gets the console length.
-            </summary>
-            <param name="text"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Con.ConsoleUtility.GetCountOfDoubleBytesChar(System.String)">
-            <summary>
-            Gets the count of double bytes char.
-            </summary>
-            <param name="text"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Con.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
             <summary>
             Gets table line, like ┌┬┐(specified by the format value).
             </summary>
@@ -32,7 +18,7 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Con.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Prints console table for models.
             </summary>
@@ -177,7 +163,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnChar.GetWidthA(System.Char)">
+        <member name="M:Dawnx.DawnChar.GetLengthA(System.Char)">
             <summary>
             Gets the length of the specified char as Ascii.
             </summary>
@@ -946,7 +932,7 @@
             <param name="isSet"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnString.GetWidthA(System.String)">
+        <member name="M:Dawnx.DawnString.GetLengthA(System.String)">
             <summary>
             Gets the length of the specified string as Ascii.
             </summary>

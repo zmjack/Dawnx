@@ -10,7 +10,7 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static int GetWidthA(this char @this) => @this < 0x100 ? 1 : 2;
+        public static int GetLengthA(this char @this) => @this < 0x100 ? 1 : 2;
 
     }
 }

@@ -22,7 +22,7 @@ namespace Dawnx.Algorithms.MathAlgorithm
                     return new
                     {
                         Top = acc.Top + (x - avg_x) * (y - avg_y),
-                        Bottom = acc.Bottom + System.Math.Pow(x - avg_x, 2.0)
+                        Bottom = acc.Bottom + Math.Pow(x - avg_x, 2.0)
                     };
                 });
 

@@ -20,7 +20,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.Authority?.Role?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.RoleManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             if (HttpContext.Request.Path.ToString().EndsWith("Roles/"))

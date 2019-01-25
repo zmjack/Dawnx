@@ -23,7 +23,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.Authority?.Role?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.RoleManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             return Page();
@@ -31,7 +31,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public IActionResult OnPost()
         {
-            if (!IdentityUtility.Authority?.Role?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.RoleManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             if (ModelState.IsValid)

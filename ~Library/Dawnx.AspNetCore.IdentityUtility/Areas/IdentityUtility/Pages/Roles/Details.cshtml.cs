@@ -23,7 +23,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Roles
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.Authority?.Role?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.RoleManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             Input = _roleManager.FindByIdAsync(Request.Query["Id"]).Result;

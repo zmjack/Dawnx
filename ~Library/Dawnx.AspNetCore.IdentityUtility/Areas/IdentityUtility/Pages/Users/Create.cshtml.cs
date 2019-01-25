@@ -27,7 +27,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnGet()
         {
-            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.UserManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             Input = new IdentityUser { LockoutEnd = DateTime.Now };
@@ -40,7 +40,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnPost()
         {
-            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.UserManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             var roles = _roleManager.Roles.Select(x => x.Name).ToArray();

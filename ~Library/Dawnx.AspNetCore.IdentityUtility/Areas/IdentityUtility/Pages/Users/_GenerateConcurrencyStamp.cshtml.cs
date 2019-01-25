@@ -28,7 +28,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
         public IActionResult OnPost()
         {
-            if (!IdentityUtility.Authority?.User?.IsUserAllowed(User) ?? false)
+            if (!IdentityUtility.Authority?.UserManager?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
 
             var user = _userManager.FindByIdAsync(Input.Id).Result;

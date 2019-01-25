@@ -7,8 +7,8 @@
 
     public class IdentityAuthority
     {
-        public Authority User { get; set; }
-        public Authority Role { get; set; }
+        public Authority UserManager { get; set; }
+        public Authority RoleManager { get; set; }
     }
 
 }

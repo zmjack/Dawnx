@@ -9,21 +9,50 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintTableLine(System.Int32[],System.String,System.Object[])">
-            <summary>
-            Gets table line, like ┌┬┐(specified by the format value).
-            </summary>
-            <param name="lengths"></param>
-            <param name="format"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintTable``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Prints console table for models.
             </summary>
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
+        </member>
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintBorderTable(System.String[],System.String[][],System.Int32[])">
+            <summary>
+            Prints console table for models.
+            </summary>
+            <param name="headers"></param>
+            <param name="colLines"></param>
+            <param name="lengths"></param>
+        </member>
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintNoBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console table with no border for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintNoBorderTable(System.String[],System.String[][],System.Int32[])">
+            <summary>
+            Prints console table with no border for models.
+            </summary>
+            <param name="headers"></param>
+            <param name="colLines"></param>
+            <param name="lengths"></param>
+        </member>
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintSeamlessTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console seamless table for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
+        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintSeamlessTable(System.String[],System.String[][],System.Int32[])">
+            <summary>
+            Prints console seamless table.
+            </summary>
+            <param name="headers"></param>
+            <param name="colLines"></param>
+            <param name="lengths"></param>
         </member>
         <member name="T:Dawnx.Data.SqlScope`3">
             <summary>
@@ -785,7 +814,6 @@
             </summary>
             <param name="this"></param>
             <param name="regex"></param>
-            <param name="options"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.Slice(System.String,System.Int32)">
@@ -901,7 +929,6 @@
             </summary>
             <param name="this"></param>
             <param name="regex"></param>
-            <param name="target"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.ProjectToArray(System.String,System.Text.RegularExpressions.Regex)">
@@ -911,7 +938,6 @@
             </summary>
             <param name="this"></param>
             <param name="regex"></param>
-            <param name="target"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.UnitInsert(System.String,System.Int32,System.String,System.Boolean)">
@@ -929,7 +955,7 @@
             Returns a copy of the string with its first character capitalized.
             </summary>
             <param name="this"></param>
-            <param name="isSet"></param>
+            <param name="upper"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.GetLengthA(System.String)">

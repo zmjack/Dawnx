@@ -5,102 +5,79 @@ using System.Text;
 
 namespace Dawnx.CConsole
 {
-    public class ConsoleUtility
+    public static partial class ConsoleUtility
     {
-        private const string TABLE_CELL_PADDING = " ";
-        private const int TABLE_CELL_PADDING_LENGTH = 1;
-
-        /// <summary>
-        /// Gets table line, like ┌┬┐(specified by the format value).
-        /// </summary>
-        /// <param name="lengths"></param>
-        /// <param name="format"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private static void PrintTableLine(int[] lengths, string format, object[] data = null)
+        public class AlignLineOptions
         {
-            var ubound = lengths.GetUpperBound(0);
+            public bool TreatDBytesTableLineAsByte { get; set; } = false;
+            public string[] Borders { get; set; } = new[] { "", " ", "" };
+            public int[] Lengths { get; set; } = null;
 
-            for (int i = 0; i < lengths.Length; i++)
+            public int GetCharLengthA(char ch)
             {
-                if (i == 0) Console.Write(format[0]);
-                else Console.Write(format[1]);
+                if (TreatDBytesTableLineAsByte && "─│┌┬┐├┼┤└┴┘".Contains(ch))
+                    return 1;
+                else return ch.GetLengthA();
+            }
 
-                if (!(data is null))
+            public int GetStringLengthA(string str) => str.Sum(ch => GetCharLengthA(ch));
+        }
+
+        public static string GetAlignConsoleLine(string[] cols, AlignLineOptions options)
+        {
+            if (options.Borders is null)
+                options.Borders = new[] { "", " ", "" };
+
+            if (cols.Length != options.Lengths.Length)
+                throw new ArgumentException($"The length of the argument `{nameof(cols)}` and `{nameof(options.Lengths)}` must be same.");
+
+            var lineCols = new string[cols.Length];
+            Array.Copy(cols, lineCols, cols.Length);
+
+            var sb = new StringBuilder(options.Lengths.Sum() + options.Borders.Sum(x => x.Length));
+
+            var cellList = new List<string>();
+            var needNewLine = true;
+            while (needNewLine)
+            {
+                needNewLine = false;
+                foreach (var vi in lineCols.AsVI())
                 {
-                    Console.Write(TABLE_CELL_PADDING);
+                    var lineCol = vi.Value;
+                    var length = options.Lengths[vi.Index];
 
-                    var value = data[i];
-                    if (value is ConsoleValue)
+                    if (options.GetStringLengthA(lineCol) <= length)
                     {
-                        if (!((value as ConsoleValue).BackgroundColor is null))
-                            Console.BackgroundColor = (value as ConsoleValue).BackgroundColor.Value;
-                        if (!((value as ConsoleValue).ForegroundColor is null))
-                            Console.ForegroundColor = (value as ConsoleValue).ForegroundColor.Value;
-
-                        var svalue = (value as ConsoleValue).Value;
-                        Console.Write(svalue.PadRight(lengths[i] - svalue.Length));
-                        Console.ResetColor();
+                        lineCols[vi.Index] = "";
+                        cellList.Add(lineCol.PadRightA(length));
                     }
                     else
                     {
-                        var svalue = value.ToString();
-                        Console.Write(svalue.PadRight(lengths[i] - svalue.Length));
+                        for (int i = 0, lineLengthA = 0; i < lineCol.Length; i++)
+                        {
+                            var chLengthA = options.GetCharLengthA(lineCol[i]);
+
+                            if (lineLengthA + chLengthA <= length)
+                                lineLengthA += chLengthA;
+                            else
+                            {
+                                var lineContent = lineCol.Substring(0, i);
+                                cellList.Add(lineContent.PadRightA(length));
+
+                                lineCols[vi.Index] = lineCol.Substring(i);
+                                needNewLine = true;
+                                break;
+                            }
+                        }
                     }
-
-                    Console.Write(TABLE_CELL_PADDING);
-                }
-                else
-                {
-                    Console.Write("─".Repeat(lengths[i] + TABLE_CELL_PADDING_LENGTH * 2));
                 }
 
-                if (i == ubound) Console.Write(format[2]);
+                sb.AppendLine($"{options.Borders[0]}{cellList.Join(options.Borders[1])}{options.Borders[2]}");
+                cellList.Clear();
             }
 
-            Console.WriteLine();
-        }
-
-        /// <summary>
-        /// Prints console table for models.
-        /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <param name="models"></param>
-        public static void PrintTable<TModel>(IEnumerable<TModel> models)
-        {
-            var props = typeof(TModel).GetProperties();
-            var lengths = new int[props.Length];
-            var line = new StringBuilder();
-
-            // Calculate lengths of each column
-            foreach (var prop in props.AsVI())
-                lengths[prop.Index] = prop.Value.Name.GetLengthA();
-
-            foreach (var prop in props.AsVI())
-            {
-                foreach (var model in models)
-                {
-                    var len = prop.Value.GetValue(model).ToString().GetLengthA();
-                    if (len > lengths[prop.Index])
-                        lengths[prop.Index] = len;
-                }
-            }
-
-            // Print lines
-            PrintTableLine(lengths, "┌┬┐");
-            PrintTableLine(lengths, "│││", props.Select(x => new ConsoleValue
-            {
-                ForegroundColor = ConsoleColor.Cyan,
-                Value = x.Name,
-            }).ToArray());
-
-            if (models.Any())
-                PrintTableLine(lengths, "├┼┤");
-
-            foreach (var model in models)
-                PrintTableLine(lengths, "│││", props.Select(x => x.GetValue(model)).ToArray());
-
-            PrintTableLine(lengths, "└┴┘");
+            sb.Length -= Environment.NewLine.Length;
+            return sb.ToString();
         }
 
     }

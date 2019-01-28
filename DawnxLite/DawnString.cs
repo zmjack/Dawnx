@@ -82,7 +82,6 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <param name="regex"></param>
-        /// <param name="options"></param>
         /// <returns></returns>
         public static bool IsMatch(this string @this, Regex regex) => regex.Match(@this).Success;
 
@@ -313,7 +312,6 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <param name="regex"></param>
-        /// <param name="target"></param>
         /// <returns></returns>
         public static string[][] ProjectToArray(this string @this, string regex)
             => ProjectToArray(@this, new Regex(regex, RegexOptions.Singleline));
@@ -324,7 +322,6 @@ namespace Dawnx
         /// </summary>
         /// <param name="this"></param>
         /// <param name="regex"></param>
-        /// <param name="target"></param>
         /// <returns></returns>
         public static string[][] ProjectToArray(this string @this, Regex regex)
         {
@@ -370,14 +367,14 @@ namespace Dawnx
         /// Returns a copy of the string with its first character capitalized.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="isSet"></param>
+        /// <param name="upper"></param>
         /// <returns></returns>
-        public static string CapitalizeFirst(this string @this, bool set = true)
+        public static string CapitalizeFirst(this string @this, bool upper = true)
         {
             var chars = @this.ToCharArray();
             if (chars.Length > 0)
             {
-                if (set) chars[0] = char.ToUpper(chars[0]);
+                if (upper) chars[0] = char.ToUpper(chars[0]);
                 else chars[0] = char.ToLower(chars[0]);
             }
             return new string(chars);
@@ -410,8 +407,7 @@ namespace Dawnx
         public static string PadLeftA(this string @this, int totalWidth, char paddingChar)
         {
             if (totalWidth < 0) throw new ArgumentOutOfRangeException(
-                $"Non-negative number required.{Environment.NewLine}" +
-                $"Parameter name: totalWidth");
+                $"The argument `{nameof(totalWidth)}` must be an non-negative number.");
 
             var fillWidth = totalWidth - GetLengthA(@this);
             if (fillWidth > 0)

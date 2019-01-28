@@ -5,6 +5,7 @@ using HtmlAgilityPack;
 using System.Collections.Generic;
 using Dawnx.Net.Web;
 using System.IO;
+using Dawnx.CConsole;
 
 namespace DawnxDevloping
 {
@@ -12,21 +13,28 @@ namespace DawnxDevloping
     {
         static void Main(string[] args)
         {
-            var ftp = new FtpAccess("ftp://127.0.0.1");
-            string ss;
+            var models = new[]
+            {
+                new SimpleData.Northwnd.Category
+                {
+                    CategoryID = 123,
+                    CategoryName = "CC",
+                    Description = "一二三四五",
+                    Picture = new byte[0],
+                },
+            };
 
-            ftp.MakeDirectory("地地地");
+            ConsoleUtility.PrintSeamlessTable(
+                new[] { "A", "B", "C" },
+                new string[][]
+                {
+                    new []{ "a123", "1一二三四五六", "c34567" },
+                },
+                new[] { 2, 4, 6 });
 
-            using (var file = new FileStream(@"C:\Users\19558\Desktop\[TOC].md", FileMode.Open))
-                ftp.UploadFile(file, "1.md");
-
-            using (var file = new FileStream(@"D:\Temp\1.md", FileMode.Create))
-                ftp.DownloadFile(file, "1.md");
-
-            var s = ftp.ListDirectoryDetails("");
-
-            var tree1 = ftp.ListTree("", true).Description;
-            var tree2 = ftp.ListTree("地", true).Description;
+            ConsoleUtility.PrintBorderTable(models);
+            ConsoleUtility.PrintSeamlessTable(models);
+            ConsoleUtility.PrintNoBorderTable(models);
         }
 
     }

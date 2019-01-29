@@ -181,7 +181,7 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
   ```c#
   sqlite.Regions
   	.OrderByCase(x => x.RegionDescription, 
-                   new[] { "Northern", "Eastern", "Western", "Southern" });
+      	new[] { "Northern", "Eastern", "Western", "Southern" });
   ```
 
   ```sqlite
@@ -210,7 +210,7 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
   ```c#
   sqlite.Regions
   	.OrderByCase(x => x.RegionDescription, 
-                   new[] { "Northern", "Eastern", "Western", "Southern" })
+      	new[] { "Northern", "Eastern", "Western", "Southern" })
       .ThenByCase(x => x.RegionID, new[] { 4, 3, 2, 1 })
   ```
 

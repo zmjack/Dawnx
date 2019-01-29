@@ -24,7 +24,7 @@ namespace DawnxDevloping
                 },
             };
 
-            ConsoleUtility.PrintSeamlessTable(
+            ConsoleUtility.CreateSeamlessTable(
                 new[] { "A", "B", "C" },
                 new string[][]
                 {
@@ -32,9 +32,9 @@ namespace DawnxDevloping
                 },
                 new[] { 2, 4, 6 });
 
-            ConsoleUtility.PrintBorderTable(models);
-            ConsoleUtility.PrintSeamlessTable(models);
-            ConsoleUtility.PrintNoBorderTable(models);
+            ConsoleUtility.CreateBorderTable(models);
+            ConsoleUtility.CreateSeamlessTable(models);
+            ConsoleUtility.CreateNoBorderTable(models);
         }
 
     }

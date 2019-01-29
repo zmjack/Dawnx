@@ -12,7 +12,7 @@ namespace Dawnx.CConsole
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="models"></param>
-        public static void PrintNoBorderTable<TModel>(IEnumerable<TModel> models)
+        public static string CreateNoBorderTable<TModel>(IEnumerable<TModel> models)
         {
             var props = typeof(TModel).GetProperties();
             var lengths = new int[props.Length];
@@ -32,7 +32,7 @@ namespace Dawnx.CConsole
                 }
             }
 
-            PrintNoBorderTable(
+            return CreateNoBorderTable(
                 headers: props.Select(x => x.Name).ToArray(),
                 colLines: models.Select(model => props.Select(x => x.GetValue(model)?.ToString() ?? "").ToArray()).ToArray(),
                 lengths: lengths);
@@ -44,8 +44,10 @@ namespace Dawnx.CConsole
         /// <param name="headers"></param>
         /// <param name="colLines"></param>
         /// <param name="lengths"></param>
-        private static void PrintNoBorderTable(string[] headers, string[][] colLines, int[] lengths)
+        private static string CreateNoBorderTable(string[] headers, string[][] colLines, int[] lengths)
         {
+            var sb = new StringBuilder();
+
             var options = new AlignLineOptions
             {
                 Lengths = lengths,
@@ -53,9 +55,11 @@ namespace Dawnx.CConsole
                 TreatDBytesTableLineAsByte = false,
             };
 
-            Console.WriteLine(GetAlignConsoleLine(headers, options));
+            sb.AppendLine(GetAlignConsoleLine(headers, options));
             foreach (var colLine in colLines)
-                Console.WriteLine(GetAlignConsoleLine(colLine, options));
+                sb.AppendLine(GetAlignConsoleLine(colLine, options));
+
+            return sb.ToString();
         }
 
     }

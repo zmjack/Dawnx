@@ -9,14 +9,14 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Prints console table for models.
             </summary>
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintBorderTable(System.String[],System.String[][],System.Int32[])">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateBorderTable(System.String[],System.String[][],System.Int32[])">
             <summary>
             Prints console table for models.
             </summary>
@@ -24,14 +24,14 @@
             <param name="colLines"></param>
             <param name="lengths"></param>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintNoBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateNoBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Prints console table with no border for models.
             </summary>
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintNoBorderTable(System.String[],System.String[][],System.Int32[])">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateNoBorderTable(System.String[],System.String[][],System.Int32[])">
             <summary>
             Prints console table with no border for models.
             </summary>
@@ -39,14 +39,14 @@
             <param name="colLines"></param>
             <param name="lengths"></param>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintSeamlessTable``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateSeamlessTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Prints console seamless table for models.
             </summary>
             <typeparam name="TModel"></typeparam>
             <param name="models"></param>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.PrintSeamlessTable(System.String[],System.String[][],System.Int32[])">
+        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateSeamlessTable(System.String[],System.String[][],System.Int32[])">
             <summary>
             Prints console seamless table.
             </summary>

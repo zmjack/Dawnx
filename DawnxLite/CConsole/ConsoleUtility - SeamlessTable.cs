@@ -12,7 +12,7 @@ namespace Dawnx.CConsole
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="models"></param>
-        public static void PrintSeamlessTable<TModel>(IEnumerable<TModel> models)
+        public static void CreateSeamlessTable<TModel>(IEnumerable<TModel> models)
         {
             var props = typeof(TModel).GetProperties();
             var lengths = new int[props.Length];
@@ -32,7 +32,7 @@ namespace Dawnx.CConsole
                 }
             }
 
-            PrintSeamlessTable(
+            CreateSeamlessTable(
                 headers: props.Select(x => x.Name).ToArray(),
                 colLines: models.Select(model => props.Select(x => x.GetValue(model)?.ToString() ?? "").ToArray()).ToArray(),
                 lengths: lengths);
@@ -44,20 +44,22 @@ namespace Dawnx.CConsole
         /// <param name="headers"></param>
         /// <param name="colLines"></param>
         /// <param name="lengths"></param>
-        public static void PrintSeamlessTable(string[] headers, string[][] colLines, int[] lengths)
+        public static string CreateSeamlessTable(string[] headers, string[][] colLines, int[] lengths)
         {
+            var sb = new StringBuilder();
+
             var borderLine = "─";
             var borderCols = new string[lengths.Length];
             for (int i = 0; i < borderCols.Length; i++)
                 borderCols[i] = borderLine.Repeat(lengths[i]);
 
-            Console.WriteLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+            sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
             {
                 Lengths = lengths,
                 Borders = new[] { "┌─", "┬─", "┐" },
                 TreatDBytesTableLineAsByte = true,
             }));
-            Console.WriteLine(GetAlignConsoleLine(headers, new AlignLineOptions
+            sb.AppendLine(GetAlignConsoleLine(headers, new AlignLineOptions
             {
                 Lengths = lengths,
                 Borders = new[] { "│ ", "│ ", "│" },
@@ -66,7 +68,7 @@ namespace Dawnx.CConsole
 
             if (colLines.Any())
             {
-                Console.WriteLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+                sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
                 {
                     Lengths = lengths,
                     Borders = new[] { "├─", "┼─", "┤" },
@@ -76,7 +78,7 @@ namespace Dawnx.CConsole
 
             foreach (var colLine in colLines)
             {
-                Console.WriteLine(GetAlignConsoleLine(colLine, new AlignLineOptions
+                sb.AppendLine(GetAlignConsoleLine(colLine, new AlignLineOptions
                 {
                     Lengths = lengths,
                     Borders = new[] { "│ ", "│ ", "│" },
@@ -84,12 +86,14 @@ namespace Dawnx.CConsole
                 }));
             }
 
-            Console.WriteLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+            sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
             {
                 Lengths = lengths,
                 Borders = new[] { "└─", "┴─", "┘" },
                 TreatDBytesTableLineAsByte = true,
             }));
+
+            return sb.ToString();
         }
 
     }

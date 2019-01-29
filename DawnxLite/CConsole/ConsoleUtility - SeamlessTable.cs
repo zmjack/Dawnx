@@ -59,21 +59,25 @@ namespace Dawnx.CConsole
                 Borders = new[] { "┌─", "┬─", "┐" },
                 TreatDBytesTableLineAsByte = true,
             }));
-            sb.AppendLine(GetAlignConsoleLine(headers, new AlignLineOptions
-            {
-                Lengths = lengths,
-                Borders = new[] { "│ ", "│ ", "│" },
-                TreatDBytesTableLineAsByte = true,
-            }));
 
-            if (colLines.Any())
+            if (!(headers is null))
             {
-                sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+                sb.AppendLine(GetAlignConsoleLine(headers, new AlignLineOptions
                 {
                     Lengths = lengths,
-                    Borders = new[] { "├─", "┼─", "┤" },
+                    Borders = new[] { "│ ", "│ ", "│" },
                     TreatDBytesTableLineAsByte = true,
                 }));
+
+                if (colLines.Any())
+                {
+                    sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+                    {
+                        Lengths = lengths,
+                        Borders = new[] { "├─", "┼─", "┤" },
+                        TreatDBytesTableLineAsByte = true,
+                    }));
+                }
             }
 
             foreach (var colLine in colLines)

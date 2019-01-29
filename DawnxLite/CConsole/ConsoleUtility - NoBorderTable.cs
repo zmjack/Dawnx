@@ -44,7 +44,7 @@ namespace Dawnx.CConsole
         /// <param name="headers"></param>
         /// <param name="colLines"></param>
         /// <param name="lengths"></param>
-        private static string CreateNoBorderTable(string[] headers, string[][] colLines, int[] lengths)
+        public static string CreateNoBorderTable(string[] headers, string[][] colLines, int[] lengths)
         {
             var sb = new StringBuilder();
 
@@ -55,7 +55,9 @@ namespace Dawnx.CConsole
                 TreatDBytesTableLineAsByte = false,
             };
 
-            sb.AppendLine(GetAlignConsoleLine(headers, options));
+            if (!(headers is null))
+                sb.AppendLine(GetAlignConsoleLine(headers, options));
+
             foreach (var colLine in colLines)
                 sb.AppendLine(GetAlignConsoleLine(colLine, options));
 

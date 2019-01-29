@@ -44,7 +44,7 @@ namespace Dawnx.CConsole
         /// <param name="headers"></param>
         /// <param name="colLines"></param>
         /// <param name="lengths"></param>
-        private static string CreateBorderTable(string[] headers, string[][] colLines, int[] lengths)
+        public static string CreateBorderTable(string[] headers, string[][] colLines, int[] lengths)
         {
             var sb = new StringBuilder();
 
@@ -59,21 +59,25 @@ namespace Dawnx.CConsole
                 Borders = new[] { "+-", "-+-", "-+" },
                 TreatDBytesTableLineAsByte = false,
             }));
-            sb.AppendLine(GetAlignConsoleLine(headers, new AlignLineOptions
-            {
-                Lengths = lengths,
-                Borders = new[] { "| ", " | ", " |" },
-                TreatDBytesTableLineAsByte = false,
-            }));
 
-            if (colLines.Any())
+            if (!(headers is null))
             {
-                sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+                sb.AppendLine(GetAlignConsoleLine(headers, new AlignLineOptions
                 {
                     Lengths = lengths,
-                    Borders = new[] { "+-", "-+-", "-+" },
+                    Borders = new[] { "| ", " | ", " |" },
                     TreatDBytesTableLineAsByte = false,
                 }));
+
+                if (colLines.Any())
+                {
+                    sb.AppendLine(GetAlignConsoleLine(borderCols, new AlignLineOptions
+                    {
+                        Lengths = lengths,
+                        Borders = new[] { "+-", "-+-", "-+" },
+                        TreatDBytesTableLineAsByte = false,
+                    }));
+                }
             }
 
             foreach (var colLine in colLines)

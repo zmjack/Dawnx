@@ -1,7 +1,4 @@
-﻿using Dawnx.Data;
-using System;
-
-namespace Dawnx
+﻿namespace Dawnx
 {
     public static class DawnChar
     {

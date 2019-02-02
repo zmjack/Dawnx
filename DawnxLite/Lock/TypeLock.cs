@@ -10,7 +10,7 @@ namespace Dawnx.Lock
     {
         public static readonly string InternString = string.Intern(typeof(TType).FullName);
 
-        public static Lock Begin(TimeSpan timeout) => Lock.Get(InternString, timeout);
-        public static Lock Begin(int millisecondsTimeout) => Lock.Get(InternString, millisecondsTimeout);
+        public static Lock Begin(TimeSpan timeout) => Lock.Begin(InternString, timeout);
+        public static Lock Begin(int millisecondsTimeout) => Lock.Begin(InternString, millisecondsTimeout);
     }
 }

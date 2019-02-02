@@ -55,7 +55,7 @@ namespace Dawnx.Lock
                 $"({Identifier})");
         }
 
-        public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Get(InternString(instance), timeout);
-        public Lock Begin(TInstance instance, int millisecondsTimeout) => Lock.Get(InternString(instance), millisecondsTimeout);
+        public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Begin(InternString(instance), timeout);
+        public Lock Begin(TInstance instance, int millisecondsTimeout) => Lock.Begin(InternString(instance), millisecondsTimeout);
     }
 }

@@ -7,8 +7,8 @@ namespace Dawnx.Lock
     {
         public string InternString { get; }
 
-        public static Lock Get(string internString, TimeSpan timeout) => new Lock(internString, (int)timeout.TotalMilliseconds);
-        public static Lock Get(string internString, int millisecondsTimeout) => new Lock(internString, millisecondsTimeout);
+        public static Lock Begin(string internString, TimeSpan timeout) => new Lock(internString, (int)timeout.TotalMilliseconds);
+        public static Lock Begin(string internString, int millisecondsTimeout) => new Lock(internString, millisecondsTimeout);
 
         private Lock(string internString, int millisecondsTimeout)
         {

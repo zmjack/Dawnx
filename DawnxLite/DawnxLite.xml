@@ -4,6 +4,14 @@
         <name>DawnxLite</name>
     </assembly>
     <members>
+        <member name="M:Dawnx.Algorithms.MathAlgorithm.NumberAlgorithm.Gcd(System.Int32,System.Int32)">
+            <summary>
+            Gets GCD(Greeting Common Divisor) number.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
         <member name="T:Dawnx.Analysises.ConsoleArgs">
             <summary>
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.

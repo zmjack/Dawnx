@@ -20,15 +20,17 @@ namespace DawnxDevloping
                 },
                 new[] { 10, 20, 30 });
 
-            Con.Out.AskYN("Are you Sure", answer => { })
+            Con.Out
+                //.AskYN("Are you Sure", answer => { })
                 .Ask("Project Name", answer =>
                 {
                     if (answer == "")
                         Console.WriteLine("aaaa");
                     else Console.WriteLine("ggg");
 
-                    return answer;
-                });
+                    return "哈哈";
+                })
+                .CenterLine("123地地");
         }
 
     }

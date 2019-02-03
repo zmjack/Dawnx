@@ -52,10 +52,10 @@ namespace Dawnx
         /// <returns></returns>
         public static string Center(this string @this, int widthA, char fillChar = ' ')
         {
-            var len = @this.Length;
+            var len = @this.GetLengthA();
             if (widthA <= len) return @this;
 
-            var total = widthA - @this.GetLengthA();
+            var total = widthA - len;
             var right = total / 2;
             var left = right;
             if (total.IsOdd()) left += 1;

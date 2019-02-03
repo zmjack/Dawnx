@@ -66,14 +66,26 @@ namespace Dawnx.Con
         public Cout Left(string line, ConColor color = null)
         {
             RowBeginning();
-            Write($"{line}{Console.WindowWidth - line.GetLengthA()}", color);
+            Write($"{line}{" ".Repeat(Console.WindowWidth - line.GetLengthA())}", color);
+            return this;
+        }
+        public Cout LeftLine(string line, ConColor color = null)
+        {
+            RowBeginning();
+            WriteLine($"{line}{" ".Repeat(Console.WindowWidth - line.GetLengthA())}", color);
             return this;
         }
 
         public Cout Right(string line, ConColor color = null)
         {
             RowBeginning();
-            Write($"{Console.WindowWidth - line.GetLengthA()}{line}", color);
+            Write($"{" ".Repeat(Console.WindowWidth - line.GetLengthA())}{line}", color);
+            return this;
+        }
+        public Cout RightLine(string line, ConColor color = null)
+        {
+            RowBeginning();
+            WriteLine($"{" ".Repeat(Console.WindowWidth - line.GetLengthA())}{line}", color);
             return this;
         }
 
@@ -81,6 +93,12 @@ namespace Dawnx.Con
         {
             RowBeginning();
             Write($"{line.Center(Console.WindowWidth)}", color);
+            return this;
+        }
+        public Cout CenterLine(string line, ConColor color = null)
+        {
+            RowBeginning();
+            WriteLine($"{line.Center(Console.WindowWidth)}", color);
             return this;
         }
 

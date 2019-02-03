@@ -2,16 +2,16 @@
 using System.Linq;
 using System.Text;
 
-namespace Dawnx.CConsole
+namespace Dawnx.Con
 {
-    public static partial class ConsoleUtility
+    public partial class ConUtility
     {
         /// <summary>
         /// Prints console seamless table for models.
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="models"></param>
-        public static void CreateSeamlessTable<TModel>(IEnumerable<TModel> models)
+        public static string CreateSeamlessTable<TModel>(IEnumerable<TModel> models)
         {
             var props = typeof(TModel).GetProperties();
             var lengths = new int[props.Length];
@@ -31,7 +31,7 @@ namespace Dawnx.CConsole
                 }
             }
 
-            CreateSeamlessTable(
+            return CreateSeamlessTable(
                 headers: props.Select(x => x.Name).ToArray(),
                 colLines: models.Select(model => props.Select(x => x.GetValue(model)?.ToString() ?? "").ToArray()).ToArray(),
                 lengths: lengths);

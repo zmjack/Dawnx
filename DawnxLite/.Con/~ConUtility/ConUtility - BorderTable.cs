@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Text;
 
-namespace Dawnx.CConsole
+namespace Dawnx.Con
 {
-    public static partial class ConsoleUtility
+    public partial class ConUtility
     {
         /// <summary>
         /// Prints console table for models.

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Dawnx.CConsole
+namespace Dawnx.Con
 {
-    public static partial class ConsoleUtility
+    public partial class ConUtility
     {
         public class AlignLineOptions
         {

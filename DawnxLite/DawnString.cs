@@ -47,20 +47,20 @@ namespace Dawnx
         /// Returns centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space).
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="width"></param>
+        /// <param name="widthA"></param>
         /// <param name="fillChar"></param>
         /// <returns></returns>
-        public static string Center(this string @this, int width, char fillChar = ' ')
+        public static string Center(this string @this, int widthA, char fillChar = ' ')
         {
             var len = @this.Length;
-            if (width <= len) return @this;
+            if (widthA <= len) return @this;
 
-            var total = width - @this.Length;
+            var total = widthA - @this.GetLengthA();
             var right = total / 2;
             var left = right;
             if (total.IsOdd()) left += 1;
 
-            var sb = new StringBuilder(width);
+            var sb = new StringBuilder(widthA);
             IntegerRange.Create(left).Each(i => sb.Append(fillChar));
             sb.Append(@this);
             IntegerRange.Create(right).Each(i => sb.Append(fillChar));

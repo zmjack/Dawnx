@@ -17,51 +17,6 @@
             This class provides a method to decompose console arguments into <see cref="T:System.Collections.Generic.Dictionary`2"/>.
             </summary>
         </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console table for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateBorderTable(System.String[],System.String[][],System.Int32[])">
-            <summary>
-            Prints console table for models.
-            </summary>
-            <param name="headers"></param>
-            <param name="colLines"></param>
-            <param name="lengths"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateNoBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console table with no border for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateNoBorderTable(System.String[],System.String[][],System.Int32[])">
-            <summary>
-            Prints console table with no border for models.
-            </summary>
-            <param name="headers"></param>
-            <param name="colLines"></param>
-            <param name="lengths"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateSeamlessTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console seamless table for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConsoleUtility.CreateSeamlessTable(System.String[],System.String[][],System.Int32[])">
-            <summary>
-            Prints console seamless table.
-            </summary>
-            <param name="headers"></param>
-            <param name="colLines"></param>
-            <param name="lengths"></param>
-        </member>
         <member name="T:Dawnx.Data.SqlScope`3">
             <summary>
             Easy to use and secure SQL Executor
@@ -804,7 +759,7 @@
             Returns centered in a string of length width. Padding is done using the specified fillchar (default is an ASCII space).
             </summary>
             <param name="this"></param>
-            <param name="width"></param>
+            <param name="widthA"></param>
             <param name="fillChar"></param>
             <returns></returns>
         </member>
@@ -1738,6 +1693,51 @@
             </summary>
             <typeparam name="TModel"></typeparam>
             <typeparam name="TSelf"></typeparam>
+        </member>
+        <member name="M:Dawnx.Con.ConUtility.CreateBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console table for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
+        <member name="M:Dawnx.Con.ConUtility.CreateBorderTable(System.String[],System.String[][],System.Int32[])">
+            <summary>
+            Prints console table for models.
+            </summary>
+            <param name="headers"></param>
+            <param name="colLines"></param>
+            <param name="lengths"></param>
+        </member>
+        <member name="M:Dawnx.Con.ConUtility.CreateNoBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console table with no border for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
+        <member name="M:Dawnx.Con.ConUtility.CreateNoBorderTable(System.String[],System.String[][],System.Int32[])">
+            <summary>
+            Prints console table with no border for models.
+            </summary>
+            <param name="headers"></param>
+            <param name="colLines"></param>
+            <param name="lengths"></param>
+        </member>
+        <member name="M:Dawnx.Con.ConUtility.CreateSeamlessTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Prints console seamless table for models.
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="models"></param>
+        </member>
+        <member name="M:Dawnx.Con.ConUtility.CreateSeamlessTable(System.String[],System.String[][],System.Int32[])">
+            <summary>
+            Prints console seamless table.
+            </summary>
+            <param name="headers"></param>
+            <param name="colLines"></param>
+            <param name="lengths"></param>
         </member>
     </members>
 </doc>

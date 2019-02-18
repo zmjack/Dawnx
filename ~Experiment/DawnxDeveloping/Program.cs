@@ -4,33 +4,39 @@ using System.Collections.Generic;
 using System;
 using Dawnx.Diagnostics;
 using Dawnx.Con;
+using System.Threading;
+using Dawnx;
 
 namespace DawnxDevloping
 {
     class Program
     {
+        public class SCache : Cached<string>
+        {
+            public SCache() : this(TimeSpan.FromSeconds(2))
+            {
+            }
+
+            public SCache(TimeSpan cachePeriod) : base(cachePeriod)
+            {
+            }
+
+            public override string CacheNewModel()
+            {
+                return DateTime.Now.ToString();
+            }
+        }
+
         static void Main(string[] args)
         {
-            Con.Out.BorderTable(
-                new[] { "Af f f地", "B", "C" },
-                new[]
-                {
-                    new[] { "1", "2", "3" },
-                    new[] { "11", "22", "33" },
-                },
-                new[] { 10, 20, 30 });
+            SCache cached = new SCache();
+            var random = new Random();
 
-            Con.Out
-                //.AskYN("Are you Sure", answer => { })
-                .Ask("Project Name", answer =>
-                {
-                    if (answer == "")
-                        Console.WriteLine("aaaa");
-                    else Console.WriteLine("ggg");
-
-                    return "哈哈";
-                })
-                .CenterLine("123地地");
+            var ret = Concurrency.Run((cid) =>
+            {
+                Thread.Sleep(random.Next(2000));
+                return cached.Get();
+            }, 100, 50).ToArray();
         }
 
     }

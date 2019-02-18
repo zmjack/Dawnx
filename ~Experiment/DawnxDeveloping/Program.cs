@@ -6,37 +6,50 @@ using Dawnx.Diagnostics;
 using Dawnx.Con;
 using System.Threading;
 using Dawnx;
+using Dawnx.Algorithms.Tree;
 
 namespace DawnxDevloping
 {
+    public class TreeEntity : ITreeEntity
+    {
+        public Guid Id { get; set; }
+
+        public long Index { get; set; }
+
+        public Guid? Parent { get; set; }
+
+        public string Content { get; set; }
+    }
+
     class Program
     {
-        public class SCache : Cached<string>
-        {
-            public SCache() : this(TimeSpan.FromSeconds(2))
-            {
-            }
 
-            public SCache(TimeSpan cachePeriod) : base(cachePeriod)
-            {
-            }
-
-            public override string CacheNewModel()
-            {
-                return DateTime.Now.ToString();
-            }
-        }
 
         static void Main(string[] args)
         {
-            SCache cached = new SCache();
-            var random = new Random();
-
-            var ret = Concurrency.Run((cid) =>
+            var s = @"# A1
+## A2
+### A3
+a3333";
+            var parents = new Stack<Guid?>();
+            var entities = s.GetPureLines().Select((v, i) =>
             {
-                Thread.Sleep(random.Next(2000));
-                return cached.Get();
-            }, 100, 50).ToArray();
+                var entity = new TreeEntity
+                {
+                    Id = Guid.NewGuid(),
+                    Index = i,
+                    Parent = parents.Count > 0 ? parents.For(_ => _.Peek()) : null,
+                };
+
+                if (v.StartsWith("#"))
+                {
+                    if (parents.Any())
+                        parents.Clear();
+                    parents.Push();
+                }
+            });
+
+
         }
 
     }

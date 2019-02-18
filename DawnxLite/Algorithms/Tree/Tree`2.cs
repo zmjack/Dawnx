@@ -20,7 +20,7 @@ namespace Dawnx.Algorithms.Tree
 
                     default:
                         Model = (TModel)modelType.GetConstructor(new Type[0]).Invoke(null);
-                        Key = NewKey();
+                        _Key = GetHashCode().ToString();
                         break;
                 }
             }
@@ -29,9 +29,7 @@ namespace Dawnx.Algorithms.Tree
         {
             Model = model;
         }
-
-        public virtual string NewKey() => GetHashCode().ToString();
-
+        
         public Guid Id { get; set; }
         public TSelf Parent { get; private set; }
         public TModel Model { get; set; }

@@ -10,6 +10,11 @@ using Dawnx.Algorithms.Tree;
 
 namespace DawnxDevloping
 {
+    public class MyTree : Tree<MyTree, TreeEntity>
+    {
+        public override string Key => Model.Content;
+    }
+
     public class TreeEntity : ITreeEntity
     {
         public Guid Id { get; set; }
@@ -17,6 +22,8 @@ namespace DawnxDevloping
         public long Index { get; set; }
 
         public Guid? Parent { get; set; }
+
+        public int TitleLevel { get; set; }
 
         public string Content { get; set; }
     }
@@ -27,29 +34,53 @@ namespace DawnxDevloping
 
         static void Main(string[] args)
         {
-            var s = @"# A1
+            var str = @"# A1
 ## A2
 ### A3
-a3333";
+a3333
+b1234
+# B2
+213
+1234";
             var parents = new Stack<Guid?>();
-            var entities = s.GetPureLines().Select((v, i) =>
+            var entities = str.GetPureLines().Select((v, i) =>
             {
                 var entity = new TreeEntity
                 {
                     Id = Guid.NewGuid(),
                     Index = i,
-                    Parent = parents.Count > 0 ? parents.For(_ => _.Peek()) : null,
                 };
 
-                if (v.StartsWith("#"))
+                var titleLevel = v.Project("^(#+) ")?.Length ?? 0;
+
+                switch (titleLevel)
                 {
-                    if (parents.Any())
-                        parents.Clear();
-                    parents.Push();
+                    case int l when l > 0:
+                        if (parents.Count < titleLevel - 1) throw new ArgumentException("Argument is invalid.");
+
+                        if (parents.Count >= titleLevel - 1)
+                        {
+                            for (int j = 0; parents.Count > titleLevel - 1; j++)
+                                parents.Pop();
+
+                            entity.Content = v.Substring(titleLevel + 1);
+                            entity.TitleLevel = titleLevel;
+                            entity.Parent = parents.Any() ? parents.Peek() : null;
+                            parents.Push(entity.Id);
+                        }
+                        break;
+
+                    default:
+                        entity.Content = v;
+                        entity.TitleLevel = titleLevel;
+                        entity.Parent = parents.Peek();
+                        break;
                 }
-            });
 
+                return entity;
+            }).ToArray();
 
+            var tree = MyTree.Create(entities);
         }
 
     }

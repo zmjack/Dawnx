@@ -280,7 +280,8 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
   ```C#
   sqlite.Orders
   	.TryUpdate(x => x.Order_Details.Any(y => y.Discount >= 0.02))
-      .Set(x => x.ShipCity, "Reims");
+      .Set(x => x.ShipCity, "Reims")
+      .Save();
   ```
 
   ```sqlite
@@ -290,10 +291,14 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
       WHERE ("y"."Discount" >= 0.02) AND ("Orders"."OrderID" = "y"."OrderID"));
   ```
 
+  **Next feature**: to support set a value which is calculated by the specified entity ***x***.
+
 - **TryDelete**
 
   ```C#
-  sqlite.Orders.TryDelete(x => x.Order_Details.Any(y => y.Discount >= 0.02));
+  sqlite.Orders
+  	.TryDelete(x => x.Order_Details.Any(y => y.Discount >= 0.02))
+      .Save();
   ```
 
   ```sqlite

@@ -35,11 +35,11 @@ namespace DawnxDevloping
         static void Main(string[] args)
         {
             var str = @"# A1
-## A2
-### A3
-a3333
+//## A2
+//### A3
+<font color=""red"">a3333</font>
 b1234
-# B2
+//# B2
 213
 1234";
             var parents = new Stack<Guid?>();
@@ -56,7 +56,7 @@ b1234
                 switch (titleLevel)
                 {
                     case int l when l > 0:
-                        if (parents.Count < titleLevel - 1) throw new ArgumentException("Argument is invalid.");
+                        if (parents.Count < titleLevel - 1) throw new ArgumentException("The argument is invalid.");
 
                         if (parents.Count >= titleLevel - 1)
                         {

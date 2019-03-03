@@ -15,10 +15,10 @@ namespace Dawnx.Data
 
         protected PagedEnumerable() { }
 
-        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize, int? pageCount = null)
+        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize)
         {
             PageSize = pageSize;
-            PageCount = pageCount ?? source.PageCount(pageSize);
+            PageCount = source.PageCount(pageSize);
 
             if (PageCount > 0)
             {
@@ -31,6 +31,14 @@ namespace Dawnx.Data
                 Items = source.Skip((PageNumber - 1) * PageSize).Take(PageSize);
             }
             else Items = source;
+        }
+
+        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize, int pageCount)
+        {
+            PageSize = pageSize;
+            PageCount = pageCount;
+            PageNumber = page;
+            Items = source;
         }
 
         public IEnumerator<T> GetEnumerator() => Items.GetEnumerator();

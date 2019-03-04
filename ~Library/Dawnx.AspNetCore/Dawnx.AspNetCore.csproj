@@ -12,7 +12,7 @@
     <Version>1.8.28</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>dawnx.net</Company>
-    <Authors>Dawnx Contributors</Authors>
+    <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
     <Description>Provides some common functions, such as navigation tree, to build Web applications easily.</Description>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>

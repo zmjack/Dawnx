@@ -12,7 +12,7 @@
     <Version>1.8.28</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Provides some functions for xpath analysis.</Description>
-    <Authors>Dawnx Contributors</Authors>
+    <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>

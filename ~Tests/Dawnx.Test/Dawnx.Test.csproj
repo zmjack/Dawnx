@@ -36,22 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
-    <ProjectReference Include="..\Dawnx.Tools\Dawnx.Tools.csproj" />
-    <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
-    <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.LuaEngine\Dawnx.LuaEngine.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.NPOI\Dawnx.NPOI.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.Security\Dawnx.Security.csproj" />
-    <ProjectReference Include="..\~Library\Dawnx.Xml\Dawnx.Xml.csproj" />
-    <ProjectReference Include="..\~Localization\Dawnx.Chinese\Dawnx.Chinese.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Net\file.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -68,6 +52,21 @@
 
   <ItemGroup>
     <Folder Include="Xml\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\DawnxLite\DawnxLite.csproj" />
+    <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore.LiveAccountUtility\Dawnx.AspNetCore.LiveAccountUtility.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.LuaEngine\Dawnx.LuaEngine.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.NPOI\Dawnx.NPOI.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.Security\Dawnx.Security.csproj" />
+    <ProjectReference Include="..\..\~Library\Dawnx.Xml\Dawnx.Xml.csproj" />
+    <ProjectReference Include="..\..\~Localization\Dawnx.Chinese\Dawnx.Chinese.csproj" />
   </ItemGroup>
 
 </Project>

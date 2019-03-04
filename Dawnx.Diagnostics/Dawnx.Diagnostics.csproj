@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Dawnx Contributors</Authors>
+    <Authors>Dawnx</Authors>
     <Company>dawnx.net</Company>
     <Version>1.8.28</Version>
     <Description>Test tool set.</Description>

@@ -1,6 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -99,7 +100,7 @@ namespace Dawnx.LuaEngine
             else return $"The $key field is required.";
         }
 
-        public JSend ValidateForJsend(Dictionary<string, object> model)
+        public JSend ValidateForJsend(IDictionary<string, object> model)
         {
             var result = LValidate(model);
             if (result.Table.Pairs.Any())
@@ -107,13 +108,11 @@ namespace Dawnx.LuaEngine
             else return JSend.Success.Create();
         }
 
-        public Dictionary<string, object> Validate(Dictionary<string, object> model)
+        public DynValue LValidate(IDictionary<string, object> model)
         {
-            return LValidate(model).Table.ToDictionary();
-        }
+            if (!(model is Dictionary<string, object>))
+                return LValidate(new Dictionary<string, object>(model));
 
-        public DynValue LValidate(Dictionary<string, object> model)
-        {
             var validator = Globals.Get("validator");
             Call(validator.Table.Get("clear"), validator);
 

@@ -33,6 +33,13 @@ end");
                 ["age"] = 27,
             };
             var jsend = lua.ValidateForJsend(model);
+
+            var model2 = new
+            {
+                name = "jack",
+                age = 27,
+            };
+            var jsend2 = lua.ValidateForJsend(model2.ToExpandoObject());
         }
 
     }

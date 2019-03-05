@@ -12,14 +12,14 @@
     <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
-    <Version>1.8.28</Version>
+    <Version>1.9.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageId>Dawnx.NPOI</PackageId>
     <Product>Dawnx.NPOI</Product>
     <Description>Helps to create report application esasily.</Description>
-    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

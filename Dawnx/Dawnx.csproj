@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.8.28</Version>
+    <Version>1.9.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
@@ -17,7 +17,7 @@
     <Description>Provides some extension functions to help you create highly readable programs.</Description>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
-    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

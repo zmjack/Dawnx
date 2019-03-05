@@ -14,8 +14,8 @@
     <Owners>zmjack</Owners>
     <Authors>Dawnx</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.8.28</Version>
-    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <Version>1.9.0</Version>
+    <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
   </PropertyGroup>

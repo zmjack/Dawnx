@@ -2,6 +2,7 @@
 using Dawnx.AspNetCore.AppSupport.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace DawnxDevelopingWeb.Data
 {
@@ -11,7 +12,7 @@ namespace DawnxDevelopingWeb.Data
             : base(options)
         {
         }
-
+        
         public DbSet<AppRegistry> AppRegistries { get; set; }
     }
 }

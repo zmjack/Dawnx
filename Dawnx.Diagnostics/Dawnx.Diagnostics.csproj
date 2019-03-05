@@ -4,12 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Dawnx</Authors>
     <Company>dawnx.net</Company>
-    <Version>1.8.28</Version>
+    <Version>1.9.0</Version>
     <Description>Test tool set.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl />
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
+    <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

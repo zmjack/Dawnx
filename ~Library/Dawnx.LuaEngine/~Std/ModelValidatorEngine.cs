@@ -1,100 +1,154 @@
 ﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Dawnx.LuaEngine
 {
     public class ModelValidatorEngine : Script
     {
+        /// <summary>
+        /// Inject lua function validator:validate(model) to validate. The simple is <see cref="LuaValidatorValidate"/>.
+        /// </summary>
+        /// <param name="luaCheckRule">[LuaCode] ex. self:check('age', range(model.age, 18, 22))</param>
         public ModelValidatorEngine()
         {
-            Globals["range"] = (Func<object[], Dictionary<string, object>>)Range;
-            Globals["required"] = (Func<object[], Dictionary<string, object>>)Required;
+            Globals["regex"] = (Func<object, string, string>)RegularExpression;
+            Globals["stringLength"] = (Func<object, int, string>)StringLength;
+            Globals["minLength"] = (Func<object, int, string>)MinLength;
+            Globals["maxLength"] = (Func<object, int, string>)MaxLength;
+            Globals["range"] = (Func<object, double, double, string>)Range;
+            Globals["required"] = (Func<object, string>)Required;
 
-            DoString(Lua_Validate);
+            DoString(LuaValidator);
         }
 
-        public Dictionary<string, object> Range(object[] args)
+        public string RegularExpression(object value, string pattern)
         {
-            var value = (double)args[0];
-            var min = (double)args[1];
-            var max = (double)args[2];
+            switch (value)
+            {
+                case string s:
+                    var regex = new Regex(pattern, RegexOptions.Singleline);
+                    if (regex.Match(s).Success) return null;
+                    else goto default;
 
-            if (min <= value && value <= max)
-            {
-                return new Dictionary<string, object>
-                {
-                    ["isValid"] = true,
-                    ["message"] = "",
-                };
-            }
-            else
-            {
-                return new Dictionary<string, object>
-                {
-                    ["isValid"] = false,
-                    ["message"] = $"The value of $key must be in range({min},{max})",
-                };
+                default: return $"The field $key must match the regular expression '{pattern}'.";
             }
         }
 
-        public Dictionary<string, object> Required(object[] args)
+        public string StringLength(object value, int length)
         {
-            var value = args[0];
-            if (value != null)
+            switch (value)
             {
-                return new Dictionary<string, object>
-                {
-                    ["isValid"] = true,
-                    ["message"] = "",
-                };
-            }
-            else
-            {
-                return new Dictionary<string, object>
-                {
-                    ["isValid"] = false,
-                    ["message"] = $"The value of $key must not be null.",
-                };
+                case string s:
+                    if (s.Length <= length) return null;
+                    else goto default;
+
+                default: return $"The field $key must be a string with a maximum length of '{length}'.";
             }
         }
 
-        public Dictionary<string, object> Validate(Dictionary<string, object> model, Dictionary<string, object[][]> modelValidator)
+        public string MinLength(object value, int length)
         {
-            return LValidate(model, modelValidator).ToDictionary();
+            switch (value)
+            {
+                case string s:
+                    if (s.Length >= length) return null;
+                    else goto default;
+
+                case Array array:
+                    if (array.Length >= length) return null;
+                    else goto default;
+
+                default: return $"The field $key must be a string or array type with a minimum length of '{length}'.";
+            }
         }
 
-        public DynValue LValidate(Dictionary<string, object> model, Dictionary<string, object[][]> modelValidator)
+        public string MaxLength(object value, int length)
         {
-            return Call(Globals["validate"], model, modelValidator);
+            switch (value)
+            {
+                case string s:
+                    if (s.Length <= length) return null;
+                    else goto default;
+
+                case Array array:
+                    if (array.Length <= length) return null;
+                    else goto default;
+
+                default: return $"The field $key must be a string or array type with a maximum length of '{length}'.";
+            }
         }
 
-        public static string Lua_Validate = @"
-function validate(model, modelValidator)
-  local data = { }
-  local count = 0
-  
-  for key,value in pairs(model) do
-    if modelValidator[key] ~= nil then
-      for i,v in pairs(modelValidator[key]) do
-        local method = v[1]
-        table.remove(v, 1)
-        table.insert(v, 1, value)
-        
-        local check = _G[method](v)
-        if not check.isValid then
-          data[key] = string.gsub(string.gsub(check.message, '$key', key), '$value', value) 
-          count = count + 1
-        end
-      end
-    end   
+        public string Range(object value, double min, double max)
+        {
+            switch (value)
+            {
+                case double d:
+                    if (min <= d && d <= max) return null;
+                    else goto default;
+
+                default: return $"The field $key must be between {min} and {max}.";
+            }
+        }
+
+        public string Required(object value)
+        {
+            if (value != null) return null;
+            else return $"The $key field is required.";
+        }
+
+        public JSend ValidateForJsend(Dictionary<string, object> model)
+        {
+            var result = LValidate(model);
+            if (result.Table.Pairs.Any())
+                return JSend.Fail.Create(result.Table.ToDictionary());
+            else return JSend.Success.Create();
+        }
+
+        public Dictionary<string, object> Validate(Dictionary<string, object> model)
+        {
+            return LValidate(model).Table.ToDictionary();
+        }
+
+        public DynValue LValidate(Dictionary<string, object> model)
+        {
+            var validator = Globals.Get("validator");
+            Call(validator.Table.Get("clear"), validator);
+
+            var validate = validator.Table.Get("validate");
+            if (validate != null)
+                Call(validator.Table.Get("validate"), validator, model);
+
+            return validator.Table.Get("errors");
+        }
+
+        public static string LuaValidator = @"
+validator =
+{
+  errors = { },
+}
+
+function validator:check(key, error)
+  if error ~= nil then
+    if self.errors[key] == nil then
+      self.errors[key] = { }
+    end
+    table.insert(self.errors[key], (string.gsub(error, '$key', key)))
   end
-  
-  return { count = count, data = data };
+end
+
+function validator:clear()
+  self.errors = { }
+end
+
+function validator:validate()
+  --self:check('name', required(model.name))
 end";
 
-        public void LoadFunction_Dump() => DoString(Lua_Dump);
-        public static string Lua_Dump = @"
+        public void LoadFunction_Dump() => DoString(LuaDump);
+        public static string LuaDump = @"
 function dump(o, leftPad)
   if leftPad == nil then leftPad = 0 end
 

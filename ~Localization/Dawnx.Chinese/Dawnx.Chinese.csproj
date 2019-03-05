@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.8.28</Version>
+    <Version>1.9.0</Version>
     <Authors>zmjack</Authors>
     <Company>dawnx.net</Company>
-    <Copyright>Copyright © dawnx.net 2018</Copyright>
+    <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

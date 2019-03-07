@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class AppRegistryManageService
+    public static class AppRegistryService
     {
         public static Type ServiceType { get; private set; }
 

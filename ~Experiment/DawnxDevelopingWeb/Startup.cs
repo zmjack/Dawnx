@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using DawnxDevelopingWeb.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CustomPolicyProvider;
 
 namespace DawnxDevelopingWeb
 {
@@ -27,6 +28,9 @@ namespace DawnxDevelopingWeb
             //    options.CheckConsentNeeded = context => true;
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
+
+            services.RewriteAuthorizationProvider<MinimumAgeExtraPolicyProvider>();
+            services.AddAuthorizationHandler<MinimumAgeAuthorizationHandler>();
 
             services.AddAppRegistry<ApplicationDbContext, AppRegistryItem>();
 

@@ -5,7 +5,7 @@ using Dawnx.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
-namespace CustomPolicyProvider
+namespace DawnxDevelopingWeb.Authorizations.MinimumAge
 {
     public class MinimumAgeExtraPolicyProvider : CustomExtraPolicyProvider
     {

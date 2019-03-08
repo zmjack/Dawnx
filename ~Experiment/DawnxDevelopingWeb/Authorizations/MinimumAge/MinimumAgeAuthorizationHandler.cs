@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Dawnx.AspNetCore;
 using Dawnx.Utilities;
 
-namespace CustomPolicyProvider
+namespace DawnxDevelopingWeb.Authorizations.MinimumAge
 {
     internal class MinimumAgeAuthorizationHandler : AuthorizationHandler<MinimumAgeRequirement>
     {

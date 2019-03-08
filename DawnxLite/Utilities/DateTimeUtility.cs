@@ -73,5 +73,119 @@ namespace Dawnx.Utilities
                 yield return dt;
         }
 
+        /// <summary>
+        /// The number of complete years in the period.
+        /// Same as DATEDIF(*, *, "Y") function in Excel.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public static int GetCompleteYears(DateTime startDate, DateTime endDate)
+        {
+            startDate = startDate.Date;
+            endDate = endDate.Date;
+
+            var passedYears = endDate.Year - startDate.Year;
+
+            if (endDate.AddYears(passedYears) >= startDate)
+                return passedYears;
+            else return passedYears - 1;
+        }
+
+        /// <summary>
+        /// The number of complete months in the period.
+        /// Same as DATEDIF(*, *, "M") function in Excel.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public static int GetCompleteMonths(DateTime startDate, DateTime endDate)
+        {
+            startDate = startDate.Date;
+            endDate = endDate.Date;
+
+            var passedYears = endDate.Year - startDate.Year;
+            var passedMonths = endDate.Month - startDate.Month;
+
+            if (endDate.AddYears(passedYears).AddMonths(passedMonths) > startDate)
+                return passedYears * 12 + passedMonths;
+            else return passedYears * 12 + passedMonths - 1;
+        }
+
+        /// <summary>
+        /// The number of days in the period.
+        /// Same as DATEDIF(*, *, "D") function in Excel.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public static int GetCompleteDays(DateTime startDate, DateTime endDate)
+        {
+            startDate = startDate.Date;
+            endDate = endDate.Date;
+
+            return (int)(endDate - startDate).TotalDays;
+        }
+
+        ///// <summary>
+        ///// [NOT RECOMMEND] The difference between the days in start_date and end_date. The months and years of the dates are ignored.
+        ///// Same as DATEDIF(*, *, "MD") function in Excel.
+        ///// </summary>
+        ///// <param name="startDate"></param>
+        ///// <param name="endDate"></param>
+        ///// <returns></returns>
+        //public static int GetDiffDaysIgnoreYearMonth(DateTime startDate, DateTime endDate)
+        //{
+        //    startDate = startDate.Date;
+        //    endDate = endDate.Date;
+
+        //    if (startDate.Day > endDate.Day)
+        //    {
+        //        var prevMonth = endDate.AddMonths(-1);
+        //        var offsetDays = startDate.Day - DateTime.DaysInMonth(prevMonth.Year, prevMonth.Month);
+        //        return (int)(endDate - prevMonth.AddDays(offsetDays)).TotalDays;
+        //    }
+        //    else return endDate.Day - startDate.Day;
+        //}
+
+        ///// <summary>
+        ///// The difference between the months in start_date and end_date. The days and years of the dates are ignored.
+        ///// Same as DATEDIF(*, *, "YM") function in Excel.
+        ///// </summary>
+        ///// <param name="startDate"></param>
+        ///// <param name="endDate"></param>
+        ///// <returns></returns>
+        //public static int GetDiffMonthsIgnoreYear(DateTime startDate, DateTime endDate)
+        //{
+        //    startDate = startDate.Date;
+        //    endDate = endDate.Date;
+
+        //    if (startDate.Month == endDate.Month)
+        //        return endDate.Day >= startDate.Day ? 0 : 11;
+        //    else
+        //    {
+        //        int passedMonths;
+        //        if (startDate.Month > endDate.Month)
+        //            passedMonths = endDate.Month + 12 - startDate.Month;
+        //        else passedMonths = endDate.Month - startDate.Month;
+
+        //        if (endDate.Day >= startDate.Day)
+        //            return passedMonths;
+        //        else return passedMonths - 1;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// The difference between the days of start_date and end_date. The years of the dates are ignored.
+        ///// Same as DATEDIF(*, *, "YD") function in Excel.
+        ///// </summary>
+        ///// <param name="startDate"></param>
+        ///// <param name="endDate"></param>
+        ///// <returns></returns>
+        //public static int GetDiffDaysIgnoreYear(DateTime startDate, DateTime endDate)
+        //{
+
+        //}
+
     }
 }

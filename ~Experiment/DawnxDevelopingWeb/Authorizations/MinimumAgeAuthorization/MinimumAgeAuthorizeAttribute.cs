@@ -10,8 +10,8 @@ namespace DawnxDevelopingWeb.Authorizations.MinimumAgeAuthorization
 
         public int Age
         {
-            get => int.TryParse(Policy.Substring(POLICY_PREFIX.Length), out var age) ? age : default(int);
-            set => Policy = $"{POLICY_PREFIX}{value.ToString()}";
+            get => int.TryParse(Policy.Substring(POLICY_PREFIX.Length + 1), out var age) ? age : default(int);
+            set => Policy = $"{POLICY_PREFIX} {value.ToString()}";
         }
     }
 }

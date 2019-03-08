@@ -14,7 +14,15 @@ namespace Dawnx.Test.Utilities
 
             Assert.Equal(3, DateTimeUtility.GetDays(new DateTime(2012, 4, 16), new DateTime(2012, 4, 18)).Count());
             Assert.Equal(30, DateTimeUtility.GetDays(new DateTime(2012, 4, 16), new DateTime(2012, 5, 15)).Count());
+
         }
+
+        [Fact]
+        public void DateDifTest()
+        {
+            Assert.Equal(3, DateTimeUtility.GetCompleteYears(new DateTime(1980, 7, 28), new DateTime(1984, 3, 27)));
+        }
+
 
     }
 }

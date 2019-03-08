@@ -3,6 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using DawnxDevelopingWeb.Models;
 using Dawnx.AspNetCore.AppSupport;
 using DawnxDevelopingWeb.Data;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using System.Threading.Tasks;
+using DawnxDevelopingWeb.Authorizations.MinimumAgeAuthorization;
 
 namespace DawnxDevelopingWeb.Controllers
 {
@@ -15,6 +21,20 @@ namespace DawnxDevelopingWeb.Controllers
             _appRegistryManager = appRegistryManager;
         }
 
+        public async Task<IActionResult> SignInAsync(DateTime birthday)
+        {
+            var identity = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, "Specified User"),
+                new Claim(ClaimTypes.DateOfBirth, birthday.ToShortDateString())
+            }, "UserSpecified");
+
+            await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [MinimumAgeAuthorize(2)]
         public IActionResult Index()
         {
             using (_appRegistryManager.BeginAutoTransaction())

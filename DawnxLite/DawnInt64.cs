@@ -16,5 +16,19 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <returns></returns>
         public static bool IsEven(this long @this) => (@this & 1) == 0;
+
+        /// <summary>
+        /// Gets the positive integer modulus. (Unlike the operator %, this method always returns a positive number)
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="mod"></param>
+        /// <returns></returns>
+        public static long Mod(this long @this, long mod)
+        {
+            if (@this < 0)
+                return @this % mod + mod;
+            else return @this % mod;
+        }
+
     }
 }

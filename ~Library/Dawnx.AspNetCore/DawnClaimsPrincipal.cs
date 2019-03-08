@@ -41,7 +41,7 @@ namespace Dawnx.AspNetCore
             return @this.Claims
                 .Where(x => x.Type == claimType)
                 .Select(x => x.Value)
-                .First();
+                .FirstOrDefault();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Dawnx.AspNetCore
             return @this.Claims
                 .Where(x => x.Type == claimType)
                 .Select(x => x.Value)
-                .First();
+                .FirstOrDefault();
         }
 
     }

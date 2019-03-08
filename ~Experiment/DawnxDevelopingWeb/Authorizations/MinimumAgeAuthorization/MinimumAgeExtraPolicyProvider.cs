@@ -19,8 +19,8 @@ namespace CustomPolicyProvider
             var match = regex.Match(policyName);
             if (match.Success)
             {
-                var prefix = match.Groups[0].Value;
-                var value = match.Groups[1].Value;
+                var prefix = match.Groups[1].Value;
+                var value = match.Groups[2].Value;
 
                 switch (prefix)
                 {

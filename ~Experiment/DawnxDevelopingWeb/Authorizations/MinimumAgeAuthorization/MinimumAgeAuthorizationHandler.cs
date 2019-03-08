@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Dawnx.AspNetCore;
+using Dawnx.Utilities;
 
 namespace CustomPolicyProvider
 {
@@ -24,29 +25,16 @@ namespace CustomPolicyProvider
             if (birthday != null)
             {
                 var date = Convert.ToDateTime(birthday);
-
-                var age = DateTime.Now.Year - date.Year;
-                if (date > DateTime.Now.AddYears(-age))
-                {
-                    age--;
-                }
+                var age = DateTimeUtility.GetCompleteYears(date, DateTime.Now);
 
                 if (age >= requirement.Age)
                 {
-                    _logger.LogInformation("Minimum age authorization requirement {age} satisfied", requirement.Age);
+                    _logger.LogInformation($"Minimum age authorization requirement {requirement.Age} satisfied");
                     context.Succeed(requirement);
                 }
-                else
-                {
-                    _logger.LogInformation("Current user's DateOfBirth claim ({dateOfBirth}) does not satisfy the minimum age authorization requirement {age}",
-                        birthday,
-                        requirement.Age);
-                }
+                else _logger.LogInformation($"Current user's DateOfBirth claim ({birthday}) does not satisfy the minimum age authorization requirement {requirement.Age}");
             }
-            else
-            {
-                _logger.LogInformation("No DateOfBirth claim present");
-            }
+            else _logger.LogInformation("No DateOfBirth claim present");
 
             return Task.CompletedTask;
         }

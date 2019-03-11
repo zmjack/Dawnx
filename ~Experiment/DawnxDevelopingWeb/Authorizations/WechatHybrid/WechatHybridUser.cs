@@ -1,10 +1,7 @@
 ﻿using Dawnx;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 {
@@ -14,8 +11,8 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 
         public EOpenIdType OpenIdType { get; set; }
         public string OpenId { get; set; }
-        public string EntUserName { get; set; }
-        public string PubUserName { get; set; }
+        public string EntUserName { get; set; } = "";
+        public string PubUserName { get; set; } = "";
 
         public IIdentity ToIdentity()
         {
@@ -34,7 +31,7 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
                 new Claim($"Wechat{nameof(OpenId)}", OpenId),
                 new Claim($"Wechat{nameof(EntUserName)}", EntUserName),
                 new Claim($"Wechat{nameof(PubUserName)}", PubUserName),
-            }, "DawnxWechat");
+            }, "WechatHybrid");
         }
     }
 }

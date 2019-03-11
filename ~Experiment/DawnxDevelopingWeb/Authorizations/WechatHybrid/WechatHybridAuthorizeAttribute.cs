@@ -6,12 +6,10 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
     {
         const string POLICY_PREFIX = "WechatHybrid";
 
-        public WechatHybridAuthorizeAttribute(int age) => Age = age;
-
-        public int Age
+        public WechatHybridAuthorizeAttribute()
         {
-            get => int.TryParse(Policy.Substring(POLICY_PREFIX.Length + 1), out var age) ? age : default(int);
-            set => Policy = $"{POLICY_PREFIX} {value.ToString()}";
+            Policy = "WechatHybrid";
         }
+        
     }
 }

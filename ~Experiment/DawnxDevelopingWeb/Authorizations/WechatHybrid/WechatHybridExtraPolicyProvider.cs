@@ -1,8 +1,5 @@
-using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Dawnx.AspNetCore.Authorization;
-using DawnxDevelopingWeb.Authorizations.MinimumAge;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
@@ -16,7 +13,7 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 
         public override IAuthorizationRequirement[] GetPolicyRequirements(string policyName)
         {
-            var regex = new Regex(@"([^\s]+) (.+)");
+            var regex = new Regex(@"([^\s]+) ?(.*)");
             var match = regex.Match(policyName);
             if (match.Success)
             {
@@ -25,8 +22,8 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 
                 switch (prefix)
                 {
-                    case "MinimumAge":
-                        return new[] { new MinimumAgeRequirement(int.Parse(value)) };
+                    case "WechatHybrid":
+                        return new[] { new WechatHybridRequirement() };
 
                     default: return null;
                 }

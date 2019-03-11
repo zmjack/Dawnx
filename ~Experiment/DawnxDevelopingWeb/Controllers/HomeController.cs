@@ -4,11 +4,11 @@ using DawnxDevelopingWeb.Models;
 using Dawnx.AspNetCore.AppSupport;
 using DawnxDevelopingWeb.Data;
 using System;
-using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
 using DawnxDevelopingWeb.Authorizations.MinimumAge;
+using DawnxDevelopingWeb.Authorizations.WechatHybrid;
 
 namespace DawnxDevelopingWeb.Controllers
 {
@@ -23,18 +23,19 @@ namespace DawnxDevelopingWeb.Controllers
 
         public async Task<IActionResult> SignInAsync(DateTime birthday)
         {
-            var identity = new ClaimsIdentity(new[]
+            var identity = new WechatHybridUser
             {
-                new Claim(ClaimTypes.Name, "Specified User"),
-                new Claim(ClaimTypes.DateOfBirth, birthday.ToShortDateString())
-            }, "UserSpecified");
+                OpenIdType = WechatHybridUser.EOpenIdType.Public,
+                OpenId = Guid.NewGuid().ToString(),
+                PubUserName = "haha",
+            }.ToIdentity();
 
             await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
 
             return RedirectToAction(nameof(Index));
         }
 
-        [MinimumAgeAuthorize(2)]
+        [WechatHybridAuthorize]
         public IActionResult Index()
         {
             using (_appRegistryManager.BeginAutoTransaction())

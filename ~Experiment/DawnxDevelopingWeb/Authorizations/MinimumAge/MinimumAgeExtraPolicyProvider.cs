@@ -1,6 +1,4 @@
-using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Dawnx.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
@@ -15,7 +13,7 @@ namespace DawnxDevelopingWeb.Authorizations.MinimumAge
 
         public override IAuthorizationRequirement[] GetPolicyRequirements(string policyName)
         {
-            var regex = new Regex(@"([^\s]+) (.+)");
+            var regex = new Regex(@"([^\s]+) ?(.*)");
             var match = regex.Match(policyName);
             if (match.Success)
             {

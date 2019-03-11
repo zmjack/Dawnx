@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Con
+﻿namespace Dawnx.Con
 {
     public static class Con
     {

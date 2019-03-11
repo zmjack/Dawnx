@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using DawnxDevelopingWeb.Authorizations.MinimumAge;
+using DawnxDevelopingWeb.Authorizations.WechatHybrid;
 
 namespace DawnxDevelopingWeb
 {
@@ -30,8 +30,8 @@ namespace DawnxDevelopingWeb
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
 
-            services.RewriteAuthorizationProvider<MinimumAgeExtraPolicyProvider>();
-            services.AddAuthorizationHandler<MinimumAgeAuthorizationHandler>();
+            services.RewriteAuthorizationProvider<WechatHybridExtraPolicyProvider>();
+            services.AddAuthorizationHandler<WechatHybridAuthorizationHandler>();
 
             services.AddAppRegistry<ApplicationDbContext, AppRegistryItem>();
 

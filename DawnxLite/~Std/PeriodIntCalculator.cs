@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx
+﻿namespace Dawnx
 {
     //TODO: Add some typical scenarios
     public class PeriodIntCalculator

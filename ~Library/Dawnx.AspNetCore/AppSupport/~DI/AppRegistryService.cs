@@ -1,7 +1,4 @@
 ﻿using Dawnx.AspNetCore.AppSupport;
-using Dawnx.AspNetCore.LiveAccount;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using Microsoft.EntityFrameworkCore;
 

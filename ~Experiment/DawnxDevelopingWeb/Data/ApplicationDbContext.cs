@@ -2,7 +2,6 @@
 using Dawnx.AspNetCore.AppSupport.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace DawnxDevelopingWeb.Data
 {

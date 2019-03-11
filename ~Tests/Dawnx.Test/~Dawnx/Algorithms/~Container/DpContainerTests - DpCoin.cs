@@ -1,5 +1,4 @@
-﻿using Dawnx.Algorithms.Container;
-using System.Linq;
+﻿using System.Linq;
 using Xunit;
 
 namespace Dawnx.Algorithms.Container.Test

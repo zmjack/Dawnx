@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace Dawnx.Test
+namespace Dawnx.Algorithms.Container.Test
 {
     public partial class DpContainerTests
     {

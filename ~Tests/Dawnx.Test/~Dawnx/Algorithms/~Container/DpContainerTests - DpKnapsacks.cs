@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace Dawnx.Test
+namespace Dawnx.Algorithms.Container.Test
 {
     public partial class DpContainerTests
     {
@@ -40,13 +40,13 @@ namespace Dawnx.Test
                     return new Result { TotalValue = Goods[0].Value, GoodWeights = new[] { Goods[0].Weight } };
                 if (i > 0 && j - Goods[i].Weight < 0) return this[(i - 1, j)];
 
-                var (take, totalValue) = new[]
+                var (scheme, totalValue) = new[]
                 {
-                    (Take: false,  TotalValue: this[(i - 1, j)].TotalValue),
-                    (Take: true, TotalValue: this[(i - 1, j - Goods[i].Weight)].TotalValue + Goods[i].Value),
+                    (Scheme: 0,  TotalValue: this[(i - 1, j)].TotalValue),
+                    (Scheme: 1, TotalValue: this[(i - 1, j - Goods[i].Weight)].TotalValue + Goods[i].Value),
                 }.WhereMax(x => x.TotalValue).First();
 
-                if (take)
+                if (scheme == 1)
                 {
                     return new Result
                     {

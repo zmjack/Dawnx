@@ -8,58 +8,102 @@ namespace Dawnx
     {
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
         public static IEnumerable<TSource> WhereMax<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
         {
-            var max = source.Max(selector);
-            return source.Where(x => selector(x).Equals(max));
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                return source.Where(x => selector(x).Equals(max));
+            }
+            else return source;
         }
 
     }

@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using DawnxDevelopingWeb.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CustomPolicyProvider;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using DawnxDevelopingWeb.Authorizations.MinimumAge;
 
 namespace DawnxDevelopingWeb
 {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
-using DawnxDevelopingWeb.Authorizations.MinimumAgeAuthorization;
+using DawnxDevelopingWeb.Authorizations.MinimumAge;
 
 namespace DawnxDevelopingWeb.Controllers
 {

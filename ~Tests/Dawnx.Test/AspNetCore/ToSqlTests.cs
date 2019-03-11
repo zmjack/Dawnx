@@ -61,7 +61,7 @@ namespace Dawnx.AspNetCore.Test
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))
             {
-                var query = sqlite.Products.WhereMinOrDefault(x => x.UnitPrice);
+                var query = sqlite.Products.WhereMin(x => x.UnitPrice);
 
                 var result = query.ToArray();
                 Assert.Single(result);

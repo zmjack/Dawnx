@@ -8,10 +8,14 @@ namespace Dawnx
     {
         public static IQueryable<TSource> WhereMax<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector)
         {
-            var max = source.Max(selector);
-            var whereExp = Expression.Lambda<Func<TSource, bool>>(
-                Expression.Equal(selector.Body, Expression.Constant(max, typeof(TResult))), selector.Parameters);
-            return source.Where(whereExp);
+            if (source.Any())
+            {
+                var max = source.Max(selector);
+                var whereExp = Expression.Lambda<Func<TSource, bool>>(
+                    Expression.Equal(selector.Body, Expression.Constant(max, typeof(TResult))), selector.Parameters);
+                return source.Where(whereExp);
+            }
+            else return source;
         }
 
     }

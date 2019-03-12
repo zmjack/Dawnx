@@ -291,6 +291,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnInt32.Mod(System.Int32,System.Int32)">
+            <summary>
+            Gets the positive integer modulus. (Unlike the operator %, this method always returns a positive number)
+            </summary>
+            <param name="this"></param>
+            <param name="mod"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnInt64.IsOdd(System.Int64)">
             <summary>
             Returns whether the specified number is odd.
@@ -303,6 +311,14 @@
             Returns whether the specified number is even.
             </summary>
             <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnInt64.Mod(System.Int64,System.Int64)">
+            <summary>
+            Gets the positive integer modulus. (Unlike the operator %, this method always returns a positive number)
+            </summary>
+            <param name="this"></param>
+            <param name="mod"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnIPAddress.ToLong(System.Net.IPAddress)">
@@ -980,6 +996,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnUInt32.Mod(System.UInt32,System.UInt32)">
+            <summary>
+            Gets the positive integer modulus. (Unlike the operator %, this method always returns a positive number)
+            </summary>
+            <param name="this"></param>
+            <param name="mod"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnUInt64.IsOdd(System.UInt64)">
             <summary>
             Returns whether the specified number is odd.
@@ -992,6 +1016,14 @@
             Returns whether the specified number is even.
             </summary>
             <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnUInt64.Mod(System.UInt64,System.UInt64)">
+            <summary>
+            Gets the positive integer modulus. (Unlike the operator %, this method always returns a positive number)
+            </summary>
+            <param name="this"></param>
+            <param name="mod"></param>
             <returns></returns>
         </member>
         <member name="F:Dawnx.Definition.FtpVerb.APPE">
@@ -1325,6 +1357,33 @@
         <member name="M:Dawnx.Utilities.DateTimeUtility.GetDays(System.DateTime,System.DateTime)">
             <summary>
             Gets the range of days.
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.GetCompleteYears(System.DateTime,System.DateTime)">
+            <summary>
+            The number of complete years in the period.
+            Same as DATEDIF(*, *, "Y") function in Excel.
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.GetCompleteMonths(System.DateTime,System.DateTime)">
+            <summary>
+            The number of complete months in the period.
+            Same as DATEDIF(*, *, "M") function in Excel.
+            </summary>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.GetCompleteDays(System.DateTime,System.DateTime)">
+            <summary>
+            The number of days in the period.
+            Same as DATEDIF(*, *, "D") function in Excel.
             </summary>
             <param name="startDate"></param>
             <param name="endDate"></param>

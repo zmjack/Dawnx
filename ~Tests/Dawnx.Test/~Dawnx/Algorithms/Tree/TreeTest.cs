@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -52,6 +54,36 @@ C
 D
   
     d"));
+        }
+
+        public class SimplifiedTree
+        {
+            public string id { get; set; }
+            public string label { get; set; }
+            [TreeChildren]
+            public IEnumerable<SimplifiedTree> children { get; set; }
+        }
+
+        [Fact]
+        public void SimplifyTests()
+        {
+            var tree1 = GetTree1();
+            var json = JsonConvert.SerializeObject(tree1.Simplify(x => new SimplifiedTree
+            {
+                id = x.Key,
+                label = x.Key,
+            }).For(_ => new { list = _.children }));
+
+            Assert.Equal("{\"list\":[{\"id\":\"A\",\"label\":\"A\",\"children\":[" +
+                "{\"id\":\"A-a\",\"label\":\"A-a\",\"children\":[" +
+                "{\"id\":\"A-a-1\",\"label\":\"A-a-1\",\"children\":[" +
+                "{\"id\":\"A-a-1-i\",\"label\":\"A-a-1-i\",\"children\":[]}" +
+                "]}" +
+                "]}," +
+                "{\"id\":\"A-b\",\"label\":\"A-b\",\"children\":[]}" +
+                "]}," +
+                "{\"id\":\"B\",\"label\":\"B\",\"children\":[]}" +
+                "]}", json);
         }
 
         private EntityTree GetTree1()

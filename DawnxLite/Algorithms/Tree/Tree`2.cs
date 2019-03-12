@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Dawnx.Algorithms.Tree
@@ -29,7 +30,7 @@ namespace Dawnx.Algorithms.Tree
         {
             Model = model;
         }
-        
+
         public Guid Id { get; set; }
         public TSelf Parent { get; private set; }
         public TModel Model { get; set; }
@@ -193,6 +194,22 @@ namespace Dawnx.Algorithms.Tree
         }
 
         protected virtual void CreateForProperties(TSelf node, object entity) { }
+
+        public TRet Simplify<TRet>(Func<Tree<TSelf, TModel>, TRet> selector)
+        {
+            var ret = selector(this);
+            var treeChildrenProps = typeof(TRet).GetProperties()
+                .Where(x => x.GetCustomAttribute<TreeChildrenAttribute>() != null);
+            var treeChildrenFields = typeof(TRet).GetFields()
+                .Where(x => x.GetCustomAttribute<TreeChildrenAttribute>() != null);
+
+            foreach (var prop in treeChildrenProps)
+                prop.SetValue(ret, Children.Select(x => x.Simplify(selector)).ToArray());
+            foreach (var field in treeChildrenFields)
+                field.SetValue(ret, Children.Select(x => x.Simplify(selector)).ToArray());
+
+            return ret;
+        }
 
     }
 }

@@ -6,11 +6,11 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 {
     public static class ClaimPricipalExtension
     {
-        public static WechatHybridUser GetWechatUser(this ClaimsPrincipal @this)
+        public static WechatHybridUser GetWechatHybridUser(this ClaimsPrincipal @this)
         {
             return new WechatHybridUser
             {
-                OpenIdType = Enum.Parse<WechatHybridUser.EOpenIdType>(@this.GetClaim($"Wechat{nameof(WechatHybridUser.OpenIdType)}")),
+                OpenIdType = Enum.Parse<WechatHybridOpenIdType>(@this.GetClaim($"Wechat{nameof(WechatHybridUser.OpenIdType)}")),
                 OpenId = @this.GetClaim($"Wechat{nameof(WechatHybridUser.OpenId)}"),
                 PubUserName = @this.GetClaim($"Wechat{nameof(WechatHybridUser.PubUserName)}"),
                 EntUserName = @this.GetClaim($"Wechat{nameof(WechatHybridUser.EntUserName)}"),

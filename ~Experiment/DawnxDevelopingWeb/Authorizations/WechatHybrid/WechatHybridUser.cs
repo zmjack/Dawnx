@@ -7,9 +7,7 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 {
     public class WechatHybridUser
     {
-        public enum EOpenIdType { Public, Enterprise }
-
-        public EOpenIdType OpenIdType { get; set; }
+        public WechatHybridOpenIdType OpenIdType { get; set; }
         public string OpenId { get; set; }
         public string EntUserName { get; set; } = "";
         public string PubUserName { get; set; } = "";
@@ -22,8 +20,8 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
                 {
                     switch(type)
                     {
-                        case EOpenIdType.Public: return PubUserName;
-                        case EOpenIdType.Enterprise: return EntUserName;
+                        case WechatHybridOpenIdType.Public: return PubUserName;
+                        case WechatHybridOpenIdType.Enterprise: return EntUserName;
                         default: throw new NotSupportedException();
                     }
                 })),

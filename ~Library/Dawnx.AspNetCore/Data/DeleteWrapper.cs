@@ -14,7 +14,7 @@ namespace Dawnx.AspNetCore.Data
 
         public string ToSql()
         {
-            return $"DELETE FROM {WhereWrapper.TableName} WHERE {WhereWrapper.WhereString}";
+            return $"DELETE FROM {WhereWrapper.TableName} WHERE {WhereWrapper.WhereString};";
         }
 
         public int Save() => WhereWrapper.DbContext.Database.ExecuteSqlCommand(ToSql());

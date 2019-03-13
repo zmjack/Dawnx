@@ -21,7 +21,7 @@ namespace Dawnx.AspNetCore.Data
             DbContext = dbSet.GetDbContext();
 
             var sql = dbSet.Where(expression).ToSql();
-            var regex = new Regex(@"FROM\s+((.).+?(.))\s+AS\s+([^\s|\r|;]+)(\s+WHERE\s+(.+))?", RegexOptions.Singleline);
+            var regex = new Regex(@"FROM\s+((.).+?(.))\s+AS\s+([^\s|\r|;]+)(\s+WHERE\s+([^;]+))?", RegexOptions.Singleline);
             var match = regex.Match(sql);
 
             TableName = match.Groups[1].Value;

@@ -50,7 +50,7 @@ namespace Dawnx.AspNetCore.Test
             {
                 var query = sqlite.Employees
                     .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
-                
+
                 var result = query.ToArray();
                 Assert.Single(result);
             }
@@ -73,9 +73,8 @@ namespace Dawnx.AspNetCore.Test
         {
             using (var sqlite = new NorthwndContext(SqliteOptions))
             {
-                var query = sqlite.Employees
-                    .WhereBetween(x => x.BirthDate, new DateTime(1960, 5, 1), new DateTime(1960, 5, 31));
-                
+                var query = sqlite.Products.WhereMax(x => x.UnitPrice);
+
                 var result = query.ToArray();
                 Assert.Single(result);
             }
@@ -92,6 +91,19 @@ namespace Dawnx.AspNetCore.Test
                         monthExp: x => x.EmployeeID,
                         dayExp: x => x.EmployeeID,
                         after: DateTime.Now);
+                var sql = query.ToSql();
+
+                //var result = query.ToArray();
+                //Assert.Single(result);
+            }
+        }
+
+        [Fact]
+        public void TryDeleteTest()
+        {
+            using (var sqlite = new NorthwndContext(SqliteOptions))
+            {
+                var query = sqlite.Employees.TryDelete(x => x.Country == "China");
                 var sql = query.ToSql();
 
                 //var result = query.ToArray();

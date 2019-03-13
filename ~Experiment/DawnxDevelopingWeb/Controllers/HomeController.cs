@@ -25,7 +25,7 @@ namespace DawnxDevelopingWeb.Controllers
         {
             var identity = new WechatHybridUser
             {
-                OpenIdType = WechatHybridUser.EOpenIdType.Public,
+                OpenIdType = WechatHybridOpenIdType.Public,
                 OpenId = Guid.NewGuid().ToString(),
                 PubUserName = "haha",
             }.ToIdentity();
@@ -35,9 +35,11 @@ namespace DawnxDevelopingWeb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [WechatHybridAuthorize]
+        //[WechatHybridAuthorize]
         public IActionResult Index()
         {
+            return RedirectToAction("Index", "StarAdmin");
+
             using (_appRegistryManager.BeginAutoTransaction())
             {
                 var item = _appRegistryManager.GetGlobalItem();

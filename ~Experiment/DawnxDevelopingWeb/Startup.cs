@@ -44,7 +44,8 @@ namespace DawnxDevelopingWeb
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.AccessDeniedPath = "/account/denied";

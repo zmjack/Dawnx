@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 {
-    internal class WechatHybridRequirement : IAuthorizationRequirement
+    public class WechatHybridRequirement : IAuthorizationRequirement
     {
     }
 }

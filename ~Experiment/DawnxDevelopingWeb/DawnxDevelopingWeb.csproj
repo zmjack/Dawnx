@@ -23,12 +23,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\NxPanel\Views\Shared\_Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\_StarAdmin.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\NxPanel\Controllers\" />
+    <Folder Include="Areas\NxPanel\Data\" />
+    <Folder Include="Areas\NxPanel\Models\" />
     <Folder Include="wwwroot\modules\axios\" />
   </ItemGroup>
 

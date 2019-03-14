@@ -8,5 +8,7 @@
         public string Name { get; set; }
         public string Users { get; set; }
         public string Roles { get; set; }
+
+        public string Tag { get; set; }
     }
 }

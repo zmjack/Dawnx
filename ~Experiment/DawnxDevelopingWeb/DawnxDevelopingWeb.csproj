@@ -17,5 +17,19 @@
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <DotNetCliToolReference Include="Dawnx.Tools" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_StarAdmin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\modules\axios\" />
+  </ItemGroup>
 
 </Project>

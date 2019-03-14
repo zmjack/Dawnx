@@ -87,7 +87,7 @@ namespace Dawnx.Utilities
 
             var passedYears = endDate.Year - startDate.Year;
 
-            if (endDate.AddYears(passedYears) >= startDate)
+            if (endDate.AddYears(-passedYears) >= startDate)
                 return passedYears;
             else return passedYears - 1;
         }

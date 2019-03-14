@@ -20,7 +20,7 @@ namespace Dawnx.Lock
             return string.Intern(
                 $"<{Thread.CurrentThread.ManagedThreadId.ToString()}> " +
                 $"{typeof(TInstance).FullName} " +
-                $"{FlagLambdas.Select(x => x(instance).ToString()).Join(" ")} " +
+                $"{FlagLambdas.Select(x => x(instance).ToString().UrlEncode()).Join(" ")} " +
                 $"({Identifier})");
         }
 

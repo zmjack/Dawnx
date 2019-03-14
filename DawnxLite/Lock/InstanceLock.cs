@@ -25,6 +25,8 @@ namespace Dawnx.Lock
                         return BasicTypeUtility.IsBasicType((x.Body as UnaryExpression).Operand.Type);
                     case ExpressionType.MemberAccess:
                         return BasicTypeUtility.IsBasicType(x.Body.Type);
+                    case ExpressionType.Constant:
+                        return BasicTypeUtility.IsBasicType((x.Body as ConstantExpression).Type);
                     default: return false;
                 }
             });
@@ -51,7 +53,7 @@ namespace Dawnx.Lock
         {
             return string.Intern(
                 $"{typeof(TInstance).FullName} " +
-                $"{FlagLambdas.Select(x => x(instance).ToString()).Join(" ")} " +
+                $"{FlagLambdas.Select(x => x(instance).ToString().UrlEncode()).Join(" ")} " +
                 $"({Identifier})");
         }
 

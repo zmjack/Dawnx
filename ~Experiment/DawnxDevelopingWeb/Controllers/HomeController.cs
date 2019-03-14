@@ -25,9 +25,9 @@ namespace DawnxDevelopingWeb.Controllers
         {
             var identity = new WechatHybridUser
             {
-                OpenIdType = WechatHybridUser.EOpenIdType.Public,
+                OpenIdType = WechatHybridOpenIdType.Public,
                 OpenId = Guid.NewGuid().ToString(),
-                PubUserName = "haha",
+                PubUserName = "",
             }.ToIdentity();
 
             await HttpContext.SignInAsync(new ClaimsPrincipal(identity));

@@ -2,74 +2,81 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0" />*@
     <title>@ViewData["Title"] - DawnxDevelopingWeb</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <script src="~/modules/axios/axios.js"></script>
+    <script src="~/modules/vue/vue.js"></script>
+    <link href="~/modules/ant-design-vue/antd.css" rel="stylesheet" />
+    <script src="~/modules/ant-design-vue/antd.js"></script>
+
+    <style>
+        #components-layout-demo-top-side-2 .logo {
+            width: 120px;
+            height: 31px;
+            background: rgba(255,255,255,.2);
+            margin: 16px 28px 16px 0;
+            float: left;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">DawnxDevelopingWeb</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @*<partial name="_LoginPartial" />*@
-            </div>
-        </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - DawnxDevelopingWeb</p>
-        </footer>
+    <div id="app">
+        <a-layout id="components-layout-demo-top-side-2">
+            <a-layout-header class="header">
+                <div class="logo"></div>
+                <a-menu theme="dark"
+                        mode="horizontal"
+                        :defaultSelectedKeys="['2']"
+                        :style="{ lineHeight: '64px' }">
+                    <a-menu-item key="1">nav 1</a-menu-item>
+                    <a-menu-item key="2">nav 2</a-menu-item>
+                    <a-menu-item key="3">nav 3</a-menu-item>
+                </a-menu>
+            </a-layout-header>
+            <a-layout>
+                <a-layout-sider width="200" style="background: #fff">
+                    <a-menu mode="inline"
+                            :defaultSelectedKeys="['1']"
+                            :defaultOpenKeys="['sub1']"
+                            :style="{ height: '100%', borderRight: 0 }">
+                        <a-sub-menu key="sub1">
+                            <span slot="title"><a-icon type="user"></a-icon>subnav 1</span>
+                            <a-menu-item key="1">option1</a-menu-item>
+                            <a-menu-item key="2">option2</a-menu-item>
+                            <a-menu-item key="3">option3</a-menu-item>
+                            <a-menu-item key="4">option4</a-menu-item>
+                        </a-sub-menu>
+                        <a-sub-menu key="sub2">
+                            <span slot="title"><a-icon type="laptop"></a-icon>subnav 2</span>
+                            <a-menu-item key="5">option5</a-menu-item>
+                            <a-menu-item key="6">option6</a-menu-item>
+                            <a-menu-item key="7">option7</a-menu-item>
+                            <a-menu-item key="8">option8</a-menu-item>
+                        </a-sub-menu>
+                        <a-sub-menu key="sub3">
+                            <span slot="title"><a-icon type="notification"></a-icon>subnav 3</span>
+                            <a-menu-item key="9">option9</a-menu-item>
+                            <a-menu-item key="10">option10</a-menu-item>
+                            <a-menu-item key="11">option11</a-menu-item>
+                            <a-menu-item key="12">option12</a-menu-item>
+                        </a-sub-menu>
+                    </a-menu>
+                </a-layout-sider>
+                <a-layout style="padding: 0 24px 24px">
+                    <a-breadcrumb style="margin: 16px 0">
+                        <a-breadcrumb-item>Home</a-breadcrumb-item>
+                        <a-breadcrumb-item>List</a-breadcrumb-item>
+                        <a-breadcrumb-item>App</a-breadcrumb-item>
+                    </a-breadcrumb>
+                    <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
+                        Content
+                    </a-layout-content>
+                </a-layout>
+            </a-layout>
+        </a-layout>
     </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-    @RenderSection("Scripts", required: false)
+    @RenderSection("scripts", true)
 </body>
 </html>

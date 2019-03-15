@@ -31,6 +31,7 @@ namespace Dawnx
         public static IQueryable<TSource> WhereNot<TSource>(this IQueryable<TSource> @this, Expression<Func<TSource, bool>> predicate)
             => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters));
 
+        //TODO: Pending Delete
         ///// <summary>
         ///// Returns distinct elements from a sequence by using a specified properties to compare values.
         ///// </summary>

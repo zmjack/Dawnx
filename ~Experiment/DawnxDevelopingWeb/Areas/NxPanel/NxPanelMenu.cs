@@ -15,10 +15,10 @@ namespace NxPanel
                 Url = "/StarAdmin",
                 Tag = "New",
             }),
-            ["Reports"] = new ClaimsMenu(new ClaimsMenuNode
+            ["Application"] = new ClaimsMenu(new ClaimsMenuNode
             {
                 IconClass = "mdi mdi-elevation-rise",
-                Url = "/StarAdmin",
+                Url = "/NxPanel/UserStatus/Identity",
             }),
             ["Score"] = new ClaimsMenu(new ClaimsMenuNode
             {

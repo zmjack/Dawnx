@@ -1506,7 +1506,26 @@
             <param name="compare"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnIEnumerable.DistinctByValue``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
+            <summary>
+            Returns distinct elements from a sequence by using a specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="source"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnIEnumerable.ExceptByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object})">
+            <summary>
+            Produces the set difference of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.ExceptByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
             <summary>
             Produces the set difference of two sequences by using the specified properties to compare values.
             </summary>
@@ -1526,7 +1545,27 @@
             <param name="compare"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnIEnumerable.UnionByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
+            <summary>
+            Produces the set union of two sequences by using a specified properties.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnIEnumerable.IntersectByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object})">
+            <summary>
+            Produces the set intersection of two sequences by using the specified properties to compare values.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="compare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.IntersectByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
             <summary>
             Produces the set intersection of two sequences by using the specified properties to compare values.
             </summary>

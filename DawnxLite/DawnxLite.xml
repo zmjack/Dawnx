@@ -33,6 +33,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnArray.UrlSafeBase64String(System.Byte[])">
+            <summary>
+            Converts an array of 8-bit unsigned integers to its equivalent string representation
+                that is encoded with url safe base-64 digits.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnArray.HexString(System.Byte[],System.String)">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
@@ -645,6 +653,14 @@
             <param name="this"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.BytesFromUrlSafeBase64(System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as url safe base-64 digits, to
+                an equivalent 8-bit unsigned integer array.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnString.BytesFromHex(System.String,System.String)">
             <summary>
             Converts the specified string, which encodes binary data as hex digits, to
@@ -657,6 +673,21 @@
         <member name="M:Dawnx.DawnString.Base64Encode(System.String)">
             <summary>
             Converts the specified string into a Base64-encoded string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.UrlSafeBase64Encode(System.String,System.Text.Encoding)">
+            <summary>
+            Converts the specified string into a url safe Base64-encoded string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.UrlSafeBase64Encode(System.String)">
+            <summary>
+            Converts the specified string into a url safe Base64-encoded string(UTF-8).
             </summary>
             <param name="this"></param>
             <returns></returns>
@@ -696,6 +727,22 @@
             Converts the specified string, which encodes binary data as base-64 digits, to a new string.
             </summary>
             <param name="this"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.UrlSafeBase64Decode(System.String)">
+            <summary>
+            Converts the specified string, which encodes binary data as base-64 digits, to a new string(UTF-8).
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.UrlSafeBase64Decode(System.String,System.Text.Encoding)">
+            <summary>
+            Converts the specified string, which encodes binary data as base-64 digits, to a new string.
+            </summary>
+            <param name="this"></param>
+            <param name="encoding"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnString.HexDecode(System.String,System.String)">
@@ -1277,7 +1324,7 @@
             <param name="number"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Utilities.Base64Utility.ConvertBase64ToUrlBase64(System.String)">
+        <member name="M:Dawnx.Utilities.Base64Utility.ConvertBase64ToUrlSafeBase64(System.String)">
             <summary>
             Converts the specified string, which encodes binary data as url safe base-64 digits, to
                 an equivalent 8-bit unsigned integer array.
@@ -1285,7 +1332,7 @@
             <param name="base64"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Utilities.Base64Utility.ConvertUrlBase64ToBase64(System.String)">
+        <member name="M:Dawnx.Utilities.Base64Utility.ConvertUrlSafeBase64ToBase64(System.String)">
             <summary>
             Converts an array of 8-bit unsigned integers to its equivalent string representation
                 that is encoded with url safe base-64 digits.

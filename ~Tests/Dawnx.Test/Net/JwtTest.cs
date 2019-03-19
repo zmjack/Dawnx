@@ -21,7 +21,7 @@ namespace Dawnx.Net.Test
             Assert.Equal(
                 "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1N2YwNzg3ZDY3ZjdmMzZkZjcxMDFlOTQ0" +
                 "OTg0MGExIiwidHlwIjoiSldUIn0",
-                Base64Utility.ConvertBase64ToUrlBase64(jwt_header.Base64Encode()));
+                Base64Utility.ConvertBase64ToUrlSafeBase64(jwt_header.Base64Encode()));
 
             // PAYLOAD: DATA
             var jwt_payload = JsonConvert.SerializeObject(new
@@ -42,7 +42,7 @@ namespace Dawnx.Net.Test
                 "L2xvY2FsaG9zdC5kYXdueC5uZXQ6NTAwMCIsImF1ZCI6WyJodHRwOi8vbG9jYWxo" +
                 "b3N0LmRhd254Lm5ldDo1MDAwL3Jlc291cmNlcyIsImFwaTEiXSwiY2xpZW50X2lk" +
                 "IjoiY2xpZW50Iiwic2NvcGUiOlsiYXBpMSJdfQ",
-                Base64Utility.ConvertBase64ToUrlBase64(jwt_payload.Base64Encode()));
+                Base64Utility.ConvertBase64ToUrlSafeBase64(jwt_payload.Base64Encode()));
 
             // VERIFY SIGNATURE
             //Assert.Equal(
@@ -63,9 +63,9 @@ namespace Dawnx.Net.Test
             {
                 _.ImportParameters(new RSAParameters
                 {
-                    Exponent = Base64Utility.ConvertUrlBase64ToBase64(
+                    Exponent = Base64Utility.ConvertUrlSafeBase64ToBase64(
                         jwk["e"].Value<string>()).BytesFromBase64(),
-                    Modulus = Base64Utility.ConvertUrlBase64ToBase64(
+                    Modulus = Base64Utility.ConvertUrlSafeBase64ToBase64(
                         jwk["n"].Value<string>()).BytesFromBase64(),
                 });
             });

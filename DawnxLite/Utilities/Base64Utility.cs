@@ -10,7 +10,7 @@ namespace Dawnx.Utilities
         /// </summary>
         /// <param name="base64"></param>
         /// <returns></returns>
-        public static string ConvertBase64ToUrlBase64(string base64)
+        public static string ConvertBase64ToUrlSafeBase64(string base64)
         {
             return base64.Replace("/", "_").Replace("+", "-").TrimEnd('=');
         }
@@ -21,7 +21,7 @@ namespace Dawnx.Utilities
         /// </summary>
         /// <param name="urlBase64"></param>
         /// <returns></returns>
-        public static string ConvertUrlBase64ToBase64(string urlBase64)
+        public static string ConvertUrlSafeBase64ToBase64(string urlBase64)
         {
             var padding = "=".Repeat((urlBase64.Length % 4).For(_ =>
             {

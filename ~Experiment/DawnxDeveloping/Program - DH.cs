@@ -15,10 +15,11 @@ namespace DawnxDevloping
 
             public static DiffieHellmanQpPair NewPair()
             {
+                // q must be less than p
                 return new DiffieHellmanQpPair
                 {
-                    Q = 3,
-                    P = 7,
+                    Q = 7,
+                    P = 11,
                 };
             }
         }
@@ -76,8 +77,8 @@ namespace DawnxDevloping
             var dh1 = new DiffieHellman(qp);
             var dh2 = new DiffieHellman(qp);
 
-            dh1.Rnd = 5;
-            dh2.Rnd = 13;
+            dh1.Rnd = 3;
+            dh2.Rnd = 5;
 
             Console.WriteLine(dh1.Key(dh2.RndResult));
             Console.WriteLine(dh2.Key(dh1.RndResult));
@@ -97,7 +98,6 @@ namespace DawnxDevloping
             var dh = new DiffieHellman(qp);
             for (int i = 0; i < qp.P * 4 - 1; i++)
             {
-                qp.Q = 8;
                 dh.Rnd = i;
                 Console.WriteLine($"{qp.Q}^{i} mod {qp.P} = {Math.Pow(qp.Q, i) % qp.P}");
             }

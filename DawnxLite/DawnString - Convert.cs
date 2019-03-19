@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Net;
 using System.Text;
 
@@ -38,6 +39,14 @@ namespace Dawnx
         public static byte[] BytesFromBase64(this string @this) => Convert.FromBase64String(@this);
 
         /// <summary>
+        /// Converts the specified string, which encodes binary data as url safe base-64 digits, to
+        ///     an equivalent 8-bit unsigned integer array.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static byte[] BytesFromUrlSafeBase64(this string @this) => Convert.FromBase64String(Base64Utility.ConvertUrlSafeBase64ToBase64(@this));
+
+        /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to
         ///     an equivalent 8-bit unsigned integer array.
         /// </summary>
@@ -70,6 +79,23 @@ namespace Dawnx
         /// <returns></returns>
         public static string Base64Encode(this string @this)
             => @this.Bytes(Encoding.UTF8).Base64String();
+
+        /// <summary>
+        /// Converts the specified string into a url safe Base64-encoded string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string UrlSafeBase64Encode(this string @this, Encoding encoding)
+            => @this.Bytes(encoding).UrlSafeBase64String();
+
+        /// <summary>
+        /// Converts the specified string into a url safe Base64-encoded string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string UrlSafeBase64Encode(this string @this)
+            => @this.Bytes(Encoding.UTF8).UrlSafeBase64String();
 
         /// <summary>
         /// Converts the specified string into a Base64-encoded string.
@@ -109,9 +135,27 @@ namespace Dawnx
         /// Converts the specified string, which encodes binary data as base-64 digits, to a new string.
         /// </summary>
         /// <param name="this"></param>
+        /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Base64Decode(this string @this, Encoding encoding)
             => @this.BytesFromBase64().String(encoding);
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as base-64 digits, to a new string(UTF-8).
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string UrlSafeBase64Decode(this string @this)
+            => @this.BytesFromUrlSafeBase64().String(Encoding.UTF8);
+
+        /// <summary>
+        /// Converts the specified string, which encodes binary data as base-64 digits, to a new string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string UrlSafeBase64Decode(this string @this, Encoding encoding)
+            => @this.BytesFromUrlSafeBase64().String(encoding);
 
         /// <summary>
         /// Converts the specified string, which encodes binary data as hex digits, to a new string(UTF-8).

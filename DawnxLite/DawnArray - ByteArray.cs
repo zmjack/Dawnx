@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawnx.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,14 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <returns></returns>
         public static string Base64String(this byte[] @this) => Convert.ToBase64String(@this);
+
+        /// <summary>
+        /// Converts an array of 8-bit unsigned integers to its equivalent string representation
+        ///     that is encoded with url safe base-64 digits.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string UrlSafeBase64String(this byte[] @this) => Base64Utility.ConvertBase64ToUrlSafeBase64(Convert.ToBase64String(@this));
 
         /// <summary>
         /// Converts an array of 8-bit unsigned integers to its equivalent string representation

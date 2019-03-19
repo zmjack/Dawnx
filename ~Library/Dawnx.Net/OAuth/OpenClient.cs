@@ -32,10 +32,10 @@ namespace Dawnx.Net.OAuth
                     _AccessToken = value;
 
                     Header = JsonConvert.DeserializeObject(
-                        Base64Utility.ConvertUrlBase64ToBase64(
+                        Base64Utility.ConvertUrlSafeBase64ToBase64(
                             match.Groups[1].Value).Base64Decode()) as JToken;       // ALGORITHM & TOKEN TYPE
                     Payload = JsonConvert.DeserializeObject(
-                        Base64Utility.ConvertUrlBase64ToBase64(
+                        Base64Utility.ConvertUrlSafeBase64ToBase64(
                             match.Groups[2].Value).Base64Decode()) as JToken;       // DATA
 
                     //TODO: Not supported yet

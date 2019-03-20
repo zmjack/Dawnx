@@ -38,6 +38,7 @@ namespace DawnxDevelopingWeb.Controllers
         //[WechatHybridAuthorize]
         public IActionResult Index()
         {
+            return View();
             return RedirectToAction("Index", "StarAdmin");
 
             using (_appRegistryManager.BeginAutoTransaction())

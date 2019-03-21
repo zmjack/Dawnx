@@ -1,14 +1,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var vue_1 = require("vue");
-var App_1 = require("./App");
+var App_vue_1 = require("./App.vue");
 new vue_1.default({
-    el: '#app',
-    render: function (h) { return h(App_1.default); },
-    components: {
-        App: App_1.default
-    },
-    mounted: function () {
-        alert(App_1.default.data);
-    }
+    el: "#app",
+    template: '<Hello/>',
+    components: { Hello: App_vue_1.default }
+    //methods() {
+    //},
+    //render: function (h) {
+    //    return h('div', this.name);
+    //}
 });
 //# sourceMappingURL=main.js.map

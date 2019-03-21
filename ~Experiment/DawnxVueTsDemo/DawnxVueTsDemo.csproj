@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\App.ts" />
+    <Content Remove="wwwroot\js\App.vue" />
     <Content Remove="wwwroot\js\main.ts" />
+    <Content Remove="wwwroot\js\vue-shims.d.ts" />
   </ItemGroup>
 
 
@@ -19,7 +20,8 @@
 
 
   <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\js\App.ts" />
+    <TypeScriptCompile Include="wwwroot\js\App.vue" />
+    <TypeScriptCompile Include="wwwroot\js\vue-shims.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\main.ts" />
   </ItemGroup>
 

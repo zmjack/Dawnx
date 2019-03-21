@@ -1,13 +1,15 @@
-﻿import Vue from 'vue'
-import App from './App'
+﻿import Vue from "vue";
+import Hello from "./App.vue";
 
 new Vue({
-    el: '#app',
-    render: h => h(App),
-    components: {
-        App
-    },
-    mounted: function () {
-        alert(App.data)
-    }
-})
+    el: "#app",
+    template: '<Hello/>',
+    components: { Hello }
+
+    //methods() {
+
+    //},
+    //render: function (h) {
+    //    return h('div', this.name);
+    //}
+});

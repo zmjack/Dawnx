@@ -13,6 +13,13 @@ module.exports = {
         filename: 'main.build.js'
     },
 
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
+    },
+
     module: {
         rules: [{
             test: /\.vue/,

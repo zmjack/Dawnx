@@ -6,15 +6,15 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
                 msg: '这是App.vue内容'
             }
         },
 
         methods: {
-            change(){
-                this.msg = "new Hello World!"
+            change() {
+                this.msg = "new Hello World!";
             }
         }
     }

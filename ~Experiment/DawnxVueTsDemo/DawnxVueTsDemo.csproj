@@ -12,6 +12,11 @@
     <Content Remove="wwwroot\js\vue-shims.d.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\components\addAdServiceModal.js" />
+    <None Include="wwwroot\js\components\addAdServiceModal.js.map" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -21,6 +26,8 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\js\App.vue" />
+    <TypeScriptCompile Include="wwwroot\js\components\addAdServiceModal.ts" />
+    <TypeScriptCompile Include="wwwroot\js\components\models\AddAdServiceModel.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\vue-shims.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\main.ts" />
   </ItemGroup>

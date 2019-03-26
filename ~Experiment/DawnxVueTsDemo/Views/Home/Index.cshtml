@@ -4,27 +4,10 @@
 
 <html>
 <body>
-    <div id="app">
-        <Hello></Hello>
-    </div>
-    <script src="~/js/main.build.js"></script>
-    @*<script src="~/js/vue.js"></script>
+    <div id="app_vue"></div>
+    <div id="app_ts"></div>
 
-        <script>
-        new Vue({
-            el: '#app',
-
-            data() {
-                return {
-                    age: "123"
-                }
-            },
-
-            //template: '<div>{{age}}</div>',
-            render: function (h) {
-            return h('div', this.age)
-        }
-        })
-        </script>*@
+    <script src="~/js/main_vue.build.js"></script>
+    <script src="~/js/main_ts.build.js"></script>
 </body>
 </html>

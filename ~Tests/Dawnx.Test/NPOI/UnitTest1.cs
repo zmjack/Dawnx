@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace Dawnx.NPOI.Test
@@ -35,6 +36,11 @@ namespace Dawnx.NPOI.Test
             }).Self(range =>
             {
                 range.SetCStyle(ºÚÌåstyle1);
+                var cstyle = range.ToArray()[0].GetCStyle();
+                var applier = cstyle.GetApplier();
+
+                Assert.Equal("0.00", applier.DataFormat);
+
                 foreach (var row in range.GetRows())
                 {
                     if (row[(0, 1)].GetValue().ToString() == "Cu")

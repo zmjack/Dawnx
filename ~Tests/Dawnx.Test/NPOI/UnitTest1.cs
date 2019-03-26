@@ -32,17 +32,15 @@ namespace Dawnx.NPOI.Test
                 { "Company 102", "Ag", 3, DateTime.Parse("2017-1-3"), "[??]" },
                 { "Company 102", "Cu", 3, DateTime.Parse("2017-1-3"), "[??]" },
                 { "Company 102", "Cu", 4, DateTime.Parse("2017-1-4"), "[??]" },
-            }).Self(_ =>
+            }).Self(range =>
             {
-                _.SetCStyle(ºÚÌåstyle1);
-                _.Each(row =>
+                range.SetCStyle(ºÚÌåstyle1);
+                foreach (var row in range.GetRows())
                 {
                     if (row[(0, 1)].GetValue().ToString() == "Cu")
-                    {
                         row.SelectColunm(1).SetCStyle(ËÎÌåstyle1);
-                    }
-                });
-                _.SmartMerge(new[] { 0, 1, 2, 3 });
+                }
+                range.SmartMerge(new[] { 0, 1, 2, 3 });
             });
 
             sampleSheet["E4"].SetValue(123);

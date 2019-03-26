@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.NPOI
 {
-    public class SheetRange : IEnumerable<SheetRange>
+    public class SheetRange : IEnumerable<SheetCell>
     {
         public ExcelSheet Sheet { get; private set; }
         public (int row, int col) Start { get; private set; }
@@ -45,14 +45,9 @@ namespace Dawnx.NPOI
         public void SetCStyle(Action<CStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
 
-        public SheetRange SelectColunm(int selectCol)
+        public SheetRange SelectColunm(int startOffsetCol)
         {
-            return new SheetRange(Sheet, (Start.row, Start.col + selectCol), (End.row, Start.col + selectCol));
-        }
-
-        public SheetRange SelectColunms(int startOffsetCol)
-        {
-            return new SheetRange(Sheet, (Start.row, Start.col + startOffsetCol), (End.row, End.col));
+            return new SheetRange(Sheet, (Start.row, Start.col + startOffsetCol), (End.row, Start.col + startOffsetCol));
         }
 
         public SheetRange SelectColunms(int startOffsetCol, int endOffsetCol)
@@ -108,17 +103,17 @@ namespace Dawnx.NPOI
             var regex_matchId = new Regex(@"^\[\[.+?\]\](.*)$");
             foreach (var colIndex in offsetCols)
             {
-                foreach (var row in SelectColunm(colIndex))
+                foreach (var cell in SelectColunm(colIndex))
                 {
-                    var value = row.Cell.GetValue();
+                    var value = cell.GetValue();
                     if (value is string)
                     {
                         var match = regex_matchId.Match(value as string);
                         if (match.Success)
                         {
                             if (double.TryParse(match.Groups[1].Value, out double dValue))
-                                row.Cell.SetValue(dValue);
-                            else row.Cell.SetValue(match.Groups[1].Value);
+                                cell.SetValue(dValue);
+                            else cell.SetValue(match.Groups[1].Value);
                         }
                     }
                 }
@@ -138,10 +133,17 @@ namespace Dawnx.NPOI
         public SheetCell this[(int offsetRow, int offsetCol) pos]
             => Sheet[(Start.row + pos.offsetRow, Start.col + pos.offsetCol)];
 
-        public IEnumerator<SheetRange> GetEnumerator()
+        public IEnumerable<SheetRange> GetRows()
         {
             for (int row = Start.row; row <= End.row; row++)
                 yield return new SheetRange(Sheet, (row, Start.col), (row, End.col));
+        }
+
+        public IEnumerator<SheetCell> GetEnumerator()
+        {
+            for (int row = Start.row; row <= End.row; row++)
+                for (int col = Start.col; col <= End.col; col++)
+                    yield return new SheetCell(Sheet, Sheet[(row, col)]);
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

@@ -6,17 +6,16 @@ namespace Dawnx.Tools
 {
     public static class ProjectUtility
     {
-        public static string ProjectName;
-        public static string RootNamespace;
-        public static string TargetFramework;
+        public static string ProjectName { get; private set; }
+        public static string RootNamespace { get; private set; }
+        public static string TargetFramework { get; private set; }
 
-        public static void Sync()
+        static ProjectUtility()
         {
             var dir = Directory.GetCurrentDirectory();
             var projectFile = Directory.GetFiles(dir, "*.csproj").For(_ =>
             {
-                if (_.Length == 1)
-                    return _[0];
+                if (_.Length == 1) return _[0];
                 else throw new FileLoadException("More than one .csproj files are exist in the current directory.");
             });
 
@@ -28,14 +27,14 @@ namespace Dawnx.Tools
 
         public static void PrintInfo()
         {
-            Console.WriteLine($"{nameof(ProjectName)}:\t{ProjectName}");
-            Console.WriteLine($"{nameof(RootNamespace)}:\t{RootNamespace}");
-            Console.WriteLine($"{nameof(TargetFramework)}:\t{TargetFramework}");
+            Con.PrintLine($"{nameof(ProjectName)}:\t{ProjectName}");
+            Con.PrintLine($"{nameof(RootNamespace)}:\t{RootNamespace}");
+            Con.PrintLine($"{nameof(TargetFramework)}:\t{TargetFramework}");
         }
 
-        public static string GetRootNamespace(XmlDocument doc)
+        private static string GetRootNamespace(XmlDocument doc)
             => doc.SelectNodes("/Project/PropertyGroup/RootNamespace").InnerText() ?? Path.GetFileNameWithoutExtension(ProjectName);
-        public static string GetTargetFramework(XmlDocument doc)
+        private static string GetTargetFramework(XmlDocument doc)
             => doc.SelectNodes("/Project/PropertyGroup/TargetFramework").InnerText() ?? "Unknown";
 
         private static string InnerText(this XmlNodeList @this)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx.Con
+namespace Dawnx
 {
     public class ConColor
     {

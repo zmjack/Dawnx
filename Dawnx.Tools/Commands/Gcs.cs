@@ -10,7 +10,7 @@ namespace Dawnx.Tools
         public static void Gcs(string jsonFile)
         {
             if (!AlertUtility.ConfirmUseOnlineService()) return;
-            Console.WriteLine("Connect to dawnx service...");
+            Con.PrintLine("Connect to dawnx service...");
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
             {
@@ -21,14 +21,11 @@ namespace Dawnx.Tools
 
             if (resp.IsSuccess())
             {
-                var outFile = $"{jsonFile}/../{Path.GetFileNameWithoutExtension(jsonFile)}.cs";
+                var path = $"{Path.GetPathRoot(Path.GetFullPath(jsonFile))}/{Path.GetFileNameWithoutExtension(jsonFile)}.cs";
+                File.WriteAllText(path, resp.data as string);
 
-                using (var stream = new FileStream(outFile, FileMode.Create))
-                using (var writer = new StreamWriter(stream))
-                    writer.Write(resp.data as string);
-
-                Console.WriteLine($"{resp.message}");
-                Console.WriteLine($"  File Saved: {Path.GetFullPath(outFile)}");
+                Con.PrintLine($"{resp.message}");
+                Con.PrintLine($"  File Saved: {Path.GetFullPath(path)}");
             }
             else AlertUtility.PrintErrorMessage(resp);
         }

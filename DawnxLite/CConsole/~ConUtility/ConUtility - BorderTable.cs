@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Dawnx.Con
+namespace Dawnx.CConsole
 {
     public partial class ConUtility
     {

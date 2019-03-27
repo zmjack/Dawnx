@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx.Con
+namespace Dawnx.CConsole
 {
     public sealed class CAsk
     {
@@ -21,8 +21,8 @@ namespace Dawnx.Con
         {
             while (true)
             {
-                Cout.Write("? ", new ConColor { ForegroundColor = ConsoleColor.Green });
-                Cout.Write($"{Question}: ");
+                Cout.Print("? ", new ConColor { ForegroundColor = ConsoleColor.Green });
+                Cout.Print($"{Question}: ");
 
                 var left = Console.CursorLeft;
                 var top = Console.CursorTop;
@@ -33,7 +33,7 @@ namespace Dawnx.Con
                 if (result is null) continue;
 
                 Console.SetCursorPosition(left, top);
-                Con.Out.Write(result, new ConColor { ForegroundColor = ConsoleColor.Cyan });
+                Con.Instance.Print(result, new ConColor { ForegroundColor = ConsoleColor.Cyan });
                 if (result.GetLengthA() < answer.GetLengthA())
                     Console.Write(" ".Repeat(answer.GetLengthA() - result.GetLengthA()));
                 Console.WriteLine();

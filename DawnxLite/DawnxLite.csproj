@@ -26,15 +26,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include=".Con\CAsk.cs" />
-    <Compile Include=".Con\ConsoleValue.cs" />
+    <Compile Include=".Con\ConText.cs" />
     <Compile Include=".Con\ConColor.cs" />
-    <Compile Include=".Con\Cout - Snapshoot.cs" />
-    <Compile Include=".Con\~ConUtility\ConUtility - BorderTable.cs" />
-    <Compile Include=".Con\~ConUtility\ConUtility - Common.cs" />
-    <Compile Include=".Con\~ConUtility\ConUtility - NoBorderTable.cs" />
-    <Compile Include=".Con\Cout.cs" />
-    <Compile Include=".Con\~ConUtility\ConUtility - SeamlessTable.cs" />
     <Compile Include=".Con\~Con.cs" />
   </ItemGroup>
 

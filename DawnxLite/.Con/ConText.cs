@@ -2,10 +2,10 @@
 
 namespace Dawnx
 {
-    public class ConsoleValue
+    public class ConText
     {
         public ConsoleColor? BackgroundColor { get; set; }
         public ConsoleColor? ForegroundColor { get; set; }
-        public string Value { get; set; }
+        public string Text { get; set; }
     }
 }

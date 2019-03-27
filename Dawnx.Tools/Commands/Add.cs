@@ -9,7 +9,7 @@ namespace Dawnx.Tools
         public static void Add(string name)
         {
             if (!AlertUtility.ConfirmUseOnlineService()) return;
-            Console.WriteLine("Connect to dawnx service...");
+            Con.PrintLine("Connect to dawnx service...");
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
             {
@@ -27,8 +27,8 @@ namespace Dawnx.Tools
                 //using (var writer = new StreamWriter(stream))
                 //    writer.Write(resp.model as string);
 
-                //Console.WriteLine($"{resp.message}");
-                //Console.WriteLine($"  File Saved: {Path.GetFullPath(outFile)}");
+                //Con.Line($"{resp.message}");
+                //Con.Line($"  File Saved: {Path.GetFullPath(outFile)}");
             }
             else AlertUtility.PrintErrorMessage(resp);
         }

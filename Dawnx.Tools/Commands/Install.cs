@@ -33,8 +33,8 @@ namespace Dawnx.Tools
                         int fileVerifySuccess = 0;
                         int fileVerifyFailed = 0;
 
-                        int totalProgressFiledLength = fileCount * 2 + 1;
-                        int filenameFiledLength = 67 - totalProgressFiledLength;
+                        int colLength1 = fileCount * 2 + 1;
+                        int[] tableLengths = new[] { colLength1, 67 - colLength1, 7 };
 
                         List<string> extractFileList = new List<string>();
 
@@ -45,13 +45,6 @@ namespace Dawnx.Tools
                             var saveas = $@"{Program.DOWNLOAD_DIRECTORY}\{Path.GetFileName(url)}";
                             var extract = item["extract"].Value<bool>();
 
-                            Console.Write(
-                                $"{$"{fileDone() + 1}/{fileCount}".PadLeft(totalProgressFiledLength)} " +
-                                $"| " + Path.GetFileName(saveas)
-                                    .For(_ => _.Length <= filenameFiledLength ? _ : _.Substring(0, filenameFiledLength))
-                                    .PadRight(filenameFiledLength) +
-                                $"|");
-
                             if (!File.Exists(saveas) || !FileUtility.CheckMD5(saveas, md5))
                             {
                                 #region Download files
@@ -60,8 +53,12 @@ namespace Dawnx.Tools
                                     var web = new HttpAccess();
                                     web.DownloadProgress += (sender, _url, received, length) =>
                                     {
-                                        Console.SetCursorPosition(72, Console.CursorTop);
-                                        Console.Write($"{((double)received / length).ToString("0.00%").PadLeft(7)}");
+                                        Con.Row(new[]
+                                        {
+                                            $"{fileDone() + 1}/{fileCount}",
+                                            $"| {Path.GetFileName(saveas)}",
+                                            ((double)received / length).ToString("0.00%")
+                                        }, tableLengths);
                                     };
 
                                     int retry = 0, allowedRetry = 3;
@@ -76,42 +73,35 @@ namespace Dawnx.Tools
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine();
+                                        Con.Line();
                                         if (retry < allowedRetry)
                                         {
-                                            Console.WriteLine($"  {ex.Message}, retry {++retry}/{allowedRetry}");
+                                            Con.PrintLine($"  {ex.Message}, retry {++retry}/{allowedRetry}");
                                             goto retry;
                                         }
                                         else
                                         {
-                                            Console.WriteLine($"  File can not be downloaded from {url}");
-                                            if (AlertUtility.AskYN("Retry?"))
-                                            {
-                                                retry = 0;
-                                                goto retry;
-                                            }
-                                            else
-                                            {
-                                                fileSkip++;
-                                                continue;
-                                            }
+                                            Con.PrintLine($"  File can not be downloaded from {url}");
+
+                                            Con.AskYN("Retry?", out var ansRetry);
+                                            if (ansRetry) { retry = 0; goto retry; }
+                                            else { fileSkip++; continue; }
                                         }
                                     }
                                 }
                                 #endregion
 
                                 #region Check file md5
-                                Console.SetCursorPosition(72, Console.CursorTop);
-                                if (FileUtility.CheckMD5(saveas, md5))
+                                var status = "";
+                                if (FileUtility.CheckMD5(saveas, md5)) { fileVerifySuccess++; status = "Safe"; }
+                                else { fileVerifyFailed++; status = "WARNING"; }
+
+                                Con.RowLine(new[]
                                 {
-                                    fileVerifySuccess++;
-                                    Console.WriteLine("Safe".Center(7));
-                                }
-                                else
-                                {
-                                    fileVerifyFailed++;
-                                    Console.WriteLine("WARNING".Center(7));
-                                }
+                                    $"{fileDone() + 1}/{fileCount}",
+                                    $"| {Path.GetFileName(saveas)}",
+                                    status
+                                }, tableLengths);
                                 #endregion
                             }
                             else
@@ -120,18 +110,21 @@ namespace Dawnx.Tools
                                     extractFileList.Add(saveas);
                                 fileDownload++;
 
-                                Console.SetCursorPosition(72, Console.CursorTop);
-                                Console.WriteLine("Found".Center(7));
+                                Con.RowLine(new[]
+                                {
+                                    $"{fileDone() + 1}/{fileCount}",
+                                    $"| {Path.GetFileName(saveas)}",
+                                    "Found"
+                                }, tableLengths);
                             }
                         }
 
-                        Console.WriteLine();
-                        Console.WriteLine(
-                            $"Result: {fileDownload} downloaded, " +
-                            $"{fileVerifySuccess} safe, " +
-                            $"{fileVerifyFailed} warning. " +
-                            $"{fileSkip} skiped.");
-                        Console.WriteLine($"---- All files has been downloaded using engine Dawnx.Net.Http.Web ----{Environment.NewLine}");
+                        Con
+                            .Line()
+                            .PrintLine($"Result: " +
+                                $"{fileDownload} downloaded, {fileVerifySuccess} safe, " +
+                                $"{fileVerifyFailed} warning, {fileSkip} skiped.")
+                            .PrintLine($"---- All files has been downloaded using engine Dawnx.Net.Http.Web ----");
 
                         // Setup
                         void extractFiles()
@@ -139,24 +132,26 @@ namespace Dawnx.Tools
                             foreach (var file in extractFileList)
                             {
                                 ZipFile.ExtractToDirectory(file, Directory.GetCurrentDirectory(), true);
-                                Console.WriteLine($"Extract {file} done.");
+                                Con.PrintLine($"Extract {file} done.");
                             }
-                            Console.WriteLine($"---- Extract files completed ----{Environment.NewLine}");
+                            Con.PrintLine($"---- Extract files completed ----{Environment.NewLine}");
                         };
 
                         if (fileVerifyFailed > 0)
-                            if (AlertUtility.AskYN("Setup now?")) extractFiles();
-                            else { }
+                        {
+                            Con.AskYN("Setup now?", out var ans);
+                            if (ans) extractFiles();
+                        }
                         else extractFiles();
                     }
-                    else Console.WriteLine($"Install service requires the lowest cli tool version: {cli_version}.");
+                    else Con.PrintLine($"Install service requires the lowest cli tool version: {cli_version}.");
                 }
                 else AlertUtility.PrintErrorMessage(resp);
 
             }
             catch (JsonReaderException ex)
             {
-                Console.WriteLine($"Error occurred. ({ex.Message})");
+                Con.PrintLine($"Error occurred. ({ex.Message})");
             }
         }
 

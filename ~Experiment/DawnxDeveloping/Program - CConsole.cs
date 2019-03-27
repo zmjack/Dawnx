@@ -1,11 +1,10 @@
-﻿#if USE
+﻿#if !USE
 using Dawnx;
 using System.Linq;
 using HtmlAgilityPack;
 using System.Collections.Generic;
-using Dawnx.Net.Web;
 using System.IO;
-using Dawnx.CConsole;
+using System;
 
 namespace DawnxDevloping
 {
@@ -24,7 +23,7 @@ namespace DawnxDevloping
                 },
             };
 
-            ConsoleUtility.CreateSeamlessTable(
+            Con.SeamlessTable(
                 new[] { "A", "B", "C" },
                 new string[][]
                 {
@@ -32,9 +31,9 @@ namespace DawnxDevloping
                 },
                 new[] { 2, 4, 6 });
 
-            ConsoleUtility.CreateBorderTable(models);
-            ConsoleUtility.CreateSeamlessTable(models);
-            ConsoleUtility.CreateNoBorderTable(models);
+            Con.BorderTable(models);
+            Con.SeamlessTable(models);
+            Con.NoBorderTable(models);
         }
 
     }

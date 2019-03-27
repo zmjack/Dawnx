@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dawnx.Con
+namespace Dawnx.CConsole
 {
     public partial class Cout
     {
@@ -30,7 +30,13 @@ namespace Dawnx.Con
             return this;
         }
 
-        public Cout Write(string content, ConColor color = null)
+        public Cout Line()
+        {
+            Console.WriteLine();
+            return this;
+        }
+
+        public Cout Print(string content, ConColor color = null)
         {
             void Process() { Console.Write(content); }
 
@@ -45,61 +51,39 @@ namespace Dawnx.Con
 
             return this;
         }
-
-        public Cout WriteLine(string content, ConColor color = null)
-        {
-            void Process() { Console.WriteLine(content); }
-
-            if (color is null) Process();
-            else
-            {
-                var originColor = ConColor;
-                ConColor = color;
-                Process();
-                ConColor = originColor;
-            }
-
-            return this;
-        }
+        public Cout PrintLine(string content, ConColor color = null) => Print(content, color).Line();
 
         public Cout Left(string line, ConColor color = null)
         {
             RowBeginning();
-            Write($"{line}{" ".Repeat(Console.WindowWidth - line.GetLengthA())}", color);
+            Print($"{line}{" ".Repeat(Console.WindowWidth - line.GetLengthA())}", color);
             return this;
         }
-        public Cout LeftLine(string line, ConColor color = null)
-        {
-            RowBeginning();
-            WriteLine($"{line}{" ".Repeat(Console.WindowWidth - line.GetLengthA())}", color);
-            return this;
-        }
+        public Cout LeftLine(string line, ConColor color = null) => Left(line, color).Line();
 
         public Cout Right(string line, ConColor color = null)
         {
             RowBeginning();
-            Write($"{" ".Repeat(Console.WindowWidth - line.GetLengthA())}{line}", color);
+            Print($"{" ".Repeat(Console.WindowWidth - line.GetLengthA())}{line}", color);
             return this;
         }
-        public Cout RightLine(string line, ConColor color = null)
-        {
-            RowBeginning();
-            WriteLine($"{" ".Repeat(Console.WindowWidth - line.GetLengthA())}{line}", color);
-            return this;
-        }
+        public Cout RightLine(string line, ConColor color = null) => Right(line, color).Line();
 
         public Cout Center(string line, ConColor color = null)
         {
             RowBeginning();
-            Write($"{line.Center(Console.WindowWidth)}", color);
+            Print($"{line.Center(Console.WindowWidth)}", color);
             return this;
         }
-        public Cout CenterLine(string line, ConColor color = null)
+        public Cout CenterLine(string line, ConColor color = null) => Center(line, color).Line();
+
+        public Cout Row(string[] cols, int[] colLengths)
         {
-            RowBeginning();
-            WriteLine($"{line.Center(Console.WindowWidth)}", color);
+            ClearRow();
+            NoBorderTable(null, new[] { cols }, colLengths);
             return this;
         }
+        public Cout RowLine(string[] cols, int[] colLengths) => Row(cols, colLengths).Line();
 
         public Cout Offset(int offsetRow, int offsetCol)
         {
@@ -192,6 +176,27 @@ namespace Dawnx.Con
                 else return null;
             })).Resolve();
 
+            return this;
+        }
+        public Cout AskYN(string question, out bool ret)
+        {
+            bool _ret = false;
+            new CAsk(this, question, new CAsk.ResolveDelegate((answer) =>
+            {
+                if (new[] { "y", "yes", "Y", "Yes", "YES" }.Contains(answer))
+                {
+                    _ret = true;
+                    return "Yes";
+                }
+                else if (new[] { "n", "no", "N", "No", "NO" }.Contains(answer))
+                {
+                    _ret = false;
+                    return "No";
+                }
+                else return null;
+            })).Resolve();
+
+            ret = _ret;
             return this;
         }
 

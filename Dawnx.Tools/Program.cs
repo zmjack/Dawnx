@@ -26,19 +26,18 @@ namespace Dawnx.Tools
             Console.CursorVisible = false;
             try
             {
-                Console.WriteLine($"{Environment.NewLine}" +
+                Con.PrintLine(
+                    $"{Environment.NewLine}" +
                     $"Welcome Dawnx Command-line Tools {CLI_VERSION}{Environment.NewLine}" +
                     $"======================================================================{Environment.NewLine}" +
                     $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}");
 
 #if !DEBUG
-                ProjectUtility.Sync();
                 ProjectUtility.PrintInfo();
 #endif
 
 #if DEBUG
                 InitArgs(new[] { "", "install", "general.ts" });
-                //InitArgs(new[] { "", "install", "general.ts" });
 #else
                 InitArgs(args);
 #endif
@@ -66,8 +65,13 @@ namespace Dawnx.Tools
                     Commands.Gcs(match.Groups[1].Value);
                     break;
 
+                case string line
+                when (match = new Regex(@" *gts *").Match(line)).Success:
+                    Commands.Gts(match.Groups[1].Value);
+                    break;
+
                 default:
-                    Console.WriteLine("Unkown command.");
+                    Con.PrintLine("Unkown command.");
                     break;
             }
         }
@@ -90,7 +94,7 @@ namespace Dawnx.Tools
         //    }
 
         //    File.Exists($"{_Directory}\\Views\\{controller}");
-        //    Console.WriteLine();
+        //    Con.Line();
         //}
 
     }

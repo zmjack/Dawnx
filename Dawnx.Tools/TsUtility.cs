@@ -10,13 +10,17 @@ namespace Dawnx.Tools
 {
     public static class TsUtility
     {
+        public static void GenerateTsFile(string path) => GenerateTsFile(Assembly.LoadFile(path));
         public static void GenerateTsFile(Assembly assembly)
         {
-            var tsFluent = TypeScript.Definitions().ForReferencedAssembly(assembly.FullName);
+            var tsFluent = TypeScript.Definitions().For(assembly);
+            var dts = tsFluent.Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields);
+            var cdts = tsFluent.Generate(TsGeneratorOutput.Constants);
+
             var name = Assembly.GetExecutingAssembly().GetName().Name;
-            File.WriteAllText($"{name}.d.ts", tsFluent.Generate(
-                TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields));
-            File.WriteAllText($"{name}.const.d.ts", tsFluent.Generate(TsGeneratorOutput.Constants));
+            File.WriteAllText($"{name}.d.ts", dts);
+            File.WriteAllText($"{name}.const.d.ts", cdts);
+
         }
 
     }

@@ -12,9 +12,9 @@ namespace Dawnx.CConsole
 
         public Cout ClearRow()
         {
-            Console.Write('\b');
+            Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(" ".Repeat(Console.WindowWidth));
-            Console.Write('\b');
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
             return this;
         }
 
@@ -51,7 +51,6 @@ namespace Dawnx.CConsole
 
             return this;
         }
-        public Cout PrintLine(string content, ConColor color = null) => Print(content, color).Line();
 
         public Cout Left(string line, ConColor color = null)
         {
@@ -59,7 +58,6 @@ namespace Dawnx.CConsole
             Print($"{line}{" ".Repeat(Console.WindowWidth - line.GetLengthA())}", color);
             return this;
         }
-        public Cout LeftLine(string line, ConColor color = null) => Left(line, color).Line();
 
         public Cout Right(string line, ConColor color = null)
         {
@@ -67,7 +65,6 @@ namespace Dawnx.CConsole
             Print($"{" ".Repeat(Console.WindowWidth - line.GetLengthA())}{line}", color);
             return this;
         }
-        public Cout RightLine(string line, ConColor color = null) => Right(line, color).Line();
 
         public Cout Center(string line, ConColor color = null)
         {
@@ -75,15 +72,19 @@ namespace Dawnx.CConsole
             Print($"{line.Center(Console.WindowWidth)}", color);
             return this;
         }
-        public Cout CenterLine(string line, ConColor color = null) => Center(line, color).Line();
 
         public Cout Row(string[] cols, int[] colLengths)
         {
+            var top = Console.CursorTop;
+
             ClearRow();
-            NoBorderTable(null, new[] { cols }, colLengths);
+            Console.Write(ConUtility.CreateRow(cols, colLengths));
+
+            if (Console.CursorTop != top)
+                Console.CursorTop = top;
+
             return this;
         }
-        public Cout RowLine(string[] cols, int[] colLengths) => Row(cols, colLengths).Line();
 
         public Cout Offset(int offsetRow, int offsetCol)
         {
@@ -109,34 +110,34 @@ namespace Dawnx.CConsole
 
         public Cout BorderTable<TModel>(IEnumerable<TModel> models)
         {
-            Console.WriteLine(ConUtility.CreateBorderTable(models));
+            Console.Write(ConUtility.CreateBorderTable(models));
             return this;
         }
         public Cout BorderTable(string[] headers, string[][] colLines, int[] lengths)
         {
-            Console.WriteLine(ConUtility.CreateBorderTable(headers, colLines, lengths));
+            Console.Write(ConUtility.CreateBorderTable(headers, colLines, lengths));
             return this;
         }
 
         public Cout NoBorderTable<TModel>(IEnumerable<TModel> models)
         {
-            Console.WriteLine(ConUtility.CreateNoBorderTable(models));
+            Console.Write(ConUtility.CreateNoBorderTable(models));
             return this;
         }
         public Cout NoBorderTable(string[] headers, string[][] colLines, int[] lengths)
         {
-            Console.WriteLine(ConUtility.CreateNoBorderTable(headers, colLines, lengths));
+            Console.Write(ConUtility.CreateNoBorderTable(headers, colLines, lengths));
             return this;
         }
 
         public Cout SeamlessTable<TModel>(IEnumerable<TModel> models)
         {
-            Console.WriteLine(ConUtility.CreateSeamlessTable(models));
+            Console.Write(ConUtility.CreateSeamlessTable(models));
             return this;
         }
         public Cout SeamlessTable(string[] headers, string[][] colLines, int[] lengths)
         {
-            Console.WriteLine(ConUtility.CreateSeamlessTable(headers, colLines, lengths));
+            Console.Write(ConUtility.CreateSeamlessTable(headers, colLines, lengths));
             return this;
         }
 

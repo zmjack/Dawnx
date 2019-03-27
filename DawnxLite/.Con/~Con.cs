@@ -14,15 +14,10 @@ namespace Dawnx
 
         public static Cout Line() => Instance.Line();
         public static Cout Print(string content, ConColor color = null) => Instance.Print(content, color);
-        public static Cout PrintLine(string content, ConColor color = null) => Instance.PrintLine(content, color);
         public static Cout Left(string line, ConColor color = null) => Instance.Left(line, color);
-        public static Cout LeftLine(string line, ConColor color = null) => Instance.LeftLine(line, color);
         public static Cout Right(string line, ConColor color = null) => Instance.Right(line, color);
-        public static Cout RightLine(string line, ConColor color = null) => Instance.RightLine(line, color);
         public static Cout Center(string line, ConColor color = null) => Instance.Center(line, color);
-        public static Cout CenterLine(string line, ConColor color = null) => Instance.CenterLine(line, color);
         public static Cout Row(string[] cols, int[] colLengths) => Instance.Row(cols, colLengths);
-        public static Cout RowLine(string[] cols, int[] colLengths) => Instance.RowLine(cols, colLengths);
 
         public static Cout Offset(int offsetRow, int offsetCol) => Instance.Offset(offsetRow, offsetCol);
         public static Cout OffsetRow(int offsetRow) => Instance.OffsetRow(offsetRow);

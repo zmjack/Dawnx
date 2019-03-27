@@ -76,12 +76,12 @@ namespace Dawnx.Tools
                                         Con.Line();
                                         if (retry < allowedRetry)
                                         {
-                                            Con.PrintLine($"  {ex.Message}, retry {++retry}/{allowedRetry}");
+                                            Con.Print($"  {ex.Message}, retry {++retry}/{allowedRetry}").Line();
                                             goto retry;
                                         }
                                         else
                                         {
-                                            Con.PrintLine($"  File can not be downloaded from {url}");
+                                            Con.Print($"  File can not be downloaded from {url}").Line();
 
                                             Con.AskYN("Retry?", out var ansRetry);
                                             if (ansRetry) { retry = 0; goto retry; }
@@ -96,12 +96,12 @@ namespace Dawnx.Tools
                                 if (FileUtility.CheckMD5(saveas, md5)) { fileVerifySuccess++; status = "Safe"; }
                                 else { fileVerifyFailed++; status = "WARNING"; }
 
-                                Con.RowLine(new[]
+                                Con.Row(new[]
                                 {
-                                    $"{fileDone() + 1}/{fileCount}",
+                                    $"{fileDone()}/{fileCount}",
                                     $"| {Path.GetFileName(saveas)}",
                                     status
-                                }, tableLengths);
+                                }, tableLengths).Line();
                                 #endregion
                             }
                             else
@@ -110,21 +110,22 @@ namespace Dawnx.Tools
                                     extractFileList.Add(saveas);
                                 fileDownload++;
 
-                                Con.RowLine(new[]
+                                Con.Row(new[]
                                 {
-                                    $"{fileDone() + 1}/{fileCount}",
+                                    $"{fileDone()}/{fileCount}",
                                     $"| {Path.GetFileName(saveas)}",
                                     "Found"
-                                }, tableLengths);
+                                }, tableLengths).Line();
                             }
                         }
 
                         Con
                             .Line()
-                            .PrintLine($"Result: " +
-                                $"{fileDownload} downloaded, {fileVerifySuccess} safe, " +
-                                $"{fileVerifyFailed} warning, {fileSkip} skiped.")
-                            .PrintLine($"---- All files has been downloaded using engine Dawnx.Net.Http.Web ----");
+                            .Print($"  " +
+                                $"{fileDownload} downloaded." +
+                                $"  {fileVerifySuccess} safe, {fileVerifyFailed} warning, {fileSkip} skiped.").Line()
+                            .Print($"---- All files has been downloaded using engine {typeof(Http).FullName} ----").Line()
+                            .Line();
 
                         // Setup
                         void extractFiles()
@@ -132,9 +133,11 @@ namespace Dawnx.Tools
                             foreach (var file in extractFileList)
                             {
                                 ZipFile.ExtractToDirectory(file, Directory.GetCurrentDirectory(), true);
-                                Con.PrintLine($"Extract {file} done.");
+                                Con.Print($"Extract {file} done.").Line();
                             }
-                            Con.PrintLine($"---- Extract files completed ----{Environment.NewLine}");
+                            Con
+                                .Print($"---- Extract files completed ----").Line()
+                                .Line();
                         };
 
                         if (fileVerifyFailed > 0)
@@ -144,14 +147,14 @@ namespace Dawnx.Tools
                         }
                         else extractFiles();
                     }
-                    else Con.PrintLine($"Install service requires the lowest cli tool version: {cli_version}.");
+                    else Con.Print($"Install service requires the lowest cli tool version: {cli_version}.").Line();
                 }
                 else AlertUtility.PrintErrorMessage(resp);
 
             }
             catch (JsonReaderException ex)
             {
-                Con.PrintLine($"Error occurred. ({ex.Message})");
+                Con.Print($"Error occurred. ({ex.Message})").Line();
             }
         }
 

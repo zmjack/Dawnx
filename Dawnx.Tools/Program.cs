@@ -26,20 +26,20 @@ namespace Dawnx.Tools
             Console.CursorVisible = false;
             try
             {
-                Con.PrintLine(
-                    $"{Environment.NewLine}" +
+                Con.Print(
                     $"Welcome Dawnx Command-line Tools {CLI_VERSION}{Environment.NewLine}" +
                     $"======================================================================{Environment.NewLine}" +
-                    $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}");
+                    $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}")
+                    .Line();
 
 #if !DEBUG
                 ProjectUtility.PrintInfo();
 #endif
 
 #if DEBUG
-                InitArgs(new[] { "", "install", "general.ts" });
+                Run(new[] { "tsgen" });
 #else
-                InitArgs(args);
+                Run(args.Slice(1));
 #endif
             }
             finally
@@ -48,30 +48,28 @@ namespace Dawnx.Tools
             }
         }
 
-        private static void InitArgs(string[] args)
+        private static void Run(string[] args)
         {
             var cargs = new ConsoleArgs(args, "-");
 
-            Match match;
-            switch (cargs.SimpleLine.ToLower())
+            switch (cargs.Contents[0])
             {
-                case string line
-                when (match = new Regex(@" *install +([^ ]+)").Match(line)).Success:
-                    Commands.Install(match.Groups[1].Value);
+                case "install":
+                    Commands.Install(cargs.Contents[1]);
                     break;
 
-                case string line
-                when (match = new Regex(@" *gcs +([^ ]+)").Match(line)).Success:
-                    Commands.Gcs(match.Groups[1].Value);
+                case "gcs":
+                    Commands.Gcs(cargs.Contents[1]);
                     break;
 
-                case string line
-                when (match = new Regex(@" *gts *").Match(line)).Success:
-                    Commands.Gts(match.Groups[1].Value);
+                case "tsgen":
+                    if (cargs.Contents.Length < 2)
+                        Commands.TsGen("TsClasses");
+                    else Commands.TsGen(cargs.Contents[1]);
                     break;
 
                 default:
-                    Con.PrintLine("Unkown command.");
+                    Con.Print("Unkown command.").Line();
                     break;
             }
         }

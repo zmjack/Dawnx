@@ -5,6 +5,7 @@ using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using System.Threading;
 
 namespace DawnxDevloping
 {
@@ -12,6 +13,36 @@ namespace DawnxDevloping
     {
         static void Main(string[] args)
         {
+            int colLength1 = 1 * 2 + 1;
+            int[] tableLengths = new[] { colLength1, 67 - colLength1, 7 };
+
+            Con.Row(new[]
+            {
+                $"1234",
+                $"| adsfafadfa",
+                "0.00%"
+            }, tableLengths);
+            Thread.Sleep(1000);
+
+            Con.Row(new[]
+            {
+                $"1234",
+                $"| adsfafadfa",
+                "20.00%"
+            }, tableLengths);
+            Thread.Sleep(1000);
+
+            Con.Row(new[]
+            {
+                $"1234",
+                $"| adsfafadfa",
+                "100.00%"
+            }, tableLengths);
+            Thread.Sleep(1000);
+
+            Con.Line();
+
+            return;
             var models = new[]
             {
                 new SimpleData.Northwnd.Category

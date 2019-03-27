@@ -35,5 +35,11 @@ namespace Dawnx
             }).ToArray();
         }
 
+        public static Type[] GetTypesWhichMarks<TAttribute>(this Assembly @this)
+            where TAttribute : Attribute
+        {
+            return @this.GetTypes().Where(type => type.GetCustomAttribute<TAttribute>() != null).ToArray();
+        }
+
     }
 }

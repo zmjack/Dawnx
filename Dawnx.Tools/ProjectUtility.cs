@@ -12,6 +12,11 @@ namespace Dawnx.Tools
 
         static ProjectUtility()
         {
+#if DEBUG
+            ProjectName = "DawnxDevelopingWeb";
+            RootNamespace = "DawnxDevelopingWeb";
+            TargetFramework = "netcoreapp2.2";
+#else
             var dir = Directory.GetCurrentDirectory();
             var projectFile = Directory.GetFiles(dir, "*.csproj").For(_ =>
             {
@@ -23,13 +28,15 @@ namespace Dawnx.Tools
             ProjectName = Path.GetFileName(projectFile);
             RootNamespace = GetRootNamespace(xml);
             TargetFramework = GetTargetFramework(xml);
+#endif
         }
 
         public static void PrintInfo()
         {
-            Con.PrintLine($"{nameof(ProjectName)}:\t{ProjectName}");
-            Con.PrintLine($"{nameof(RootNamespace)}:\t{RootNamespace}");
-            Con.PrintLine($"{nameof(TargetFramework)}:\t{TargetFramework}");
+            Con.Print(
+                $"{nameof(ProjectName)}:\t{ProjectName}" +
+                $"{nameof(RootNamespace)}:\t{RootNamespace}" +
+                $"{nameof(TargetFramework)}:\t{TargetFramework}");
         }
 
         private static string GetRootNamespace(XmlDocument doc)

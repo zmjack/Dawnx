@@ -9,7 +9,7 @@ namespace Dawnx.Tools
         public static void Add(string name)
         {
             if (!AlertUtility.ConfirmUseOnlineService()) return;
-            Con.PrintLine("Connect to dawnx service...");
+            Con.Print("Connect to dawnx service...").Line();
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/Add", new Dictionary<string, object>
             {

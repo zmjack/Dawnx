@@ -9,6 +9,7 @@ namespace Dawnx.CConsole
     {
         public class AlignLineOptions
         {
+            public bool OverflowHidden { get; set; } = false;
             public bool TreatDBytesTableLineAsByte { get; set; } = false;
             public string[] Borders { get; set; } = new[] { "", " ", "" };
             public int[] Lengths { get; set; } = null;
@@ -74,6 +75,9 @@ namespace Dawnx.CConsole
 
                 sb.AppendLine($"{options.Borders[0]}{cellList.Join(options.Borders[1])}{options.Borders[2]}");
                 cellList.Clear();
+
+                if (options.OverflowHidden)
+                    break;
             }
 
             sb.Length -= Environment.NewLine.Length;

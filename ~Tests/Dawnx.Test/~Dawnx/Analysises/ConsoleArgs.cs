@@ -10,17 +10,35 @@ namespace Dawnx.Analysises.Test
         {
             var conArgs = new ConsoleArgs(new[]
             {
-                "-h", "123", "-u" ,"root", "c:\\temp", "-h", "127.0.0.1"
+                "-h", "123", "-u" ,"root", "C:\\Program Files", "-h", "127.0.0.1"
             }, new[] { "-" });
 
-            Assert.Equal(conArgs, new Dictionary<string, string>
+            Assert.Equal(conArgs.Properties, new Dictionary<string, string>
             {
                 ["-h"] = "127.0.0.1",
                 ["-u"] = "root",
-                [""] = "c:\\temp",
             });
+
+            Assert.Equal(conArgs.Contents, new[] { "C:\\Program Files" });
 
             Assert.Null(conArgs["-t"]);
         }
+
+        [Fact]
+        public void Test2()
+        {
+            var conArgs = new ConsoleArgs(@"-h 123 -u root ""C:\Program Files"" -h 127.0.0.1", new[] { "-" });
+
+            Assert.Equal(conArgs.Properties, new Dictionary<string, string>
+            {
+                ["-h"] = "127.0.0.1",
+                ["-u"] = "root",
+            });
+
+            Assert.Equal(conArgs.Contents, new[] { "C:\\Program Files" });
+
+            Assert.Null(conArgs["-t"]);
+        }
+
     }
 }

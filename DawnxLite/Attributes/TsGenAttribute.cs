@@ -4,6 +4,6 @@ using System.Text;
 
 namespace Dawnx.Attributes
 {
-    public class TsClassAttribute : Attribute { }
+    public class TsGenAttributeAttribute : Attribute { }
 
 }

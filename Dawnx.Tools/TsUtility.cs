@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using TypeLite;
-using TypeLite.Net4;
+using TypeLitePlus;
 
 namespace Dawnx.Tools
 {

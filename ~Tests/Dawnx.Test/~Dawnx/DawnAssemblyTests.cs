@@ -24,7 +24,7 @@ namespace Dawnx.Test
             Assert.Equal(new[] { typeof(B), typeof(C) }, assembly.GetTypesWhichExtends<A>(true));
 
             Assert.Equal(new[] { typeof(A), typeof(B), typeof(C) }, assembly.GetTypesWhichImplements<IA>());
-            Assert.Equal(new[] { typeof(C) }, assembly.GetTypesWhichMarks<MarkAttribute>());
+            Assert.Equal(new[] { typeof(C) }, assembly.GetTypesWhichMarkedAs<MarkAttribute>());
         }
 
     }

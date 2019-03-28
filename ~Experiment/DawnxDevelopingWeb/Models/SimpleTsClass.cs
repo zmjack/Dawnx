@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Dawnx.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TypeLite;
 
 namespace DawnxDevelopingWeb.Models
 {
-    [TsClass]
+    [TsGenAttribute]
     public class AAA
     {
         public const string AAAA = "123";
@@ -15,7 +15,7 @@ namespace DawnxDevelopingWeb.Models
         public string B { get; set; }
     }
 
-    [TsClass]
+    [TsGenAttribute]
     public class BBB
     {
         public EState State { get; set; }

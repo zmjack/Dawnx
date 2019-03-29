@@ -2,6 +2,7 @@
 using Dawnx.Net.Web;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace Dawnx.Tools
@@ -30,13 +31,11 @@ namespace Dawnx.Tools
                     $"======================================================================{Environment.NewLine}" +
                     $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}")
                     .Line();
-
-#if !DEBUG
+                
                 ProjectUtility.PrintInfo();
-#endif
 
 #if DEBUG
-                Run(new[] { "tsgen" });
+                Run(new string[] { });
 #else
                 Run(args);
 #endif
@@ -51,25 +50,28 @@ namespace Dawnx.Tools
         {
             var cargs = new ConsoleArgs(args, "-");
 
-            switch (cargs.Contents[0])
+            if (cargs.Contents.Any())
             {
-                case "install":
-                    Commands.Install(cargs.Contents[1]);
-                    break;
+                switch (cargs.Contents[0])
+                {
+                    case "install":
+                        Commands.Install(cargs.Contents[1]);
+                        break;
 
-                case "gcs":
-                    Commands.Gcs(cargs.Contents[1]);
-                    break;
+                    case "gcs":
+                        Commands.Gcs(cargs.Contents[1]);
+                        break;
 
-                case "tsgen":
-                    if (cargs.Contents.Length < 2)
-                        Commands.TsGen("TsGens");
-                    else Commands.TsGen(cargs.Contents[1]);
-                    break;
+                    case "tsgen":
+                        if (cargs.Contents.Length < 2)
+                            Commands.TsGen("TsGens");
+                        else Commands.TsGen(cargs.Contents[1]);
+                        break;
 
-                default:
-                    Con.Print("Unkown command.").Line();
-                    break;
+                    default:
+                        Con.Print("Unkown command.").Line();
+                        break;
+                }
             }
         }
 

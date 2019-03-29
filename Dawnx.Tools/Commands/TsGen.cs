@@ -14,7 +14,7 @@ namespace Dawnx.Tools
             if (!Directory.Exists(outFolder))
                 Directory.CreateDirectory(outFolder);
 
-            var dllPath = Path.GetFullPath($"{SearchDirs[0]}/{ProjectUtility.ProjectName}.dll");
+            var dllPath = Path.GetFullPath($"{SearchDirs[0]}/{ProjectUtility.AssemblyName}.dll");
 
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 

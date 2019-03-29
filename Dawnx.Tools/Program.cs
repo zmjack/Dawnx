@@ -63,7 +63,7 @@ namespace Dawnx.Tools
 
                 case "tsgen":
                     if (cargs.Contents.Length < 2)
-                        Commands.TsGen("TsClasses");
+                        Commands.TsGen("TsGens");
                     else Commands.TsGen(cargs.Contents[1]);
                     break;
 

@@ -9,6 +9,17 @@ namespace Dawnx.Tools
 {
     public static partial class Commands
     {
+        private static string[] SearchDirs = new[]
+        {
+#if DEBUG
+            Path.GetFullPath($"../../../../~Experiment/DawnxDevelopingWeb/bin/Debug/{ProjectUtility.TargetFramework}"),
+#else
+            Path.GetFullPath($"bin/Debug/{ProjectUtility.TargetFramework}"),
+#endif
+            $"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}/dotnet/sdk/NuGetFallbackFolder",
+            $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",
+        };
+
         public static void TsGen(string outFolder)
         {
             if (!Directory.Exists(outFolder))
@@ -20,8 +31,6 @@ namespace Dawnx.Tools
 
             var assembly = Assembly.LoadFrom(dllPath);
             var tsFluent = TypeScript.Definitions();
-            var types = assembly.GetTypesWhichMarkedAs<TsGenAttribute>();
-
             foreach (var type in assembly.GetTypesWhichMarkedAs<TsGenAttribute>())
                 tsFluent.For(type);
 
@@ -29,12 +38,18 @@ namespace Dawnx.Tools
             {
                 new
                 {
-                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.ProjectName}.d.ts")}",
+                    FileName = $"{Path.GetFullPath($"{outFolder}/JSend.d.ts")}",
+                    Content = TypeScript.Definitions().For(typeof(JSend))
+                        .Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields),
+                },
+                new
+                {
+                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.d.ts")}",
                     Content = tsFluent.Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields),
                 },
                 new
                 {
-                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.ProjectName}.const.ts")}",
+                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.const.ts")}",
                     Content = tsFluent.Generate(TsGeneratorOutput.Constants),
                 },
             };
@@ -45,17 +60,6 @@ namespace Dawnx.Tools
                 Con.Print($"  File Saved: {file.FileName}").Line();
             }
         }
-
-        private static string[] SearchDirs = new[]
-        {
-#if DEBUG
-            Path.GetFullPath($"../../../../~Experiment/DawnxDevelopingWeb/bin/Debug/{ProjectUtility.TargetFramework}"),
-#else
-            Path.GetFullPath($"bin/Debug/{ProjectUtility.TargetFramework}"),
-#endif
-            $"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}/dotnet/sdk/NuGetFallbackFolder",
-            $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",
-        };
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {

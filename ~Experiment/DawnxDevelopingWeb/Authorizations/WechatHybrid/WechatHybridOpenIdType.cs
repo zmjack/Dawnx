@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
+﻿namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 {
     public enum WechatHybridOpenIdType { Public, Enterprise }
 

@@ -3,7 +3,6 @@ using Dawnx.Net.Web;
 using System;
 using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Dawnx.Tools
 {
@@ -39,7 +38,7 @@ namespace Dawnx.Tools
 #if DEBUG
                 Run(new[] { "tsgen" });
 #else
-                Run(args.Slice(1));
+                Run(args);
 #endif
             }
             finally

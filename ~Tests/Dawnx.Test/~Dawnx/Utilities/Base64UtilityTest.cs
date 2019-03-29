@@ -1,5 +1,4 @@
-﻿using Dawnx.Utilities;
-using Xunit;
+﻿using Xunit;
 
 namespace Dawnx.Test.Utilities
 {

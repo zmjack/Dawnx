@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Dawnx.Tools
+﻿namespace Dawnx.Tools
 {
     public static class AlertUtility
     {

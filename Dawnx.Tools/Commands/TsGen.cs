@@ -1,11 +1,6 @@
-﻿using Dawnx.Attributes;
-using Dawnx.Net.Web;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Dawnx.Annotation;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using TypeLitePlus;
@@ -25,9 +20,9 @@ namespace Dawnx.Tools
 
             var assembly = Assembly.LoadFrom(dllPath);
             var tsFluent = TypeScript.Definitions();
-            var types = assembly.GetTypesWhichMarkedAs<TsGenAttributeAttribute>();
+            var types = assembly.GetTypesWhichMarkedAs<TsGenAttribute>();
 
-            foreach (var type in assembly.GetTypesWhichMarkedAs<TsGenAttributeAttribute>())
+            foreach (var type in assembly.GetTypesWhichMarkedAs<TsGenAttribute>())
                 tsFluent.For(type);
 
             var files = new[]

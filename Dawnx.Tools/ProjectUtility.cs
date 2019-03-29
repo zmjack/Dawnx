@@ -34,9 +34,9 @@ namespace Dawnx.Tools
         public static void PrintInfo()
         {
             Con.Print(
-                $"{nameof(ProjectName)}:\t{ProjectName}" +
-                $"{nameof(RootNamespace)}:\t{RootNamespace}" +
-                $"{nameof(TargetFramework)}:\t{TargetFramework}");
+                $"{nameof(ProjectName)}:\t{ProjectName}{Environment.NewLine}" +
+                $"{nameof(RootNamespace)}:\t{RootNamespace}{Environment.NewLine}" +
+                $"{nameof(TargetFramework)}:\t{TargetFramework}{Environment.NewLine}");
         }
 
         private static string GetRootNamespace(XmlDocument doc)

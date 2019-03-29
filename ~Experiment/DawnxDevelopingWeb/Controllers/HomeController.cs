@@ -7,7 +7,6 @@ using System;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
-using DawnxDevelopingWeb.Authorizations.MinimumAge;
 using DawnxDevelopingWeb.Authorizations.WechatHybrid;
 
 namespace DawnxDevelopingWeb.Controllers

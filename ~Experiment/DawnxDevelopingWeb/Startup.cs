@@ -6,7 +6,6 @@ using DawnxDevelopingWeb.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using DawnxDevelopingWeb.Authorizations.MinimumAge;
 using DawnxDevelopingWeb.Authorizations.WechatHybrid;
 
 namespace DawnxDevelopingWeb

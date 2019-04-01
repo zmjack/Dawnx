@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Dawnx.Net.Web
 {
-    public partial class Http
+    public static partial class Http
     {
         public static string Get(string url, Dictionary<string, object> updata = null, HttpStateContainer config = null)
             => new HttpAccess(config).Get(url, updata);
@@ -31,7 +31,7 @@ namespace Dawnx.Net.Web
             HttpStateContainer config = null)
             => new HttpAccess(config).GetFor(url, updata);
 
-        public Stream GetStreamUsingGet(string url, Dictionary<string, object> updata = null,
+        public static Stream GetStreamUsingGet(string url, Dictionary<string, object> updata = null,
             HttpStateContainer config = null)
             => new HttpAccess(config).GetStreamUsingGet(url, updata);
 

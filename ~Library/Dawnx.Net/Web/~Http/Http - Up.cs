@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Dawnx.Net.Web
 {
-    public partial class Http
+    public static partial class Http
     {
         public static string Up(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, HttpStateContainer config = null)
             => new HttpAccess(config).Up(url, updata, upfiles);
@@ -26,7 +26,7 @@ namespace Dawnx.Net.Web
         public static JToken UpFor(string url, object updata, Dictionary<string, object> upfiles = null, HttpStateContainer config = null)
             => new HttpAccess(config).UpFor(url, updata, upfiles);
 
-        public Stream GetStreamUsingUp(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
+        public static Stream GetStreamUsingUp(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             HttpStateContainer config = null)
             => new HttpAccess(config).GetStreamUsingUp(url, updata, upfiles);
 

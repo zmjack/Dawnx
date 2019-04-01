@@ -5,7 +5,7 @@ using System.Net;
 
 namespace Dawnx.Net.Web
 {
-    public partial class Http
+    public static partial class Http
     {
         public static void RegisterProxy(bool enabledByDefault)
         {

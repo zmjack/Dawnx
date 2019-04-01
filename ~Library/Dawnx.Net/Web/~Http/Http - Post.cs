@@ -11,10 +11,10 @@ namespace Dawnx.Net.Web
         public static string Post(string url, object updata, HttpStateContainer config = null)
             => new HttpAccess(config).Post(url, updata);
 
-        public static void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
+        public static string PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null,
             int bufferSize = HttpAccess.RECOMMENDED_BUFFER_SIZE, HttpStateContainer config = null)
             => new HttpAccess(config).PostDownload(receiver, url, updata, bufferSize);
-        public static void PostDownload(Stream receiver, string url, object updata,
+        public static string PostDownload(Stream receiver, string url, object updata,
             int bufferSize = HttpAccess.RECOMMENDED_BUFFER_SIZE, HttpStateContainer config = null)
             => new HttpAccess(config).PostDownload(receiver, url, updata, bufferSize);
 

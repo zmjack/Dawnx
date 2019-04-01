@@ -17,13 +17,9 @@ namespace Dawnx.Net.Web
         }
         public string Get(string url, object updata) => Get(url, ObjectUtility.CovertToDictionary(updata));
 
-        public void GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
-        {
-            Download(receiver,
-                HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
-                url, updata, null, bufferSize);
-        }
-        public void GetDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
+        public string GetDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
+        public string GetDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => GetDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), bufferSize);
 
         public TRet GetFor<TRet>(string url, Dictionary<string, object> updata = null)

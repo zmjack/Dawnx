@@ -25,7 +25,7 @@ namespace Dawnx.Net.Web
         public static void RegisterUserAgent(string userAgent) => HttpStateContainer.DefaultUserAgent = userAgent;
         public static void RegisterEncoding(string encoding) => HttpStateContainer.DefaultEncoding = encoding;
 
-        public static void Download(Stream receiver,
+        public static string Download(Stream receiver,
             string method, string url,
             string enctype = MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
@@ -33,7 +33,7 @@ namespace Dawnx.Net.Web
             int bufferSize = 4096,
             HttpStateContainer config = null)
         {
-            new HttpAccess(config).Download(receiver, method, enctype, url, updata, upfiles, bufferSize);
+            return new HttpAccess(config).Download(receiver, method, enctype, url, updata, upfiles, bufferSize);
         }
 
         public static string ReadString(

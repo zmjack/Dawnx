@@ -17,12 +17,9 @@ namespace Dawnx.Net.Web
         }
         public string Post(string url, object updata) => Post(url, ObjectUtility.CovertToDictionary(updata));
 
-        public void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
-        {
-            Download(receiver, HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
-                url, updata, null, bufferSize);
-        }
-        public void PostDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
+        public string PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
+        public string PostDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => PostDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), bufferSize);
 
         public TRet PostFor<TRet>(string url, Dictionary<string, object> updata = null)

@@ -11,9 +11,9 @@ namespace Dawnx.Net.Web
         public static string Up(string url, object updata, Dictionary<string, object> upfiles = null, HttpStateContainer config = null)
             => new HttpAccess(config).Up(url, updata, upfiles);
 
-        public static void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, int bufferSize = HttpAccess.RECOMMENDED_BUFFER_SIZE, HttpStateContainer config = null)
+        public static string UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, int bufferSize = HttpAccess.RECOMMENDED_BUFFER_SIZE, HttpStateContainer config = null)
             => new HttpAccess(config).UpDownload(receiver, url, updata, upfiles, bufferSize);
-        public static void UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null, int bufferSize = HttpAccess.RECOMMENDED_BUFFER_SIZE, HttpStateContainer config = null)
+        public static string UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null, int bufferSize = HttpAccess.RECOMMENDED_BUFFER_SIZE, HttpStateContainer config = null)
             => new HttpAccess(config).UpDownload(receiver, url, updata, upfiles, bufferSize);
 
         public static TRet UpFor<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, HttpStateContainer config = null)

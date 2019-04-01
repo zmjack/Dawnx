@@ -18,13 +18,9 @@ namespace Dawnx.Net.Web
         public string Up(string url, object updata, Dictionary<string, object> upfiles = null)
             => Up(url, ObjectUtility.CovertToDictionary(updata), upfiles);
 
-        public void UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
-        {
-            Download(receiver,
-                HttpVerb.POST, MimeType.MULTIPART_FORM_DATA,
-                url, updata, upfiles, bufferSize);
-        }
-        public void UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
+        public string UpDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
+            => Download(receiver, HttpVerb.POST, MimeType.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
+        public string UpDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => UpDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), upfiles, bufferSize);
 
         public TRet UpFor<TRet>(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)

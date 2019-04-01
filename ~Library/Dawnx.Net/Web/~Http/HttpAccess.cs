@@ -73,7 +73,7 @@ namespace Dawnx.Net.Web
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles) => true;
 
-        public void Download(
+        public string Download(
             Stream receiver,
             string method, string enctype, string url,
             Dictionary<string, object> updata,
@@ -92,6 +92,7 @@ namespace Dawnx.Net.Web
                         DownloadProgress?.Invoke(this, url, received, response.ContentLength);
                     });
                 }
+                return response.Headers["Content-Disposition"];
             }
         }
 

@@ -32,5 +32,9 @@ namespace Dawnx.Net.Web
             HttpStateContainer config = null)
             => new HttpAccess(config).PostFor(url, updata);
 
+        public Stream GetStreamUsingPost(string url, Dictionary<string, object> updata = null,
+            HttpStateContainer config = null)
+            => new HttpAccess(config).GetStreamUsingPost(url, updata);
+
     }
 }

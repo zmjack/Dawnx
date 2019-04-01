@@ -19,7 +19,8 @@ namespace Dawnx.Net.Web
 
         public void PostDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
         {
-            Download(receiver, HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null, bufferSize);
+            Download(receiver, HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
+                url, updata, null, bufferSize);
         }
         public void PostDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => PostDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), bufferSize);
@@ -33,6 +34,12 @@ namespace Dawnx.Net.Web
             => JsonConvert.DeserializeObject<JToken>(Post(url, updata));
         public JToken PostFor(string url, object updata)
             => PostFor(url, ObjectUtility.CovertToDictionary(updata));
+
+        public Stream GetStreamUsingPost(string url, Dictionary<string, object> updata = null)
+        {
+            var resp = GetPureResponse(HttpVerb.POST, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
+            return resp.GetResponseStream();
+        }
 
     }
 }

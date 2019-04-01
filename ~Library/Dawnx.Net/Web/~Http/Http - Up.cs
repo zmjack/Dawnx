@@ -26,5 +26,9 @@ namespace Dawnx.Net.Web
         public static JToken UpFor(string url, object updata, Dictionary<string, object> upfiles = null, HttpStateContainer config = null)
             => new HttpAccess(config).UpFor(url, updata, upfiles);
 
+        public Stream GetStreamUsingUp(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
+            HttpStateContainer config = null)
+            => new HttpAccess(config).GetStreamUsingUp(url, updata, upfiles);
+
     }
 }

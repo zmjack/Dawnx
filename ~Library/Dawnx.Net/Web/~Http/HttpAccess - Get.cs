@@ -36,5 +36,11 @@ namespace Dawnx.Net.Web
         public JToken GetFor(string url, object updata)
             => GetFor(url, ObjectUtility.CovertToDictionary(updata));
 
+        public Stream GetStreamUsingGet(string url, Dictionary<string, object> updata = null)
+        {
+            var resp = GetPureResponse(HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);
+            return resp.GetResponseStream();
+        }
+
     }
 }

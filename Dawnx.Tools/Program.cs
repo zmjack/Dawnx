@@ -35,7 +35,7 @@ namespace Dawnx.Tools
                 ProjectUtility.PrintInfo();
 
 #if DEBUG
-                Run(new string[] { });
+                Run(new string[] { "tsgen" });
 #else
                 Run(args);
 #endif

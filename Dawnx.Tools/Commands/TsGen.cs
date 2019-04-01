@@ -40,6 +40,7 @@ namespace Dawnx.Tools
                 {
                     FileName = $"{Path.GetFullPath($"{outFolder}/JSend.d.ts")}",
                     Content = TypeScript.Definitions().For(typeof(JSend))
+                        .WithMemberFormatter(x => $"{x.Name}?")
                         .Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields),
                 },
                 new

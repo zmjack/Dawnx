@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 
 namespace Dawnx.Net.Web
 {
@@ -32,11 +33,8 @@ namespace Dawnx.Net.Web
         public JToken PostJsonFor(string url, object updata)
             => PostJsonFor(url, ObjectUtility.CovertToDictionary(updata));
 
-        public Stream GetStreamUsingPostJson(string url, Dictionary<string, object> updata = null)
-        {
-            var resp = GetPureResponse(HttpVerb.POST, MimeType.APPLICATION_JSON, url, updata, null);
-            return resp.GetResponseStream();
-        }
+        public HttpWebResponse PostJsonResponse(string url, Dictionary<string, object> updata = null) 
+            => GetPureResponse(HttpVerb.POST, MimeType.APPLICATION_JSON, url, updata, null);
 
     }
 }

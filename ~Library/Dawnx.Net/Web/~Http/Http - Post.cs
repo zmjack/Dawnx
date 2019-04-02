@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 
 namespace Dawnx.Net.Web
 {
@@ -32,9 +33,9 @@ namespace Dawnx.Net.Web
             HttpStateContainer config = null)
             => new HttpAccess(config).PostFor(url, updata);
 
-        public static Stream GetStreamUsingPost(string url, Dictionary<string, object> updata = null,
+        public static HttpWebResponse PostResponse(string url, Dictionary<string, object> updata = null,
             HttpStateContainer config = null)
-            => new HttpAccess(config).GetStreamUsingPost(url, updata);
+            => new HttpAccess(config).PostResponse(url, updata);
 
     }
 }

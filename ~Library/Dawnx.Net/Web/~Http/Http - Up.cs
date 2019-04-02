@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 
 namespace Dawnx.Net.Web
 {
@@ -26,9 +27,9 @@ namespace Dawnx.Net.Web
         public static JToken UpFor(string url, object updata, Dictionary<string, object> upfiles = null, HttpStateContainer config = null)
             => new HttpAccess(config).UpFor(url, updata, upfiles);
 
-        public static Stream GetStreamUsingUp(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
+        public static HttpWebResponse UpResponse(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null,
             HttpStateContainer config = null)
-            => new HttpAccess(config).GetStreamUsingUp(url, updata, upfiles);
+            => new HttpAccess(config).UpResponse(url, updata, upfiles);
 
     }
 }

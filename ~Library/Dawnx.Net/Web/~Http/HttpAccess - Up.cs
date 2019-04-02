@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 
 namespace Dawnx.Net.Web
 {
@@ -33,11 +34,8 @@ namespace Dawnx.Net.Web
         public JToken UpFor(string url, object updata, Dictionary<string, object> upfiles = null)
             => UpFor(url, ObjectUtility.CovertToDictionary(updata), upfiles);
 
-        public Stream GetStreamUsingUp(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
-        {
-            var resp = GetPureResponse(HttpVerb.POST, MimeType.MULTIPART_FORM_DATA, url, updata, upfiles);
-            return resp.GetResponseStream();
-        }
+        public HttpWebResponse UpResponse(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
+            => GetPureResponse(HttpVerb.POST, MimeType.MULTIPART_FORM_DATA, url, updata, upfiles);
 
     }
 }

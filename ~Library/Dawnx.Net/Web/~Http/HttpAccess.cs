@@ -80,7 +80,7 @@ namespace Dawnx.Net.Web
             Dictionary<string, object> upfiles,
             int bufferSize)
         {
-            using (var response = GetResponse(method, enctype, url, updata, upfiles))
+            using (var response = GetLastResponse(method, enctype, url, updata, upfiles))
             {
                 long received = 0;
                 using (var stream = response.GetResponseStream())
@@ -101,13 +101,13 @@ namespace Dawnx.Net.Web
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
-            using (var response = GetResponse(method, enctype, url, updata, upfiles))
+            using (var response = GetLastResponse(method, enctype, url, updata, upfiles))
             using (var stream = response.GetResponseStream())
             using (var reader = new StreamReader(stream))
                 return reader.ReadToEnd();
         }
 
-        public HttpWebResponse GetResponse(
+        public HttpWebResponse GetLastResponse(
             string method, string enctype, string url,
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)

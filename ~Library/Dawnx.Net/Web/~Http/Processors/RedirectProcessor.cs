@@ -26,7 +26,7 @@ namespace Dawnx.Net.Web.Processors
                 {
                     OnRedirect?.Invoke(location);
                     web.RedirectTimes++;
-                    return web.GetResponse(HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, location, null, null);
+                    return web.GetLastResponse(HttpVerb.GET, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, location, null, null);
                 }
                 else throw new WebException("Too many automatic redirections were attempted.");
             }

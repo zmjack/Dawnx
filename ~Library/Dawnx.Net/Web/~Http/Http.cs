@@ -53,7 +53,7 @@ namespace Dawnx.Net.Web
             Dictionary<string, object> upfiles = null,
             HttpStateContainer config = null)
         {
-            return new HttpAccess(config).GetResponse(method, enctype, url, updata, upfiles);
+            return new HttpAccess(config).GetLastResponse(method, enctype, url, updata, upfiles);
         }
 
     }

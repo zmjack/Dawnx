@@ -27,7 +27,7 @@ namespace Dawnx
                 .Where(x => x.CanRead && x.CanWrite)
                 .Where(x => !x.GetCustomAttributes(false).For(attrs =>
                 {
-                    return attrs.Any(attr => attr is NotAcceptable)
+                    return attrs.Any(attr => attr is NotAcceptableAttribute)
                         || attrs.Any(attr => attr.GetType().Name.In(new[]
                         {
                             nameof(KeyAttribute),
@@ -116,7 +116,7 @@ namespace Dawnx
                 .Where(x => x.CanRead && x.CanWrite)
                 .Where(x => !x.GetCustomAttributes(false).For(attrs =>
                 {
-                    return attrs.Any(attr => attr is NotAcceptable)
+                    return attrs.Any(attr => attr is NotAcceptableAttribute)
                         || attrs.Any(attr => attr.GetType().Name.In(new[]
                         {
                             nameof(KeyAttribute),

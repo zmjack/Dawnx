@@ -1,4 +1,6 @@
-﻿namespace Dawnx.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Dawnx.Data
 {
     public abstract class RegistryStore
     {

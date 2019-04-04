@@ -4,17 +4,6 @@
         <name>Dawnx.AspNetCore</name>
     </assembly>
     <members>
-        <member name="T:Dawnx.AspNetCore.AppSupport.IAppRegistryItem">
-            <summary>
-            (Hint: Each Properties should be virtual property)
-            </summary>
-        </member>
-        <member name="M:Dawnx.AspNetCore.AppSupport.AppRegistryManager`2.BeginAutoTransaction">
-            <summary>
-            Begin IsolationLevel.Serializable level transaction.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.Menu``1(System.Security.Claims.ClaimsPrincipal,Dawnx.AspNetCore.ClaimsMenu{``0})">
             <summary>
             Gets user's menu from the specified menu.
@@ -310,6 +299,17 @@
             Save the Zip file as a new file.
             </summary>
             <param name="path"></param>
+        </member>
+        <member name="T:Dawnx.Data.Registry">
+            <summary>
+            Use Registry[TSelf]
+            </summary>
+        </member>
+        <member name="T:Dawnx.Data.Registry`1">
+            <summary>
+            Hint: Each custom properties must be virtual(public).
+            </summary>
+            <typeparam name="TSelf"></typeparam>
         </member>
         <member name="M:Microsoft.EntityFrameworkCore.IntelliTrackExtensions.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
             <summary>

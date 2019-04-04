@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using DawnxDevelopingWeb.Models;
-using Dawnx.AspNetCore.AppSupport;
 using DawnxDevelopingWeb.Data;
 using System;
 using System.Security.Claims;
@@ -13,11 +12,8 @@ namespace DawnxDevelopingWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public readonly AppRegistryManager<ApplicationDbContext, AppRegistryItem> _appRegistryManager;
-
-        public HomeController(AppRegistryManager<ApplicationDbContext, AppRegistryItem> appRegistryManager)
+        public HomeController()
         {
-            _appRegistryManager = appRegistryManager;
         }
 
         public async Task<IActionResult> SignInAsync(DateTime birthday)
@@ -37,16 +33,6 @@ namespace DawnxDevelopingWeb.Controllers
         //[WechatHybridAuthorize]
         public IActionResult Index()
         {
-            return View();
-            return RedirectToAction("Index", "StarAdmin");
-
-            using (_appRegistryManager.BeginAutoTransaction())
-            {
-                var item = _appRegistryManager.GetGlobalItem();
-                item.AllowedCount = 5;
-                _appRegistryManager.SaveChanges();
-            }
-
             return View();
         }
 

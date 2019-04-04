@@ -31,9 +31,7 @@ namespace DawnxDevelopingWeb
 
             services.RewriteAuthorizationProvider<WechatHybridExtraPolicyProvider>();
             services.AddAuthorizationHandler<WechatHybridAuthorizationHandler>();
-
-            services.AddAppRegistry<ApplicationDbContext, AppRegistryItem>();
-
+            
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 

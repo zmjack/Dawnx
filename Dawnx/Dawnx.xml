@@ -14,17 +14,6 @@
             Use <see cref="T:Dawnx.Entity.IEntity"/> to define entity classes to get some useful extension methods.
             </summary>
         </member>
-        <member name="T:Dawnx.Data.Registry">
-            <summary>
-            Use Registry[TSelf]
-            </summary>
-        </member>
-        <member name="T:Dawnx.Data.Registry`1">
-            <summary>
-            Hint: Each custom properties must be virtual(public).
-            </summary>
-            <typeparam name="TSelf"></typeparam>
-        </member>
         <member name="M:Dawnx.DawnIEntity.Accept``1(``0,``0)">
             <summary>
             Accept all property values which are can be read and write from another model.

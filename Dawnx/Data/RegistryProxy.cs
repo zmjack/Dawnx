@@ -45,6 +45,7 @@ namespace Dawnx.Data
 
                         if (store != null)
                             invocation.ReturnValue = Convert.ChangeType(store.Value, proxyProperty.PropertyType);
+                        else invocation.Proceed();
                         break;
 
                     default: invocation.Proceed(); break;

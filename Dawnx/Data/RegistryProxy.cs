@@ -8,33 +8,24 @@ using System.Text;
 
 namespace Dawnx.Data
 {
-    public class RegistryProxy<TColumnStorable, TIColumnStore> : IInterceptor
-       where TColumnStorable : IColumnStorable<TIColumnStore>
-       where TIColumnStore : IColumnStore
+    public class RegistryProxy<TRegistry> : IInterceptor
+       where TRegistry : Registry
     {
-        private static string EntityKeyProperty;
-
-        static RegistryProxy()
-        {
-            EntityKeyProperty = typeof(TColumnStorable).GetProperties()
-                .First(x => x.GetCustomAttribute<KeyAttribute>() != null).Name;
-        }
-
         public void Intercept(IInvocation invocation)
         {
-            var proxy = (IColumnStorable<TIColumnStore>)invocation.Proxy;
+            var proxy = (TRegistry)invocation.Proxy;
 
             string property;
             string value;
-            TIColumnStore store;
+            RegistryStore store;
             PropertyInfo proxyProperty;
 
             if (proxy.ProxyLoaded)
             {
                 switch (invocation.Method.Name)
                 {
-                    case string name when name == $"set_{EntityKeyProperty}": goto default;
-                    case string name when name == $"get_{EntityKeyProperty}": goto default;
+                    case string name when name == $"set_{nameof(Registry.Item)}": goto default;
+                    case string name when name == $"get_{nameof(Registry.Item)}": goto default;
 
                     case string name when name.StartsWith("set_"):
                         property = invocation.Method.Name.Substring(4);
@@ -44,6 +35,7 @@ namespace Dawnx.Data
 
                         if (store != null)
                             store.Value = value.ToString();
+                        else throw new KeyNotFoundException();
                         break;
 
                     case string name when name.StartsWith("get_"):

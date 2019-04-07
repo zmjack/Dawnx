@@ -1,0 +1,37 @@
+﻿<div>
+    <div class="card w-100">
+        <div class="card-body">
+            <h5 class="card-title">Player: {{ player }}</h5>
+            <p class="card-text">
+                <b>Health:</b> {{ hp }}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped health-bar" :style="'width:'+(hp*100/100)+'%'"></div>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <div class="text-center" style="color:red">
+        <h3>&nbsp;{{ result }}&nbsp;</h3>
+    </div>
+
+    <div class="card w-100">
+        <div class="card-body">
+            <h5 class="card-title">Monster</h5>
+            <p class="card-text">
+                <b>Health:</b> {{ m_hp }}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped health-bar" :style="'width:'+(m_hp*100/200)+'%'"></div>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-4 text-right" v-if="gameOver===false">
+        <button type="button" class="btn btn-primary" @click="attackRound">Attack</button>
+        <button type="button" class="btn btn-primary" @click="addHP">+HP</button>
+    </div>
+    <div class="mt-4 text-center " v-else>
+        <button type="button" class="btn btn-light" @click="newGame">New Game</button>
+    </div>
+</div>

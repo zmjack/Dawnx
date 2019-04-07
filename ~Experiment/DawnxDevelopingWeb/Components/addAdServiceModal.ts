@@ -1,5 +1,5 @@
 ﻿declare var Vue;
-import axios from './axios'
+import axios from 'axios'
 
 Vue.component('add-ad-service-modal', {
     template: `

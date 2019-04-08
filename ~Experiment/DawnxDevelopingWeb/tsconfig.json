@@ -5,10 +5,14 @@
     "removeComments": false,
     "sourceMap": true,
     "target": "es5",
-    "outDir": "wwwroot/js/components"
+    "experimentalDecorators": true,
+    "noImplicitUseStrict": true
   },
+  "compileOnSave": true,
+  "include": [ "**/*" ],
   "exclude": [
-    "node_modules",
-    "wwwroot"
+    "obj",
+    "bin",
+    "node_modules"
   ]
 }

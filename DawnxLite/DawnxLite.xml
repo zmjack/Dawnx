@@ -977,10 +977,10 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <!-- 对于成员“M:Dawnx.DawnString.RegexReplace(System.String,System.String,System.String)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:Dawnx.DawnString.RegexReplace(System.String,System.Text.RegularExpressions.Regex,System.String)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:Dawnx.DawnString.RegexReplace(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:Dawnx.DawnString.RegexReplace(System.String,System.Text.RegularExpressions.Regex,System.Text.RegularExpressions.MatchEvaluator)”忽略有格式错误的 XML 注释 -->
+        <!-- Badly formed XML comment ignored for member "M:Dawnx.DawnString.RegexReplace(System.String,System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Dawnx.DawnString.RegexReplace(System.String,System.Text.RegularExpressions.Regex,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Dawnx.DawnString.RegexReplace(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator)" -->
+        <!-- Badly formed XML comment ignored for member "M:Dawnx.DawnString.RegexReplace(System.String,System.Text.RegularExpressions.Regex,System.Text.RegularExpressions.MatchEvaluator)" -->
         <member name="M:Dawnx.DawnString.Project(System.String,System.String,System.String)">
             <summary>
             Projects the specified string to a new string by using regular expressions (using Single-line Mode).
@@ -1299,6 +1299,33 @@
             <param name="lock"></param>
             <param name="then"></param>
         </member>
+        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do(System.Func{System.Boolean},System.String,System.Action)">
+            <summary>
+            Do a task with Double-checked locking pattern:
+                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
+            </summary>
+            <param name="if"></param>
+            <param name="lock"></param>
+            <param name="then"></param>
+        </member>
+        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do``1(System.Func{System.Boolean},System.Object,System.Func{``0},``0)">
+            <summary>
+            Do a task with Double-checked locking pattern:
+                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
+            </summary>
+            <param name="if"></param>
+            <param name="lock"></param>
+            <param name="then"></param>
+        </member>
+        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do``1(System.Func{System.Boolean},System.String,System.Action,``0)">
+            <summary>
+            Do a task with Double-checked locking pattern:
+                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
+            </summary>
+            <param name="if"></param>
+            <param name="lock"></param>
+            <param name="then"></param>
+        </member>
         <member name="M:Dawnx.Patterns.UseSpinLock.Do(System.Action,System.Func{System.Boolean})">
             <summary>
             Do a task with SpinLock pattern:
@@ -1331,7 +1358,7 @@
             </summary>
             <param name="until"></param>
             <param name="task"></param>
-            <param name="task"></param>
+            <param name="frequency"></param>
         </member>
         <member name="M:Dawnx.Ranges.IntegerRange.Create(System.Int32)">
             <summary>

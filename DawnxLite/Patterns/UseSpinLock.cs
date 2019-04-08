@@ -54,7 +54,7 @@ namespace Dawnx.Patterns
         /// </summary>
         /// <param name="until"></param>
         /// <param name="task"></param>
-        /// <param name="task"></param>
+        /// <param name="frequency"></param>
         public static TRet Do<TRet>(Func<TRet> task, Func<TRet, bool> until, TimeSpan frequency)
         {
             TRet ret;

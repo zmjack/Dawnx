@@ -13,13 +13,13 @@ namespace Dawnx.Net.Web
         public string PutJson(string url, Dictionary<string, object> updata = null)
         {
             return ReadString(
-                HttpVerb.POST, MimeType.APPLICATION_JSON,
+                HttpVerb.PUT, MimeType.APPLICATION_JSON,
                 url, updata, null);
         }
         public string PutJson(string url, object updata) => PutJson(url, ObjectUtility.CovertToDictionary(updata));
 
         public string PutJsonDownload(Stream receiver, string url, Dictionary<string, object> updata = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.POST, MimeType.APPLICATION_JSON, url, updata, null, bufferSize);
+            => Download(receiver, HttpVerb.PUT, MimeType.APPLICATION_JSON, url, updata, null, bufferSize);
         public string PutJsonDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => PutJsonDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), bufferSize);
 
@@ -34,7 +34,7 @@ namespace Dawnx.Net.Web
             => PutJsonFor(url, ObjectUtility.CovertToDictionary(updata));
 
         public HttpWebResponse PutJsonResponse(string url, Dictionary<string, object> updata = null) 
-            => GetPureResponse(HttpVerb.POST, MimeType.APPLICATION_JSON, url, updata, null);
+            => GetPureResponse(HttpVerb.PUT, MimeType.APPLICATION_JSON, url, updata, null);
 
     }
 }

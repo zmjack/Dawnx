@@ -157,18 +157,17 @@ namespace Dawnx.Net.Web
                     foreach (var data in updata)
                     {
                         var values = NormalizeStringValues(data.Value);
-                        foreach (var value in values)
-                            query.Add($"{data.Key}={WebUtility.UrlEncode(value)}");
+                        query.AddRange(values.Select(value => $"{data.Key}={WebUtility.UrlEncode(value)}"));
                     }
                     var queryString = query.Join("&");
 
-                    if (method == HttpVerb.GET)
+                    if (method.In(HttpVerb.GET, HttpVerb.DELETE))
                     {
                         if (!url.Contains("?"))
                             url = $"{url}?{queryString}";
                         else url = $"{url}&{queryString}";
                     }
-                    else if (method == HttpVerb.POST)
+                    else if (method.In(HttpVerb.POST, HttpVerb.PUT))
                     {
                         bodyStream = new MemoryStream(queryString.Bytes(encoding));
                     }
@@ -198,26 +197,26 @@ namespace Dawnx.Net.Web
                     break;
             }
 
-            var request = ((HttpWebRequest)WebRequest.Create(new Uri(url))).Self(_ =>
+            var request = ((HttpWebRequest)WebRequest.Create(new Uri(url)));
             {
                 StateContainer.Headers.Self(headers =>
                 {
                     if (!(headers is null))
                     {
                         foreach (var header in StateContainer.Headers)
-                            _.Headers.Add(header.Key, header.Value);
+                            request.Headers.Add(header.Key, header.Value);
                     }
                 });
 
-                _.UserAgent = StateContainer.UserAgent;
-                _.Method = method;
-                _.Timeout = -1;
-                _.UseDefaultCredentials = StateContainer.SystemLogin;
+                request.UserAgent = StateContainer.UserAgent;
+                request.Method = method;
+                request.Timeout = -1;
+                request.UseDefaultCredentials = StateContainer.SystemLogin;
                 if (StateContainer.UseProxy)
                 {
                     if (!string.IsNullOrEmpty(StateContainer.ProxyAddress))
                     {
-                        _.Proxy = new WebProxy
+                        request.Proxy = new WebProxy
                         {
                             Address = new Uri(StateContainer.ProxyAddress),
                             Credentials = new NetworkCredential
@@ -228,9 +227,8 @@ namespace Dawnx.Net.Web
                         };
                     }
                 }
-
-                _.CookieContainer = StateContainer.Cookies;
-            });
+                request.CookieContainer = StateContainer.Cookies;
+            }
 
             if (method == HttpVerb.POST)
             {

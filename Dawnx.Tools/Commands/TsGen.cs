@@ -30,7 +30,7 @@ namespace Dawnx.Tools
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             var assembly = Assembly.LoadFrom(dllPath);
-            var tsFluent = TypeScript.Definitions();
+            var tsFluent = TypeScript.Definitions().WithConvertor<Guid>(x => "string");
             foreach (var type in assembly.GetTypesWhichMarkedAs<TsGenAttribute>())
                 tsFluent.For(type);
 

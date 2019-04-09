@@ -4,6 +4,36 @@
         <name>Dawnx.AspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsIdentity.GetRoles(System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            Gets roles of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsIdentity.GetId(System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            Gets ID of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsIdentity.GetClaims(System.Security.Claims.ClaimsIdentity,System.String)">
+            <summary>
+            Gets claims of the specified cliam type of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <param name="claimType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsIdentity.GetClaim(System.Security.Claims.ClaimsIdentity,System.String)">
+            <summary>
+            Gets the first claim of the specified cliam type of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <param name="claimType"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.Menu``1(System.Security.Claims.ClaimsPrincipal,Dawnx.AspNetCore.ClaimsMenu{``0})">
             <summary>
             Gets user's menu from the specified menu.
@@ -13,33 +43,37 @@
             <param name="menu"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetRoles(System.Security.Claims.ClaimsPrincipal)">
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetRoles(System.Security.Claims.ClaimsPrincipal,System.String)">
             <summary>
             Gets roles of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
+            <param name="schema">If null, then use the default schema.</param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetId(System.Security.Claims.ClaimsPrincipal)">
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetId(System.Security.Claims.ClaimsPrincipal,System.String)">
             <summary>
             Gets ID of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
+            <param name="schema">If null, then use the default schema.</param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaims(System.Security.Claims.ClaimsPrincipal,System.String)">
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaims(System.Security.Claims.ClaimsPrincipal,System.String,System.String)">
             <summary>
             Gets claims of the specified cliam type of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
+            <param name="schema">If null, then use the default schema.</param>
             <param name="claimType"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaim(System.Security.Claims.ClaimsPrincipal,System.String)">
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaim(System.Security.Claims.ClaimsPrincipal,System.String,System.String)">
             <summary>
             Gets the first claim of the specified cliam type of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
+            <param name="schema">If null, then use the default schema.</param>
             <param name="claimType"></param>
             <returns></returns>
         </member>

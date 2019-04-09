@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Dawnx.AspNetCore;
 
-namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
+namespace DawnxTemplate.Authorizations.WechatHybridAuthorize
 {
     internal class WechatHybridAuthorizationHandler : AuthorizationHandler<WechatHybridRequirement>
     {
@@ -16,7 +16,7 @@ namespace DawnxDevelopingWeb.Authorizations.WechatHybrid
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, WechatHybridRequirement requirement)
         {
-            var openId = context.User.GetClaim($"Wechat{nameof(WechatHybridUser.OpenId)}");
+            var openId = context.User.GetClaim(requirement.AuthenticationScheme, $"Wechat{nameof(WechatHybridUser.OpenId)}");
             if (openId != null)
                 context.Succeed(requirement);
 

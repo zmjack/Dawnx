@@ -6,7 +6,7 @@ using System;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
-using DawnxDevelopingWeb.Authorizations.WechatHybrid;
+using DawnxTemplate.Authorizations.WechatHybridAuthorize;
 
 namespace DawnxDevelopingWeb.Controllers
 {

@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -80,4 +80,4 @@ var default_1 = /** @class */ (function (_super) {
     return default_1;
 }(vue_1.default));
 exports.default = default_1;
-//# sourceMappingURL=HeroicBattle.js.map
+//# sourceMappingURL=table.js.map

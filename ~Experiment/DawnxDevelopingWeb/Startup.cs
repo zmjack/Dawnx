@@ -6,7 +6,9 @@ using DawnxDevelopingWeb.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using DawnxDevelopingWeb.Authorizations.WechatHybrid;
+using DawnxTemplate.Authorizations.WechatHybridAuthorize;
+using Dawnx.AspNetCore.Authorization;
+using DawnxTemplate.Authorizations;
 
 namespace DawnxDevelopingWeb
 {
@@ -29,9 +31,8 @@ namespace DawnxDevelopingWeb
             //    options.MinimumSameSitePolicy = SameSiteMode.None;
             //});
 
-            services.RewriteAuthorizationProvider<WechatHybridExtraPolicyProvider>();
-            services.AddAuthorizationHandler<WechatHybridAuthorizationHandler>();
-            
+            services.RewriteAuthorizationProvider<CustomAuthorizationPolicyProvider>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 

@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dawnx.AspNetCore.Authorization
 {
-    public abstract class CustomExtraPolicyProvider : IAuthorizationPolicyProvider
+    public abstract class CustomExtraAuthorizationPolicyProvider : IAuthorizationPolicyProvider
     {
         public DefaultAuthorizationPolicyProvider FallbackPolicyProvider { get; }
 
-        public CustomExtraPolicyProvider(IOptions<AuthorizationOptions> options)
+        public CustomExtraAuthorizationPolicyProvider() { }
+        public CustomExtraAuthorizationPolicyProvider(IOptions<AuthorizationOptions> options)
         {
             FallbackPolicyProvider = new DefaultAuthorizationPolicyProvider(options);
         }
@@ -31,6 +33,8 @@ namespace Dawnx.AspNetCore.Authorization
         }
 
         public abstract IAuthorizationRequirement[] GetPolicyRequirements(string policyName);
+
+        public abstract Type[] RequirementHandlerTypes { get; }
 
     }
 }

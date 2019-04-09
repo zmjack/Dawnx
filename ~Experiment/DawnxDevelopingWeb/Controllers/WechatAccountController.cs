@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Dawnx;
 using Dawnx.AspNetCore;
-using DawnxDevelopingWeb.Authorizations.WechatHybrid;
+using DawnxTemplate.Authorizations.WechatHybridAuthorize;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 

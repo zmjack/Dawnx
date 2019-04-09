@@ -65,13 +65,9 @@ namespace Dawnx.Tools
 
                     case "tsgen":
                         {
-                            var outFolder = new[] { cargs["--out"], cargs["-o"] }
-                                .SelectMany(prop => prop?.Split(",").Select(x => x.Trim()) ?? new string[0])
-                                .FirstOrDefault() ?? "TsGen";
+                            var outFolder = cargs["--out"] ?? cargs["-o"] ?? "TsGen";
 
-                            var includes = new[] { cargs["--include"], cargs["-i"] }
-                                .SelectMany(prop => prop?.Split(",").Select(x => x.Trim()) ?? new string[0])
-                                .ToArray();
+                            var includes = cargs["--include"]?.Split(",") ?? cargs["-i"].Split(",") ?? new string[0];
                             Commands.TsGen(outFolder, includes);
                         }
                         break;

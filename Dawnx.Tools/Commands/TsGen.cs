@@ -1,6 +1,7 @@
 ﻿using Dawnx.Annotation;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using TypeLitePlus;
@@ -60,6 +61,11 @@ namespace Dawnx.Tools
                 File.WriteAllText(file.FileName, file.Content);
                 Con.Print($"  File Saved: {file.FileName}").Line();
             }
+
+            var typingContent = files
+                .Select(x => $"/// <reference path=\"{Path.GetFileName(x.FileName)}\" />{Environment.NewLine}")
+                .Join("");
+            File.WriteAllText($"{Path.GetFullPath($"{outFolder}/typing.d.ts")}", typingContent);
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

@@ -21,13 +21,31 @@ namespace Dawnx.AspNetCore
         /// Gets roles of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="schema">If null, then use the default schema.</param>
+        /// <param name="authenticationType">If null, then use the default authenticationType.</param>
         /// <returns></returns>
-        public static IEnumerable<string> GetRoles(this ClaimsPrincipal @this, string schema = null)
+        public static string GetName(this ClaimsPrincipal @this, string authenticationType = null)
         {
             ClaimsIdentity identity;
-            if (schema != null)
-                identity = @this.Identities.FirstOrDefault(x => x.AuthenticationType == schema);
+            if (authenticationType != null)
+                identity = @this.Identities.FirstOrDefault(x => x.AuthenticationType == authenticationType);
+            else identity = @this.Identity as ClaimsIdentity;
+
+            if (identity != null)
+                return DawnClaimsIdentity.GetName(identity);
+            else return null;
+        }
+
+        /// <summary>
+        /// Gets roles of the specified ClaimsPrincipal.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="authenticationType">If null, then use the default authenticationType.</param>
+        /// <returns></returns>
+        public static IEnumerable<string> GetRoles(this ClaimsPrincipal @this, string authenticationType = null)
+        {
+            ClaimsIdentity identity;
+            if (authenticationType != null)
+                identity = @this.Identities.FirstOrDefault(x => x.AuthenticationType == authenticationType);
             else identity = @this.Identity as ClaimsIdentity;
 
             if (identity != null)
@@ -39,22 +57,22 @@ namespace Dawnx.AspNetCore
         /// Gets ID of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="schema">If null, then use the default schema.</param>
+        /// <param name="authenticationType">If null, then use the default authenticationType.</param>
         /// <returns></returns>
-        public static string GetId(this ClaimsPrincipal @this, string schema = null) => GetClaim(@this, schema, ClaimTypes.NameIdentifier);
+        public static string GetId(this ClaimsPrincipal @this, string authenticationType = null) => GetClaim(@this, authenticationType, ClaimTypes.NameIdentifier);
 
         /// <summary>
         /// Gets claims of the specified cliam type of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="schema">If null, then use the default schema.</param>
+        /// <param name="authenticationType">If null, then use the default authenticationType.</param>
         /// <param name="claimType"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetClaims(this ClaimsPrincipal @this, string schema, string claimType)
+        public static IEnumerable<string> GetClaims(this ClaimsPrincipal @this, string authenticationType, string claimType)
         {
             ClaimsIdentity identity;
-            if (schema != null)
-                identity = @this.Identities.FirstOrDefault(x => x.AuthenticationType == schema);
+            if (authenticationType != null)
+                identity = @this.Identities.FirstOrDefault(x => x.AuthenticationType == authenticationType);
             else identity = @this.Identity as ClaimsIdentity;
 
             if (identity != null)
@@ -65,10 +83,10 @@ namespace Dawnx.AspNetCore
         /// Gets the first claim of the specified cliam type of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>
-        /// <param name="schema">If null, then use the default schema.</param>
+        /// <param name="authenticationType">If null, then use the default authenticationType.</param>
         /// <param name="claimType"></param>
         /// <returns></returns>
-        public static string GetClaim(this ClaimsPrincipal @this, string schema, string claimType) => GetClaims(@this, schema, claimType).FirstOrDefault();
+        public static string GetClaim(this ClaimsPrincipal @this, string authenticationType, string claimType) => GetClaims(@this, authenticationType, claimType).FirstOrDefault();
 
     }
 }

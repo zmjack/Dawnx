@@ -16,7 +16,7 @@ namespace DawnxTemplate.Authorizations.WechatHybridAuthorize
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, WechatHybridRequirement requirement)
         {
-            var openId = context.User.GetClaim(requirement.AuthenticationScheme, $"Wechat{nameof(WechatHybridUser.OpenId)}");
+            var openId = context.User.GetClaim(requirement.AuthenticationType, $"Wechat{nameof(WechatHybridUser.OpenId)}");
             if (openId != null)
                 context.Succeed(requirement);
 

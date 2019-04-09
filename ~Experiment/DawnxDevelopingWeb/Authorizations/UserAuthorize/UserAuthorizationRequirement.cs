@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DawnxTemplate.Authorizations.UserAuthorize
 {
-    internal class UserAuthorizationRequirement : SchemaAuthorizationRequirement
+    internal class UserAuthorizationRequirement : AuthorizationRequirementBase
     {
-        public UserAuthorizationRequirement(string schema) : base(schema)
+        public UserAuthorizationRequirement(string authenticationType) : base(authenticationType)
         {
         }
 

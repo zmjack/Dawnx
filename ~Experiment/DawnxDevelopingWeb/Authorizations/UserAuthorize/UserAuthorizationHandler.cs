@@ -17,7 +17,8 @@ namespace DawnxTemplate.Authorizations.UserAuthorize
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, UserAuthorizationRequirement requirement)
         {
-            if (requirement.Users.Contains(context.User.Identity.Name))
+            var name = context.User.GetName(requirement.AuthenticationType);
+            if (requirement.Users.Contains(name))
                 context.Succeed(requirement);
 
             return Task.CompletedTask;

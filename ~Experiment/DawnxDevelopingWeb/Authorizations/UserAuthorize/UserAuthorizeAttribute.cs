@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DawnxTemplate.Authorizations.UserAuthorize
 {
-    public class UserAuthorizeAttribute : SchemaAuthorizeAttribute
+    public class UserAuthorizeAttribute : AuthorizeBaseAttribute
     {
         public override string PolicyPrefix => nameof(UserAuthorize);
 
         public UserAuthorizeAttribute(
             string[] users,
-            string schema = CookieAuthenticationDefaults.AuthenticationScheme) : base(schema)
+            string authenticationType = null) : base(authenticationType)
         {
             Policy = $@"{PolicyPrefix} ""{users.Join("\t")}""";
 
-            if (schema != null)
-                Policy += $"--schema {AuthenticationScheme}";
+            if (authenticationType != null)
+                Policy += $"--type {AuthenticationType}";
         }
 
     }

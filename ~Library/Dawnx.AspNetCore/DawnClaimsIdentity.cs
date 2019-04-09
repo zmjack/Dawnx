@@ -7,6 +7,13 @@ namespace Dawnx.AspNetCore
     public static class DawnClaimsIdentity
     {
         /// <summary>
+        /// Gets ID of the specified ClaimsPrincipal.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string GetName(this ClaimsIdentity @this) => GetClaim(@this, @this.NameClaimType);
+
+        /// <summary>
         /// Gets roles of the specified ClaimsPrincipal.
         /// </summary>
         /// <param name="this"></param>

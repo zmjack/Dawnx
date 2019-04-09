@@ -14,7 +14,7 @@ namespace DawnxTemplate.Authorizations.WechatHybridAuthorize
             Policy = $"{PolicyPrefix}";
 
             if (schema != null)
-                Policy += $"--schema {AuthenticationScheme}";
+                Policy += $"--schema {AuthenticationType}";
         }
 
     }

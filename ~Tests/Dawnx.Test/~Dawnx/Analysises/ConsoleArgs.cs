@@ -13,13 +13,13 @@ namespace Dawnx.Analysises.Test
                 "-h", "123", "-u" ,"root", "C:\\Program Files", "-h", "127.0.0.1"
             }, new[] { "-" });
 
-            Assert.Equal(conArgs.Properties, new Dictionary<string, string>
+            Assert.Equal(new Dictionary<string, string>
             {
                 ["-h"] = "127.0.0.1",
                 ["-u"] = "root",
-            });
+            }, conArgs.Properties);
 
-            Assert.Equal(conArgs.Contents, new[] { "C:\\Program Files" });
+            Assert.Equal(new[] { "C:\\Program Files" }, conArgs.Contents);
 
             Assert.Null(conArgs["-t"]);
         }
@@ -35,7 +35,7 @@ namespace Dawnx.Analysises.Test
                 ["-u"] = "root",
             });
 
-            Assert.Equal(conArgs.Contents, new[] { "C:\\Program Files" });
+            Assert.Equal(new[] { "C:\\Program Files" }, conArgs.Contents);
 
             Assert.Null(conArgs["-t"]);
         }

@@ -1,5 +1,6 @@
 ﻿using Dawnx.Annotation;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,12 @@ namespace Dawnx.Tools
 {
     public static partial class Commands
     {
+        public class TsGenFile
+        {
+            public string FileName { get; set; }
+            public string Content { get; set; }
+        }
+
         private static string[] SearchDirs = new[]
         {
 #if DEBUG
@@ -21,8 +28,10 @@ namespace Dawnx.Tools
             $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",
         };
 
-        public static void TsGen(string outFolder)
+        public static void TsGen(string outFolder, string[] includes)
         {
+            includes = includes?.Select(x => x.ToLower()).ToArray() ?? new string[0];
+
             if (!Directory.Exists(outFolder))
                 Directory.CreateDirectory(outFolder);
 
@@ -35,25 +44,30 @@ namespace Dawnx.Tools
             foreach (var type in assembly.GetTypesWhichMarkedAs<TsGenAttribute>())
                 tsFluent.For(type);
 
-            var files = new[]
+
+            var files = new List<TsGenFile>();
+            files.AddRange(new[]
             {
-                new
+                new TsGenFile
+                {
+                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.d.ts")}",
+                    Content = tsFluent.Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields),
+                },
+                new TsGenFile
+                {
+                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.const.ts")}",
+                    Content = tsFluent.Generate(TsGeneratorOutput.Constants),
+                },
+            });
+            if (includes.Contains("jsend"))
+            {
+                files.Add(new TsGenFile
                 {
                     FileName = $"{Path.GetFullPath($"{outFolder}/JSend.d.ts")}",
                     Content = TypeScript.Definitions().For(typeof(JSend))
                         .WithMemberFormatter(x => $"{x.Name}?")
                         .Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields),
-                },
-                new
-                {
-                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.d.ts")}",
-                    Content = tsFluent.Generate(TsGeneratorOutput.Enums | TsGeneratorOutput.Properties | TsGeneratorOutput.Fields),
-                },
-                new
-                {
-                    FileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.const.ts")}",
-                    Content = tsFluent.Generate(TsGeneratorOutput.Constants),
-                },
+                });
             };
 
             foreach (var file in files)

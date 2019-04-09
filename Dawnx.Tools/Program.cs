@@ -1,5 +1,6 @@
 ﻿using Dawnx.Analysises;
 using Dawnx.Net.Web;
+using Dawnx.Utilities;
 using System;
 using System.IO;
 using System.Linq;
@@ -31,11 +32,11 @@ namespace Dawnx.Tools
                     $"======================================================================{Environment.NewLine}" +
                     $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}")
                     .Line();
-                
+
                 ProjectUtility.PrintInfo();
 
 #if DEBUG
-                Run(new string[] { "tsgen" });
+                Run(new string[] { "tsgen", "-i", "jsend" });
 #else
                 Run(args);
 #endif
@@ -63,9 +64,16 @@ namespace Dawnx.Tools
                         break;
 
                     case "tsgen":
-                        if (cargs.Contents.Length < 2)
-                            Commands.TsGen("TsGens");
-                        else Commands.TsGen(cargs.Contents[1]);
+                        {
+                            var outFolder = new[] { cargs["--out"], cargs["-o"] }
+                                .SelectMany(prop => prop?.Split(",").Select(x => x.Trim()) ?? new string[0])
+                                .FirstOrDefault() ?? "TsGen";
+
+                            var includes = new[] { cargs["--include"], cargs["-i"] }
+                                .SelectMany(prop => prop?.Split(",").Select(x => x.Trim()) ?? new string[0])
+                                .ToArray();
+                            Commands.TsGen(outFolder, includes);
+                        }
                         break;
 
                     default:

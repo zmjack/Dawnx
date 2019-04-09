@@ -7,6 +7,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
 using DawnxTemplate.Authorizations.WechatHybridAuthorize;
+using Dawnx.AspNetCore.Authorization;
+using DawnxTemplate.Authorizations.UserAuthorize;
 
 namespace DawnxDevelopingWeb.Controllers
 {
@@ -16,7 +18,12 @@ namespace DawnxDevelopingWeb.Controllers
         {
         }
 
-        public async Task<IActionResult> SignInAsync(DateTime birthday)
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> SignInWechatHybrid()
         {
             var identity = new WechatHybridUser
             {
@@ -27,13 +34,28 @@ namespace DawnxDevelopingWeb.Controllers
 
             await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Scheme1));
         }
 
-        //[WechatHybridAuthorize]
-        public IActionResult Index()
+        [WechatHybridAuthorize(AuthenticationSchemes = "scheme1")]
+        public IActionResult Scheme1()
         {
-            return View();
+            return Content("OK");
+        }
+
+        public async Task<IActionResult> SignInSimpleId(DateTime birthday)
+        {
+            var identity = new SimpleClaimsIdentity("SimpleId", new[] { "Beginner", "Display" });
+
+            await HttpContext.SignInAsync("scheme2", new ClaimsPrincipal(identity));
+
+            return RedirectToAction(nameof(Scheme2));
+        }
+
+        [UserAuthorize(new[] { "SimpleId" }, AuthenticationSchemes = "scheme2")]
+        public IActionResult Scheme2()
+        {
+            return Content("OK");
         }
 
         public IActionResult About()

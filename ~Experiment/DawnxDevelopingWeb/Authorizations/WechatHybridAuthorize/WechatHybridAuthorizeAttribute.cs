@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DawnxTemplate.Authorizations.WechatHybridAuthorize
 {
-    public class WechatHybridAuthorizeAttribute : SchemaAuthorizeAttribute
+    public class WechatHybridAuthorizeAttribute : AuthorizeBaseAttribute
     {
         public override string PolicyPrefix => nameof(WechatHybridAuthorize);
 
-        public WechatHybridAuthorizeAttribute(string schema = null)
-            : base(schema)
+        public WechatHybridAuthorizeAttribute(string authenticationType = null)
+            : base(authenticationType)
         {
             Policy = $"{PolicyPrefix}";
 
-            if (schema != null)
-                Policy += $"--schema {AuthenticationType}";
+            if (authenticationType != null)
+                Policy += $"--schema {base.AuthenticationType}";
         }
 
     }

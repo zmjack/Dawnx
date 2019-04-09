@@ -43,12 +43,18 @@ namespace DawnxDevelopingWeb
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services
-                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+                //.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddAuthentication("scheme2")
+                .AddCookie("scheme1", options =>
                 {
                     options.AccessDeniedPath = "/account/denied";
                     options.LoginPath = "/account/signin";
-                });
+                })
+                .AddCookie("scheme2", options =>
+                {
+                    options.AccessDeniedPath = "/account/denied";
+                    options.LoginPath = "/account/signin";
+                }); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

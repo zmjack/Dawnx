@@ -28,17 +28,17 @@ namespace DawnxTemplate.Authorizations
         public override IAuthorizationRequirement[] GetPolicyRequirements(string policyName)
         {
             var cargs = new ConsoleArgs(policyName);
-            var schema = cargs["--schema"] ?? cargs["-s"];
+            var authenticationType = cargs["--type"] ?? cargs["-t"];
 
             switch (cargs.Contents[0])
             {
                 case nameof(WechatHybridAuthorize):
-                    return new[] { new WechatHybridRequirement(schema) };
+                    return new[] { new WechatHybridRequirement(authenticationType) };
 
                 case nameof(UserAuthorize):
                     return new[]
                     {
-                        new UserAuthorizationRequirement(schema)
+                        new UserAuthorizationRequirement(authenticationType)
                         {
                             Users = cargs.Contents[1].Split("\t"),
                         },

@@ -4,6 +4,13 @@
         <name>Dawnx.AspNetCore</name>
     </assembly>
     <members>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsIdentity.GetName(System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            Gets ID of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsIdentity.GetRoles(System.Security.Claims.ClaimsIdentity)">
             <summary>
             Gets roles of the specified ClaimsPrincipal.
@@ -43,12 +50,20 @@
             <param name="menu"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetName(System.Security.Claims.ClaimsPrincipal,System.String)">
+            <summary>
+            Gets roles of the specified ClaimsPrincipal.
+            </summary>
+            <param name="this"></param>
+            <param name="authenticationType">If null, then use the default authenticationType.</param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetRoles(System.Security.Claims.ClaimsPrincipal,System.String)">
             <summary>
             Gets roles of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
-            <param name="schema">If null, then use the default schema.</param>
+            <param name="authenticationType">If null, then use the default authenticationType.</param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetId(System.Security.Claims.ClaimsPrincipal,System.String)">
@@ -56,7 +71,7 @@
             Gets ID of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
-            <param name="schema">If null, then use the default schema.</param>
+            <param name="authenticationType">If null, then use the default authenticationType.</param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.AspNetCore.DawnClaimsPrincipal.GetClaims(System.Security.Claims.ClaimsPrincipal,System.String,System.String)">
@@ -64,7 +79,7 @@
             Gets claims of the specified cliam type of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
-            <param name="schema">If null, then use the default schema.</param>
+            <param name="authenticationType">If null, then use the default authenticationType.</param>
             <param name="claimType"></param>
             <returns></returns>
         </member>
@@ -73,7 +88,7 @@
             Gets the first claim of the specified cliam type of the specified ClaimsPrincipal.
             </summary>
             <param name="this"></param>
-            <param name="schema">If null, then use the default schema.</param>
+            <param name="authenticationType">If null, then use the default authenticationType.</param>
             <param name="claimType"></param>
             <returns></returns>
         </member>

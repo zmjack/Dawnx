@@ -32,7 +32,7 @@ namespace DawnxDevelopingWeb.Controllers
                 PubUserName = "",
             }.ToIdentity();
 
-            await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
+            await HttpContext.SignInAsync("scheme1", new ClaimsPrincipal(identity));
 
             return RedirectToAction(nameof(Scheme1));
         }

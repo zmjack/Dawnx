@@ -48,12 +48,12 @@ namespace DawnxDevelopingWeb
                 .AddCookie("scheme1", options =>
                 {
                     options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/signin";
+                    options.LoginPath = "/Home/SignInWechatHybrid";
                 })
                 .AddCookie("scheme2", options =>
                 {
                     options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/signin";
+                    options.LoginPath = "/Home/SignInSimpleId";
                 }); ;
         }
 

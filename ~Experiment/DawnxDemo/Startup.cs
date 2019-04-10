@@ -1,5 +1,6 @@
 ﻿using DawnxDemo.Data;
 using DawnxTemplate.Authorizations;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,18 +42,17 @@ namespace DawnxDemo
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services
-                //.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddAuthentication("scheme2")
-                .AddCookie("scheme1", options =>
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
                 {
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/Home/SignInWechatHybrid";
+                    options.LoginPath = "/WechatAccount/SignIn";
+                    options.AccessDeniedPath = "/WechatAccount/Denied";
                 })
-                .AddCookie("scheme2", options =>
+                .AddCookie("Internal", options =>
                 {
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/Home/SignInSimpleId";
-                }); ;
+                    options.LoginPath = "/InternalAccount/SignIn";
+                    options.AccessDeniedPath = "/InternalAccount/Denied";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +70,8 @@ namespace DawnxDemo
             }
 
             app.UsePathBase(new PathString(Configuration["ASPNETCORE_APPL_PATH"]));
-            //app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //app.UseHttpsRedirection();
             //app.UseCookiePolicy();
 
             app.UseAuthentication();

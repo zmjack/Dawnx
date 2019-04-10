@@ -20,6 +20,7 @@ namespace Dawnx.Security.Test
             var assumedTicket = TemporaryTicket.Parse(aesProvider, ciphertext);
             Assert.Equal(ticket.Data, assumedTicket.Data);
             Assert.Equal(ticket.ExpirationTimeUtc, assumedTicket.ExpirationTimeUtc);
+            Assert.True(ticket.IsValid);
         }
 
     }

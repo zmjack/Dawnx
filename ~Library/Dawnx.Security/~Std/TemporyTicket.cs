@@ -9,7 +9,7 @@ namespace Dawnx.Security
         public static TimeSpan SlideOffsetForExpiration = TimeSpan.FromMinutes(10);
         public static TemporaryTicket Parse(AesProvider aesProvider, string ciphertext)
         {
-            var json = aesProvider.Decrypt(ciphertext.BytesFromBase64()).String();
+            var json = aesProvider.Decrypt(ciphertext.BytesFromUrlSafeBase64()).String();
             return JsonConvert.DeserializeObject<TemporaryTicket>(json);
         }
 
@@ -32,7 +32,7 @@ namespace Dawnx.Security
         public string Ciphertext(AesProvider aesProvider)
         {
             var json = JsonConvert.SerializeObject(this).Bytes();
-            return aesProvider.Encrypt(json).Base64String();
+            return aesProvider.Encrypt(json).UrlSafeBase64String();
         }
 
     }

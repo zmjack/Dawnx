@@ -36,7 +36,8 @@ namespace Dawnx.Tools
                 ProjectUtility.PrintInfo();
 
 #if DEBUG
-                Run(new string[] { "tsgen", "-i", "jsend" });
+                Run(new string[] { "tsgen" });
+                //Run(new string[] { "tsgen", "-i", "jsend" });
 #else
                 Run(args);
 #endif
@@ -67,7 +68,7 @@ namespace Dawnx.Tools
                         {
                             var outFolder = cargs["--out"] ?? cargs["-o"] ?? "TsGen";
 
-                            var includes = cargs["--include"]?.Split(",") ?? cargs["-i"].Split(",") ?? new string[0];
+                            var includes = cargs["--include"]?.Split(",") ?? cargs["-i"]?.Split(",") ?? new string[0];
                             Commands.TsGen(outFolder, includes);
                         }
                         break;

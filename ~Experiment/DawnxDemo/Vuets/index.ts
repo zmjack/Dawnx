@@ -1,6 +1,5 @@
 ﻿import Vue from 'vue'
 import components from './components/_components'
-declare var vuets: Vue
 
 export default components;
 
@@ -20,11 +19,8 @@ export class Vuets {
         var tag = vue.$vnode.componentOptions.tag;
 
         if (vue.vEvent === undefined) {
-            if (vuets === undefined) {
-                console.warn(`[${tag}] Register events failed, because both \`vEvent\` and global varialbe \`vuets\` are undefined.`)
-                return;
-            }
-            else vue.vEvent = vuets;
+            console.warn(`[${tag}] Register events failed, because both \`vEvent\` are undefined.`)
+            return;
         }
 
         var cid = vue.$el.id;

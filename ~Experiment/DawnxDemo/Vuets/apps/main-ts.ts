@@ -9,4 +9,7 @@ Vue.use(Vts);
 new Vue({
     el: '#app',
     template,
+    data() {
+        return { vuets: new Vue() }
+    }
 });

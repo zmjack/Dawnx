@@ -4,7 +4,7 @@ namespace Dawnx.Algorithms.Container.Test
 {
     public partial class DpContainerTests
     {
-        public class DpFeb : DpContainer<int, int>
+        public class DpFib : DpContainer<int, int>
         {
             public override int StateTransfer(int n)
             {
@@ -14,9 +14,9 @@ namespace Dawnx.Algorithms.Container.Test
         }
 
         [Fact]
-        public void DpFebTest()
+        public void DpFibTest()
         {
-            Assert.Equal(1836311903, new DpFeb()[45]);
+            Assert.Equal(1836311903, new DpFib()[45]);
         }
 
     }

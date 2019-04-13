@@ -44,7 +44,7 @@ export default class extends Vue {
         if (this.hp < 0) {
             this.hp = 0;
             this.gameOver = true;
-            this.result = 'You are dead'
+            this.result = 'You are dead';
         }
     }
 

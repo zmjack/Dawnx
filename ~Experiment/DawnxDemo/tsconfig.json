@@ -8,8 +8,6 @@
     "experimentalDecorators": true,
     "noImplicitUseStrict": true
   },
-  "compileOnSave": true,
-  "include": [ "**/*" ],
   "exclude": [
     "obj",
     "bin",

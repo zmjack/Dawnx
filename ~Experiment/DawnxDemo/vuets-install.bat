@@ -1,12 +1,17 @@
 @echo off
-call npm i -s webpack
-call npm i -s webpack-cli
-call npm i -s raw-loader
-call npm i -s vue-loader
-call npm i -s css-loader
-call npm i -s vue-style-loader
+rem webpack
+call npm i -s webpack webpack-cli
+rem loader
+call npm i -s raw-loader vue-loader css-loader vue-style-loader ts-loader
+rem vue
+call npm i -s vue vue-template-compiler vue-class-component vue-property-decorator
+rem typescript
+call npm i -s typescript ts-nameof @types/ts-nameof
 
-call npm i -s vue
-call npm i -s vue-template-compiler
-call npm i -s vue-class-component
-call npm i -s vue-property-decorator
+echo.
+echo Maybe you should disable TypeScript compilation when the project is compiled.
+echo To use the part of configuration:
+echo.
+echo   ^<PropertyGroup^>
+echo     ^<TypeScriptCompileBlocked^>true^</TypeScriptCompileBlocked^>
+echo   ^</PropertyGroup^>

@@ -1,21 +1,22 @@
 ﻿var path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const tsNameof = require("ts-nameof");
 
 module.exports = {
 
     entry: {
-        main_ts: './Vuets/apps/main_ts',
-        main_vue: './Vuets/apps/main_vue',
+        ['main-ts']: './Vuets/apps/main-ts',
+        ['main-vue']: './Vuets/apps/main-vue'
     },
 
     output: {
         publicPath: "/js/",
         path: path.join(__dirname, '/wwwroot/js/'),
-        filename: '[name].js',
+        filename: '[name].js'
     },
 
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.ts', '.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         }
@@ -23,7 +24,13 @@ module.exports = {
 
     module: {
         rules: [{
-            test: /\.vue/,
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            options: {
+                getCustomTransformers: () => ({ before: [tsNameof] })
+            }
+        }, {
+            test: /\.vue$/,
             loader: 'vue-loader'
         }, {
             test: /\.css$/,
@@ -33,7 +40,7 @@ module.exports = {
             ]
         }, {
             test: /\.html$/,
-            use: 'raw-loader',
+            use: 'raw-loader'
         }]
     },
 

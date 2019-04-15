@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\js\components\**" />
+    <Content Remove="wwwroot\js\components\**" />
+    <EmbeddedResource Remove="wwwroot\js\components\**" />
+    <None Remove="wwwroot\js\components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Components\file.ts" />
   </ItemGroup>
 
@@ -39,7 +46,6 @@
   <ItemGroup>
     <Folder Include="Areas\NxPanel\Data\" />
     <Folder Include="Areas\NxPanel\Models\" />
-    <Folder Include="wwwroot\js\components\" />
     <Folder Include="wwwroot\modules\axios\" />
   </ItemGroup>
 

@@ -1,6 +1,0 @@
-﻿namespace DawnxDeveloping
-{
-    class DawnDbSet
-    {
-    }
-}

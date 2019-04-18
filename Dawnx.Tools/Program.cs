@@ -66,7 +66,7 @@ namespace Dawnx.Tools
 
                     case "tsgen":
                         {
-                            var outFolder = cargs["--out"] ?? cargs["-o"] ?? "TsGen";
+                            var outFolder = cargs["--out"] ?? cargs["-o"] ?? "TsGens";
 
                             var includes = cargs["--include"]?.Split(",") ?? cargs["-i"]?.Split(",") ?? new string[0];
                             Commands.TsGen(outFolder, includes);

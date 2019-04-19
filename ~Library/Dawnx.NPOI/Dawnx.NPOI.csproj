@@ -12,7 +12,7 @@
     <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
-    <Version>1.9.14</Version>
+    <Version>1.9.15</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
@@ -20,6 +20,7 @@
     <Product>Dawnx.NPOI</Product>
     <Description>Helps to create report application esasily.</Description>
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -46,6 +47,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

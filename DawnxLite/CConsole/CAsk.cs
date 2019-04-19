@@ -19,6 +19,9 @@ namespace Dawnx.CConsole
 
         public void Resolve()
         {
+            var cursorVisible = Console.CursorVisible;
+            Console.CursorVisible = true;
+
             while (true)
             {
                 Cout.Print("? ", new ConColor { ForegroundColor = ConsoleColor.Green });
@@ -37,8 +40,11 @@ namespace Dawnx.CConsole
                 if (result.GetLengthA() < answer.GetLengthA())
                     Console.Write(" ".Repeat(answer.GetLengthA() - result.GetLengthA()));
                 Console.WriteLine();
-                return;
+
+                break;
             }
+
+            Console.CursorVisible = cursorVisible;
         }
     }
 

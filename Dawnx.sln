@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		cloc.txt = cloc.txt
 		jenkins.cmd = jenkins.cmd
-		LICENSE = LICENSE
+		LICENSE.md = LICENSE.md
 		push.cmd = push.cmd
 		README.md = README.md
 	EndProjectSection
@@ -54,7 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~Tests", "~Tests", "{24CF3E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DawnxDemo", "~Experiment\DawnxDemo\DawnxDemo.csproj", "{CA2E4999-4535-4C55-A45D-287D90A53E93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dawnx.RTC", "~Experiment\Dawnx.RTC\Dawnx.RTC.csproj", "{30253114-33B7-4676-8BFB-8846D1B2E1FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dawnx.RTC", "~Experiment\Dawnx.RTC\Dawnx.RTC.csproj", "{30253114-33B7-4676-8BFB-8846D1B2E1FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

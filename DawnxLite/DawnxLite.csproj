@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx</Authors>
-    <Version>1.9.14</Version>
+    <Version>1.9.15</Version>
     <Company>dawnx.net</Company>
     <Description>Dawnx lite version. Less dependencies.</Description>
     <RootNamespace>Dawnx</RootNamespace>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,6 +30,13 @@
     <Compile Include=".Con\ConText.cs" />
     <Compile Include=".Con\ConColor.cs" />
     <Compile Include=".Con\~Con.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

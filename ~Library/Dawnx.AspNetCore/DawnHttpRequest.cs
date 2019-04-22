@@ -32,8 +32,8 @@ namespace Dawnx.AspNetCore
         public static string UrlSchemeHost(this HttpRequest @this) => $"{@this.Scheme}://{@this.Host}";
 
         /// <summary>
-        /// Returns $"{@this.Scheme}://{@this.Host}".
-        ///     eg. http://dawnx.net
+        /// Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}".
+        ///     eg. http://dawnx.net{Configuration["ASPNETCORE_APPL_PATH"]}
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>

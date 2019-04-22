@@ -130,10 +130,10 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.Url(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlSchemeHostBase(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
-            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
-                eg. http://dawnx.net/controller/action?id=1
+            Returns $"{@this.Scheme}://{@this.Host}".
+                eg. http://dawnx.net
             </summary>
             <param name="this"></param>
             <returns></returns>
@@ -142,6 +142,14 @@
             <summary>
             Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}".
                 eg. http://dawnx.net/controller/action
+            </summary>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.Url(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
+                eg. http://dawnx.net/controller/action?id=1
             </summary>
             <param name="this"></param>
             <returns></returns>

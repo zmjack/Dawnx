@@ -32,13 +32,12 @@ namespace Dawnx.AspNetCore
         public static string UrlSchemeHost(this HttpRequest @this) => $"{@this.Scheme}://{@this.Host}";
 
         /// <summary>
-        /// Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
-        ///     eg. http://dawnx.net/controller/action?id=1
+        /// Returns $"{@this.Scheme}://{@this.Host}".
+        ///     eg. http://dawnx.net
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static string Url(this HttpRequest @this)
-            => $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}";
+        public static string UrlSchemeHostBase(this HttpRequest @this) => $"{@this.Scheme}://{@this.Host}{@this.PathBase}";
 
         /// <summary>
         /// Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}".
@@ -48,6 +47,15 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public static string UrlSchemeHostPath(this HttpRequest @this)
             => $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}";
+
+        /// <summary>
+        /// Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}".
+        ///     eg. http://dawnx.net/controller/action?id=1
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static string Url(this HttpRequest @this)
+            => $"{@this.Scheme}://{@this.Host}{@this.PathBase}{@this.Path}{@this.QueryString}";
 
         /// <summary>
         /// Determines whether the access device is a mobile.

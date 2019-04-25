@@ -32,7 +32,7 @@ namespace Dawnx.IO
                 foreach (var dir in Directory.GetDirectories(dirPath))
                 {
                     var dirName = Path.GetFileName(dir);
-                    Copy(dirName, $"{destDirPath}/{dirName}", overwrite);
+                    Copy(dir, $"{destDirPath}/{dirName}", overwrite);
                 }
             }
             else throw new DirectoryNotFoundException($"The specified path({dirPath}) is not found.");

@@ -132,8 +132,8 @@
         </member>
         <member name="M:Dawnx.AspNetCore.DawnHttpRequest.UrlSchemeHostBase(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
-            Returns $"{@this.Scheme}://{@this.Host}".
-                eg. http://dawnx.net
+            Returns $"{@this.Scheme}://{@this.Host}{@this.PathBase}".
+                eg. http://dawnx.net{Configuration["ASPNETCORE_APPL_PATH"]}
             </summary>
             <param name="this"></param>
             <returns></returns>

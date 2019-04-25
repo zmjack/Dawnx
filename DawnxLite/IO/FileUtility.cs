@@ -3,15 +3,13 @@ using System.IO;
 
 namespace Dawnx.IO
 {
-    public static class FilesSearcher
+    public static class FileUtility
     {
         public static string[] GetAllFiles(string path)
         {
-            return new List<string>().For(_ =>
-            {
-                AddFilesToList(_, path);
-                return _.ToArray();
-            });
+            var list = new List<string>();
+            AddFilesToList(list, path);
+            return list.ToArray();
         }
 
         private static void AddFilesToList(List<string> list, string path)

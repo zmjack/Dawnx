@@ -1,6 +1,6 @@
 ﻿#if USE
 using Dawnx.Diagnostics;
-using Dawnx.Net.Http;
+using Dawnx.Net.Web;
 using SimpleData;
 using System;
 using System.Collections;
@@ -38,7 +38,7 @@ namespace DawnxDevloping
 
         static string DawnxNetWeb500()
         {
-            return Web.Get("https://www.baidu.com");
+            return Http.Get("https://www.baidu.com");
         }
 
     }

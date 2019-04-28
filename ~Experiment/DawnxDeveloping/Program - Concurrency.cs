@@ -3,6 +3,7 @@ using Dawnx.Diagnostics;
 using Dawnx.Generators;
 using Dawnx.Patterns;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -22,7 +23,7 @@ namespace DawnxDevloping
         {
             using (var probe = PerformanceProbe.Create(nameof(Wrong)))
             {
-                var ret = Concurrency.Run(() =>
+                var ret = Concurrency.Run(cid =>
                 {
                     return DateTime.Now.Ticks.ToString();
                 }, level);
@@ -36,7 +37,7 @@ namespace DawnxDevloping
         {
             using (var probe = PerformanceProbe.Create(nameof(G1)))
             {
-                var ret = Concurrency.Run(() =>
+                var ret = Concurrency.Run(cid =>
                 {
                     lock ("aa")
                     {
@@ -55,7 +56,7 @@ namespace DawnxDevloping
         {
             using (var probe = PerformanceProbe.Create(nameof(G2)))
             {
-                var ret = Concurrency.Run(() =>
+                var ret = Concurrency.Run(cid =>
                 {
                     lock ("aa")
                     {
@@ -79,7 +80,7 @@ namespace DawnxDevloping
             var generator = new IdGenerator<string>(() => DateTime.Now.Ticks.ToString());
             using (var probe = PerformanceProbe.Create(nameof(G3)))
             {
-                var ret = Concurrency.Run(() =>
+                var ret = Concurrency.Run(cid =>
                 {
                     return generator.TakeOne();
                 }, level);

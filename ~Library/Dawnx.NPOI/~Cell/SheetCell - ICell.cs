@@ -46,6 +46,11 @@ namespace Dawnx.NPOI
             return MapedCell.CopyCellTo(targetIndex);
         }
 
+        public CellType GetCachedFormulaResultTypeEnum()
+        {
+            return MapedCell.GetCachedFormulaResultTypeEnum();
+        }
+
         public void RemoveCellComment()
         {
             MapedCell.RemoveCellComment();

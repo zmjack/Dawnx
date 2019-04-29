@@ -1,4 +1,4 @@
-﻿#if !USE
+﻿#if USE
 using Dawnx.Diagnostics;
 using Dawnx.Generators;
 using Dawnx.Patterns;

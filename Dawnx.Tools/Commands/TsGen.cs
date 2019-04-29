@@ -101,14 +101,11 @@ namespace Dawnx.Tools
                 string file;
 
                 if (vi.Index == 0)
-                    file = $"{assemblyName}.dll";
+                    file = $"{dir}/{assemblyName}.dll";
                 else file = $"{dir}/{assemblyName}/{version}/lib/netstandard2.0/{assemblyName}.dll";
 
                 if (File.Exists(file))
-                {
-                    try { return Assembly.LoadFrom(file); }
-                    catch { }
-                }
+                    return Assembly.LoadFile(file);
             }
 
             return null;

@@ -14,9 +14,9 @@ namespace Dawnx.Tools
         static ProjectUtility()
         {
 #if DEBUG
-            ProjectName = "DawnxDevelopingWeb.csproj";
-            AssemblyName = "DawnxDevelopingWeb";
-            RootNamespace = "DawnxDevelopingWeb";
+            ProjectName = "DawnxDemo.csproj";
+            AssemblyName = "DawnxDemo";
+            RootNamespace = "DawnxDemo";
             TargetFramework = "netcoreapp2.2";
 #else
             var dir = Directory.GetCurrentDirectory();

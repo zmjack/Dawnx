@@ -141,7 +141,5 @@ namespace Dawnx.NPOI
         public ExcelSheet GetSheetAt(int index) => new ExcelSheet(this, MapedWorkbook.GetSheetAt(index));
         public int GetSheetIndex(ExcelSheet sheet) => GetSheetIndex(sheet.SheetName);
 
-        public Stream GetStream
-
     }
 }

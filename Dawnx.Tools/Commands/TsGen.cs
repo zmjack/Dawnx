@@ -20,7 +20,7 @@ namespace Dawnx.Tools
         private static string[] SearchDirs = new[]
         {
 #if DEBUG
-            Path.GetFullPath($"../../../../~Experiment/DawnxDevelopingWeb/bin/Debug/{ProjectUtility.TargetFramework}"),
+            Path.GetFullPath($"../../../../~Experiment/DawnxDemo/bin/Debug/{ProjectUtility.TargetFramework}"),
 #else
             Path.GetFullPath($"bin/Debug/{ProjectUtility.TargetFramework}"),
 #endif
@@ -105,7 +105,10 @@ namespace Dawnx.Tools
                 else file = $"{dir}/{assemblyName}/{version}/lib/netstandard2.0/{assemblyName}.dll";
 
                 if (File.Exists(file))
-                    return Assembly.LoadFrom(file);
+                {
+                    try { return Assembly.LoadFrom(file); }
+                    catch { }
+                }
             }
 
             return null;

@@ -22,12 +22,12 @@ namespace Dawnx.AspNetCore
         /// <returns></returns>
         public static string GetRefreshToken(this HttpContext @this) => @this.GetTokenAsync("refresh_token").Result;
 
-        public static void Login(this HttpContext @this, string userName, string[] roles)
+        public static void Login(this HttpContext @this, string userName, string[] roles = null)
         {
             @this.SignInAsync(new ClaimsPrincipal(new SimpleClaimsIdentity(userName, roles))).Wait();
         }
 
-        public static async Task LoginAsync(this HttpContext @this, string userName, string[] roles)
+        public static async Task LoginAsync(this HttpContext @this, string userName, string[] roles = null)
         {
             await @this.SignInAsync(new ClaimsPrincipal(new SimpleClaimsIdentity(userName, roles)));
         }

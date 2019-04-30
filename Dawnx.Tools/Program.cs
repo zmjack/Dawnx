@@ -1,5 +1,6 @@
 ﻿using Dawnx.Analysises;
 using Dawnx.Net.Web;
+using Dawnx.Security.AesSecurity;
 using Dawnx.Utilities;
 using System;
 using System.IO;
@@ -54,14 +55,14 @@ namespace Dawnx.Tools
 
             if (cargs.Contents.Any())
             {
-                switch (cargs.Contents[0])
+                switch (cargs[0])
                 {
                     case "install":
-                        Commands.Install(cargs.Contents[1]);
+                        Commands.Install(cargs[1]);
                         break;
 
                     case "gcs":
-                        Commands.Gcs(cargs.Contents[1]);
+                        Commands.Gcs(cargs[1]);
                         break;
 
                     case "tsgen":
@@ -70,6 +71,13 @@ namespace Dawnx.Tools
 
                             var includes = cargs["--include"]?.Split(",") ?? cargs["-i"]?.Split(",") ?? new string[0];
                             Commands.TsGen(outFolder, includes);
+                        }
+                        break;
+
+                    case "aes":
+                        {
+                            AesKey aesKey = cargs[1] == "hex" ? AesKey.HexString : AesKey.Base64String;
+                            Commands.Aes(aesKey);
                         }
                         break;
 

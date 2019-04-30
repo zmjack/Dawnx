@@ -10,9 +10,9 @@ namespace Dawnx.Analysises
     /// </summary>
     public class ConsoleArgs
     {
-        public string[] Args { get; private set; }
-        public string[] Contents { get; private set; }
+        public string[] OriginArgs { get; private set; }
         public Dictionary<string, string> Properties { get; } = new Dictionary<string, string>();
+        public string[] Contents { get; private set; }
 
         public ConsoleArgs(string line, params string[] keyStarts)
         {
@@ -31,7 +31,7 @@ namespace Dawnx.Analysises
 
         private void Constructor(string[] args, params string[] keyStarts)
         {
-            Args = args;
+            OriginArgs = args;
             var contents = new List<string>();
 
             string key = string.Empty;
@@ -57,6 +57,7 @@ namespace Dawnx.Analysises
             Contents = contents.ToArray();
         }
 
+        public string this[int n] => n < Contents.Length ? Contents[n] : null;
         public string this[string key]
         {
             get

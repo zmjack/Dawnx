@@ -30,7 +30,7 @@ namespace DawnxTemplate.Authorizations
             var cargs = new ConsoleArgs(policyName);
             var authenticationType = cargs["--type"] ?? cargs["-t"];
 
-            switch (cargs.Contents[0])
+            switch (cargs[0])
             {
                 case nameof(WechatHybridAuthorize):
                     return new[] { new WechatHybridRequirement(authenticationType) };
@@ -40,7 +40,7 @@ namespace DawnxTemplate.Authorizations
                     {
                         new UserAuthorizationRequirement(authenticationType)
                         {
-                            Users = cargs.Contents[1].Split("\t"),
+                            Users = cargs[1].Split("\t"),
                         },
                     };
 

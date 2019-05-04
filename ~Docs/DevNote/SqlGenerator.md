@@ -36,7 +36,7 @@ WHERE "x"."City" = 'London';
 
 ### Use simple database (Northwnd)
 
-The Entity Framework provides some basic query extensions, but using it to develop business applications is not simple enough. So, we provide more query extensions to help developers solve their business problems.
+The Entity Framework provides some basic query extensions, but use it to develop business applications is not simple enough. So, we provide more query extensions to help developers to solve their business problems.
 
 First of all, "**DbContext sqlite**" is defined as:
 

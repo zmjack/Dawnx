@@ -123,7 +123,7 @@ namespace Dawnx.AspNetCore
         /// <typeparam name="TRet"></typeparam>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static TRet BodyJsonDecode<TRet>(this HttpRequest @this) => BodyJsonDecode<TRet>(@this);
+        public static TRet BodyJsonDecode<TRet>(this HttpRequest @this) => BodyJsonDecode<TRet>(@this, Encoding.UTF8);
 
         /// <summary>
         /// Deserializes the body, which is json, to a .NET object.

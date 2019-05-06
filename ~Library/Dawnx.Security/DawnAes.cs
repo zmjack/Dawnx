@@ -29,8 +29,8 @@ namespace Dawnx.Security
             var combiner = new TAesCombiner().Self(_ => _.Init(@this));
 
             var iv = @this.IV;
-            var encryptor = @this.CreateEncryptor();
             var encryptor_memory = new MemoryStream();
+            using (var encryptor = @this.CreateEncryptor())
             using (var crypto = new CryptoStream(encryptor_memory, encryptor, CryptoStreamMode.Write))
                 crypto.Write(data, 0, data.Length);
 
@@ -53,17 +53,12 @@ namespace Dawnx.Security
             var iv = separatedData.iv;
             var ciphertext = separatedData.ciphertext;
 
-            var decryptor = @this.CreateDecryptor(@this.Key, iv);
             var decryptor_memory = new MemoryStream(ciphertext);
+            using (var decryptor = @this.CreateDecryptor(@this.Key, iv))
             using (var crypto = new CryptoStream(decryptor_memory, decryptor, CryptoStreamMode.Read))
             {
                 var data_memory = new MemoryStream();
-                var buffer = new byte[1024];
-                int readLength;
-
-                while ((readLength = crypto.Read(buffer, 0, buffer.Length)) > 0)
-                    data_memory.Write(buffer, 0, readLength);
-
+                crypto.CopyTo(data_memory);
                 return data_memory.ToArray();
             }
         }

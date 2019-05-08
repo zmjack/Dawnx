@@ -14,6 +14,12 @@ namespace Dawnx.Security.AesSecurity
             WrappedAes.Padding = PaddingMode.PKCS7;
         }
 
+        public AesProvider WithKey(byte[] key)
+        {
+            WrappedAes.Key = key;
+            return this;
+        }
+
         public AesProvider WithKey(AesKey aesKey, string key)
         {
             ImportKey(aesKey, key);

@@ -11,7 +11,14 @@ namespace Dawnx.Security.AesSecurity
         public AesProvider(Aes aes)
         {
             WrappedAes = aes;
+            WrappedAes.Mode = CipherMode.CBC;
             WrappedAes.Padding = PaddingMode.PKCS7;
+        }
+
+        public AesProvider WithMode(CipherMode mode)
+        {
+            WrappedAes.Mode = mode;
+            return this;
         }
 
         public AesProvider WithKey(byte[] key)

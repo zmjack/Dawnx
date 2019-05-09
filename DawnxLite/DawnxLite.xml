@@ -1615,6 +1615,16 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnIEnumerable.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32@)">
+            <summary>
+            Calculates the max page number through the specified page size.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="pageSize"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnIEnumerable.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Calculates the max page number through the specified page size.

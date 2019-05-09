@@ -47,7 +47,7 @@ namespace Dawnx.Security
         public static byte[] Decrypt<TAesCombiner>(this Aes @this, byte[] data)
             where TAesCombiner : IAesCombiner, new()
         {
-            var combiner = new TAesCombiner().Self(_ => _.Init(@this));
+            var combiner = new TAesCombiner();
 
             var separatedData = combiner.Separate(data);
             var iv = separatedData.iv;

@@ -25,10 +25,10 @@ namespace Dawnx
         /// <typeparam name="TSource"></typeparam>
         /// <param name="this"></param>
         /// <param name="pageSize"></param>
+        /// <param name="count"></param>
         /// <returns></returns>
-        public static int PageCount<TSource>(this IEnumerable<TSource> @this, int pageSize)
+        public static int PageCount<TSource>(this IEnumerable<TSource> @this, int pageSize, out int count)
         {
-            int count = 0;
             switch (@this)
             {
                 case TSource[] array: count = array.Length; break;
@@ -38,6 +38,14 @@ namespace Dawnx
             }
             return (int)Math.Ceiling((double)count / pageSize);
         }
+        /// <summary>
+        /// Calculates the max page number through the specified page size.
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static int PageCount<TSource>(this IEnumerable<TSource> @this, int pageSize) => PageCount(@this, pageSize, out _);
 
         public static IEnumerable<TSource> WhereNot<TSource>(this IEnumerable<TSource> @this, Expression<Func<TSource, bool>> predicate)
             => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters).Compile());

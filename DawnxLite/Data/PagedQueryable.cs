@@ -13,7 +13,8 @@ namespace Dawnx.Data
         public PagedQueryable(IQueryable<T> source, int page, int pageSize)
         {
             PageSize = pageSize;
-            PageCount = source.PageCount(pageSize);
+            PageCount = source.PageCount(pageSize, out var sourceCount);
+            SourceCount = sourceCount;
 
             if (PageCount > 0)
             {

@@ -10,6 +10,7 @@ namespace Dawnx.Data
         public int PageNumber { get; protected set; }
         public int PageSize { get; protected set; }
         public int PageCount { get; protected set; }
+        public int SourceCount { get; protected set; }
         public bool IsFristPage => PageNumber == 1;
         public bool IsLastPage => PageNumber == PageCount;
 
@@ -18,7 +19,8 @@ namespace Dawnx.Data
         public PagedEnumerable(IEnumerable<T> source, int page, int pageSize)
         {
             PageSize = pageSize;
-            PageCount = source.PageCount(pageSize);
+            PageCount = source.PageCount(pageSize, out var sourceCount);
+            SourceCount = sourceCount;
 
             if (PageCount > 0)
             {

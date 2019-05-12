@@ -35,12 +35,13 @@ namespace Dawnx.Data
             else Items = source;
         }
 
-        public PagedEnumerable(IEnumerable<T> source, int page, int pageSize, int pageCount)
+        public PagedEnumerable(PagedQueryable<T> pagedQueryable)
         {
-            PageSize = pageSize;
-            PageCount = pageCount;
-            PageNumber = page;
-            Items = source;
+            PageSize = pagedQueryable.PageSize;
+            PageCount = pagedQueryable.PageCount;
+            PageNumber = pagedQueryable.PageNumber;
+            SourceCount = pagedQueryable.SourceCount;
+            Items = pagedQueryable.ToArray();
         }
 
         public IEnumerator<T> GetEnumerator() => Items.GetEnumerator();

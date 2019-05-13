@@ -17,14 +17,14 @@ namespace Dawnx.NPOI
             Range = range;
         }
 
-        public SheetRange this[int? firstRow, int? lastRow]
+        public SheetRange this[int? startOffset, int? endOffset]
         {
             get
             {
-                if (firstRow is null) firstRow = Range.Start.row;
-                if (lastRow is null) lastRow = Range.End.row;
+                if (startOffset is null) startOffset = 0;
+                if (endOffset is null) endOffset = Range.RowLength - 1;
 
-                return new SheetRange(Range.Sheet, (firstRow.Value, Range.Start.col), (lastRow.Value, Range.End.col));
+                return new SheetRange(Range.Sheet, (Range.Start.row + startOffset.Value, Range.Start.col), (Range.Start.row + endOffset.Value, Range.End.col));
             }
         }
 

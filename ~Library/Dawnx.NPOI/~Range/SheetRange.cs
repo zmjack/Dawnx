@@ -45,7 +45,7 @@ namespace Dawnx.NPOI
         public void SetCStyle(Action<CStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
 
-        public SheetRangeColSelector Columns => new SheetRangeColSelector(this);
+        public SheetRangeColumnSelector Columns => new SheetRangeColumnSelector(this);
         public SheetRangeGroup Column(params int[] indexes)
         {
             IEnumerable<SheetRange> select()

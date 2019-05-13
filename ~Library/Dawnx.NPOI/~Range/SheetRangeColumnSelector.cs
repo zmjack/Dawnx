@@ -8,23 +8,23 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.NPOI
 {
-    public class SheetRangeColSelector
+    public class SheetRangeColumnSelector
     {
         private SheetRange Range;
 
-        public SheetRangeColSelector(SheetRange range)
+        public SheetRangeColumnSelector(SheetRange range)
         {
             Range = range;
         }
 
-        public SheetRange this[int? firstCol, int? lastCol]
+        public SheetRange this[int? startOffset, int? endOffset]
         {
             get
             {
-                if (firstCol is null) firstCol = Range.Start.col;
-                if (lastCol is null) lastCol = Range.End.col;
+                if (startOffset is null) startOffset = 0;
+                if (endOffset is null) endOffset = Range.ColumnLengh - 1;
 
-                return new SheetRange(Range.Sheet, (Range.Start.row, firstCol.Value), (Range.End.row, lastCol.Value));
+                return new SheetRange(Range.Sheet, (Range.Start.row, Range.Start.col + startOffset.Value), (Range.End.row, Range.Start.col + endOffset.Value));
             }
         }
 

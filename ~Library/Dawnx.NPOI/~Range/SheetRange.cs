@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.NPOI
 {
-    public class SheetRange : IEnumerable<SheetCell>
+    public class SheetRange : IEnumerable<SheetCell>, IStylizable
     {
         public ExcelSheet Sheet { get; private set; }
         public (int row, int col) Start { get; private set; }
@@ -45,15 +45,8 @@ namespace Dawnx.NPOI
         public void SetCStyle(Action<CStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
 
-        public SheetRange SelectColunm(int startOffsetCol)
-        {
-            return new SheetRange(Sheet, (Start.row, Start.col + startOffsetCol), (End.row, Start.col + startOffsetCol));
-        }
-
-        public SheetRange SelectColunms(int startOffsetCol, int endOffsetCol)
-        {
-            return new SheetRange(Sheet, (Start.row, Start.col + startOffsetCol), (End.row, Start.col + endOffsetCol));
-        }
+        public SheetRangeColSelector Columns => new SheetRangeColSelector(this);
+        public SheetRangeRowSelector Rows => new SheetRangeRowSelector(this);
 
         public void Merge()
         {
@@ -103,7 +96,7 @@ namespace Dawnx.NPOI
             var regex_matchId = new Regex(@"^\[\[.+?\]\](.*)$");
             foreach (var colIndex in offsetCols)
             {
-                foreach (var cell in SelectColunm(colIndex))
+                foreach (var cell in Columns.Select(colIndex))
                 {
                     var value = cell.GetValue();
                     if (value is string)

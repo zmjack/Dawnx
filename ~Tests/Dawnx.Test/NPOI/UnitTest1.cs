@@ -44,7 +44,7 @@ namespace Dawnx.NPOI.Test
                 foreach (var row in range.GetRows())
                 {
                     if (row[(0, 1)].GetValue().ToString() == "Cu")
-                        row.SelectColunm(1).SetCStyle(ËÎÌåstyle1);
+                        row.Columns.Select(1).SetCStyle(ËÎÌåstyle1);
                 }
                 range.SmartMerge(new[] { 0, 1, 2, 3 });
             });

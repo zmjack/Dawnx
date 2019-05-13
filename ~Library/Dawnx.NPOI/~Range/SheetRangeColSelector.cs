@@ -28,16 +28,6 @@ namespace Dawnx.NPOI
             }
         }
 
-        public SheetRangeGroup Select(params int[] indexes)
-        {
-            IEnumerable<SheetRange> select()
-            {
-                foreach (var index in indexes)
-                    yield return new SheetRange(Range.Sheet, (Range.Start.row, Range.Start.col + index), (Range.End.row, Range.Start.col + index));
-            }
-            return new SheetRangeGroup(select());
-        }
-
         public SheetRangeGroup Select(Func<int, bool> indexSelector)
         {
             IEnumerable<SheetRange> select()

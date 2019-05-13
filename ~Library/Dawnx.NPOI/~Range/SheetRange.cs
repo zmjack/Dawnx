@@ -46,7 +46,26 @@ namespace Dawnx.NPOI
             => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
 
         public SheetRangeColSelector Columns => new SheetRangeColSelector(this);
+        public SheetRangeGroup Column(params int[] indexes)
+        {
+            IEnumerable<SheetRange> select()
+            {
+                foreach (var index in indexes)
+                    yield return new SheetRange(Sheet, (Start.row, Start.col + index), (End.row, Start.col + index));
+            }
+            return new SheetRangeGroup(select());
+        }
+
         public SheetRangeRowSelector Rows => new SheetRangeRowSelector(this);
+        public SheetRangeGroup Row(params int[] indexes)
+        {
+            IEnumerable<SheetRange> select()
+            {
+                foreach (var index in indexes)
+                    yield return new SheetRange(Sheet, (Start.row + index, Start.col), (Start.row + index, End.col));
+            }
+            return new SheetRangeGroup(select());
+        }
 
         public void Merge()
         {
@@ -96,7 +115,7 @@ namespace Dawnx.NPOI
             var regex_matchId = new Regex(@"^\[\[.+?\]\](.*)$");
             foreach (var colIndex in offsetCols)
             {
-                foreach (var cell in Columns.Select(colIndex))
+                foreach (var cell in Column(colIndex))
                 {
                     var value = cell.GetValue();
                     if (value is string)

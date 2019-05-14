@@ -33,7 +33,7 @@ namespace Dawnx.Data.Test
             var zmjack = AppRegistry.Connect(regs, "Person1");
             zmjack.Age = 999;
 
-            Assert.Equal("Person1", zmjack.Item);
+            Assert.Equal("Person1", zmjack.GetItemString());
             Assert.Equal(999, zmjack.Age);
             Assert.Equal("haha", zmjack.NickName);
 

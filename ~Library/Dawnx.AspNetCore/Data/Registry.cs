@@ -9,11 +9,13 @@ namespace Dawnx.Data
     /// </summary>
     public abstract class Registry
     {
-        public string Item { get; private set; }
+        private string _Item;
+        private IEnumerable<RegistryStore> _ColumnStores;
+        private bool _ProxyLoaded;
 
-        public IEnumerable<RegistryStore> ColumnStores { get; private set; }
-
-        public bool ProxyLoaded { get; private set; }
+        public string GetItemString() => _Item;
+        public IEnumerable<RegistryStore> GetColumnStores() => _ColumnStores;
+        public bool IsProxyLoaded() => _ProxyLoaded;
 
         public void Load<TRegistryStore>(IEnumerable<TRegistryStore> columnStores, string item)
             where TRegistryStore : RegistryStore
@@ -21,9 +23,9 @@ namespace Dawnx.Data
             if (GetType().Namespace != "Castle.Proxies")
                 throw new InvalidOperationException("This method can only be called in a proxy instance.");
 
-            Item = item;
-            ColumnStores = columnStores.Where(x => x.Item == item);
-            ProxyLoaded = true;
+            _Item = item;
+            _ColumnStores = columnStores.Where(x => x.Item == item);
+            _ProxyLoaded = true;
         }
     }
 

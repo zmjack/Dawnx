@@ -18,17 +18,14 @@ namespace Dawnx.Data
             RegistryStore store;
             PropertyInfo proxyProperty;
 
-            if (proxy.ProxyLoaded)
+            if (proxy.IsProxyLoaded())
             {
                 switch (invocation.Method.Name)
                 {
-                    case string name when name == $"set_{nameof(Registry.Item)}": goto default;
-                    case string name when name == $"get_{nameof(Registry.Item)}": goto default;
-
                     case string name when name.StartsWith("set_"):
                         property = invocation.Method.Name.Substring(4);
                         value = invocation.Arguments[0].ToString();
-                        store = proxy.ColumnStores.FirstOrDefault(x => x.Key == property);
+                        store = proxy.GetColumnStores().FirstOrDefault(x => x.Key == property);
                         proxyProperty = proxy.GetType().GetProperty(property);
 
                         if (store != null)
@@ -38,7 +35,7 @@ namespace Dawnx.Data
 
                     case string name when name.StartsWith("get_"):
                         property = invocation.Method.Name.Substring(4);
-                        store = proxy.ColumnStores.FirstOrDefault(x => x.Key == property);
+                        store = proxy.GetColumnStores().FirstOrDefault(x => x.Key == property);
                         proxyProperty = proxy.GetType().GetProperty(property);
 
                         if (store != null)

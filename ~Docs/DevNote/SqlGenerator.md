@@ -17,7 +17,7 @@ install-package SimpleData
 And, you can use this simple database to test your own queries. Just like this:
 
 ```C#
-using (var sqlite = new NorthwndContext(SqliteOptions))
+using (var sqlite = new NorthwndContext(SimpleSources.NorthwndOptions))
 {
     var query = sqlite.Employees.Where(x => x.City == "London");
     var sql = query.ToSql();

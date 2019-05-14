@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.NPOI
 {
-    public class SheetRange : IEnumerable<SheetCell>
+    public class SheetRange : IEnumerable<SheetCell>, IStylizable
     {
         public ExcelSheet Sheet { get; private set; }
         public (int row, int col) Start { get; private set; }
@@ -45,14 +45,26 @@ namespace Dawnx.NPOI
         public void SetCStyle(Action<CStyleApplier> initApplier)
             => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
 
-        public SheetRange SelectColunm(int startOffsetCol)
+        public SheetRangeColumnSelector Columns => new SheetRangeColumnSelector(this);
+        public SheetRangeGroup Column(params int[] indexes)
         {
-            return new SheetRange(Sheet, (Start.row, Start.col + startOffsetCol), (End.row, Start.col + startOffsetCol));
+            IEnumerable<SheetRange> select()
+            {
+                foreach (var index in indexes)
+                    yield return new SheetRange(Sheet, (Start.row, Start.col + index), (End.row, Start.col + index));
+            }
+            return new SheetRangeGroup(select());
         }
 
-        public SheetRange SelectColunms(int startOffsetCol, int endOffsetCol)
+        public SheetRangeRowSelector Rows => new SheetRangeRowSelector(this);
+        public SheetRangeGroup Row(params int[] indexes)
         {
-            return new SheetRange(Sheet, (Start.row, Start.col + startOffsetCol), (End.row, Start.col + endOffsetCol));
+            IEnumerable<SheetRange> select()
+            {
+                foreach (var index in indexes)
+                    yield return new SheetRange(Sheet, (Start.row + index, Start.col), (Start.row + index, End.col));
+            }
+            return new SheetRangeGroup(select());
         }
 
         public void Merge()
@@ -103,7 +115,7 @@ namespace Dawnx.NPOI
             var regex_matchId = new Regex(@"^\[\[.+?\]\](.*)$");
             foreach (var colIndex in offsetCols)
             {
-                foreach (var cell in SelectColunm(colIndex))
+                foreach (var cell in Column(colIndex))
                 {
                     var value = cell.GetValue();
                     if (value is string)

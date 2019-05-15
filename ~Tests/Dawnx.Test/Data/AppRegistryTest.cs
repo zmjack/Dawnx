@@ -15,6 +15,8 @@ namespace Dawnx.Data.Test
         public virtual int Age { get; set; }
 
         public virtual string NickName { get; set; } = "haha";
+
+        public virtual string Address { get; set; }
     }
 
     public class AppRegistryTest
@@ -36,6 +38,7 @@ namespace Dawnx.Data.Test
             Assert.Equal("Person1", zmjack.GetItemString());
             Assert.Equal(999, zmjack.Age);
             Assert.Equal("haha", zmjack.NickName);
+            Assert.Null(zmjack.Address);
 
             Assert.Throws<KeyNotFoundException>(() => zmjack.NickName = "new");
             Assert.Equal("999", regs.FirstOrDefault(x => x.Key == nameof(AppRegistry.Age))?.Value);

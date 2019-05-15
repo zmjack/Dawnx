@@ -53,6 +53,13 @@ namespace Dawnx.NPOI
             MapedWorkbook = Open(stream, version);
         }
 
+        public ExcelBook(byte[] bytes, ExcelVersion version)
+        {
+            Version = version;
+            var memory = new MemoryStream(bytes);
+            MapedWorkbook = Open(memory, version);
+        }
+
         public short GetDataFormat(string format) => MapedWorkbook.CreateDataFormat().GetFormat(format);
 
         public IEnumerable<ICellStyle> CellStyles => IntegerRange.Create(NumCellStyles).Select(i => GetCellStyleAt((short)i));
@@ -140,6 +147,17 @@ namespace Dawnx.NPOI
         public ExcelSheet GetSheet(string name) => new ExcelSheet(this, MapedWorkbook.GetSheet(name));
         public ExcelSheet GetSheetAt(int index) => new ExcelSheet(this, MapedWorkbook.GetSheetAt(index));
         public int GetSheetIndex(ExcelSheet sheet) => GetSheetIndex(sheet.SheetName);
+
+        public byte[] ToArray()
+        {
+            byte[] bytes;
+            using (var memory = new MemoryStream())
+            {
+                Write(memory);
+                bytes = memory.ToArray();
+            }
+            return bytes;
+        }
 
     }
 }

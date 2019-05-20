@@ -1,4 +1,5 @@
 ﻿using Dawnx.Algorithms.Tree;
+using Dawnx.Sequences;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -77,7 +78,24 @@ namespace Dawnx.Net.Web
                     AddRange(lines.Select(line =>
                     {
                         var groups = line.ProjectToArray(@"^(d?).+?\s+\d+\s+.+?\s+.+?\s+(\d+)\s+(.+)\s+(.+)$");
-                        //var lastWriteTime = DateTime.Parse(groups[3][0]);
+                        var lastWriteTime = groups[3][0].For(creationTime =>
+                        {
+                            var creationTimeGroups = "Mar 07  09:24".ProjectToArray(@"(\w+)\s+(\d+)\s+(.+)");
+                            var month = MonthSequence.GetMonth(creationTimeGroups[1][0]);
+                            var day = int.Parse(creationTimeGroups[2][0]);
+                            DateTime lastModify;
+
+                            //if like 09:00
+                            if (creationTimeGroups[3][0].Contains(":"))
+                            {
+                                var timeParts = creationTimeGroups[3][0].Split(':');
+                                lastModify = new DateTime(DateTime.Now.Year, month, day, int.Parse(timeParts[0]), int.Parse(timeParts[1]), 0);
+                            }
+                            //if like 2002
+                            else lastModify = new DateTime(int.Parse(creationTimeGroups[3][0]), month, day);
+
+                            return lastModify;
+                        });
                         var isDirectory = groups[1][0] == "d";
                         var size = long.Parse(groups[2][0]);
                         var name = groups[4][0];
@@ -85,8 +103,7 @@ namespace Dawnx.Net.Web
                         var item = new FtpListTree(FtpAccess, isDirectory ? $"{RelativePath}/{name}/" : "");
                         item.Model.Self(_ =>
                         {
-                            // LastWriteTime doesn't have a year component, so we decided to ignore it
-                            //_.LastWriteTime = lastWriteTime;
+                            _.LastWriteTime = lastWriteTime;
                             _.Type = isDirectory ? FtpListItem.ItemType.Directory : FtpListItem.ItemType.File;
                             _.Size = size;
                             _.Name = name;

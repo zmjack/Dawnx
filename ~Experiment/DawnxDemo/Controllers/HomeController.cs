@@ -20,6 +20,7 @@ namespace DawnxDemo.Controllers
 
         public IActionResult Index()
         {
+            throw new Exception("123");
             return View();
         }
 

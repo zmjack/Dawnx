@@ -6,6 +6,10 @@
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="wwwroot\js\components\**" />
     <Content Remove="wwwroot\js\components\**" />
@@ -31,7 +35,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <DotNetCliToolReference Include="Dawnx.Tools" Version="1.9.4" />
+    <DotNetCliToolReference Include="Dawnx.Tools" Version="*" />
   </ItemGroup>
 
   <ItemGroup>

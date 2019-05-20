@@ -24,9 +24,5 @@ namespace Dawnx.Lock
                 $"({Identifier})");
         }
 
-        public static new InstanceTsLock<TInstance> Get(params Expression<Func<TInstance, object>>[] flagExpressions)
-            => new InstanceTsLock<TInstance>(flagExpressions);
-        public static new InstanceTsLock<TInstance> Get(string identifier, params Expression<Func<TInstance, object>>[] flagExpressions)
-            => new InstanceTsLock<TInstance>(identifier, flagExpressions);
     }
 }

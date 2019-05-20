@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Dawnx.Lock
 {
@@ -6,11 +8,28 @@ namespace Dawnx.Lock
     /// Type lock
     /// </summary>
     /// <typeparam name="TType"></typeparam>
-    public static class TypeLock<TType>
+    public class TypeLock<TType>
     {
-        public static readonly string InternString = string.Intern(typeof(TType).FullName);
+        public string[] Flags { get; }
 
-        public static Lock Begin(TimeSpan timeout) => Lock.Begin(InternString, timeout);
-        public static Lock Begin(int millisecondsTimeout) => Lock.Begin(InternString, millisecondsTimeout);
+        protected TypeLock(params string[] flags)
+        {
+            Flags = flags;
+        }
+
+        public static TypeLock<TType> Get(params string[] flags) => new TypeLock<TType>(flags);
+
+        public virtual string InternString
+        {
+            get
+            {
+                return string.Intern(
+                   $"{typeof(TType).FullName} " +
+                   $"{Flags.Select(x => x.ToString().UrlEncode()).Join(" ")}");
+            }
+        }
+
+        public Lock Begin(TimeSpan timeout) => Lock.Begin(InternString, timeout);
+        public Lock Begin(int millisecondsTimeout) => Lock.Begin(InternString, millisecondsTimeout);
     }
 }

@@ -17,7 +17,7 @@ namespace Dawnx.Test.Lock
                 {
                     try
                     {
-                        using (TypeLock<TypeLockTest>.Begin(500))
+                        using (TypeLock<TypeLockTest>.Get().Begin(500))
                         {
                             Thread.Sleep(1000);
                             return "Entered";

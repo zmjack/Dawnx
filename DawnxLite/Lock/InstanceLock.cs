@@ -59,5 +59,6 @@ namespace Dawnx.Lock
 
         public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Begin(InternString(instance), timeout);
         public Lock Begin(TInstance instance, int millisecondsTimeout) => Lock.Begin(InternString(instance), millisecondsTimeout);
+
     }
 }

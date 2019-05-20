@@ -69,6 +69,8 @@ namespace DawnxDemo
                 app.UseHsts();
             }
 
+            app.UseErrorLogging<ErrorLoggingFileMiddleware>();
+
             app.UsePathBase(new PathString(Configuration["ASPNETCORE_APPL_PATH"]));
             app.UseStaticFiles();
             //app.UseHttpsRedirection();

@@ -78,9 +78,9 @@ namespace Dawnx.Net.Web
                     AddRange(lines.Select(line =>
                     {
                         var groups = line.ProjectToArray(@"^(d?).+?\s+\d+\s+.+?\s+.+?\s+(\d+)\s+(.+)\s+(.+)$");
-                        var lastWriteTime = groups[3][0].For(creationTime =>
+                        var lastWriteTime = groups[3][0].For(timePart =>
                         {
-                            var creationTimeGroups = "Mar 07  09:24".ProjectToArray(@"(\w+)\s+(\d+)\s+(.+)");
+                            var creationTimeGroups = timePart.ProjectToArray(@"(\w+)\s+(\d+)\s+(.+)");
                             var month = MonthSequence.GetMonth(creationTimeGroups[1][0]);
                             var day = int.Parse(creationTimeGroups[2][0]);
                             DateTime lastModify;

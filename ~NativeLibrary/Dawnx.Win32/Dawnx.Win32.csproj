@@ -74,6 +74,8 @@
     <Compile Include="~NativeConstants\NativeConstants - _.cs" />
     <Compile Include="~NativeConstants\NativeConstants - Y.cs" />
     <Compile Include="~NativeConstants\NativeConstants - Z.cs" />
+    <Compile Include="PInvoke\AutoIntPtr.cs" />
+    <Compile Include="PInvoke\MemoryAccessor.cs" />
     <Compile Include="~NativeMethods\NativeMethods - A.cs" />
     <Compile Include="~NativeMethods\NativeMethods - B.cs" />
     <Compile Include="~NativeMethods\NativeMethods - C.cs" />

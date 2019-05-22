@@ -238,19 +238,47 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnString.GetFromJson``1(System.String)">
+        <member name="M:Dawnx.AspNetCore.DawnObject.Json(System.Object,Dawnx.AspNetCore.JsonFormat)">
+            <summary>
+            Serializes the specified object to a JSON string.
+            </summary>
+            <param name="this"></param>
+            <param name="jsonFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.AspNetCore.DawnString.JsonX``1(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnString.GetFromJson(System.String)">
+        <member name="M:Dawnx.AspNetCore.DawnString.JsonX(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>
             <param name="this"></param>
             <returns></returns>
+        </member>
+        <member name="P:Dawnx.AspNetCore.JsonFormat.QuoteName">
+            <summary>
+            Gets or sets a value indicating whether object names will be surrounded with quotes.
+            </summary>
+        </member>
+        <member name="P:Dawnx.AspNetCore.JsonFormat.QuoteChar">
+            <summary>
+            Gets or sets which character to use to quote attribute values.
+            </summary>
+        </member>
+        <member name="P:Dawnx.AspNetCore.JsonFormat.Indentation">
+            <summary>
+            Gets or sets how many IndentChars to write for each level in the hierarchy.
+            </summary>
+        </member>
+        <member name="P:Dawnx.AspNetCore.JsonFormat.IndentChar">
+            <summary>
+            Gets or sets which character to use for indenting.
+            </summary>
         </member>
         <member name="F:Dawnx.AspNetCore.SimpleResponse.state">
             <summary>

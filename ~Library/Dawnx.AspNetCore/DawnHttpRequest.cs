@@ -115,7 +115,7 @@ namespace Dawnx.AspNetCore
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static object BodyJsonDecode(this HttpRequest @this, Encoding encoding)
-            => BodyString(@this, encoding).GetFromJson();
+            => BodyString(@this, encoding).JsonX();
 
         /// <summary>
         /// Deserializes the body(UTF-8), which is json, to a .NET object.
@@ -133,7 +133,7 @@ namespace Dawnx.AspNetCore
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static TRet BodyJsonDecode<TRet>(this HttpRequest @this, Encoding encoding)
-            => BodyString(@this, encoding).GetFromJson<TRet>();
+            => BodyString(@this, encoding).JsonX<TRet>();
 
     }
 }

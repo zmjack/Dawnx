@@ -1,17 +1,22 @@
 ﻿#if !USE
-
+using Dawnx.AspNetCore;
 using Dawnx.AspNetCore.Identity;
 using System;
 using System.Reflection;
 
 namespace DawnxDevloping
 {
-
-
     class Program
     {
         static void Main(string[] args)
         {
+            var item = new SimpleData.Northwnd.Category
+            {
+                CategoryID = 111,
+                CategoryName = "123",
+            };
+            var s = item.Json(JsonFormat.Default);
+
             return;
 
 

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PInvoke\AutoCharPtr.cs" />
     <Compile Include="~NativeConstants - Addition\NativeConstants - E.cs" />
     <Compile Include="~NativeConstants\NativeConstants - A.cs" />
     <Compile Include="~NativeConstants\NativeConstants - B.cs" />

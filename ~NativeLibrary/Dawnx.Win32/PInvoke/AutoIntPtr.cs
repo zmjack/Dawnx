@@ -40,11 +40,10 @@ namespace Dawnx.Win32.PInvoke
             return @this.Ptr;
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Dispose()
         {
             if (HasUnmanagedMemoryBeenAllocated) Marshal.FreeHGlobal(Ptr);
         }
-    }
 
+    }
 }

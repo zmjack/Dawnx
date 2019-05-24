@@ -28,6 +28,7 @@ namespace Dawnx.Win32App
         protected static int EnumWindowsProc(IntPtr hwnd, IntPtr lParam)
         {
             using var pid = new AutoIntPtr<int>();
+            using var pid = new AutoIntPtr<int>();
 
             StringBuilder window_text_ptr = new StringBuilder(255);
             string window_text;

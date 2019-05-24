@@ -28,19 +28,14 @@ namespace Dawnx.Win32App
         protected static int EnumWindowsProc(IntPtr hwnd, IntPtr lParam)
         {
             using var pid = new AutoIntPtr<int>();
-            using var pid = new AutoIntPtr<int>();
+            using var windowText = new AutoCharPtr(255);
 
-            StringBuilder window_text_ptr = new StringBuilder(255);
-            string window_text;
-
-            GetWindowTextW(hwnd, window_text_ptr, 255);
-            window_text = window_text_ptr.ToString();
-
+            GetWindowTextW(hwnd, windowText, windowText.Length);
             GetWindowThreadProcessId(hwnd, pid);
 
             if (pids.Any(x => x == pid.Value))
             {
-                if (window_text.StartsWith("无标题"))
+                if (windowText.Value.StartsWith("无标题"))
                 {
                     return 0;
                 }

@@ -10,6 +10,7 @@ namespace Dawnx.Win32.PInvoke
     public sealed class AutoCharPtr : IDisposable
     {
         public StringBuilder Ptr { get; private set; }
+        public int Length => Ptr.Capacity;
 
         public AutoCharPtr(int length)
         {

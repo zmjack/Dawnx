@@ -10,8 +10,8 @@ namespace Dawnx.Win32.PInvoke
     public sealed class AutoIntPtr<T> : IDisposable
     {
         public IntPtr Ptr { get; private set; }
-        public bool HasUnmanagedMemoryBeenAllocated { get; private set; }
         private T ManagedValue;
+        public bool HasUnmanagedMemoryBeenAllocated { get; private set; }
 
         public T Value
         {
@@ -34,6 +34,7 @@ namespace Dawnx.Win32.PInvoke
         {
             if (!@this.HasUnmanagedMemoryBeenAllocated)
             {
+                @this.ManagedValue = default;
                 @this.Ptr = Marshal.AllocHGlobal(sizeof(int));
                 @this.HasUnmanagedMemoryBeenAllocated = true;
             }

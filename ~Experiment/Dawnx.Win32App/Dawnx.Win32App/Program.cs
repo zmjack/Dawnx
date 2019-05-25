@@ -14,28 +14,32 @@ namespace Dawnx.Win32App
 {
     class Program
     {
-        public static IntPtr WindowHwnd;
-        public static IntPtr ProcessHwnd;
+        public static IntPtr HWnd;
+        public static uint ProcessId;
 
         static void Main(string[] args)
         {
-            EnumWindows(EnumWindowsProc, IntPtr.Zero);
+            var a = EnumWindows(EnumWindowsProc, IntPtr.Zero);
 
+            using (var m = new MemoryAccessor(ProcessId))
+            {
+                var v = m.I4(0x016A5010);
 
-            var r = Marshal.SizeOf(new int());
+                m.Write(0x016A5010, 102);
+                Console.WriteLine(v);
+            }
 
             //dynamic a;
             //var b = a[a.F(a.I4(0x1) + 0x1)];
-
         }
 
         protected static int EnumWindowsProc(IntPtr hwnd, IntPtr lParam)
         {
             var pids = Process.GetProcesses()
-                .Where(x => x.ProcessName == "Tutorial-i386.exe")
-                .Select(x => x.Id).ToArray();
+                .Where(x => x.ProcessName == "Tutorial-i386")
+                .Select(x => (uint)x.Id).ToArray();
 
-            using var pid = new AutoIntPtr<int>();
+            using var pid = new AutoIntPtr<uint>();
             using var windowText = new AutoCharPtr(255);
 
             GetWindowTextW(hwnd, windowText, windowText.Length);
@@ -46,8 +50,8 @@ namespace Dawnx.Win32App
 
             if (ret)
             {
-                WindowHwnd = hwnd;
-                ProcessHwnd = pid;
+                HWnd = hwnd;
+                ProcessId = pid.Value;
                 return 0;
             }
             else return 1;

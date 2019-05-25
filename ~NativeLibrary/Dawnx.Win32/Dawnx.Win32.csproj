@@ -24,8 +24,9 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
     <LangVersion>default</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
@@ -46,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PInvoke\AutoCharPtr.cs" />
-    <Compile Include="PInvoke\AutoIntPtr-T.cs" />
+    <Compile Include="PInvoke\AutoIntPtr.cs" />
     <Compile Include="~NativeConstants - Addition\NativeConstants - E.cs" />
     <Compile Include="~NativeConstants\NativeConstants - A.cs" />
     <Compile Include="~NativeConstants\NativeConstants - B.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="~NativeConstants\NativeConstants - _.cs" />
     <Compile Include="~NativeConstants\NativeConstants - Y.cs" />
     <Compile Include="~NativeConstants\NativeConstants - Z.cs" />
-    <Compile Include="PInvoke\AutoIntPtr.cs" />
     <Compile Include="PInvoke\MemoryAccessor.cs" />
     <Compile Include="~NativeMethods\NativeMethods - A.cs" />
     <Compile Include="~NativeMethods\NativeMethods - B.cs" />

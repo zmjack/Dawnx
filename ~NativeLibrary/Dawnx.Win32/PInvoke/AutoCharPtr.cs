@@ -12,10 +12,8 @@ namespace Dawnx.Win32.PInvoke
         public StringBuilder Ptr { get; private set; }
         public int Length => Ptr.Capacity;
 
-        public AutoCharPtr(int length)
-        {
-            Ptr = new StringBuilder(length);
-        }
+        public AutoCharPtr(int length) => Ptr = new StringBuilder(length);
+        public void Dispose() { }
 
         public string Value => Ptr.ToString();
 
@@ -25,10 +23,5 @@ namespace Dawnx.Win32.PInvoke
             return @this.Ptr;
         }
 
-        public void Dispose()
-        {
-        }
-
     }
-
 }

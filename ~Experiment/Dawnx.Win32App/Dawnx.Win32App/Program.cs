@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using static Dawnx.Win32.NativeMethods;
-using static Dawnx.Win32.NativeConstants;
+﻿using Dawnx.Win32.PInvoke;
+using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using Dawnx.Win32.PInvoke;
+using System.Linq;
+using static Dawnx.Win32.NativeMethods;
 
 namespace Dawnx.Win32App
 {
@@ -23,14 +17,12 @@ namespace Dawnx.Win32App
 
             using (var m = new MemoryAccessor(ProcessId))
             {
-                var v = m.I4(0x016A5010);
+                var v = m.F(0x016A86C4);
 
-                m.Write(0x016A5010, 102);
+                m.Write(0x016A86C4, 5000f);
                 Console.WriteLine(v);
             }
 
-            //dynamic a;
-            //var b = a[a.F(a.I4(0x1) + 0x1)];
         }
 
         protected static int EnumWindowsProc(IntPtr hwnd, IntPtr lParam)

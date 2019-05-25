@@ -10,11 +10,11 @@ namespace Dawnx.Win32.PInvoke
         public int TargetPointerLength { get; private set; }
         public IntPtr HProcess { get; private set; }
 
-        public MemoryAccessor(uint pid, int targetPointerLength = 4)
+        public MemoryAccessor(uint pid, int targetPointerLength = 4, uint dwDesiredAccess = PROCESS_ALL_ACCESS | PROCESS_VM_READ | PROCESS_VM_WRITE)
         {
             if (new[] { 4, 8 }.Contains(targetPointerLength))
             {
-                HProcess = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_VM_READ | PROCESS_VM_WRITE, false, pid);
+                HProcess = OpenProcess(dwDesiredAccess, false, pid);
                 TargetPointerLength = targetPointerLength;
             }
             else throw new ArgumentException("The `TargetPointerLength` must be 4(x86) ro 8(x64).");

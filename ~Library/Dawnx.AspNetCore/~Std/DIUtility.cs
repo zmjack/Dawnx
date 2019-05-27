@@ -30,17 +30,17 @@ namespace Dawnx.AspNetCore
         {
             var assembly = Assembly.GetEntryAssembly();
             var webHostBuilder = assembly
-                .For(_ =>
+                .For(self =>
                 {
                     var className = $"{assembly.GetName().Name}.Program";
-                    var type = _.GetType(className);
+                    var type = self.GetType(className);
                     if (type != null) return type;
                     else throw new EntryPointNotFoundException($"Can not find class '{className}'");
                 })
-                .For(_ =>
+                .For(self =>
                 {
                     var methodName = "CreateWebHostBuilder";
-                    var method = _.GetMethod(methodName);
+                    var method = self.GetMethod(methodName);
                     if (method != null) return method;
                     else throw new EntryPointNotFoundException($"Can not find method '{methodName}'");
                 })

@@ -56,6 +56,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DawnxDemo", "~Experiment\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dawnx.RTC", "~Experiment\Dawnx.RTC\Dawnx.RTC.csproj", "{30253114-33B7-4676-8BFB-8846D1B2E1FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linqx", "Linqx\Linqx.csproj", "{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -282,6 +284,18 @@ Global
 		{30253114-33B7-4676-8BFB-8846D1B2E1FB}.Release|x64.Build.0 = Release|Any CPU
 		{30253114-33B7-4676-8BFB-8846D1B2E1FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{30253114-33B7-4676-8BFB-8846D1B2E1FB}.Release|x86.Build.0 = Release|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Debug|x64.Build.0 = Debug|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Debug|x86.Build.0 = Debug|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Release|x64.ActiveCfg = Release|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Release|x64.Build.0 = Release|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0D12DD9-2A61-469B-9B9B-4052D84F1FC4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

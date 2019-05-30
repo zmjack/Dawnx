@@ -2,7 +2,6 @@
 using Dawnx.Reflection;
 using Dawnx.Sequences;
 using NPOI.SS.UserModel;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -297,18 +296,10 @@ namespace Dawnx.NPOI
                         valueString = ((double)value).ToString(cstyle.DataFormat);
                     else valueString = value.ToString();
 
-                    var bitmap = new SKBitmap(1, 1);
-                    using (SKCanvas canvas = new SKCanvas(bitmap))
-                    using (SKPaint sKPaint = new SKPaint())
+                    using (var bitmap = new Bitmap(1, 1))
+                    using (var graphics = Graphics.FromImage(new Bitmap(1, 1)))
                     {
-                        sKPaint.Color = SKColors.White;
-                        sKPaint.TextSize = cstyle.Font.FontSize;
-                        sKPaint.Typeface = SKTypeface.FromFamilyName(cstyle.Font.FontName, SKFontStyle.Normal);
-                        SKRect fontSize = new SKRect();
-                        sKPaint.MeasureText(valueString, ref fontSize);
-
-                        //var graphics = Graphics.FromImage(new Bitmap(1, 1));
-                        //var fontSize = graphics.MeasureString(valueString, new Font(cstyle.Font.FontName, cstyle.Font.FontSize));
+                        var fontSize = graphics.MeasureString(valueString, new Font(cstyle.Font.FontName, cstyle.Font.FontSize));
                         var width = fontSize.Width > 0 ? (int)((COLUMN_BORDER_PX + AUTO_SIZE_PADDING_PX + fontSize.Width) / EXCEL_WIDTH_PER_PX) : 0;
                         if (width > maxWidth) maxWidth = width;
                     }

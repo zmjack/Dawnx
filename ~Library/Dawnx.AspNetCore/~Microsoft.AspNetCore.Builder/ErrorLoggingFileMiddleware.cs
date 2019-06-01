@@ -1,12 +1,8 @@
 ﻿using Dawnx.AspNetCore;
 using Dawnx.Lock;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Builder
 {

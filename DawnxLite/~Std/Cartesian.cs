@@ -45,6 +45,6 @@ namespace Dawnx
             ret.Each((v, i0, i1, i2, i3, i4, i5, i6) => ret[i0, i1, i2, i3, i4, i5, i6] = Tuple.Create(a0[i0], a1[i1], a2[i2], a3[i3], a4[i4], a5[i5], a6[i6]));
             return ret;
         }
-        
+
     }
 }

@@ -11,7 +11,7 @@ namespace Dawnx
                 return @this.Current;
             else return default(TElement);
         }
-        
+
         public static object TakeElement(this IEnumerator @this)
         {
             if (@this.MoveNext())

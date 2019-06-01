@@ -21,7 +21,7 @@ namespace Dawnx.Entity
             @this.Each(_ => MonitorCarry(_, carry));
             return @this;
         }
-        
+
     }
 
 }

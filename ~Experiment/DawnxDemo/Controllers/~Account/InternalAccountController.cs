@@ -1,13 +1,10 @@
-﻿using System.Security.Claims;
-using Dawnx;
-using Dawnx.AspNetCore;
-using Dawnx.AspNetCore.Authorization;
+﻿using Dawnx.AspNetCore.Authorization;
 using Dawnx.Security;
-using DawnxTemplate.Authorizations.WechatHybridAuthorize;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Security.Claims;
 
 namespace DawnxDemo.Controllers
 {

@@ -6,7 +6,7 @@ namespace Dawnx
     {
         public delegate void ReadProcessingHandler(Stream readTarget, byte[] buffer, int readLength);
         public delegate void WriteProcessingHandler(Stream writeTarget, byte[] buffer, int totalWrittenLength);
-        
+
         public static void ReadProcess(this Stream @this, int bufferSize, ReadProcessingHandler processing)
         {
             var buffer = new byte[bufferSize];

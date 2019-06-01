@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
+using Dawnx.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using Dawnx.AspNetCore;
+using System.Threading.Tasks;
 
 namespace DawnxTemplate.Authorizations.WechatHybridAuthorize
 {

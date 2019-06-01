@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Dawnx.AspNetCore.Authorization;
 using DawnxDemo.Models;
-using DawnxDemo.Data;
-using System;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using System.Threading.Tasks;
-using DawnxTemplate.Authorizations.WechatHybridAuthorize;
-using Dawnx.AspNetCore.Authorization;
 using DawnxTemplate.Authorizations.UserAuthorize;
+using DawnxTemplate.Authorizations.WechatHybridAuthorize;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Diagnostics;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace DawnxDemo.Controllers
 {

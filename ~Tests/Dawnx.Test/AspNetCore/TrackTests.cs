@@ -1,6 +1,6 @@
-using Xunit;
-using System.Linq;
 using System;
+using System.Linq;
+using Xunit;
 
 namespace Dawnx.AspNetCore.Test
 {

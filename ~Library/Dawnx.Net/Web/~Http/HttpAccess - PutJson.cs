@@ -33,7 +33,7 @@ namespace Dawnx.Net.Web
         public JToken PutJsonFor(string url, object updata)
             => PutJsonFor(url, ObjectUtility.CovertToDictionary(updata));
 
-        public HttpWebResponse PutJsonResponse(string url, Dictionary<string, object> updata = null) 
+        public HttpWebResponse PutJsonResponse(string url, Dictionary<string, object> updata = null)
             => GetPureResponse(HttpVerb.PUT, MimeType.APPLICATION_JSON, url, updata, null);
 
     }

@@ -1,10 +1,8 @@
-﻿using Dawnx;
-using Dawnx.Security.AesSecurity;
+﻿using Dawnx.Security.AesSecurity;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.IO;
-using System.Linq;
 
 namespace DawnxDemo
 {

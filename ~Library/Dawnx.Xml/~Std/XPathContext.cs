@@ -15,7 +15,7 @@ namespace Dawnx.Xml
             public XPathResultType[] ArgTypes { get; set; }
             public MethodInfo Method { get; set; }
         }
-        
+
         /// <summary>
         /// This event has the source arguments that are available before the defined function is called.
         ///     And it is called when the function defined in the context is called.

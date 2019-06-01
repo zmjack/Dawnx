@@ -28,6 +28,6 @@ namespace Dawnx.Algorithms.MathAlgorithm
 
             return new Matrix(values);
         }
-        
+
     }
 }

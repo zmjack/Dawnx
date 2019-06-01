@@ -16,7 +16,7 @@ namespace Dawnx.Xml.SampleWithHAP
                     @"<div id=""category_2"">category_2</div>" +
                     @"<div id=""output"">bye</div>");
             });
-            
+
             var context = new MyContext().Self(_ =>
             {
                 _.AddNamespace("fn");

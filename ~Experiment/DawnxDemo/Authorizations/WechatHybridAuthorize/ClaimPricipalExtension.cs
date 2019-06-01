@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Dawnx.AspNetCore;
+using System;
 using System.Security.Claims;
-using Dawnx.AspNetCore;
 
 namespace DawnxTemplate.Authorizations.WechatHybridAuthorize
 {

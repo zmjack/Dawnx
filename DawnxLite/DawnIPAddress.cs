@@ -12,6 +12,6 @@ namespace Dawnx
         /// <returns></returns>
         public static long ToLong(this IPAddress @this)
             => BitConverter.ToUInt32(@this.GetAddressBytes(), 0);
-        
+
     }
 }

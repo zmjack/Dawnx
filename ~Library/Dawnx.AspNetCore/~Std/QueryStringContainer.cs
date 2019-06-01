@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Microsoft.AspNetCore.Http;
 
 namespace Dawnx.AspNetCore
 {
@@ -19,7 +19,7 @@ namespace Dawnx.AspNetCore
             Source[key] = value;
             return this;
         }
-        
+
         public override string ToString()
         {
             return Source.Select(pair

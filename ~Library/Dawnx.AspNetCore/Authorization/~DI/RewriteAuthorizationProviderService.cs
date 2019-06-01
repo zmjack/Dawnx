@@ -1,5 +1,4 @@
-﻿using System;
-using Dawnx.AspNetCore.Authorization;
+﻿using Dawnx.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.Extensions.DependencyInjection

@@ -11,7 +11,7 @@ namespace Dawnx.LuaEngine
             if (new[] { DataType.Function, DataType.ClrFunction }.Contains(@this.Type))
                 return @this.Function.Call(args);
             else throw new InvalidOperationException("The DynValue is not a function.");
-        }        
+        }
 
     }
 }

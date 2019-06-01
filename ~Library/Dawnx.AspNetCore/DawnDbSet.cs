@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Dawnx.AspNetCore.Data;
+﻿using Dawnx.AspNetCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Dawnx.AspNetCore
 {

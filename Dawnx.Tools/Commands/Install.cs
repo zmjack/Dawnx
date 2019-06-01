@@ -62,7 +62,7 @@ namespace Dawnx.Tools
                                     };
 
                                     int retry = 0, allowedRetry = 3;
-                                    retry:
+                                retry:
                                     try
                                     {
                                         web.GetDownload(file, url);

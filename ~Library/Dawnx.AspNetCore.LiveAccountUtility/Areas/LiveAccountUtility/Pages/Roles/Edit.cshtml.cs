@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Dawnx.AspNetCore.LiveAccount;
+﻿using Dawnx.AspNetCore.LiveAccount;
 using Dawnx.AspNetCore.LiveAccount.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
 
 namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
 {
@@ -42,7 +42,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
         {
             if (!LiveAccountUtility.Authority?.Advanced?.IsUserAllowed(User) ?? false)
                 throw Authority.New_UnauthorizedAccessException;
-            
+
             ViewData["LiveOperations"] = _liveAccountManager.LiveOperations.ToArray();
             ViewData["RoleLiveOperations"] = _liveAccountManager.GetRoleOperations(Input.Id);
 

@@ -15,7 +15,7 @@ namespace Dawnx
         public static IQueryable<TEntity> WhereStrategy<TEntity>(this IQueryable<TEntity> @this,
             IWhereStrategy<TEntity> strategy)
             => @this.Where(strategy.StrategyExpression);
-                
+
     }
 
 }

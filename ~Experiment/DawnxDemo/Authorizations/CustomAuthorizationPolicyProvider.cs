@@ -1,12 +1,9 @@
-using System.Linq;
-using System.Text.RegularExpressions;
 using Dawnx.Analysises;
 using Dawnx.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
 using DawnxTemplate.Authorizations.UserAuthorize;
 using DawnxTemplate.Authorizations.WechatHybridAuthorize;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace DawnxTemplate.Authorizations

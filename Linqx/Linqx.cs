@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace System.Linq
+﻿namespace System.Linq
 {
     public partial class Linqx
     {

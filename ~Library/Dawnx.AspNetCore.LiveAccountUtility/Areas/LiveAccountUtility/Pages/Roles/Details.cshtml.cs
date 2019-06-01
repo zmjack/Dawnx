@@ -34,7 +34,7 @@ namespace Dawnx.AspNetCore.LiveAccountUtility.Pages.Roles
 
             ViewData["LiveOperations"] = _liveAccountManager.LiveRoleOperations.ToArray();
             ViewData["RoleLiveOperations"] = _liveAccountManager.GetRoleOperations(Input.Id);
-            
+
             return Page();
         }
 

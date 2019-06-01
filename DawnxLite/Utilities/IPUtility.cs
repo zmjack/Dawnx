@@ -13,6 +13,6 @@ namespace Dawnx.Utilities
         /// <returns></returns>
         public static string GetLongString(IPAddress ip)
             => BitConverter.ToUInt32(ip.GetAddressBytes().Reverse().ToArray(), 0).ToString();
-        
+
     }
 }

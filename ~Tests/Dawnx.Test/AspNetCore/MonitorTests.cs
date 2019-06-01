@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using Xunit;
-using System.Linq;
-using System.Collections.Generic;
 using Dawnx.Entity;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace Dawnx.AspNetCore.Test
 {

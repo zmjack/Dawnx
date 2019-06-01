@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Dawnx.AspNetCore.LiveAccount.Entities;
+﻿using Dawnx.AspNetCore.LiveAccount.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {

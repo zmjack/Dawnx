@@ -9,6 +9,6 @@ namespace DawnxDemo.Data
             : base(options)
         {
         }
-        
+
     }
 }

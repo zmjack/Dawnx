@@ -197,7 +197,7 @@ namespace Dawnx.Net.Web
                     break;
             }
 
-            var request = ((HttpWebRequest)WebRequest.Create(new Uri(url)));
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
             {
                 StateContainer.Headers.Self(headers =>
                 {

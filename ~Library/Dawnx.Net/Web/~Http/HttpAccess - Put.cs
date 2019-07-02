@@ -23,15 +23,11 @@ namespace Dawnx.Net.Web
         public string PutDownload(Stream receiver, string url, object updata, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => PutDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), bufferSize);
 
-        public TRet PutFor<TRet>(string url, Dictionary<string, object> updata = null)
-            => JsonConvert.DeserializeObject<TRet>(Put(url, updata));
-        public TRet PutFor<TRet>(string url, object updata)
-            => PutFor<TRet>(url, ObjectUtility.CovertToDictionary(updata));
+        public TRet PutFor<TRet>(string url, Dictionary<string, object> updata = null) => PackAsJson<TRet>(Put(url, updata));
+        public TRet PutFor<TRet>(string url, object updata) => PutFor<TRet>(url, ObjectUtility.CovertToDictionary(updata));
 
-        public JToken PutFor(string url, Dictionary<string, object> updata = null)
-            => JsonConvert.DeserializeObject<JToken>(Put(url, updata));
-        public JToken PutFor(string url, object updata)
-            => PutFor(url, ObjectUtility.CovertToDictionary(updata));
+        public JToken PutFor(string url, Dictionary<string, object> updata = null) => PackAsJson<JToken>(Put(url, updata));
+        public JToken PutFor(string url, object updata) => PutFor(url, ObjectUtility.CovertToDictionary(updata));
 
         public HttpWebResponse PutResponse(string url, Dictionary<string, object> updata = null)
             => GetPureResponse(HttpVerb.PUT, MimeType.APPLICATION_X_WWW_FORM_URLENCODED, url, updata, null);

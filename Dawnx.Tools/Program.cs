@@ -36,7 +36,7 @@ namespace Dawnx.Tools
                 ProjectUtility.PrintInfo();
 
 #if DEBUG
-                Run(new string[] { "tsgen" });
+                Run(new string[] { "install", "vuets" });
                 //Run(new string[] { "tsgen", "-i", "jsend" });
 #else
                 Run(args);

@@ -303,5 +303,17 @@ namespace Dawnx.Net.Web
             return this;
         }
 
+        public TRet PackAsJson<TRet>(string json)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<TRet>(json);
+            }
+            catch (Exception ex)
+            {
+                throw new WebException($"Can not convert to Object from JsonString. Origin code is: {json}", ex);
+            }
+        }
+
     }
 }

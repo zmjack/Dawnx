@@ -65,7 +65,7 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
   ```sqlite
   SELECT "x"."CategoryID", "x"."CategoryName", "x"."Description", "x"."Picture"
   FROM "Categories" AS "x"
-  WHERE instr("x"."Description", 'Sweet') > 0;
+  WHERE instr("x"."FirstName", 'Steven') > 0;
   ```
 
   ----
@@ -107,9 +107,9 @@ The source of database is "**%userprofile%/.nuget/simpledata/{version}/source/no
 
   ----
 
-  In addition, we may also need to use some other special queries. For example, you want to search for another string in many fields.
+  In addition, we may also need to use some other special queries. For example, if you want to search for another string in many fields.
 
-  This is an example of querying ***tofu*** and ***pkg*** in the fields ***ProductName*** and ***QuantityPerUnit***.
+  This is an example of querying ***ToFu*** and ***pkg*** in the fields ***ProductName*** and ***QuantityPerUnit***.
 
   ```c#
   sqlite.Products.WhereSearch(new[] { "Tofu", "pkg" }, x => new 

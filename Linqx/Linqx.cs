@@ -1,6 +1,6 @@
 ﻿namespace System.Linq
 {
-    public partial class Linqx
+    public class Linqx
     {
     }
 }

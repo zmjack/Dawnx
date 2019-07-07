@@ -42,7 +42,8 @@ namespace Dawnx.Tools
                         {
                             var url = item["url"].Value<string>();
                             var md5 = item["md5"].Value<string>();
-                            var saveas = $@"{Program.DOWNLOAD_DIRECTORY}\{Path.GetFileName(url)}";
+                            var fileName = item["fileName"].Value<string>();
+                            var saveas = $@"{Program.DOWNLOAD_DIRECTORY}\{fileName}";
                             var extract = item["extract"].Value<bool>();
 
                             if (!File.Exists(saveas) || !FileUtility.CheckMD5(saveas, md5))
@@ -55,9 +56,7 @@ namespace Dawnx.Tools
                                     {
                                         Con.Row(new[]
                                         {
-                                            $"{fileDone() + 1}/{fileCount}",
-                                            $"| {Path.GetFileName(saveas)}",
-                                            ((double)received / length).ToString("0.00%")
+                                            $"{fileDone() + 1}/{fileCount}", $"| {fileName}", ((double)received / length).ToString("0.00%")
                                         }, tableLengths);
                                     };
 

@@ -30,9 +30,11 @@ namespace Dawnx.CConsole
             return this;
         }
 
-        public Cout Line()
+        public Cout Line(int number = 1)
         {
-            Console.WriteLine();
+            for (int i = 0; i < number; i++)
+                Console.WriteLine();
+
             return this;
         }
 

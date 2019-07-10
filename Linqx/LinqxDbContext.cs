@@ -6,8 +6,6 @@ namespace Linqx
 {
     public class LinqxDbContext : DbContext
     {
-        public static bool UseTrackAttributes = true;
-
         public LinqxDbContext(DbContextOptions options) : base(options) { }
         protected LinqxDbContext() : base() { }
 

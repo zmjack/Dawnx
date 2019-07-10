@@ -12,11 +12,19 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="T:Dawnx.Analysises.ConsoleArgs">
+        <member name="T:Dawnx.Data.ConsoleArgs">
             <summary>
             This class provides some methods to
                 separate the console arguments to content or property.
             </summary>
+        </member>
+        <member name="T:Dawnx.Data.SqlScope`3">
+            <summary>
+            Easy to use and secure SQL Executor
+            </summary>
+            <typeparam name="TDbConnection"></typeparam>
+            <typeparam name="TDbCommand"></typeparam>
+            <typeparam name="TDbParameter"></typeparam>
         </member>
         <member name="M:Dawnx.CConsole.ConUtility.CreateBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
@@ -69,14 +77,6 @@
             <param name="headers"></param>
             <param name="colLines"></param>
             <param name="lengths"></param>
-        </member>
-        <member name="T:Dawnx.Data.SqlScope`3">
-            <summary>
-            Easy to use and secure SQL Executor
-            </summary>
-            <typeparam name="TDbConnection"></typeparam>
-            <typeparam name="TDbCommand"></typeparam>
-            <typeparam name="TDbParameter"></typeparam>
         </member>
         <member name="M:Dawnx.DawnArray.Base64String(System.Byte[])">
             <summary>
@@ -199,16 +199,6 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnArray.SelectPage``1(``0[],System.Int32,System.Int32)">
-            <summary>
-            Projects page elements of a sequence into a new form.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="pageNumber">'pageNumber' starts at 1</param>
-            <param name="pageSize"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.DawnBoolean.Not(System.Boolean)">
             <summary>
             Invert the Boolean value.
@@ -328,14 +318,95 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.DawnICollection.SelectPage``1(System.Collections.Generic.ICollection{``0},System.Int32,System.Int32)">
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
-            Projects page elements of a sequence into a new form.
+            Do action for each item.
             </summary>
             <typeparam name="TSource"></typeparam>
             <param name="this"></param>
-            <param name="pageNumber">'pageNumber' starts at 1</param>
-            <param name="pageSize"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.IEnumerable,System.Action{``0})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.IEnumerable,System.Action{``0,System.Int32})">
+            <summary>
+            Do action for each item.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="task"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.AsVI``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns a collection of tuples containing values and indexes.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.AsVI``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns a collection of tuples containing values and indexes.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Join``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Concatenates the members of a collection, using the specified separator between each member.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Projects each element of the specified array into a new distributed array collection by 'Classify' method.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TConditionRet"></typeparam>
+            <param name="this"></param>
+            <param name="Classify"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
+            <summary>
+            Projects each element of the specified array into a new distributed array collection by 'Classify' method.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TConditionRet"></typeparam>
+            <param name="this"></param>
+            <param name="Classify"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnIEnumerable.Distribute``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Boolean)">
+            <summary>
+            Projects each element of the specified array into a new distributed array collection by its index.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="this"></param>
+            <param name="count"></param>
+            <param name="alignRight"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.DawnInt32.IsOdd(System.Int32)">
@@ -1559,313 +1630,6 @@
             <param name="source"></param>
             <param name="instance"></param>
             <param name="patternExp"></param>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.OrderByCaseStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.OrderByCaseDescendingStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.ThenByCaseStrategy``1(System.Linq.IOrderedEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.ThenByCaseDescendingStrategy``1(System.Linq.IOrderedEnumerable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.WhereStrategy``1(System.Collections.Generic.IEnumerable{``0},Dawnx.Linq.IWhereStrategy{``0})">
-            <summary>
-            Use a WhereStragtegy to generate a where expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.SelectPage``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
-            <summary>
-            Projects page elements of a sequence into a new form.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="pageNumber">'pageNumber' starts at 1</param>
-            <param name="pageSize"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32@)">
-            <summary>
-            Calculates the max page number through the specified page size.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="pageSize"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.PageCount``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
-            <summary>
-            Calculates the max page number through the specified page size.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="pageSize"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.DistinctByValue``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Returns distinct elements from a sequence by using a specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="source"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.DistinctByValue``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
-            <summary>
-            Returns distinct elements from a sequence by using a specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="source"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.ExceptByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Produces the set difference of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.ExceptByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
-            <summary>
-            Produces the set difference of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.UnionByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Produces the set union of two sequences by using a specified properties.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.UnionByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
-            <summary>
-            Produces the set union of two sequences by using a specified properties.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.IntersectByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object})">
-            <summary>
-            Produces the set intersection of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.IntersectByValue``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object}[])">
-            <summary>
-            Produces the set intersection of two sequences by using the specified properties to compare values.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="first"></param>
-            <param name="second"></param>
-            <param name="compare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
-            <summary>
-            Do action for each item.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="task"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.IEnumerable,System.Action{``0})">
-            <summary>
-            Do action for each item.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="task"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
-            <summary>
-            Do action for each item.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="task"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Each``1(System.Collections.IEnumerable,System.Action{``0,System.Int32})">
-            <summary>
-            Do action for each item.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="task"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.AsVI``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Returns a collection of tuples containing values and indexes.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.AsVI``1(System.Collections.IEnumerable)">
-            <summary>
-            Returns a collection of tuples containing values and indexes.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Join``1(System.Collections.Generic.IEnumerable{``0},System.String)">
-            <summary>
-            Concatenates the members of a collection, using the specified separator between each member.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="separator"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
-            <summary>
-            Projects each element of the specified array into a new distributed array collection by 'Classify' method.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <typeparam name="TConditionRet"></typeparam>
-            <param name="this"></param>
-            <param name="Classify"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Distribute``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
-            <summary>
-            Projects each element of the specified array into a new distributed array collection by 'Classify' method.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <typeparam name="TConditionRet"></typeparam>
-            <param name="this"></param>
-            <param name="Classify"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIEnumerable.Distribute``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Boolean)">
-            <summary>
-            Projects each element of the specified array into a new distributed array collection by its index.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="count"></param>
-            <param name="alignRight"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.OrderByCaseStrategy``1(System.Linq.IQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.OrderByCaseDescendingStrategy``1(System.Linq.IQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.ThenByCaseStrategy``1(System.Linq.IOrderedQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.ThenByCaseDescendingStrategy``1(System.Linq.IOrderedQueryable{``0},Dawnx.Linq.IOrderStrategy{``0})">
-            <summary>
-            Use an OrderStrategy to generate an orberby expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.WhereStrategy``1(System.Linq.IQueryable{``0},Dawnx.Linq.IWhereStrategy{``0})">
-            <summary>
-            Use a WhereStragtegy to generate a where expression.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <param name="strategy"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.SelectPage``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
-            <summary>
-            Projects page elements of a sequence into a new form.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="pageNumber">'pageNumber' starts at 1</param>
-            <param name="pageSize"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.DawnIQueryable.PageCount``1(System.Linq.IQueryable{``0},System.Int32)">
-            <summary>
-            Calculates the max page number through the specified page size.
-            </summary>
-            <typeparam name="TSource"></typeparam>
-            <param name="this"></param>
-            <param name="pageSize"></param>
-            <returns></returns>
         </member>
         <member name="T:Dawnx.JSend.Error`1">
             <summary>

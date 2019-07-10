@@ -215,22 +215,6 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnIQueryable.GetStorageName``1(System.Linq.IQueryable{``0})">
-            <summary>
-            Gets the provider name of database.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.AspNetCore.DawnIQueryable.ToSql``1(System.Linq.IQueryable{``0})">
-            <summary>
-            Gets the generated Sql string.
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="this"></param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.AspNetCore.DawnObject.Json(System.Object)">
             <summary>
             Serializes the specified object to a JSON string.
@@ -246,14 +230,14 @@
             <param name="jsonFormat"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnString.JsonX``1(System.String)">
+        <member name="M:Dawnx.AspNetCore.DawnString.JsonFor``1(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnString.JsonX(System.String)">
+        <member name="M:Dawnx.AspNetCore.DawnString.JsonFor(System.String)">
             <summary>
             Deserializes the JSON to a .NET object.
             </summary>
@@ -395,14 +379,6 @@
             Hint: Each custom properties must be virtual(public).
             </summary>
             <typeparam name="TSelf"></typeparam>
-        </member>
-        <member name="M:Microsoft.EntityFrameworkCore.IntelliTrackExtensions.IntelliTrack(Microsoft.EntityFrameworkCore.DbContext,System.Boolean)">
-            <summary>
-            This method should be called before 'base.SaveChanges'.
-            </summary>
-            <param name="this"></param>
-            <param name="acceptAllChangesOnSuccess"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

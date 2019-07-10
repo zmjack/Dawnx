@@ -1,12 +1,11 @@
-using Dawnx;
-using Dawnx.Data;
 using Dawnx.AspNetCore.Reflection;
+using Dawnx.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class IVModelTests
     {

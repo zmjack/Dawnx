@@ -1,6 +1,6 @@
 using Dawnx;
-using Linqx.Strategies;
 using Microsoft.EntityFrameworkCore;
+using NLinq.Strategies;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Xunit;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class WhereSearch1Tests
     {

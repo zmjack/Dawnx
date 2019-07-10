@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class PagedEnumerableTest
     {

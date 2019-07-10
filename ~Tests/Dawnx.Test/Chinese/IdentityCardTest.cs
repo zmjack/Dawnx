@@ -1,5 +1,4 @@
-﻿using Dawnx.Utilities;
-using System;
+﻿using System;
 using Xunit;
 
 namespace Dawnx.Chinese.Test

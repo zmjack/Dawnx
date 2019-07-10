@@ -3,9 +3,8 @@ using SimpleData;
 using System;
 using System.Linq;
 using Xunit;
-using Linqx;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class ToSqlTests
     {

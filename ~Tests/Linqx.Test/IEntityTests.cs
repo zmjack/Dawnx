@@ -1,10 +1,7 @@
 using Dawnx;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Xunit;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class IEntityTests
     {

@@ -1,10 +1,9 @@
 ﻿using Dawnx.Utilities;
-using Linqx;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class TrackModel : IEntity<TrackModel>
     {

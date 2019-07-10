@@ -1,5 +1,5 @@
 ﻿using Dawnx.Reflection;
-using Linqx;
+using NLinq;
 using System;
 using System.Data;
 using System.Linq;

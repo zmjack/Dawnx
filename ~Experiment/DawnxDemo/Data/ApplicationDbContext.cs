@@ -1,8 +1,5 @@
-﻿using Linqx;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using NLinq;
 
 namespace DawnxDemo.Data
 {

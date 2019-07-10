@@ -11,9 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="logs\**" />
     <Compile Remove="wwwroot\js\components\**" />
+    <Content Remove="logs\**" />
     <Content Remove="wwwroot\js\components\**" />
+    <EmbeddedResource Remove="logs\**" />
     <EmbeddedResource Remove="wwwroot\js\components\**" />
+    <None Remove="logs\**" />
     <None Remove="wwwroot\js\components\**" />
   </ItemGroup>
 
@@ -42,13 +46,12 @@
   <ItemGroup>
     <Folder Include="Areas\NxPanel\Data\" />
     <Folder Include="Areas\NxPanel\Models\" />
-    <Folder Include="logs\" />
     <Folder Include="wwwroot\modules\axios\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\..\Linqx\Linqx.csproj" />
+    <ProjectReference Include="..\..\NLinq\NLinq.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
   </ItemGroup>
 

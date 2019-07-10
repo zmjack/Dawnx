@@ -1,10 +1,6 @@
 ﻿#if !USE
-using Dawnx.AspNetCore;
-using Dawnx.AspNetCore.Identity;
 using DawnxDemo.Data;
 using Microsoft.EntityFrameworkCore;
-using SimpleData;
-using System;
 using System.Linq;
 
 namespace DawnxDevloping

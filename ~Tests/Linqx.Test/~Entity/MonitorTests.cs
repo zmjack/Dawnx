@@ -1,10 +1,9 @@
-using Linqx;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Linqx.Test
+namespace NLinq.Test
 {
     public class MonitorTests
     {

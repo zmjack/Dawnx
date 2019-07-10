@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using NLinq;
+using System.Linq;
 using Xunit;
-using Linqx;
 
 namespace Dawnx.Algorithms.Container.Test
 {

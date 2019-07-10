@@ -1,4 +1,4 @@
-﻿using Dawnx.Entity;
+﻿using Linqx;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

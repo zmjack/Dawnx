@@ -9,14 +9,14 @@ namespace Dawnx.AspNetCore
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static TRet JsonX<TRet>(this string @this) => JsonConvert.DeserializeObject<TRet>(@this);
+        public static TRet JsonFor<TRet>(this string @this) => JsonConvert.DeserializeObject<TRet>(@this);
 
         /// <summary>
         /// Deserializes the JSON to a .NET object.
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static object JsonX(this string @this) => JsonConvert.DeserializeObject(@this);
+        public static object JsonFor(this string @this) => JsonConvert.DeserializeObject(@this);
 
     }
 }

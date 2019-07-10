@@ -128,16 +128,5 @@ namespace Dawnx
             return @this;
         }
 
-        /// <summary>
-        /// Projects page elements of a sequence into a new form.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="this"></param>
-        /// <param name="pageNumber">'pageNumber' starts at 1</param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public static PagedEnumerable<TSource> SelectPage<TSource>(this TSource[] @this, int pageNumber, int pageSize)
-            => new PagedEnumerable<TSource>(@this, pageNumber, pageSize);
-
     }
 }

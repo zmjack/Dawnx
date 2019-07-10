@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 
-namespace Dawnx.Analysises.Test
+namespace Dawnx.Data.Test
 {
     public class ConsoleArgsTest
     {

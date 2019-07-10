@@ -1,4 +1,4 @@
-using Dawnx.Analysises;
+using Dawnx.Data;
 using Dawnx.AspNetCore.Authorization;
 using DawnxTemplate.Authorizations.UserAuthorize;
 using DawnxTemplate.Authorizations.WechatHybridAuthorize;

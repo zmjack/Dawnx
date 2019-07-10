@@ -1,4 +1,4 @@
-﻿using Dawnx.Analysises;
+﻿using Dawnx.Data;
 using Dawnx.Net.Web;
 using Dawnx.Security.AesSecurity;
 using System;

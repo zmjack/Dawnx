@@ -61,9 +61,10 @@ namespace Dawnx
             if (total.IsOdd()) left += 1;
 
             var sb = new StringBuilder(widthA);
-            IntegerRange.Create(left).Each(i => sb.Append(fillChar));
+
+            for (int i = 0; i < left; i++) sb.Append(fillChar);
             sb.Append(@this);
-            IntegerRange.Create(right).Each(i => sb.Append(fillChar));
+            for (int i = 0; i < right; i++) sb.Append(fillChar);
 
             return sb.ToString();
         }
@@ -298,8 +299,7 @@ namespace Dawnx
             if (match.Success)
             {
                 if (target is null)
-                    return new IntegerRange(1, match.Groups.Count - 1)
-                        .Select(i => match.Groups[i].Value).Join("");
+                    return string.Join("", new IntegerRange(1, match.Groups.Count - 1).Select(i => match.Groups[i].Value));
                 else return regex.Replace(match.Groups[0].Value, target);
             }
             else return null;

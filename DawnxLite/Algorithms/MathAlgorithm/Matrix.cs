@@ -37,14 +37,14 @@ namespace Dawnx.Algorithms.MathAlgorithm
             {
                 var divisor = SelectDeterminant(IntegerRange.Create(RowLength).ToArray());
 
-                IntegerRange.Create(RowLength).Each(i =>
+                for (int i = 0; i < RowLength; i++)
                 {
                     var dividend = SelectDeterminant(
                         IntegerRange.Create(RowLength).ToArray()
                             .Self(_ => _[i] = ColumnLength - 1)
                             .ToArray());
                     ret[i] = dividend.Value / divisor.Value;
-                });
+                }
 
                 return ret;
             }

@@ -1,4 +1,4 @@
-﻿using Dawnx.Entity;
+﻿using Linqx;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
     <PackageReference Include="SimpleData" Version="1.0.6" />
   </ItemGroup>
 
@@ -19,6 +20,7 @@
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
+    <ProjectReference Include="..\DawnxDemo\DawnxDemo.csproj" />
   </ItemGroup>
 
 </Project>

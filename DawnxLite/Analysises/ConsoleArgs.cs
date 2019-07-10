@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Dawnx.Analysises
+namespace Dawnx.Data
 {
     /// <summary>
     /// This class provides some methods to

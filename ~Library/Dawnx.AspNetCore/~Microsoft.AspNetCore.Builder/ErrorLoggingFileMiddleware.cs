@@ -22,7 +22,7 @@ namespace Microsoft.AspNetCore.Builder
                 var now = DateTime.Now;
                 var pathBase = "logs";
                 var dailyDirectory = now.ToString("yyyyMMdd");
-                var hourlyFile = $"{dailyDirectory}/{now.ToString("yyyyMMdd HH")}.txt";
+                var hourlyFile = $"{dailyDirectory}/{now.ToString("yyyyMMdd HH")}-{((now.Hour + 1) % 24).ToString("00")}.txt";
 
                 if (CheckHourlyFile != hourlyFile)
                 {

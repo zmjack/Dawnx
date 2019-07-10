@@ -33,7 +33,7 @@ namespace DawnxDemo
             services.RewriteAuthorizationProvider<CustomAuthorizationPolicyProvider>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             //services.AddIdentity<IdentityUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()

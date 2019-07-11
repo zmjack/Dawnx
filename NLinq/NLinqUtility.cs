@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace NLinq
 {
-    public static partial class LinqxUtility
+    public static partial class NLinqUtility
     {
         public static ValueConverter<TModel, TProvider> BuildConverter<TModel, TProvider>(IProvider<TModel, TProvider> field)
         {

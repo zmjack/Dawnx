@@ -3,7 +3,7 @@ using NLinq;
 
 namespace DawnxDemo.Data
 {
-    public class ApplicationDbContext : LinqxDbContext
+    public class ApplicationDbContext : NDbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 

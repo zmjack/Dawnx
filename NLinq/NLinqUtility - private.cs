@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace NLinq
 {
-    public static partial class LinqxUtility
+    public static partial class NLinqUtility
     {
         private static void ApplyIndexes(object entityTypeBuilder, Type modelClass)
         {
@@ -50,7 +50,7 @@ namespace NLinq
                     var hasConversionMethod = typeof(PropertyBuilder).GetMethod(nameof(PropertyBuilder.HasConversion), new[] { typeof(ValueConverter) });
 
                     dynamic provider = Activator.CreateInstance(attr.ProviderType);
-                    hasConversionMethod.Invoke(propertyBuilder, new object[] { LinqxUtility.BuildConverter(provider) });
+                    hasConversionMethod.Invoke(propertyBuilder, new object[] { NLinqUtility.BuildConverter(provider) });
                 }
             }
         }

@@ -19,13 +19,13 @@ namespace NLinq.Test
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            LinqxUtility.IntelliTrack(this, acceptAllChangesOnSuccess);
+            NLinqUtility.IntelliTrack(this, acceptAllChangesOnSuccess);
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         {
-            LinqxUtility.IntelliTrack(this, acceptAllChangesOnSuccess);
+            NLinqUtility.IntelliTrack(this, acceptAllChangesOnSuccess);
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }

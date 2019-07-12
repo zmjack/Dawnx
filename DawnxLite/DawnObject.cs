@@ -46,7 +46,6 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="convert"></param>
         /// <returns></returns>
-        [Obsolete("This method should be only used in development environments.")]
         public static TRet For<TSelf, TRet>(this TSelf @this, TRet convert) => convert;
 
         /// <summary>

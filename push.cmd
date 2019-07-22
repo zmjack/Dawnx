@@ -18,6 +18,6 @@ nuget push "~Library/Dawnx.Xml/bin/Release/Dawnx.Xml.1.12.0.nupkg" -source nuget
 nuget push "~Localization/Dawnx.Chinese/bin/Release/Dawnx.Chinese.1.12.0.nupkg" -source nuget.org
 
 ::==== NLinq ====
-nuget push "NLinq/bin/Release/NLinq.0.0.1.nupkg" -source nuget.org
+nuget push "NLinq/bin/Release/NLinq.0.0.2.nupkg" -source nuget.org
 
 pause

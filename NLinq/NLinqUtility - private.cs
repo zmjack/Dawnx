@@ -109,7 +109,7 @@ namespace NLinq
                 var csharp = trackAttr.CSharp;
                 var entity = entry.Entity;
                 var entityType = entity.GetType()
-                    .For(_ => _.Module.FullyQualifiedName != "<In Memory Module>" ? _ : _.BaseType);
+                    .For(self => self.Module.FullyQualifiedName != "<In Memory Module>" ? self : self.BaseType);
 
                 Script shell;
                 if (type != null)

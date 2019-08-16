@@ -31,26 +31,6 @@ namespace NLinq
             => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters));
 
         //TODO: Pending Delete
-        ///// <summary>
-        ///// Returns distinct elements from a sequence by using a specified properties to compare values.
-        ///// </summary>
-        ///// <typeparam name="TSource"></typeparam>
-        ///// <param name="source"></param>
-        ///// <param name="compare"></param>
-        ///// <returns></returns>
-        //public static IQueryable<TSource> DistinctByValue<TSource>(this IQueryable<TSource> source, Func<TSource, object> compare)
-        //        => Queryable.Distinct(source, new ExactEqualityComparer<TSource>(compare));
-
-        ///// <summary>
-        ///// Produces the set difference of two sequences by using the specified properties to compare values.
-        ///// </summary>
-        ///// <typeparam name="TSource"></typeparam>
-        ///// <param name="first"></param>
-        ///// <param name="second"></param>
-        ///// <param name="compare"></param>
-        ///// <returns></returns>
-        //public static IQueryable<TSource> ExceptByValue<TSource>(this IQueryable<TSource> first, IQueryable<TSource> second, Func<TSource, object> compare)
-        //    => Queryable.Except(first, second, new ExactEqualityComparer<TSource>(compare));
 
         ///// <summary>
         ///// Produces the set union of two sequences by using a specified properties.

@@ -50,26 +50,6 @@ namespace NLinq
             => @this.Where(Expression.Lambda<Func<TSource, bool>>(Expression.Not(predicate.Body), predicate.Parameters).Compile());
 
         /// <summary>
-        /// Returns distinct elements from a sequence by using a specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IEnumerable<TSource> DistinctByValue<TSource>(this IEnumerable<TSource> source, Func<TSource, object> compare)
-                => Enumerable.Distinct(source, new ExactEqualityComparer<TSource>(compare));
-
-        /// <summary>
-        /// Returns distinct elements from a sequence by using a specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IEnumerable<TSource> DistinctByValue<TSource>(this IEnumerable<TSource> source, Func<TSource, object>[] compares)
-                => Enumerable.Distinct(source, new ExactEqualityComparer<TSource>(compares));
-
-        /// <summary>
         /// Produces the set difference of two sequences by using the specified properties to compare values.
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
@@ -77,21 +57,10 @@ namespace NLinq
         /// <param name="second"></param>
         /// <param name="compare"></param>
         /// <returns></returns>
-        public static IEnumerable<TSource> ExceptByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, object> compare)
+        public static IEnumerable<TSource> ExceptBy<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Expression<Func<TSource, object>> compare)
             => Enumerable.Except(first, second, new ExactEqualityComparer<TSource>(compare));
 
         /// <summary>
-        /// Produces the set difference of two sequences by using the specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IEnumerable<TSource> ExceptByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, object>[] compares)
-            => Enumerable.Except(first, second, new ExactEqualityComparer<TSource>(compares));
-
-        /// <summary>
         /// Produces the set union of two sequences by using a specified properties.
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
@@ -99,21 +68,10 @@ namespace NLinq
         /// <param name="second"></param>
         /// <param name="compare"></param>
         /// <returns></returns>
-        public static IEnumerable<TSource> UnionByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, object> compare)
+        public static IEnumerable<TSource> UnionBy<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Expression<Func<TSource, object>> compare)
             => Enumerable.Union(first, second, new ExactEqualityComparer<TSource>(compare));
 
         /// <summary>
-        /// Produces the set union of two sequences by using a specified properties.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IEnumerable<TSource> UnionByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, object>[] compares)
-            => Enumerable.Union(first, second, new ExactEqualityComparer<TSource>(compares));
-
-        /// <summary>
         /// Produces the set intersection of two sequences by using the specified properties to compare values.
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
@@ -121,19 +79,8 @@ namespace NLinq
         /// <param name="second"></param>
         /// <param name="compare"></param>
         /// <returns></returns>
-        public static IEnumerable<TSource> IntersectByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, object> compare)
+        public static IEnumerable<TSource> IntersectBy<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Expression<Func<TSource, object>> compare)
             => Enumerable.Intersect(first, second, new ExactEqualityComparer<TSource>(compare));
-
-        /// <summary>
-        /// Produces the set intersection of two sequences by using the specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IEnumerable<TSource> IntersectByValue<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, object>[] compares)
-            => Enumerable.Intersect(first, second, new ExactEqualityComparer<TSource>(compares));
 
     }
 

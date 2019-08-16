@@ -50,30 +50,12 @@ namespace NLinq
         /// <typeparam name="TEntity">Instance of IEntity</typeparam>
         /// <param name="this">Source model</param>
         /// <param name="model">The model which provide values</param>
-        /// <param name="includes">Specifies properties that are applied to the source model.</param>
+        /// <param name="includes_MemberOrNewExp">Specifies properties that are applied to the source model.</param>
         /// <returns></returns>
-        public static TEntity Accept<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> includes)
+        public static TEntity Accept<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> includes_MemberOrNewExp)
             where TEntity : class, IEntity
         {
-            string[] propNames;
-            switch (includes.Body)
-            {
-                case MemberExpression exp:
-                    propNames = new[] { exp.Member.Name };
-                    break;
-
-                case NewExpression exp:
-                    propNames = exp.Members.Select(x => x.Name).ToArray();
-                    break;
-
-                default:
-                    throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
-            }
-
-            // Filter
-            var type = typeof(TEntity);
-            var props = type.GetProperties()
-                .Where(a => propNames.Contains(a.Name));
+            var props = ExpressionUtility.GetProperties(includes_MemberOrNewExp);
 
             // Copy values
             foreach (var prop in props)
@@ -90,25 +72,12 @@ namespace NLinq
         /// <typeparam name="TEntity">Instance of IEntity</typeparam>
         /// <param name="this">Source model</param>
         /// <param name="model">The model which provide values</param>
-        /// <param name="excludes">Specifies properties that aren't applied to the source model.</param>
+        /// <param name="excludes_MemberOrNewExp">Specifies properties that aren't applied to the source model.</param>
         /// <returns></returns>
-        public static TEntity AcceptBut<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> excludes)
+        public static TEntity AcceptBut<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> excludes_MemberOrNewExp)
             where TEntity : class, IEntity
         {
-            string[] propNames;
-            switch (excludes.Body)
-            {
-                case MemberExpression exp:
-                    propNames = new[] { exp.Member.Name };
-                    break;
-
-                case NewExpression exp:
-                    propNames = exp.Members.Select(x => x.Name).ToArray();
-                    break;
-
-                default:
-                    throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
-            }
+            var propNames = ExpressionUtility.GetPropertyNamesForMemberOrNew(excludes_MemberOrNewExp);
 
             // Filter
             var type = typeof(TEntity);
@@ -167,8 +136,7 @@ namespace NLinq
         {
             // Filter
             var type = @this.GetType();
-            var props = type.GetProperties()
-                .Where(a => propNames.Contains(a.Name));
+            var props = type.GetProperties().Where(x => propNames.Contains(x.Name));
 
             // Copy Values
             var ret = new Dictionary<string, string>();
@@ -178,24 +146,10 @@ namespace NLinq
             return ret;
         }
 
-        public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this, Expression<Func<TEntity, object>> includes)
+        public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this, Expression<Func<TEntity, object>> includes_MemberOrNewExpression)
             where TEntity : class, IEntity<TEntity>, new()
         {
-            string[] propNames;
-            switch (includes.Body)
-            {
-                case MemberExpression exp:
-                    propNames = new[] { exp.Member.Name };
-                    break;
-
-                case NewExpression exp:
-                    propNames = exp.Members.Select(x => x.Name).ToArray();
-                    break;
-
-                default:
-                    throw new NotSupportedException("This argument 'includes' must be MemberExpression or NewExpression.");
-            }
-
+            var propNames = ExpressionUtility.GetPropertyNamesForMemberOrNew(includes_MemberOrNewExpression);
             return ToDisplayDictionary(@this as IEntity, propNames);
         }
 

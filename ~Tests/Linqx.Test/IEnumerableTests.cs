@@ -66,7 +66,7 @@ namespace NLinq.Test
         public void DistinctByValueTest()
         {
             var s = new[] { "a1", "a2", "b1", "b2" };
-            Assert.Equal(new[] { "a1", "b1" }, s.DistinctByValue(x => x.CharAt(0)));
+            Assert.Equal(new[] { "a1", "b1" }, s.DistinctBy(x => x.CharAt(0)));
         }
 
     }

@@ -1,4 +1,4 @@
-﻿#if !USE
+﻿#if USE
 using DawnxDemo.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

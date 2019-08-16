@@ -1,9 +1,3 @@
-## DawnIQureryable
-
-This class provides some extension functions to generate SQL to query database record.
-
-
-
 ### How to try it?
 
 Firstly, you should install the **SimpleData** package through **Nuget**.

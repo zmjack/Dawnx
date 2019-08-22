@@ -15,7 +15,8 @@ namespace NLinq
         /// <returns></returns>
         public static IQueryable<TSource> DistinctBy<TSource>(this IQueryable<TSource> source, Func<TSource, object> compare)
         {
-            return source.GroupBy(compare).Select(x => x.First()).AsQueryable();
+            //TODO: This method will be search all records of `source`, may be optimized.
+            return source.GroupBy(compare).Select(x => x.FirstOrDefault()).AsQueryable();
         }
 
         ///// <summary>

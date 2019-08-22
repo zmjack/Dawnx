@@ -14,7 +14,7 @@ namespace NLinq
         public ExactEqualityComparer(Expression<Func<TEntity, object>> compares_MemberOrNewExp)
         {
             var type = typeof(TEntity);
-            var propNames = ExpressionUtility.GetPropertyNamesForMemberOrNew(compares_MemberOrNewExp);
+            var propNames = ExpressionUtility.GetPropertyNames(compares_MemberOrNewExp);
             var compareList = new List<Delegate>();
 
             foreach (var propName in propNames)

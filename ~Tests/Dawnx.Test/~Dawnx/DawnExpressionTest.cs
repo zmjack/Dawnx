@@ -10,7 +10,7 @@ namespace Dawnx.Test
         [Fact]
         public void Test()
         {
-            var exp = new Expression<Func<Order_Detail, bool>>[]
+            var exp = new Expression<Func<OrderDetail, bool>>[]
             {
                  x => x.OrderID == 1,
                  x => x.ProductID == 1,

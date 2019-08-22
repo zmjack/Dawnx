@@ -9,7 +9,7 @@ namespace Dawnx.Utilities
 {
     public static class ExpressionUtility
     {
-        public static string[] GetPropertyNamesForMemberOrNew<TEntity>(Expression<Func<TEntity, object>> memberOrNewExp)
+        public static string[] GetPropertyNames<TEntity>(Expression<Func<TEntity, object>> memberOrNewExp)
         {
             string[] propNames;
             switch (memberOrNewExp.Body)
@@ -31,10 +31,16 @@ namespace Dawnx.Utilities
 
         public static IEnumerable<PropertyInfo> GetProperties<TEntity>(Expression<Func<TEntity, object>> memberOrNewExp)
         {
-            string[] propNames = GetPropertyNamesForMemberOrNew(memberOrNewExp);
+            var propNames = GetPropertyNames(memberOrNewExp);
             var type = typeof(TEntity);
             var props = type.GetProperties().Where(x => propNames.Contains(x.Name));
             return props;
+        }
+
+        public static MemberExpression[] GetSingleExpressions<TEntity>(Expression<Func<TEntity, object>> memberOrNewExp)
+        {
+            var propNames = GetPropertyNames(memberOrNewExp);
+            return propNames.Select(name => Expression.PropertyOrField(Expression.Parameter(typeof(TEntity)), name)).ToArray();
         }
 
     }

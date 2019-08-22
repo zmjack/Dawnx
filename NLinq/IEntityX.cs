@@ -77,7 +77,7 @@ namespace NLinq
         public static TEntity AcceptBut<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> excludes_MemberOrNewExp)
             where TEntity : class, IEntity
         {
-            var propNames = ExpressionUtility.GetPropertyNamesForMemberOrNew(excludes_MemberOrNewExp);
+            var propNames = ExpressionUtility.GetPropertyNames(excludes_MemberOrNewExp);
 
             // Filter
             var type = typeof(TEntity);
@@ -149,7 +149,7 @@ namespace NLinq
         public static Dictionary<string, string> ToDisplayDictionary<TEntity>(this IEntity<TEntity> @this, Expression<Func<TEntity, object>> includes_MemberOrNewExpression)
             where TEntity : class, IEntity<TEntity>, new()
         {
-            var propNames = ExpressionUtility.GetPropertyNamesForMemberOrNew(includes_MemberOrNewExpression);
+            var propNames = ExpressionUtility.GetPropertyNames(includes_MemberOrNewExpression);
             return ToDisplayDictionary(@this as IEntity, propNames);
         }
 

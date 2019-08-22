@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.9" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="SimpleData" Version="1.0.6" />
+    <PackageReference Include="SimpleData" Version="1.0.12" />
   </ItemGroup>
 
   <ItemGroup>

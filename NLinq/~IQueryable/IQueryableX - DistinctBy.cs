@@ -6,18 +6,18 @@ namespace NLinq
 {
     public static partial class IQueryableX
     {
-        /// <summary>
-        /// Returns distinct elements from a sequence by using a specified properties to compare values.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="compare"></param>
-        /// <returns></returns>
-        public static IQueryable<TSource> DistinctBy<TSource>(this IQueryable<TSource> source, Func<TSource, object> compare)
-        {
-            //TODO: This method will be search all records of `source`, may be optimized.
-            return source.GroupBy(compare).Select(x => x.FirstOrDefault()).AsQueryable();
-        }
+        ///// <summary>
+        ///// Returns distinct elements from a sequence by using a specified properties to compare values.
+        ///// </summary>
+        ///// <typeparam name="TSource"></typeparam>
+        ///// <param name="source"></param>
+        ///// <param name="compare"></param>
+        ///// <returns></returns>
+        //public static IQueryable<TSource> DistinctBy<TSource>(this IQueryable<TSource> source, Func<TSource, object> compare)
+        //{
+        //    //TODO: This method will be search all records of `source`, may be optimized.
+        //    return source.GroupBy(compare).Select(x => x.FirstOrDefault()).AsQueryable();
+        //}
 
         ///// <summary>
         ///// Produces the set difference of two sequences by using the specified properties to compare values.

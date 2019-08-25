@@ -19,9 +19,9 @@ namespace DawnxDevloping
             {
                 var s = sqlite.Employees.Where(x => x.FirstName == "123").ToSql();
 
-                var query = IQueryableX.DistinctBy(sqlite.Employees, x => x.City);
-                var sql2 = query.ToSql();
-                var result = query.ToArray();
+                var query = IEnumerableX.DistinctBy(sqlite.Employees, x => x.City).Where(x => x.FirstName == "123");
+                //var sql2 = query.ToSql();
+                //var result = query.ToArray();
             }
 
         }

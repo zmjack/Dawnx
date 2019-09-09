@@ -13,7 +13,7 @@ namespace NLinq
             return new ValueConverter<TModel, TProvider>(v => field.ConvertToProvider(v), v => field.ConvertFromProvider(v));
         }
 
-        public static void Apply(DbContext context, ModelBuilder modelBuilder)
+        public static void ApplyAnnotations(DbContext context, ModelBuilder modelBuilder, NLinqAnnotation annotation = NLinqAnnotation.All)
         {
             var entityMethod = modelBuilder.GetType()
                 .GetMethodViaQualifiedName("Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder`1[TEntity] Entity[TEntity]()");
@@ -26,8 +26,12 @@ namespace NLinq
                 var entityMethod1 = entityMethod.MakeGenericMethod(modelClass);
                 var entityTypeBuilder = entityMethod1.Invoke(modelBuilder, new object[0]);
 
-                ApplyIndexes(entityTypeBuilder, modelClass);
-                ApplyProviders(entityTypeBuilder, modelClass);
+                if ((annotation & NLinqAnnotation.Index) == NLinqAnnotation.Index)
+                    ApplyIndexes(entityTypeBuilder, modelClass);
+                if ((annotation & NLinqAnnotation.Provider) == NLinqAnnotation.Provider)
+                    ApplyProviders(entityTypeBuilder, modelClass);
+                if ((annotation & NLinqAnnotation.CompositeKey) == NLinqAnnotation.CompositeKey)
+                    ApplyCompositeKey(entityTypeBuilder, modelClass);
             }
         }
 

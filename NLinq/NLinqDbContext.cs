@@ -12,7 +12,7 @@ namespace NLinq
         protected virtual void ModelCreating(ModelBuilder modelBuilder) { }
         protected override sealed void OnModelCreating(ModelBuilder modelBuilder)
         {
-            NLinqUtility.Apply(this, modelBuilder);
+            NLinqUtility.ApplyAnnotations(this, modelBuilder);
             ModelCreating(modelBuilder);
         }
 

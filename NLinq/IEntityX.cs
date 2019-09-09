@@ -50,7 +50,13 @@ namespace NLinq
         /// <typeparam name="TEntity">Instance of IEntity</typeparam>
         /// <param name="this">Source model</param>
         /// <param name="model">The model which provide values</param>
-        /// <param name="includes_MemberOrNewExp">Specifies properties that are applied to the source model.</param>
+        /// <param name="includes_MemberOrNewExp">Specifies properties that are applied to the source model.
+        /// <para>A lambda expression representing the property(s) (x => x.Url).</para>
+        /// <para>
+        ///     If the value is made up of multiple properties then specify an anonymous
+        ///     type including the properties (x => new { x.Title, x.BlogId }).
+        /// </para>
+        /// </param>
         /// <returns></returns>
         public static TEntity Accept<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> includes_MemberOrNewExp)
             where TEntity : class, IEntity
@@ -72,7 +78,13 @@ namespace NLinq
         /// <typeparam name="TEntity">Instance of IEntity</typeparam>
         /// <param name="this">Source model</param>
         /// <param name="model">The model which provide values</param>
-        /// <param name="excludes_MemberOrNewExp">Specifies properties that aren't applied to the source model.</param>
+        /// <param name="excludes_MemberOrNewExp">Specifies properties that aren't applied to the source model.
+        /// <para>A lambda expression representing the property(s) (x => x.Url).</para>
+        /// <para>
+        ///     If the value is made up of multiple properties then specify an anonymous
+        ///     type including the properties (x => new { x.Title, x.BlogId }).
+        /// </para>
+        /// </param>
         /// <returns></returns>
         public static TEntity AcceptBut<TEntity>(this TEntity @this, TEntity model, Expression<Func<TEntity, object>> excludes_MemberOrNewExp)
             where TEntity : class, IEntity

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace NLinq.Test
     public partial class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
-            : base(new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase("default").Options)
+            : base(new DbContextOptionsBuilder<ApplicationDbContext>().UseMySql("server=127.0.0.1;database=nlinqtest").Options)
         {
         }
 
@@ -16,6 +17,13 @@ namespace NLinq.Test
         public DbSet<TrackModel> TrackModels { get; set; }
         public DbSet<EntityMonitorModel> EntityMonitorModels { get; set; }
         public DbSet<SimpleModel> SimpleModels { get; set; }
+        public DbSet<CompositeKeyModel> CompositeKeyModels { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            NLinqUtility.ApplyAnnotations(this, modelBuilder, NLinqAnnotation.All);
+            base.OnModelCreating(modelBuilder);
+        }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {

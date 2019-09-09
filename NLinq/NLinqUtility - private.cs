@@ -15,6 +15,19 @@ namespace NLinq
 {
     public static partial class NLinqUtility
     {
+        private static void ApplyCompositeKey(object entityTypeBuilder, Type modelClass)
+        {
+            var hasKeyMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasKey), new[] { typeof(string[]) });
+
+            var modelProps = modelClass.GetProperties()
+                .Where(x => x.GetCustomAttribute<CompositeKeyAttribute>() != null)
+                .OrderBy(x => x.GetCustomAttribute<CompositeKeyAttribute>().Order);
+            var propNames = modelProps.Select(x => x.Name).ToArray();
+
+            if (propNames.Any())
+                hasKeyMethod.Invoke(entityTypeBuilder, new object[] { propNames });
+        }
+
         private static void ApplyIndexes(object entityTypeBuilder, Type modelClass)
         {
             var hasIndexMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasIndex), new[] { typeof(string[]) });

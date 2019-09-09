@@ -8,7 +8,7 @@ namespace NLinq.Test
 {
     public class CompositeKeyModel
     {
-        [CompositeKey(3)]
+        [CompositeKey(1)]
         public Guid Id1 { get; set; }
 
         [CompositeKey(2)]

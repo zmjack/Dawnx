@@ -83,6 +83,14 @@ namespace NLinq.Test
                 Assert.Equal(27, result.Age);
             }
 
+
+            using (var context = new ApplicationDbContext())
+            {
+                var result = context.SimpleModels;
+                context.RemoveRange(result);
+                context.SaveChanges();
+            }
+
         }
 
     }

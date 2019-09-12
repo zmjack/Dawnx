@@ -20,8 +20,8 @@ namespace NLinq
             var hasKeyMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasKey), new[] { typeof(string[]) });
 
             var modelProps = modelClass.GetProperties()
-                .Where(x => x.GetCustomAttribute<CompositeKeyAttribute>() != null)
-                .OrderBy(x => x.GetCustomAttribute<CompositeKeyAttribute>().Order);
+                .Where(x => x.GetCustomAttribute<CPKeyAttribute>() != null)
+                .OrderBy(x => x.GetCustomAttribute<CPKeyAttribute>().Order);
             var propNames = modelProps.Select(x => x.Name).ToArray();
 
             if (propNames.Any())

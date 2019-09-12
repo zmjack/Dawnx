@@ -17,7 +17,7 @@ namespace NLinq.Test
         public DbSet<TrackModel> TrackModels { get; set; }
         public DbSet<EntityMonitorModel> EntityMonitorModels { get; set; }
         public DbSet<SimpleModel> SimpleModels { get; set; }
-        public DbSet<CompositeKeyModel> CompositeKeyModels { get; set; }
+        public DbSet<CPKeyModel> CompositeKeyModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

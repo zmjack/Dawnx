@@ -6,12 +6,12 @@ using System.Text;
 
 namespace NLinq.Test
 {
-    public class CompositeKeyModel
+    public class CPKeyModel
     {
-        [CompositeKey(1)]
+        [CPKey(1)]
         public Guid Id1 { get; set; }
 
-        [CompositeKey(2)]
+        [CPKey(2)]
         public Guid Id2 { get; set; }
 
     }

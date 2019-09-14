@@ -29,6 +29,11 @@ namespace NLinq
             _compares = compareList.ToArray();
         }
 
+        public ExactEqualityComparer(Func<TEntity, object>[] compares)
+        {
+            _compares = compares;
+        }
+
         public bool Equals(TEntity v1, TEntity v2) => _compares.All(f => f.DynamicInvoke(v1).Equals(f.DynamicInvoke(v2)));
         public int GetHashCode(TEntity obj) => 0;
     }

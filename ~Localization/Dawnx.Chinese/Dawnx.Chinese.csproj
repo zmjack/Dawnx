@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.15.0</Version>
+    <Version>1.16.0-preview2</Version>
     <Authors>zmjack</Authors>
     <Company>dawnx.net</Company>
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
@@ -26,6 +26,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="lib\ChnCharInfo.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="lib\netstandard2.0\ChnCharInfo.dll">
+      <PackagePath>lib\netstandard2.0\ChnCharInfo.dll</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\DawnxLite\DawnxLite.csproj" />
   </ItemGroup>
 
@@ -34,6 +45,12 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ChnCharInfo">
+      <HintPath>lib\netstandard2.0\ChnCharInfo.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

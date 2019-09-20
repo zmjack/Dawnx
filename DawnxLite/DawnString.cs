@@ -142,7 +142,7 @@ namespace Dawnx
         }
 
         /// <summary>
-        /// Returns the number of occurrences of substring sub in the string.
+        /// Returns the number of occurrences of substring which in the specified string.
         /// </summary>
         /// <param name="this"></param>
         /// <param name="searchString"></param>
@@ -412,7 +412,7 @@ namespace Dawnx
             if (fillWidth > 0)
             {
                 var fillBlank = false;
-                var padWidth = 0;
+                int padWidth;
 
                 if (paddingChar.GetLengthA() == 2)
                 {
@@ -454,7 +454,7 @@ namespace Dawnx
             if (fillWidth > 0)
             {
                 var fillBlank = false;
-                var padWidth = 0;
+                int padWidth;
 
                 if (paddingChar.GetLengthA() == 2)
                 {

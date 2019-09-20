@@ -37,6 +37,28 @@ namespace Dawnx.Utilities
         }
 
         /// <summary>
+        /// Converts a string to a CamelCase string.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string CamelCase(string source)
+        {
+            if (source.Length == 0) return "";
+
+            var chars = source.ToArray();
+            bool IsUpper(char ch) => 'A' <= ch && ch <= 'Z';
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (IsUpper(chars[i]))
+                    chars[i] = char.ToLower(chars[i]);
+                else break;
+            }
+
+            return new string(chars);
+        }
+
+        /// <summary>
         /// Projects some strings back into an instance's field or property. (Using `?` on the right side of a variable disables greedy matching)
         /// </summary>
         /// <typeparam name="TClass"></typeparam>

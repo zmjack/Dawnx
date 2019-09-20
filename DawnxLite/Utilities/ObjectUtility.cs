@@ -71,6 +71,7 @@ namespace Dawnx.Utilities
         /// Gets a <see cref="Dictionary{String, Object}"/> from an anonymouse type.
         /// </summary>
         /// <param name="instance"></param>
+        /// <param name="ignorePrefix"></param>
         /// <returns></returns>
         public static Dictionary<string, object> GetPropertyPureDictionary(object instance, bool ignorePrefix = false)
         {

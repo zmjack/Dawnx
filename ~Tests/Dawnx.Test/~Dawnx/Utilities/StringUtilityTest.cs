@@ -14,6 +14,15 @@ namespace Dawnx.Test.Utilities
         }
 
         [Fact]
+        public void CamelCaseTest()
+        {
+            Assert.Equal("jackT0", StringUtility.CamelCase("JackT0"));
+            Assert.Equal("jackT0", StringUtility.CamelCase("JAckT0"));
+            Assert.Equal("jackt0", StringUtility.CamelCase("JACKT0"));
+            Assert.Equal("jackT0", StringUtility.CamelCase("jackT0"));
+        }
+
+        [Fact]
         public void CommonStartsTest()
         {
             Assert.Equal("AB", StringUtility.CommonStarts("ABC", "AB123", "ABC23"));

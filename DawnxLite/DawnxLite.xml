@@ -1006,7 +1006,7 @@
         </member>
         <member name="M:Dawnx.DawnString.Count(System.String,System.String,System.Boolean)">
             <summary>
-            Returns the number of occurrences of substring sub in the string.
+            Returns the number of occurrences of substring which in the specified string.
             </summary>
             <param name="this"></param>
             <param name="searchString"></param>
@@ -1606,6 +1606,7 @@
             Gets a <see cref="T:System.Collections.Generic.Dictionary`2"/> from an anonymouse type.
             </summary>
             <param name="instance"></param>
+            <param name="ignorePrefix"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.RegexUtility.IPRange(System.String)">
@@ -1620,6 +1621,13 @@
             Get the common starts of the specified strings.
             </summary>
             <param name="strings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.StringUtility.CamelCase(System.String)">
+            <summary>
+            Converts a string to a CamelCase string.
+            </summary>
+            <param name="source"></param>
             <returns></returns>
         </member>
         <member name="M:Dawnx.Utilities.StringUtility.Extract``1(System.String,``0,System.Linq.Expressions.Expression{System.Func{``0,System.FormattableString}})">

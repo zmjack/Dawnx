@@ -83,7 +83,7 @@ namespace Dawnx.Utilities
                 }
             }).ToArray();
 
-            var prePattern = new[] { "\\", "/", "+", "*", "[", "]", "(", ")", "?", "|", "^" }
+            var prePattern = new[] { "/", "+", "*", "[", "]", "(", ")", "?", "|", "^" }
                 .Aggregate(format, (_acc, ch) => _acc.Replace(ch, $"\\{ch}"));
             var pattern = new IntegerRange(0, members.Length - 1)
                 .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.*?)").Replace($"{{{i}}}", @"(.*)"))

@@ -41,7 +41,7 @@ namespace Dawnx.Tools
 
             var assembly = Assembly.LoadFrom(dllPath);
             var tsFluent = TypeScript.Definitions().WithConvertor<Guid>(x => "string");
-            foreach (var type in assembly.GetTypesWhichMarkedAs<TsGenAttribute>())
+            foreach (var type in assembly.GetTypesWhichMarkedAs<TypeScriptModelAttribute>())
                 tsFluent.For(type);
 
 

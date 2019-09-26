@@ -31,7 +31,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <DotNetCliToolReference Include="Dawnx.Tools" Version="1.17.0" />
+    <DotNetCliToolReference Include="Dawnx.Tools" Version="1.18.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
     <ProjectReference Include="..\..\NLinq\NLinq.csproj" />
+    <ProjectReference Include="..\..\TypeSharp\TypeSharp.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
   </ItemGroup>
 

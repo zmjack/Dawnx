@@ -1,13 +1,22 @@
-﻿using Dawnx.Net.Web;
+﻿using Dawnx.Data;
+using Dawnx.Net.Web;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Dawnx.Tools
 {
-    public static partial class Commands
+    public class GcsCommand : ICommand
     {
-        public static void Gcs(string jsonFile)
+        public void Help()
         {
+            throw new NotImplementedException();
+        }
+
+        public void Run(ConsoleArgs args)
+        {
+            var jsonFile = args[1];
+
             if (!AlertUtility.ConfirmUseOnlineService()) return;
             Con.Print("Connect to dawnx service...").Line();
 
@@ -30,4 +39,5 @@ namespace Dawnx.Tools
         }
 
     }
+
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Dawnx.Annotation
+namespace TypeSharp
 {
     public class TypeScriptModelAttribute : Attribute
     {
         public string Namespace { get; set; }
-
     }
 
 }

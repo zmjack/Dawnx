@@ -61,6 +61,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\Dawnx.Tools\Dawnx.Tools.csproj" />
     <ProjectReference Include="..\..\DawnxLite\DawnxLite.csproj" />
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore.IdentityUtility\Dawnx.AspNetCore.IdentityUtility.csproj" />

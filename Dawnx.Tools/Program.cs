@@ -2,6 +2,7 @@
 using Dawnx.Net.Web;
 using Dawnx.Security.AesSecurity;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,8 +16,20 @@ namespace Dawnx.Tools
 
         public const string SUPPORT_URL = "http://dawnx.net/CliService";
 
+        private static Dictionary<string, ICommand> Commands = new Dictionary<string, ICommand>();
+
         static void Main(string[] args)
         {
+            var cargs = new ConsoleArgs(args, "-");
+
+            if (!cargs.Contents.Any())
+            {
+                // Help Content
+                return;
+            }
+
+            CacheCommands();
+
             if (!Directory.Exists(DOWNLOAD_DIRECTORY))
                 Directory.CreateDirectory(DOWNLOAD_DIRECTORY);
 
@@ -34,7 +47,9 @@ namespace Dawnx.Tools
 
                 ProjectUtility.PrintInfo();
 
-                Run(args);
+                if (Commands.ContainsKey(cargs[0]))
+                    Commands["cargs[0]"].Run(cargs);
+                else Console.WriteLine($"Unkown command: {cargs[0]}");
             }
             finally
             {
@@ -42,65 +57,20 @@ namespace Dawnx.Tools
             }
         }
 
-        private static void Run(string[] args)
+        private static void CacheCommands()
         {
-            var cargs = new ConsoleArgs(args, "-");
-
-            if (cargs.Contents.Any())
+            var types = Assembly.GetExecutingAssembly().GetTypesWhichMarkedAs<CommandAttribute>();
+            foreach (var type in types)
             {
-                switch (cargs[0])
-                {
-                    case "install":
-                        Commands.Install(cargs[1]);
-                        break;
+                var command = Activator.CreateInstance(type) as ICommand;
+                var attr = type.GetCustomAttribute<CommandAttribute>();
 
-                    case "gcs":
-                        Commands.Gcs(cargs[1]);
-                        break;
-
-                    case "tsgen":
-                        {
-                            var outFolder = cargs["--out"] ?? cargs["-o"] ?? "Typings/Gens";
-
-                            var includes = cargs["--include"]?.Split(",") ?? cargs["-i"]?.Split(",") ?? new string[0];
-                            Commands.TsGen(outFolder, includes);
-                        }
-                        break;
-
-                    case "aes":
-                        {
-                            AesKey aesKey = cargs[1] == "hex" ? AesKey.HexString : AesKey.Base64String;
-                            Commands.Aes(aesKey);
-                        }
-                        break;
-
-                    default:
-                        Con.Print("Unkown command.").Line();
-                        break;
-                }
+                if (!attr.Name.IsNullOrWhiteSpace())
+                    Commands[attr.Name.Trim()] = command;
+                if (!attr.ShortName.IsNullOrWhiteSpace())
+                    Commands[attr.ShortName.Trim()] = command;
             }
         }
-
-        //public static void AddView(
-        //    string view, string model, string controller, string area,
-        //    string template, string website, string user)
-        //{
-        //    if (!area.IsNullOrWhiteSpace())
-        //    {
-        //        var filePath = $"{_Directory}\\Areas\\{area}\\Views\\{controller}\\{view}.cshtml";
-        //        if (File.Exists(filePath))
-        //        {
-        //            using (var file = new FileStream(filePath, FileMode.Create))
-        //            using (var fileStream = new StreamWriter(file))
-        //            {
-
-        //            }
-        //        }
-        //    }
-
-        //    File.Exists($"{_Directory}\\Views\\{controller}");
-        //    Con.Line();
-        //}
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Dawnx.Net.Web;
+﻿using Dawnx.Data;
+using Dawnx.Net.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,10 +9,17 @@ using System.IO.Compression;
 
 namespace Dawnx.Tools
 {
-    public static partial class Commands
+    public class InstallCommand : ICommand
     {
-        public static void Install(string name)
+        public void Help()
         {
+            throw new NotImplementedException();
+        }
+
+        public void Run(ConsoleArgs args)
+        {
+            var name = args[1];
+
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/Install", new Dictionary<string, object>
             {
                 ["name"] = name,
@@ -158,4 +166,5 @@ namespace Dawnx.Tools
         }
 
     }
+
 }

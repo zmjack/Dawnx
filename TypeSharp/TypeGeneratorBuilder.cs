@@ -144,7 +144,7 @@ namespace TypeSharp
             return $"{fieldInfo.Name} : {TypeDefinitions[fieldType.FullName].ReferenceName} = {sValue}";
         }
 
-        public void CacheType(params Type[] types) => types.Each(type => CacheType(type));
+        public void CacheTypes(params Type[] types) => types.Each(type => CacheType(type));
         public void CacheType<TType>(TypeScriptModelAttribute attr = null) => CacheType(typeof(TType), attr);
         public void CacheType(Type type, TypeScriptModelAttribute attr = null)
         {

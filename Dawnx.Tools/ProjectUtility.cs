@@ -37,10 +37,10 @@ namespace Dawnx.Tools
         public static void PrintInfo()
         {
             Con.Print(
-                $"{nameof(ProjectName)}:\t{ProjectName}{Environment.NewLine}" +
-                $"{nameof(AssemblyName)}:\t{AssemblyName}{Environment.NewLine}" +
-                $"{nameof(RootNamespace)}:\t{RootNamespace}{Environment.NewLine}" +
-                $"{nameof(TargetFramework)}:\t{TargetFramework}{Environment.NewLine}").Line(2);
+                $"{nameof(ProjectName)}:        {ProjectName}{Environment.NewLine}" +
+                $"{nameof(AssemblyName)}:       {AssemblyName}{Environment.NewLine}" +
+                $"{nameof(RootNamespace)}:      {RootNamespace}{Environment.NewLine}" +
+                $"{nameof(TargetFramework)}:    {TargetFramework}{Environment.NewLine}").Line(2);
         }
 
         private static string GetAssemblyName(XmlDocument doc)

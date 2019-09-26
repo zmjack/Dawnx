@@ -51,8 +51,13 @@ namespace Dawnx.Tools
             #region Assembly Types
             {
                 var builder = new TypeScriptModelBuilder();
+                var fileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.d.ts")}";
                 var modelTypes = assembly.GetTypesWhichMarkedAs<TypeScriptModelAttribute>();
-                builder.WriteTo($"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.d.ts")}");
+
+                builder.CacheTypes(modelTypes);
+                builder.WriteTo(fileName);
+
+                Console.WriteLine($"File saved: {fileName}");
             }
             #endregion
 
@@ -60,8 +65,12 @@ namespace Dawnx.Tools
             if (includes.Contains("jsend"))
             {
                 var builder = new TypeScriptModelBuilder();
+                var fileName = $"{Path.GetFullPath($"{outFolder}/JSend.d.ts")}";
+
                 builder.CacheType<JSend>();
-                builder.WriteTo($"{Path.GetFullPath($"{outFolder}/JSend.d.ts")}");
+                builder.WriteTo(fileName);
+
+                Console.WriteLine($"File saved: {fileName}");
             };
             #endregion
         }

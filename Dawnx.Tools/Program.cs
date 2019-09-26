@@ -54,6 +54,7 @@ namespace Dawnx.Tools
             finally
             {
                 Console.CursorVisible = true;
+                Console.WriteLine("Completed.");
             }
         }
 

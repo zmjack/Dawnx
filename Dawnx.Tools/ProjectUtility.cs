@@ -40,7 +40,7 @@ namespace Dawnx.Tools
                 $"{nameof(ProjectName)}:        {ProjectName}{Environment.NewLine}" +
                 $"{nameof(AssemblyName)}:       {AssemblyName}{Environment.NewLine}" +
                 $"{nameof(RootNamespace)}:      {RootNamespace}{Environment.NewLine}" +
-                $"{nameof(TargetFramework)}:    {TargetFramework}{Environment.NewLine}").Line(2);
+                $"{nameof(TargetFramework)}:    {TargetFramework}{Environment.NewLine}").Line();
         }
 
         private static string GetAssemblyName(XmlDocument doc)

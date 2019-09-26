@@ -31,7 +31,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <DotNetCliToolReference Include="Dawnx.Tools" Version="1.18.0.1" />
+    <DotNetCliToolReference Include="Dawnx.Tools" Version="1.18.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +46,6 @@
   <ItemGroup>
     <Folder Include="Areas\NxPanel\Data\" />
     <Folder Include="Areas\NxPanel\Models\" />
-    <Folder Include="Typings\" />
     <Folder Include="wwwroot\modules\axios\" />
   </ItemGroup>
 

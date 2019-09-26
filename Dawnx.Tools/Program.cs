@@ -48,7 +48,7 @@ namespace Dawnx.Tools
                 ProjectUtility.PrintInfo();
 
                 if (Commands.ContainsKey(cargs[0]))
-                    Commands["cargs[0]"].Run(cargs);
+                    Commands[cargs[0]].Run(cargs);
                 else Console.WriteLine($"Unkown command: {cargs[0]}");
             }
             finally

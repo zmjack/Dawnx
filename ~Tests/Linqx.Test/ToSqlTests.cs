@@ -207,17 +207,6 @@ namespace NLinq.Test
             return;
         }
 
-        [Fact]
-        public void RandomTest()
-        {
-            using (var mysql = new ApplicationDbContext())
-            {
-                var query = mysql.FreeModels.Random(2);
-                var sql = query.ToSql();
-                var result = query.ToArray();
-            }
-        }
-
     }
 
 }

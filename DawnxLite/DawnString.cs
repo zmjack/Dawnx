@@ -153,14 +153,13 @@ namespace Dawnx
 
         /// <summary>
         /// Returns a new string which is normalized by the newline string of current environment.
+        /// <para>If a string come from non-Unix platforms, then its NewLine is "\r\n".</para>
+        /// <para>If a string come from Unix platforms, then its NewLine is "\n".</para>
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
         public static string NormalizeNewLine(this string @this)
         {
-            // If a string come from non-Unix platforms, then its NewLine is "\r\n".
-            // If a string come from Unix platforms, then its NewLine is "\n".
-
             switch (Environment.NewLine)
             {
                 case "\r\n":

@@ -40,7 +40,7 @@ namespace Dawnx.Tools
             try
             {
                 Con.Print(
-                    $"Welcome Dawnx Command-line Tools {CLI_VERSION}{Environment.NewLine}" +
+                    $"Welcome to use Dawnx Cli Tools {CLI_VERSION}{Environment.NewLine}" +
                     $"======================================================================{Environment.NewLine}" +
                     $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}")
                     .Line();

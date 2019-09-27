@@ -8,6 +8,7 @@ namespace NLinq.ProviderFunctions
     public static class PSqlServer
     {
         [DbFunction]
-        public static double Rand() => throw new NotImplementedException();
+        public static double Rand() => throw new NotSupportedException();
+
     }
 }

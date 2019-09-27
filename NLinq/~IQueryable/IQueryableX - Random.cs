@@ -24,22 +24,23 @@ namespace NLinq
 
             switch (providerName)
             {
-                case DatabaseProviderName.Cosmos:
-                case DatabaseProviderName.Firebird:
-                case DatabaseProviderName.IBM:
-                case DatabaseProviderName.Jet:
+                case DatabaseProviderName.Cosmos: goto default;
+                case DatabaseProviderName.Firebird: goto default;
+                case DatabaseProviderName.IBM: goto default;
+                case DatabaseProviderName.Jet: return @this.OrderBy(x => PJet.Rnd()).Take(count);
                 case DatabaseProviderName.MyCat:
                 case DatabaseProviderName.MySql: return @this.OrderBy(x => PMySql.Rand()).Take(count);
-                case DatabaseProviderName.OpenEdge:
-                case DatabaseProviderName.Oracle:
-                case DatabaseProviderName.PostgreSQL:
-                case DatabaseProviderName.Sqlite:
+                case DatabaseProviderName.OpenEdge: goto default;
+                case DatabaseProviderName.Oracle: return @this.OrderBy(x => POracle.Random()).Take(count);
+                case DatabaseProviderName.PostgreSQL: return @this.OrderBy(x => PPostgreSQL.Random()).Take(count);
+                case DatabaseProviderName.Sqlite: return @this.OrderBy(x => PSqlite.Random()).Take(count);
                 case DatabaseProviderName.SqlServer:
                 case DatabaseProviderName.SqlServerCompact35:
-                case DatabaseProviderName.SqlServerCompact40:
+                case DatabaseProviderName.SqlServerCompact40: return @this.OrderBy(x => PSqlServer.Rand()).Take(count);
+
                 case DatabaseProviderName.Unknown:
                 default:
-                    throw new NotSupportedException("This method is not supported by the current provider.");
+                    throw new NotSupportedException($"This method is not supported by the current provider({providerName}).");
             }
         }
 

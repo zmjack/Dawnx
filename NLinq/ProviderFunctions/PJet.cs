@@ -5,10 +5,10 @@ using System.Text;
 
 namespace NLinq.ProviderFunctions
 {
-    public static class PMySql
+    public static class PJet
     {
         [DbFunction]
-        public static double Rand() => throw new NotSupportedException();
+        public static double Rnd() => throw new NotSupportedException();
 
     }
 }

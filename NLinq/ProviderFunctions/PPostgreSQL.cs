@@ -5,10 +5,10 @@ using System.Text;
 
 namespace NLinq.ProviderFunctions
 {
-    public static class PMySql
+    public static class PPostgreSQL
     {
         [DbFunction]
-        public static double Rand() => throw new NotSupportedException();
+        public static double Random() => throw new NotSupportedException();
 
     }
 }

@@ -1,8 +1,12 @@
-﻿using Dawnx.Reflection;
+﻿using Dawnx;
+using Dawnx.Definition;
+using Dawnx.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NLinq.ProviderFunctions;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace NLinq
 {
@@ -11,6 +15,35 @@ namespace NLinq
         public static ValueConverter<TModel, TProvider> BuildConverter<TModel, TProvider>(IProvider<TModel, TProvider> field)
         {
             return new ValueConverter<TModel, TProvider>(v => field.ConvertToProvider(v), v => field.ConvertFromProvider(v));
+        }
+
+        public static void ApplyProviderFunctions(DbContext context, ModelBuilder modelBuilder)
+        {
+            var providerName = context.GetProviderName();
+
+            switch (providerName)
+            {
+                case DatabaseProviderName.MySql:
+                    modelBuilder.HasDbFunction(typeof(PMySql).GetMethod(nameof(PMySql.Rand)));
+                    break;
+            }
+        }
+
+        public static void ApplyUdFunctions(DbContext context, ModelBuilder modelBuilder)
+        {
+            var providerName = context.GetProviderName();
+
+            var types = Assembly.GetCallingAssembly().GetTypesWhichImplements<IUdFunctionContainer>();
+            var methods = types.SelectMany(type => type.GetMethods().Where(x => x.GetCustomAttribute<UdFunctionAttribute>()?.ProviderName == providerName));
+            foreach (var method in methods)
+            {
+                var attr = method.GetCustomAttribute<UdFunctionAttribute>();
+                modelBuilder.HasDbFunction(method, x =>
+                {
+                    x.HasName(attr.Name);
+                    x.HasSchema(attr.Schema);
+                });
+            }
         }
 
         public static void ApplyAnnotations(DbContext context, ModelBuilder modelBuilder, NLinqAnnotation annotation = NLinqAnnotation.All)

@@ -31,7 +31,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <DotNetCliToolReference Include="Dawnx.Tools" Version="1.18.0.2" />
+    <DotNetCliToolReference Include="Dawnx.Tools" Version="*" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,16 +15,20 @@ namespace NLinq.Test
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            NLinqUtility.ApplyProviderFunctions(this, modelBuilder);
+            NLinqUtility.ApplyUdFunctions(this, modelBuilder);
+            NLinqUtility.ApplyAnnotations(this, modelBuilder, NLinqAnnotation.All);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<TrackModel> TrackModels { get; set; }
         public DbSet<EntityMonitorModel> EntityMonitorModels { get; set; }
         public DbSet<SimpleModel> SimpleModels { get; set; }
         public DbSet<CPKeyModel> CompositeKeyModels { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            NLinqUtility.ApplyAnnotations(this, modelBuilder, NLinqAnnotation.All);
-            base.OnModelCreating(modelBuilder);
-        }
+        public DbSet<FreeModel> FreeModels { get; set; }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {

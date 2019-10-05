@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Dawnx.AspNetCore.Test._Zip
+namespace Dawnx.Compress.Test
 {
     public class ZipStreamTests
     {

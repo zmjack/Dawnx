@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using System.Text.RegularExpressions;
 
-namespace Dawnx.IO
+namespace Dawnx.Utilities
 {
     public static class DirectoryUtility
     {
@@ -33,6 +34,14 @@ namespace Dawnx.IO
                 }
             }
             else throw new DirectoryNotFoundException($"The specified path({dirPath}) is not found.");
+        }
+
+        public static bool IsDirectoryPath(string path)
+        {
+            var ext = Path.GetExtension(path);
+            if (ext == string.Empty)
+                return !path.IsMatch(new Regex(@"[*?\""<>|]"));
+            else return false;
         }
 
     }

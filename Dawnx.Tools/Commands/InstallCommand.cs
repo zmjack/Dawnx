@@ -1,5 +1,6 @@
 ﻿using Dawnx.Data;
 using Dawnx.Net.Web;
+using Dawnx.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -54,7 +55,7 @@ namespace Dawnx.Tools
                             var saveas = $@"{Program.DOWNLOAD_DIRECTORY}\{fileName}";
                             var extract = item["extract"].Value<bool>();
 
-                            if (!File.Exists(saveas) || !FileUtility.CheckMD5(saveas, md5))
+                            if (!File.Exists(saveas) || FileUtility.ComputeMD5(saveas) != md5)
                             {
                                 #region Download files
                                 using (var file = new FileStream(saveas, FileMode.Create))
@@ -100,8 +101,16 @@ namespace Dawnx.Tools
 
                                 #region Check file md5
                                 var status = "";
-                                if (FileUtility.CheckMD5(saveas, md5)) { fileVerifySuccess++; status = "Safe"; }
-                                else { fileVerifyFailed++; status = "WARNING"; }
+                                if (FileUtility.ComputeMD5(saveas) == md5)
+                                {
+                                    fileVerifySuccess++;
+                                    status = "Safe";
+                                }
+                                else
+                                {
+                                    fileVerifyFailed++;
+                                    status = "WARNING";
+                                }
 
                                 Con.Row(new[]
                                 {
@@ -139,7 +148,7 @@ namespace Dawnx.Tools
                         {
                             foreach (var file in extractFileList)
                             {
-                                ZipFile.ExtractToDirectory(file, Directory.GetCurrentDirectory(), true);
+                                ZipFile.ExtractToDirectory(file, Program.ProjectRoot, true);
                                 Con.Print($"Extract {file} done.").Line();
                             }
                             Con

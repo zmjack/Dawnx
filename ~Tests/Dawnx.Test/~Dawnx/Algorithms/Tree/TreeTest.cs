@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dawnx.Algorithms.Tree.Test
@@ -38,7 +39,7 @@ namespace Dawnx.Algorithms.Tree.Test
             tree1.AddEntry("C", new EntityTree());
             tree1.AddEntry("D//d", new EntityTree());
 
-            Assert.True(tree1.Description.IsMatch(@"A
+            Assert.True(tree1.Description.IsMatch(new Regex(@"A
   A-a
     A-a-1
       A-a-1-i
@@ -53,7 +54,7 @@ B
 C
 D
   
-    d"));
+    d")));
         }
 
         public class SimplifiedTree

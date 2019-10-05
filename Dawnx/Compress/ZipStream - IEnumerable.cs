@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Dawnx.AspNetCore
+namespace Dawnx.Compress
 {
     public partial class ZipStream : IEnumerable<ZipEntry>
     {

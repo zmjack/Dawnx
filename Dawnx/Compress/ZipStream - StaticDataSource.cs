@@ -1,7 +1,7 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
 
-namespace Dawnx.AspNetCore
+namespace Dawnx.Compress
 {
     public partial class ZipStream
     {

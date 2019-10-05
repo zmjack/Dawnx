@@ -1,4 +1,4 @@
-﻿namespace Dawnx.AspNetCore
+﻿namespace Dawnx.Compress
 {
     public partial class ZipStream
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Dawnx.AspNetCore
+namespace Dawnx.Compress
 {
     public partial class ZipStream : Stream
     {

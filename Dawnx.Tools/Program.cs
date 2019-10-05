@@ -13,7 +13,7 @@ namespace Dawnx.Tools
     {
         public static readonly string CLI_VERSION = Assembly.GetEntryAssembly().GetName().Version.ToString();
         public static readonly string DOWNLOAD_DIRECTORY = $"{Path.GetTempPath()}DawnxCliCaches";
-
+        public static TargetProjectInfo TargetProjectInfo { get; set; }
         public const string SUPPORT_URL = "http://dawnx.net/CliService";
 
         private static Dictionary<string, ICommand> Commands = new Dictionary<string, ICommand>();
@@ -22,33 +22,33 @@ namespace Dawnx.Tools
         {
             var cargs = new ConsoleArgs(args, "-");
 
+            TargetProjectInfo = ProjectUtility.GetTargetProjectInfo();
+            CheckDownloadDirectory();
+            CacheCommands();
+
+            Http.RegisterSystemLogin(true);
+            Http.RegisterProxy(true);
+
             if (!cargs.Contents.Any())
             {
                 // Help Content
                 return;
             }
 
-            CacheCommands();
-
-            if (!Directory.Exists(DOWNLOAD_DIRECTORY))
-                Directory.CreateDirectory(DOWNLOAD_DIRECTORY);
-
-            Http.RegisterSystemLogin(true);
-            Http.RegisterProxy(true);
-
             Console.CursorVisible = false;
             try
             {
-                Con.Print(
+                Console.WriteLine(
                     $"Welcome to use Dawnx Cli Tools {CLI_VERSION}{Environment.NewLine}" +
                     $"======================================================================{Environment.NewLine}" +
-                    $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}")
-                    .Line();
+                    $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}");
 
-                ProjectUtility.PrintInfo();
+                PrintTargetProjectInfo();
 
                 if (Commands.ContainsKey(cargs[0]))
+                {
                     Commands[cargs[0]].Run(cargs);
+                }
                 else Console.WriteLine($"Unkown command: {cargs[0]}");
             }
             finally
@@ -71,6 +71,21 @@ namespace Dawnx.Tools
                 if (!attr.ShortName.IsNullOrWhiteSpace())
                     Commands[attr.ShortName.Trim()] = command;
             }
+        }
+
+        private static void PrintTargetProjectInfo()
+        {
+            Console.WriteLine(
+                $"{nameof(TargetProjectInfo.ProjectName)}:        {TargetProjectInfo.ProjectName}{Environment.NewLine}" +
+                $"{nameof(TargetProjectInfo.AssemblyName)}:       {TargetProjectInfo.AssemblyName}{Environment.NewLine}" +
+                $"{nameof(TargetProjectInfo.RootNamespace)}:      {TargetProjectInfo.RootNamespace}{Environment.NewLine}" +
+                $"{nameof(TargetProjectInfo.TargetFramework)}:    {TargetProjectInfo.TargetFramework}{Environment.NewLine}");
+        }
+
+        private static void CheckDownloadDirectory()
+        {
+            if (!Directory.Exists(DOWNLOAD_DIRECTORY))
+                Directory.CreateDirectory(DOWNLOAD_DIRECTORY);
         }
 
     }

@@ -6,65 +6,32 @@ namespace Dawnx.Tools
 {
     public static class ProjectUtility
     {
-        public static string ProjectName { get; private set; }
-        public static string AssemblyName { get; private set; }
-        public static string RootNamespace { get; private set; }
-        public static string TargetFramework { get; private set; }
-
-        static ProjectUtility()
+        public static TargetProjectInfo GetTargetProjectInfo()
         {
-#if DEBUG
-            ProjectName = "DawnxDemo.csproj";
-            AssemblyName = "DawnxDemo";
-            RootNamespace = "DawnxDemo";
-            TargetFramework = "netcoreapp2.2";
-#else
             var dir = Directory.GetCurrentDirectory();
-            var projectFile = Directory.GetFiles(dir, "*.csproj").For(_ =>
+            var projectFile = Directory.GetFiles(dir, "*.csproj").For(files =>
             {
-                if (_.Length == 1) return _[0];
+                if (files.Length == 1) return files[0];
                 else throw new FileLoadException("More than one .csproj files are exist in the current directory.");
             });
+            var projectName = Path.GetFileName(projectFile);
 
-            var xml = new XmlDocument().Self(_ => _.Load(projectFile));
-            ProjectName = Path.GetFileName(projectFile);
-            AssemblyName = GetAssemblyName(xml);
-            RootNamespace = GetRootNamespace(xml);
-            TargetFramework = GetTargetFramework(xml);
-#endif
-        }
-
-        public static void PrintInfo()
-        {
-            Con.Print(
-                $"{nameof(ProjectName)}:        {ProjectName}{Environment.NewLine}" +
-                $"{nameof(AssemblyName)}:       {AssemblyName}{Environment.NewLine}" +
-                $"{nameof(RootNamespace)}:      {RootNamespace}{Environment.NewLine}" +
-                $"{nameof(TargetFramework)}:    {TargetFramework}{Environment.NewLine}").Line();
-        }
-
-        private static string GetAssemblyName(XmlDocument doc)
-        {
-            return doc.SelectNodes("/Project/PropertyGroup/AssemblyName").InnerText()
-                ?? Path.GetFileNameWithoutExtension(ProjectName);
-        }
-
-        private static string GetRootNamespace(XmlDocument doc)
-        {
-            return doc.SelectNodes("/Project/PropertyGroup/RootNamespace").InnerText()
-                ?? Path.GetFileNameWithoutExtension(ProjectName);
-        }
-
-        private static string GetTargetFramework(XmlDocument doc)
-        {
-            return doc.SelectNodes("/Project/PropertyGroup/TargetFramework").InnerText() ?? "Unknown";
+            var xml = new XmlDocument().Self(x => x.Load(projectFile));
+            return new TargetProjectInfo
+            {
+                ProjectRoot = dir,
+                ProjectName = projectName,
+                AssemblyName = xml.SelectNodes("/Project/PropertyGroup/AssemblyName").InnerText() ?? Path.GetFileNameWithoutExtension(projectName),
+                RootNamespace = xml.SelectNodes("/Project/PropertyGroup/RootNamespace").InnerText() ?? Path.GetFileNameWithoutExtension(projectName),
+                TargetFramework = xml.SelectNodes("/Project/PropertyGroup/TargetFramework").InnerText() ?? "Unknown",
+            };
         }
 
         private static string InnerText(this XmlNodeList @this)
         {
-            return @this.For(_ =>
+            return @this.For(nodeList =>
             {
-                if (_.Count > 0) return _[0].InnerText;
+                if (nodeList.Count > 0) return nodeList[0].InnerText;
                 else return null;
             });
         }

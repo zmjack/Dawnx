@@ -75,6 +75,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="regex"></param>
         /// <returns></returns>
+        [Obsolete("Replace with the new function: bool IsMatch(this string @this, Regex regex)", true)]
         public static bool IsMatch(this string @this, string regex)
             => new Regex(regex, RegexOptions.Singleline).Match(@this).Success;
 

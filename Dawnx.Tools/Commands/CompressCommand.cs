@@ -142,6 +142,7 @@ ConfigFile:
                         }
 
                         zip.SaveAs(archive);
+                        Console.WriteLine($"Zip file has been created: {new FileInfo(archive).FullName}");
                     }
 
                 }

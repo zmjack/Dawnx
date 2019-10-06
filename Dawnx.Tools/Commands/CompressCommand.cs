@@ -56,7 +56,7 @@ ConfigFile:
 ]");
                     }
 
-                    Console.Error.WriteLine("File `compress.json` is created.");
+                    Console.Error.WriteLine("File compress.json is created.");
                     return;
                 }
                 else jsonFiles = new string[] { json };
@@ -73,15 +73,15 @@ ConfigFile:
                     var sources = new Dictionary<string, string>();
 
                     if (!zipDef.Properties().Any(x => x.Name == nameof(archive)))
-                        throw new ArgumentException($"The compress json file has no property(`{nameof(archive)}`).");
+                        throw new ArgumentException($"The compress json file has no property({nameof(archive)}).");
                     if (zipDef[nameof(archive)].Type != JTokenType.String
                         || !FileUtility.IsFilePath(zipDef[nameof(archive)].Value<string>()))
-                        throw new ArgumentException($"The compress json file's property(`{nameof(archive)}`) must be a file path.");
+                        throw new ArgumentException($"The compress json file's property({nameof(archive)}) must be a file path.");
 
                     if (!zipDef.Properties().Any(x => x.Name == nameof(sources)))
-                        throw new ArgumentException($"The compress json file has no property(`${nameof(sources)}`).");
+                        throw new ArgumentException($"The compress json file has no property(${nameof(sources)}).");
                     if (zipDef["sources"].Type != JTokenType.Object)
-                        throw new ArgumentException($"The compress json file's property(`${nameof(sources)}`) must be a {JTokenType.Object}.");
+                        throw new ArgumentException($"The compress json file's property(${nameof(sources)}) must be a {JTokenType.Object}.");
 
                     archive = zipDef[nameof(archive)].Value<string>();
                     using (var zip = new ZipStream())
@@ -103,7 +103,7 @@ ConfigFile:
                                                 var file = source.Value.Value<string>();
                                                 if (File.Exists(file))
                                                     zip.AddFileEntry(Path.Combine(source.Name, Path.GetFileName(file)), file);
-                                                else throw new FileNotFoundException();
+                                                else throw new FileNotFoundException($"Can not find the file({file}).");
                                             }
                                             break;
 
@@ -112,16 +112,16 @@ ConfigFile:
                                             {
                                                 if (File.Exists(file))
                                                     zip.AddFileEntry(Path.Combine(source.Name, Path.GetFileName(file)), file);
-                                                else throw new FileNotFoundException();
+                                                else throw new FileNotFoundException($"Can not find the file({file}).");
                                             }
                                             break;
 
                                         default:
-                                            throw new ArgumentException($"The compress json file's property(`${nameof(sources)}/${source.Name}`)'s value must be a file path or file path list.");
+                                            throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name})'s value must be a file path or file path list.");
                                     }
 
                                 }
-                                else throw new ArgumentException($"The compress json file's property(`${nameof(sources)}/${source.Name}`) must be a directory path or file path.");
+                                else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name}) must be a directory path or file path.");
                             }
                             // Guess the name is a file name
                             else
@@ -133,11 +133,11 @@ ConfigFile:
                                         var file = source.Value.Value<string>();
                                         if (File.Exists(file))
                                             zip.AddFileEntry(source.Name, file);
-                                        else throw new FileNotFoundException();
+                                        else throw new FileNotFoundException($"Can not find the file({file}).");
                                     }
-                                    else throw new ArgumentException($"The compress json file's property(`${nameof(sources)}/${source.Name}`)'s value must be a file path.");
+                                    else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name})'s value must be a file path.");
                                 }
-                                else throw new ArgumentException($"The compress json file's property(`${nameof(sources)}/${source.Name}`) must be a directory path or file path.");
+                                else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name}) must be a directory path or file path.");
                             }
                         }
 

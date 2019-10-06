@@ -28,8 +28,8 @@ namespace Dawnx.Tools
 Usage: dotnet nx (tsg|typescriptgenerator) [Options]
 
 Options:
-  -o|--out{"\t"}Specify the output directory path.
-  -i|--include{"\t"}Specify to include other built-in models, such as 'JSend'.");
+  {"-o|--out".PadRight(20)}{"\t"}Specify the output directory path.
+  {"-i|--include".PadRight(20)}{"\t"}Specify to include other built-in models, such as 'JSend'.");
         }
 
         public void Run(ConsoleArgs cargs)

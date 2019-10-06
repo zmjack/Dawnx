@@ -24,7 +24,7 @@ namespace Dawnx.Tools
 Usage: dotnet nx (cp|compress) [ConfigFile(.json)=compress.json] ...
 
 ConfigFile:
-  <FilePath>{"\t"}The path of configuration file. The default file is 'compress.json' (If it doesn't exist, create it).");
+  <FilePath>:{"\t"}The path of configuration file. The default file is 'compress.json' (If it doesn't exist, create it).");
         }
 
         public void Run(ConsoleArgs cargs)

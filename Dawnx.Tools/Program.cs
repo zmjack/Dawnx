@@ -73,36 +73,40 @@ namespace Dawnx.Tools
             }
         }
 
-        private static void PrintTargetProjectInfo()
+        public static void PrintTargetProjectInfo()
         {
             Console.WriteLine($@"
-{nameof(TargetProjectInfo.ProjectName)}:        {TargetProjectInfo.ProjectName}
-{nameof(TargetProjectInfo.AssemblyName)}:       {TargetProjectInfo.AssemblyName}
-{nameof(TargetProjectInfo.RootNamespace)}:      {TargetProjectInfo.RootNamespace}
-{nameof(TargetProjectInfo.TargetFramework)}:    {TargetProjectInfo.TargetFramework}");
-        }
-
-        private static void PrintWelcome()
-        {
-            Console.WriteLine($@"Dawnx .NET Command-line Tools {CLI_VERSION}
-
-Usage: dotnet nx [command]
-Hint : All files will be downloaded to {DOWNLOAD_DIRECTORY}");
-        }
-
-        private static void PrintUsage()
-        {
-            Console.WriteLine($@"
-Usage: dotnet nx [command]
-
-Commands:");
-
-            foreach (var attr in CommandAttributes)
-                Console.WriteLine($"  {attr.ShortName}|{attr.Name}\t{attr.Description}");
+* {nameof(TargetProjectInfo.ProjectName)}:        {TargetProjectInfo.ProjectName}
+* {nameof(TargetProjectInfo.AssemblyName)}:       {TargetProjectInfo.AssemblyName}
+* {nameof(TargetProjectInfo.RootNamespace)}:      {TargetProjectInfo.RootNamespace}
+* {nameof(TargetProjectInfo.TargetFramework)}:    {TargetProjectInfo.TargetFramework}");
             Console.WriteLine();
         }
 
-        private static void CheckDownloadDirectory()
+        public static void PrintWelcome()
+        {
+            Console.WriteLine($@"
+{"ヽ(✿ﾟ▽ﾟ)ノ".Center(60)}
+
+Dawnx .NET Command-line Tools {CLI_VERSION}
+
+<Hint>: All files will be downloaded to {DOWNLOAD_DIRECTORY}");
+        }
+
+        public static void PrintUsage()
+        {
+            Console.WriteLine($@"
+Usage: dotnet nx [command]
+
+Commands:
+  {nameof(CommandAttribute.Name).PadRight(10)}\t{nameof(CommandAttribute.ShortName).PadRight(20)}\t{nameof(CommandAttribute.Description)}");
+
+            foreach (var attr in CommandAttributes)
+                Console.WriteLine($"  {attr.Name.PadRight(10)}\t{attr.ShortName.PadRight(20)}\t{attr.Description}");
+            Console.WriteLine();
+        }
+
+        public static void CheckDownloadDirectory()
         {
             if (!Directory.Exists(DOWNLOAD_DIRECTORY))
                 Directory.CreateDirectory(DOWNLOAD_DIRECTORY);

@@ -20,6 +20,15 @@ namespace Dawnx.Tools.Test
                 TargetFramework = "netcoreapp2.2",
             };
 
+            using (var memory = new MemoryStream())
+            using (var writer = new StreamWriter(memory))
+            {
+                Console.SetOut(writer);
+                Program.PrintWelcome();
+
+                var output = GetText(writer);
+            }
+
             CompressCommandTest();
             AesCommandTest();
         }

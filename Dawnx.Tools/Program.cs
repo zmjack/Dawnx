@@ -86,7 +86,7 @@ namespace Dawnx.Tools
         public static void PrintWelcome()
         {
             Console.WriteLine($@"
-{"ヽ(✿ﾟ▽ﾟ)ノ".Center(60)}
+{"ヽ(*^▽^)ノ".Center(60)}
 
 Dawnx .NET Command-line Tools {CLI_VERSION}
 
@@ -99,10 +99,10 @@ Dawnx .NET Command-line Tools {CLI_VERSION}
 Usage: dotnet nx [command]
 
 Commands:
-  {nameof(CommandAttribute.Name).PadRight(10)}\t{nameof(CommandAttribute.ShortName).PadRight(20)}\t{nameof(CommandAttribute.Description)}");
+  {"Name".PadRight(20)}{"\t"}{"ShortName".PadRight(10)}\t{"Description"}");
 
             foreach (var attr in CommandAttributes)
-                Console.WriteLine($"  {attr.Name.PadRight(10)}\t{attr.ShortName.PadRight(20)}\t{attr.Description}");
+                Console.WriteLine($"  {attr.Name.PadRight(20)}\t{attr.ShortName.PadRight(10)}\t{attr.Description}");
             Console.WriteLine();
         }
 

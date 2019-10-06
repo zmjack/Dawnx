@@ -1016,6 +1016,8 @@
         <member name="M:Dawnx.DawnString.NormalizeNewLine(System.String)">
             <summary>
             Returns a new string which is normalized by the newline string of current environment.
+            <para>If a string come from non-Unix platforms, then its NewLine is "\r\n".</para>
+            <para>If a string come from Unix platforms, then its NewLine is "\n".</para>
             </summary>
             <param name="this"></param>
             <returns></returns>

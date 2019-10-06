@@ -16,7 +16,7 @@ namespace Dawnx.Tools
 #if DEBUG
             Path.GetFullPath($"../../../../~Experiment/DawnxDemo/bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
 #else
-            Path.GetFullPath($"bin/Debug/{ProjectUtility.TargetFramework}"),
+            Path.GetFullPath($"bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
 #endif
             $"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}/dotnet/sdk/NuGetFallbackFolder",
             $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",

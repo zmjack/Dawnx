@@ -21,7 +21,7 @@ namespace Dawnx.Tools.Test
             };
 
             CompressCommandTest();
-            //AesCommandTest();
+            AesCommandTest();
         }
 
         private void AesCommandTest()

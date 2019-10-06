@@ -12,19 +12,30 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.Tools
 {
+    [Command("Compress", "cp", Description = "Compress the files listed in file 'compress.json' or other config file.")]
     public class CompressCommand : ICommand
     {
         private object archive;
         private object sources;
 
-        public void Help()
+        public void PrintUsage()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($@"
+Usage: dotnet nx (cp|compress) [ConfigFile(.json)=compress.json] ...
+
+ConfigFile:
+  <FilePath>{"\t"}The path of configuration file. The default file is 'compress.json' (If it doesn't exist, create it).");
         }
 
-        public void Run(ConsoleArgs args)
+        public void Run(ConsoleArgs cargs)
         {
-            string[] jsonFiles = args.Contents.Skip(1).ToArray();
+            if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")))
+            {
+                PrintUsage();
+                return;
+            }
+
+            string[] jsonFiles = cargs.Contents.Skip(1).ToArray();
 
             if (!jsonFiles.Any())
             {

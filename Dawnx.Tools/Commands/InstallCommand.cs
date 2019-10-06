@@ -12,7 +12,7 @@ namespace Dawnx.Tools
 {
     public class InstallCommand : ICommand
     {
-        public void Help()
+        public void PrintUsage()
         {
             throw new NotImplementedException();
         }

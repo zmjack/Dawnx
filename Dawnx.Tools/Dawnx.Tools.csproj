@@ -23,7 +23,7 @@
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
-    <Version>1.19.0</Version>
+    <Version>1.19.5</Version>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\NLinq\NLinq.csproj" />
     <ProjectReference Include="..\TypeSharp\TypeSharp.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.Security\Dawnx.Security.csproj" />

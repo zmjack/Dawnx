@@ -34,7 +34,13 @@ namespace Dawnx.CConsole
         {
             for (int i = 0; i < number; i++)
                 Console.WriteLine();
+            return this;
+        }
 
+        public Cout Line(string content, ConColor color = null)
+        {
+            Print(content, color);
+            Console.WriteLine();
             return this;
         }
 

@@ -8,7 +8,7 @@ using TypeSharp;
 
 namespace Dawnx.Tools
 {
-    [Command("TypeScriptGenerator", "tsg")]
+    [Command("TypeScriptGenerator", "tsg", Description = "Generate TypeScript model from CSharp model.")]
     public class TypeScriptGenerator : ICommand
     {
         private static string[] SearchDirs = new[]
@@ -22,15 +22,26 @@ namespace Dawnx.Tools
             $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",
         };
 
-        public void Help()
+        public void PrintUsage()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($@"
+Usage: dotnet nx (tsg|typescriptgenerator) [Options]
+
+Options:
+  -o|--out{"\t"}Specify the output directory path.
+  -i|--include{"\t"}Specify to include other built-in models, such as 'JSend'.");
         }
 
         public void Run(ConsoleArgs cargs)
         {
+            if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")))
+            {
+                PrintUsage();
+                return;
+            }
+
             var outFolder = cargs["--out"] ?? cargs["-o"] ?? "Typings";
-            var includes = cargs["--include"]?.Split(",") ?? cargs["-i"]?.Split(",") ?? new string[0];
+            var includes = cargs["-i"]?.Split(",") ?? cargs["--include"]?.Split(",") ?? new string[0];
 
             GenerateTypeScript(outFolder, includes);
         }

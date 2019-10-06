@@ -8,7 +8,7 @@ namespace Dawnx.Tools
 {
     public class GcsCommand : ICommand
     {
-        public void Help()
+        public void PrintUsage()
         {
             throw new NotImplementedException();
         }

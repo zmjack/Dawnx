@@ -1,6 +1,6 @@
 ﻿using Dawnx.Data;
 using Dawnx.Net.Web;
-using Dawnx.Security.AesSecurity;
+using NLinq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +17,7 @@ namespace Dawnx.Tools
         public const string SUPPORT_URL = "http://dawnx.net/CliService";
 
         private static Dictionary<string, ICommand> Commands = new Dictionary<string, ICommand>();
+        private static List<CommandAttribute> CommandAttributes = new List<CommandAttribute>();
 
         static void Main(string[] args)
         {
@@ -30,25 +31,22 @@ namespace Dawnx.Tools
             Http.RegisterSystemLogin(true);
             Http.RegisterProxy(true);
 
+            PrintWelcome();
+
             if (!cargs.Contents.Any())
             {
-                // Help Content
+                PrintUsage();
                 return;
             }
 
             Console.CursorVisible = false;
             try
             {
-                Console.WriteLine(
-                    $"Welcome to use Dawnx Cli Tools {CLI_VERSION}{Environment.NewLine}" +
-                    $"======================================================================{Environment.NewLine}" +
-                    $"Hint: All files will be downloaded to {DOWNLOAD_DIRECTORY}{Environment.NewLine}");
-
                 PrintTargetProjectInfo();
 
                 if (Commands.ContainsKey(cargs[0]))
                 {
-                    Commands[cargs[0]].Run(cargs);
+                    Commands[cargs[0].ToLower()].Run(cargs);
                 }
                 else Console.WriteLine($"Unkown command: {cargs[0]}");
             }
@@ -66,21 +64,42 @@ namespace Dawnx.Tools
             {
                 var command = Activator.CreateInstance(type) as ICommand;
                 var attr = type.GetCustomAttribute<CommandAttribute>();
+                CommandAttributes.Add(attr);
 
                 if (!attr.Name.IsNullOrWhiteSpace())
-                    Commands[attr.Name.Trim()] = command;
+                    Commands[attr.Name.Trim().ToLower()] = command;
                 if (!attr.ShortName.IsNullOrWhiteSpace())
-                    Commands[attr.ShortName.Trim()] = command;
+                    Commands[attr.ShortName.Trim().ToLower()] = command;
             }
         }
 
         private static void PrintTargetProjectInfo()
         {
-            Console.WriteLine(
-                $"{nameof(TargetProjectInfo.ProjectName)}:        {TargetProjectInfo.ProjectName}{Environment.NewLine}" +
-                $"{nameof(TargetProjectInfo.AssemblyName)}:       {TargetProjectInfo.AssemblyName}{Environment.NewLine}" +
-                $"{nameof(TargetProjectInfo.RootNamespace)}:      {TargetProjectInfo.RootNamespace}{Environment.NewLine}" +
-                $"{nameof(TargetProjectInfo.TargetFramework)}:    {TargetProjectInfo.TargetFramework}{Environment.NewLine}");
+            Console.WriteLine($@"
+{nameof(TargetProjectInfo.ProjectName)}:        {TargetProjectInfo.ProjectName}
+{nameof(TargetProjectInfo.AssemblyName)}:       {TargetProjectInfo.AssemblyName}
+{nameof(TargetProjectInfo.RootNamespace)}:      {TargetProjectInfo.RootNamespace}
+{nameof(TargetProjectInfo.TargetFramework)}:    {TargetProjectInfo.TargetFramework}");
+        }
+
+        private static void PrintWelcome()
+        {
+            Console.WriteLine($@"Dawnx .NET Command-line Tools {CLI_VERSION}
+
+Usage: dotnet nx [command]
+Hint : All files will be downloaded to {DOWNLOAD_DIRECTORY}");
+        }
+
+        private static void PrintUsage()
+        {
+            Console.WriteLine($@"
+Usage: dotnet nx [command]
+
+Commands:");
+
+            foreach (var attr in CommandAttributes)
+                Console.WriteLine($"  {attr.ShortName}|{attr.Name}\t{attr.Description}");
+            Console.WriteLine();
         }
 
         private static void CheckDownloadDirectory()

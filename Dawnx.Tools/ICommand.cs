@@ -7,7 +7,7 @@ namespace Dawnx.Tools
 {
     public interface ICommand
     {
-        void Run(ConsoleArgs args);
-        void Help();
+        void Run(ConsoleArgs cargs);
+        void PrintUsage();
     }
 }

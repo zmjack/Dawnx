@@ -6,7 +6,7 @@ namespace Dawnx.Tools
 {
     public class AesCommand : ICommand
     {
-        public void Help()
+        public void PrintUsage()
         {
             throw new NotImplementedException();
         }

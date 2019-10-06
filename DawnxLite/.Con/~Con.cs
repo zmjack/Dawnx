@@ -13,6 +13,7 @@ namespace Dawnx
         public static Cout RowEnd() => Instance.RowEnd();
 
         public static Cout Line() => Instance.Line();
+        public static Cout Line(string content, ConColor color = null) => Instance.Line(content, color);
         public static Cout Print(string content, ConColor color = null) => Instance.Print(content, color);
         public static Cout Left(string line, ConColor color = null) => Instance.Left(line, color);
         public static Cout Right(string line, ConColor color = null) => Instance.Right(line, color);

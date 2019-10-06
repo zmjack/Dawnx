@@ -11,8 +11,11 @@ namespace Dawnx.Tools
             var dir = Directory.GetCurrentDirectory();
             var projectFile = Directory.GetFiles(dir, "*.csproj").For(files =>
             {
-                if (files.Length == 1) return files[0];
-                else throw new FileLoadException("More than one .csproj files are exist in the current directory.");
+                if (files.Length == 0)
+                    throw new FileLoadException("The .csproj file is not found in the current directory.");
+                else if (files.Length > 1)
+                    throw new FileLoadException("More than one .csproj files are exist in the current directory.");
+                else return files[0];
             });
             var projectName = Path.GetFileName(projectFile);
 

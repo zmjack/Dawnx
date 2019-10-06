@@ -148,7 +148,7 @@ namespace Dawnx.Tools
                         {
                             foreach (var file in extractFileList)
                             {
-                                ZipFile.ExtractToDirectory(file, Program.ProjectRoot, true);
+                                ZipFile.ExtractToDirectory(file, Program.TargetProjectInfo.ProjectRoot, true);
                                 Con.Print($"Extract {file} done.").Line();
                             }
                             Con

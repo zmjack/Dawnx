@@ -14,7 +14,7 @@ namespace Dawnx.Tools
         private static string[] SearchDirs = new[]
         {
 #if DEBUG
-            Path.GetFullPath($"../../../../~Experiment/DawnxDemo/bin/Debug/{ProjectUtility.TargetFramework}"),
+            Path.GetFullPath($"../../../../~Experiment/DawnxDemo/bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
 #else
             Path.GetFullPath($"bin/Debug/{ProjectUtility.TargetFramework}"),
 #endif
@@ -43,7 +43,7 @@ namespace Dawnx.Tools
             if (!Directory.Exists(outFolder))
                 Directory.CreateDirectory(outFolder);
 
-            var dllPath = Path.GetFullPath($"{SearchDirs[0]}/{ProjectUtility.AssemblyName}.dll");
+            var dllPath = Path.GetFullPath($"{SearchDirs[0]}/{Program.TargetProjectInfo.AssemblyName}.dll");
 
             var assembly = Assembly.LoadFrom(dllPath);
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
@@ -51,7 +51,7 @@ namespace Dawnx.Tools
             #region Assembly Types
             {
                 var builder = new TypeScriptModelBuilder();
-                var fileName = $"{Path.GetFullPath($"{outFolder}/{ProjectUtility.AssemblyName}.ts")}";
+                var fileName = $"{Path.GetFullPath($"{outFolder}/{Program.TargetProjectInfo.AssemblyName}.ts")}";
                 var modelTypes = assembly.GetTypesWhichMarkedAs<TypeScriptModelAttribute>();
 
                 builder.CacheTypes(modelTypes);

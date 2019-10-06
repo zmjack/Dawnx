@@ -22,7 +22,7 @@ namespace Dawnx.Tools
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
             {
-                ["Namespace"] = ProjectUtility.RootNamespace,
+                ["Namespace"] = Program.TargetProjectInfo.RootNamespace,
                 ["ClassName"] = Path.GetFileNameWithoutExtension(jsonFile),
                 ["Json"] = File.ReadAllText(jsonFile),
             });

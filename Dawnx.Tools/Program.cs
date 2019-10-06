@@ -20,9 +20,10 @@ namespace Dawnx.Tools
 
         static void Main(string[] args)
         {
+            TargetProjectInfo = ProjectUtility.GetTargetProjectInfo();
+
             var cargs = new ConsoleArgs(args, "-");
 
-            TargetProjectInfo = ProjectUtility.GetTargetProjectInfo();
             CheckDownloadDirectory();
             CacheCommands();
 

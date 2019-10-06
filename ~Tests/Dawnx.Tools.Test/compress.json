@@ -1,0 +1,9 @@
+[
+  {
+    "archive": "compress.zip",
+    "sources": {
+      "simple-root.txt": "simple.txt",
+      "simple-directory": [ "simple-directory/simple1.txt", "simple-directory/simple2.txt" ]
+    }
+  }
+]

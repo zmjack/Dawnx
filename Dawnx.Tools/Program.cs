@@ -99,7 +99,7 @@ Dawnx .NET Command-line Tools {CLI_VERSION}
 Usage: dotnet nx [command]
 
 Commands:
-  {"Name".PadRight(20)}{"\t"}{"ShortName".PadRight(10)}\t{"Description"}");
+  {"Name".PadRight(20)}{"\t"}{"ShortName".PadRight(10)}{"\t"}{"Description"}");
 
             foreach (var attr in CommandAttributes)
                 Console.WriteLine($"  {attr.Name.PadRight(20)}\t{attr.ShortName.PadRight(10)}\t{attr.Description}");

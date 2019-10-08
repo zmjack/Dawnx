@@ -216,19 +216,37 @@ namespace Dawnx.NPOI
             return ret.ToArray();
         }
 
-        public DataTable Fetch(string startCell, bool includeTitle, Type[] colTypes)
+        public DataTable Fetch(string startCell, bool isFirstRowTitle)
         {
             var pos = GetCellPos(startCell);
-            return Fetch(pos, includeTitle, colTypes);
+            var colLength = 0;
+
+            var @continue = true;
+            for (int colOffset = 0; @continue; colOffset++)
+            {
+                if (this[(pos.row, pos.col + colOffset)]
+                    .For(x => x.MapedCell.CellType != CellType.Blank && !x.String.IsNullOrWhiteSpace()))
+                {
+                    colLength++;
+                }
+                else break;
+            }
+
+            return Fetch(pos, isFirstRowTitle, new IntegerRange(colLength).Select(i => typeof(string)).ToArray());
         }
-        public DataTable Fetch((int row, int col) pos, bool includeTitle, Type[] colTypes)
+        public DataTable Fetch(string startCell, bool isFirstRowTitle, Type[] colTypes)
+        {
+            var pos = GetCellPos(startCell);
+            return Fetch(pos, isFirstRowTitle, colTypes);
+        }
+        public DataTable Fetch((int row, int col) pos, bool isFirstRowTitle, Type[] colTypes)
         {
             var ret = new DataTable();
             ret.Columns.Self(_ =>
                 _.AddRange(colTypes.Select(colType => new DataColumn("", colType)).ToArray()));
 
             (int row, int col) dataStart;
-            if (includeTitle)
+            if (isFirstRowTitle)
             {
                 for (int i = 0; i < colTypes.Length; i++)
                     ret.Columns[i].ColumnName = this[(pos.row, pos.col + i)].String;

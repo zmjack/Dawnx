@@ -140,6 +140,27 @@ namespace Dawnx.Compress
             MappedStream.Seek(position, SeekOrigin.Begin);
         }
 
+        /// <summary>
+        /// Extract all file into a directory.
+        /// </summary>
+        /// <param name="path"></param>
+        public void ExtractAll(string path)
+        {
+            foreach (ZipEntry entry in ZipFile)
+            {
+                var filePath = Path.Combine(path, entry.Name);
+
+                var dir = new DirectoryInfo(Path.GetDirectoryName(filePath));
+                if (!dir.Exists) dir.Create();
+
+                using (var file = new FileStream(Path.Combine(path, entry.Name), FileMode.Create))
+                using (var stream = ZipFile.GetInputStream(entry))
+                {
+                    ZipFile.GetInputStream(entry).WriteTo(file, 1024 * 1024);
+                }
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             MappedStream.Dispose();

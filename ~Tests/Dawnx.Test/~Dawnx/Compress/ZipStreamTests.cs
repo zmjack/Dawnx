@@ -19,6 +19,12 @@ namespace Dawnx.Compress.Test
             {
                 zip.AddEntry("123/english1.txt", "this is a simple text".Bytes());
             }
+
+            using (var zip = new ZipStream("simple.zip"))
+            {
+                zip.SetPassword("123").ExtractAll("extract");
+            }
+
         }
 
     }

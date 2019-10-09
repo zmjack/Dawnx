@@ -82,5 +82,11 @@
             </summary>
             <param name="path"></param>
         </member>
+        <member name="M:Dawnx.Compress.ZipStream.ExtractAll(System.String)">
+            <summary>
+            Extract all file into a directory.
+            </summary>
+            <param name="path"></param>
+        </member>
     </members>
 </doc>

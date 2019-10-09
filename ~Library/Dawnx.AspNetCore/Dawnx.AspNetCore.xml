@@ -183,14 +183,14 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJson(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Deserializes the body(UTF-8), which is json, to a .NET object.
             </summary>
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJson(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
             <summary>
             Deserializes the body, which is json, to a .NET object.
             </summary>
@@ -198,7 +198,7 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJson``1(Microsoft.AspNetCore.Http.HttpRequest)">
             <summary>
             Deserializes the body(UTF-8), which is json, to a .NET object.
             </summary>
@@ -206,7 +206,7 @@
             <param name="this"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJsonDecode``1(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
+        <member name="M:Dawnx.AspNetCore.DawnHttpRequest.BodyJson``1(Microsoft.AspNetCore.Http.HttpRequest,System.Text.Encoding)">
             <summary>
             Deserializes the body, which is json, to a .NET object.
             </summary>

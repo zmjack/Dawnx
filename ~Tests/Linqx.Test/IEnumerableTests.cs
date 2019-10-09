@@ -11,20 +11,20 @@ namespace NLinq.Test
         public void DistributeAlignLeftTest()
         {
             var arr = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var rets = arr.Distribute(3).ToArray();
-            Assert.Equal(string.Join(",", new[] { 1, 2, 3 }), string.Join(",", rets[0]));
-            Assert.Equal(string.Join(",", new[] { 4, 5, 6 }), string.Join(",", rets[1]));
-            Assert.Equal(string.Join(",", new[] { 7 }), string.Join(",", rets[2]));
+            var result = arr.Distribute(3).ToArray();
+            Assert.Equal(string.Join(",", new[] { 1, 2, 3 }), string.Join(",", result[0]));
+            Assert.Equal(string.Join(",", new[] { 4, 5, 6 }), string.Join(",", result[1]));
+            Assert.Equal(string.Join(",", new[] { 7 }), string.Join(",", result[2]));
         }
 
         [Fact]
         public void DistributeAlignRightTest()
         {
             var arr = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var rets = arr.Distribute(3, true).ToArray();
-            Assert.Equal(string.Join(",", new[] { 1 }), string.Join(",", rets[0]));
-            Assert.Equal(string.Join(",", new[] { 2, 3, 4 }), string.Join(",", rets[1]));
-            Assert.Equal(string.Join(",", new[] { 5, 6, 7 }), string.Join(",", rets[2]));
+            var result = arr.Distribute(3, true).ToArray();
+            Assert.Equal(string.Join(",", new[] { 1 }), string.Join(",", result[0]));
+            Assert.Equal(string.Join(",", new[] { 2, 3, 4 }), string.Join(",", result[1]));
+            Assert.Equal(string.Join(",", new[] { 5, 6, 7 }), string.Join(",", result[2]));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace NLinq.Test
                 new[] { 1, 21, 22 },
                 new[] { 2, 31, 32 },
             };
-            var groups = arr.Distribute(_ => _[0]).ToArray();
+            var groups = arr.Distribute(x => x[0]).ToArray();
 
             Assert.Equal(new int[][]
             {

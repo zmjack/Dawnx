@@ -1,6 +1,7 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Dawnx.Compress
 {
@@ -141,12 +142,13 @@ namespace Dawnx.Compress
         }
 
         /// <summary>
-        /// Extract all file into a directory.
+        /// Extract part of files into a directory.
         /// </summary>
         /// <param name="path"></param>
-        public void ExtractAll(string path)
+        /// <param name="predicate"></param>
+        public void Extract(string path, Func<ZipEntry, bool> predicate)
         {
-            foreach (ZipEntry entry in ZipFile)
+            foreach (var entry in ZipFile.OfType<ZipEntry>().Where(predicate))
             {
                 var filePath = Path.Combine(path, entry.Name);
 
@@ -159,7 +161,14 @@ namespace Dawnx.Compress
                     ZipFile.GetInputStream(entry).WriteTo(file, 1024 * 1024);
                 }
             }
+            ZipFile.OfType<ZipEntry>().Where(predicate);
         }
+
+        /// <summary>
+        /// Extract all file into a directory.
+        /// </summary>
+        /// <param name="path"></param>
+        public void ExtractAll(string path) => Extract(path, x => true);
 
         protected override void Dispose(bool disposing)
         {

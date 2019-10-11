@@ -4,6 +4,7 @@
     {
         public static class Microsoft
         {
+            // Refer: https://blogs.msdn.microsoft.com/vsofficedeveloper/2008/05/08/office-2007-file-format-mime-types-for-http-content-streaming-2/
             public const string WORD_2003 = APPLICATION_MSWORD;
             public const string EXCEL_2003 = APPLICATION_VND_MS_EXCEL;
             public const string PPT_2003 = APPLICATION_VND_MS_POWERPOINT;

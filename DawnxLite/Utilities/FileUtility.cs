@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
@@ -7,8 +8,15 @@ namespace Dawnx.Utilities
 {
     public static class FileUtility
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        [Obsolete("Use `new DirectoryInfo(path)`")]
         public static string[] GetAllFiles(string path)
         {
+            //TODO: new DirectoryInfo(path).GetFiles("*.*", SearchOption.AllDirectories);
             var list = new List<string>();
             AddFilesToList(list, path);
             return list.ToArray();

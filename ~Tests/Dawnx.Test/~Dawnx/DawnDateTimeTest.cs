@@ -69,5 +69,12 @@ namespace Dawnx.Test
                 DateTimeUtility.FromUnixSeconds(1540972517).ToLocalTime());
         }
 
+        [Fact]
+        public void WeekTest()
+        {
+            Assert.Equal(0, new DateTime(2017, 1, 1).Week(DayOfWeek.Monday));
+            Assert.Equal(1, new DateTime(2018, 1, 1).Week(DayOfWeek.Monday));
+        }
+
     }
 }

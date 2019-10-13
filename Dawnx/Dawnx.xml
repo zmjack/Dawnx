@@ -82,6 +82,13 @@
             </summary>
             <param name="path"></param>
         </member>
+        <member name="M:Dawnx.Compress.ZipStream.Extract(System.String,System.Func{ICSharpCode.SharpZipLib.Zip.ZipEntry,System.Boolean})">
+            <summary>
+            Extract part of files into a directory.
+            </summary>
+            <param name="path"></param>
+            <param name="predicate"></param>
+        </member>
         <member name="M:Dawnx.Compress.ZipStream.ExtractAll(System.String)">
             <summary>
             Extract all file into a directory.

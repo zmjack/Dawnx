@@ -1589,6 +1589,21 @@
             <param name="endDate"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.Utilities.DateTimeUtility.ParseFromWeek(System.Int32,System.Int32,System.DayOfWeek)">
+            <summary>
+            Gets a DateTime for the specified week of year.
+            </summary>
+            <param name="this"></param>
+            <param name="weekStart"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.FileUtility.GetAllFiles(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.Utilities.IPUtility.GetLongString(System.Net.IPAddress)">
             <summary>
             Converts a <see cref="T:System.Net.IPAddress"/>  into a long IP string.

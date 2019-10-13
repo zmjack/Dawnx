@@ -66,11 +66,12 @@ namespace Dawnx
         public static int WeekInMonth(this DateTime @this, DayOfWeek weekStart)
         {
             var day1 = new DateTime(@this.Year, @this.Month, 1);
-            var day1Week_day1 = PastDay(day1, weekStart, false);
+            var week0 = PastDay(day1, weekStart, true);
 
-            if (day1Week_day1.Month == @this.Month)
-                return (PastDay(@this, weekStart, false) - day1Week_day1).Days / 7 + 1;
-            else return (PastDay(@this, weekStart, false) - day1Week_day1).Days / 7;
+            if (week0.Month == @this.Month)
+                week0 = week0.AddDays(-7);
+
+            return (PastDay(@this, weekStart, true) - week0).Days / 7;
         }
 
         /// <summary>
@@ -82,11 +83,12 @@ namespace Dawnx
         public static int Week(this DateTime @this, DayOfWeek weekStart)
         {
             var day1 = new DateTime(@this.Year, 1, 1);
-            var day1Week_day1 = PastDay(day1, weekStart, false);
+            var week0 = PastDay(day1, weekStart, true);
 
-            if (day1Week_day1.Year == @this.Year)
-                return (PastDay(@this, weekStart, false) - day1Week_day1).Days / 7 + 1;
-            else return (PastDay(@this, weekStart, false) - day1Week_day1).Days / 7;
+            if (week0.Year == @this.Year)
+                week0 = week0.AddDays(-7);
+
+            return (PastDay(@this, weekStart, true) - week0).Days / 7;
         }
 
         /// <summary>

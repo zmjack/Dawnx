@@ -123,8 +123,24 @@ namespace Dawnx.Utilities
         {
             startDate = startDate.Date;
             endDate = endDate.Date;
-
             return (int)(endDate - startDate).TotalDays;
+        }
+
+        /// <summary>
+        /// Gets a DateTime for the specified week of year.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="weekStart"></param>
+        /// <returns></returns>
+        public static DateTime ParseFromWeek(int year, int week, DayOfWeek weekStart)
+        {
+            var day1 = new DateTime(year, 1, 1);
+            var week0 = DawnDateTime.PastDay(day1, weekStart, true);
+
+            if (week0.Year == year)
+                week0 = week0.AddDays(-7);
+
+            return week0.AddDays(week * 7);
         }
 
         ///// <summary>

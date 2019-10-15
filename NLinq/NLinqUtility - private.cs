@@ -31,21 +31,26 @@ namespace NLinq
         private static void ApplyIndexes(object entityTypeBuilder, Type modelClass)
         {
             var hasIndexMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasIndex), new[] { typeof(string[]) });
-
-            var modelProps = modelClass.GetProperties();
-            foreach (var modelProp in modelProps)
+            var propPairs = modelClass.GetProperties().Select(prop => new
             {
-                var attr = modelProp.GetCustomAttribute<IndexAttribute>();
-                if (attr != null)
-                {
-                    var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { new[] { modelProp.Name } }) as IndexBuilder;
+                Attribute = prop.GetCustomAttribute<IndexAttribute>(),
+                Property = prop,
+            }).Where(x => x.Attribute != null);
 
-                    switch (attr.Type)
-                    {
-                        case IndexType.Normal: break;
-                        case IndexType.Unique: indexBuilder.IsUnique(); break;
-                    }
-                }
+            foreach (var pair in propPairs.Where(x => !x.Attribute.Group.HasValue))
+            {
+                var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { new[] { pair.Property.Name } }) as IndexBuilder;
+                if (pair.Attribute.Type == IndexType.Unique)
+                    indexBuilder.IsUnique();
+            }
+            foreach (var pairGroup in propPairs.Where(x => x.Attribute.Group.HasValue).GroupBy(x => x.Attribute.Group.Value))
+            {
+                var normalPairs = pairGroup.Where(x => x.Attribute.Type == IndexType.Normal);
+                hasIndexMethod.Invoke(entityTypeBuilder, new object[] { normalPairs.Select(x => x.Property.Name).ToArray() });
+
+                var uniquePairs = pairGroup.Where(x => x.Attribute.Type == IndexType.Unique);
+                var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { uniquePairs.Select(x => x.Property.Name).ToArray() }) as IndexBuilder;
+                indexBuilder.IsUnique();
             }
         }
 

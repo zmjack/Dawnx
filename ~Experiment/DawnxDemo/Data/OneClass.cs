@@ -9,23 +9,28 @@ namespace DawnxDemo.Data
         [Key]
         public Guid Id { get; set; }
 
+        [Required]
         [Index(IndexType.Unique)]
         public string UserName { get; set; }
 
         [Provider(typeof(PasswordProvider))]
         public string Password { get; set; }
 
+        [Required]
         [Index(IndexType.Unique, Group = "UniqueA")]
         public string UniqueA1 { get; set; }
 
+        [Required]
         [Index(IndexType.Unique, Group = "UniqueA")]
         public string UniqueA2 { get; set; }
 
-        [Index(IndexType.Normal, Group = "NormalA")]
-        public string NormalA1 { get; set; }
+        [Required]
+        [Index(IndexType.Unique, Group = "UniqueB")]
+        public DateTime UniqueB1 { get; set; }
 
-        [Index(IndexType.Normal, Group = "NormalA")]
-        public string NormalA2 { get; set; }
+        [Required]
+        [Index(IndexType.Unique, Group = "UniqueB")]
+        public DateTime UniqueB2 { get; set; }
 
         private class PasswordProvider : IProvider<string, int>
         {

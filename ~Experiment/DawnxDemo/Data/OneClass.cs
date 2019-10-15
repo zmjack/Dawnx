@@ -15,6 +15,18 @@ namespace DawnxDemo.Data
         [Provider(typeof(PasswordProvider))]
         public string Password { get; set; }
 
+        [Index(IndexType.Unique, Group = "UniqueA")]
+        public string UniqueA1 { get; set; }
+
+        [Index(IndexType.Unique, Group = "UniqueA")]
+        public string UniqueA2 { get; set; }
+
+        [Index(IndexType.Normal, Group = "NormalA")]
+        public string NormalA1 { get; set; }
+
+        [Index(IndexType.Normal, Group = "NormalA")]
+        public string NormalA2 { get; set; }
+
         private class PasswordProvider : IProvider<string, int>
         {
             public override string ConvertFromProvider(int provider) => provider == 0 ? "" : "a";

@@ -37,20 +37,24 @@ namespace NLinq
                 Property = prop,
             }).Where(x => x.Attribute != null);
 
-            foreach (var pair in propPairs.Where(x => !x.Attribute.Group.HasValue))
+            foreach (var pair in propPairs.Where(x => x.Attribute.Group == null))
             {
                 var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { new[] { pair.Property.Name } }) as IndexBuilder;
                 if (pair.Attribute.Type == IndexType.Unique)
                     indexBuilder.IsUnique();
             }
-            foreach (var pairGroup in propPairs.Where(x => x.Attribute.Group.HasValue).GroupBy(x => x.Attribute.Group.Value))
+            foreach (var pairGroup in propPairs.Where(x => x.Attribute.Group != null).GroupBy(x => x.Attribute.Group))
             {
                 var normalPairs = pairGroup.Where(x => x.Attribute.Type == IndexType.Normal);
-                hasIndexMethod.Invoke(entityTypeBuilder, new object[] { normalPairs.Select(x => x.Property.Name).ToArray() });
+                if (normalPairs.Any())
+                    hasIndexMethod.Invoke(entityTypeBuilder, new object[] { normalPairs.Select(x => x.Property.Name).ToArray() });
 
                 var uniquePairs = pairGroup.Where(x => x.Attribute.Type == IndexType.Unique);
-                var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { uniquePairs.Select(x => x.Property.Name).ToArray() }) as IndexBuilder;
-                indexBuilder.IsUnique();
+                if (uniquePairs.Any())
+                {
+                    var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { uniquePairs.Select(x => x.Property.Name).ToArray() }) as IndexBuilder;
+                    indexBuilder.IsUnique();
+                }
             }
         }
 

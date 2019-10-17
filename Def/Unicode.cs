@@ -1,6 +1,10 @@
-﻿namespace Dawnx.Definition
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Def
 {
-    public static partial class Unicode
+    public static class Unicode
     {
         /// <summary>
         /// The Chinese includes
@@ -10,10 +14,10 @@
         ///     CJK_Compatibility_Ideographs.
         /// </summary>
         public const string Chinese = "[" +
-            Origin.CJK_Radicals_Supplement +
-            Origin.CJK_Unified_Ideographs_Extension_A +
-            Origin.CJK_Unified_Ideographs +
-            Origin.CJK_Compatibility_Ideographs + "]";
+            UnicodeMap.CJK_Radicals_Supplement +
+            UnicodeMap.CJK_Unified_Ideographs_Extension_A +
+            UnicodeMap.CJK_Unified_Ideographs +
+            UnicodeMap.CJK_Compatibility_Ideographs + "]";
 
         /// <summary>
         /// The Japanese includes
@@ -26,13 +30,13 @@
         ///     Halfwidth_and_Fullwidth_Forms.
         /// </summary>
         public const string Japanese = "[" +
-            Origin.CJK_Radicals_Supplement +
-            Origin.CJK_Unified_Ideographs_Extension_A +
-            Origin.CJK_Unified_Ideographs +
-            Origin.CJK_Compatibility_Ideographs +
-            Origin.Hiragana +
-            Origin.Katakana_Phonetic_Extensions +
-            Origin.Halfwidth_and_Fullwidth_Forms + "]";
+            UnicodeMap.CJK_Radicals_Supplement +
+            UnicodeMap.CJK_Unified_Ideographs_Extension_A +
+            UnicodeMap.CJK_Unified_Ideographs +
+            UnicodeMap.CJK_Compatibility_Ideographs +
+            UnicodeMap.Hiragana +
+            UnicodeMap.Katakana_Phonetic_Extensions +
+            UnicodeMap.Halfwidth_and_Fullwidth_Forms + "]";
 
         /// <summary>
         /// The Korean includes
@@ -46,14 +50,14 @@
         ///     Halfwidth_and_Fullwidth_Forms.
         /// </summary>
         public const string Korean = "[" +
-            Origin.CJK_Radicals_Supplement +
-            Origin.CJK_Unified_Ideographs_Extension_A +
-            Origin.CJK_Unified_Ideographs +
-            Origin.CJK_Compatibility_Ideographs +
-            Origin.Hangul_Jamo +
-            Origin.Hangul_Compatibility_Jamo +
-            Origin.Hangul_Syllables +
-            Origin.Halfwidth_and_Fullwidth_Forms + "]";
+            UnicodeMap.CJK_Radicals_Supplement +
+            UnicodeMap.CJK_Unified_Ideographs_Extension_A +
+            UnicodeMap.CJK_Unified_Ideographs +
+            UnicodeMap.CJK_Compatibility_Ideographs +
+            UnicodeMap.Hangul_Jamo +
+            UnicodeMap.Hangul_Compatibility_Jamo +
+            UnicodeMap.Hangul_Syllables +
+            UnicodeMap.Halfwidth_and_Fullwidth_Forms + "]";
 
     }
 }

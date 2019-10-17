@@ -14,7 +14,7 @@ namespace NLinq.Test
         public void Test1()
         {
             using (var mysql = new NorthwndContext(
-                new DbContextOptionsBuilder().UseMySql("server=127.0.0.1;database=tmp1").Options))
+                new DbContextOptionsBuilder().UseMySql("server=127.0.0.1;database=northwnd").Options))
             {
                 var query = mysql.Categories.Where(x => x.CategoryName == "Beverages");
                 var result = query.First();

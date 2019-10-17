@@ -1,4 +1,5 @@
 ﻿using Dawnx.Utilities;
+using System;
 using Xunit;
 
 namespace Dawnx.Test.Utilities
@@ -16,10 +17,23 @@ namespace Dawnx.Test.Utilities
         [Fact]
         public void CamelCaseTest()
         {
-            Assert.Equal("jackT0", StringUtility.CamelCase("JackT0"));
-            Assert.Equal("jackT0", StringUtility.CamelCase("JAckT0"));
-            Assert.Equal("jackt0", StringUtility.CamelCase("JACKT0"));
-            Assert.Equal("jackT0", StringUtility.CamelCase("jackT0"));
+            Assert.Equal("", StringUtility.CamelCase(""));
+            Assert.Equal("cpKey", StringUtility.CamelCase("CPKey"));
+            Assert.Equal("mySQL", StringUtility.CamelCase("MySQL"));
+            Assert.Equal("gate2Name", StringUtility.CamelCase("gate2Name"));
+            Assert.Equal("dawnxV2", StringUtility.CamelCase("DAWNXV2"));
+            Assert.Throws<ArgumentException>(() => StringUtility.CamelCase("Exception\0"));
+        }
+
+        [Fact]
+        public void KebabCaseTest()
+        {
+            Assert.Equal("", StringUtility.KebabCase(""));
+            Assert.Equal("cp-key", StringUtility.KebabCase("CPKey"));
+            Assert.Equal("my-sql", StringUtility.KebabCase("MySQL"));
+            Assert.Equal("gate2-name", StringUtility.KebabCase("gate2Name"));
+            Assert.Equal("dawnx-v2", StringUtility.KebabCase("DAWNXV2"));
+            Assert.Throws<ArgumentException>(() => StringUtility.KebabCase("Exception\0"));
         }
 
         [Fact]

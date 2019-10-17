@@ -1,4 +1,5 @@
 ﻿using Dawnx.Ranges;
+using Def;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -37,25 +38,106 @@ namespace Dawnx.Utilities
         }
 
         /// <summary>
-        /// Converts a string to a CamelCase string.
+        /// Converts a string to CamelCase string.
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
         public static string CamelCase(string source)
         {
-            if (source.Length == 0) return "";
+            if (source.IsNullOrEmpty()) return source;
+            if (!source.All(c => 31 < c && c < 127)) throw new ArgumentException("Some char is out of allowed range(ascii, 32 to 126).");
 
-            var chars = source.ToArray();
-            bool IsUpper(char ch) => 'A' <= ch && ch <= 'Z';
+            bool IsNotUpper(char c) => c < 'A' || 'Z' < c;
+            var index = source.IndexOf(IsNotUpper);
 
-            for (int i = 0; i < chars.Length; i++)
+            switch (index)
             {
-                if (IsUpper(chars[i]))
-                    chars[i] = char.ToLower(chars[i]);
-                else break;
+                case int _ when index > 1: return $"{source.Slice(0, index - 1).ToLower()}{source[index - 1]}{source.Substring(index)}";
+                case int _ when index == 1: return $"{char.ToLower(source[0])}{source.Substring(index)}";
+                case int _ when index == 0: return source;
+                default: return source.ToLower();
+            }
+        }
+
+        /// <summary>
+        /// Converts a string to KebabCase string.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string KebabCase(string source)
+        {
+            if (source.IsNullOrEmpty()) return source;
+            if (!source.All(c => 31 < c && c < 127)) throw new ArgumentException("Some char is out of allowed range(ascii, 32 to 126).");
+
+            bool IsUpper(char c) => 'A' <= c && c <= 'Z';
+            bool IsNotUpper(char c) => c < 'A' || 'Z' < c;
+
+            var sb = new StringBuilder();
+            string GetPattern(int _startIndex)
+            {
+                switch (_startIndex)
+                {
+                    case int _ when _startIndex == source.Length - 1:
+                        return "x";
+
+                    case int _ when _startIndex < source.Length - 1:
+                        var c1 = source[_startIndex];
+                        var c2 = source[_startIndex + 1];
+
+                        if (IsUpper(c1) && IsUpper(c2)) return "AA";
+                        else if (IsUpper(c1) && IsNotUpper(c2)) return "Ab";
+                        else if (IsNotUpper(c1) && IsUpper(c2)) return "bA";
+                        else if (IsNotUpper(c1) && IsNotUpper(c2)) return "bb";
+                        else goto default;
+
+                    default: return null;
+                }
             }
 
-            return new string(chars);
+            var startIndex = 0;
+            while (startIndex != -1)
+            {
+                var pattern = GetPattern(startIndex);
+                int index;
+                switch (pattern)
+                {
+                    case "x":
+                        sb.Append(source[startIndex]);
+                        startIndex++;
+                        break;
+
+                    case "bb":
+                    case "Ab":
+                        index = source.IndexOf(IsUpper, startIndex + 1);
+                        if (index != -1)
+                            sb.Append($"-{source.Slice(startIndex, index).ToLower()}");
+                        else sb.Append($"-{source.Slice(startIndex).ToLower()}");
+                        startIndex = index;
+                        break;
+
+                    case "bA":
+                        sb.Append($"-{source[startIndex]}");
+                        break;
+
+                    case "AA":
+                        index = source.IndexOf(IsNotUpper, startIndex + 1);
+                        if (index != -1)
+                        {
+                            sb.Append($"-{source.Slice(startIndex, index - 1).ToLower()}");
+                            startIndex = index - 1;
+                        }
+                        else
+                        {
+                            sb.Append($"-{source.Slice(startIndex).ToLower()}");
+                            startIndex = -1;
+                        }
+                        break;
+
+                    default: throw new InvalidOperationException();
+                }
+            }
+
+            return sb.ToString().Substring(1);
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using Dawnx.Definition;
 using Dawnx.Ranges;
+using Def;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -22,8 +23,8 @@ namespace Dawnx.NPOI
             {
                 switch (Version)
                 {
-                    case ExcelVersion.Excel2003: return MimeType.Microsoft.EXCEL_2003;
-                    case ExcelVersion.Excel2007: return MimeType.Microsoft.EXCEL_2007;
+                    case ExcelVersion.Excel2003: return Mime.MSOffice.EXCEL03;
+                    case ExcelVersion.Excel2007: return Mime.MSOffice.EXCEL07;
                     default: return string.Empty;
                 }
             }

@@ -19,24 +19,24 @@ namespace Dawnx.Algorithms.StringAlgorithm
             PartialMoves[0] = 1;
             for (int i = 1; i < Pattern.Length; i++)
             {
-                var prefixs = Prefixs(Pattern.Slice(0, i + 1));
-                var suffixs = Suffixs(Pattern.Slice(0, i + 1));
+                var part = Pattern.Slice(0, i + 1);
+                var prefixs = GetPrefixs(part);
+                var suffixs = GetSuffixs(part);
 
                 for (int j = 0; j < prefixs.Length; j++)
                 {
                     if (prefixs[j] == suffixs[j])
                     {
-                        PartialMoves[i] = j + 1;
+                        PartialMoves[i] = j;
                         break;
                     }
                 }
 
-                if (PartialMoves[i] == 0)
-                    PartialMoves[i] = 1;
+                PartialMoves[i]++;
             }
         }
 
-        private string[] Prefixs(string input)
+        private string[] GetPrefixs(string input)
         {
             var ret = new Stack<string>();
             for (int i = 1; i < input.Length; i++)
@@ -44,7 +44,7 @@ namespace Dawnx.Algorithms.StringAlgorithm
             return ret.ToArray();
         }
 
-        private string[] Suffixs(string input)
+        private string[] GetSuffixs(string input)
         {
             var ret = new Stack<string>();
             for (int i = 1; i < input.Length; i++)
@@ -75,9 +75,7 @@ namespace Dawnx.Algorithms.StringAlgorithm
                     if (find)
                     {
                         findCount++;
-                        if (repeatMatchChars)
-                            p += 1;
-                        else p += Pattern.Length;
+                        p += repeatMatchChars ? 1 : Pattern.Length;
                     }
                 }
             }

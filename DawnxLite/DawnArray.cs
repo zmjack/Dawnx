@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Dawnx
 {
@@ -66,6 +67,68 @@ namespace Dawnx
                 if (e.Equals(element))
                     return i;
                 i++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Reports the zero-based index of the first occurrence of the specified element in this array.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public static int IndexOf<T>(this T[] @this, Func<T, bool> predicate)
+        {
+            int i = 0;
+            foreach (var e in @this)
+            {
+                if (predicate(e))
+                    return i;
+                i++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Reports the zero-based index of the first occurrence of the specified element in this string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="predicate"></param>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
+        public static int IndexOf<T>(this T[] @this, Func<T, bool> predicate, int startIndex)
+        {
+            int i = startIndex;
+            foreach (var e in @this.Skip(startIndex))
+            {
+                if (predicate(e))
+                    return i;
+                i++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Reports the zero-based index of the first occurrence of the specified element in this string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="predicate"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static int IndexOf<T>(this T[] @this, Func<T, bool> predicate, int startIndex, int count)
+        {
+            int i = startIndex;
+            int iEnd = startIndex + count;
+            if (iEnd < 1) return -1;
+
+            foreach (var e in @this.Skip(startIndex))
+            {
+                if (predicate(e))
+                    return i;
+                i++;
+                if (i == iEnd) break;
             }
             return -1;
         }

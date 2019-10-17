@@ -1,4 +1,8 @@
-﻿namespace Dawnx.Definition
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Def
 {
     public static class FtpVerb
     {
@@ -66,5 +70,6 @@
         /// UploadFileWithUniqueName
         /// </summary>
         public const string STOU = "STOU";
+
     }
 }

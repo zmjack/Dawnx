@@ -1,9 +1,13 @@
-﻿namespace Dawnx.Definition
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Def
 {
-    public static partial class MimeType
+    public static class MimeMap
     {
-        //From: 
-        //  https://support.microsoft.com/zh-cn/help/936496/description-of-the-default-settings-for-the-mimemap-property-and-for-t
+        // IIS Mime map
+        // Refer: https://support.microsoft.com/zh-cn/help/936496/description-of-the-default-settings-for-the-mimemap-property-and-for-t
         public const string APPLICATION_DIRECTX = "application/directx";
         public const string APPLICATION_ENVOY = "application/envoy";
         public const string APPLICATION_FUTURESPLASH = "application/futuresplash";
@@ -166,5 +170,19 @@
         public const string VIDEO_X_MSVIDEO = "video/x-msvideo";
         public const string VIDEO_X_SGI_MOVIE = "video/x-sgi-movie";
         public const string X_WORLD_X_VRML = "x-world/x-vrml";
+
+        // Other map
+        public const string APPLICATION_ATOM_XML = "application/atom+xml";
+        public const string APPLICATION_JSON = "application/json";
+        public const string APPLICATION_SVG_XML = "application/svg+xml";
+        public const string APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
+        public const string APPLICATION_XHTML_XML = "application/xhtml+xml";
+        public const string APPLICATION_XML = "application/xml";
+        public const string APPLICATION_XML_DTD = "application/xml-dtd";
+        public const string MULTIPART_FORM_DATA = "multipart/form-data";
+
+        public const string APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        public const string APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+        public const string APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     }
 }

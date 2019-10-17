@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx</Authors>
-    <Version>1.19.8</Version>
+    <Version>1.20.0</Version>
     <Company>dawnx.net</Company>
     <Description>Dawnx lite version. Less dependencies.</Description>
     <RootNamespace>Dawnx</RootNamespace>
@@ -37,6 +37,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Def\Def.csproj" />
   </ItemGroup>
 
 </Project>

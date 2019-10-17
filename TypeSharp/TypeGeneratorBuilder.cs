@@ -1,5 +1,4 @@
-﻿using TypeSharp;
-using Dawnx.Definition;
+﻿using Dawnx;
 using Dawnx.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Dawnx;
 
 namespace TypeSharp
 {

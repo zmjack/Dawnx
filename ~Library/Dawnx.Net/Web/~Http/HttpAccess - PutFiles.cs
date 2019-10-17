@@ -1,5 +1,6 @@
 ﻿using Dawnx.Definition;
 using Dawnx.Utilities;
+using Def;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
@@ -12,14 +13,14 @@ namespace Dawnx.Net.Web
         public string PutFiles(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
         {
             return ReadString(
-                HttpVerb.PUT, MimeType.MULTIPART_FORM_DATA,
+                HttpVerb.PUT, MimeMap.MULTIPART_FORM_DATA,
                 url, updata, upfiles);
         }
         public string PutFiles(string url, object updata, Dictionary<string, object> upfiles = null)
             => PutFiles(url, ObjectUtility.CovertToDictionary(updata), upfiles);
 
         public string PutFilesDownload(Stream receiver, string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
-            => Download(receiver, HttpVerb.PUT, MimeType.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
+            => Download(receiver, HttpVerb.PUT, MimeMap.MULTIPART_FORM_DATA, url, updata, upfiles, bufferSize);
         public string PutFilesDownload(Stream receiver, string url, object updata, Dictionary<string, object> upfiles = null, int bufferSize = RECOMMENDED_BUFFER_SIZE)
             => PutFilesDownload(receiver, url, ObjectUtility.CovertToDictionary(updata), upfiles, bufferSize);
 
@@ -30,7 +31,7 @@ namespace Dawnx.Net.Web
         public JToken PutFilesFor(string url, object updata, Dictionary<string, object> upfiles = null) => PutFilesFor(url, ObjectUtility.CovertToDictionary(updata), upfiles);
 
         public HttpWebResponse PutFilesResponse(string url, Dictionary<string, object> updata = null, Dictionary<string, object> upfiles = null)
-            => GetPureResponse(HttpVerb.PUT, MimeType.MULTIPART_FORM_DATA, url, updata, upfiles);
+            => GetPureResponse(HttpVerb.PUT, MimeMap.MULTIPART_FORM_DATA, url, updata, upfiles);
 
     }
 }

@@ -112,10 +112,7 @@ namespace Dawnx
             stop = GetCharPosition(ref @this, stop);
 
             var length = stop - start;
-            if (length > 0)
-                return @this.Substring(start, length);
-            else if (length == 0) return "";
-            else throw new IndexOutOfRangeException($"'start:{start}' can not greater than 'end:{stop}'.");
+            return @this.Substring(start, length);
         }
         private static int GetCharPosition(ref string str, int pos) => pos < 0 ? str.Length + pos : pos;
 
@@ -468,6 +465,68 @@ namespace Dawnx
                 else return @this.PadRight(padWidth, paddingChar);
             }
             else return @this;
+        }
+
+        /// <summary>
+        /// Reports the zero-based index of the first occurrence of the specified element in this string.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public static int IndexOf(this string @this, Func<char, bool> predicate)
+        {
+            int i = 0;
+            foreach (var e in @this)
+            {
+                if (predicate(e))
+                    return i;
+                i++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Reports the zero-based index of the first occurrence of the specified element in this string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="predicate"></param>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
+        public static int IndexOf(this string @this, Func<char, bool> predicate, int startIndex)
+        {
+            int i = startIndex;
+            foreach (var e in @this.Skip(startIndex))
+            {
+                if (predicate(e))
+                    return i;
+                i++;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Reports the zero-based index of the first occurrence of the specified element in this string.
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="predicate"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static int IndexOf(this string @this, Func<char, bool> predicate, int startIndex, int count)
+        {
+            int i = startIndex;
+            int iEnd = startIndex + count;
+            if (iEnd < 1) return -1;
+
+            foreach (var e in @this.Skip(startIndex))
+            {
+                if (predicate(e))
+                    return i;
+                i++;
+                if (i == iEnd) break;
+            }
+            return -1;
         }
 
     }

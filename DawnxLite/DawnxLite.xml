@@ -170,6 +170,34 @@
             <param name="element"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnArray.IndexOf``1(``0[],System.Func{``0,System.Boolean})">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.IndexOf``1(``0[],System.Func{``0,System.Boolean},System.Int32)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this string.
+            </summary>
+            <param name="this"></param>
+            <param name="predicate"></param>
+            <param name="startIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnArray.IndexOf``1(``0[],System.Func{``0,System.Boolean},System.Int32,System.Int32)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this string.
+            </summary>
+            <param name="this"></param>
+            <param name="predicate"></param>
+            <param name="startIndex"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnArray.Slice``1(``0[],System.Int32)">
             <summary>
             Retrieves an array from this instance. The new array starts at a specified
@@ -1155,6 +1183,34 @@
             <param name="paddingChar"></param>
             <returns></returns>
         </member>
+        <member name="M:Dawnx.DawnString.IndexOf(System.String,System.Func{System.Char,System.Boolean})">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this string.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IndexOf(System.String,System.Func{System.Char,System.Boolean},System.Int32)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this string.
+            </summary>
+            <param name="this"></param>
+            <param name="predicate"></param>
+            <param name="startIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.DawnString.IndexOf(System.String,System.Func{System.Char,System.Boolean},System.Int32,System.Int32)">
+            <summary>
+            Reports the zero-based index of the first occurrence of the specified element in this string.
+            </summary>
+            <param name="this"></param>
+            <param name="predicate"></param>
+            <param name="startIndex"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dawnx.DawnUInt32.IsOdd(System.UInt32)">
             <summary>
             Returns whether the specified number is odd.
@@ -1198,146 +1254,6 @@
             <param name="this"></param>
             <param name="mod"></param>
             <returns></returns>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.APPE">
-            <summary>
-            AppendFile
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.DELE">
-            <summary>
-            DeleteFile
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.RETR">
-            <summary>
-            DownloadFile
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.MDTM">
-            <summary>
-            GetDateTimestamp
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.SIZE">
-            <summary>
-            GetFileSize
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.NLST">
-            <summary>
-            ListDirectory
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.LIST">
-            <summary>
-            ListDirectoryDetails
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.MKD">
-            <summary>
-            MakeDirectory
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.PWD">
-            <summary>
-            PrintWorkingDirectory
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.RMD">
-            <summary>
-            RemoveDirectory
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.RENAME">
-            <summary>
-            Rename
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.STOR">
-            <summary>
-            UploadFile
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.FtpVerb.STOU">
-            <summary>
-            UploadFileWithUniqueName
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unicode.Chinese">
-            <summary>
-            The Chinese includes
-                CJK_Radicals_Supplement,
-                CJK_Unified_Ideographs_Extension_A,
-                CJK_Unified_Ideographs,
-                CJK_Compatibility_Ideographs.
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unicode.Japanese">
-            <summary>
-            The Japanese includes
-                CJK_Radicals_Supplement,
-                CJK_Unified_Ideographs_Extension_A,
-                CJK_Unified_Ideographs,
-                CJK_Compatibility_Ideographs,
-                Hiragana,
-                Katakana_Phonetic_Extensions,
-                Halfwidth_and_Fullwidth_Forms.
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unicode.Korean">
-            <summary>
-            The Korean includes
-                CJK_Radicals_Supplement,
-                CJK_Unified_Ideographs_Extension_A,
-                CJK_Unified_Ideographs,
-                CJK_Compatibility_Ideographs,
-                Hangul_Jamo,
-                Hangul_Compatibility_Jamo,
-                Hangul_Syllables,
-                Halfwidth_and_Fullwidth_Forms.
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.B">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.KB">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.MB">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.GB">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.TB">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.PB">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="F:Dawnx.Definition.Unit.Storage.EB">
-            <summary>
-            Unit: Byte
-            </summary>
-        </member>
-        <member name="T:Dawnx.Definition.MimeType">
-            <summary>
-            MIME Type definitions
-            (Referrer: https://www.iana.org/assignments/media-types/media-types.xhtml)
-            </summary>
         </member>
         <member name="T:Dawnx.Lock.InstanceLock`1">
             <summary>
@@ -1642,7 +1558,14 @@
         </member>
         <member name="M:Dawnx.Utilities.StringUtility.CamelCase(System.String)">
             <summary>
-            Converts a string to a CamelCase string.
+            Converts a string to CamelCase string.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dawnx.Utilities.StringUtility.KebabCase(System.String)">
+            <summary>
+            Converts a string to KebabCase string.
             </summary>
             <param name="source"></param>
             <returns></returns>

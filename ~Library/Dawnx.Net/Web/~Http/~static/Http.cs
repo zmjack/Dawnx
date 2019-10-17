@@ -1,4 +1,5 @@
 ﻿using Dawnx.Definition;
+using Def;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -27,7 +28,7 @@ namespace Dawnx.Net.Web
 
         public static string Download(Stream receiver,
             string method, string url,
-            string enctype = MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
+            string enctype = MimeMap.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
             Dictionary<string, object> upfiles = null,
             int bufferSize = 4096,
@@ -38,7 +39,7 @@ namespace Dawnx.Net.Web
 
         public static string ReadString(
             string method, string url,
-            string enctype = MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
+            string enctype = MimeMap.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
             Dictionary<string, object> upfiles = null,
             HttpStateContainer config = null)
@@ -48,7 +49,7 @@ namespace Dawnx.Net.Web
 
         public static HttpWebResponse GetResponse(
             string method, string url,
-            string enctype = MimeType.APPLICATION_X_WWW_FORM_URLENCODED,
+            string enctype = MimeMap.APPLICATION_X_WWW_FORM_URLENCODED,
             Dictionary<string, object> updata = null,
             Dictionary<string, object> upfiles = null,
             HttpStateContainer config = null)

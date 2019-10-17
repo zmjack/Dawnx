@@ -1,6 +1,7 @@
 ﻿using Dawnx.Definition;
 using Dawnx.IO;
 using Dawnx.Utilities;
+using Def;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -59,13 +60,13 @@ Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
                 {
                     new MemoryStream(GetPartHeader(x.Key)),
                     x.Stream,
-                    new MemoryStream(ControlBytes.CrLf),
+                    new MemoryStream(ControlChars.CrLfBytes),
                 }) as Stream),
                 Files.Select(x => SequenceInputStream.Create(new[]
                 {
                     new MemoryStream(GetPartHeader(x.Name, x.FileName)),
                     x.Stream,
-                    new MemoryStream(ControlBytes.CrLf),
+                    new MemoryStream(ControlChars.CrLfBytes),
                 }) as Stream),
                 new []
                 {

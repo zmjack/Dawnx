@@ -1,5 +1,6 @@
 ﻿using Dawnx.Definition;
 using Dawnx.Net.Web.Processors;
+using Def;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -152,7 +153,7 @@ namespace Dawnx.Net.Web
             switch (enctype)
             {
                 default:
-                case MimeType.APPLICATION_X_WWW_FORM_URLENCODED:
+                case MimeMap.APPLICATION_X_WWW_FORM_URLENCODED:
                     var query = new List<string>();
                     foreach (var data in updata)
                     {
@@ -173,7 +174,7 @@ namespace Dawnx.Net.Web
                     }
                     break;
 
-                case MimeType.MULTIPART_FORM_DATA:
+                case MimeMap.MULTIPART_FORM_DATA:
                     var formData = new HttpFormData(encoding);
                     foreach (var data in updata)
                     {
@@ -192,7 +193,7 @@ namespace Dawnx.Net.Web
                     enctype = formData.ContentType;
                     break;
 
-                case MimeType.APPLICATION_JSON:
+                case MimeMap.APPLICATION_JSON:
                     bodyStream = new MemoryStream(JsonConvert.SerializeObject(updata).Bytes(encoding));
                     break;
             }

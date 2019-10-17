@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Def;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
@@ -48,6 +49,16 @@ namespace Dawnx.Utilities
             using (var file = new FileStream(path, FileMode.Open))
             {
                 return MD5.Create().ComputeHash(file).HexString();
+            }
+        }
+
+        public static string GetMimeType(string path)
+        {
+            switch (Path.GetExtension(path))
+            {
+                case ".html":
+                case ".htm": return MimeMap.TEXT_HTML;
+                default: return MimeMap.APPLICATION_OCTET_STREAM;
             }
         }
 

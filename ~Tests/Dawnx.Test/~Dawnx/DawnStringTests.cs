@@ -1,4 +1,5 @@
 using Dawnx.Definition;
+using Def;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,16 +10,16 @@ namespace Dawnx.Test
     public class DawnStringTests
     {
         [Fact]
-        public void Common()
+        public void CommonTest()
         {
             var ds = "123";
 
             Assert.Equal("123123123", ds.Repeat(3));
             Assert.Equal("12", ds.Slice(0, -1));
             Assert.Equal("1", ds.Slice(0, 1));
-            Assert.Equal("23", ds.Slice(1));
+            Assert.Equal("23", ds.Substring(1));
             Assert.Equal("23", ds.Slice(-2));
-            Assert.Throws<IndexOutOfRangeException>(() => ds.Slice(3, 2));
+            Assert.Throws<ArgumentOutOfRangeException>(() => ds.Slice(3, 2));
 
             Assert.Equal('1', ds.CharAt(0));
             Assert.Equal('3', ds.CharAt(-1));
@@ -30,7 +31,7 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void GetBytes()
+        public void GetBytesTest()
         {
             var str = "黎明";
             Assert.Equal(Encoding.UTF8.GetBytes(str), str.Bytes(Encoding.UTF8));
@@ -52,14 +53,14 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void NormalizeNewLine()
+        public void NormalizeNewLineTest()
         {
             Assert.Equal("123456", "123\n456".NormalizeNewLine().Replace(Environment.NewLine, ""));
             Assert.Equal("123456", "123\r\n456".NormalizeNewLine().Replace(Environment.NewLine, ""));
         }
 
         [Fact]
-        public void GetLines()
+        public void GetLinesTest()
         {
             string nullString = null;
             Assert.Equal(new string[0], nullString.GetLines());
@@ -74,7 +75,7 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void GetPureLines()
+        public void GetPureLinesTest()
         {
             string nullString = null;
             Assert.Equal(new string[0], nullString.GetPureLines());
@@ -85,7 +86,7 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void Unique()
+        public void UniqueTest()
         {
             Assert.Equal("123 456 7890", "  123  456    7890 ".Unique());
             Assert.Equal("123 456 7890", "  123  456 7890".Unique());
@@ -94,23 +95,18 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void Project1()
+        public void ProjectTest()
         {
             var regex = new Regex(@"(.+?)(?:(?=\()|(?=（)|$)");
             Assert.Equal("zmjack", "zmjack(1)".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack (1)".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack (".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack".Project(regex).Trim());
-        }
-
-        [Fact]
-        public void Project2()
-        {
             Assert.Equal("ja", "zmjack".Project(@"(ja)", "$1"));
         }
 
         [Fact]
-        public void ProjectToArray()
+        public void ProjectToArrayTest()
         {
             Assert.Equal(new string[][]
             {
@@ -147,11 +143,10 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void PadLeftU()
+        public void PadLeftUTest()
         {
             Assert.Equal("English", "English".PadLeftA(1));
             Assert.Equal(" English", "English".PadLeftA(8));
-
             Assert.Equal("中文", "中文".PadLeftA(1));
             Assert.Equal(" 中文", "中文".PadLeftA(5));
             Assert.Equal(" 中文", "中文".PadLeftA(5, '嗯'));
@@ -161,17 +156,24 @@ namespace Dawnx.Test
         }
 
         [Fact]
-        public void PadRightU()
+        public void PadRightUTest()
         {
             Assert.Equal("English", "English".PadRightA(1));
             Assert.Equal("English ", "English".PadRightA(8));
-
             Assert.Equal("中文", "中文".PadRightA(1));
             Assert.Equal("中文 ", "中文".PadRightA(5));
             Assert.Equal("中文 ", "中文".PadRightA(5, '嗯'));
             Assert.Equal("中文嗯", "中文".PadRightA(6, '嗯'));
             Assert.Equal("中文.", "中文".PadRightA(5, '.'));
             Assert.Equal("中文..", "中文".PadRightA(6, '.'));
+        }
+
+        [Fact]
+        public void IndexOfTest()
+        {
+            Assert.Equal(3, "1110101".IndexOf(c => c == '0'));
+            Assert.Equal(5, "1110101".IndexOf(c => c == '0', 4));
+            Assert.Equal(-1, "1110101".IndexOf(c => c == '0', 4, 1));
         }
 
     }

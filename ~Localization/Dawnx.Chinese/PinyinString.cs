@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Dawnx.Chinese
 {
+    // Refer: Microsoft Visual Studio International Pack 1.0 Service
     public class PinyinString
     {
         public string Chinese { get; }
@@ -16,7 +17,7 @@ namespace Dawnx.Chinese
             Chinese = chinese;
         }
 
-        public string Pinyin
+        public string PinyinWithTone
         {
             get
             {
@@ -38,7 +39,7 @@ namespace Dawnx.Chinese
             }
         }
 
-        public string PurePinyin
+        public string Pinyin
         {
             get
             {

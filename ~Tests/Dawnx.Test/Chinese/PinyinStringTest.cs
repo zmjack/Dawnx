@@ -9,8 +9,8 @@ namespace Dawnx.Chinese.Test
         public void Test1()
         {
             var pinyin = new PinyinString("欢迎");
-            Assert.Equal("HUANYING", pinyin.PurePinyin);
-            Assert.Equal("HUAN1YING2", pinyin.Pinyin);
+            Assert.Equal("HUANYING", pinyin.Pinyin);
+            Assert.Equal("HUAN1YING2", pinyin.PinyinWithTone);
         }
 
     }

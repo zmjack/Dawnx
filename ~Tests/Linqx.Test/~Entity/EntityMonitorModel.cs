@@ -11,7 +11,5 @@ namespace NLinq.Test
 
         public string ProductName { get; set; }
 
-        [NotMapped]
-        public object MonitorCarry { get; set; }
     }
 }

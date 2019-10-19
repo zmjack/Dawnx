@@ -8,6 +8,19 @@ using System.Linq.Expressions;
 
 namespace NLinq
 {
+    /// <summary>
+    /// Use <see cref="IEntity"/> to define entity classes to get some useful extension methods.
+    /// </summary>
+    public interface IEntity { }
+
+    /// <summary>
+    /// Use <see cref="IEntity"/> to define entity classes to get some useful extension methods.
+    /// </summary>
+    public interface IEntity<TSelf> : IEntity
+        where TSelf : class, IEntity<TSelf>, new()
+    {
+    }
+
     public static partial class IEntityX
     {
         /// <summary>
@@ -184,4 +197,6 @@ namespace NLinq
             => DataAnnotationUtility.GetDisplayString(@this, expression, defaultReturn);
 
     }
+
+
 }

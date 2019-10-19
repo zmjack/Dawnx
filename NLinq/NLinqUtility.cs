@@ -19,6 +19,7 @@ namespace NLinq
 
         public static void ApplyProviderFunctions(DbContext context, ModelBuilder modelBuilder)
         {
+            //TODO: To support more providers.
             var providerName = context.GetProviderName();
 
             switch (providerName)
@@ -26,6 +27,8 @@ namespace NLinq
                 case DatabaseProviderName.MySql:
                     modelBuilder.HasDbFunction(typeof(PMySql).GetMethod(nameof(PMySql.Rand)));
                     break;
+
+                default: throw new NotSupportedException();
             }
         }
 
@@ -98,7 +101,6 @@ namespace NLinq
                     var param = Activator.CreateInstance(paramType) as IEntityMonitorInvokerParameter;
                     param.State = entry.State;
                     param.Entity = entity;
-                    param.Carry = entityMonitor.MonitorCarry;
                     param.PropertyEntries = entry.Properties;
 
                     EntityMonitor.GetMonitor(entity.GetType().FullName)?.DynamicInvoke(param);

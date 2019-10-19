@@ -13,7 +13,7 @@ namespace NLinq
 
     public static class IEntityMonitorLogX
     {
-        public static TEntityMonitorLog FillMonitorLog<TEntityMonitorLog, TEntity>(this TEntityMonitorLog @this, EntityMonitorInvokerParameter<TEntity> param)
+        public static TEntityMonitorLog Parse<TEntityMonitorLog, TEntity>(this TEntityMonitorLog @this, EntityMonitorInvokerParameter<TEntity> param)
             where TEntityMonitorLog : IEntityMonitorLog
             where TEntity : IEntityMonitor
         {

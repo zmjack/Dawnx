@@ -1,31 +1,45 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace NLinq.Test
 {
     public class MonitorTests
     {
+        private class MonitorLog : IEntityMonitorLog
+        {
+            public DateTime MonitorTime { get; set; }
+            public string MonitorEvent { get; set; }
+            public string ModelClassName { get; set; }
+            public string ModelKeys { get; set; }
+            public string ChangeValues { get; set; }
+        }
+
         [Fact]
         public void Test1()
         {
-            var log = new List<string>();
+            var logs = new List<string>();
+            var monitorLogs = new List<MonitorLog>();
 
             EntityMonitor.Register<EntityMonitorModel>(param =>
             {
                 switch (param.State)
                 {
                     case EntityState.Added:
-                        log.Add($"{param.Carry}\t{nameof(EntityState.Added)}");
+                        logs.Add($"{param.Entity.ProductName}\t{nameof(EntityState.Added)}");
                         break;
                     case EntityState.Modified:
-                        log.Add($"{param.Carry}\t{nameof(EntityState.Modified)}");
+                        logs.Add($"{param.Entity.ProductName}\t{nameof(EntityState.Modified)}");
                         break;
                     case EntityState.Deleted:
-                        log.Add($"{param.Carry}\t{nameof(EntityState.Deleted)}");
+                        logs.Add($"{param.Entity.ProductName}\t{nameof(EntityState.Deleted)}");
                         break;
                 }
+
+                monitorLogs.Add(new MonitorLog().Parse(param));
             });
 
             using (var context = new ApplicationDbContext())
@@ -35,33 +49,31 @@ namespace NLinq.Test
                     ProductName = "A",
                 });
                 context.SaveChanges();
-                Assert.Equal($"\t{nameof(EntityState.Added)}", log.Last());
+                Assert.Equal($"A\t{nameof(EntityState.Added)}", logs.Last());
 
                 // Added
-                var item = new EntityMonitorModel
+                context.Add(new EntityMonitorModel
                 {
                     ProductName = "b",
-                }.MonitorCarry("u1");
-                context.Add(item);
+                });
                 context.SaveChanges();
-                Assert.Equal($"u1\t{nameof(EntityState.Added)}", log.Last());
+                Assert.Equal($"b\t{nameof(EntityState.Added)}", logs.Last());
 
                 // Modified
-                var result = context.EntityMonitorModels.First();
+                var result = context.EntityMonitorModels.First(x => x.ProductName == "b");
                 result.ProductName = "B";
-                result.MonitorCarry("u2");
                 context.SaveChanges();
-                Assert.Equal($"u2\t{nameof(EntityState.Modified)}", log.Last());
+                Assert.Equal($"B\t{nameof(EntityState.Modified)}", logs.Last());
 
                 // Deleted
-                context.EntityMonitorModels.AsEnumerable().MonitorCarry("u3");
+                context.EntityMonitorModels.AsEnumerable();
                 context.RemoveRange(context.EntityMonitorModels);
                 context.SaveChanges();
-                Assert.Equal(new[]
-                {
-                    $"{result.MonitorCarry as string}\t{nameof(EntityState.Deleted)}",
-                    $"{result.MonitorCarry as string}\t{nameof(EntityState.Deleted)}",
-                }, log.TakeLast(2));
+
+                Assert.Equal(new[] {
+                    $"A\t{nameof(EntityState.Deleted)}",
+                    $"B\t{nameof(EntityState.Deleted)}",
+                }, logs.TakeLast(2).ToArray());
             }
 
         }

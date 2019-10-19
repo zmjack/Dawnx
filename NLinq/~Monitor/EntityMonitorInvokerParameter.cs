@@ -8,7 +8,6 @@ namespace NLinq
     {
         EntityState State { get; set; }
         object Entity { get; set; }
-        dynamic Carry { get; set; }
         IEnumerable<PropertyEntry> PropertyEntries { get; set; }
     }
 
@@ -21,11 +20,8 @@ namespace NLinq
             get => (TEntity)(this as IEntityMonitorInvokerParameter).Entity;
             set => (this as IEntityMonitorInvokerParameter).Entity = value;
         }
-        public dynamic Carry { get; set; }
         public IEnumerable<PropertyEntry> PropertyEntries { get; set; }
         object IEntityMonitorInvokerParameter.Entity { get; set; }
     }
-
-
 
 }

@@ -9,7 +9,7 @@ namespace NLinq
 {
     public static partial class IQueryableX
     {
-        public static IQueryable<TSource> WhereOr<TSource>(this IQueryable<TSource> @this, Expression<Func<TSource, bool>>[] predicates)
+        public static IQueryable<TSource> WhereOr<TSource>(this IQueryable<TSource> @this, params Expression<Func<TSource, bool>>[] predicates)
         {
             var parameter = predicates[0].Parameters[0];
             return @this.Where(predicates
@@ -17,7 +17,7 @@ namespace NLinq
                 .LambdaJoin(Expression.OrElse));
         }
 
-        public static IQueryable<TSource> WhereOr<TSource, TAnonymous>(this IQueryable<TSource> @this, IEnumerable<TAnonymous> anonymousArray)
+        public static IQueryable<TSource> WhereOrEx<TSource, TAnonymous>(this IQueryable<TSource> @this, IEnumerable<TAnonymous> anonymousArray)
         {
             var parameter = Expression.Parameter(typeof(TSource));
 

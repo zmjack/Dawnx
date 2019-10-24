@@ -96,7 +96,7 @@ namespace NLinq
                     SetPropertiesValue(props_TrackLower, entry, v => (v as string)?.ToLower());
                     SetPropertiesValue(props_TrackUpper, entry, v => (v as string)?.ToUpper());
                     SetPropertiesValue(props_TrackTrim, entry, v => (v as string)?.Trim());
-                    SetPropertiesValue(props_TrackCondensed, entry, v => (v as string)?.Unique());
+                    SetPropertiesValue(props_TrackCondensed, entry, v => ((v as string) ?? "").Unique());
                     SetPropertiesValueForTrack(props_Track, entry);
                     break;
 

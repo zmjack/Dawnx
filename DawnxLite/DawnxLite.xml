@@ -18,14 +18,6 @@
                 separate the console arguments to content or property.
             </summary>
         </member>
-        <member name="T:Dawnx.Data.SqlScope`3">
-            <summary>
-            Easy to use and secure SQL Executor
-            </summary>
-            <typeparam name="TDbConnection"></typeparam>
-            <typeparam name="TDbCommand"></typeparam>
-            <typeparam name="TDbParameter"></typeparam>
-        </member>
         <member name="M:Dawnx.CConsole.ConUtility.CreateBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Prints console table for models.

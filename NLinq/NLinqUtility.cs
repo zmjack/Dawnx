@@ -36,7 +36,7 @@ namespace NLinq
         {
             var providerName = context.GetProviderName();
 
-            var types = Assembly.GetCallingAssembly().GetTypesWhichImplements<IUdFunctionContainer>();
+            var types = Assembly.GetEntryAssembly().GetTypesWhichImplements<IUdFunctionContainer>();
             var methods = types.SelectMany(type => type.GetMethods().Where(x => x.GetCustomAttribute<UdFunctionAttribute>()?.ProviderName == providerName));
             foreach (var method in methods)
             {

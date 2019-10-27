@@ -1,5 +1,6 @@
 ﻿using TypeSharp;
 using System;
+using System.Collections.Generic;
 
 namespace DawnxDemo.Models
 {
@@ -12,6 +13,7 @@ namespace DawnxDemo.Models
         public string A { get; set; }
         public BBB B { get; set; }
         public DateTime DT { get; set; }
+        public Dictionary<Guid, string> Dict { get; set; }
     }
 
     public class BBB

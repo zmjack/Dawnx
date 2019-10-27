@@ -144,11 +144,7 @@ namespace TypeSharp
             return $"{fieldInfo.Name} : {TypeDefinitions[fieldType.FullName].ReferenceName} = {sValue}";
         }
 
-        public void CacheTypes(params Type[] types)
-        {
-            foreach (var type in types)
-                CacheType(type);
-        }
+        public void CacheTypes(params Type[] types) => types.Each(type => CacheType(type));
         public void CacheType<TType>(TypeScriptModelAttribute attr = null) => CacheType(typeof(TType), attr);
         public void CacheType(Type type, TypeScriptModelAttribute attr = null)
         {
@@ -159,40 +155,49 @@ namespace TypeSharp
 
             if (type.IsClass)
             {
-                #region Cache Consts
+                switch (type.FullName)
                 {
-                    var consts = type.GetFields().Where(x => x.IsStatic && x.IsLiteral && x.IsPublic);
-                    foreach (var field in consts)
-                    {
-                        ConstDefinitions[$"{field.DeclaringType.FullName}.{field.Name}"] = new ConstDefinition
+                    case string _ when type.FullName.StartsWith("System.Collections.Generic.Dictionary"):
+                        TypeDefinitions[type.FullName] = new TypeDefinition { Name = "any" };
+                        break;
+
+                    default:
+                        #region Cache Consts
                         {
-                            OuterNamespace = tsNamespace,
-                            InnerNamespace = type.Name,
-                            Name = field.Name,
-                            Code = $"        export const {GetConstValue(field)};",
-                        };
-                    }
+                            var consts = type.GetFields().Where(x => x.IsStatic && x.IsLiteral && x.IsPublic);
+                            foreach (var field in consts)
+                            {
+                                ConstDefinitions[$"{field.DeclaringType.FullName}.{field.Name}"] = new ConstDefinition
+                                {
+                                    OuterNamespace = tsNamespace,
+                                    InnerNamespace = type.Name,
+                                    Name = field.Name,
+                                    Code = $"        export const {GetConstValue(field)};",
+                                };
+                            }
+                        }
+                        #endregion
+
+                        #region Cache Properties
+                        {
+                            var props = type.GetProperties();
+                            var code = new StringBuilder();
+
+                            code.AppendLine($"    interface {type.Name} {{");
+                            foreach (var prop in props)
+                                code.AppendLine($"        {GetTypeValue(prop)};");
+                            code.Append($"    }}");
+
+                            TypeDefinitions[type.FullName] = new TypeDefinition
+                            {
+                                Namespace = tsNamespace,
+                                Name = type.Name,
+                                Code = code.ToString(),
+                            };
+                        }
+                        #endregion
+                        break;
                 }
-                #endregion
-
-                #region Cache Properties
-                {
-                    var props = type.GetProperties();
-                    var code = new StringBuilder();
-
-                    code.AppendLine($"    interface {type.Name} {{");
-                    foreach (var prop in props)
-                        code.AppendLine($"        {GetTypeValue(prop)};");
-                    code.Append($"    }}");
-
-                    TypeDefinitions[type.FullName] = new TypeDefinition
-                    {
-                        Namespace = tsNamespace,
-                        Name = type.Name,
-                        Code = code.ToString(),
-                    };
-                }
-                #endregion
             }
             else if (type.IsEnum)
             {

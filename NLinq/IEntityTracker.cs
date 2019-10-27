@@ -8,4 +8,5 @@ namespace NLinq
         void OnUpdating(DbContext context);
         void OnDeleting(DbContext context);
     }
+
 }

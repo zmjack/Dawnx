@@ -113,7 +113,7 @@ namespace NLinq
                     switch (entry.State)
                     {
                         case EntityState.Added: tracker.OnInserting(@this); break;
-                        case EntityState.Modified: tracker.OnUpdating(@this); break;
+                        case EntityState.Modified: tracker.OnUpdating(@this, entry.OriginalValues); break;
                         case EntityState.Deleted: tracker.OnDeleting(@this); break;
                     }
                 }

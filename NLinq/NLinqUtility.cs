@@ -95,7 +95,7 @@ namespace NLinq
 
                 // Resolve Monitors
                 var entityMonitor = entity as IEntityMonitor;
-                if (!(entityMonitor is null))
+                if (entityMonitor != null)
                 {
                     var paramType = typeof(EntityMonitorInvokerParameter<>).MakeGenericType(entity.GetType());
                     var param = Activator.CreateInstance(paramType) as IEntityMonitorInvokerParameter;
@@ -105,6 +105,19 @@ namespace NLinq
 
                     EntityMonitor.GetMonitor(entity.GetType().FullName)?.DynamicInvoke(param);
                 }
+
+                // Resolve EntityTracker
+                var tracker = entity as IEntityTracker;
+                if (tracker != null)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added: tracker.OnInserting(@this); break;
+                        case EntityState.Modified: tracker.OnUpdating(@this); break;
+                        case EntityState.Deleted: tracker.OnDeleting(@this); break;
+                    }
+                }
+
             }
         }
 

@@ -13,27 +13,19 @@ namespace Dawnx.Tools.Test
         {
             Program.TargetProjectInfo = new TargetProjectInfo
             {
-                ProjectRoot = $"{Directory.GetCurrentDirectory()}/../..",
-                ProjectName = "Dawnx.Tools.csproj",
-                AssemblyName = "Dawnx.Tools",
-                RootNamespace = "Dawnx.Tools",
+                ProjectRoot = $"{Directory.GetCurrentDirectory()}/../../../../../~Experiment/DawnxDemo",
+                ProjectName = "DawnxDemo.csproj",
+                AssemblyName = "DawnxDemo",
+                RootNamespace = "DawnxDemo",
                 TargetFramework = "netcoreapp2.2",
             };
 
-            using (var memory = new MemoryStream())
-            using (var writer = new StreamWriter(memory))
-            {
-                Console.SetOut(writer);
-                Program.PrintWelcome();
-
-                var output = GetText(writer);
-            }
-
-            CompressCommandTest();
-            AesCommandTest();
+            //AesTest();
+            //CompressTest();
+            TypeScriptGeneratorTest();
         }
 
-        private void AesCommandTest()
+        private void AesTest()
         {
             var args = new[] { "aes", "hex" };
             var cargs = new ConsoleArgs(args, "-");
@@ -49,7 +41,7 @@ namespace Dawnx.Tools.Test
             }
         }
 
-        private void CompressCommandTest()
+        private void CompressTest()
         {
             var args = new[] { "compress" };
             var cargs = new ConsoleArgs(args, "-");
@@ -62,6 +54,21 @@ namespace Dawnx.Tools.Test
 
                 var output = GetText(writer);
                 Assert.Equal(401, new FileInfo(Directory.GetCurrentDirectory() + "/compress.zip").Length);
+            }
+        }
+
+        private void TypeScriptGeneratorTest()
+        {
+            var args = new[] { "tsg", "-o", "Vuets/Typings/@project", "-i", "jsend" };
+            var cargs = new ConsoleArgs(args, "-");
+
+            using (var memory = new MemoryStream())
+            using (var writer = new StreamWriter(memory))
+            {
+                Console.SetOut(writer);
+                new TypeScriptGeneratorCommand().Run(cargs);
+
+                var output = GetText(writer);
             }
         }
 

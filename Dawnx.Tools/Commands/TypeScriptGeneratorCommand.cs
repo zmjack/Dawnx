@@ -9,15 +9,11 @@ using TypeSharp;
 namespace Dawnx.Tools
 {
     [Command("TSGenerator", "tsg", Description = "Generate TypeScript model from CSharp model.")]
-    public class TypeScriptGenerator : ICommand
+    public class TypeScriptGeneratorCommand : ICommand
     {
         private static string[] SearchDirs = new[]
         {
-#if DEBUG
-            Path.GetFullPath($"../../../../~Experiment/DawnxDemo/bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
-#else
-            Path.GetFullPath($"bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
-#endif
+            Path.GetFullPath($"{Program.TargetProjectInfo.ProjectRoot}/bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
             $"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}/dotnet/sdk/NuGetFallbackFolder",
             $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",
         };

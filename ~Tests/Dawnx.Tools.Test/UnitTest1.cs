@@ -20,8 +20,8 @@ namespace Dawnx.Tools.Test
                 TargetFramework = "netcoreapp2.2",
             };
 
-            AesTest();
-            CompressTest();
+            //AesTest();
+            //CompressTest();
             TypeScriptGeneratorTest();
         }
 

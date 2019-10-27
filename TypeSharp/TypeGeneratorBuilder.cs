@@ -70,6 +70,8 @@ namespace TypeSharp
             #region Compile Consts
             {
                 var constGroup1 = ConstDefinitions.Values.GroupBy(x => x.OuterNamespace);
+
+                if (constGroup1.Any()) code.AppendLine();
                 foreach (var constGroupItem1 in constGroup1)
                 {
                     var constGroup2 = constGroupItem1.GroupBy(x => x.InnerNamespace);
@@ -83,13 +85,13 @@ namespace TypeSharp
                     }
                     code.AppendLine($"}}");
                 }
-                code.AppendLine();
             }
             #endregion
 
-            #region Compile Consts
+            #region Compile Types
             {
                 var typeGroup1 = TypeDefinitions.Values.Where(x => x.Namespace != null).GroupBy(x => x.Namespace);
+                if (typeGroup1.Any()) code.AppendLine();
                 foreach (var typeGroupItem1 in typeGroup1)
                 {
                     code.AppendLine($"declare namespace {typeGroupItem1.Key} {{");
@@ -97,7 +99,6 @@ namespace TypeSharp
                         code.AppendLine(definition.Code);
                     code.AppendLine($"}}");
                 }
-                code.AppendLine();
             }
             #endregion
 
@@ -143,7 +144,11 @@ namespace TypeSharp
             return $"{fieldInfo.Name} : {TypeDefinitions[fieldType.FullName].ReferenceName} = {sValue}";
         }
 
-        public void CacheTypes(params Type[] types) => types.Each(type => CacheType(type));
+        public void CacheTypes(params Type[] types)
+        {
+            foreach (var type in types)
+                CacheType(type);
+        }
         public void CacheType<TType>(TypeScriptModelAttribute attr = null) => CacheType(typeof(TType), attr);
         public void CacheType(Type type, TypeScriptModelAttribute attr = null)
         {

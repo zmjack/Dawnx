@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.Tools
 {
-    [Command("Compress", "cp", Description = "Compress the files listed in file 'compress.json' or other config file.")]
+    [Command("Compress", "cp", Description = "Compress files which are listed in config file(default: 'compress.json').")]
     public class CompressCommand : ICommand
     {
         private object archive;

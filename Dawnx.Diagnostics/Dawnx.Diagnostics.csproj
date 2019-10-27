@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Dawnx</Authors>
     <Company>dawnx.net</Company>
-    <Version>1.22.0</Version>
+    <Version>1.23.0</Version>
     <Description>Test tool set.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl />

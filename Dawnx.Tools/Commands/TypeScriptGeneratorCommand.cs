@@ -8,7 +8,7 @@ using TypeSharp;
 
 namespace Dawnx.Tools
 {
-    [Command("TSGenerator", "tsg", Description = "Generate TypeScript model from CSharp model.")]
+    [Command("TSGenerator", "tsg", Description = "Generate TypeScript model from CSharp class.")]
     public class TypeScriptGeneratorCommand : ICommand
     {
         private static string[] SearchDirs = new[]

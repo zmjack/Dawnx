@@ -19,7 +19,7 @@ nuget push "~Localization/Dawnx.Chinese/bin/Release/Dawnx.Chinese.1.24.0.nupkg" 
 
 ::==== Others ====
 nuget push "Def/bin/Release/Def.1.0.0.nupkg" -source nuget.org
-nuget push "NLinq/bin/Release/NLinq.0.1.7.nupkg" -source nuget.org
-nuget push "TypeSharp/bin/Release/TypeSharp.0.1.6.nupkg" -source nuget.org
+nuget push "NLinq/bin/Release/NLinq.0.1.10.nupkg" -source nuget.org
+nuget push "TypeSharp/bin/Release/TypeSharp.0.1.7.nupkg" -source nuget.org
 
 pause

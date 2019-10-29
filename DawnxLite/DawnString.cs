@@ -280,6 +280,7 @@ namespace Dawnx
         /// <param name="regex"></param>
         /// <param name="target"></param>
         /// <returns></returns>
+        [Obsolete("Replace with the new function: string Project(this string @this, Regex regex, string target = null)", true)]
         public static string Project(this string @this, string regex, string target = null) => Project(@this, new Regex(regex, RegexOptions.Singleline), target);
 
         /// <summary>
@@ -309,6 +310,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="regex"></param>
         /// <returns></returns>
+        [Obsolete("Replace with the new function: string[][] ProjectToArray(this string @this, Regex regex)", true)]
         public static string[][] ProjectToArray(this string @this, string regex)
             => ProjectToArray(@this, new Regex(regex, RegexOptions.Singleline));
 

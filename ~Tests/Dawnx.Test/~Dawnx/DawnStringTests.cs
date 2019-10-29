@@ -102,7 +102,7 @@ namespace Dawnx.Test
             Assert.Equal("zmjack", "zmjack (1)".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack (".Project(regex).Trim());
             Assert.Equal("zmjack", "zmjack".Project(regex).Trim());
-            Assert.Equal("ja", "zmjack".Project(@"(ja)", "$1"));
+            Assert.Equal("ja", "zmjack".Project(new Regex(@"(ja)"), "$1"));
         }
 
         [Fact]
@@ -112,7 +112,7 @@ namespace Dawnx.Test
             {
                 new [] { "A|1|11|B|2|22" },
                 new [] { "A|1|11", "B|2|22" },
-            }, "A|1|11|B|2|22".ProjectToArray(@"(?:(?:^|\|)(.+?\|.+?\|.+?)(?=\||$))*"));
+            }, "A|1|11|B|2|22".ProjectToArray(new Regex(@"(?:(?:^|\|)(.+?\|.+?\|.+?)(?=\||$))*")));
         }
 
         [Fact]

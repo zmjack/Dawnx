@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Dawnx.Test
@@ -12,8 +13,8 @@ namespace Dawnx.Test
             var items = new[] { "a12", "_34", "$56" };
             var result = items.Select(x => x.For(new Func<string, string>[]
             {
-                _ => _.Project(@"[a-zA-Z]+(\d+)"),
-                _ => _.Project(@"_(\d+)"),
+                _ => _.Project(new Regex(@"[a-zA-Z]+(\d+)")),
+                _ => _.Project(new Regex(@"_(\d+)")),
             }) ?? "Unknown");
 
             Assert.Equal(new[] { "12", "34", "Unknown" }, result);

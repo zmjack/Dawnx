@@ -7,6 +7,7 @@ using NLinq;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
@@ -83,7 +84,7 @@ namespace Dawnx.AspNetCore.LiveAccount
                         return new LiveAction
                         {
                             Area = areaAttr?.RouteValue,
-                            Controller = controllerType.Name.Project("^(.+?)(?:Controller)?$"),
+                            Controller = controllerType.Name.Project(new Regex("^(.+?)(?:Controller)?$")),
                             Action = method.Name,
                             IsExisted = true,
                             IsEnabled = isEnabled,

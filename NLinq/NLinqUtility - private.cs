@@ -79,13 +79,13 @@ namespace NLinq
 
         private static void ResolveTrackAttributes(EntityEntry entry, PropertyInfo[] properties)
         {
-            var props_TrackCreationTime = properties.Where(x => x.HasCustomAttribute<TrackCreationTimeAttribute>());
-            var props_TrackLastWrite = properties.Where(x => x.HasCustomAttribute<TrackLastWriteTimeAttribute>());
-            var props_TrackLower = properties.Where(x => x.HasCustomAttribute<TrackLowerAttribute>());
-            var props_TrackUpper = properties.Where(x => x.HasCustomAttribute<TrackUpperAttribute>());
-            var props_TrackTrim = properties.Where(x => x.HasCustomAttribute<TrackTrimAttribute>());
-            var props_TrackCondensed = properties.Where(x => x.HasCustomAttribute<TrackCondensedAttribute>());
-            var props_Track = properties.Where(x => x.HasCustomAttribute<TrackAttribute>());
+            var props_TrackCreationTime = properties.Where(x => x.IsMarkedAs<TrackCreationTimeAttribute>());
+            var props_TrackLastWrite = properties.Where(x => x.IsMarkedAs<TrackLastWriteTimeAttribute>());
+            var props_TrackLower = properties.Where(x => x.IsMarkedAs<TrackLowerAttribute>());
+            var props_TrackUpper = properties.Where(x => x.IsMarkedAs<TrackUpperAttribute>());
+            var props_TrackTrim = properties.Where(x => x.IsMarkedAs<TrackTrimAttribute>());
+            var props_TrackCondensed = properties.Where(x => x.IsMarkedAs<TrackCondensedAttribute>());
+            var props_Track = properties.Where(x => x.IsMarkedAs<TrackAttribute>());
 
             var now = DateTime.Now;
             switch (entry.State)

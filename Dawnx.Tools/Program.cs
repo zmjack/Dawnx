@@ -11,7 +11,7 @@ namespace Dawnx.Tools
 {
     public class Program
     {
-        public static readonly string CLI_VERSION = Assembly.GetCallingAssembly().GetName().Version.ToString();
+        public static readonly string CLI_VERSION = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         public static readonly string DOWNLOAD_DIRECTORY = $"{Path.GetTempPath()}DawnxCliCaches";
         public static TargetProjectInfo TargetProjectInfo { get; set; }
         public const string SUPPORT_URL = "http://dawnx.net/CliService";

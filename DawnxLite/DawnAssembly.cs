@@ -6,33 +6,23 @@ namespace Dawnx
 {
     public static class DawnAssembly
     {
-        public static Type[] GetTypesWhichExtends<TSuperClass>(this Assembly @this, bool recursiveSearch = false)
+        public static Type[] GetTypesWhichExtends<TExtendClass>(this Assembly @this, bool recursiveSearch = false)
         {
-            return @this.GetTypes().Where(type =>
-            {
-                if (recursiveSearch)
-                    return RecursiveSearchExtends<TSuperClass>(type.BaseType);
-                else return type.BaseType?.FullName == typeof(TSuperClass).FullName;
-            }).ToArray();
+            return @this.GetTypes().Where(type => DawnType.IsExtend<TExtendClass>(type, recursiveSearch)).ToArray();
+        }
+        public static Type[] GetTypesWhichExtends(this Assembly @this, Type @class, bool recursiveSearch = false)
+        {
+            return @this.GetTypes().Where(type => DawnType.IsExtend(type, @class, recursiveSearch)).ToArray();
         }
 
-        private static bool RecursiveSearchExtends<TSuperClass>(Type type)
+        public static Type[] GetTypesWhichImplements<TInterface>(this Assembly @this)
+            where TInterface : class
         {
-            if (type != null)
-            {
-                if (type.FullName == typeof(TSuperClass).FullName)
-                    return true;
-                else return RecursiveSearchExtends<TSuperClass>(type.BaseType);
-            }
-            else return false;
+            return @this.GetTypes().Where(type => DawnType.IsImplement<TInterface>(type)).ToArray();
         }
-
-        public static Type[] GetTypesWhichImplements<TImplementInterface>(this Assembly @this)
+        public static Type[] GetTypesWhichImplements(this Assembly @this, Type @interface)
         {
-            return @this.GetTypes().Where(type =>
-            {
-                return type.GetInterfaces().Any(x => x.FullName == typeof(TImplementInterface).FullName);
-            }).ToArray();
+            return @this.GetTypes().Where(type => DawnType.IsImplement(type, @interface)).ToArray();
         }
 
         public static Type[] GetTypesWhichMarkedAs<TAttribute>(this Assembly @this)
@@ -40,7 +30,14 @@ namespace Dawnx
         {
             return @this.GetTypes()
                 .Where(type => type.Assembly.FullName == @this.FullName)
-                .Where(type => type.GetCustomAttribute<TAttribute>() != null)
+                .Where(type => type.IsMarkedAs<TAttribute>())
+                .ToArray();
+        }
+        public static Type[] GetTypesWhichMarkedAs(this Assembly @this, Type attribute)
+        {
+            return @this.GetTypes()
+                .Where(type => type.Assembly.FullName == @this.FullName)
+                .Where(type => type.IsMarkedAs(attribute))
                 .ToArray();
         }
 

@@ -2,6 +2,8 @@
 
 namespace NLinq
 {
+    public enum IndexType { Normal, Unique }
+
     public class IndexAttribute : Attribute
     {
         public string Group { get; set; }

@@ -42,6 +42,7 @@ declare namespace TSNS1 {{
         str? : string;
         int? : number;
         strArray? : string[];
+        nGuid? : string;
     }}
 }}
 declare namespace Nx {{

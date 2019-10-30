@@ -154,6 +154,7 @@ namespace TypeSharp
                 attr = type.GetCustomAttribute<TypeScriptModelAttribute>();
 
             var tsNamespace = attr?.Namespace ?? GetTsNamespace(type);
+            TypeDefinition typeDef;
 
             if (type.IsClass)
             {
@@ -163,12 +164,12 @@ namespace TypeSharp
                         TypeDefinitions[type.FullName] = new TypeDefinition { Name = "any" };
                         break;
 
-                    case Type _ when type.IsExtend<Array>():
-                        var typeDef = GetTypeDefinition(Type.GetType(type.FullName.Replace("[]", "")));
+                    case Type _ when type.IsArray:
+                        typeDef = GetTypeDefinition(Type.GetType(type.FullName.Replace("[]", "")));
                         TypeDefinitions[type.FullName] = new TypeDefinition
                         {
                             Name = $"{typeDef.Name}{"[]".Repeat(type.FullName.Count("[]"))}"
-                        };                        
+                        };
                         break;
 
                     default:
@@ -224,6 +225,16 @@ namespace TypeSharp
                     Name = type.Name,
                     Code = code.ToString(),
                 };
+            }
+            else if (type.IsValueType)
+            {
+                switch (type)
+                {
+                    case Type _ when type.IsGenericType(typeof(Nullable<>)):
+                        typeDef = GetTypeDefinition(type.GenericTypeArguments[0]);
+                        TypeDefinitions[type.FullName] = new TypeDefinition { Name = typeDef.Name };
+                        break;
+                }
             }
             else throw new NotSupportedException($"{type.FullName} is not supported.");
         }

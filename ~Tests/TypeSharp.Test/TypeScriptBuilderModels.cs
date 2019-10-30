@@ -1,4 +1,5 @@
-﻿using TypeSharp;
+﻿using System;
+using TypeSharp;
 
 namespace TypeSharp.Test
 {
@@ -12,6 +13,7 @@ namespace TypeSharp.Test
         public string Str { get; set; }
         public int Int { get; set; }
         public string[] StrArray { get; set; }
+        public Guid? NGuid { get; set; }
     }
 
     [TypeScriptModel(Namespace = "TSNS2")]

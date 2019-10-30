@@ -59,6 +59,13 @@ namespace TypeSharp
             [typeof(Guid).FullName] = new TypeDefinition { Name = "string" },
             [typeof(DateTime).FullName] = new TypeDefinition { Name = "Date" },
         };
+        public TypeDefinition GetTypeDefinition(Type type)
+        {
+            if (!TypeDefinitions.ContainsKey(type.FullName))
+                CacheType(type);
+
+            return TypeDefinitions[type.FullName];
+        }
 
         public void WriteTo(string path) => File.WriteAllText(path, Compile());
 
@@ -121,19 +128,14 @@ namespace TypeSharp
         private string GetTypeValue(PropertyInfo propertyInfo)
         {
             var propType = propertyInfo.PropertyType;
-
-            if (!TypeDefinitions.ContainsKey(propType.FullName))
-                CacheType(propType);
-
-            return $"{StringUtility.CamelCase(propertyInfo.Name)}? : {TypeDefinitions[propType.FullName].ReferenceName}";
+            var typeDef = GetTypeDefinition(propType);
+            return $"{StringUtility.CamelCase(propertyInfo.Name)}? : {typeDef.ReferenceName}";
         }
 
         private string GetConstValue(FieldInfo fieldInfo)
         {
             var fieldType = fieldInfo.FieldType;
-
-            if (!TypeDefinitions.ContainsKey(fieldType.FullName))
-                CacheType(fieldType);
+            var typeDef = GetTypeDefinition(fieldType);
 
             var value = fieldInfo.GetValue(null);
             string sValue;
@@ -141,7 +143,7 @@ namespace TypeSharp
                 sValue = $"'{value}'";
             else sValue = value.ToString();
 
-            return $"{fieldInfo.Name} : {TypeDefinitions[fieldType.FullName].ReferenceName} = {sValue}";
+            return $"{fieldInfo.Name} : {typeDef.ReferenceName} = {sValue}";
         }
 
         public void CacheTypes(params Type[] types) => types.Each(type => CacheType(type));
@@ -155,10 +157,18 @@ namespace TypeSharp
 
             if (type.IsClass)
             {
-                switch (type.FullName)
+                switch (type)
                 {
-                    case string _ when type.FullName.StartsWith("System.Collections.Generic.Dictionary"):
+                    case Type _ when type.IsType(typeof(Dictionary<,>)):
                         TypeDefinitions[type.FullName] = new TypeDefinition { Name = "any" };
+                        break;
+
+                    case Type _ when type.IsExtend<Array>():
+                        var typeDef = GetTypeDefinition(Type.GetType(type.FullName.Replace("[]", "")));
+                        TypeDefinitions[type.FullName] = new TypeDefinition
+                        {
+                            Name = $"{typeDef.Name}{"[]".Repeat(type.FullName.Count("[]"))}"
+                        };                        
                         break;
 
                     default:

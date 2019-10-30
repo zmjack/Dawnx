@@ -41,6 +41,7 @@ declare namespace TSNS1 {{
         bbb? : TSNS2.SubClass;
         str? : string;
         int? : number;
+        strArray? : string[];
     }}
 }}
 declare namespace Nx {{

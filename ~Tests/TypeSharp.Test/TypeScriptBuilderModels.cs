@@ -11,6 +11,7 @@ namespace TypeSharp.Test
         public SubClass BBB { get; set; }
         public string Str { get; set; }
         public int Int { get; set; }
+        public string[] StrArray { get; set; }
     }
 
     [TypeScriptModel(Namespace = "TSNS2")]

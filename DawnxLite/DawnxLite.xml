@@ -1501,7 +1501,8 @@
             <summary>
             Gets a DateTime for the specified week of year.
             </summary>
-            <param name="this"></param>
+            <param name="year"></param>
+            <param name="week"></param>
             <param name="weekStart"></param>
             <returns></returns>
         </member>

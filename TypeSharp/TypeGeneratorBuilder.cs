@@ -165,7 +165,9 @@ namespace TypeSharp
                         break;
 
                     case Type _ when type.IsArray:
-                        typeDef = GetTypeDefinition(Type.GetType(type.FullName.Replace("[]", "")));
+                        var elementTypeName = type.FullName.Replace("[]", "");
+                        var elementType = type.Assembly.GetType(elementTypeName);
+                        typeDef = GetTypeDefinition(elementType);
                         TypeDefinitions[type.FullName] = new TypeDefinition
                         {
                             Name = $"{typeDef.Name}{"[]".Repeat(type.FullName.Count("[]"))}"

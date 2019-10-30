@@ -11,9 +11,9 @@ namespace Dawnx.Lock
     /// <typeparam name="TInstance"></typeparam>
     public class InstanceTsLock<TInstance> : InstanceLock<TInstance>
     {
-        protected InstanceTsLock(params Expression<Func<TInstance, object>>[] flagExpressions) : base(flagExpressions) { }
-        protected InstanceTsLock(string identifier, params Expression<Func<TInstance, object>>[] flagExpressions)
-            : base(identifier, flagExpressions) { }
+        protected InstanceTsLock(params Expression<Func<TInstance, object>>[] flags) : base(flags) { }
+        protected InstanceTsLock(string lockName, params Expression<Func<TInstance, object>>[] flags)
+            : base(lockName, flags) { }
 
         public override string InternString(TInstance instance)
         {
@@ -21,7 +21,7 @@ namespace Dawnx.Lock
                 $"<{Thread.CurrentThread.ManagedThreadId.ToString()}> " +
                 $"{typeof(TInstance).FullName} " +
                 $"{FlagLambdas.Select(x => x(instance).ToString().UrlEncode()).Join(" ")} " +
-                $"({Identifier})");
+                $"({LockName})");
         }
 
     }

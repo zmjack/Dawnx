@@ -1,10 +1,11 @@
-﻿using NLinq;
+﻿using Microsoft.EntityFrameworkCore;
+using NLinq;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DawnxDemo.Data
 {
-    public class OneClass
+    public class OneClass : IEntityTracker<ApplicationDbContext, OneClass>
     {
         [Key]
         public Guid Id { get; set; }
@@ -20,6 +21,8 @@ namespace DawnxDemo.Data
         [Index(IndexType.Unique, Group = "UniqueA")]
         public string UniqueA1 { get; set; }
 
+        public string A => UniqueA1;
+
         [Required]
         [Index(IndexType.Unique, Group = "UniqueA")]
         public string UniqueA2 { get; set; }
@@ -31,6 +34,18 @@ namespace DawnxDemo.Data
         [Required]
         [Index(IndexType.Unique, Group = "UniqueB")]
         public DateTime UniqueB2 { get; set; }
+
+        public void OnDeleting(ApplicationDbContext context)
+        {
+        }
+
+        public void OnInserting(ApplicationDbContext context)
+        {
+        }
+
+        public void OnUpdating(ApplicationDbContext context, OneClass origin)
+        {
+        }
 
         private class PasswordProvider : IProvider<string, int>
         {

@@ -87,9 +87,10 @@ namespace NLinq
             {
                 // Resolve TrackAttributes
                 var entity = entry.Entity;
+                var entityType = entity.GetType();
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
                 {
-                    var props = entity.GetType().GetProperties().Where(x => x.CanWrite).ToArray();
+                    var props = entityType.GetProperties().Where(x => x.CanWrite).ToArray();
                     ResolveTrackAttributes(entry, props);
                 }
 
@@ -97,24 +98,33 @@ namespace NLinq
                 var entityMonitor = entity as IEntityMonitor;
                 if (entityMonitor != null)
                 {
-                    var paramType = typeof(EntityMonitorInvokerParameter<>).MakeGenericType(entity.GetType());
+                    var paramType = typeof(EntityMonitorInvokerParameter<>).MakeGenericType(entityType);
                     var param = Activator.CreateInstance(paramType) as IEntityMonitorInvokerParameter;
                     param.State = entry.State;
                     param.Entity = entity;
                     param.PropertyEntries = entry.Properties;
 
-                    EntityMonitor.GetMonitor(entity.GetType().FullName)?.DynamicInvoke(param);
+                    EntityMonitor.GetMonitor(entityType.FullName)?.DynamicInvoke(param);
                 }
 
                 // Resolve EntityTracker
-                var tracker = entity as IEntityTracker;
-                if (tracker != null)
+                var trackerType = typeof(IEntityTracker<,>).MakeGenericType(@this.GetType(), entityType);
+                if (entityType.IsImplement(trackerType))
                 {
+                    //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
+                    var onInsertingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnInserting));
+                    var onUpdatingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnUpdating));
+                    var onDeletingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnDeleting));
+
+                    var origin = Activator.CreateInstance(entry.Entity.GetType());
+                    foreach (var originValue in entry.OriginalValues.Properties)
+                        origin.SetPropertyValue(originValue.Name, entry.OriginalValues[originValue.Name]);
+
                     switch (entry.State)
                     {
-                        case EntityState.Added: tracker.OnInserting(@this); break;
-                        case EntityState.Modified: tracker.OnUpdating(@this, entry.OriginalValues); break;
-                        case EntityState.Deleted: tracker.OnDeleting(@this); break;
+                        case EntityState.Added: onInsertingMethod.Invoke(entity, new object[] { @this }); break;
+                        case EntityState.Modified: onUpdatingMethod.Invoke(entity, new object[] { @this, origin }); break;
+                        case EntityState.Deleted: onDeletingMethod.Invoke(entity, new object[] { @this }); break;
                     }
                 }
 

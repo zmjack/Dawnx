@@ -11,13 +11,13 @@ namespace Dawnx.Lock
     /// <typeparam name="TInstance"></typeparam>
     public class InstanceLock<TInstance>
     {
-        public string Identifier { get; }
-        public Expression<Func<TInstance, object>>[] FlagExpressions { get; }
+        public string LockName { get; }
+        public Expression<Func<TInstance, object>>[] Flags { get; }
         protected Func<TInstance, object>[] FlagLambdas { get; }
 
-        protected InstanceLock(params Expression<Func<TInstance, object>>[] flagExpressions)
+        protected InstanceLock(params Expression<Func<TInstance, object>>[] flags)
         {
-            var isAllExpressionValid = flagExpressions.All(x =>
+            var isAllExpressionValid = flags.All(x =>
             {
                 switch (x.Body.NodeType)
                 {
@@ -34,31 +34,31 @@ namespace Dawnx.Lock
             if (!isAllExpressionValid)
                 throw new ArgumentException("Every expression's return type must be basic type.");
 
-            FlagExpressions = flagExpressions;
-            FlagLambdas = FlagExpressions.Select(x => x.Compile()).ToArray();
+            Flags = flags;
+            FlagLambdas = Flags.Select(x => x.Compile()).ToArray();
         }
 
-        protected InstanceLock(string identifier, params Expression<Func<TInstance, object>>[] flagExpressions)
-            : this(flagExpressions)
+        protected InstanceLock(string lockName, params Expression<Func<TInstance, object>>[] flags)
+            : this(flags)
         {
-            Identifier = identifier;
+            LockName = lockName;
         }
 
-        public static InstanceLock<TInstance> Get(params Expression<Func<TInstance, object>>[] flagExpressions)
-            => new InstanceLock<TInstance>(flagExpressions);
-        public static InstanceLock<TInstance> Get(string identifier, params Expression<Func<TInstance, object>>[] flagExpressions)
-            => new InstanceLock<TInstance>(identifier, flagExpressions);
+        public static InstanceLock<TInstance> Get(params Expression<Func<TInstance, object>>[] flags)
+            => new InstanceLock<TInstance>(flags);
+        public static InstanceLock<TInstance> Get(string lockName, params Expression<Func<TInstance, object>>[] flags)
+            => new InstanceLock<TInstance>(lockName, flags);
 
         public virtual string InternString(TInstance instance)
         {
             return string.Intern(
                 $"{typeof(TInstance).FullName} " +
                 $"{FlagLambdas.Select(x => x(instance).ToString().UrlEncode()).Join(" ")} " +
-                $"({Identifier})");
+                $"({LockName})");
         }
 
         public Lock Begin(TInstance instance, TimeSpan timeout) => Lock.Begin(InternString(instance), timeout);
         public Lock Begin(TInstance instance, int millisecondsTimeout) => Lock.Begin(InternString(instance), millisecondsTimeout);
-
     }
+
 }

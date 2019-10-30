@@ -14,7 +14,7 @@ namespace Dawnx
     {
         public Scope()
         {
-            var @lock = TypeTsLock<Scope<TSelf>>.Get();
+            var @lock = TypeTsLock<Scope<TSelf>>.Get(GetType().FullName);
 
             UseDoubleCheck.Do(
                 @if: () => Scopes is null,
@@ -46,7 +46,7 @@ namespace Dawnx
 
         public Scope(TModel model)
         {
-            var @lock = TypeTsLock<Scope<TModel, TSelf>>.Get();
+            var @lock = TypeTsLock<Scope<TModel, TSelf>>.Get(GetType().FullName);
 
             UseDoubleCheck.Do(
                 @if: () => Scopes is null,

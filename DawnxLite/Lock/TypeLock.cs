@@ -7,28 +7,38 @@ namespace Dawnx.Lock
     /// Type lock
     /// </summary>
     /// <typeparam name="TType"></typeparam>
-    public class TypeLock<TType>
+    public class TypeLock<TType> : TypeLock
     {
         public string[] Flags { get; }
 
-        protected TypeLock(params string[] flags)
+        protected TypeLock(string lockName) : base(typeof(TType), lockName) { }
+
+        public static TypeLock<TType> Get(string lockName) => new TypeLock<TType>(lockName);
+    }
+
+    public class TypeLock
+    {
+        public Type Type { get; }
+        public string LockName { get; }
+
+        protected TypeLock(Type type, string lockName)
         {
-            Flags = flags;
+            Type = type;
+            LockName = lockName;
         }
 
-        public static TypeLock<TType> Get(params string[] flags) => new TypeLock<TType>(flags);
+        public static TypeLock Get(Type type, string lockName) => new TypeLock(type, lockName);
 
         public virtual string InternString
         {
             get
             {
-                return string.Intern(
-                   $"{typeof(TType).FullName} " +
-                   $"{Flags.Select(x => x.ToString().UrlEncode()).Join(" ")}");
+                return string.Intern($"{Type.FullName} {LockName.UrlEncode()}");
             }
         }
 
         public Lock Begin(TimeSpan timeout) => Lock.Begin(InternString, timeout);
         public Lock Begin(int millisecondsTimeout) => Lock.Begin(InternString, millisecondsTimeout);
     }
+
 }

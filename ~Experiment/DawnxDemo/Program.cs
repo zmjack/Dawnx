@@ -13,7 +13,7 @@ namespace DawnxDemo
 
         public static void Main(string[] args)
         {
-            using (var file = new FileStream("D:/Temp/1.txt", FileMode.Create))
+            using (var file = new FileStream("D:/tmp/1.txt", FileMode.Create))
             using (var writer = new StreamWriter(file))
             {
                 writer.WriteLine(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));

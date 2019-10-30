@@ -1,4 +1,5 @@
 ﻿using Dawnx.AspNetCore.Authorization;
+using DawnxDemo.Data;
 using DawnxDemo.Models;
 using DawnxTemplate.Authorizations.UserAuthorize;
 using DawnxTemplate.Authorizations.WechatHybridAuthorize;
@@ -6,6 +7,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -13,13 +16,18 @@ namespace DawnxDemo.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
         {
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            throw new Exception("123");
+            var result = _context.OneClasses.First();
+            result.UserName = Path.GetRandomFileName();
+            _context.SaveChanges();
             return View();
         }
 

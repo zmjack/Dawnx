@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Builder
     {
         private FileStream _loggingFileStream;
         private StreamWriter _loggingWriter;
-        private static TypeLock<ErrorLoggingFileMiddleware> HandleLock = TypeLock<ErrorLoggingFileMiddleware>.Get();
+        private static TypeLock<ErrorLoggingFileMiddleware> HandleLock = TypeLock<ErrorLoggingFileMiddleware>.Get("");
         private string CheckHourlyFile;
 
         public ErrorLoggingFileMiddleware(RequestDelegate next) : base(next) { }

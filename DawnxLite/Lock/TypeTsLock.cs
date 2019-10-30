@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 
 namespace Dawnx.Lock
@@ -7,9 +8,18 @@ namespace Dawnx.Lock
     /// Type thread safe lock, inherits from <see cref="InstanceLock{TInstance}" />.
     /// </summary>
     /// <typeparam name="TType"></typeparam>
-    public class TypeTsLock<TType> : TypeLock<TType>
+    public class TypeTsLock<TType> : TypeTsLock
     {
-        protected TypeTsLock(params string[] flags) : base(flags) { }
+        protected TypeTsLock(string lockName) : base(typeof(TType), lockName) { }
+
+        public static TypeTsLock<TType> Get(string lockName) => new TypeTsLock<TType>(lockName);
+    }
+
+    public class TypeTsLock : TypeLock
+    {
+        protected TypeTsLock(Type type, string lockName) : base(type, lockName) { }
+
+        public new static TypeTsLock Get(Type type, string lockName) => new TypeTsLock(type, lockName);
 
         public override string InternString
         {
@@ -17,10 +27,9 @@ namespace Dawnx.Lock
             {
                 return string.Intern(
                     $"<{Thread.CurrentThread.ManagedThreadId.ToString()}> " +
-                    $"{typeof(TType).FullName} " +
-                    $"{Flags.Select(x => x.ToString().UrlEncode()).Join(" ")}");
+                    $"{Type.FullName} {LockName.UrlEncode()}");
             }
         }
-
     }
+
 }

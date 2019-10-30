@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:50221/NxPanel",
+      "launchUrl": "http://localhost:50221",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

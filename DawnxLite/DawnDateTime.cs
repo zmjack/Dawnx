@@ -63,7 +63,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="weekStart"></param>
         /// <returns></returns>
-        public static int WeekInMonth(this DateTime @this, DayOfWeek weekStart)
+        public static int WeekInMonth(this DateTime @this, DayOfWeek weekStart = DayOfWeek.Sunday)
         {
             var day1 = new DateTime(@this.Year, @this.Month, 1);
             var week0 = PastDay(day1, weekStart, true);
@@ -80,7 +80,7 @@ namespace Dawnx
         /// <param name="this"></param>
         /// <param name="weekStart"></param>
         /// <returns></returns>
-        public static int Week(this DateTime @this, DayOfWeek weekStart)
+        public static int Week(this DateTime @this, DayOfWeek weekStart = DayOfWeek.Sunday)
         {
             var day1 = new DateTime(@this.Year, 1, 1);
             var week0 = PastDay(day1, weekStart, true);

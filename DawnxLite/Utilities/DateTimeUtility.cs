@@ -129,10 +129,11 @@ namespace Dawnx.Utilities
         /// <summary>
         /// Gets a DateTime for the specified week of year.
         /// </summary>
-        /// <param name="this"></param>
+        /// <param name="year"></param>
+        /// <param name="week"></param>
         /// <param name="weekStart"></param>
         /// <returns></returns>
-        public static DateTime ParseFromWeek(int year, int week, DayOfWeek weekStart)
+        public static DateTime ParseFromWeek(int year, int week, DayOfWeek weekStart = DayOfWeek.Sunday)
         {
             var day1 = new DateTime(year, 1, 1);
             var week0 = DawnDateTime.PastDay(day1, weekStart, true);

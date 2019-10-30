@@ -6,32 +6,29 @@ namespace Dawnx
 {
     public static class DawnAssembly
     {
-        public static Type[] GetTypesWhichExtends<TExtendClass>(this Assembly @this, bool recursiveSearch = false)
+        public static Type[] GetTypesWhichExtends<TExtendClass>(this Assembly @this, bool recursiveSearch = false, bool useGenericX = false)
         {
-            return @this.GetTypes().Where(type => DawnType.IsExtend<TExtendClass>(type, recursiveSearch)).ToArray();
+            return GetTypesWhichExtends(@this, typeof(TExtendClass), recursiveSearch, useGenericX);
         }
-        public static Type[] GetTypesWhichExtends(this Assembly @this, Type @class, bool recursiveSearch = false)
+        public static Type[] GetTypesWhichExtends(this Assembly @this, Type @class, bool recursiveSearch = false, bool useGenericX = false)
         {
-            return @this.GetTypes().Where(type => DawnType.IsExtend(type, @class, recursiveSearch)).ToArray();
+            return @this.GetTypes().Where(type => DawnType.IsExtend(type, @class, recursiveSearch, useGenericX)).ToArray();
         }
 
-        public static Type[] GetTypesWhichImplements<TInterface>(this Assembly @this)
+        public static Type[] GetTypesWhichImplements<TInterface>(this Assembly @this, bool useGenericX = false)
             where TInterface : class
         {
-            return @this.GetTypes().Where(type => DawnType.IsImplement<TInterface>(type)).ToArray();
+            return GetTypesWhichImplements(@this, typeof(TInterface), useGenericX);
         }
-        public static Type[] GetTypesWhichImplements(this Assembly @this, Type @interface)
+        public static Type[] GetTypesWhichImplements(this Assembly @this, Type @interface, bool useGenericX = false)
         {
-            return @this.GetTypes().Where(type => DawnType.IsImplement(type, @interface)).ToArray();
+            return @this.GetTypes().Where(type => DawnType.IsImplement(type, @interface, useGenericX)).ToArray();
         }
 
         public static Type[] GetTypesWhichMarkedAs<TAttribute>(this Assembly @this)
             where TAttribute : Attribute
         {
-            return @this.GetTypes()
-                .Where(type => type.Assembly.FullName == @this.FullName)
-                .Where(type => type.IsMarkedAs<TAttribute>())
-                .ToArray();
+            return GetTypesWhichMarkedAs(@this, typeof(TAttribute));
         }
         public static Type[] GetTypesWhichMarkedAs(this Assembly @this, Type attribute)
         {

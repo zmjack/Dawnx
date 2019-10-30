@@ -11,6 +11,18 @@ namespace Dawnx
             return @this.GetMethods().First(x => x.ToString() == formatName);
         }
 
+        public static bool IsType<TType>(this Type @this) => IsType(@this, typeof(TType));
+        public static bool IsType(this Type @this, Type type) => @this.FullName == type.FullName;
+
+        public static bool IsGenericType<TType>(this Type @this) => IsType(@this, typeof(TType));
+        public static bool IsGenericType(this Type @this, Type type)
+        {
+            if (!type.IsGenericType)
+                throw new ArgumentException($"The type(`${type.FullName}`) is not a generic type.");
+
+            return @this.FullName.StartsWith(type.FullName);
+        }
+
         public static bool IsImplement<TInterface>(this Type @this)
             where TInterface : class
         {

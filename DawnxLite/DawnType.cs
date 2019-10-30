@@ -11,35 +11,44 @@ namespace Dawnx
             return @this.GetMethods().First(x => x.ToString() == formatName);
         }
 
-        public static bool IsImplement<TInterface>(this Type @this, bool useGenericX = false)
+        public static bool IsImplement<TInterface>(this Type @this)
             where TInterface : class
         {
-            return IsImplement(@this, typeof(TInterface), useGenericX);
+            return IsImplement(@this, typeof(TInterface));
         }
-        public static bool IsImplement(this Type @this, Type @interface, bool useGenericX = false)
+        public static bool IsImplement(this Type @this, Type @interface)
         {
-            var interfaces = @this.GetInterfaces();
-            if (!useGenericX)
-                return interfaces.Any(x => x.FullName == @interface.FullName);
-            else return interfaces.Any(x => x.FullName.StartsWith(@interface.FullName));
+            return @this.GetInterfaces().Any(x => x.FullName == @interface.FullName);
+        }
+        public static bool IsImplementGeneric(this Type @this, Type @interface)
+        {
+            if (!@interface.IsGenericType)
+                throw new ArgumentException($"The `${nameof(@interface)}` is not generic type.");
+
+            return @this.GetInterfaces().Any(x => x.FullName.StartsWith(@interface.FullName));
         }
 
-        public static bool IsExtend<TExtendType>(this Type @this, bool recursiveSearch = false, bool useGenericX = false)
+        public static bool IsExtend<TExtendType>(this Type @this, bool recursiveSearch = false)
         {
-            return IsExtend(@this, typeof(TExtendType), recursiveSearch, useGenericX);
+            return IsExtend(@this, typeof(TExtendType), recursiveSearch);
         }
-        public static bool IsExtend(this Type @this, Type extendType, bool recursiveSearch = false, bool useGenericX = false)
+        public static bool IsExtend(this Type @this, Type extendType, bool recursiveSearch = false)
         {
             if (!recursiveSearch)
-            {
-                if (!useGenericX)
-                    return @this.BaseType?.FullName == extendType.FullName;
-                else return @this.BaseType?.FullName.StartsWith(extendType.FullName) ?? false;
-            }
-            else return RecursiveSearchExtends(@this.BaseType, extendType);
+                return @this.BaseType?.FullName == extendType.FullName;
+            else return RecursiveSearchExtends(@this.BaseType, extendType, false);
+        }
+        public static bool IsExtendGeneric(this Type @this, Type extendType, bool recursiveSearch = false)
+        {
+            if (!extendType.IsGenericType)
+                throw new ArgumentException($"The `${nameof(extendType)}` is not generic type.");
+
+            if (!recursiveSearch)
+                return @this.BaseType?.FullName.StartsWith(extendType.FullName) ?? false;
+            else return RecursiveSearchExtends(@this.BaseType, extendType, true);
         }
 
-        private static bool RecursiveSearchExtends(Type type, Type extendType, bool useGenericX = false)
+        private static bool RecursiveSearchExtends(Type type, Type extendType, bool useGenericX)
         {
             if (type != null)
             {
@@ -47,7 +56,7 @@ namespace Dawnx
                     return true;
                 else if (useGenericX && type.FullName.StartsWith(extendType.FullName))
                     return true;
-                else return RecursiveSearchExtends(type.BaseType, extendType);
+                else return RecursiveSearchExtends(type.BaseType, extendType, useGenericX);
             }
             else return false;
         }

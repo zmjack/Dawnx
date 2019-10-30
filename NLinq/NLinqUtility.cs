@@ -108,10 +108,10 @@ namespace NLinq
                 }
 
                 // Resolve EntityTracker
-                var trackerType = typeof(IEntityTracker<,>).MakeGenericType(@this.GetType(), entityType);
-                if (entityType.IsImplement(trackerType))
+                if (entityType.IsImplementGeneric(typeof(IEntityTracker<,>)))
                 {
                     //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
+                    var trackerType = typeof(IEntityTracker<,>).MakeGenericType(@this.GetType(), entityType);
                     var onInsertingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnInserting));
                     var onUpdatingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnUpdating));
                     var onDeletingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnDeleting));

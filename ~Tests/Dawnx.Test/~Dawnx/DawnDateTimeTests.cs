@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Dawnx.Test
 {
-    public class DawnDateTimeTest
+    public class DawnDateTimeTests
     {
         [Fact]
         public void BeginningOrEndTest()

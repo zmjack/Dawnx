@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Dawnx.Test
 {
-    public class DawnExpressionTest
+    public class DawnExpressionTests
     {
         [Fact]
         public void Test()

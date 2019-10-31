@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Dawnx.Algorithms.Graph
+namespace Dawnx.Algorithms.GraphAlgorithm
 {
     public class GraphAnalysedPoint<TPointModel, TRelationModel>
         where TPointModel : IGraphPoint

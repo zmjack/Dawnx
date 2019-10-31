@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace Dawnx.Algorithms.Graph.Test
+namespace Dawnx.Algorithms.GraphAlgorithm.Test
 {
     public class GraphTests
     {

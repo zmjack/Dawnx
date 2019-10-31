@@ -1,6 +1,4 @@
 ﻿using Dawnx.Utilities;
-using System;
-using System.Drawing;
 using Xunit;
 
 namespace Dawnx.Test.Utilities

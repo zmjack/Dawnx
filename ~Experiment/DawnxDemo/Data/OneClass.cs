@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NLinq;
+﻿using NLinq;
 using System;
 using System.ComponentModel.DataAnnotations;
 

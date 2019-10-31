@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dawnx.Algorithms.Graph
+namespace Dawnx.Algorithms.GraphAlgorithm
 {
     public class GraphRelation : IGraphRelation
     {

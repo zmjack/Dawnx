@@ -1,5 +1,4 @@
 ﻿using System;
-using TypeSharp;
 
 namespace TypeSharp.Test
 {

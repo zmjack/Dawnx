@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-
-namespace NLinq
+﻿namespace NLinq
 {
     public static partial class IQueryableX
     {

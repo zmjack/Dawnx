@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Def
+﻿namespace Def
 {
     public static class HttpVerb
     {

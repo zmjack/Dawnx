@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Tools
+﻿namespace Dawnx.Tools
 {
     public class TargetProjectInfo
     {

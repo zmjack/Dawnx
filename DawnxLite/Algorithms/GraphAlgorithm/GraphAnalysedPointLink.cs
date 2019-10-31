@@ -1,4 +1,4 @@
-﻿namespace Dawnx.Algorithms.Graph
+﻿namespace Dawnx.Algorithms.GraphAlgorithm
 {
     public class GraphAnalysedPointLink<TPointModel, TRelationModel>
         where TPointModel : IGraphPoint

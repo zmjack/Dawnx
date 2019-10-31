@@ -1,4 +1,4 @@
-﻿namespace Dawnx.Algorithms.Graph
+﻿namespace Dawnx.Algorithms.GraphAlgorithm
 {
     public interface IGraphPathNode<TPointModel, TRelationModel>
         where TPointModel : IGraphPoint

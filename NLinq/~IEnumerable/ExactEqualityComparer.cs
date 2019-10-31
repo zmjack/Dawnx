@@ -1,7 +1,5 @@
-﻿using Dawnx.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace NLinq
@@ -16,7 +14,7 @@ namespace NLinq
             _compare = compare_MemberOrNewExp.Compile();
 
             //Expression<Func<TEntity, object>> compares_MemberOrNewExp
-            
+
 
             //var type = typeof(TEntity);
             //var propNames = ExpressionUtility.GetPropertyNames(compares_MemberOrNewExp);

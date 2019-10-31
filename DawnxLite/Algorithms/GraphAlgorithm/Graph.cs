@@ -1,4 +1,4 @@
-﻿using Dawnx.Algorithms.Graph;
+﻿using Dawnx.Algorithms.GraphAlgorithm;
 using System;
 using System.Collections.Generic;
 using System.Linq;

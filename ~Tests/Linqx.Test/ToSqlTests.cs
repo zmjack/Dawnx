@@ -1,6 +1,4 @@
-using Dawnx.Definition;
 using Microsoft.EntityFrameworkCore;
-using NLinq.ProviderFunctions;
 using SimpleData;
 using System;
 using System.Linq;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Def
+﻿namespace Def
 {
     public static partial class Mime
     {

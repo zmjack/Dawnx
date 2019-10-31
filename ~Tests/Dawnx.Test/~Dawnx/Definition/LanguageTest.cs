@@ -1,5 +1,4 @@
-﻿using Dawnx.Definition;
-using Def;
+﻿using Def;
 using System.Text.RegularExpressions;
 using Xunit;
 

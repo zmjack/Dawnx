@@ -160,7 +160,7 @@ namespace TypeSharp
             {
                 switch (type)
                 {
-                    case Type _ when type.IsType(typeof(Dictionary<,>)):
+                    case Type _ when type.IsGenericType(typeof(Dictionary<,>)):
                         TypeDefinitions[type.FullName] = new TypeDefinition { Name = "any" };
                         break;
 

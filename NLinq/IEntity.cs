@@ -1,5 +1,6 @@
 ﻿using Dawnx;
 using Dawnx.Utilities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +24,12 @@ namespace NLinq
 
     public static partial class IEntityX
     {
+        public static void MarkUpdate<TEntity>(this TEntity @this, DbContext context)
+            where TEntity : class, IEntity
+        {
+            context.Entry(@this).State = EntityState.Modified;
+        }
+
         /// <summary>
         /// Accept all property values which are can be read and write from another model.
         ///     (Only ValueTypes, exclude 'KeyAttribute' and attributes which are start with 'Track')

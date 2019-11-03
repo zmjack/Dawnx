@@ -25,28 +25,28 @@ namespace Dawnx.Security.Test
             var data = Encoding.UTF8.GetBytes(text);
 
             // 128 bits (16 bytes) key
-            Aes.Create().Self(_ =>
+            Aes.Create().Then(_ =>
             {
                 _.FromBase64String(key16);
                 Assert.Equal(_.Decrypt(_.Encrypt(data)), data);
             });
 
             // 192 bits (24 bytes) key
-            Aes.Create().Self(_ =>
+            Aes.Create().Then(_ =>
             {
                 _.FromBase64String(key24);
                 Assert.Equal(_.Decrypt(_.Encrypt(data)), data);
             });
 
             // 256 bits (32 bytes) key
-            Aes.Create().Self(_ =>
+            Aes.Create().Then(_ =>
             {
                 _.FromBase64String(key32);
                 Assert.Equal(_.Decrypt(_.Encrypt(data)), data);
             });
 
             // Not a key
-            Aes.Create().Self(_ =>
+            Aes.Create().Then(_ =>
             {
                 Assert.Throws<CryptographicException>(() => _.FromBase64String(key48));
             });
@@ -55,7 +55,7 @@ namespace Dawnx.Security.Test
         [Fact]
         public void Test2()
         {
-            Aes.Create().Self(_ =>
+            Aes.Create().Then(_ =>
             {
                 _.SetEmptyIV();
                 _.Key = "1234567890123456".Bytes(Encoding.ASCII);
@@ -64,7 +64,7 @@ namespace Dawnx.Security.Test
                     _.Encrypt<AesEmptyIVCombiner>("123".Bytes(Encoding.UTF8)).HexString());
             });
 
-            Aes.Create().Self(_ =>
+            Aes.Create().Then(_ =>
             {
                 var now = DateTime.Now.ToString();
                 var encrypted = _.Encrypt(now.ToString().Bytes(Encoding.UTF8)).Base64String();
@@ -75,13 +75,13 @@ namespace Dawnx.Security.Test
         [Fact]
         public void Test3()
         {
-            var aes1 = Aes.Create().Self(_ =>
+            var aes1 = Aes.Create().Then(_ =>
             {
                 _.SetEmptyIV();
                 _.Key = "075ee2b75db7c4452c21fa9b33e89101".Bytes(Encoding.ASCII);
                 _.Mode = CipherMode.CBC;
             });
-            var aes2 = Aes.Create().Self(_ =>
+            var aes2 = Aes.Create().Then(_ =>
             {
                 _.SetEmptyIV();
                 _.Key = "075ee2b75db7c4452c21fa9b33e89101".Bytes(Encoding.ASCII);

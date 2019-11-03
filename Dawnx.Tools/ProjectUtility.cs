@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 
 namespace Dawnx.Tools
@@ -18,7 +19,7 @@ namespace Dawnx.Tools
             });
             var projectName = Path.GetFileName(projectFile);
 
-            var xml = new XmlDocument().Self(x => x.Load(projectFile));
+            var xml = new XmlDocument().Then(x => x.Load(projectFile));
             return new TargetProjectInfo
             {
                 ProjectRoot = dir,

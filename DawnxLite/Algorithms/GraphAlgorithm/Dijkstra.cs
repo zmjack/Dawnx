@@ -34,7 +34,7 @@ namespace Dawnx.Algorithms.GraphAlgorithm
 #pragma warning disable IDE0042
             var take = nodes
                 .Single(node => node.Point.Name == from)
-                .Self(_ => _.Distance = 0);
+                .Then(_ => _.Distance = 0);
 #pragma warning restore IDE0042
 
             do

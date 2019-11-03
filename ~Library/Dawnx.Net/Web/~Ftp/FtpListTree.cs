@@ -58,7 +58,7 @@ namespace Dawnx.Net.Web
                         var name = groups[3][0];
 
                         var item = new FtpListTree(FtpAccess, isDirectory ? $"{RelativePath}/{name}/" : "");
-                        item.Model.Self(_ =>
+                        item.Model.Then(_ =>
                         {
                             _.LastWriteTime = lastWriteTime;
                             _.Type = isDirectory ? FtpListItem.ItemType.Directory : FtpListItem.ItemType.File;
@@ -102,7 +102,7 @@ namespace Dawnx.Net.Web
                         var name = groups[4][0];
 
                         var item = new FtpListTree(FtpAccess, isDirectory ? $"{RelativePath}/{name}/" : "");
-                        item.Model.Self(_ =>
+                        item.Model.Then(_ =>
                         {
                             _.LastWriteTime = lastWriteTime;
                             _.Type = isDirectory ? FtpListItem.ItemType.Directory : FtpListItem.ItemType.File;

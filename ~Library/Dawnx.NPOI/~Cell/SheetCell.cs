@@ -17,12 +17,12 @@ namespace Dawnx.NPOI
 
         public string CellName => Sheet.GetCellName((RowIndex, ColumnIndex));
 
-        public static SheetCell operator |(SheetCell @this, bool value) => @this.Self(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, double value) => @this.Self(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, DateTime value) => @this.Self(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, IRichTextString value) => @this.Self(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, string value) => @this.Self(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, object value) => @this.Self(_ => _.SetValue(value));
+        public static SheetCell operator |(SheetCell @this, bool value) => @this.Then(_ => _.SetValue(value));
+        public static SheetCell operator |(SheetCell @this, double value) => @this.Then(_ => _.SetValue(value));
+        public static SheetCell operator |(SheetCell @this, DateTime value) => @this.Then(_ => _.SetValue(value));
+        public static SheetCell operator |(SheetCell @this, IRichTextString value) => @this.Then(_ => _.SetValue(value));
+        public static SheetCell operator |(SheetCell @this, string value) => @this.Then(_ => _.SetValue(value));
+        public static SheetCell operator |(SheetCell @this, object value) => @this.Then(_ => _.SetValue(value));
 
         public static implicit operator bool(SheetCell @this) => @this.MapedCell.BooleanCellValue;
         public static implicit operator double(SheetCell @this) => @this.MapedCell.NumericCellValue;

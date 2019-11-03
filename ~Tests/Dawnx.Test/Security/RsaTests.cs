@@ -10,7 +10,7 @@ namespace Dawnx.Security.Test
         [Fact]
         public void ImportPublicPemTest()
         {
-            RSA.Create().Self(_ =>
+            RSA.Create().Then(_ =>
             {
                 _.FromPemStringStd(publicPem);
                 AssertCheck_Public(_);
@@ -20,7 +20,7 @@ namespace Dawnx.Security.Test
         [Fact]
         public void ImportPemTest()
         {
-            RSA.Create().Self(_ =>
+            RSA.Create().Then(_ =>
             {
                 _.FromPemStringStd(privatePem);
                 AssertCheck_Public(_);
@@ -31,7 +31,7 @@ namespace Dawnx.Security.Test
         [Fact]
         public void ImportPublicXmlTest()
         {
-            RSA.Create().Self(_ =>
+            RSA.Create().Then(_ =>
             {
                 _.FromXmlStringStd(publicKey);
                 AssertCheck_Public(_);
@@ -41,7 +41,7 @@ namespace Dawnx.Security.Test
         [Fact]
         public void ImportXmlTest()
         {
-            RSA.Create().Self(_ =>
+            RSA.Create().Then(_ =>
             {
                 _.FromXmlStringStd(privateKey);
                 AssertCheck_Public(_);
@@ -55,7 +55,7 @@ namespace Dawnx.Security.Test
             var text = Guid.NewGuid().ToString();
             var data = Encoding.UTF8.GetBytes(text);
 
-            RSA.Create().Self(_ =>
+            RSA.Create().Then(_ =>
             {
                 Assert.Equal(_.Decrypt(_.Encrypt(data)), data);
             });
@@ -67,7 +67,7 @@ namespace Dawnx.Security.Test
             var text = Guid.NewGuid().ToString();
             var data = Encoding.UTF8.GetBytes(text);
 
-            RSA.Create().Self(_ =>
+            RSA.Create().Then(_ =>
             {
                 Assert.True(_.VerifyData(data, _.SignData(data)));
             });

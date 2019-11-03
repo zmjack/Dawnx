@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 
 namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
@@ -53,7 +54,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindByIdAsync(Input.Id).Result;
-                user.Self(_ =>
+                user.Then(_ =>
                 {
                     _.PhoneNumberConfirmed = Input.PhoneNumberConfirmed;
                     _.EmailConfirmed = Input.EmailConfirmed;

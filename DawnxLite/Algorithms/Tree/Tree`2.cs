@@ -131,13 +131,13 @@ namespace Dawnx.Algorithms.Tree
         {
             var ubound = pathKeys.UBound();
             var currentNode = this;
-            foreach (var vi in pathKeys.AsVI())
+            foreach (var kv in pathKeys.AsKvPairs())
             {
-                var key = vi.Value;
+                var key = kv.Value;
                 var subNode = currentNode.Children.FirstOrDefault(x => x.Key == key);
                 if (subNode is null)
                 {
-                    if (vi.Index < ubound)
+                    if (kv.Key < ubound)
                     {
                         var newNode = new TSelf();
                         if (!key.IsNullOrEmpty())
@@ -150,7 +150,7 @@ namespace Dawnx.Algorithms.Tree
                     {
                         if (key.IsNullOrEmpty())
                             currentNode.Add(node);
-                        else currentNode.Add(node.Self(_ => _.Key = key));
+                        else currentNode.Add(node.Then(_ => _.Key = key));
                     }
                 }
                 else currentNode = subNode;

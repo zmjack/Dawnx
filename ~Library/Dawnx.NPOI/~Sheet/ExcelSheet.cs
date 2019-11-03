@@ -202,10 +202,10 @@ namespace Dawnx.NPOI
                 if (@break) break;
 
                 var item = new TModel();
-                foreach (var prop in props.AsVI())
+                foreach (var kv in props.AsKvPairs())
                 {
-                    var propInfo = prop.Value;
-                    var cell = this[(row + rowOffset, pos.col + prop.Index)];
+                    var propInfo = kv.Value;
+                    var cell = this[(row + rowOffset, pos.col + kv.Key)];
                     if (propInfo.PropertyType == typeof(DateTime))
                         propInfo.SetValue(item, converter.Convert(propInfo, cell.DateTime));
                     else propInfo.SetValue(item, converter.Convert(propInfo, cell.GetValue()));
@@ -242,7 +242,7 @@ namespace Dawnx.NPOI
         public DataTable Fetch((int row, int col) pos, bool isFirstRowTitle, Type[] colTypes)
         {
             var ret = new DataTable();
-            ret.Columns.Self(_ =>
+            ret.Columns.Then(_ =>
                 _.AddRange(colTypes.Select(colType => new DataColumn("", colType)).ToArray()));
 
             (int row, int col) dataStart;

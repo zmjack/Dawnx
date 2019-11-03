@@ -25,11 +25,11 @@ namespace Dawnx.AspNetCore.Test
                 },
                 ["3"] = new ClaimsMenu<MyMenuEntity>(new MyMenuEntity { Users = null, Roles = "manager1" }),
             };
-            var navMenu2 = new ClaimsMenu<MyMenuEntity>().Self(_ =>
+            var navMenu2 = new ClaimsMenu<MyMenuEntity>().Then(_ =>
             {
                 _.AddRange(new[]
                 {
-                    new ClaimsMenu<MyMenuEntity>(new MyMenuEntity { Name = "1" }).Self(__ =>
+                    new ClaimsMenu<MyMenuEntity>(new MyMenuEntity { Name = "1" }).Then(__ =>
                     {
                         __.AddRange(new[]
                         {
@@ -37,7 +37,7 @@ namespace Dawnx.AspNetCore.Test
                             new ClaimsMenu<MyMenuEntity>(new MyMenuEntity { Name = "1-2", Users = "user2", Roles = "manager1" }),
                         });
                     }),
-                    new ClaimsMenu<MyMenuEntity>(new MyMenuEntity { Name = "2" }).Self(__ =>
+                    new ClaimsMenu<MyMenuEntity>(new MyMenuEntity { Name = "2" }).Then(__ =>
                     {
                         __.AddRange(new[]
                         {

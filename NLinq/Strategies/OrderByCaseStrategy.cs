@@ -1,5 +1,6 @@
 ﻿using Dawnx;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -14,16 +15,16 @@ namespace NLinq.Strategies
             TRet[] orderValues)
         {
             var valueLenth = orderValues.Length;
-            var lambdaExp = orderValues.Reverse().AsVI().Aggregate(null as Expression, (acc, vi) =>
+            var lambdaExp = orderValues.Reverse().AsKvPairs().Aggregate(null as Expression, (acc, kv) =>
             {
-                var compareExp = Expression.Equal(memberExp.Body, Expression.Constant(vi.Value));
+                var compareExp = Expression.Equal(memberExp.Body, Expression.Constant(kv.Value));
 
                 if (acc is null)
                 {
                     return
                         Expression.Condition(
                             compareExp,
-                            Expression.Constant(valueLenth - 1 - vi.Index),
+                            Expression.Constant(valueLenth - 1 - kv.Key),
                             Expression.Constant(valueLenth));
                 }
                 else
@@ -31,7 +32,7 @@ namespace NLinq.Strategies
                     return
                         Expression.Condition(
                             compareExp,
-                            Expression.Constant(valueLenth - 1 - vi.Index),
+                            Expression.Constant(valueLenth - 1 - kv.Key),
                             acc);
                 }
             });

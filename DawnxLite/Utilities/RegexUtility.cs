@@ -20,12 +20,12 @@ namespace Dawnx.Utilities
 
             var parts = expression.Split('.').Select(x => x.Trim());
             var regexParts = new string[4];
-            foreach (var part in parts.AsVI())
+            foreach (var part in parts.AsKvPairs())
             {
                 switch (part.Value)
                 {
                     case "*":
-                        regexParts[part.Index] = $"(?:{NumberRange(0, 255)})";
+                        regexParts[part.Key] = $"(?:{NumberRange(0, 255)})";
                         break;
 
                     case string s when new Regex(@"^\d+$").Match(s).Success:
@@ -34,7 +34,7 @@ namespace Dawnx.Utilities
                         if (!CheckIPPart(value))
                             throw new FormatException("Each part of IPv4 must be between 0 and 255.");
 
-                        regexParts[part.Index] = s;
+                        regexParts[part.Key] = s;
                         break;
 
                     case string s:
@@ -49,7 +49,7 @@ namespace Dawnx.Utilities
                             if (!CheckIPPart(from) || !(CheckIPPart(to)))
                                 throw new FormatException("Each part of IPv4 must be between 0 and 255.");
 
-                            regexParts[part.Index] = $"(?:{NumberRange(from, to)})";
+                            regexParts[part.Key] = $"(?:{NumberRange(from, to)})";
                         }
                         break;
                 }

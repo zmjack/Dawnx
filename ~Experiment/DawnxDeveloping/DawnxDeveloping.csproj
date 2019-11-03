@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Dawnx.Diagnostics\Dawnx.Diagnostics.csproj" />
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
+    <ProjectReference Include="..\..\NStd\NStd.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
     <ProjectReference Include="..\DawnxDemo\DawnxDemo.csproj" />

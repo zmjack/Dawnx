@@ -9,7 +9,7 @@ namespace Dawnx.NPOI
         private CFontApplier() { }
 
         internal static CFontApplier Create(Action<CFontApplier> init)
-            => new CFontApplier().Self(_ => init?.Invoke(_));
+            => new CFontApplier().Then(_ => init?.Invoke(_));
 
         public string FontName { get; set; } = "Calibri";
         public short FontSize { get; set; } = 11;

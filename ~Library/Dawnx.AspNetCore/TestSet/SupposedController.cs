@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 
 namespace Dawnx.AspNetCore.TestSet
@@ -21,7 +22,7 @@ namespace Dawnx.AspNetCore.TestSet
             {
                 HttpContext = new DefaultHttpContext
                 {
-                    User = new ClaimsPrincipal(new ClaimsIdentity().Self(_ =>
+                    User = new ClaimsPrincipal(new ClaimsIdentity().Then(_ =>
                     {
                         _.AddClaims(new[]
                         {

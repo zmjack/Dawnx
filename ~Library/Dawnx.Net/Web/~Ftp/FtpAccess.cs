@@ -34,7 +34,7 @@ namespace Dawnx.Net.Web
         /// <returns></returns>
         protected FtpWebRequest NewRequest(string relativePath, string method)
         {
-            var request = ((FtpWebRequest)WebRequest.Create(new Uri(BaseUrl.AbsoluteUri + relativePath))).Self(_ =>
+            var request = ((FtpWebRequest)WebRequest.Create(new Uri(BaseUrl.AbsoluteUri + relativePath))).Then(_ =>
             {
                 _.Method = method;
 
@@ -72,7 +72,7 @@ namespace Dawnx.Net.Web
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.ReadProcess(bufferSize, (readTarget, buffer, readLength) =>
+                    stream.Reading(bufferSize, (buffer, readLength) =>
                     {
                         receiver.Write(buffer, 0, readLength);
                         received += readLength;
@@ -85,7 +85,7 @@ namespace Dawnx.Net.Web
         public FtpListTree ListTree(string relativePath = "", bool recursive = false)
         {
             return new FtpListTree(this, relativePath)
-                .Self(_ => _.Model.Type = FtpListItem.ItemType.Directory)
+                .Then(_ => _.Model.Type = FtpListItem.ItemType.Directory)
                 .Sync(recursive);
         }
 
@@ -100,7 +100,7 @@ namespace Dawnx.Net.Web
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.ReadProcess(bufferSize, (readTarget, buffer, readLength) =>
+                    stream.Reading(bufferSize, (buffer, readLength) =>
                     {
                         memory.Write(buffer, 0, readLength);
                         received += readLength;
@@ -120,7 +120,7 @@ namespace Dawnx.Net.Web
             request.ContentLength = bodyStream.Length;
             using (var stream = request.GetRequestStream())
             {
-                bodyStream.WriteTo(stream, bufferSize, (writeTarget, buffer, totalWrittenLength) =>
+                bodyStream.Writing(stream, bufferSize, (writeTarget, buffer, totalWrittenLength) =>
                 {
                     UploadProgress?.Invoke(this, totalWrittenLength, bodyStream.Length);
                 });

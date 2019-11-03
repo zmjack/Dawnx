@@ -26,7 +26,7 @@ namespace Dawnx.Net.Web
 
         public HttpStateContainer StateContainer { get; private set; }
         public LinkedList<IProcessor> ResponseProcessors { get; private set; }
-            = new LinkedList<IProcessor>().Self(_ => _.AddLast(new RedirectProcessor()));
+            = new LinkedList<IProcessor>().Then(_ => _.AddLast(new RedirectProcessor()));
 
         public HttpAccess() : this(new HttpStateContainer()) { }
         public HttpAccess(HttpStateContainer config)
@@ -85,7 +85,7 @@ namespace Dawnx.Net.Web
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.ReadProcess(bufferSize, (readTarget, buffer, readLength) =>
+                    stream.Reading(bufferSize, (buffer, readLength) =>
                     {
                         receiver.Write(buffer, 0, readLength);
                         received += readLength;
@@ -199,7 +199,7 @@ namespace Dawnx.Net.Web
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
             {
-                StateContainer.Headers.Self(headers =>
+                StateContainer.Headers.Then(headers =>
                 {
                     if (!(headers is null))
                     {
@@ -238,7 +238,7 @@ namespace Dawnx.Net.Web
                 request.ContentLength = bodyStream.Length;
                 using (var stream = request.GetRequestStream())
                 {
-                    bodyStream.WriteTo(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
+                    bodyStream.Writing(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
                     {
                         UploadProgress?.Invoke(this, url, totalWrittenLength, bodyStream.Length);
                     });

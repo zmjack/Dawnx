@@ -8,7 +8,7 @@ namespace Dawnx.Xml.SampleWithHAP
     {
         static void Main(string[] args)
         {
-            var doc = new HtmlDocument().Self(_ =>
+            var doc = new HtmlDocument().Then(_ =>
             {
                 _.LoadHtml(
                     @"<div id=""info"">hello</div>" +
@@ -17,7 +17,7 @@ namespace Dawnx.Xml.SampleWithHAP
                     @"<div id=""output"">bye</div>");
             });
 
-            var context = new MyContext().Self(_ =>
+            var context = new MyContext().Then(_ =>
             {
                 _.AddNamespace("fn");
             });

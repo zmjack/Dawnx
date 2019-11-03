@@ -1,4 +1,6 @@
-﻿namespace Dawnx
+﻿using System;
+
+namespace Dawnx
 {
     public struct PeriodInt
     {

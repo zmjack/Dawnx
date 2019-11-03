@@ -136,7 +136,7 @@ namespace Dawnx.Compress
             using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 // The default ZipFile's buffer size is 4096
-                MappedStream.WriteTo(file, 4096);
+                MappedStream.CopyTo(file, 4096);
             }
             MappedStream.Seek(position, SeekOrigin.Begin);
         }
@@ -158,7 +158,7 @@ namespace Dawnx.Compress
                 using (var file = new FileStream(Path.Combine(path, entry.Name), FileMode.Create))
                 using (var stream = ZipFile.GetInputStream(entry))
                 {
-                    ZipFile.GetInputStream(entry).WriteTo(file, 1024 * 1024);
+                    ZipFile.GetInputStream(entry).CopyTo(file, 1024 * 1024);
                 }
             }
             ZipFile.OfType<ZipEntry>().Where(predicate);

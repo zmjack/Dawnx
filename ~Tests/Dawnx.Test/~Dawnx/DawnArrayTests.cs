@@ -7,15 +7,6 @@ namespace Dawnx.Test
     public class DawnArrayTests
     {
         [Fact]
-        public void Test1()
-        {
-            var random = new Random();
-            var arr = new int[1000000];
-            IntegerRange.Create(arr.Length).Each(i => arr[i] = i);
-            arr.Shuffle();
-        }
-
-        [Fact]
         public void Test2()
         {
             var arr = new string[2, 3]

@@ -92,13 +92,13 @@ namespace NLinq
                         case QueryCompilerVersion.Version_2_1:
                             var generator = queryCompiler
                                 .GetFieldValue<QueryCompiler>("_queryModelGenerator");      // as QueryModelGenerator
-                            return generator.InnerInvoke("ParseQuery", @this.Expression) as QueryModel;
+                            return generator.Invoke("ParseQuery", @this.Expression) as QueryModel;
 
                         case QueryCompilerVersion.Version_2_0:
                             var nodeTypeProvider = queryCompiler
                                 .GetPropertyValue<QueryCompiler>("NodeTypeProvider") as INodeTypeProvider;
                             var parser = queryCompiler
-                                .InnerInvoke<QueryCompiler>("CreateQueryParser", nodeTypeProvider) as QueryParser;
+                                .Invoke<QueryCompiler>("CreateQueryParser", nodeTypeProvider) as QueryParser;
                             return parser.GetParsedQuery(@this.Expression);
 
                         default: throw new NotSupportedException();
@@ -107,7 +107,7 @@ namespace NLinq
 
                 var modelVisitor = dependencies.QueryCompilationContextFactory.Create(false)
                     .CreateQueryModelVisitor()
-                    .Self(_ => _.CreateQueryExecutor<TEntity>(queryModel));
+                    .Then(_ => _.CreateQueryExecutor<TEntity>(queryModel));
 
                 return (modelVisitor as RelationalQueryModelVisitor)
                     .Queries.Select(x => $"{x.ToString().TrimEnd(';')};{Environment.NewLine}").Join("");

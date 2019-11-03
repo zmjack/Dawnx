@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Dawnx.Algorithms.MathAlgorithm.Test
 {
@@ -39,7 +40,7 @@ namespace Dawnx.Algorithms.MathAlgorithm.Test
                 { 2, 3, 13 },
                 { 7, 8, 38 },
             })
-            .Self(_ => Assert.Equal(new double[] { 2, 3 }, _.FindEquationSolution()));
+            .Then(_ => Assert.Equal(new double[] { 2, 3 }, _.FindEquationSolution()));
         }
 
         [Fact]
@@ -51,7 +52,7 @@ namespace Dawnx.Algorithms.MathAlgorithm.Test
                 { 2, -1, 3, 7 },
                 { 3, 1, 2, 18 },
             })
-            .Self(_ => Assert.Equal(new double[] { 7, 1, -2 }, _.FindEquationSolution()));
+            .Then(_ => Assert.Equal(new double[] { 7, 1, -2 }, _.FindEquationSolution()));
         }
 
         [Fact]
@@ -64,7 +65,7 @@ namespace Dawnx.Algorithms.MathAlgorithm.Test
                 { 1, 1, 1, 1, 8 },
                 { 3, 2, 1, 0, -1 },
             })
-            .Self(_ => Assert.Equal(new double[] { 1.75, -10.25, 14.25, 2.25 }, _.FindEquationSolution()));
+            .Then(_ => Assert.Equal(new double[] { 1.75, -10.25, 14.25, 2.25 }, _.FindEquationSolution()));
         }
 
         [Fact]

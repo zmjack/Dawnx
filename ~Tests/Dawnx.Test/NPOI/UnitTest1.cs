@@ -33,7 +33,7 @@ namespace Dawnx.NPOI.Test
                 { "Company 102", "Ag", 3, DateTime.Parse("2017-1-3"), "[??]" },
                 { "Company 102", "Cu", 3, DateTime.Parse("2017-1-3"), "[??]" },
                 { "Company 102", "Cu", 4, DateTime.Parse("2017-1-4"), "[??]" },
-            }).Self(range =>
+            }).Then(range =>
             {
                 range.SetCStyle(ºÚÌåstyle1);
                 var cstyle = range.ToArray()[0].GetCStyle();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -18,16 +19,16 @@ namespace Dawnx.CConsole
             var line = new StringBuilder();
 
             // Calculate lengths of each column
-            foreach (var prop in props.AsVI())
-                lengths[prop.Index] = prop.Value.Name.GetLengthA();
+            foreach (var kv in props.AsKvPairs())
+                lengths[kv.Key] = kv.Value.Name.GetLengthA();
 
-            foreach (var prop in props.AsVI())
+            foreach (var kv in props.AsKvPairs())
             {
                 foreach (var model in models)
                 {
-                    var len = prop.Value.GetValue(model)?.ToString().GetLengthA() ?? 0;
-                    if (len > lengths[prop.Index])
-                        lengths[prop.Index] = len;
+                    var len = kv.Value.GetValue(model)?.ToString().GetLengthA() ?? 0;
+                    if (len > lengths[kv.Key])
+                        lengths[kv.Key] = len;
                 }
             }
 

@@ -45,7 +45,7 @@ namespace Dawnx.Algorithms
 
                 var relations_PendingPointAsPointB = pendingPoint_Relations.Where(
                     relation => relation.PointB == pendingPoint.Id && relation.Directed);
-                points.Find(pendingPoint.Id).Self(_ =>
+                points.Find(pendingPoint.Id).Then(_ =>
                 {
                     _.From = relations_PendingPointAsPointB.Select(relation =>
                     {
@@ -59,7 +59,7 @@ namespace Dawnx.Algorithms
 
                 var relations_else = pendingPoint_Relations.Where(
                     relation => !(relation.PointB == pendingPoint.Id && relation.Directed));
-                points.Find(pendingPoint.Id).Self(_ =>
+                points.Find(pendingPoint.Id).Then(_ =>
                 {
                     _.To = relations_else.Select(relation =>
                     {
@@ -104,7 +104,7 @@ namespace Dawnx.Algorithms
             where TPoint : TPointModel, IGraphPoint
             where TRelation : TRelationModel, IGraphRelation
         {
-            return new TDerivedClass().Self(_ =>
+            return new TDerivedClass().Then(_ =>
             {
                 _.PendingPoints = new HashSet<TPointModel>(points as IEnumerable<TPointModel>);
                 _.PendingRelations = new HashSet<TRelationModel>(relations as IEnumerable<TRelationModel>);

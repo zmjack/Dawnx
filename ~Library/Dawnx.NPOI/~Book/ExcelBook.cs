@@ -70,7 +70,7 @@ namespace Dawnx.NPOI
         {
             var find = CStyles.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
             if (find is null)
-                return new CStyle(this).Self(_ => applier.Apply(_));
+                return new CStyle(this).Then(_ => applier.Apply(_));
             else return find;
         }
 
@@ -82,7 +82,7 @@ namespace Dawnx.NPOI
         {
             var find = CFonts.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
             if (find is null)
-                return new CFont(this).Self(_ => applier.Apply(_));
+                return new CFont(this).Then(_ => applier.Apply(_));
             else return find;
         }
 

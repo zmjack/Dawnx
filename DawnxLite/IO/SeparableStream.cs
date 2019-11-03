@@ -34,8 +34,8 @@ namespace Dawnx.IO
                 throw new ArgumentOutOfRangeException($"The '{nameof(count)}' can not be greater than the length of data.");
 
             Stream.Seek(0, SeekOrigin.Begin);
-            var ret = new byte[count].Self(_ => Stream.Read(_, 0, count));
-            Stream = new MemoryStream().Self(_ => Stream.WriteTo(_, BufferSize));
+            var ret = new byte[count].Then(x => Stream.Read(x, 0, count));
+            Stream = new MemoryStream().Then(x => Stream.CopyTo(x, BufferSize));
 
             return ret;
         }
@@ -43,7 +43,7 @@ namespace Dawnx.IO
         public void Remove(int count)
         {
             Stream.Seek(count, SeekOrigin.Begin);
-            Stream = new MemoryStream().Self(_ => Stream.WriteTo(_, BufferSize));
+            Stream = new MemoryStream().Then(x => Stream.CopyTo(x, BufferSize));
         }
 
     }

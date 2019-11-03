@@ -1,4 +1,5 @@
 ﻿using Dawnx.Security.AesSecurity;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -26,7 +27,7 @@ namespace Dawnx.Security
         public static byte[] Encrypt<TAesCombiner>(this Aes @this, byte[] data)
             where TAesCombiner : IAesCombiner, new()
         {
-            var combiner = new TAesCombiner().Self(_ => _.Init(@this));
+            var combiner = new TAesCombiner().Then(x => x.Init(@this));
 
             var iv = @this.IV;
             var encryptor_memory = new MemoryStream();

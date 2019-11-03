@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -43,12 +44,12 @@ namespace Dawnx.Chinese
 
                 var sb = new StringBuilder();
                 var zero = false;
-                foreach (var vi in singles.AsVI())
+                foreach (var kv in singles.AsKvPairs())
                 {
-                    if (vi.Value != '0')
+                    if (kv.Value != '0')
                     {
-                        var value = NumberValues[index][vi.Value - '0'];
-                        var singleNumberUnit = SingleNumberUnits[index][SingleNumberUnits[0].Length - singles.Length + vi.Index];
+                        var value = NumberValues[index][kv.Value - '0'];
+                        var singleNumberUnit = SingleNumberUnits[index][SingleNumberUnits[0].Length - singles.Length + kv.Key];
 
                         if (zero)
                             sb.Append($"{NumberValues[index][0]}{value}{singleNumberUnit}");

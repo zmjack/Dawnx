@@ -63,7 +63,7 @@ namespace Dawnx.Data
             foreach (var i in range)
                 sql = sql.Replace($"{{{i}}}", $"@p{i}");
 
-            var command = new TDbCommand().Self(_ =>
+            var command = new TDbCommand().Then(_ =>
             {
                 _.CommandText = sql;
                 _.Connection = Connection;
@@ -71,7 +71,7 @@ namespace Dawnx.Data
 
             foreach (var i in range)
             {
-                command.Parameters.Add(new TDbParameter().Self(_ =>
+                command.Parameters.Add(new TDbParameter().Then(_ =>
                 {
                     _.ParameterName = $"@p{i}";
                     _.Value = values[i];

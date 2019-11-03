@@ -170,7 +170,5 @@ namespace Dawnx
             else return days < 0 ? days + 7 : days;
         }
 
-
-
     }
 }

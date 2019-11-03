@@ -108,7 +108,7 @@ namespace NLinq
                 }
 
                 // Resolve EntityTracker
-                if (entityType.IsImplementGeneric(typeof(IEntityTracker<,>)))
+                if (entityType.IsImplement(typeof(IEntityTracker<,>)))
                 {
                     //TODO: Use TypeReflectionCacheContainer to optimize it in the futrue.
                     var trackerType = typeof(IEntityTracker<,>).MakeGenericType(@this.GetType(), entityType);

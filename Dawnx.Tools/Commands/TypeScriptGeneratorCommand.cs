@@ -95,12 +95,12 @@ Options:
                 else return ver;
             });
 
-            foreach (var vi in SearchDirs.AsVI())
+            foreach (var kv in SearchDirs.AsKvPairs())
             {
-                var dir = vi.Value;
+                var dir = kv.Value;
                 string file;
 
-                if (vi.Index == 0)
+                if (kv.Key == 0)
                     file = $"{dir}/{assemblyName}.dll";
                 else file = $"{dir}/{assemblyName}/{version}/lib/netstandard2.0/{assemblyName}.dll";
 

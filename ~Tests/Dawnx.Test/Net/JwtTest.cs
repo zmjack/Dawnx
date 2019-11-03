@@ -1,4 +1,5 @@
-﻿using Dawnx.Utilities;
+﻿using System;
+using Dawnx.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
@@ -59,7 +60,7 @@ namespace Dawnx.Net.Test
             var alg = jwk["alg"].Value<string>();
             var kid = jwk["kid"].Value<string>();
 
-            return RSA.Create().Self(_ =>
+            return RSA.Create().Then(_ =>
             {
                 _.ImportParameters(new RSAParameters
                 {

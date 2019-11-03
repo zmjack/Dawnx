@@ -31,7 +31,7 @@ namespace Dawnx.AspNetCore.Test
                 }
             });
 
-            EnumUtility.GetSelectList(Sex.Female).Self(_ =>
+            EnumUtility.GetSelectList(Sex.Female).Then(_ =>
             {
                 Assert.Equal(Sex.Female.ToString(), _.SelectedValue);
             })

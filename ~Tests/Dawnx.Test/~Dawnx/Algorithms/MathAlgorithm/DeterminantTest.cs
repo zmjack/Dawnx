@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Dawnx.Algorithms.MathAlgorithm.Test
 {
@@ -12,7 +13,7 @@ namespace Dawnx.Algorithms.MathAlgorithm.Test
                 { 2, 3 },
                 { 7, 8 },
             })
-            .Self(_ => Assert.Equal(-5, _.Value));
+            .Then(_ => Assert.Equal(-5, _.Value));
         }
 
         [Fact]
@@ -24,7 +25,7 @@ namespace Dawnx.Algorithms.MathAlgorithm.Test
                 { 3, 4, 5 },
                 { 6, 7, 8 },
             })
-            .Self(_ => Assert.Equal(0, _.Value));
+            .Then(_ => Assert.Equal(0, _.Value));
         }
     }
 }

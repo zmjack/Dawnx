@@ -42,14 +42,14 @@ namespace Dawnx.CConsole
             while (needNewLine)
             {
                 needNewLine = false;
-                foreach (var vi in lineCols.AsVI())
+                foreach (var kv in lineCols.AsKvPairs())
                 {
-                    var lineCol = vi.Value;
-                    var length = options.Lengths[vi.Index];
+                    var lineCol = kv.Value;
+                    var length = options.Lengths[kv.Key];
 
                     if (options.GetStringLengthA(lineCol) <= length)
                     {
-                        lineCols[vi.Index] = "";
+                        lineCols[kv.Key] = "";
                         cellList.Add(lineCol.PadRightA(length));
                     }
                     else
@@ -65,7 +65,7 @@ namespace Dawnx.CConsole
                                 var lineContent = lineCol.Substring(0, i);
                                 cellList.Add(lineContent.PadRightA(length));
 
-                                lineCols[vi.Index] = lineCol.Substring(i);
+                                lineCols[kv.Key] = lineCol.Substring(i);
                                 needNewLine = true;
                                 break;
                             }

@@ -60,7 +60,7 @@ namespace Dawnx.AspNetCore.IdentityUtility.Pages.Users
 
                 if (userResult.Succeeded)
                 {
-                    user.Self(_ =>
+                    user.Then(_ =>
                     {
                         _.PhoneNumberConfirmed = Input.PhoneNumberConfirmed;
                         _.EmailConfirmed = Input.EmailConfirmed;

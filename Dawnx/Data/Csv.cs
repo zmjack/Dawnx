@@ -46,7 +46,7 @@ namespace Dawnx.Data
         public TRet[] ToArray<TRet>()
             where TRet : new()
         {
-            var ret = new TRet[Values.Length].Self((_, i) => _[i] = new TRet());
+            var ret = new TRet[Values.Length].Let(() => new TRet());
             var props = typeof(TRet).GetProperties();
 
             for (int j = 0; j < Titles.Length; j++)

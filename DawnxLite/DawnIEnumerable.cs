@@ -66,32 +66,6 @@ namespace Dawnx
         }
 
         /// <summary>
-        /// Returns a collection of tuples containing values and indexes.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="this"></param>
-        /// <returns></returns>
-        public static IEnumerable<VI<TSource>> AsVI<TSource>(this IEnumerable<TSource> @this)
-        {
-            int i = 0;
-            foreach (var item in @this)
-                yield return new VI<TSource>(item, i++);
-        }
-
-        /// <summary>
-        /// Returns a collection of tuples containing values and indexes.
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <param name="this"></param>
-        /// <returns></returns>
-        public static IEnumerable<VI<TSource>> AsVI<TSource>(this IEnumerable @this)
-        {
-            int i = 0;
-            foreach (TSource item in @this)
-                yield return new VI<TSource>(item, i++);
-        }
-
-        /// <summary>
         /// Concatenates the members of a collection, using the specified separator between each member.
         /// </summary>
         /// <typeparam name="TSource"></typeparam>

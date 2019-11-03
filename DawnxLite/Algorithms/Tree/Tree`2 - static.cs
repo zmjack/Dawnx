@@ -15,7 +15,7 @@ namespace Dawnx.Algorithms.Tree
             entities
                 .Where(entity => entity.Parent is null)
                 .OrderBy(entity => entity.Index)
-                .Self(self =>
+                .Then(self =>
                 {
                     foreach (var entity in self)
                     {
@@ -23,12 +23,12 @@ namespace Dawnx.Algorithms.Tree
                         {
                             Id = entity.Id,
                             Model = entity,
-                        }.Self(_ => new TSelf().CreateForProperties(_, entity)));
+                        }.Then(_ => new TSelf().CreateForProperties(_, entity)));
                     }
                 });
 
             var node = new TSelf()
-                .Self(_ => _.AddRange(pendingNodeQueue.ToArray()));
+                .Then(_ => _.AddRange(pendingNodeQueue.ToArray()));
 
             while (pendingNodeQueue.Any())
             {
@@ -37,7 +37,7 @@ namespace Dawnx.Algorithms.Tree
                 entities
                     .Where(entity => entity.Parent == pendingNode.Id)
                     .OrderBy(entity => entity.Index)
-                    .Self(self =>
+                    .Then(self =>
                     {
                         foreach (var entity in self)
                         {
@@ -45,7 +45,7 @@ namespace Dawnx.Algorithms.Tree
                             {
                                 Id = entity.Id,
                                 Model = entity,
-                            }.Self(_ => new TSelf().CreateForProperties(_, entity));
+                            }.Then(_ => new TSelf().CreateForProperties(_, entity));
 
                             pendingNode.Add(item);
                             pendingNodeQueue.Enqueue(item);

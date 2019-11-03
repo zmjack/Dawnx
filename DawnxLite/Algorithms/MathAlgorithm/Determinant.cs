@@ -36,7 +36,7 @@ namespace Dawnx.Algorithms.MathAlgorithm
             {
                 double ret = 0;
                 var colGroups = new HashSet<int[]>()
-                    .Self(_ => CalcGroups(_, 0, IntegerRange.Create(DimensionLength), new int[0] { }));
+                    .Then(_ => CalcGroups(_, 0, IntegerRange.Create(DimensionLength), new int[0] { }));
 
                 foreach (var colGroup in colGroups)
                 {

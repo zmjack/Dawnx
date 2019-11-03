@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Def\Def.csproj" />
+    <ProjectReference Include="..\NStd\NStd.csproj" />
   </ItemGroup>
 
 </Project>

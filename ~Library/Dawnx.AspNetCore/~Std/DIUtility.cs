@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using NStandard;
 using System;
 using System.Reflection;
 

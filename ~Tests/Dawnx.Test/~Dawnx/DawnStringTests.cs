@@ -1,4 +1,5 @@
 using Def;
+using NStandard;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -44,11 +45,11 @@ namespace Dawnx.Test
             {
                 0x0C, 0x66, 0x18, 0x2E, 0xC7, 0x10, 0x84, 0x00, 0x65, 0xEB, 0xAA, 0x47, 0xC5, 0xE6, 0xCE, 0x90
             };
-            Assert.Equal(hexString_Bytes, hexString.BytesFromHex());
-            Assert.Equal(hexString, hexString_Bytes.HexString());
+            Assert.Equal(hexString_Bytes, hexString.Flow(BytesFlows.FromHexString));
+            Assert.Equal(hexString, hexString_Bytes.Flow(BytesFlows.HexString));
 
             Assert.Equal(hexString,
-                hexString_Base64.BytesFromBase64().String(Encoding.Default));
+                hexString_Base64.Flow(BytesFlows.FromBase64).String(Encoding.Default));
         }
 
         [Fact]

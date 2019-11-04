@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NStandard;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Dawnx.Algorithms.StringAlgorithm

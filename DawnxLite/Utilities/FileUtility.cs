@@ -1,4 +1,5 @@
 ﻿using Def;
+using NStandard;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,7 +49,7 @@ namespace Dawnx.Utilities
         {
             using (var file = new FileStream(path, FileMode.Open))
             {
-                return MD5.Create().ComputeHash(file).HexString();
+                return MD5.Create().ComputeHash(file).Flow(BytesFlows.HexString);
             }
         }
 

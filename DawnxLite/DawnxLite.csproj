@@ -41,7 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Def\Def.csproj" />
-    <ProjectReference Include="..\NStd\NStd.csproj" />
+    <ProjectReference Include="..\NStandard\NStandard.csproj" />
   </ItemGroup>
 
 </Project>

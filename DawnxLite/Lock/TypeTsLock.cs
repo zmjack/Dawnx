@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NStandard;
+using System;
 using System.Threading;
 
 namespace Dawnx.Lock
@@ -26,7 +27,7 @@ namespace Dawnx.Lock
             {
                 return string.Intern(
                     $"<{Thread.CurrentThread.ManagedThreadId.ToString()}> " +
-                    $"{Type.FullName} {LockName.UrlEncode()}");
+                    $"{Type.FullName} {LockName.Flow(StringFlows.UrlEncode)}");
             }
         }
     }

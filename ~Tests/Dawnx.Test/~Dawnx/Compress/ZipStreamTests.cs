@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using NStandard;
+using System;
+using Xunit;
 
 namespace Dawnx.Compress.Test
 {

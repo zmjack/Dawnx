@@ -1,4 +1,5 @@
 using Dawnx;
+using NStandard;
 using System;
 using Xunit;
 
@@ -16,9 +17,9 @@ namespace NLinq.Test
         public void Test1()
         {
             var a = new Entity() { String = "123", Int = 1 };
-            var b = new Entity().For(_ => _.Accept(a));
-            var c = new Entity().For(_ => _.Accept(a, m => new { m.String }));
-            var d = new Entity().For(_ => _.AcceptBut(a, m => new { m.String }));
+            var b = new Entity().For(x => x.Accept(a));
+            var c = new Entity().For(x => x.Accept(a, m => new { m.String }));
+            var d = new Entity().For(x => x.AcceptBut(a, m => new { m.String }));
 
             Assert.Equal("123", b.String);
             Assert.Equal(1, b.Int);

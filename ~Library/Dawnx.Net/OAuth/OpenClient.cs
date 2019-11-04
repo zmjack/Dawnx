@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NStandard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,8 @@ namespace Dawnx.Net.OAuth
                 {
                     _AccessToken = value;
 
-                    Header = JsonConvert.DeserializeObject(
-                        Base64Utility.ConvertUrlSafeBase64ToBase64(
-                            match.Groups[1].Value).Base64Decode()) as JToken;       // ALGORITHM & TOKEN TYPE
-                    Payload = JsonConvert.DeserializeObject(
-                        Base64Utility.ConvertUrlSafeBase64ToBase64(
-                            match.Groups[2].Value).Base64Decode()) as JToken;       // DATA
+                    Header = JsonConvert.DeserializeObject(match.Groups[1].Value.Flow(StringFlows.FromUrlSafeBase64)) as JToken;        // ALGORITHM & TOKEN TYPE
+                    Payload = JsonConvert.DeserializeObject(match.Groups[2].Value.Flow(StringFlows.FromUrlSafeBase64)) as JToken;       // DATA
 
                     //TODO: Not supported yet
                     //Signature = JsonConvert.DeserializeObject(

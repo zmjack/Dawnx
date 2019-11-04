@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NStandard;
+using System;
 
 namespace Dawnx
 {

@@ -1,5 +1,5 @@
-﻿using NStandard;
-using Dawnx.Utilities;
+﻿using Dawnx.Utilities;
+using NStandard;
 using System;
 using System.Text.RegularExpressions;
 using Xunit;

@@ -1,6 +1,8 @@
 using Dawnx.Generators;
 using Dawnx.Security.AesSecurity;
 using NStandard;
+using NStandard.Converts;
+using NStandard.Flows;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -62,14 +64,15 @@ namespace Dawnx.Security.Test
                 _.Key = "1234567890123456".Bytes(Encoding.ASCII);
 
                 Assert.Equal("0c66182ec710840065ebaa47c5e6ce90",
-                    _.Encrypt<AesEmptyIVCombiner>("123".Bytes(Encoding.UTF8)).Flow(BytesFlows.HexString));
+                    _.Encrypt<AesEmptyIVCombiner>("123".Bytes(Encoding.UTF8)).Flow(BytesFlow.HexString));
             });
 
             Aes.Create().Then(_ =>
             {
                 var now = DateTime.Now.ToString();
-                var encrypted = _.Encrypt(now.ToString().Bytes(Encoding.UTF8)).Flow(BytesFlows.Base64);
-                Assert.Equal(now, _.Decrypt(encrypted.Flow(BytesFlows.FromBase64)).String(Encoding.UTF8));
+                var flow = new Flow<byte[], byte[], string>(_.Encrypt, BytesConvert.Base64);
+                var encrypted = _.Encrypt(now.ToString().Bytes(Encoding.UTF8)).Flow(BytesFlow.Base64);
+                Assert.Equal(now, _.Decrypt(encrypted.Flow(BytesFlow.FromBase64)).String(Encoding.UTF8));
             });
         }
 

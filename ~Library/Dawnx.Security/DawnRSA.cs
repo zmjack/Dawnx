@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NStandard;
+using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -97,7 +98,9 @@ namespace Dawnx.Security
             var @params = @this.ExportParameters(includePrivateParameters);
             var base64 = string.Join(Environment.NewLine, Convert.ToBase64String(
                 RsaConverter.ParamsToPem(@params, includePrivateParameters))
-                .ToCharArray().Distribute(64).Select(a => new string(a.ToArray())));
+                .ToCharArray().AsKvPairs()
+                .GroupBy(x => x.Key / 64)
+                .Select(g => new string(g.Select(x => x.Value).ToArray())));
 
             return $"-----BEGIN {keyName} KEY-----\r\n{base64}\r\n-----END {keyName} KEY-----";
         }

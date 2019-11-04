@@ -45,6 +45,16 @@ namespace NStandard
             => convert(@this);
 
         /// <summary>
+        /// Casts the element to the specified type through the specified flow.
+        /// </summary>
+        /// <typeparam name="TSelf"></typeparam>
+        /// <typeparam name="TRet"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="convert"></param>
+        /// <returns></returns>
+        public static TRet Flow<T, TRet>(this T @this, IFlow<T, TRet> flow) => flow.Execute(@this);
+
+        /// <summary>
         /// Casts the element to the specified type through the specified filter method.
         /// </summary>
         /// <typeparam name="TSelf"></typeparam>
@@ -113,73 +123,6 @@ namespace NStandard
             }
             return obj;
         }
-
-        #region Flow
-        public static TRet Flow<T, TRet>(this T @this, IFlow<T, TRet> flow) => flow.Execute(@this);
-
-        public static TRet Flow<T, TRet>(this T @this,
-            Func<T, TRet> ret)
-        {
-            return new Flow<T, TRet>(ret).Execute(@this);
-        }
-
-        public static TRet Flow<T, TStep1, TRet>(this T @this,
-            Func<T, TStep1> step1,
-            Func<TStep1, TRet> ret)
-        {
-            return new Flow<T, TStep1, TRet>(step1, ret).Execute(@this);
-        }
-
-        public static TRet Flow<T, TStep1, TStep2, TRet>(this T @this,
-            Func<T, TStep1> step1,
-            Func<TStep1, TStep2> step2,
-            Func<TStep2, TRet> ret)
-        {
-            return new Flow<T, TStep1, TStep2, TRet>(step1, step2, ret).Execute(@this);
-        }
-
-        public static TRet Flow<T, TStep1, TStep2, TStep3, TRet>(this T @this,
-            Func<T, TStep1> step1,
-            Func<TStep1, TStep2> step2,
-            Func<TStep2, TStep3> step3,
-            Func<TStep3, TRet> ret)
-        {
-            return new Flow<T, TStep1, TStep2, TStep3, TRet>(step1, step2, step3, ret).Execute(@this);
-        }
-
-        public static TRet Flow<T, TStep1, TStep2, TStep3, TStep4, TRet>(this T @this,
-            Func<T, TStep1> step1,
-            Func<TStep1, TStep2> step2,
-            Func<TStep2, TStep3> step3,
-            Func<TStep3, TStep4> step4,
-            Func<TStep4, TRet> ret)
-        {
-            return new Flow<T, TStep1, TStep2, TStep3, TStep4, TRet>(step1, step2, step3, step4, ret).Execute(@this);
-        }
-
-        public static TRet Flow<T, TStep1, TStep2, TStep3, TStep4, TStep5, TRet>(this T @this,
-            Func<T, TStep1> step1,
-            Func<TStep1, TStep2> step2,
-            Func<TStep2, TStep3> step3,
-            Func<TStep3, TStep4> step4,
-            Func<TStep4, TStep5> step5,
-            Func<TStep5, TRet> ret)
-        {
-            return new Flow<T, TStep1, TStep2, TStep3, TStep4, TStep5, TRet>(step1, step2, step3, step4, step5, ret).Execute(@this);
-        }
-
-        public static TRet Flow<T, TStep1, TStep2, TStep3, TStep4, TStep5, TStep6, TRet>(this T @this,
-            Func<T, TStep1> step1,
-            Func<TStep1, TStep2> step2,
-            Func<TStep2, TStep3> step3,
-            Func<TStep3, TStep4> step4,
-            Func<TStep4, TStep5> step5,
-            Func<TStep5, TStep6> step6,
-            Func<TStep6, TRet> ret)
-        {
-            return new Flow<T, TStep1, TStep2, TStep3, TStep4, TStep5, TStep6, TRet>(step1, step2, step3, step4, step5, step6, ret).Execute(@this);
-        }
-        #endregion
 
         // Method
         public static object Invoke(this object @this, string methodName, params object[] parameters)

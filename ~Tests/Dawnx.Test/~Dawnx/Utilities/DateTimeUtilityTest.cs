@@ -1,4 +1,4 @@
-﻿using Dawnx.Utilities;
+﻿using NStandard;
 using System;
 using System.Linq;
 using Xunit;
@@ -10,17 +10,17 @@ namespace Dawnx.Test.Utilities
         [Fact]
         public void Test1()
         {
-            Assert.Equal(49, DateTimeUtility.GetMonths(new DateTime(2012, 4, 16), new DateTime(2016, 4, 18)).Count());
+            Assert.Equal(49, DateTimeEx.GetMonths(new DateTime(2012, 4, 16), new DateTime(2016, 4, 18)).Count());
 
-            Assert.Equal(3, DateTimeUtility.GetDays(new DateTime(2012, 4, 16), new DateTime(2012, 4, 18)).Count());
-            Assert.Equal(30, DateTimeUtility.GetDays(new DateTime(2012, 4, 16), new DateTime(2012, 5, 15)).Count());
+            Assert.Equal(3, DateTimeEx.GetDays(new DateTime(2012, 4, 16), new DateTime(2012, 4, 18)).Count());
+            Assert.Equal(30, DateTimeEx.GetDays(new DateTime(2012, 4, 16), new DateTime(2012, 5, 15)).Count());
 
         }
 
         [Fact]
         public void DateDifTest()
         {
-            Assert.Equal(3, DateTimeUtility.GetCompleteYears(new DateTime(1980, 7, 28), new DateTime(1984, 3, 27)));
+            Assert.Equal(3, DateTimeEx.GetCompleteYears(new DateTime(1980, 7, 28), new DateTime(1984, 3, 27)));
         }
 
         [Fact]
@@ -35,13 +35,13 @@ namespace Dawnx.Test.Utilities
              * (20) 21  22  23  24  25  26
              *  27  28  29  30  31
              */
-            Assert.Equal(new DateTime(2019, 1, 7), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Monday));
-            Assert.Equal(new DateTime(2019, 1, 1), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Tuesday));
-            Assert.Equal(new DateTime(2019, 1, 2), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Wednesday));
-            Assert.Equal(new DateTime(2019, 1, 3), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Thursday));
-            Assert.Equal(new DateTime(2019, 1, 4), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Friday));
-            Assert.Equal(new DateTime(2019, 1, 5), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Saturday));
-            Assert.Equal(new DateTime(2019, 1, 6), DateTimeUtility.ParseFromWeek(2019, 1, DayOfWeek.Sunday));
+            Assert.Equal(new DateTime(2019, 1, 7), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Monday));
+            Assert.Equal(new DateTime(2019, 1, 1), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Tuesday));
+            Assert.Equal(new DateTime(2019, 1, 2), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Wednesday));
+            Assert.Equal(new DateTime(2019, 1, 3), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Thursday));
+            Assert.Equal(new DateTime(2019, 1, 4), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Friday));
+            Assert.Equal(new DateTime(2019, 1, 5), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Saturday));
+            Assert.Equal(new DateTime(2019, 1, 6), DateTimeEx.ParseFromWeek(2019, 1, DayOfWeek.Sunday));
         }
 
 

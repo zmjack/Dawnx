@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using NStandard;
+using NStandard.Flows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,7 +25,7 @@ namespace Dawnx.AspNetCore
         public override string ToString()
         {
             return Source.Select(pair
-                => $"{WebUtility.UrlEncode(pair.Key)}={WebUtility.UrlEncode(Source[pair.Key].ToString())}").Join("&");
+                => $"{pair.Key.Flow(StringFlow.UrlEncode)}={Source[pair.Key].ToString().Flow(StringFlow.UrlEncode)}").Join("&");
         }
 
     }

@@ -1,10 +1,10 @@
 ﻿using Dawnx.Net.Web;
-using Dawnx.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NStandard;
+using NStandard.Flows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +32,8 @@ namespace Dawnx.Net.OAuth
                 {
                     _AccessToken = value;
 
-                    Header = JsonConvert.DeserializeObject(match.Groups[1].Value.Flow(StringFlows.FromUrlSafeBase64)) as JToken;        // ALGORITHM & TOKEN TYPE
-                    Payload = JsonConvert.DeserializeObject(match.Groups[2].Value.Flow(StringFlows.FromUrlSafeBase64)) as JToken;       // DATA
+                    Header = JsonConvert.DeserializeObject(match.Groups[1].Value.Flow(StringFlow.FromUrlSafeBase64)) as JToken;        // ALGORITHM & TOKEN TYPE
+                    Payload = JsonConvert.DeserializeObject(match.Groups[2].Value.Flow(StringFlow.FromUrlSafeBase64)) as JToken;       // DATA
 
                     //TODO: Not supported yet
                     //Signature = JsonConvert.DeserializeObject(
@@ -65,9 +65,9 @@ namespace Dawnx.Net.OAuth
         public string Issuer => Payload["iss"].Value<string>();
         public string[] ApiScopes => Payload["scope"].Values<string>().ToArray();
         public DateTime NotValidBeforeUTC => Payload?
-            .For(_ => DateTimeUtility.FromUnixSeconds(_["nbf"].Value<int>())) ?? DateTimeUtility.UnixMinValue();
+            .For(_ => DateTimeEx.FromUnixSeconds(_["nbf"].Value<int>())) ?? DateTimeEx.UnixMinValue();
         public DateTime ExpirationTimeUTC => Payload?
-            .For(_ => DateTimeUtility.FromUnixSeconds(_["exp"].Value<int>())) ?? DateTimeUtility.UnixMinValue();
+            .For(_ => DateTimeEx.FromUnixSeconds(_["exp"].Value<int>())) ?? DateTimeEx.UnixMinValue();
 
         public bool IsAccessTokenValid => DateTime.UtcNow.For(_ => NotValidBeforeUTC <= _ && _ <= ExpirationTimeUTC);
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dawnx.Algorithms.ApplyingAlgorithm
+﻿namespace Dawnx.Algorithms.ApplyingAlgorithm
 {
     public static class DistributionResult
     {

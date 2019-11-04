@@ -1,5 +1,6 @@
 ﻿
-using System.Linq;
+using NStandard;
+using NStandard.Flows;
 
 namespace Dawnx.NPOI
 {
@@ -39,7 +40,7 @@ namespace Dawnx.NPOI
         public static bool operator ==(RGBColor instance1, RGBColor instance2) => instance1.Equals(instance2);
         public static bool operator !=(RGBColor instance1, RGBColor instance2) => !instance1.Equals(instance2);
 
-        public override string ToString() => $"#{Bytes.Select(x => x.ToString("x2")).Join("")}";
+        public override string ToString() => $"#{Bytes.Flow(BytesFlow.HexString)}";
 
     }
 

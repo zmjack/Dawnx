@@ -1,5 +1,5 @@
 ﻿using NStandard;
-using System;
+using NStandard.Flows;
 using System.Collections.Generic;
 
 namespace Dawnx.Net.OAuth
@@ -15,7 +15,7 @@ namespace Dawnx.Net.OAuth
             public string RedirectUri { get; set; }
 
             public string GrantType => "authorization_code";
-            public string Authorization => $"{ClientId}:{ClientSecret}".Flow(StringFlows.Base64);
+            public string Authorization => $"{ClientId}:{ClientSecret}".Flow(StringFlow.Base64);
             public Dictionary<string, object> RequestBody => new Dictionary<string, object>
             {
                 ["grant_type"] = GrantType,

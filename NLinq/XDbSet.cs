@@ -26,7 +26,7 @@ namespace NLinq
 
         public static string ToSql<TEntity>(this DbSet<TEntity> @this)
             where TEntity : class
-            => IQueryableX.ToSql(@this.Where(x => true));
+            => XIQueryable.ToSql(@this.Where(x => true));
 
     }
 }

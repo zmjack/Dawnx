@@ -1,10 +1,9 @@
-﻿using System;
-using Dawnx.Utilities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NStandard;
+using NStandard.Flows;
 using System.Security.Cryptography;
 using Xunit;
-using NStandard;
 
 namespace Dawnx.Net.Test
 {
@@ -23,7 +22,7 @@ namespace Dawnx.Net.Test
             Assert.Equal(
                 "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1N2YwNzg3ZDY3ZjdmMzZkZjcxMDFlOTQ0" +
                 "OTg0MGExIiwidHlwIjoiSldUIn0",
-                jwt_header.Flow(StringFlows.UrlSafeBase64));
+                jwt_header.Flow(StringFlow.UrlSafeBase64));
 
             // PAYLOAD: DATA
             var jwt_payload = JsonConvert.SerializeObject(new
@@ -44,7 +43,7 @@ namespace Dawnx.Net.Test
                 "L2xvY2FsaG9zdC5kYXdueC5uZXQ6NTAwMCIsImF1ZCI6WyJodHRwOi8vbG9jYWxo" +
                 "b3N0LmRhd254Lm5ldDo1MDAwL3Jlc291cmNlcyIsImFwaTEiXSwiY2xpZW50X2lk" +
                 "IjoiY2xpZW50Iiwic2NvcGUiOlsiYXBpMSJdfQ",
-                jwt_payload.Flow(StringFlows.UrlSafeBase64));
+                jwt_payload.Flow(StringFlow.UrlSafeBase64));
 
             // VERIFY SIGNATURE
             //Assert.Equal(
@@ -65,8 +64,8 @@ namespace Dawnx.Net.Test
             {
                 _.ImportParameters(new RSAParameters
                 {
-                    Exponent = jwk["e"].Value<string>().Flow(BytesFlows.FromUrlSafeBase64),
-                    Modulus = jwk["n"].Value<string>().Flow(BytesFlows.FromUrlSafeBase64),
+                    Exponent = jwk["e"].Value<string>().Flow(BytesFlow.FromUrlSafeBase64),
+                    Modulus = jwk["n"].Value<string>().Flow(BytesFlow.FromUrlSafeBase64),
                 });
             });
         }

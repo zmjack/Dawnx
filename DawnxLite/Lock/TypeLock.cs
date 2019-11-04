@@ -1,4 +1,5 @@
 ﻿using NStandard;
+using NStandard.Flows;
 using System;
 
 namespace Dawnx.Lock
@@ -33,7 +34,7 @@ namespace Dawnx.Lock
         {
             get
             {
-                return string.Intern($"{Type.FullName} {LockName.Flow(StringFlows.UrlEncode)}");
+                return string.Intern($"{Type.FullName} {LockName.Flow(StringFlow.UrlEncode)}");
             }
         }
 

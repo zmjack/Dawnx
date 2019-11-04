@@ -6,7 +6,7 @@ using System.Linq;
 namespace NStandard
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static class XArray
+    public static partial class XArray
     {
         /// <summary>
         /// Use a method to initailize each element of an array.

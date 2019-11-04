@@ -1,5 +1,5 @@
 ﻿using NStandard;
-using System;
+using NStandard.Flows;
 using System.Collections.Generic;
 
 namespace Dawnx.Net.OAuth
@@ -16,7 +16,7 @@ namespace Dawnx.Net.OAuth
             public string Password { get; set; }
 
             public string GrantType => "password";
-            public string Authorization => $"{ClientId}:{ClientSecret}".Flow(StringFlows.FromBase64);
+            public string Authorization => $"{ClientId}:{ClientSecret}".Flow(StringFlow.FromBase64);
             public Dictionary<string, object> RequestBody => new Dictionary<string, object>
             {
                 ["grant_type"] = GrantType,

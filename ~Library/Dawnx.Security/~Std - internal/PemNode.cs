@@ -39,7 +39,9 @@ namespace Dawnx.Security
                 {
                     if (Type == DataType.BitString)
                         data.Add(0);
-                    Nodes.Each(node => data.AddRange(node.Fragment));
+
+                    foreach (var node in Nodes)
+                        data.AddRange(node.Fragment);
                 }
 
                 fragment.Add((byte)Type);

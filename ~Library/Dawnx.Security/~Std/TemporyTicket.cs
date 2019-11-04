@@ -1,6 +1,7 @@
 ﻿using Dawnx.Security.AesSecurity;
 using Newtonsoft.Json;
 using NStandard;
+using NStandard.Flows;
 using System;
 
 namespace Dawnx.Security
@@ -10,7 +11,7 @@ namespace Dawnx.Security
         public static TimeSpan SlideOffsetForExpiration = TimeSpan.FromMinutes(10);
         public static TemporaryTicket Parse(AesProvider aesProvider, string ciphertext)
         {
-            var json = aesProvider.Decrypt(ciphertext.Flow(BytesFlows.FromUrlSafeBase64)).String();
+            var json = aesProvider.Decrypt(ciphertext.Flow(BytesFlow.FromUrlSafeBase64)).String();
             return JsonConvert.DeserializeObject<TemporaryTicket>(json);
         }
 
@@ -33,7 +34,7 @@ namespace Dawnx.Security
         public string Ciphertext(AesProvider aesProvider)
         {
             var json = JsonConvert.SerializeObject(this).Bytes();
-            return aesProvider.Encrypt(json).Flow(BytesFlows.UrlSafeBase64);
+            return aesProvider.Encrypt(json).Flow(BytesFlow.UrlSafeBase64);
         }
 
     }

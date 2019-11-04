@@ -1,5 +1,6 @@
 ﻿using Dawnx.Utilities;
 using NStandard;
+using NStandard.Flows;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -54,7 +55,7 @@ namespace Dawnx.Lock
         {
             return string.Intern(
                 $"{typeof(TInstance).FullName} " +
-                $"{FlagLambdas.Select(x => x(instance).ToString().Flow(StringFlows.UrlEncode)).Join(" ")} " +
+                $"{FlagLambdas.Select(x => x(instance).ToString().Flow(StringFlow.UrlEncode)).Join(" ")} " +
                 $"({LockName})");
         }
 

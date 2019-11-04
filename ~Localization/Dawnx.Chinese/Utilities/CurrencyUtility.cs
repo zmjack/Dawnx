@@ -1,6 +1,5 @@
 ﻿using NStandard;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -65,7 +64,11 @@ namespace Dawnx.Chinese
                 return sb.ToString();
             }
 
-            var levelParts = integer.ToString().Distribute(4, true).ToArray();
+            var levelParts = integer.ToString()
+                .For(parts => parts.AsKvPairs()
+                    .GroupBy(x => (x.Key + (4 - parts.Length % 4)) / 4)
+                    .Select(g => g.Select(x => x.Value).ToArray()))
+                .ToArray();
             var integerRet = levelParts.Select((v, i) => GetPartString(v, Levels[Levels.Length - levelParts.Length + i])).Join("");
 
             if (option.IsSimplified && (integerRet.StartsWith("一十") || integerRet.StartsWith("壹拾")))

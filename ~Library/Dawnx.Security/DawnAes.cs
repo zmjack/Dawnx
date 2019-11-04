@@ -1,6 +1,6 @@
 ﻿using Dawnx.Security.AesSecurity;
 using NStandard;
-using System;
+using NStandard.Flows;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -11,12 +11,12 @@ namespace Dawnx.Security
         public static readonly byte[] EMPTY_IV = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public static void FromBase64String(this Aes @this, string base64Key)
-            => @this.Key = base64Key.Flow(BytesFlows.FromBase64);
-        public static string ToBase64String(this Aes @this) => @this.Key.Flow(BytesFlows.Base64);
+            => @this.Key = base64Key.Flow(BytesFlow.FromBase64);
+        public static string ToBase64String(this Aes @this) => @this.Key.Flow(BytesFlow.Base64);
 
         public static void FromHexString(this Aes @this, string hexKey)
-            => @this.Key = hexKey.Flow(BytesFlows.FromHexString);
-        public static string ToHexString(this Aes @this) => @this.Key.Flow(BytesFlows.HexString);
+            => @this.Key = hexKey.Flow(BytesFlow.FromHexString);
+        public static string ToHexString(this Aes @this) => @this.Key.Flow(BytesFlow.HexString);
 
         public static void SetEmptyIV(this Aes @this) => @this.IV = EMPTY_IV;
 

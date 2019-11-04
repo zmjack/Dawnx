@@ -1,4 +1,5 @@
-﻿using NLinq;
+﻿using Microsoft.EntityFrameworkCore;
+using NLinq;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -33,6 +34,10 @@ namespace DawnxDemo.Data
         [Required]
         [Index(IndexType.Unique, Group = "UniqueB")]
         public DateTime UniqueB2 { get; set; }
+
+        public void OnCompleting(ApplicationDbContext context, EntityState state)
+        {
+        }
 
         public void OnDeleting(ApplicationDbContext context)
         {

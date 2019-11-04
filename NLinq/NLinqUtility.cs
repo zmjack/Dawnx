@@ -114,6 +114,7 @@ namespace NLinq
                     var onInsertingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnInserting));
                     var onUpdatingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnUpdating));
                     var onDeletingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnDeleting));
+                    var onCompletingMethod = trackerType.GetMethod(nameof(DefEntityTracker.OnCompleting));
 
                     var origin = Activator.CreateInstance(entry.Entity.GetType());
                     foreach (var originValue in entry.OriginalValues.Properties)
@@ -125,6 +126,7 @@ namespace NLinq
                         case EntityState.Modified: onUpdatingMethod.Invoke(entity, new object[] { @this, origin }); break;
                         case EntityState.Deleted: onDeletingMethod.Invoke(entity, new object[] { @this }); break;
                     }
+                    onCompletingMethod.Invoke(entity, new object[] { @this, entry.State });
                 }
 
             }

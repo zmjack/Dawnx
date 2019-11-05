@@ -173,7 +173,7 @@ namespace NLinq
             var hasIndexMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasIndex), new[] { typeof(string[]) });
             void setIndex(string[] propertyNames, bool unique, bool isForeignKey)
             {
-                if (propertyNames.Length > 1)
+                if (propertyNames.Length > 0)
                 {
                     var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { propertyNames }) as IndexBuilder;
                     if (unique) indexBuilder.IsUnique();

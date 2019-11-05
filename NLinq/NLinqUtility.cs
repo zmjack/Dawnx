@@ -171,19 +171,25 @@ namespace NLinq
         private static void ApplyIndexes(object entityTypeBuilder, Type modelClass)
         {
             var hasIndexMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasIndex), new[] { typeof(string[]) });
-            void setIndex(string[] propertyNames, bool unique)
+            void setIndex(string[] propertyNames, bool unique, bool isForeignKey)
             {
                 if (propertyNames.Length > 1)
                 {
                     var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { propertyNames }) as IndexBuilder;
                     if (unique) indexBuilder.IsUnique();
+
+                    // Because of some unknown BUG in the EntityFramework, creating an index causes the first normal index to be dropped, which is defined with ForeignKeyAttribute.
+                    // (The problem was found in EntityFrameworkCore 2.2.6)
+                    //TODO: Here is the temporary solution
+                    if (isForeignKey)
+                        setIndex(new[] { propertyNames[0] }, false, false);
                 }
             }
 
             var props = modelClass.GetProperties().Select(prop => new
             {
                 Index = prop.GetCustomAttribute<IndexAttribute>(),
-                ForeignKey = prop.GetCustomAttribute<ForeignKeyAttribute>(),
+                IsForeignKey = prop.GetCustomAttribute<ForeignKeyAttribute>() != null,
                 prop.Name,
             }).Where(x => x.Index != null);
 
@@ -191,22 +197,17 @@ namespace NLinq
             {
                 switch (prop.Index.Type)
                 {
-                    case IndexType.Normal: setIndex(new[] { prop.Name }, false); break;
-                    case IndexType.Unique: setIndex(new[] { prop.Name }, true); break;
+                    case IndexType.Normal: setIndex(new[] { prop.Name }, false, prop.IsForeignKey); break;
+                    case IndexType.Unique: setIndex(new[] { prop.Name }, true, prop.IsForeignKey); break;
                 }
             }
             foreach (var group in props.Where(x => x.Index.Group != null).GroupBy(x => new { x.Index.Type, x.Index.Group }))
             {
                 switch (group.Key.Type)
                 {
-                    case IndexType.Normal: setIndex(group.Select(x => x.Name).ToArray(), false); break;
-                    case IndexType.Unique: setIndex(group.Select(x => x.Name).ToArray(), true); break;
+                    case IndexType.Normal: setIndex(group.Select(x => x.Name).ToArray(), false, group.First().IsForeignKey); break;
+                    case IndexType.Unique: setIndex(group.Select(x => x.Name).ToArray(), true, group.First().IsForeignKey); break;
                 }
-
-                // Because of some unknown BUG in the EntityFramework, creating an index causes the first normal index to be dropped, which is defined with ForeignKeyAttribute.
-                //TODO: Here is the temporary solution
-                if (group.First().ForeignKey != null)
-                    setIndex(new[] { group.First().Name }, false);
             }
         }
 

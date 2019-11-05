@@ -9,6 +9,7 @@ using NLinq.ProviderFunctions;
 using NStandard;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 
@@ -170,30 +171,42 @@ namespace NLinq
         private static void ApplyIndexes(object entityTypeBuilder, Type modelClass)
         {
             var hasIndexMethod = entityTypeBuilder.GetType().GetMethod(nameof(EntityTypeBuilder.HasIndex), new[] { typeof(string[]) });
-            var propPairs = modelClass.GetProperties().Select(prop => new
+            void setIndex(string[] propertyNames, bool unique)
             {
-                Attribute = prop.GetCustomAttribute<IndexAttribute>(),
-                Property = prop,
-            }).Where(x => x.Attribute != null);
-
-            foreach (var pair in propPairs.Where(x => x.Attribute.Group == null))
-            {
-                var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { new[] { pair.Property.Name } }) as IndexBuilder;
-                if (pair.Attribute.Type == IndexType.Unique)
-                    indexBuilder.IsUnique();
-            }
-            foreach (var pairGroup in propPairs.Where(x => x.Attribute.Group != null).GroupBy(x => x.Attribute.Group))
-            {
-                var normalPairs = pairGroup.Where(x => x.Attribute.Type == IndexType.Normal);
-                if (normalPairs.Any())
-                    hasIndexMethod.Invoke(entityTypeBuilder, new object[] { normalPairs.Select(x => x.Property.Name).ToArray() });
-
-                var uniquePairs = pairGroup.Where(x => x.Attribute.Type == IndexType.Unique);
-                if (uniquePairs.Any())
+                if (propertyNames.Length > 1)
                 {
-                    var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { uniquePairs.Select(x => x.Property.Name).ToArray() }) as IndexBuilder;
-                    indexBuilder.IsUnique();
+                    var indexBuilder = hasIndexMethod.Invoke(entityTypeBuilder, new object[] { propertyNames }) as IndexBuilder;
+                    if (unique) indexBuilder.IsUnique();
                 }
+            }
+
+            var props = modelClass.GetProperties().Select(prop => new
+            {
+                Index = prop.GetCustomAttribute<IndexAttribute>(),
+                ForeignKey = prop.GetCustomAttribute<ForeignKeyAttribute>(),
+                prop.Name,
+            }).Where(x => x.Index != null);
+
+            foreach (var prop in props.Where(x => x.Index.Group == null))
+            {
+                switch (prop.Index.Type)
+                {
+                    case IndexType.Normal: setIndex(new[] { prop.Name }, false); break;
+                    case IndexType.Unique: setIndex(new[] { prop.Name }, true); break;
+                }
+            }
+            foreach (var group in props.Where(x => x.Index.Group != null).GroupBy(x => new { x.Index.Type, x.Index.Group }))
+            {
+                switch (group.Key.Type)
+                {
+                    case IndexType.Normal: setIndex(group.Select(x => x.Name).ToArray(), false); break;
+                    case IndexType.Unique: setIndex(group.Select(x => x.Name).ToArray(), true); break;
+                }
+
+                // Because of some unknown BUG in the EntityFramework, creating an index causes the first normal index to be dropped, which is defined with ForeignKeyAttribute.
+                //TODO: Here is the temporary solution
+                if (group.First().ForeignKey != null)
+                    setIndex(new[] { group.First().Name }, false);
             }
         }
 

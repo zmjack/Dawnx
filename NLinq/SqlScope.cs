@@ -72,33 +72,33 @@ namespace Dawnx.Data
 
             foreach (var i in range)
             {
-                command.Parameters.Add(new TDbParameter().Then((Action<TDbParameter>)(_ =>
+                command.Parameters.Add(new TDbParameter().Then(x =>
                 {
-                    _.ParameterName = $"@p{i}";
-                    _.Value = values[i];
-                    _.DbType = XObject.For<object, DbType>(values[(int)i], (Func<object, DbType>)(value =>
+                    x.ParameterName = $"@p{i}";
+                    x.Value = values[i];
+                    x.DbType = XObject.For(values[i], value =>
                        {
                            switch (value.GetType().FullName)
                            {
-                               case BasicTypeUtility.@bool: return (DbType)DbType.Boolean;
-                               case BasicTypeUtility.@byte: return (DbType)DbType.Byte;
-                               case BasicTypeUtility.@sbyte: return (DbType)DbType.SByte;
-                               case BasicTypeUtility.@char: return (DbType)DbType.Byte;
-                               case BasicTypeUtility.@short: return (DbType)DbType.Int16;
-                               case BasicTypeUtility.@ushort: return (DbType)DbType.UInt16;
-                               case BasicTypeUtility.@int: return (DbType)DbType.Int32;
-                               case BasicTypeUtility.@uint: return (DbType)DbType.UInt32;
-                               case BasicTypeUtility.@long: return (DbType)DbType.Int64;
-                               case BasicTypeUtility.@ulong: return (DbType)DbType.UInt64;
-                               case BasicTypeUtility.@float: return (DbType)DbType.Single;
-                               case BasicTypeUtility.@double: return (DbType)DbType.Double;
-                               case BasicTypeUtility.@string: return (DbType)DbType.String;
-                               case BasicTypeUtility.@decimal: return (DbType)DbType.Decimal;
-                               case BasicTypeUtility.DateTime: return (DbType)DbType.DateTime;
-                               default: return (DbType)DbType.Object;
+                               case BasicTypeUtility.@bool: return DbType.Boolean;
+                               case BasicTypeUtility.@byte: return DbType.Byte;
+                               case BasicTypeUtility.@sbyte: return DbType.SByte;
+                               case BasicTypeUtility.@char: return DbType.Byte;
+                               case BasicTypeUtility.@short: return DbType.Int16;
+                               case BasicTypeUtility.@ushort: return DbType.UInt16;
+                               case BasicTypeUtility.@int: return DbType.Int32;
+                               case BasicTypeUtility.@uint: return DbType.UInt32;
+                               case BasicTypeUtility.@long: return DbType.Int64;
+                               case BasicTypeUtility.@ulong: return DbType.UInt64;
+                               case BasicTypeUtility.@float: return DbType.Single;
+                               case BasicTypeUtility.@double: return DbType.Double;
+                               case BasicTypeUtility.@string: return DbType.String;
+                               case BasicTypeUtility.@decimal: return DbType.Decimal;
+                               case BasicTypeUtility.DateTime: return DbType.DateTime;
+                               default: return DbType.Object;
                            }
-                       }));
-                })));
+                       });
+                }));
             }
             return command;
         }

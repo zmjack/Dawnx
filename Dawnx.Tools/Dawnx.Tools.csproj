@@ -48,7 +48,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\TypeSharp\TypeSharp.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.Net\Dawnx.Net.csproj" />
     <ProjectReference Include="..\~Library\Dawnx.Security\Dawnx.Security.csproj" />
   </ItemGroup>

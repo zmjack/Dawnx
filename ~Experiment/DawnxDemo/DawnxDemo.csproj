@@ -52,7 +52,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
-    <ProjectReference Include="..\..\NLinq\NLinq.csproj" />
     <ProjectReference Include="..\..\TypeSharp\TypeSharp.csproj" />
     <ProjectReference Include="..\..\~Library\Dawnx.AspNetCore\Dawnx.AspNetCore.csproj" />
   </ItemGroup>

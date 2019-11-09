@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.30.0</Version>
+    <Version>1.31.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
@@ -38,12 +38,12 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.0" />
+    <PackageReference Include="NLinq" Version="0.2.0.4" />
     <PackageReference Include="SharpZipLib" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DawnxLite\DawnxLite.csproj" />
-    <ProjectReference Include="..\NLinq\NLinq.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,26 +15,35 @@ namespace Dawnx.Xml
             public string Namespace { get; set; }
             public string Name { get; set; }
             public Type[] ArgTypes { get; set; }
+            public Type[] RealArgTypes { get; set; }
             public MethodInfo Method { get; set; }
         }
 
         private HashSet<ContextFunction> CustomFunctions = new HashSet<ContextFunction>();
 
+        public XPathContext(string prefix) : this()
+        {
+            AddNamespace(prefix, DefaultNamespace);
+        }
         public XPathContext()
         {
-            var contextMethods = GetType().GetMethods()
-                .Where(method => method.GetCustomAttribute<XPathFunctionAttribute>() != null);
-
+            var contextMethods = GetType().GetMethods();
             foreach (var method in contextMethods)
             {
-                var attrs = method.GetCustomAttributes<XPathFunctionAttribute>();
-                foreach (var attr in attrs)
+                var attr = method
+                    .GetCustomAttributes(typeof(XPathFunctionAttribute), true)
+                    .FirstOrDefault() as XPathFunctionAttribute;
+                if (attr != null)
                 {
                     CustomFunctions.Add(new ContextFunction
                     {
                         Namespace = attr.Namespace ?? DefaultNamespace,
                         Name = attr.Name ?? method.Name,
-                        ArgTypes = method.GetParameters().Select(x => x.ParameterType).ToArray(),
+                        ArgTypes = method.GetParameters()
+                            .Where(x => x.ParameterType != typeof(XPathNavigator))
+                            .Select(x => x.ParameterType)
+                            .ToArray(),
+                        RealArgTypes = method.GetParameters().Select(x => x.ParameterType).ToArray(),
                         Method = method,
                     });
                 }
@@ -90,12 +100,6 @@ namespace Dawnx.Xml
             => new XPathVariable(prefix, name);
 
         /// <summary>
-        /// Adds the given namespace to the collection for 'DefaultNamespace'.
-        /// </summary>
-        /// <param name="prefix"></param>
-        public void AddNamespace(string prefix) => AddNamespace(prefix, DefaultNamespace);
-
-        /// <summary>
         /// Adds a argument to <see cref="ArgList"/> and associates it with the namespace qualified name. 
         /// </summary>
         /// <param name="name"></param>
@@ -123,6 +127,90 @@ namespace Dawnx.Xml
             var xExp = XPathExpression.Compile(xpath);
             xExp.SetContext(this);
             return xExp;
+        }
+        public XPathExpression this[string xpath] => Compile(xpath);
+
+        public class XPathFunctionAgent : IXsltContextFunction
+        {
+            private string Namespace;
+            private string Name;
+
+            public XPathFunctionAgent(string @namespace, string name)
+            {
+                Namespace = @namespace;
+                Name = name;
+            }
+
+            public int Minargs => throw new NotSupportedException();
+            public int Maxargs => throw new NotSupportedException();
+            public XPathResultType ReturnType => XPathResultType.Any;
+            public XPathResultType[] ArgTypes => throw new NotSupportedException();
+
+            public object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+            {
+                var context = xsltContext as XPathContext;
+                var argTypes = args.Select(x =>
+                {
+                    switch (x.GetType().FullName)
+                    {
+                        case "MS.Internal.Xml.XPath.XPathSelectionIterator": return typeof(string);
+                        default: return x.GetType();
+                    }
+                });
+                var customFunc = context.CustomFunctions
+                    .FirstOrDefault(x => x.Namespace == Namespace && x.Name == Name
+                                      && Enumerable.SequenceEqual(argTypes, x.ArgTypes));
+
+                if (customFunc != null)
+                {
+                    var methodParameterLength = customFunc.Method.GetParameters().Count();
+                    var funcArgs = args.Select<object, object>((arg, i) =>
+                    {
+                        switch (arg.GetType().FullName)
+                        {
+                            case "MS.Internal.Xml.XPath.XPathSelectionIterator": return GetAttributeValue(args[i]);
+                            default: return args[i].ToString();
+                        }
+                    }).ToArray();
+
+                    int argIndex = 0;
+                    var invokeParameters = new List<object>();
+                    foreach (var realArgType in customFunc.RealArgTypes)
+                    {
+                        switch (realArgType)
+                        {
+                            case Type _ when realArgType == typeof(XPathNavigator):
+                                invokeParameters.Add(docContext);
+                                break;
+
+                            default:
+                                invokeParameters.Add(funcArgs[argIndex++]);
+                                break;
+                        }
+                    }
+                    return customFunc.Method.Invoke(context, invokeParameters.ToArray());
+                }
+                else throw new KeyNotFoundException($"No function found. ({Namespace}.{Name})");
+            }
+
+            private string GetAttributeValue(object arg)
+            {
+                // The type of arg is MS.Internal.Xml.XPath.XPathSelectionIterator.
+                var currentProp = arg.GetType().GetProperty("Current");
+                var current = currentProp.GetValue(arg) as XPathNavigator;
+
+                switch (current.NodeType)
+                {
+                    case XPathNodeType.Element:
+                        foreach (XPathNavigator item in arg as IEnumerable)
+                            return item.InnerXml;
+                        goto default;
+
+                    default:
+                        return string.Empty;
+                }
+            }
+
         }
 
     }

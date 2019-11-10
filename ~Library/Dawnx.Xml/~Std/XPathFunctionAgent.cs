@@ -12,64 +12,64 @@ namespace Dawnx.Xml
         {
             private string Namespace;
             private string Name;
-            private XPathResultType[] _ArgTypes;
 
-            public XPathFunctionAgent(string @namespace, string name, XPathResultType[] argTypes)
+            public XPathFunctionAgent(string @namespace, string name)
             {
                 Namespace = @namespace;
                 Name = name;
-                _ArgTypes = argTypes;
             }
 
-            public int Minargs => _ArgTypes.Length;
-            public int Maxargs => _ArgTypes.Length;
+            public int Minargs => throw new NotSupportedException();
+            public int Maxargs => throw new NotSupportedException();
             public XPathResultType ReturnType => XPathResultType.Any;
-            public XPathResultType[] ArgTypes => _ArgTypes;
+            public XPathResultType[] ArgTypes => throw new NotSupportedException();
 
             public object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
             {
                 var context = xsltContext as XPathContext;
-                context.Monitor?.Invoke(context, _ArgTypes, args, docContext);
-
-                var funcDef = context.FunctionPool
-                    .FirstOrDefault(func => func.Namespace == Namespace
-                    && func.Name == Name
-                    && string.Join(",", func.ArgTypes.Select(type => (int)type)) == string.Join(",", _ArgTypes.Select(type => (int)type)));
-
-                if (funcDef != null)
+                var argTypes = args.Select(x =>
                 {
-                    var methodParameterLength = funcDef.Method.GetParameters().Count();
-                    var normalizedArgs = args.Select<object, object>((arg, i) =>
+                    switch (x.GetType().FullName)
                     {
-                        switch (_ArgTypes[i])
-                        {
-                            case XPathResultType.NodeSet:
-                                return GetAttributeValue(args[i]);
+                        case "MS.Internal.Xml.XPath.XPathSelectionIterator": return typeof(string);
+                        default: return x.GetType();
+                    }
+                });
+                var customFunc = context.CustomFunctions
+                    .FirstOrDefault(x => x.Namespace == Namespace && x.Name == Name
+                                      && Enumerable.SequenceEqual(argTypes, x.ArgTypes));
 
-                            default:
-                                return args[i].ToString();
+                if (customFunc != null)
+                {
+                    var methodParameterLength = customFunc.Method.GetParameters().Count();
+                    var funcArgs = args.Select<object, object>((arg, i) =>
+                    {
+                        switch (arg.GetType().FullName)
+                        {
+                            case "MS.Internal.Xml.XPath.XPathSelectionIterator": return GetAttributeValue(args[i]);
+                            default: return args[i].ToString();
                         }
                     });
 
                     if (methodParameterLength == args.Length)
                     {
-                        return funcDef.Method.Invoke(context, normalizedArgs.ToArray());
+                        return customFunc.Method.Invoke(context, funcArgs.ToArray());
                     }
                     else if (methodParameterLength == args.Length + 1)
                     {
-                        return funcDef.Method.Invoke(context,
-                            normalizedArgs.Concat(new object[] { docContext }).ToArray());
+                        return customFunc.Method.Invoke(context,
+                            funcArgs.Concat(new object[] { docContext }).ToArray());
                     }
                     else throw new ArgumentOutOfRangeException(
                         "The parameter length of the method must be equal to the 'args' length or 'args' length-1.");
                 }
                 else throw new KeyNotFoundException(
-                    $"No function found. ({Namespace}::{Name}({string.Join(",", _ArgTypes)}))");
+                    $"No function found. ({Namespace}::{Name}({string.Join(",", ArgTypes)}))");
             }
 
             private string GetAttributeValue(dynamic arg)
             {
-                // The type of dyArg is MS.Internal.Xml.XPath.XPathSelectionIterator.
+                // The type of arg is MS.Internal.Xml.XPath.XPathSelectionIterator.
                 // It isn't a public type. So, use dynamic instead.
                 XPathNodeType nodeType = arg.Current.NodeType;
 

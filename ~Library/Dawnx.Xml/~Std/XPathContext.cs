@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.XPath;
@@ -12,18 +13,11 @@ namespace Dawnx.Xml
         {
             public string Namespace { get; set; }
             public string Name { get; set; }
-            public XPathResultType[] ArgTypes { get; set; }
+            public Type[] ArgTypes { get; set; }
             public MethodInfo Method { get; set; }
         }
 
-        /// <summary>
-        /// This event has the source arguments that are available before the defined function is called.
-        ///     And it is called when the function defined in the context is called.
-        /// </summary>
-        public event OnMonitor Monitor;
-        public delegate void OnMonitor(XPathContext sender, XPathResultType[] argTypes, object[] args, XPathNavigator docContext);
-
-        private HashSet<ContextFunction> FunctionPool = new HashSet<ContextFunction>();
+        private HashSet<ContextFunction> CustomFunctions = new HashSet<ContextFunction>();
 
         public XPathContext()
         {
@@ -35,11 +29,11 @@ namespace Dawnx.Xml
                 var attrs = method.GetCustomAttributes<XPathFunctionAttribute>();
                 foreach (var attr in attrs)
                 {
-                    FunctionPool.Add(new ContextFunction
+                    CustomFunctions.Add(new ContextFunction
                     {
                         Namespace = attr.Namespace ?? DefaultNamespace,
                         Name = attr.Name ?? method.Name,
-                        ArgTypes = attr.ArgTypes,
+                        ArgTypes = method.GetParameters().Select(x => x.ParameterType).ToArray(),
                         Method = method,
                     });
                 }
@@ -83,7 +77,7 @@ namespace Dawnx.Xml
         /// <param name="argTypes"></param>
         /// <returns></returns>
         public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
-            => new XPathFunctionAgent(LookupNamespace(prefix), name, argTypes);
+            => new XPathFunctionAgent(LookupNamespace(prefix), name);
 
         /// <summary>
         /// Resolves a variable reference and returns

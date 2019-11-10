@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-DawnxDevelopingWeb-DB03C189-C51D-4E57-A92C-602FAD7263A0</UserSecretsId>
-    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,12 +12,16 @@
 
   <ItemGroup>
     <Compile Remove="logs\**" />
+    <Compile Remove="Typings\**" />
     <Compile Remove="wwwroot\js\components\**" />
     <Content Remove="logs\**" />
+    <Content Remove="Typings\**" />
     <Content Remove="wwwroot\js\components\**" />
     <EmbeddedResource Remove="logs\**" />
+    <EmbeddedResource Remove="Typings\**" />
     <EmbeddedResource Remove="wwwroot\js\components\**" />
     <None Remove="logs\**" />
+    <None Remove="Typings\**" />
     <None Remove="wwwroot\js\components\**" />
   </ItemGroup>
 
@@ -28,6 +32,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="TypeSharp" Version="0.3.0.1" />
   </ItemGroup>
   
   <ItemGroup>
@@ -46,7 +51,6 @@
   <ItemGroup>
     <Folder Include="Areas\NxPanel\Data\" />
     <Folder Include="Areas\NxPanel\Models\" />
-    <Folder Include="Typings\" />
     <Folder Include="wwwroot\modules\axios\" />
   </ItemGroup>
 

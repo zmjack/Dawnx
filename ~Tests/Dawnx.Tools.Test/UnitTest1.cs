@@ -30,7 +30,7 @@ namespace Dawnx.Tools.Test
 
         private void ConvertCppHeaderTest()
         {
-            var args = new[] { "cch", "cpp.h" };
+            var args = new[] { "cch", "CppDll.h" };
             var cargs = new ConsoleArgs(args, "-");
 
             using (var memory = new MemoryStream())
@@ -44,13 +44,13 @@ namespace Dawnx.Tools.Test
 public partial class NativeMethods {
     
     /// Return Type: LPWSTR->WCHAR*
-    [DllImport(""cpp.dll""), EntryPoint=""CreateString"", CallingConvention=CallingConvention.StdCall)]
+    [DllImport(""CppDll.dll""), EntryPoint=""CreateString"", CallingConvention=CallingConvention.StdCall)]
     [return: MarshalAs(UnmanagedType.LPWStr)]
     public static extern string CreateString() ;
 
 }
 ";
-                Assert.Equal(expected, File.ReadAllText("PI_cpp.cs"));
+                Assert.Equal(expected, File.ReadAllText("PI_CppDll.cs"));
             }
         }
 

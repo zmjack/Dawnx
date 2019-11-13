@@ -22,11 +22,12 @@ namespace Dawnx.Tools
         public void PrintUsage()
         {
             Console.WriteLine($@"
-Usage: dotnet nx (tsg|typescriptgenerator) [Options]
+Usage: dotnet nx (tsg|tsgenerator) [Options]
 
 Options:
-  {"-o|--out".PadRight(20)}{"\t"}Specify the output directory path.
-  {"-i|--include".PadRight(20)}{"\t"}Specify to include other built-in models, such as 'JSend'.");
+  {"-o|--out".PadRight(20)}{"\t"}Specify the output directory path. (default: Typings)
+  {"-i|--include".PadRight(20)}{"\t"}Specify to include other built-in models, such as 'JSend'.
+");
         }
 
         public void Run(ConsoleArgs cargs)
@@ -37,7 +38,7 @@ Options:
                 return;
             }
 
-            var outFolder = cargs["--out"] ?? cargs["-o"] ?? "Typings";
+            var outFolder = cargs["-o"] ?? cargs["-out"] ?? "Typings";
             var includes = cargs["-i"]?.Split(",") ?? cargs["--include"]?.Split(",") ?? new string[0];
 
             GenerateTypeScript(outFolder, includes);

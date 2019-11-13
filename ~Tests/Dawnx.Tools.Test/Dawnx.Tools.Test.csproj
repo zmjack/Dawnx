@@ -39,4 +39,10 @@
     <ProjectReference Include="..\..\Dawnx.Tools\Dawnx.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="cpp.h">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

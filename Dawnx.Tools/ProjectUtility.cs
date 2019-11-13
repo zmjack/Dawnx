@@ -1,5 +1,6 @@
 ﻿using NStandard;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 
 namespace Dawnx.Tools
@@ -27,6 +28,7 @@ namespace Dawnx.Tools
                 AssemblyName = xml.SelectNodes("/Project/PropertyGroup/AssemblyName").InnerText() ?? Path.GetFileNameWithoutExtension(projectName),
                 RootNamespace = xml.SelectNodes("/Project/PropertyGroup/RootNamespace").InnerText() ?? Path.GetFileNameWithoutExtension(projectName),
                 TargetFramework = xml.SelectNodes("/Project/PropertyGroup/TargetFramework").InnerText() ?? "Unknown",
+                CliPackagePath = Def.NuGet.PackageFolder(Assembly.GetExecutingAssembly()),
             };
         }
 

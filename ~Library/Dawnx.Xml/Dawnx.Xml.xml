@@ -4,12 +4,6 @@
         <name>Dawnx.Xml</name>
     </assembly>
     <members>
-        <member name="E:Dawnx.Xml.XPathContext.Monitor">
-            <summary>
-            This event has the source arguments that are available before the defined function is called.
-                And it is called when the function defined in the context is called.
-            </summary>
-        </member>
         <member name="P:Dawnx.Xml.XPathContext.ArgList">
             <summary>
             Gets all the defined argumennts in the context.
@@ -57,12 +51,6 @@
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Xml.XPathContext.AddNamespace(System.String)">
-            <summary>
-            Adds the given namespace to the collection for 'DefaultNamespace'.
-            </summary>
-            <param name="prefix"></param>
-        </member>
         <member name="M:Dawnx.Xml.XPathContext.AddParam(System.String,System.String,System.Object)">
             <summary>
             Adds a argument to <see cref="P:Dawnx.Xml.XPathContext.ArgList"/> and associates it with the namespace qualified name. 
@@ -86,32 +74,22 @@
             <param name="xpath"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Xml.XPathFunctionAttribute.#ctor(System.Xml.XPath.XPathResultType[])">
-            <summary>
-            Defines a function named '{DefaultNamespace}:{FunctionName}' in the context.
-                Project each <see cref="T:System.Xml.XPath.XPathResultType"/> into the function's arguments.
-                (If you need the 'docContext', you must use a <see cref="T:System.Xml.XPath.XPathNavigator"/> parameter to receive it.)
-            </summary>
-            <param name="argTypes"></param>
-        </member>
-        <member name="M:Dawnx.Xml.XPathFunctionAttribute.#ctor(System.String,System.Xml.XPath.XPathResultType[])">
+        <member name="M:Dawnx.Xml.XPathFunctionAttribute.#ctor(System.String)">
             <summary>
             Defines a function named '{DefaultNamespace}:{$name}' in the context.
                 Project each <see cref="T:System.Xml.XPath.XPathResultType"/> into the function's arguments.
                 (If you need the 'docContext', you must use a <see cref="T:System.Xml.XPath.XPathNavigator"/> parameter to receive it.)
             </summary>
             <param name="name"></param>
-            <param name="argTypes"></param>
         </member>
-        <member name="M:Dawnx.Xml.XPathFunctionAttribute.#ctor(System.String,System.String,System.Xml.XPath.XPathResultType[])">
+        <member name="M:Dawnx.Xml.XPathFunctionAttribute.#ctor(System.String,System.String)">
             <summary>
             Defines a function named '{$namespace}:{$name}' in the context.
                 Project each <see cref="T:System.Xml.XPath.XPathResultType"/> into the function's arguments.
                 (If you need the 'docContext', you must use a <see cref="T:System.Xml.XPath.XPathNavigator"/> parameter to receive it.)
             </summary>
-            <param name="namespace"></param>
+            <param name="namespaceUri"></param>
             <param name="name"></param>
-            <param name="argTypes"></param>
         </member>
     </members>
 </doc>

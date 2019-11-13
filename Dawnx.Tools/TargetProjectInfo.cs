@@ -7,5 +7,6 @@
         public string AssemblyName { get; set; }
         public string RootNamespace { get; set; }
         public string TargetFramework { get; set; }
+        public string CliPackagePath { get; set; }
     }
 }

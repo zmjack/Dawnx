@@ -23,7 +23,7 @@
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
-    <Version>1.31.0</Version>
+    <Version>1.32.0</Version>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
@@ -40,6 +40,18 @@
     <DocumentationFile></DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="lib\netstandard2.0\sigimp.exe" />
+    <None Remove="lib\netstandard2.0\sigimplib.dll" />
+    <None Remove="lib\netstandard2.0\windows.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="lib\netstandard2.0\sigimp.exe" />
+    <Content Include="lib\netstandard2.0\sigimplib.dll" />
+    <Content Include="lib\netstandard2.0\windows.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

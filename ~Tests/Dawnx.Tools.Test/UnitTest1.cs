@@ -19,11 +19,39 @@ namespace Dawnx.Tools.Test
                 AssemblyName = "DawnxDemo",
                 RootNamespace = "DawnxDemo",
                 TargetFramework = "netcoreapp2.2",
+                CliPackagePath = $"{Directory.GetCurrentDirectory()}/../../../../../Dawnx.Tools",
             };
 
+            //ConvertCppHeaderTest();
             //AesTest();
             //CompressTest();
-            TypeScriptGeneratorTest();
+            //TypeScriptGeneratorTest();
+        }
+
+        private void ConvertCppHeaderTest()
+        {
+            var args = new[] { "cch", "cpp.h" };
+            var cargs = new ConsoleArgs(args, "-");
+
+            using (var memory = new MemoryStream())
+            using (var writer = new StreamWriter(memory))
+            {
+                Console.SetOut(writer);
+                new ConvertCppHeaderCommand().Run(cargs);
+
+                var output = GetText(writer);
+                var expected = @"
+public partial class NativeMethods {
+    
+    /// Return Type: LPWSTR->WCHAR*
+    [DllImport(""cpp.dll""), EntryPoint=""CreateString"", CallingConvention=CallingConvention.StdCall)]
+    [return: MarshalAs(UnmanagedType.LPWStr)]
+    public static extern string CreateString() ;
+
+}
+";
+                Assert.Equal(expected, File.ReadAllText("PI_cpp.cs"));
+            }
         }
 
         private void AesTest()

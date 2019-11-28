@@ -45,7 +45,7 @@ namespace Dawnx.Utilities
         public static string CamelCase(string source)
         {
             if (source.IsNullOrEmpty()) return source;
-            if (!source.All(c => 31 < c && c < 127)) throw new ArgumentException("Some char is out of allowed range(ascii, 32 to 126).");
+            if (!source.All(c => 31 < c && c < 127)) throw new ArgumentException("Some chars is out of allowed range(ascii, 32 to 126).");
 
             bool IsNotUpper(char c) => c < 'A' || 'Z' < c;
             var index = source.IndexOf(IsNotUpper);
@@ -67,7 +67,7 @@ namespace Dawnx.Utilities
         public static string KebabCase(string source)
         {
             if (source.IsNullOrEmpty()) return source;
-            if (!source.All(c => 31 < c && c < 127)) throw new ArgumentException("Some char is out of allowed range(ascii, 32 to 126).");
+            if (!source.All(c => 31 < c && c < 127)) throw new ArgumentException("Some chars is out of allowed range(ascii, 32 to 126).");
 
             bool IsUpper(char c) => 'A' <= c && c <= 'Z';
             bool IsNotUpper(char c) => c < 'A' || 'Z' < c;
@@ -169,7 +169,7 @@ namespace Dawnx.Utilities
                 .Aggregate(format, (_acc, ch) => _acc.Replace(ch, $"\\{ch}"));
             var pattern = new IntegerRange(0, members.Length - 1)
                 .Aggregate(prePattern, (acc, i) => acc.Replace($"{{{i}}}\\?", @"(.*?)").Replace($"{{{i}}}", @"(.*)"))
-                .For(_ => $"^{_}$");
+                .For(x => $"^{x}$");
             var regex = new Regex(pattern, RegexOptions.Singleline);
 
             var match = regex.Match(source);
@@ -189,7 +189,7 @@ namespace Dawnx.Utilities
                             break;
 
                         default:
-                            throw new ArgumentException($"The access member must be {nameof(FieldInfo)} of {nameof(PropertyInfo)}.");
+                            throw new ArgumentException($"The access member must be {nameof(FieldInfo)} or {nameof(PropertyInfo)}.");
                     }
                 }
             }

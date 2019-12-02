@@ -97,25 +97,39 @@ namespace Dawnx.NPOI
             get => MapedCell.CellFormula;
             set => MapedCell.SetCellFormula(value);
         }
-        public bool Boolean
+        public bool? Boolean
         {
             get => MapedCell.BooleanCellValue;
-            set => MapedCell.SetCellValue(value);
+            set
+            {
+                if (value.HasValue)
+                    MapedCell.SetCellValue(value.Value);
+                else MapedCell.SetCellValue((string)null);
+            }
         }
-        public DateTime DateTime
+        public DateTime? DateTime
         {
             get => MapedCell.DateCellValue;
             set
             {
-                var book = Sheet.Book;
-                MapedCell.SetCellValue(value);
-                SetCStyle(book.CStyle(s => s.DataFormat = "yyyy-M-d"));
+                if (value.HasValue)
+                {
+                    var book = Sheet.Book;
+                    MapedCell.SetCellValue(value.Value);
+                    SetCStyle(book.CStyle(s => s.DataFormat = "yyyy-M-d"));
+                }
+                else MapedCell.SetCellValue((string)null);
             }
         }
-        public double Number
+        public double? Number
         {
             get => MapedCell.NumericCellValue;
-            set => MapedCell.SetCellValue(value);
+            set
+            {
+                if (value.HasValue)
+                    MapedCell.SetCellValue(value.Value);
+                else MapedCell.SetCellValue((string)null);
+            }
         }
         public IRichTextString RichTextString
         {

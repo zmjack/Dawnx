@@ -188,12 +188,6 @@
             <param name="stop"></param>
             <param name="scan"></param>
         </member>
-        <member name="M:Dawnx.Reflection.DefaultBasicTypeConverter.#ctor(System.Boolean)">
-            <summary>
-            If set 'strict', null string will be replaced by default of the source.
-            </summary>
-            <param name="strict"></param>
-        </member>
         <member name="M:Dawnx.Sequences.LetterSequence.GetNumber(System.String)">
             <summary>
             Gets the number of letter. It's start at 0. (For example, "A" is 0).

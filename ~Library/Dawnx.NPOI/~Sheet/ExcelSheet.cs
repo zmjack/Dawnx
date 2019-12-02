@@ -157,7 +157,7 @@ namespace Dawnx.NPOI
         public TModel[] Fetch<TModel>(string startCell, Expression<Func<TModel, object>> includes = null)
             where TModel : new()
         {
-            var converter = new DefaultBasicTypeConverter(false);
+            var converter = new BasicConverter();
             var ret = new List<TModel>();
             var pos = GetCellPos(startCell);
             (int row, int col) = (pos.row, pos.col);
@@ -208,8 +208,8 @@ namespace Dawnx.NPOI
                     var propInfo = kv.Value;
                     var cell = this[(row + rowOffset, pos.col + kv.Key)];
                     if (propInfo.PropertyType == typeof(DateTime))
-                        propInfo.SetValue(item, converter.Convert(propInfo, cell.DateTime));
-                    else propInfo.SetValue(item, converter.Convert(propInfo, cell.GetValue()));
+                        propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.DateTime, propInfo));
+                    else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.GetValue(), propInfo));
                 }
                 ret.Add(item);
             }

@@ -88,7 +88,7 @@ namespace Dawnx.NPOI
                 case CellType.String:
                 case CellType.Formula: return String;
 
-                default: return "";
+                default: return null;
             }
         }
 

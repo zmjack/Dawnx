@@ -36,8 +36,7 @@ namespace Dawnx.Algorithms.Container
 
         public bool ContainsKey(TIn key) => ((IDictionary<TIn, TOut>)Dp).ContainsKey(key);
 
-        public void CopyTo(KeyValuePair<TIn, TOut>[] array, int arrayIndex)
-            => ((IDictionary<TIn, TOut>)Dp).CopyTo(array, arrayIndex);
+        public void CopyTo(KeyValuePair<TIn, TOut>[] array, int arrayIndex) => ((IDictionary<TIn, TOut>)Dp).CopyTo(array, arrayIndex);
 
         public IEnumerator<KeyValuePair<TIn, TOut>> GetEnumerator() => ((IDictionary<TIn, TOut>)Dp).GetEnumerator();
 

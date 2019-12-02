@@ -7,20 +7,20 @@ using System.Linq;
 
 namespace Dawnx.Data
 {
-    public class Csv : Csv<DefaultBasicTypeConverter>
+    public class Csv : Csv<BasicConverter>
     {
         public Csv(string source, string separator = ",")
             : base(source, separator) { }
     }
 
-    public class Csv<TBasicTypeConverter>
-        where TBasicTypeConverter : IBasicTypeConverter, new()
+    public class Csv<TBasicConverter>
+        where TBasicConverter : IBasicConverter, new()
     {
         public string Source { get; private set; }
         public string Separator { get; private set; }
         public string[] Titles { get; private set; }
         public string[][] Values { get; private set; }
-        private TBasicTypeConverter _Converter = new TBasicTypeConverter();
+        private TBasicConverter _Converter = new TBasicConverter();
 
         private DataTable _Table = new DataTable();
         public DataTable Table { get => _Table.Clone(); }
@@ -60,7 +60,7 @@ namespace Dawnx.Data
                     for (int i = 0; i < ret.Length; i++)
                     {
                         prop.SetValue(ret[i],
-                            _Converter.Convert(prop, Values[i][j]));
+                            _Converter.Convert(prop.PropertyType, Values[i][j], prop));
                     }
                 }
             }

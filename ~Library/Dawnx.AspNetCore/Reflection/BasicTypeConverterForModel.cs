@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Dawnx.AspNetCore.Reflection
 {
-    public class BasicTypeConverterForModel : DefaultBasicTypeConverter
+    public class BasicTypeConverterForModel : BasicConverter
     {
         public override object ConvertToDateTime(object source, ICustomAttributeProvider provider)
         {

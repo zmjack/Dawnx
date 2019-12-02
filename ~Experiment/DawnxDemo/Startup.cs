@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DawnxDemo
 {
@@ -49,6 +50,17 @@ namespace DawnxDemo
                     options.AccessDeniedPath = "/WechatAccount/Denied";
                 })
                 .AddCookie("Internal", options =>
+                {
+                    options.LoginPath = "/InternalAccount/SignIn";
+                    options.AccessDeniedPath = "/InternalAccount/Denied";
+                })
+                .AddCookie("scheme1", options =>
+                {
+                    options.LoginPath = "/Home/SignInWechatHybrid";
+                    options.AccessDeniedPath = "/InternalAccount/Denied";
+                    options.ExpireTimeSpan = TimeSpan.FromSeconds(30);
+                })
+                .AddCookie("scheme2", options =>
                 {
                     options.LoginPath = "/InternalAccount/SignIn";
                     options.AccessDeniedPath = "/InternalAccount/Denied";

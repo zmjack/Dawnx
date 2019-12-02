@@ -37,7 +37,7 @@ namespace DawnxDemo.Controllers
             {
                 OpenIdType = WechatHybridOpenIdType.Public,
                 OpenId = Guid.NewGuid().ToString(),
-                PubUserName = "",
+                PubUserName = Path.GetRandomFileName(),
             }.ToIdentity();
 
             await HttpContext.SignInAsync("scheme1", new ClaimsPrincipal(identity));
@@ -48,7 +48,13 @@ namespace DawnxDemo.Controllers
         [WechatHybridAuthorize(AuthenticationSchemes = "scheme1")]
         public IActionResult Scheme1()
         {
-            return Content("OK");
+            return Content($"{User.Identity.AuthenticationType} {User.Identity.Name}");
+        }
+
+        public IActionResult Scheme1SignOut()
+        {
+            HttpContext.SignOutAsync("scheme1");
+            return Content("SignOut");
         }
 
         public async Task<IActionResult> SignInSimpleId(DateTime birthday)

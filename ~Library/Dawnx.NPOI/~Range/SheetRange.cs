@@ -97,7 +97,7 @@ namespace Dawnx.NPOI
 
             for (int takeRow = mergeStart; takeRow <= End.row; takeRow++)
             {
-                var value = Sheet[(takeRow, col)].GetValue().ToString();
+                var value = Sheet[(takeRow, col)].GetValue()?.ToString();
                 if (value != take)
                 {
                     if (takeRow - mergeStart > 1)
@@ -119,7 +119,7 @@ namespace Dawnx.NPOI
                 foreach (var cell in Column(colIndex))
                 {
                     var value = cell.GetValue();
-                    if (value is string)
+                    if (value is string && !(value as string).IsNullOrWhiteSpace())
                     {
                         var match = regex_matchId.Match(value as string);
                         if (match.Success)

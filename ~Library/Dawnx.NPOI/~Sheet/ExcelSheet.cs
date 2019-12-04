@@ -313,7 +313,9 @@ namespace Dawnx.NPOI
                     string valueString;
                     if (value is double)
                         valueString = ((double)value).ToString(cstyle.DataFormat);
-                    else valueString = value.ToString();
+                    else if (value is DateTime)
+                        valueString = ((DateTime)value).ToString(cstyle.DataFormat);
+                    else valueString = value?.ToString() ?? "";
 
                     using (var bitmap = new Bitmap(1, 1))
                     using (var graphics = Graphics.FromImage(new Bitmap(1, 1)))

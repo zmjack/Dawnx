@@ -1,6 +1,7 @@
 ﻿using Dawnx.Compress;
 using Dawnx.Data;
 using Dawnx.Utilities;
+using NEcho;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NStandard;
@@ -27,7 +28,7 @@ ConfigFile:
 ");
         }
 
-        public void Run(ConsoleArgs cargs)
+        public void Run(ConArgs cargs)
         {
             if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")))
             {

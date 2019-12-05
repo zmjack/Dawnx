@@ -24,7 +24,7 @@ namespace DawnxTemplate.Authorizations
 
         public override IAuthorizationRequirement[] GetPolicyRequirements(string policyName)
         {
-            var cargs = new ConsoleArgs(policyName);
+            var cargs = new ConArgs(policyName);
             var authenticationType = cargs["--type"] ?? cargs["-t"];
 
             switch (cargs[0])

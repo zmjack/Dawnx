@@ -12,64 +12,6 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="T:Dawnx.Data.ConsoleArgs">
-            <summary>
-            This class provides some methods to
-                separate the console arguments to content or property.
-            </summary>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console table for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateBorderTable(System.String[],System.String[][],System.Int32[])">
-            <summary>
-            Prints console table for models.
-            </summary>
-            <param name="headers"></param>
-            <param name="colLines"></param>
-            <param name="lengths"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateNoBorderTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console table with no border for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateNoBorderTable(System.String[],System.String[][],System.Int32[])">
-            <summary>
-            Prints console table with no border for models.
-            </summary>
-            <param name="headers"></param>
-            <param name="colLines"></param>
-            <param name="lengths"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateRow(System.String[],System.Int32[])">
-            <summary>
-            Prints console row.
-            </summary>
-            <param name="cols"></param>
-            <param name="colLengths"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateSeamlessTable``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Prints console seamless table for models.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <param name="models"></param>
-        </member>
-        <member name="M:Dawnx.CConsole.ConUtility.CreateSeamlessTable(System.String[],System.String[][],System.Int32[])">
-            <summary>
-            Prints console seamless table.
-            </summary>
-            <param name="headers"></param>
-            <param name="colLines"></param>
-            <param name="lengths"></param>
-        </member>
         <member name="T:Dawnx.Lock.InstanceLock`1">
             <summary>
             Instance Lock

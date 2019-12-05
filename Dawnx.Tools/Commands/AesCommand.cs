@@ -1,5 +1,6 @@
 ﻿using Dawnx.Data;
 using Dawnx.Security.AesSecurity;
+using NEcho;
 using System;
 
 namespace Dawnx.Tools
@@ -11,7 +12,7 @@ namespace Dawnx.Tools
             throw new NotImplementedException();
         }
 
-        public void Run(ConsoleArgs cargs)
+        public void Run(ConArgs cargs)
         {
             var aesKey = cargs[1] == "hex" ? AesKey.HexString : AesKey.Base64String;
 

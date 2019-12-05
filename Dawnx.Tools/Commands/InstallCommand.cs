@@ -1,6 +1,7 @@
 ﻿using Dawnx.Data;
 using Dawnx.Net.Web;
 using Dawnx.Utilities;
+using NEcho;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -17,7 +18,7 @@ namespace Dawnx.Tools
             throw new NotImplementedException();
         }
 
-        public void Run(ConsoleArgs args)
+        public void Run(ConArgs args)
         {
             var name = args[1];
 
@@ -63,7 +64,7 @@ namespace Dawnx.Tools
                                     var web = new HttpAccess();
                                     web.DownloadProgress += (sender, _url, received, length) =>
                                     {
-                                        Con.Row(new[]
+                                        Echo.Row(new[]
                                         {
                                             $"{fileDone() + 1}/{fileCount}", $"| {fileName}", ((double)received / length).ToString("0.00%")
                                         }, tableLengths);
@@ -81,17 +82,17 @@ namespace Dawnx.Tools
                                     }
                                     catch (Exception ex)
                                     {
-                                        Con.Line();
+                                        Echo.Line();
                                         if (retry < allowedRetry)
                                         {
-                                            Con.Print($"  {ex.Message}, retry {++retry}/{allowedRetry}").Line();
+                                            Echo.Print($"  {ex.Message}, retry {++retry}/{allowedRetry}").Line();
                                             goto retry;
                                         }
                                         else
                                         {
-                                            Con.Print($"  File can not be downloaded from {url}").Line();
+                                            Echo.Print($"  File can not be downloaded from {url}").Line();
 
-                                            Con.AskYN("Retry?", out var ansRetry);
+                                            Echo.AskYN("Retry?", out var ansRetry);
                                             if (ansRetry) { retry = 0; goto retry; }
                                             else { fileSkip++; continue; }
                                         }
@@ -112,7 +113,7 @@ namespace Dawnx.Tools
                                     status = "WARNING";
                                 }
 
-                                Con.Row(new[]
+                                Echo.Row(new[]
                                 {
                                     $"{fileDone()}/{fileCount}",
                                     $"| {Path.GetFileName(saveas)}",
@@ -126,7 +127,7 @@ namespace Dawnx.Tools
                                     extractFileList.Add(saveas);
                                 fileDownload++;
 
-                                Con.Row(new[]
+                                Echo.Row(new[]
                                 {
                                     $"{fileDone()}/{fileCount}",
                                     $"| {Path.GetFileName(saveas)}",
@@ -135,7 +136,7 @@ namespace Dawnx.Tools
                             }
                         }
 
-                        Con
+                        Echo
                             .Line()
                             .Print($"  " +
                                 $"{fileDownload} downloaded." +
@@ -149,28 +150,28 @@ namespace Dawnx.Tools
                             foreach (var file in extractFileList)
                             {
                                 ZipFile.ExtractToDirectory(file, Program.TargetProjectInfo.ProjectRoot, true);
-                                Con.Print($"Extract {file} done.").Line();
+                                Echo.Print($"Extract {file} done.").Line();
                             }
-                            Con
+                            Echo
                                 .Print($"---- Extract files completed ----").Line()
                                 .Line();
                         };
 
                         if (fileVerifyFailed > 0)
                         {
-                            Con.AskYN("Setup now?", out var ans);
+                            Echo.AskYN("Setup now?", out var ans);
                             if (ans) extractFiles();
                         }
                         else extractFiles();
                     }
-                    else Con.Print($"Install service requires the lowest cli tool version: {cli_version}.").Line();
+                    else Echo.Print($"Install service requires the lowest cli tool version: {cli_version}.").Line();
                 }
                 else AlertUtility.PrintErrorMessage(resp);
 
             }
             catch (JsonReaderException ex)
             {
-                Con.Print($"Error occurred. ({ex.Message})").Line();
+                Echo.Print($"Error occurred. ({ex.Message})").Line();
             }
         }
 

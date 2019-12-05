@@ -1,4 +1,5 @@
 ﻿using Dawnx.Data;
+using NEcho;
 using NStandard;
 using System;
 using System.IO;
@@ -30,7 +31,7 @@ Options:
 ");
         }
 
-        public void Run(ConsoleArgs cargs)
+        public void Run(ConArgs cargs)
         {
             if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")))
             {
@@ -39,7 +40,7 @@ Options:
             }
 
             var outFolder = cargs["-o"] ?? cargs["-out"] ?? "Typings";
-            var includes = cargs["-i"]?.Split(",") ?? cargs["--include"]?.Split(",") ?? new string[0];
+            var includes = cargs["-i"].Split(",") ?? cargs["--include"]?.Split(",") ?? new string[0];
 
             GenerateTypeScript(outFolder, includes);
         }
@@ -76,7 +77,7 @@ Options:
                 var builder = new TypeScriptModelBuilder();
                 var fileName = $"{Path.GetFullPath($"{outFolder}/JSend.ts")}";
 
-                builder.CacheType<JSend>();
+                builder.CacheType<JSend>(new TypeScriptModelAttribute { Namespace = "Nx" });
                 builder.WriteTo(fileName);
 
                 Console.WriteLine($"File saved: {fileName}");

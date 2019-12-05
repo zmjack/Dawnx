@@ -1,5 +1,6 @@
 ﻿using Dawnx.Data;
 using Dawnx.Net.Web;
+using NEcho;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,12 +14,12 @@ namespace Dawnx.Tools
             throw new NotImplementedException();
         }
 
-        public void Run(ConsoleArgs args)
+        public void Run(ConArgs args)
         {
             var jsonFile = args[1];
 
             if (!AlertUtility.ConfirmUseOnlineService()) return;
-            Con.Print("Connect to dawnx service...").Line();
+            Echo.Print("Connect to dawnx service...").Line();
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
             {
@@ -32,8 +33,8 @@ namespace Dawnx.Tools
                 var path = $"{Path.GetPathRoot(Path.GetFullPath(jsonFile))}/{Path.GetFileNameWithoutExtension(jsonFile)}.cs";
                 File.WriteAllText(path, resp.data as string);
 
-                Con.Print($"{resp.message}").Line();
-                Con.Print($"  File Saved: {Path.GetFullPath(path)}").Line();
+                Echo.Print($"{resp.message}").Line();
+                Echo.Print($"  File Saved: {Path.GetFullPath(path)}").Line();
             }
             else AlertUtility.PrintErrorMessage(resp);
         }

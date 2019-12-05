@@ -1,5 +1,6 @@
 ﻿using Dawnx.Data;
 using Dawnx.Security.AesSecurity;
+using NEcho;
 using NStandard;
 using System;
 using System.Diagnostics;
@@ -26,7 +27,7 @@ Options:
 ");
         }
 
-        public void Run(ConsoleArgs cargs)
+        public void Run(ConArgs cargs)
         {
             if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")) || cargs.Contents.Length < 2)
             {

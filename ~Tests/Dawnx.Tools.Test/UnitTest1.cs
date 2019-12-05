@@ -1,4 +1,5 @@
 using Dawnx.Data;
+using NEcho;
 using NStandard;
 using System;
 using System.IO;
@@ -31,7 +32,7 @@ namespace Dawnx.Tools.Test
         private void ConvertCppHeaderTest()
         {
             var args = new[] { "cch", "CppDll.h" };
-            var cargs = new ConsoleArgs(args, "-");
+            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))
@@ -57,7 +58,7 @@ public partial class NativeMethods {
         private void AesTest()
         {
             var args = new[] { "aes", "hex" };
-            var cargs = new ConsoleArgs(args, "-");
+            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))
@@ -73,7 +74,7 @@ public partial class NativeMethods {
         private void CompressTest()
         {
             var args = new[] { "compress" };
-            var cargs = new ConsoleArgs(args, "-");
+            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))
@@ -89,7 +90,7 @@ public partial class NativeMethods {
         private void TypeScriptGeneratorTest()
         {
             var args = new[] { "tsg", "-o", "Vuets/Typings/@project", "-i", "jsend" };
-            var cargs = new ConsoleArgs(args, "-");
+            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))

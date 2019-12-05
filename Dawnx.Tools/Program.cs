@@ -1,5 +1,6 @@
 ﻿using Dawnx.Data;
 using Dawnx.Net.Web;
+using NEcho;
 using NStandard;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Dawnx.Tools
         {
             TargetProjectInfo = ProjectUtility.GetTargetProjectInfo();
 
-            var cargs = new ConsoleArgs(args, "-");
+            var cargs = new ConArgs(args, "-");
 
             CheckDownloadDirectory();
             CacheCommands();

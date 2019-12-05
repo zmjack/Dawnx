@@ -1,12 +1,9 @@
-﻿using Dawnx.Data;
-using Dawnx.Security.AesSecurity;
+﻿using DotNetCli;
 using NEcho;
 using NStandard;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Dawnx.Tools
@@ -49,7 +46,7 @@ Options:
             var sigimp = Process.Start(new ProcessStartInfo
             {
                 Arguments = $"{_headerFile} /lang:{language} /out:{outFile}",
-                FileName = $"{Program.TargetProjectInfo.CliPackagePath}/lib/netstandard2.0/sigimp.exe",
+                FileName = $"{Program.ProjectInfo.CliPackagePath}/lib/netstandard2.0/sigimp.exe",
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,

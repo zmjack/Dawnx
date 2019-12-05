@@ -17,12 +17,11 @@
     <Authors>dawnx.net</Authors>
     <Owners>zmjack</Owners>
     <Description>Dawnx cli tools.</Description>
-    <PackageId>Dawnx.Tools</PackageId>
-    <Product>Dawnx.Tools</Product>
+    <PackageId>dotnet-nx</PackageId>
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
-    <Version>1.34.0.1</Version>
+    <Version>0.0.1.1</Version>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageType>DotnetCliTool</PackageType>
@@ -55,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCli" Version="0.0.1.2" />
     <PackageReference Include="NEcho" Version="0.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />

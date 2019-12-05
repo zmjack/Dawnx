@@ -1,4 +1,4 @@
-using Dawnx.Data;
+using DotNetCli;
 using NEcho;
 using NStandard;
 using System;
@@ -13,7 +13,7 @@ namespace Dawnx.Tools.Test
         [Fact]
         public void TestEntry()
         {
-            Program.TargetProjectInfo = new TargetProjectInfo
+            Program.CommandContainer = new CommandContainer(new ProjectInfo
             {
                 ProjectRoot = $"{Directory.GetCurrentDirectory()}/../../../../../~Experiment/DawnxDemo",
                 ProjectName = "DawnxDemo.csproj",
@@ -21,9 +21,9 @@ namespace Dawnx.Tools.Test
                 RootNamespace = "DawnxDemo",
                 TargetFramework = "netcoreapp2.2",
                 CliPackagePath = $"{Directory.GetCurrentDirectory()}/../../../../../Dawnx.Tools",
-            };
+            }, "nx");
 
-            //ConvertCppHeaderTest();
+            ConvertCppHeaderTest();
             //AesTest();
             //CompressTest();
             //TypeScriptGeneratorTest();

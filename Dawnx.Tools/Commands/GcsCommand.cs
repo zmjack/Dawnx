@@ -1,5 +1,5 @@
-﻿using Dawnx.Data;
-using Dawnx.Net.Web;
+﻿using Dawnx.Net.Web;
+using DotNetCli;
 using NEcho;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Dawnx.Tools
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/JsonToCsFile", new Dictionary<string, object>
             {
-                ["Namespace"] = Program.TargetProjectInfo.RootNamespace,
+                ["Namespace"] = Program.ProjectInfo.RootNamespace,
                 ["ClassName"] = Path.GetFileNameWithoutExtension(jsonFile),
                 ["Json"] = File.ReadAllText(jsonFile),
             });

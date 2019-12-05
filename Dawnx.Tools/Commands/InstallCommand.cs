@@ -1,6 +1,6 @@
-﻿using Dawnx.Data;
-using Dawnx.Net.Web;
+﻿using Dawnx.Net.Web;
 using Dawnx.Utilities;
+using DotNetCli;
 using NEcho;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -71,7 +71,7 @@ namespace Dawnx.Tools
                                     };
 
                                     int retry = 0, allowedRetry = 3;
-                                retry:
+                                    retry:
                                     try
                                     {
                                         web.GetDownload(file, url);
@@ -149,7 +149,7 @@ namespace Dawnx.Tools
                         {
                             foreach (var file in extractFileList)
                             {
-                                ZipFile.ExtractToDirectory(file, Program.TargetProjectInfo.ProjectRoot, true);
+                                ZipFile.ExtractToDirectory(file, Program.ProjectInfo.ProjectRoot, true);
                                 Echo.Print($"Extract {file} done.").Line();
                             }
                             Echo

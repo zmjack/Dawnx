@@ -1,4 +1,4 @@
-﻿using Dawnx.Data;
+﻿using DotNetCli;
 using NEcho;
 using NStandard;
 using System;
@@ -15,7 +15,7 @@ namespace Dawnx.Tools
     {
         private static string[] SearchDirs = new[]
         {
-            Path.GetFullPath($"{Program.TargetProjectInfo.ProjectRoot}/bin/Debug/{Program.TargetProjectInfo.TargetFramework}"),
+            Path.GetFullPath($"{Program.ProjectInfo.ProjectRoot}/bin/Debug/{Program.ProjectInfo.TargetFramework}"),
             $"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}/dotnet/sdk/NuGetFallbackFolder",
             $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.nuget/packages",
         };
@@ -53,7 +53,7 @@ Options:
             if (!Directory.Exists(outFolder))
                 Directory.CreateDirectory(outFolder);
 
-            var dllPath = Path.GetFullPath($"{SearchDirs[0]}/{Program.TargetProjectInfo.AssemblyName}.dll");
+            var dllPath = Path.GetFullPath($"{SearchDirs[0]}/{Program.ProjectInfo.AssemblyName}.dll");
 
             var assembly = Assembly.LoadFrom(dllPath);
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
@@ -61,7 +61,7 @@ Options:
             #region Assembly Types
             {
                 var builder = new TypeScriptModelBuilder();
-                var fileName = $"{Path.GetFullPath($"{outFolder}/{Program.TargetProjectInfo.AssemblyName}.ts")}";
+                var fileName = $"{Path.GetFullPath($"{outFolder}/{Program.ProjectInfo.AssemblyName}.ts")}";
                 var modelTypes = assembly.GetTypesWhichMarkedAs<TypeScriptModelAttribute>();
 
                 builder.CacheTypes(modelTypes);

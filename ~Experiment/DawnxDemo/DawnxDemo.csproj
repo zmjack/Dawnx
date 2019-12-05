@@ -31,12 +31,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="NEcho" Version="0.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
     <PackageReference Include="TypeSharp" Version="0.3.0.1" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <DotNetCliToolReference Include="Dawnx.Tools" Version="*" />
   </ItemGroup>
 
   <ItemGroup>

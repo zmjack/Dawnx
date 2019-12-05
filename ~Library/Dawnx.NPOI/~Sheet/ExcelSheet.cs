@@ -207,8 +207,17 @@ namespace Dawnx.NPOI
                 {
                     var propInfo = kv.Value;
                     var cell = this[(row + rowOffset, pos.col + kv.Key)];
-                    if (propInfo.PropertyType == typeof(DateTime))
-                        propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.DateTime, propInfo));
+
+                    if (propInfo.PropertyType == typeof(DateTime) || propInfo.PropertyType == typeof(DateTime?))
+                    {
+                        if (cell.CellType == CellType.Blank)
+                        {
+                            if (propInfo.PropertyType == typeof(DateTime?))
+                                propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, null, propInfo));
+                            else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, default(DateTime), propInfo));
+                        }
+                        else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.DateTime, propInfo));
+                    }
                     else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.GetValue(), propInfo));
                 }
                 ret.Add(item);

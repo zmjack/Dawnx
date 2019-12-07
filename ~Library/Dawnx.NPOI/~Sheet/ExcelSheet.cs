@@ -216,9 +216,17 @@ namespace Dawnx.NPOI
                                 propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, null, propInfo));
                             else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, default(DateTime), propInfo));
                         }
-                        else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.DateTime, propInfo));
+                        else
+                        {
+                            var value = cell.IsMergedCell ? cell.MergedRange.Cell.DateTime : cell.DateTime;
+                            propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, value, propInfo));
+                        }
                     }
-                    else propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.GetValue(), propInfo));
+                    else
+                    {
+                        var value = cell.IsMergedCell ? cell.MergedRange.Cell.GetValue() : cell.GetValue();
+                        propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.GetValue(), propInfo));
+                    }
                 }
                 ret.Add(item);
             }
@@ -252,8 +260,7 @@ namespace Dawnx.NPOI
         public DataTable Fetch((int row, int col) pos, bool isFirstRowTitle, Type[] colTypes)
         {
             var ret = new DataTable();
-            ret.Columns.Then(_ =>
-                _.AddRange(colTypes.Select(colType => new DataColumn("", colType)).ToArray()));
+            ret.Columns.Then(x => x.AddRange(colTypes.Select(colType => new DataColumn("", colType)).ToArray()));
 
             (int row, int col) dataStart;
             if (isFirstRowTitle)

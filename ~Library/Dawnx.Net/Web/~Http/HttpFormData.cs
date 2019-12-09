@@ -1,6 +1,7 @@
 ﻿using Dawnx.IO;
 using Dawnx.Utilities;
 using Def;
+using NStandard;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,7 +54,8 @@ Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
 
         public Stream GetStream()
         {
-            return SequenceInputStream.Create(EnumerableUtility.Combine(new[]
+            //TODO: To simply this method
+            return SequenceInputStream.Create(EnumerableEx.Concat(new[]
             {
                 Values.Select(x => SequenceInputStream.Create(new[]
                 {

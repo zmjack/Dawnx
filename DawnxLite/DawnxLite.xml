@@ -144,25 +144,6 @@
             <param name="number"></param>
             <returns></returns>
         </member>
-        <member name="M:Dawnx.Utilities.ColorUtility.CreateFromAhsv(System.Single,System.Single,System.Single)">
-            <summary>
-            Creates a color using Alpha(255) + HSV model.
-            </summary>
-            <param name="hue">[0,360)</param>
-            <param name="saturation">[0,1]</param>
-            <param name="value">[0,1]</param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Utilities.ColorUtility.CreateFromAhsv(System.Int32,System.Single,System.Single,System.Single)">
-            <summary>
-            Creates a color using Alpha + HSV model.
-            </summary>
-            <param name="alpha"></param>
-            <param name="hue">[0,360)</param>
-            <param name="saturation">[0,1]</param>
-            <param name="value">[0,1]</param>
-            <returns></returns>
-        </member>
         <member name="M:Dawnx.Utilities.FileUtility.GetAllFiles(System.String)">
             <summary>
             
@@ -198,36 +179,6 @@
             </summary>
             <param name="expression"></param>
             <returns></returns>
-        </member>
-        <member name="M:Dawnx.Utilities.StringUtility.CommonStarts(System.String[])">
-            <summary>
-            Get the common starts of the specified strings.
-            </summary>
-            <param name="strings"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Utilities.StringUtility.CamelCase(System.String)">
-            <summary>
-            Converts a string to CamelCase string.
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Utilities.StringUtility.KebabCase(System.String)">
-            <summary>
-            Converts a string to KebabCase string.
-            </summary>
-            <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Dawnx.Utilities.StringUtility.Extract``1(System.String,``0,System.Linq.Expressions.Expression{System.Func{``0,System.FormattableString}})">
-            <summary>
-            Projects some strings back into an instance's field or property. (Using `?` on the right side of a variable disables greedy matching)
-            </summary>
-            <typeparam name="TClass"></typeparam>
-            <param name="source"></param>
-            <param name="instance"></param>
-            <param name="patternExp"></param>
         </member>
         <member name="T:Dawnx.JSend.Error`1">
             <summary>

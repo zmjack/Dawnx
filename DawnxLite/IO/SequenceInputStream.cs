@@ -4,10 +4,15 @@ using System.Linq;
 
 namespace Dawnx.IO
 {
-    public static class SequenceInputStream
+    public class SequenceInputStream
     {
         public static SequenceInputStream<TStream> Create<TStream>(params TStream[] streams)
             where TStream : Stream => new SequenceInputStream<TStream>(streams);
+
+        public SequenceInputStream(params Stream[] streams)
+        {
+            new SequenceInputStream<Stream>(streams);
+        }
     }
 
     public class SequenceInputStream<TStream> : Stream

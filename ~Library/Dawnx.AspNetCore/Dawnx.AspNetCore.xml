@@ -291,16 +291,5 @@
             <param name="user"></param>
             <returns></returns>
         </member>
-        <member name="T:Dawnx.Data.Registry">
-            <summary>
-            Use Registry[TSelf]
-            </summary>
-        </member>
-        <member name="T:Dawnx.Data.Registry`1">
-            <summary>
-            Hint: Each custom properties must be virtual(public).
-            </summary>
-            <typeparam name="TSelf"></typeparam>
-        </member>
     </members>
 </doc>

@@ -230,7 +230,7 @@ namespace Dawnx.NPOI
                     else
                     {
                         var value = cell.IsMergedCell ? cell.MergedRange.Cell.GetValue() : cell.GetValue();
-                        propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, cell.GetValue(), propInfo));
+                        propInfo.SetValue(item, converter.Convert(propInfo.PropertyType, value, propInfo));
                     }
                 }
                 ret.Add(item);

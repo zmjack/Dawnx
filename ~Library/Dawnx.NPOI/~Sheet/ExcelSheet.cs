@@ -154,7 +154,7 @@ namespace Dawnx.NPOI
             return new SheetRange(this, range1.Start, range2.End);
         }
 
-        public TModel[] Fetch<TModel>(string startCell, Expression<Func<TModel, object>> includes = null)
+        public TModel[] Fetch<TModel>(string startCell, Expression<Func<TModel, object>> includes = null, Predicate<int> rowSelector = null)
             where TModel : new()
         {
             var converter = new BasicConverter();
@@ -191,6 +191,11 @@ namespace Dawnx.NPOI
 
             for (int rowOffset = 0; pos.row + rowOffset <= MapedSheet.LastRowNum; rowOffset++)
             {
+                if (rowSelector != null)
+                {
+                    if (!rowSelector(rowOffset)) continue;
+                }
+
                 var @break = true;
                 for (int i = 0; i < props.Length; i++)
                 {

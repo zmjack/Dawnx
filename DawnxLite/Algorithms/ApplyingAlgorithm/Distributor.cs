@@ -27,28 +27,19 @@ namespace Dawnx.Algorithms.ApplyingAlgorithm
             Method = method;
         }
 
-        public DistributionResult<TProducer, TConsumer>[] Distribute<TProducer, TConsumer>(
-            TProducer[] producers,
-            Func<TProducer, int> amountMethod,
-            TConsumer[] consumers,
-            Func<TConsumer, int> capacityMethod)
+        public DistributionResult<TProducer, TConsumer>[] Distribute<TProducer, TConsumer>(DistributionContract<TProducer, TConsumer> contract)
             where TProducer : class
             where TConsumer : class
         {
-            return Distribute(producers, amountMethod, consumers, capacityMethod, out _);
+            return Distribute(contract, out _);
         }
 
-        public DistributionResult<TProducer, TConsumer>[] Distribute<TProducer, TConsumer>(
-            TProducer[] producers,
-            Func<TProducer, int> amountMethod,
-            TConsumer[] consumers,
-            Func<TConsumer, int> capacityMethod,
-            out ProducerRest<TProducer>[] rests)
+        public DistributionResult<TProducer, TConsumer>[] Distribute<TProducer, TConsumer>(DistributionContract<TProducer, TConsumer> contract, out ProducerRest<TProducer>[] rests)
             where TProducer : class
             where TConsumer : class
         {
             var results = new List<DistributionResult<TProducer, TConsumer>>();
-            var _rests = producers.Select(x => new ProducerRest<TProducer>(x, amountMethod(x))).ToArray();
+            var _rests = contract.Producers.Select(x => new ProducerRest<TProducer>(x, contract.ProducerAmount(x))).ToArray();
 
             switch (Method)
             {
@@ -58,9 +49,9 @@ namespace Dawnx.Algorithms.ApplyingAlgorithm
 
                     if (rest != null)
                     {
-                        foreach (var consumer in consumers)
+                        foreach (var consumer in contract.Consumers)
                         {
-                            var capacity = capacityMethod(consumer);
+                            var capacity = contract.ConsumerAmount(consumer);
                             for (var over = false; !over && rest != null;)
                             {
                                 if (rest.Rest >= capacity)

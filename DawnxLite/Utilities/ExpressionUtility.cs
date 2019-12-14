@@ -21,6 +21,19 @@ namespace Dawnx.Utilities
                     propNames = exp.Members.Select(x => x.Name).ToArray();
                     break;
 
+                case UnaryExpression exp:
+                    if (exp.NodeType == ExpressionType.Convert)
+                    {
+                        var mexp = (exp.Operand as MemberExpression);
+                        if (mexp != null)
+                        {
+                            propNames = new[] { mexp.Member.Name };
+                            break;
+                        }
+                        else goto default;
+                    }
+                    else goto default;
+
                 default:
                     throw new NotSupportedException("This argument must be MemberExpression or NewExpression.");
             }

@@ -66,7 +66,7 @@ namespace Dawnx.NPOI
         public IEnumerable<ICellStyle> CellStyles => IntegerRange.Create(NumCellStyles).Select(i => GetCellStyleAt((short)i));
         public IEnumerable<CStyle> CStyles => CellStyles.Select(x => new CStyle(this, x));
         public CStyle CStyleAt(short index) => new CStyle(this, GetCellStyleAt(index));
-        public CStyle CStyle(Action<CStyleApplier> init) => CStyle(CStyleApplier.Create(init));
+        public CStyle CStyle(Action<CStyleApplier> init) => CStyle(NPOI.CStyleApplier.Create(init));
         public CStyle CStyle(CStyleApplier applier)
         {
             var find = CStyles.FirstOrDefault(x => x.InterfaceValuesEqual(applier));
@@ -74,6 +74,7 @@ namespace Dawnx.NPOI
                 return new CStyle(this).Then(_ => applier.Apply(_));
             else return find;
         }
+        public CStyleApplier CStyleApplier(Action<CStyleApplier> init) => NPOI.CStyleApplier.Create(init);
 
         public IEnumerable<IFont> Fonts => IntegerRange.Create(NumberOfFonts).Select(i => GetFontAt((short)i));
         public IEnumerable<CFont> CFonts => Fonts.Select(x => new CFont(this, x));

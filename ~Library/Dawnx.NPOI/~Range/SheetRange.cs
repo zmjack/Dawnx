@@ -47,9 +47,13 @@ namespace Dawnx.NPOI
         public void UpdateCStyle(Action<CStyleApplier> initApplier)
         {
             for (int row = Start.row; row <= End.row; row++)
+            {
                 for (int col = Start.col; col <= End.col; col++)
-                    Sheet[(row, col)].SetCellStyle(
-                        Sheet.Book.CStyle(initApplier.Then(x => x(Sheet[(row, col)].GetCStyle().GetApplier()))).CellStyle);
+                {
+                    var applier = Sheet[(row, col)].GetCStyle().GetApplier().Then(x => initApplier(x));
+                    Sheet[(row, col)].SetCellStyle(Sheet.Book.CStyle(applier).CellStyle);
+                }
+            }
         }
 
         public SheetRangeColumnSelector Columns => new SheetRangeColumnSelector(this);

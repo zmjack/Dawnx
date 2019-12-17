@@ -39,6 +39,10 @@ namespace Dawnx.NPOI
         public void SetCStyle(CStyle style) => SetCellStyle(style.CellStyle);
         public void SetCStyle(Action<CStyleApplier> initApplier) => SetCellStyle(Sheet.Book.CStyle(initApplier).CellStyle);
         public CStyle GetCStyle() => new CStyle(Sheet.Book, CellStyle);
+        public void UpdateCStyle(Action<CStyleApplier> initApplier)
+        {
+            SetCellStyle(Sheet.Book.CStyle(initApplier.Then(x => x(GetCStyle().GetApplier()))).CellStyle);
+        }
 
         public void SetValue(object value)
         {

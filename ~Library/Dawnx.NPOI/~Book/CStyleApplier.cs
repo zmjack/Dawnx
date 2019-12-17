@@ -9,8 +9,7 @@ namespace Dawnx.NPOI
     {
         private CStyleApplier() { }
 
-        internal static CStyleApplier Create(Action<CStyleApplier> init)
-            => new CStyleApplier().Then(_ => init?.Invoke(_));
+        internal static CStyleApplier Create(Action<CStyleApplier> init) => new CStyleApplier().Then(x => init?.Invoke(x));
 
         #region Alignment
         public HorizontalAlignment Alignment { get; set; } = HorizontalAlignment.General;

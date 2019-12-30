@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dawnx</Authors>
-    <Version>1.37.0.1</Version>
+    <Version>1.38.0</Version>
     <Company>dawnx.net</Company>
     <Description>Dawnx lite version. Less dependencies.</Description>
     <RootNamespace>Dawnx</RootNamespace>
@@ -34,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Def" Version="1.0.0.1" />
-    <PackageReference Include="NStandard" Version="0.0.8.2" />
+    <PackageReference Include="Def" Version="1.1.2" />
+    <PackageReference Include="NStandard" Version="0.0.16" />
   </ItemGroup>
 
 </Project>

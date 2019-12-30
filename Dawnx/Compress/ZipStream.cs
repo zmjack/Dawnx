@@ -7,7 +7,7 @@ namespace Dawnx.Compress
 {
     public partial class ZipStream : IDisposable
     {
-        private Stream MappedStream;
+        public Stream MappedStream { get; set; }
         public ZipFile ZipFile { get; private set; }
 
         /// <summary>

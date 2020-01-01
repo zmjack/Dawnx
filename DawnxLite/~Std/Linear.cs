@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Dawnx
 {
+    [Obsolete("Please use NStandard.Zipper.Create instead.")]
     public static class Linear
     {
         public static IEnumerable<Tuple<T1, T2>> Create<T1, T2>(IEnumerable<T1> list1, IEnumerable<T2> list2)

@@ -1,6 +1,4 @@
-﻿using Dawnx.IO;
-using Dawnx.Utilities;
-using Def;
+﻿using Def;
 using NStandard;
 using NStandard.IO;
 using System;
@@ -56,15 +54,15 @@ Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
         public Stream GetStream()
         {
             //TODO: To simply this method
-            return SequenceInputStream.Create(EnumerableEx.Concat(new[]
+            return new SequenceInputStream(EnumerableEx.Concat(new[]
             {
-                Values.Select(x => SequenceInputStream.Create(new[]
+                Values.Select(x => new SequenceInputStream(new[]
                 {
                     new MemoryStream(GetPartHeader(x.Key)),
                     x.Stream,
                     new MemoryStream(ControlChars.CrLfBytes),
                 }) as Stream),
-                Files.Select(x => SequenceInputStream.Create(new[]
+                Files.Select(x => new SequenceInputStream(new[]
                 {
                     new MemoryStream(GetPartHeader(x.Name, x.FileName)),
                     x.Stream,
@@ -72,8 +70,7 @@ Content-Disposition: form-data; name=""{name}""" + "\r\n\r\n");
                 }) as Stream),
                 new []
                 {
-                    new SequenceInputStream<Stream>(
-                        new MemoryStream(Encoding.GetBytes($"--{_boundary}--"))) as Stream,
+                    new MemoryStream(Encoding.GetBytes($"--{_boundary}--")) as Stream,
                 },
             }).ToArray());
         }

@@ -1,5 +1,4 @@
-﻿using Dawnx.Patterns;
-using Dawnx.Ranges;
+﻿using Dawnx.Ranges;
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -58,10 +57,8 @@ namespace Dawnx.Diagnostics
             foreach (var thread in threads)
                 thread.Start();
 
-            UseSpinLock.Do(
-                task: () => { },
-                until: () => ret.Count == level,
-                frequency: TimeSpan.FromSeconds(0.5));
+            do { Thread.Sleep(500); }
+            while (ret.Count != level);
 
             return ret;
         }

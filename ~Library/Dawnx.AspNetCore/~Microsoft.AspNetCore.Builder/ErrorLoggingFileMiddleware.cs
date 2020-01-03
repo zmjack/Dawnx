@@ -1,6 +1,6 @@
 ﻿using Dawnx.AspNetCore;
-using Dawnx.Lock;
 using Microsoft.AspNetCore.Http;
+using NStandard.Locks;
 using System;
 using System.IO;
 
@@ -10,14 +10,14 @@ namespace Microsoft.AspNetCore.Builder
     {
         private FileStream _loggingFileStream;
         private StreamWriter _loggingWriter;
-        private static TypeLock<ErrorLoggingFileMiddleware> HandleLock = TypeLock<ErrorLoggingFileMiddleware>.Get("");
+        private static TypeLockParser LockParser = new TypeLockParser(nameof(Dawnx));
         private string CheckHourlyFile;
 
         public ErrorLoggingFileMiddleware(RequestDelegate next) : base(next) { }
 
         protected override void Handle(HttpContext context, Exception exception)
         {
-            lock (HandleLock.InternString)
+            lock (LockParser.Parse<ErrorLoggingFileMiddleware>())
             {
                 var now = DateTime.Now;
                 var pathBase = "logs";

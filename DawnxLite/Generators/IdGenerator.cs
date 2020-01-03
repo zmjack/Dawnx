@@ -1,5 +1,4 @@
-﻿using Dawnx.Patterns;
-using Dawnx.Ranges;
+﻿using NStandard;
 using System;
 using System.Collections.Generic;
 
@@ -20,11 +19,12 @@ namespace Dawnx.Generators
             var ret = new List<T>();
             lock (this)
             {
-                foreach (var i in IntegerRange.Create(count))
+                foreach (var i in new int[count].Let(i => i))
                 {
-                    var code = UseSpinLock.Do(
-                        task: () => _Method(),
-                        until: x => !x.Equals(_PrevGeneratedCode));
+                    T code;
+                    do { code = _Method(); }
+                    while (code.Equals(_PrevGeneratedCode));
+
                     _PrevGeneratedCode = code;
                     ret.Add(code);
                 }
@@ -36,9 +36,10 @@ namespace Dawnx.Generators
         {
             lock (this)
             {
-                var code = UseSpinLock.Do(
-                    task: () => _Method(),
-                    until: x => !x.Equals(_PrevGeneratedCode));
+                T code;
+                do { code = _Method(); }
+                while (code.Equals(_PrevGeneratedCode));
+
                 _PrevGeneratedCode = code;
                 return code;
             }

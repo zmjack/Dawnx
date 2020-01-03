@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NStandard;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -12,21 +13,7 @@ namespace Dawnx.Test
             var starts = new[] { new DateTime(2018, 6, 15), new DateTime(2018, 12, 31), new DateTime(2019, 1, 1) };
             var ends = new[] { new DateTime(2018, 7, 15), new DateTime(2019, 1, 1) };
 
-            var linear = Linear.Create(starts, ends);
-            Assert.Equal(31, linear.Sum(x => (x.Item2 - x.Item1).TotalDays));
-        }
-
-        [Fact]
-        public void Test2()
-        {
-            var starts = new[] { new DateTime(2018, 6, 15), new DateTime(2018, 12, 31), new DateTime(2019, 1, 1) };
-            var ends = new[] { new DateTime(2018, 7, 15), new DateTime(2019, 1, 1) };
-
-            var zip = ends.Zip(starts, (x, y) => (y - x).TotalDays).Sum();
-
-            Assert.Equal(31, zip);
-
-            var linear = Linear.Create(starts, ends);
+            var linear = Zipper.Create(starts, ends);
             Assert.Equal(31, linear.Sum(x => (x.Item2 - x.Item1).TotalDays));
         }
 

@@ -28,9 +28,9 @@ namespace Dawnx.Algorithms.ApplyingAlgorithm.Test
             var ps = contract.Producers.Select(x => x.RefValue).ToArray();
             var cs = contract.Consumers.Select(x => x.RefValue).ToArray();
             Assert.Equal(new[] { 4, 2, 2, 6, 2 }, results.Select(x => x.Gain).ToArray());
-            foreach (var line in Linear.Create(new[] { ps[0], ps[0], ps[0], ps[1], ps[1] }, results.Select(x => x.Producer.RefValue).ToArray()))
+            foreach (var line in Zipper.Create(new[] { ps[0], ps[0], ps[0], ps[1], ps[1] }, results.Select(x => x.Producer.RefValue).ToArray()))
                 Assert.Same(line.Item1, line.Item2);
-            foreach (var line in Linear.Create(new[] { cs[0], cs[1], cs[2], cs[2], cs[3] }, results.Select(x => x.Consumer.RefValue).ToArray()))
+            foreach (var line in Zipper.Create(new[] { cs[0], cs[1], cs[2], cs[2], cs[3] }, results.Select(x => x.Consumer.RefValue).ToArray()))
                 Assert.Same(line.Item1, line.Item2);
             Assert.Equal(0, rests[0].Rest);
 

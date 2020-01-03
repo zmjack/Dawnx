@@ -12,100 +12,6 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="T:Dawnx.Lock.InstanceLock`1">
-            <summary>
-            Instance Lock
-            </summary>
-            <typeparam name="TInstance"></typeparam>
-        </member>
-        <member name="T:Dawnx.Lock.InstanceTsLock`1">
-            <summary>
-            Instance thread safe lock, inherits from <see cref="T:Dawnx.Lock.InstanceLock`1" />.
-            </summary>
-            <typeparam name="TInstance"></typeparam>
-        </member>
-        <member name="T:Dawnx.Lock.TypeLock`1">
-            <summary>
-            Type lock
-            </summary>
-            <typeparam name="TType"></typeparam>
-        </member>
-        <member name="T:Dawnx.Lock.TypeTsLock`1">
-            <summary>
-            Type thread safe lock, inherits from <see cref="T:Dawnx.Lock.InstanceLock`1" />.
-            </summary>
-            <typeparam name="TType"></typeparam>
-        </member>
-        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do(System.Func{System.Boolean},System.Object,System.Action)">
-            <summary>
-            Do a task with Double-checked locking pattern:
-                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
-            </summary>
-            <param name="if"></param>
-            <param name="lock"></param>
-            <param name="then"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do(System.Func{System.Boolean},System.String,System.Action)">
-            <summary>
-            Do a task with Double-checked locking pattern:
-                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
-            </summary>
-            <param name="if"></param>
-            <param name="lock"></param>
-            <param name="then"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do``1(System.Func{System.Boolean},System.Object,System.Func{``0},``0)">
-            <summary>
-            Do a task with Double-checked locking pattern:
-                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
-            </summary>
-            <param name="if"></param>
-            <param name="lock"></param>
-            <param name="then"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseDoubleCheck.Do``1(System.Func{System.Boolean},System.String,System.Action,``0)">
-            <summary>
-            Do a task with Double-checked locking pattern:
-                if(@if) -> lock(@locker) -> if(@if) -> do(@then).
-            </summary>
-            <param name="if"></param>
-            <param name="lock"></param>
-            <param name="then"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseSpinLock.Do(System.Action,System.Func{System.Boolean})">
-            <summary>
-            Do a task with SpinLock pattern:
-                do { @task() } until(@until())
-            </summary>
-            <param name="until"></param>
-            <param name="task"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseSpinLock.Do(System.Action,System.Func{System.Boolean},System.TimeSpan)">
-            <summary>
-            Do a task with SpinLock pattern:
-                do { @task(); sleep(@frequency) } until(@until())
-            </summary>
-            <param name="until"></param>
-            <param name="task"></param>
-            <param name="frequency"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseSpinLock.Do``1(System.Func{``0},System.Func{``0,System.Boolean})">
-            <summary>
-            Do a task with SpinLock pattern:
-                do { $param=@task(); sleep(@frequency); } until(@until($param))
-            </summary>
-            <param name="until"></param>
-            <param name="task"></param>
-        </member>
-        <member name="M:Dawnx.Patterns.UseSpinLock.Do``1(System.Func{``0},System.Func{``0,System.Boolean},System.TimeSpan)">
-            <summary>
-            Do a task with SpinLock pattern:
-                do { $param=@task(); sleep(@frequency); } until(@until($param))
-            </summary>
-            <param name="until"></param>
-            <param name="task"></param>
-            <param name="frequency"></param>
-        </member>
         <member name="M:Dawnx.Ranges.IntegerRange.Create(System.Int32)">
             <summary>
             The range type represents an immutable sequence of numbers
@@ -228,19 +134,6 @@
                 Acts as the wrapper for any data returned by the API call.
                 If the call returns no data, data should be set to null.
             </summary>
-        </member>
-        <member name="T:Dawnx.Scope`1">
-            <summary>
-            Cooperate with 'using' keyword to use thread safe <see cref="T:Dawnx.Scope`1"/>.
-            </summary>
-            <typeparam name="TSelf"></typeparam>
-        </member>
-        <member name="T:Dawnx.Scope`2">
-            <summary>
-            Cooperate with 'using' keyword to use thread safe <see cref="T:Dawnx.Scope`2"/>.
-            </summary>
-            <typeparam name="TModel"></typeparam>
-            <typeparam name="TSelf"></typeparam>
         </member>
     </members>
 </doc>

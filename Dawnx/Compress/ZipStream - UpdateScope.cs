@@ -1,4 +1,6 @@
-﻿namespace Dawnx.Compress
+﻿using NStandard;
+
+namespace Dawnx.Compress
 {
     public partial class ZipStream
     {

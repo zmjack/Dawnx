@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NStandard;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +39,7 @@ namespace Dawnx.Utilities
 
         private static object GetConvertedValue(List<object> stateContainer, object value)
         {
-            if (BasicTypeUtility.IsBasicType(value))
+            if (value.GetType().IsBasicType())
                 return value;
             else if (value.GetType().GetInterfaces().Contains(typeof(IEnumerable)))
                 return (value as IEnumerable).OfType<object>().Select(x => GetConvertedValue(stateContainer, x)).ToArray();
@@ -59,7 +60,7 @@ namespace Dawnx.Utilities
             {
                 var value = prop.GetValue(instance);
 
-                if (BasicTypeUtility.IsBasicType(prop.PropertyType, true))
+                if (prop.PropertyType.IsBasicType(true))
                     dict.Add(prop.Name, value);
                 else dict.Add(prop.Name, GetPropertyDictionary(value));
             }
@@ -84,7 +85,7 @@ namespace Dawnx.Utilities
                 {
                     var value = prop.GetValue(obj);
 
-                    if (BasicTypeUtility.IsBasicType(prop.PropertyType, true))
+                    if (prop.PropertyType.IsBasicType(true))
                         dict.Add($"{prefix}{prop.Name}", value);
                     else Write(value, ignorePrefix ? string.Empty : $"{prop.Name}_");
                 }
@@ -92,31 +93,6 @@ namespace Dawnx.Utilities
 
             Write(instance, string.Empty);
             return dict;
-        }
-
-        public static Type GetNullableType(object instance) => GetNullableType(instance.GetType().FullName);
-        public static Type GetNullableType(Type type) => GetNullableType(type.FullName);
-        public static Type GetNullableType(string typeFullName)
-        {
-            switch (typeFullName)
-            {
-                case BasicTypeUtility.@bool: return typeof(bool?);
-                case BasicTypeUtility.@byte: return typeof(byte?);
-                case BasicTypeUtility.@sbyte: return typeof(sbyte?);
-                case BasicTypeUtility.@char: return typeof(char?);
-                case BasicTypeUtility.@short: return typeof(short?);
-                case BasicTypeUtility.@ushort: return typeof(ushort?);
-                case BasicTypeUtility.@int: return typeof(int?);
-                case BasicTypeUtility.@uint: return typeof(uint?);
-                case BasicTypeUtility.@long: return typeof(long?);
-                case BasicTypeUtility.@ulong: return typeof(ulong?);
-                case BasicTypeUtility.@float: return typeof(float?);
-                case BasicTypeUtility.@double: return typeof(double?);
-                case BasicTypeUtility.@decimal: return typeof(decimal?);
-                case BasicTypeUtility.DateTime: return typeof(DateTime?);
-                case BasicTypeUtility.Guid: return typeof(Guid?);
-                default: throw new NotSupportedException();
-            }
         }
 
     }

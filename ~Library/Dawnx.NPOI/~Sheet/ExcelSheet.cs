@@ -322,11 +322,23 @@ namespace Dawnx.NPOI
         {
             foreach (var col in columns)
             {
-                int maxWidth = GetWidth(col);
-                for (int row = 0; row <= LastRowNum; row++)
+                int defaultWidth = GetWidth(col);
+                var exceptRows = EnumerableEx.Concat(
+                    MergedRanges
+                        .Where(x => x.Start.col < col && col <= x.End.col)
+                        .SelectMany(x => new int[x.End.row - x.Start.row + 1].Let(i => x.Start.row + i))
+                        .ToArray(),
+                    MergedRanges
+                        .Where(x => x.Start.col == col)
+                        .SelectMany(x => new int[x.End.row - x.Start.row].Let(i => x.Start.row + i + 1))
+                        .ToArray())
+                    .ToArray();
+
+                var rowNumbers = new int[LastRowNum + 1].Let(i => i).Where(row => !exceptRows.Contains(row));
+                var widths = rowNumbers.Select(row =>
                 {
                     var cell = this[(row, col)];
-                    if (cell.MergedRange?.For(_ => !_.IsSingleColumn || !_.IsDefinitionCell(cell)) ?? false) continue;
+                    if (cell.MergedRange?.For(_ => !_.IsSingleColumn || !_.IsDefinitionCell(cell)) ?? false) return 0;
 
                     var cstyle = cell.GetCStyle();
                     var value = cell.GetValue();
@@ -343,10 +355,11 @@ namespace Dawnx.NPOI
                     {
                         var fontSize = graphics.MeasureString(valueString, new Font(cstyle.Font.FontName, cstyle.Font.FontSize));
                         var width = fontSize.Width > 0 ? (int)((COLUMN_BORDER_PX + AUTO_SIZE_PADDING_PX + fontSize.Width) / EXCEL_WIDTH_PER_PX) : 0;
-                        if (width > maxWidth) maxWidth = width;
+                        return width;
                     }
-                }
-                SetWidth(col, maxWidth);
+                });
+
+                SetWidth(col, new[] { defaultWidth }.Concat(widths).Max());
             }
         }
 
@@ -355,7 +368,7 @@ namespace Dawnx.NPOI
             get
             {
                 return IntegerRange.Create(NumMergedRegions).Select(
-                    i => GetMergedRegion(i).For(_ => new SheetRange(this, (_.FirstRow, _.FirstColumn), (_.LastRow, _.LastColumn))));
+                    i => GetMergedRegion(i).For(x => new SheetRange(this, (x.FirstRow, x.FirstColumn), (x.LastRow, x.LastColumn))));
             }
         }
 

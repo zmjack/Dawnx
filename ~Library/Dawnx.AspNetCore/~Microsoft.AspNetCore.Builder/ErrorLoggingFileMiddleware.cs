@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Builder
 
         protected override void Handle(HttpContext context, Exception exception)
         {
-            lock (LockParser.Parse<ErrorLoggingFileMiddleware>())
+            using (LockParser.Parse<ErrorLoggingFileMiddleware>().Begin())
             {
                 var now = DateTime.Now;
                 var pathBase = "logs";

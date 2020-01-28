@@ -1,4 +1,4 @@
-﻿using Dawnx.Ranges;
+﻿using NStandard;
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -33,12 +33,12 @@ namespace Dawnx.Diagnostics
             var ret = new ConcurrentDictionary<ConcurrencyResultId, TRet>();
 
             var threads = new Thread[threadCount];
-            foreach (var threadNumber in IntegerRange.Create(threadCount))
+            foreach (var threadNumber in new int[threadCount].Let(i => i))
             {
                 threads[threadNumber] = new Thread(() =>
                 {
                     var s_count = threadNumber < mod ? div + 1 : div;
-                    foreach (var invokeNumber in IntegerRange.Create(s_count))
+                    foreach (var invokeNumber in new int[s_count].Let(i => i))
                     {
                         var threadId = Thread.CurrentThread.ManagedThreadId;
                         try

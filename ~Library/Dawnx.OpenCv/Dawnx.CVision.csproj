@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.2-dev6</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NStandard" Version="0.2.5" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.2.0.20200108" />
+  </ItemGroup>
+
+</Project>

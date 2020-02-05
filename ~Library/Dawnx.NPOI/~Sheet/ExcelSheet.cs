@@ -199,7 +199,9 @@ namespace Dawnx.NPOI
                 var @break = true;
                 for (int i = 0; i < props.Length; i++)
                 {
-                    if (this[(pos.row + rowOffset, pos.col + i)].MapedCell.CellType != CellType.Blank)
+                    var cell = this[(pos.row + rowOffset, pos.col + i)];
+                    var cellType = cell.IsMergedCell ? cell.CellType : cell.MergedRange.Cell.CellType;
+                    if (cellType != CellType.Blank)
                     {
                         @break = false;
                         break;

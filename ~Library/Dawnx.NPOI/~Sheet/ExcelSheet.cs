@@ -200,7 +200,7 @@ namespace Dawnx.NPOI
                 for (int i = 0; i < props.Length; i++)
                 {
                     var cell = this[(pos.row + rowOffset, pos.col + i)];
-                    var cellType = cell.IsMergedCell ? cell.CellType : cell.MergedRange.Cell.CellType;
+                    var cellType = cell.IsMergedCell ? cell.MergedRange.Cell.CellType : cell.CellType;
                     if (cellType != CellType.Blank)
                     {
                         @break = false;

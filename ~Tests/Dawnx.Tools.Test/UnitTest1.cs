@@ -26,7 +26,6 @@ namespace Dawnx.Tools.Test
             ConvertCppHeaderTest();
             //AesTest();
             //CompressTest();
-            //TypeScriptGeneratorTest();
         }
 
         private void ConvertCppHeaderTest()
@@ -84,21 +83,6 @@ public partial class NativeMethods {
 
                 var output = GetText(writer);
                 Assert.Equal(401, new FileInfo(Directory.GetCurrentDirectory() + "/compress.zip").Length);
-            }
-        }
-
-        private void TypeScriptGeneratorTest()
-        {
-            var args = new[] { "tsg", "-o", "Vuets/Typings/@project", "-i", "jsend" };
-            var cargs = new ConArgs(args, "-");
-
-            using (var memory = new MemoryStream())
-            using (var writer = new StreamWriter(memory))
-            {
-                Console.SetOut(writer);
-                new TypeScriptGeneratorCommand().Run(cargs);
-
-                var output = GetText(writer);
             }
         }
 

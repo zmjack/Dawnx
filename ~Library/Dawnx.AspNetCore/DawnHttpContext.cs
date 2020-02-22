@@ -24,8 +24,7 @@ namespace Dawnx.AspNetCore
 
         public static void Login(this HttpContext @this, string scheme, string userName, string[] roles = null) => LoginAsync(@this, scheme, userName, roles).Wait();
         public static async Task LoginAsync(this HttpContext @this, string scheme, string userName, string[] roles = null)
-            => await @this.SignInAsync(scheme, new ClaimsPrincipal(
-                new SimpleClaimsIdentity(scheme, userName, roles)));
+            => await @this.SignInAsync(scheme, new ClaimsPrincipal(new SimpleClaimsIdentity(scheme, userName, roles)));
 
         public static void Logout(this HttpContext @this, string shceme) => LogoutAsync(@this, shceme).Wait();
         public static async Task LogoutAsync(this HttpContext @this, string shceme) => await @this.SignOutAsync(shceme);

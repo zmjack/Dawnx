@@ -75,6 +75,7 @@ category_2
 XPath: //div[re:match('(hello|bye)')]
 hello
 bye
+
 ", sb.ToString());
         }
 

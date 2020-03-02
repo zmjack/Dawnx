@@ -13,7 +13,7 @@ namespace Dawnx.Tools.Test
         [Fact]
         public void TestEntry()
         {
-            Program.CommandContainer = new CommandContainer(new ProjectInfo
+            Program.CommandContainer = new CommandContainer("nx", new ProjectInfo
             {
                 ProjectRoot = $"{Directory.GetCurrentDirectory()}/../../../../../~Experiment/DawnxDemo",
                 ProjectName = "DawnxDemo.csproj",
@@ -21,7 +21,7 @@ namespace Dawnx.Tools.Test
                 RootNamespace = "DawnxDemo",
                 TargetFramework = "netcoreapp2.2",
                 CliPackagePath = $"{Directory.GetCurrentDirectory()}/../../../../../Dawnx.Tools",
-            }, "nx");
+            });
 
             ConvertCppHeaderTest();
             //AesTest();
@@ -31,13 +31,12 @@ namespace Dawnx.Tools.Test
         private void ConvertCppHeaderTest()
         {
             var args = new[] { "cch", "CppDll.h" };
-            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))
             {
                 Console.SetOut(writer);
-                new ConvertCppHeaderCommand().Run(cargs);
+                new ConvertCppHeaderCommand().Run(args);
 
                 var output = GetText(writer);
                 var expected = @"
@@ -57,13 +56,12 @@ public partial class NativeMethods {
         private void AesTest()
         {
             var args = new[] { "aes", "hex" };
-            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))
             {
                 Console.SetOut(writer);
-                new AesCommand().Run(cargs);
+                new AesCommand().Run(args);
 
                 var output = GetText(writer);
                 Assert.True(output.IsMatch(new Regex(@"New HexString:\t[0-9a-f]{64}")));
@@ -73,13 +71,12 @@ public partial class NativeMethods {
         private void CompressTest()
         {
             var args = new[] { "compress" };
-            var cargs = new ConArgs(args, "-");
 
             using (var memory = new MemoryStream())
             using (var writer = new StreamWriter(memory))
             {
                 Console.SetOut(writer);
-                new CompressCommand().Run(cargs);
+                new CompressCommand().Run(args);
 
                 var output = GetText(writer);
                 Assert.Equal(401, new FileInfo(Directory.GetCurrentDirectory() + "/compress.zip").Length);

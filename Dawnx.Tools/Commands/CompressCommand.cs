@@ -28,15 +28,16 @@ ConfigFile:
 ");
         }
 
-        public void Run(ConArgs cargs)
+        public void Run(string[] args)
         {
-            if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")))
+            var conArgs = new ConArgs(args, "-");
+            if (conArgs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")))
             {
                 PrintUsage();
                 return;
             }
 
-            string[] jsonFiles = cargs.Contents.Skip(1).ToArray();
+            string[] jsonFiles = conArgs.Contents.Skip(1).ToArray();
 
             if (!jsonFiles.Any())
             {

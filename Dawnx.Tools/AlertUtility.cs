@@ -1,4 +1,4 @@
-﻿using Frontend;
+﻿using Ajax;
 using NEcho;
 
 namespace Dawnx.Tools

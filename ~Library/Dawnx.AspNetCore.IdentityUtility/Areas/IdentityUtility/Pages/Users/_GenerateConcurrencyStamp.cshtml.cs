@@ -1,4 +1,4 @@
-﻿using Frontend;
+﻿using Ajax;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

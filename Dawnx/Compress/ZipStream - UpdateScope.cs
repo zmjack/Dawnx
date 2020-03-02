@@ -4,11 +4,14 @@ namespace Dawnx.Compress
 {
     public partial class ZipStream
     {
-        public class UpdateScope : Scope<ZipStream, UpdateScope>
+        public class UpdateScope : Scope<UpdateScope>
         {
-            public UpdateScope(ZipStream model) : base(model)
+            public readonly ZipStream Model;
+
+            public UpdateScope(ZipStream model)
             {
-                model.ZipFile.BeginUpdate();
+                Model = model;
+                Model.ZipFile.BeginUpdate();
             }
 
             public override void Disposing()

@@ -3,18 +3,23 @@ using NStandard;
 
 namespace Dawnx.AspNetCore.LiveAccount
 {
-    public class LiveTransaction : Scope<IDbContextTransaction, LiveTransaction>
+    public class LiveTransaction : Scope<LiveTransaction>
     {
+        public readonly IDbContextTransaction Transaction;
+
         public LiveTransaction(ILiveManager manager)
-            : this(manager.Context.Database.BeginTransaction())
         {
+            Transaction = manager.Context.Database.BeginTransaction();
         }
-        private LiveTransaction(IDbContextTransaction model) : base(model) { }
+        private LiveTransaction(IDbContextTransaction model)
+        {
+            Transaction = model;
+        }
 
         public override void Disposing()
         {
-            Model.Commit();
-            Model.Dispose();
+            Transaction.Commit();
+            Transaction.Dispose();
         }
 
     }

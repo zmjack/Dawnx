@@ -37,7 +37,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>default</LangVersion>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>D:\TeamProjects\Dawnx\Dawnx.Tools\dotnet-nx.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 

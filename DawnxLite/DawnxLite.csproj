@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <PackageReference Include="Def" Version="1.1.2" />
-    <PackageReference Include="NStandard" Version="0.3.2" />
+    <PackageReference Include="NStandard" Version="0.3.5" />
   </ItemGroup>
 
 </Project>

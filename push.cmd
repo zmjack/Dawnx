@@ -2,6 +2,7 @@
 nuget push "Dawnx/bin/Release/Dawnx.1.41.0.nupkg" -source nuget.org
 nuget push "Dawnx.Diagnostics/bin/Release/Dawnx.Diagnostics.1.41.0.nupkg" -source nuget.org
 nuget push "DawnxLite/bin/Release/DawnxLite.1.41.0.nupkg" -source nuget.org
+nuget push "Dawnx.Tools/bin/Release/Dawnx.Tools.0.0.2.nupkg" -source nuget.org
 
 ::==== ~Dawnx.Library ====
 nuget push "~Library/Dawnx.AspNetCore/bin/Release/Dawnx.AspNetCore.1.41.0.nupkg" -source nuget.org

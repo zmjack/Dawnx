@@ -24,7 +24,7 @@ namespace Dawnx.Tools
 Usage: dotnet nx (cp|compress) [ConfigFile(.json)=compress.json] ...
 
 ConfigFile:
-    {"<value>".PadRight(20)}{"\t"}The path of configuration file. The default file is 'compress.json' (If it doesn't exist, create it).
+    {"<value>",20}{"\t"}The path of configuration file. The default file is 'compress.json' (If it doesn't exist, create it).
 ");
         }
 
@@ -103,42 +103,46 @@ ConfigFile:
                                             {
                                                 var file = source.Value.Value<string>();
                                                 if (File.Exists(file))
-                                                    zip.AddFileEntry(Path.Combine(source.Name, Path.GetFileName(file)), file);
+                                                    zip.AddFileEntry(Path.Combine(dir, Path.GetFileName(file)), file);
                                                 else throw new FileNotFoundException($"Can not find the file({file}).");
                                             }
                                             break;
 
                                         case JTokenType.Array:
-                                            foreach (var file in source.Value.Value<JArray>().Select(x => x.Value<string>()))
+                                            var files = source.Value.Value<JArray>().Select(x => x.Value<string>());
+                                            zip.AddDictionary(dir);
+                                            foreach (var file in files)
                                             {
                                                 if (File.Exists(file))
-                                                    zip.AddFileEntry(Path.Combine(source.Name, Path.GetFileName(file)), file);
+                                                    zip.AddFileEntry(Path.Combine(dir, Path.GetFileName(file)), file);
                                                 else throw new FileNotFoundException($"Can not find the file({file}).");
                                             }
                                             break;
 
                                         default:
-                                            throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name})'s value must be a file path or file path list.");
+                                            throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${dir})'s value must be a file path or file path list.");
                                     }
 
                                 }
-                                else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name}) must be a directory path or file path.");
+                                else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${dir}) must be a directory path or file path.");
                             }
                             // Guess the name is a file name
                             else
                             {
-                                if (FileUtility.IsFilePath(source.Name))
+                                var embededFile = source.Name;
+
+                                if (FileUtility.IsFilePath(embededFile))
                                 {
                                     if (source.Value.Type == JTokenType.String)
                                     {
                                         var file = source.Value.Value<string>();
                                         if (File.Exists(file))
-                                            zip.AddFileEntry(source.Name, file);
+                                            zip.AddFileEntry(embededFile, file);
                                         else throw new FileNotFoundException($"Can not find the file({file}).");
                                     }
-                                    else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name})'s value must be a file path.");
+                                    else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${embededFile})'s value must be a file path.");
                                 }
-                                else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${source.Name}) must be a directory path or file path.");
+                                else throw new ArgumentException($"The compress json file's property(${nameof(sources)}/${embededFile}) must be a directory path or file path.");
                             }
                         }
 
@@ -151,6 +155,10 @@ ConfigFile:
 
         }
 
+        public void Run(string[] args)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

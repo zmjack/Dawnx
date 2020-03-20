@@ -24,18 +24,19 @@ Options:
 ");
         }
 
-        public void Run(ConArgs cargs)
+        public void Run(string[] args)
         {
-            if (cargs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")) || cargs.Contents.Length < 2)
+            var conArgs = new ConArgs(args, "-");
+            if (conArgs.Properties.For(x => x.ContainsKey("-h") || x.ContainsKey("--help")) || conArgs.Contents.Length < 2)
             {
                 PrintUsage();
                 return;
             }
 
-            var headerFile = cargs[1];
+            var headerFile = conArgs[1];
             var headerName = Path.GetFileNameWithoutExtension(headerFile);
-            var language = cargs["-l"] ?? cargs["--lang"] ?? "cs";
-            var outFile = cargs["-o"] ?? cargs["--out"] ?? $"PI_{headerName}.{language}";
+            var language = conArgs["-l"] ?? conArgs["--lang"] ?? "cs";
+            var outFile = conArgs["-o"] ?? conArgs["--out"] ?? $"PI_{headerName}.{language}";
 
             var _headerFile = $"_{headerFile}";
             var content = File.ReadAllText(headerFile)

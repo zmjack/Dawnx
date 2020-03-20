@@ -22,15 +22,14 @@ namespace Dawnx.Tools
             Http.RegisterSystemLogin(true);
             Http.RegisterProxy(true);
 
-            CommandContainer = new CommandContainer(ProjectInfo.GetCurrent(), "nx");
+            CommandContainer = new CommandContainer("nx", ProjectInfo.GetCurrent());
             CommandContainer.CacheCommands(Assembly.GetExecutingAssembly());
 
             PrintWelcome();
             CheckDownloadDirectory();
 
-            var conArgs = new ConArgs(args, "-");
             CommandContainer.PrintProjectInfo();
-            CommandContainer.Run(conArgs);
+            CommandContainer.Run(args);
         }
 
         public static void PrintWelcome()

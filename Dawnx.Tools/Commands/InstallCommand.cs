@@ -1,6 +1,7 @@
 ﻿using Dawnx.Net.Web;
 using Dawnx.Utilities;
 using DotNetCli;
+using Ajax;
 using NEcho;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,9 +19,10 @@ namespace Dawnx.Tools
             throw new NotImplementedException();
         }
 
-        public void Run(ConArgs args)
+        public void Run(string[] args)
         {
-            var name = args[1];
+            var conArgs = new ConArgs(args, "-");
+            var name = conArgs[1];
 
             var resp = Http.PostFor<JSend>($"{Program.SUPPORT_URL}/Install", new Dictionary<string, object>
             {
@@ -71,7 +73,7 @@ namespace Dawnx.Tools
                                     };
 
                                     int retry = 0, allowedRetry = 3;
-                                    retry:
+                                retry:
                                     try
                                     {
                                         web.GetDownload(file, url);

@@ -1,4 +1,5 @@
-﻿using NEcho;
+﻿using Ajax;
+using NEcho;
 
 namespace Dawnx.Tools
 {

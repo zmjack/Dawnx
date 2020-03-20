@@ -12,9 +12,10 @@ namespace Dawnx.Tools
             throw new NotImplementedException();
         }
 
-        public void Run(ConArgs cargs)
+        public void Run(string[] args)
         {
-            var aesKey = cargs[1] == "hex" ? AesKey.HexString : AesKey.Base64String;
+            var conArgs = new ConArgs(args, "-");
+            var aesKey = conArgs[1] == "hex" ? AesKey.HexString : AesKey.Base64String;
 
             var aes = new AesProvider();
             Console.WriteLine($"New {aesKey.ToString()}:\t{aes.ExportKey(aesKey)}");

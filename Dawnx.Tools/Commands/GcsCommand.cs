@@ -1,5 +1,6 @@
 ﻿using Dawnx.Net.Web;
 using DotNetCli;
+using Ajax;
 using NEcho;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Dawnx.Tools
             throw new NotImplementedException();
         }
 
-        public void Run(ConArgs args)
+        public void Run(string[] args)
         {
-            var jsonFile = args[1];
+            var conArgs = new ConArgs(args, "-");
+            var jsonFile = conArgs[1];
 
             if (!AlertUtility.ConfirmUseOnlineService()) return;
             Echo.Print("Connect to dawnx service...").Line();

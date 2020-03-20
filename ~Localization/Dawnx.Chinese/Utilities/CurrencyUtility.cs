@@ -64,6 +64,7 @@ namespace Dawnx.Chinese
                 return sb.ToString();
             }
 
+            //TODO: Use Linqsharp to calculate
             var levelParts = integer.ToString()
                 .For(parts => parts.AsKvPairs()
                     .GroupBy(x => (x.Key + (4 - parts.Length % 4)) / 4)

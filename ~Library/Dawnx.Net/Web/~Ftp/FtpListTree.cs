@@ -51,7 +51,7 @@ namespace Dawnx.Net.Web
                      */
                     AddRange(lines.Select(line =>
                     {
-                        var groups = line.ProjectToArray(new Regex(@"^(.+?(?=AM|PM)(?:AM|PM))\s+(<DIR>|\d+)\s+(.+)$"));
+                        var groups = line.Resolve(new Regex(@"^(.+?(?=AM|PM)(?:AM|PM))\s+(<DIR>|\d+)\s+(.+)$"));
                         DateTime lastWriteTime;
                         DateTime.TryParseExact(groups[1][0], "MM-dd-yy  hh:mmtt", new CultureInfo("en-US"), DateTimeStyles.None, out lastWriteTime);
                         var isDirectory = groups[2][0] == "<DIR>";
@@ -79,10 +79,10 @@ namespace Dawnx.Net.Web
                      */
                     AddRange(lines.Select(line =>
                     {
-                        var groups = line.ProjectToArray(new Regex(@"^(d?).+?\s+\d+\s+.+?\s+.+?\s+(\d+)\s+(.+)\s+(.+)$"));
+                        var groups = line.Resolve(new Regex(@"^(d?).+?\s+\d+\s+.+?\s+.+?\s+(\d+)\s+(.+)\s+(.+)$"));
                         var lastWriteTime = groups[3][0].For(timePart =>
                         {
-                            var creationTimeGroups = timePart.ProjectToArray(new Regex(@"(\w+)\s+(\d+)\s+(.+)"));
+                            var creationTimeGroups = timePart.Resolve(new Regex(@"(\w+)\s+(\d+)\s+(.+)"));
                             var month = MonthSequence.GetMonth(creationTimeGroups[1][0]);
                             var day = int.Parse(creationTimeGroups[2][0]);
                             DateTime lastModify;

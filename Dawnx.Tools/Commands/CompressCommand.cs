@@ -156,10 +156,6 @@ ConfigFile:
 
         }
 
-        public void Run(string[] args)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

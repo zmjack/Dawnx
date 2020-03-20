@@ -111,7 +111,8 @@ ConfigFile:
 
                                         case JTokenType.Array:
                                             var files = source.Value.Value<JArray>().Select(x => x.Value<string>());
-                                            zip.AddDictionary(dir);
+
+                                            if (!dir.IsNullOrWhiteSpace()) zip.AddDictionary(dir);
                                             foreach (var file in files)
                                             {
                                                 if (File.Exists(file))

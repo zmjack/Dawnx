@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
+using NStandard;
 using System;
 using System.IO;
 using System.Linq;
@@ -148,17 +149,21 @@ namespace Dawnx.Compress
         /// <param name="predicate"></param>
         public void Extract(string path, Func<ZipEntry, bool> predicate)
         {
-            foreach (var entry in ZipFile.OfType<ZipEntry>().Where(predicate))
+            var entries = ZipFile.OfType<ZipEntry>().Where(predicate);
+            foreach (var entry in entries)
             {
                 var filePath = Path.Combine(path, entry.Name);
 
                 var dir = new DirectoryInfo(Path.GetDirectoryName(filePath));
                 if (!dir.Exists) dir.Create();
 
-                using (var file = new FileStream(Path.Combine(path, entry.Name), FileMode.Create))
-                using (var stream = ZipFile.GetInputStream(entry))
+                if (!Path.GetFileName(entry.Name).IsNullOrWhiteSpace())
                 {
-                    ZipFile.GetInputStream(entry).CopyTo(file, 1024 * 1024);
+                    using (var file = new FileStream(Path.Combine(path, entry.Name), FileMode.Create))
+                    using (var stream = ZipFile.GetInputStream(entry))
+                    {
+                        ZipFile.GetInputStream(entry).CopyTo(file, 1024 * 1024);
+                    }
                 }
             }
             ZipFile.OfType<ZipEntry>().Where(predicate);

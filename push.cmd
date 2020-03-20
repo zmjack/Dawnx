@@ -1,7 +1,10 @@
 ::==== ~Root ====
-nuget push "Dawnx/bin/Release/Dawnx.1.45.0.nupkg" -source nuget.org
+nuget push "Dawnx/bin/Release/Dawnx.1.45.0.1.nupkg" -source nuget.org
 nuget push "Dawnx.Diagnostics/bin/Release/Dawnx.Diagnostics.1.45.0.nupkg" -source nuget.org
 nuget push "DawnxLite/bin/Release/DawnxLite.1.45.0.nupkg" -source nuget.org
+
+::==== Dawnx.Tools ====
+nuget push "Dawnx.Tools/bin/Release/dotnet-nx.0.0.6.nupkg" -source nuget.org
 
 ::==== ~Dawnx.Library ====
 nuget push "~Library/Dawnx.AspNetCore/bin/Release/Dawnx.AspNetCore.1.45.0.nupkg" -source nuget.org
@@ -15,8 +18,5 @@ nuget push "~Library/Dawnx.Xml/bin/Release/Dawnx.Xml.1.45.0.nupkg" -source nuget
 
 ::==== Dawnx.Chinese ====
 nuget push "~Localization/Dawnx.Chinese/bin/Release/Dawnx.Chinese.1.45.0.nupkg" -source nuget.org
-
-::==== Dawnx.Tools ====
-nuget push "Dawnx.Tools/bin/Release/dotnet-nx.0.0.5.nupkg" -source nuget.org
 
 pause

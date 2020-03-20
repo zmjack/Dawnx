@@ -18,6 +18,7 @@ namespace Dawnx.Compress.Test
 
             using (var zip = new ZipStream("simple.zip"))
             {
+                zip.AddDictionary("123/111");
                 zip.AddEntry("adir/english.txt", "this is a simple text".Bytes());
             }
 

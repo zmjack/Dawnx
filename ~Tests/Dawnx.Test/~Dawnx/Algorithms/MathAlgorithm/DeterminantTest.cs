@@ -8,24 +8,24 @@ namespace Dawnx.Algorithms.MathAlgorithm.Test
         [Fact]
         public void Test1()
         {
-            new Determinant(new double[,]
+            var determinant = new Determinant(new double[,]
             {
                 { 2, 3 },
                 { 7, 8 },
-            })
-            .Then(_ => Assert.Equal(-5, _.Value));
+            });
+            Assert.Equal(-5, determinant.Value);
         }
 
         [Fact]
         public void Test2()
         {
-            new Determinant(new double[,]
+            var determinant = new Determinant(new double[,]
             {
                 { 2, 3, 4 },
                 { 3, 4, 5 },
                 { 6, 7, 8 },
-            })
-            .Then(_ => Assert.Equal(0, _.Value));
+            });
+            Assert.Equal(0, determinant.Value);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Ajax;
-using NEcho;
+using Ink;
 
 namespace Dawnx.Tools
 {

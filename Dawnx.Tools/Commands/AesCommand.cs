@@ -1,6 +1,6 @@
 ﻿using Dawnx.Security.AesSecurity;
 using DotNetCli;
-using NEcho;
+using Ink;
 using System;
 
 namespace Dawnx.Tools

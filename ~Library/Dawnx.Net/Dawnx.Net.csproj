@@ -14,7 +14,7 @@
     <Owners>zmjack</Owners>
     <Authors>Dawnx</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.45.0</Version>
+    <Version>1.46.0</Version>
     <Copyright>Copyright © dawnx.net 2018-2019</Copyright>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
@@ -37,8 +37,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

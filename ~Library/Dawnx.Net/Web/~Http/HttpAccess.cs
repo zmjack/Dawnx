@@ -155,7 +155,7 @@ namespace Dawnx.Net.Web
                 default:
                 case MimeMap.APPLICATION_X_WWW_FORM_URLENCODED:
                     var query = new List<string>();
-                    foreach (var data in updata)
+                    foreach (var data in updata.Where(x => x.Value != null))
                     {
                         var values = NormalizeStringValues(data.Value);
                         query.AddRange(values.Select(value => $"{data.Key}={WebUtility.UrlEncode(value)}"));
@@ -176,7 +176,7 @@ namespace Dawnx.Net.Web
 
                 case MimeMap.MULTIPART_FORM_DATA:
                     var formData = new HttpFormData(encoding);
-                    foreach (var data in updata)
+                    foreach (var data in updata.Where(x => x.Value != null))
                     {
                         var values = NormalizeStringValues(data.Value);
                         foreach (var value in values)

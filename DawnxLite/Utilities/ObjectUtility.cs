@@ -32,6 +32,7 @@ namespace Dawnx.Utilities
                 var value = prop.GetValue(obj);
                 if (value != null)
                     dict[prop.Name] = GetConvertedValue(stateContainer, value);
+                else dict[prop.Name] = null;
             }
 
             return dict;

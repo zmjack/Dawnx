@@ -73,7 +73,7 @@ namespace Dawnx.Net.Web
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.Reading(bufferSize, (buffer, readLength) =>
+                    stream.Scan(bufferSize, (buffer, readLength) =>
                     {
                         receiver.Write(buffer, 0, readLength);
                         received += readLength;
@@ -101,7 +101,7 @@ namespace Dawnx.Net.Web
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.Reading(bufferSize, (buffer, readLength) =>
+                    stream.Scan(bufferSize, (buffer, readLength) =>
                     {
                         memory.Write(buffer, 0, readLength);
                         received += readLength;
@@ -121,7 +121,7 @@ namespace Dawnx.Net.Web
             request.ContentLength = bodyStream.Length;
             using (var stream = request.GetRequestStream())
             {
-                bodyStream.Writing(stream, bufferSize, (writeTarget, buffer, totalWrittenLength) =>
+                bodyStream.ScanAndWriteTo(stream, bufferSize, (writeTarget, buffer, totalWrittenLength) =>
                 {
                     UploadProgress?.Invoke(this, totalWrittenLength, bodyStream.Length);
                 });

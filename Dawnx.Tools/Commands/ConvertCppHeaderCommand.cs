@@ -4,6 +4,7 @@ using NStandard;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Dawnx.Tools
@@ -35,8 +36,8 @@ Options:
 
             var headerFile = conArgs[1];
             var headerName = Path.GetFileNameWithoutExtension(headerFile);
-            var language = conArgs["-l"] ?? conArgs["--lang"] ?? "cs";
-            var outFile = conArgs["-o"] ?? conArgs["--out"] ?? $"PI_{headerName}.{language}";
+            var language = conArgs["-l"].Concat(conArgs["--lang"]).FirstOrDefault() ?? "cs";
+            var outFile = conArgs["-o"].Concat(conArgs["--out"]).FirstOrDefault() ?? $"PI_{headerName}.{language}";
 
             var _headerFile = $"_{headerFile}";
             var content = File.ReadAllText(headerFile)

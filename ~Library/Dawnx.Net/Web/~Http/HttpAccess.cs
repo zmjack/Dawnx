@@ -86,7 +86,7 @@ namespace Dawnx.Net.Web
                 long received = 0;
                 using (var stream = response.GetResponseStream())
                 {
-                    stream.Reading(bufferSize, (buffer, readLength) =>
+                    stream.Scan(bufferSize, (buffer, readLength) =>
                     {
                         receiver.Write(buffer, 0, readLength);
                         received += readLength;
@@ -162,13 +162,13 @@ namespace Dawnx.Net.Web
                     }
                     var queryString = query.Join("&");
 
-                    if (method.In(HttpVerb.GET, HttpVerb.DELETE))
+                    if (new[] { HttpVerb.GET, HttpVerb.DELETE }.Contains(method))
                     {
                         if (!url.Contains("?"))
                             url = $"{url}?{queryString}";
                         else url = $"{url}&{queryString}";
                     }
-                    else if (method.In(HttpVerb.POST, HttpVerb.PUT))
+                    else if (new[] { HttpVerb.POST, HttpVerb.PUT }.Contains(method))
                     {
                         bodyStream = new MemoryStream(queryString.Bytes(encoding));
                     }
@@ -239,7 +239,7 @@ namespace Dawnx.Net.Web
                 request.ContentLength = bodyStream.Length;
                 using (var stream = request.GetRequestStream())
                 {
-                    bodyStream.Writing(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
+                    bodyStream.ScanAndWriteTo(stream, RECOMMENDED_BUFFER_SIZE, (writeTarget, buffer, totalWrittenLength) =>
                     {
                         UploadProgress?.Invoke(this, url, totalWrittenLength, bodyStream.Length);
                     });

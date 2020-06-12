@@ -70,7 +70,7 @@ namespace Dawnx.Security.Test
             Aes.Create().Then(_ =>
             {
                 var now = DateTime.Now.ToString();
-                var flow = new Flow<byte[], byte[], string>(_.Encrypt, BytesConvert.Base64);
+                var flow = new Flow<byte[], string>(x => BytesConvert.Base64(_.Encrypt(x)));
                 var encrypted = _.Encrypt(now.ToString().Bytes(Encoding.UTF8)).Flow(BytesFlow.Base64);
                 Assert.Equal(now, _.Decrypt(encrypted.Flow(BytesFlow.FromBase64)).String(Encoding.UTF8));
             });

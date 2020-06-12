@@ -132,13 +132,13 @@ namespace Dawnx.AspNetCore.LiveAccount
             {
                 var find = LiveUserRoles.Where(x => x.User == userId && x.Role == liveRole.Id);
 
-                if (find.Any() && !liveRole.Id.In(liveRoleIds))
+                if (find.Any() && !liveRoleIds.Contains(liveRole.Id))
                 {
                     LiveUserRoles.RemoveRange(find);
                     continue;
                 }
 
-                if (!find.Any() && liveRole.Id.In(liveRoleIds))
+                if (!find.Any() && liveRoleIds.Contains(liveRole.Id))
                 {
                     LiveUserRoles.Add(new LiveUserRole
                     {
@@ -171,13 +171,13 @@ namespace Dawnx.AspNetCore.LiveAccount
             {
                 var find = LiveRoleOperations.Where(x => x.Role == liveRoleId && x.Operation == liveOperation.Id);
 
-                if (find.Any() && !liveOperation.Id.In(liveOperationIds))
+                if (find.Any() && !liveOperationIds.Contains(liveOperation.Id))
                 {
                     LiveRoleOperations.RemoveRange(find);
                     continue;
                 }
 
-                if (!find.Any() && liveOperation.Id.In(liveOperationIds))
+                if (!find.Any() && liveOperationIds.Contains(liveOperation.Id))
                 {
                     LiveRoleOperations.Add(new LiveRoleOperation
                     {
@@ -204,13 +204,13 @@ namespace Dawnx.AspNetCore.LiveAccount
             {
                 var find = LiveOperationActions.Where(x => x.Operation == liveOperationId && x.Action == liveAction.Id);
 
-                if (find.Any() && !liveAction.Id.In(liveActionIds))
+                if (find.Any() && !liveActionIds.Contains(liveAction.Id))
                 {
                     LiveOperationActions.RemoveRange(find);
                     continue;
                 }
 
-                if (!find.Any() && liveAction.Id.In(liveActionIds))
+                if (!find.Any() && liveActionIds.Contains(liveAction.Id))
                 {
                     LiveOperationActions.Add(new LiveOperationAction
                     {

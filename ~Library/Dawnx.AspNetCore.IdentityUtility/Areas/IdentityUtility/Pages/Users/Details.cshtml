@@ -46,7 +46,7 @@
                     var id = Guid.NewGuid();
                     <li>
                         <input type="checkbox" id="@id" name="Roles" value="@role"
-                               disabled @(role.In(UserRoles) ? "checked" : "") />
+                               disabled @(UserRoles.Contains(role) ? "checked" : "") />
                         <label for="@id">@role</label>
                     </li>
                 }

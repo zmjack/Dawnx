@@ -29,7 +29,7 @@
                     var id = Guid.NewGuid();
                     <li>
                         <input type="checkbox" id="@id" name="LiveRoles" value="@liveRole"
-                               disabled @(liveRole.In(UserLiveRoles) ? "checked" : "") />
+                               disabled @(UserLiveRoles.Contains(liveRole) ? "checked" : "") />
                         <label for="@id">@liveRole</label>
                     </li>
                 }

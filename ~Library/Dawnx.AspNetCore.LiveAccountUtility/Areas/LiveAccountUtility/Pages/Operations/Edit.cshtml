@@ -33,7 +33,7 @@
                         var id = Guid.NewGuid();
                         <li>
                             <input type="checkbox" id="@id" name="LiveActions" value="@liveAction.Id"
-                                   @(liveAction.In(OperationLiveActions) ? "checked" : "") />
+                                   @(OperationLiveActions.Contains(liveAction) ? "checked" : "") />
                             <label for="@id">@liveAction.Name</label>
                         </li>
                     }

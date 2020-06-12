@@ -1,6 +1,7 @@
 ﻿using Def;
 using NStandard;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -14,10 +15,12 @@ namespace Dawnx.Net.Web.Processors
             Dictionary<string, object> updata,
             Dictionary<string, object> upfiles)
         {
-            if (response.StatusCode.In(
+            if (new[]
+            {
                 HttpStatusCode.MovedPermanently,        // 301
                 HttpStatusCode.Redirect,                // 302
-                HttpStatusCode.TemporaryRedirect))      // 307                
+                HttpStatusCode.TemporaryRedirect,       // 307
+            }.Contains(response.StatusCode))
             {
                 string location = response.Headers["Location"];
                 if (!new Regex("^https?://").Match(location).Success)

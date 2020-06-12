@@ -33,7 +33,7 @@
                         var id = Guid.NewGuid();
                         <li>
                             <input type="checkbox" id="@id" name="liveRoles" value="@liveRole.Id"
-                                   @(liveRole.In(UserLiveRoles) ? "checked" : "") />
+                                   @(UserLiveRoles.Contains(liveRole) ? "checked" : "") />
                             <label for="@id">@liveRole.Name</label>
                             <ul class="live_operation" style="color:#a9a9a9">
                                 @foreach (var operationName in liveRole.RoleOperations.Select(x => x.OperationLink.Name))

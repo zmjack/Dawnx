@@ -3,6 +3,7 @@ using NStandard;
 using System;
 using System.Data;
 using System.Linq;
+using System.Net.Http.Headers;
 
 namespace Dawnx.NPOI
 {
@@ -17,13 +18,6 @@ namespace Dawnx.NPOI
         }
 
         public string CellName => Sheet.GetCellName((RowIndex, ColumnIndex));
-
-        public static SheetCell operator |(SheetCell @this, bool value) => @this.Then(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, double value) => @this.Then(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, DateTime value) => @this.Then(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, IRichTextString value) => @this.Then(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, string value) => @this.Then(_ => _.SetValue(value));
-        public static SheetCell operator |(SheetCell @this, object value) => @this.Then(_ => _.SetValue(value));
 
         public static implicit operator bool(SheetCell @this) => @this.MapedCell.BooleanCellValue;
         public static implicit operator double(SheetCell @this) => @this.MapedCell.NumericCellValue;
@@ -49,41 +43,80 @@ namespace Dawnx.NPOI
         {
             switch (value)
             {
-                case null: String = ""; break;
-                case bool v: Boolean = v; break;
-                case short v: Number = v; break;
-                case ushort v: Number = v; break;
-                case int v: Number = v; break;
-                case uint v: Number = v; break;
-                case long v: Number = v; break;
-                case ulong v: Number = v; break;
-                case float v: Number = v; break;
-                case double v: Number = v; break;
-                case DateTime v: DateTime = v; break;
-                case IRichTextString v: RichTextString = v; break;
-                case string v:
-                    if (v.StartsWith("=")) Formula = v.Slice(1);
-                    else String = v;
-                    break;
+                case null: SetValue(null as string); break;
+                case bool v: SetValue(v); break;
 
-                case SheetCell v when v.MapedCell.CellType == CellType.Blank: break;
-                case SheetCell v when v.MapedCell.CellType == CellType.Error: break;
-                case SheetCell v when v.MapedCell.CellType == CellType.Unknown: break;
-                case SheetCell v when v.MapedCell.CellType == CellType.Boolean: Boolean = v.Boolean; break;
-                case SheetCell v when v.MapedCell.CellType == CellType.Numeric: Number = v.Number; break;
-                case SheetCell v when v.MapedCell.CellType == CellType.String: String = v.String; break;
-                case SheetCell v when v.MapedCell.CellType == CellType.Formula: Formula = v.Formula; break;
+                case short v: SetValue(v); break;
+                case ushort v: SetValue(v); break;
+                case int v: SetValue(v); break;
+                case uint v: SetValue(v); break;
+                case long v: SetValue(v); break;
+                case ulong v: SetValue(v); break;
+                case float v: SetValue(v); break;
+                case double v: SetValue(v); break;
+                case DateTime v: SetValue(v); break;
+                case IRichTextString v: SetValue(v); break;
+                case string v: SetValue(v); break;
+                case SheetCell v: SetValue(v); break;
 
                 case CValue v:
                     SetValue(v.Value);
-                    if (!(v.Style is null))
-                        SetCStyle(v.Style);
-
+                    if (!(v.Style is null)) SetCStyle(v.Style);
+                    if (!(v.DataFormat is null)) SetCStyle(x => x.DataFormat = v.DataFormat);
                     break;
 
                 case object v: String = v.ToString(); break;
             }
         }
+
+        public void SetValue(bool value) => MapedCell.SetCellValue(value);
+        public void SetValue(bool? value)
+        {
+            if (value.HasValue) SetValue(value.Value);
+            else MapedCell.SetCellValue((string)null);
+        }
+        public void SetValue(double value) => MapedCell.SetCellValue(value);
+        public void SetValue(double? value)
+        {
+            if (value.HasValue) SetValue(value.Value);
+            else MapedCell.SetCellValue((string)null);
+        }
+        public void SetValue(DateTime value, string dataFormat = "yyyy/M/d")
+        {
+            var book = Sheet.Book;
+            MapedCell.SetCellValue(value);
+            SetCStyle(x => x.DataFormat = dataFormat);
+        }
+        public void SetValue(DateTime? value, string dataFormat = "yyyy/M/d")
+        {
+            if (value.HasValue) SetValue(value.Value, dataFormat);
+            else MapedCell.SetCellValue((string)null);
+        }
+        public void SetValue(IRichTextString value) => MapedCell.SetCellValue(value);
+        public void SetValue(string value)
+        {
+            if (value is null) MapedCell.SetCellValue(value);
+            else
+            {
+                if (value.StartsWith("=")) SetFormulaValue(value.Substring(1));
+                else MapedCell.SetCellValue(value);
+            }
+        }
+        public void SetValue(SheetCell value)
+        {
+            switch (value.MapedCell.CellType)
+            {
+                case CellType.Blank: break;
+                case CellType.Error: break;
+                case CellType.Unknown: break;
+                case CellType.Boolean: Boolean = value.Boolean; break;
+                case CellType.Numeric: Number = value.Number; break;
+                case CellType.String: String = value.String; break;
+                case CellType.Formula: Formula = value.Formula; break;
+            }
+        }
+        public void SetFormulaValue(string value) => MapedCell.SetCellFormula(value);
+
         public object GetValue()
         {
             switch (MapedCell.CellType)
@@ -100,51 +133,32 @@ namespace Dawnx.NPOI
         public string Formula
         {
             get => MapedCell.CellFormula;
-            set => MapedCell.SetCellFormula(value);
+            set => SetFormulaValue(value);
         }
         public bool? Boolean
         {
             get => MapedCell.BooleanCellValue;
-            set
-            {
-                if (value.HasValue)
-                    MapedCell.SetCellValue(value.Value);
-                else MapedCell.SetCellValue((string)null);
-            }
+            set => SetValue(value);
         }
         public DateTime? DateTime
         {
             get => MapedCell.DateCellValue;
-            set
-            {
-                if (value.HasValue)
-                {
-                    var book = Sheet.Book;
-                    MapedCell.SetCellValue(value.Value);
-                    SetCStyle(book.CStyle(s => s.DataFormat = "yyyy-M-d"));
-                }
-                else MapedCell.SetCellValue((string)null);
-            }
+            set => SetValue(value);
         }
         public double? Number
         {
             get => MapedCell.NumericCellValue;
-            set
-            {
-                if (value.HasValue)
-                    MapedCell.SetCellValue(value.Value);
-                else MapedCell.SetCellValue((string)null);
-            }
+            set => SetValue(value);
         }
         public IRichTextString RichTextString
         {
             get => MapedCell.RichStringCellValue;
-            set => MapedCell.SetCellValue(value);
+            set => SetValue(value);
         }
         public string String
         {
             get => MapedCell.StringCellValue;
-            set => MapedCell.SetCellValue(value);
+            set => SetValue(value);
         }
 
         public ICellStyle CellStyle

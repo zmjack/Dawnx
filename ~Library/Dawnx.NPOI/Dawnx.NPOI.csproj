@@ -12,7 +12,7 @@
     <Authors>Dawnx</Authors>
     <Owners>zmjack</Owners>
     <Company>dawnx.net</Company>
-    <Version>1.48.0</Version>
+    <Version>1.48.1-alpha3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>http://dawnx.net/logo32.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/zmjack/Dawnx</PackageProjectUrl>
@@ -42,11 +42,7 @@
     <PackageReference Include="ZKWeb.System.Drawing" Version="4.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <ProjectReference Include="..\..\Dawnx\Dawnx.csproj" />
   </ItemGroup>
 

@@ -66,10 +66,8 @@ namespace Dawnx.NPOI
         }
         public SheetCell this[string cellName] => this[GetCellPos(cellName)];
 
-        public SheetRange this[(int row, int col) start, (int row, int col) end]
-            => new SheetRange(this, start, end);
-        public SheetRange this[string start, string end]
-            => new SheetRange(this, GetCellPos(start), GetCellPos(end));
+        public SheetRange this[(int row, int col) start, (int row, int col) end] => new SheetRange(this, start, end);
+        public SheetRange this[string start, string end] => new SheetRange(this, GetCellPos(start), GetCellPos(end));
 
         public SheetRange Print(object[,] values, bool reserveCursor = false)
         {

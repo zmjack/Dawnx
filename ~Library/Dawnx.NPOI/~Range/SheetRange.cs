@@ -111,7 +111,7 @@ namespace Dawnx.NPOI
                 if (value != take)
                 {
                     if (takeRow - mergeStart > 1)
-                        SmartColMerge(mergeStart, takeRow - 1, col, offsetCols);
+                        SmartMergeVertical(mergeStart, takeRow - 1, col, offsetCols);
 
                     mergeStart = takeRow;
                     take = value;
@@ -120,7 +120,7 @@ namespace Dawnx.NPOI
             }
 
             if (End.row > mergeStart)
-                SmartColMerge(mergeStart, End.row, col, offsetCols);
+                SmartMergeVertical(mergeStart, End.row, col, offsetCols);
 
             //TODO: Remove identifier(type will be changed -> unchange)
             var regex_matchId = new Regex(@"^\[\[.+?\]\](.*)$");
@@ -134,8 +134,8 @@ namespace Dawnx.NPOI
                         var match = regex_matchId.Match(value as string);
                         if (match.Success)
                         {
-                            if (double.TryParse(match.Groups[1].Value, out double dValue))
-                                cell.SetValue(dValue);
+                            if (double.TryParse(match.Groups[1].Value, out double dvalue))
+                                cell.SetValue(dvalue);
                             else cell.SetValue(match.Groups[1].Value);
                         }
                     }
@@ -143,7 +143,54 @@ namespace Dawnx.NPOI
             }
         }
 
-        private void SmartColMerge(int mergeStart, int mergeEnd, int col, int[] offsetCols)
+        public void SmartColMerge()
+        {
+            void InnerMerge(int row, int startCol, int endCol, string value)
+            {
+                value ??= "";
+
+                if (endCol - startCol > 0)
+                    new SheetRange(Sheet, (row, startCol), (row, endCol)).Merge();
+
+                var regex = new Regex(@"^\[\[.+?\]\](.*)$");
+                var match = regex.Match(value);
+
+                if (match.Success)
+                {
+                    var cell = Sheet[(row, startCol)];
+                    var svalue = match.Groups[1].Value;
+                    if (!svalue.IsNullOrWhiteSpace())
+                    {
+                        if (double.TryParse(svalue, out double dvalue))
+                            cell.SetValue(dvalue);
+                        else cell.SetValue(svalue);
+                    }
+                    else cell.SetValue(svalue);
+                }
+            }
+
+            for (int row = Start.row; row <= End.row; row++)
+            {
+                string take = null;
+                int startCol = Start.col;
+                int takeCol = startCol;
+
+                for (; takeCol <= End.col; takeCol++)
+                {
+                    var value = Sheet[(row, takeCol)].GetValue()?.ToString();
+                    if (value == take) continue;
+
+                    InnerMerge(row, startCol, takeCol - 1, take);
+
+                    startCol = takeCol;
+                    take = value;
+                }
+
+                InnerMerge(row, startCol, takeCol - 1, take);
+            }
+        }
+
+        private void SmartMergeVertical(int mergeStart, int mergeEnd, int col, int[] offsetCols)
         {
             new SheetRange(Sheet, (mergeStart, col), (mergeEnd, col)).Merge();
             if (offsetCols.Length > 1)
@@ -153,8 +200,7 @@ namespace Dawnx.NPOI
             }
         }
 
-        public SheetCell this[(int offsetRow, int offsetCol) pos]
-            => Sheet[(Start.row + pos.offsetRow, Start.col + pos.offsetCol)];
+        public SheetCell this[(int offsetRow, int offsetCol) pos] => Sheet[(Start.row + pos.offsetRow, Start.col + pos.offsetCol)];
 
         public IEnumerable<SheetRange> GetRows()
         {

@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JSend" Version="0.8.5" />
+    <PackageReference Include="JSend" Version="0.9.5" />
     <PackageReference Include="MoonSharp" Version="2.0.0" />
   </ItemGroup>
 

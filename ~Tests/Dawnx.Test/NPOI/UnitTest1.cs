@@ -52,6 +52,10 @@ namespace Dawnx.NPOI.Test
 
             sampleSheet["E4"].SetValue(123);
 
+            sampleSheet.SetCursor("A12");
+            sampleSheet.PrintLine(new[] { "[[1]]A", "[[1]]A", "[[2]]A", "[[2]]B", "[[2]]B" });
+            sampleSheet["A12", "E12"].SmartColMerge();
+
             //var dawnxSheet = book.CloneSheet( sampleSheet;
             //var cell = sheet["C2"];
 

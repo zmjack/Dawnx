@@ -85,7 +85,7 @@ namespace Dawnx.AspNetCore.LiveAccount
                         return new LiveAction
                         {
                             Area = areaAttr?.RouteValue,
-                            Controller = controllerType.Name.Project(new Regex("^(.+?)(?:Controller)?$")),
+                            Controller = controllerType.Name.ExtractFirst(new Regex("^(.+?)(?:Controller)?$")),
                             Action = method.Name,
                             IsExisted = true,
                             IsEnabled = isEnabled,
